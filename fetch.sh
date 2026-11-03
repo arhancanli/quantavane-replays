@@ -1,0 +1,12 @@
+#!/bin/sh
+# Download the certificates replayed here, at the commits their pull requests pin, and check their SHA-256.
+set -e
+mkdir -p certs && cd certs
+get() { curl -s -f -L -o "$1" "$2"; }
+get koshta_K24576_0.4103333.json https://raw.githubusercontent.com/DennisKoshta/c1c-autocorrelation-certificate/a4ee94ef29ff/K24576_0.4103333.json
+get julsgaard_certificate.json https://raw.githubusercontent.com/Julsgaard/c1d-certificate/cc455ca0989f40b2b2a8a5248f507e9c78e95383/cert/certificate.json
+get kerem_c1d_n40960_1.4556234448.json https://raw.githubusercontent.com/Keremozdemirra/tao-1c-1d-certificates/408f8d0b6e8d232e632354997f1cc7f223f93ff9/c1d_n40960_1.4556234448.json
+get echul_c1d_records.tgz https://raw.githubusercontent.com/echul-seal/c1d-upper-bound/2be42dfdb6ecc60e2fe1345a38c4db21688f5726/c1d_records.tgz
+get huiihao_construction.json https://raw.githubusercontent.com/huiihao/c1d-certificate/302817dc3227ce281e9cfb486f12ff0df7fe2876/construction.json
+python3 -I -c "import tarfile; t = tarfile.open('echul_c1d_records.tgz'); m = t.getmember('ub/c_f10240.json'); assert m.isfile(); open('echul_c_f10240.json', 'wb').write(t.extractfile(m).read())"
+shasum -a 256 -c ../SHA256SUMS

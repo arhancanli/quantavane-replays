@@ -1,0 +1,13 @@
+1c certs/koshta_K24576_0.4103333.json
+  n: 24592
+  K: 24576
+  S: 18114753508907
+  argmin_k: 21264
+  min_A: 5478863469433788177441
+  ties: 1
+  bound = 134648548624804778248790016/328144294688458468928334649
+  decimal: floor 0.4103333527484933395347  ceil 0.4103333527484933395348
+  claimed fraction in the file: AGREES
+  control: corrupted coefficient 8197 rejected: True
+  control: old coefficients rejected for weight 12296 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

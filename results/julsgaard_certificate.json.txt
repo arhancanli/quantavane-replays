@@ -1,0 +1,13 @@
+1d certs/julsgaard_certificate.json
+  n: 81920
+  S: 412487294903845
+  argmax_m: 29124
+  max_abs_c: 1510716286480922993390330
+  scaled_by: 1
+  sign_at_max: +
+  ties: 1
+  bound = 9900630255081376929482866688/6805830738283663732311831361
+  decimal: floor 1.4547276645287506488477  ceil 1.4547276645287506488478
+  control: corrupted coefficient 54613 rejected: True
+  control: old coefficients rejected for weight 40960 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

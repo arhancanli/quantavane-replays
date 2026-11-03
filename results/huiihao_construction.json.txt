@@ -1,0 +1,13 @@
+1d certs/huiihao_construction.json
+  n: 400
+  S: 230584300921369396879
+  argmax_m: 153
+  max_abs_c: 96977564969456587527605312845541372928
+  scaled_by: 288230376151711744
+  sign_at_max: -
+  ties: 1
+  bound = 4563650116209721766004955898613711667200/3127595284199802099438492053245424408273
+  decimal: floor 1.4591562211596490211386  ceil 1.4591562211596490211387
+  control: corrupted coefficient 266 rejected: True
+  control: old coefficients rejected for weight 200 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

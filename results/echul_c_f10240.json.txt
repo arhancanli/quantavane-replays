@@ -1,0 +1,13 @@
+1d certs/echul_c_f10240.json
+  n: 10240
+  S: 229031045634677
+  argmax_m: 3168
+  max_abs_c: 3728426195675448191566898
+  scaled_by: 1
+  sign_at_max: +
+  ties: 1
+  bound = 76358168487433178963290071040/52455219864513498497744894329
+  decimal: floor 1.4556829365058151948841  ceil 1.4556829365058151948842
+  control: corrupted coefficient 6826 rejected: True
+  control: old coefficients rejected for weight 5120 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

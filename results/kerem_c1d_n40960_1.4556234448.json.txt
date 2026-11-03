@@ -1,0 +1,13 @@
+1d certs/kerem_c1d_n40960_1.4556234448.json
+  n: 40960
+  S: 438332266346761
+  argmax_m: 15313
+  max_abs_c: 3414019364387580110906100
+  scaled_by: 1
+  sign_at_max: +
+  ties: 1
+  bound = 279676466330630562685427712000/192135175720687825901095191121
+  decimal: floor 1.4556234447002245528116  ceil 1.4556234447002245528117
+  control: corrupted coefficient 27306 rejected: True
+  control: old coefficients rejected for weight 20480 + 1: True
+  control: bound unchanged when every value is scaled by 3: True
