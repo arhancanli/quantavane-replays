@@ -19,6 +19,6 @@ get pin cert_n1200_A11.json rpinho/c86-trace-certificate 116a58ff99681226ce6299d
 # [Pat2026] row of PR #270, 1.8077686* (the file has the same git blob at fb80010, the PR body, and 7c6586f, the row)
 get vid c86_deg8_h400_1.807768536863.json vidigoat/optimization-records fb800103581d5c63fa096805f73eff48fce32c98 \
     tao/certificates/c86/c86_deg8_h400_1.807768536863.json
-# PR #298, 1.80560940* (exact conditions only)
+# PR #298, 1.80560940* (piecewise-linear density on 5,375 nodes; auxiliaries with nonreal roots)
 get p298 certificate.json rpinho/math-certificates 0d821621bab3d3d9408015f2679b89d5d5e9b379 c86/adaptive-cone/certificate.json
 shasum -a 256 -c "$here/SHA256SUMS"

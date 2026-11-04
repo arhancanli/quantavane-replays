@@ -3,11 +3,13 @@
 (teorth/optimizationproblems, constant 86a), from the certificates' data files.
 
 Written from the definition and the criterion as the 86a page states them, and from the certificate format notes
-(FORMAT.md / PROOF.md of [Kos2026], README of [Pin26]). The claimants' checkers were neither read nor run. Standard
-library only (Python 3.9+); run with python3 -I. No floating-point number decides anything: floats only choose
-where to split and where to put a tangent point; every decision is an exact integer or rational comparison.
+(FORMAT.md / PROOF.md of [Kos2026], README of [Pin26]; for PR #298 the README, PROOF.md, METHOD.md and
+VERIFIER_NOTES.md of c86/adaptive-cone). The claimants' checkers and audit scripts were neither read nor run.
+Standard library only (Python 3.9+); run with python3 -I. No floating-point number decides anything: floats only
+choose where to split, where to put a tangent point and where to start a root iteration; every decision is an exact
+integer or rational comparison.
 
-  c86_check.py ROW CERTS_ROOT [--controls] [--workers=N]     ROW in: kos pin vid p298 (p298: exact parts only)
+  c86_check.py ROW CERTS_ROOT [--controls] [--workers=N]     ROW in: kos pin vid p298
 
 The certificate: edges e_0 < ... < e_N, densities d_i >= 0 on [e_i, e_{i+1}], integer polynomials Q_j (constant
 term first), weights b_j >= 0, and `bound`. With mu = sum_i d_i 1_[e_i,e_{i+1}] dx, m = mu(R), T = int x dmu,
@@ -45,10 +47,28 @@ How each is decided
   agrees with direct termwise sums at random points; f >= 0 at gap and exterior points (the minimum principle);
   the energy I(mu) = int U dmu closed form, and int f dmu = I(mu) - sum_j b_j E4_j >= m min_S f.
 
+PR #298 (row p298) has a different format: node heights h_k, the density linear between the nodes e_k (5,375 of
+them, unequal spacing) and zero outside; auxiliaries may have nonreal roots (E2 there: primitive, irreducible by the
+sieve, positive leading coefficient, distinct). U(z) = Re sum_k j_k F(z - e_k), j_k the slope jumps,
+F(w) = w^2 log(w)/2 - 3w^2/4 (principal logarithm; G2(u) = u^2 log|u|/2 - 3u^2/4 on the real line).
+- Roots: real ones by exact Sturm isolation; every root also in a Gershgorin disc of the Weierstrass matrix (radius
+  about 2^-305; the code of our C82 replay), the discs off the real axis holding exactly the nonreal roots; Vieta's
+  e1, e2 and |e_n| are checked against the enclosures.
+- E4 from the closed form at every root: log by our own series, arg by our own arctangent (table of atan(j/256) by
+  Euler's series, then the alternating series below 1/512; pi by Machin's formula); a real root costs
+  5 rad sum|j_k| (Lipschitz), a nonreal one rad m/(Im c - rad).
+- E5 per support cell, x = x0 + r sigma: nodes and roots within 4r are exact on each piece (chords for concave,
+  tangents for convex terms; every near node is within distance 1, where G2 is concave), the rest is a Taylor
+  polynomial of degree 24 in sigma (power sums of r/(x0 - e_k) from exact integers, table logarithms) with explicit
+  remainder bounds for the value and two derivatives; bounds A and B as above, bisection until each piece clears
+  the goal (0.9 x the cell's float minimum), and the cells near the global minimum again at (1 - 1e-8) x it.
+
 What rests on mathematics rather than computation (cited, not re-derived): the minimum principle (f >= 0 on S gives
 f >= 0 on C), Smith's Prop. 5.15 (E2-E5 make mu/m arithmetic) and Thm 1.5 (arithmetic measures on an interval of
-capacity > 1 are limits of conjugate distributions), as [Kos2026] PROOF.md and the [Pin26] README state them.
+capacity > 1 are limits of conjugate distributions), as [Kos2026] PROOF.md, the [Pin26] README and the #298
+PROOF.md state them.
 """
+import cmath
 import hashlib
 import json
 import math
@@ -61,6 +81,7 @@ from decimal import Decimal, getcontext
 from fractions import Fraction
 from functools import lru_cache
 from itertools import combinations
+from math import isqrt
 from operator import mul
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -1673,6 +1694,1491 @@ def piece_soundness(rep, cert, rng, count=240):
                   bad, tight[len(tight) // 2], tight[-1]))
 
 
+# ================================================================================================================
+# PR #298: a piecewise-linear density on non-uniform rational nodes, auxiliaries with nonreal roots
+# ================================================================================================================
+#
+# The density rho interpolates the node heights h_k linearly between the nodes e_k and is zero outside them (the
+# end heights are 0, so rho is continuous). Then rho'' = sum_k j_k delta(e_k), j_k the slope jump at e_k, and two
+# integrations by parts give, for every z in C,
+#     U(z) = int log|z - y| rho(y) dy = Re sum_k j_k F(z - e_k),     F(w) = w^2 log(w)/2 - 3 w^2/4  (F'' = log),
+# with the principal logarithm (for Im z > 0 every z - e_k lies in the upper half-plane, so the branch is
+# continuous in y); on the real line F(u) = G2(u) = u^2 log|u|/2 - 3u^2/4, G2(0) = 0. sum j_k = sum j_k e_k = 0 and
+# sum j_k e_k^2/2 = m are checked exactly. Every logarithm and arctangent below is our own, outward-rounded.
+
+ROOT_BITS = 300                 # root certification works at 2^-(Mb + ROOT_BITS), Mb bounding Horner's partials
+KC = 160                        # nonreal root centres are rounded to the grid 2^-KC (the rounding joins the radius)
+
+
+# ---- roots: our own Aberth iteration, then Gershgorin's theorem on the Weierstrass matrix (copied from c82) ----
+
+def float_aberth(a, maxit=600, z=None):
+    """Approximate roots in floats (starting points only)."""
+    n = len(a) - 1
+    lc = float(a[-1])
+    c = [x / lc for x in a]
+    if z is None:
+        nz = 0
+        while nz < n and a[nz] == 0:
+            nz += 1
+        r0 = abs(c[nz]) ** (1.0 / (n - nz)) if nz < n else 1.0
+        r0 = min(max(r0, 0.5), 2.0)
+        z = [r0 * cmath.exp(1j * (2 * math.pi * k / n + 0.4)) for k in range(n)]
+    z = list(z)
+    for it in range(maxit):
+        prev = list(z)
+        try:
+            mx = _aberth_sweep(c, z, n)
+        except (OverflowError, ZeroDivisionError):
+            return prev
+        if not all(math.isfinite(x.real) and math.isfinite(x.imag) for x in z):
+            return prev
+        if mx < 1e-12:
+            break
+    return z
+
+
+def _aberth_sweep(c, z, n):
+    mx = 0.0
+    for k in range(n):
+        zk = z[k]
+        p = 0j
+        dp = 0j
+        for co in reversed(c):
+            dp = dp * zk + p
+            p = p * zk + co
+        if p == 0:
+            continue
+        if dp == 0:
+            z[k] = zk + 1e-8
+            continue
+        N = p / dp
+        s = 0j
+        for j in range(n):
+            if j != k:
+                dz = zk - z[j]
+                if dz != 0:
+                    s += 1 / dz
+        den = 1 - N * s
+        w = N / den if den != 0 else N
+        z[k] = zk - w
+        mx = max(mx, abs(w) / max(1.0, abs(zk)))
+    return mx
+
+
+def _to_fixed(z, prec):
+    return int(round(z.real * 2.0 ** 52)) << (prec - 52), int(round(z.imag * 2.0 ** 52)) << (prec - 52)
+
+
+def _to_float(zf, prec):
+    return complex(zf[0] / 2.0 ** prec, zf[1] / 2.0 ** prec)
+
+
+def fx_aberth(a, zs, prec, tol_ulps, maxit=400):
+    """Aberth iteration in fixed point at scale 2^-prec from integer pairs zs (scale 2^-prec). Returns
+    (approximations, sweeps) once two consecutive sweeps move no point by more than tol_ulps, else (zs, None)."""
+    n = len(a) - 1
+    one = 1 << prec
+    zs = list(zs)
+    ash = [c << prec for c in a]
+    done_rounds = 0
+    for it in range(maxit):
+        mx = 0
+        for k in range(n):
+            x, y = zs[k]
+            px, py = ash[n], 0
+            dx, dy = 0, 0
+            for j in range(n - 1, -1, -1):
+                dx, dy = ((dx * x - dy * y) >> prec) + px, ((dx * y + dy * x) >> prec) + py
+                px, py = ((px * x - py * y) >> prec) + ash[j], (px * y + py * x) >> prec
+            if px == 0 and py == 0:
+                continue
+            dd = dx * dx + dy * dy
+            if dd == 0:
+                zs[k] = (x + (one >> 30), y)
+                mx = one
+                continue
+            Nx = ((px * dx + py * dy) << prec) // dd
+            Ny = ((py * dx - px * dy) << prec) // dd
+            sx = sy = 0
+            for j in range(n):
+                if j == k:
+                    continue
+                ex, ey = x - zs[j][0], y - zs[j][1]
+                ee = ex * ex + ey * ey
+                if ee == 0:
+                    continue
+                sx += (ex << (2 * prec)) // ee
+                sy -= (ey << (2 * prec)) // ee
+            tx = one - ((Nx * sx - Ny * sy) >> prec)
+            ty = -((Nx * sy + Ny * sx) >> prec)
+            tt = tx * tx + ty * ty
+            if tt == 0:
+                wx, wy = Nx, Ny
+            else:
+                wx = ((Nx * tx + Ny * ty) << prec) // tt
+                wy = ((Ny * tx - Nx * ty) << prec) // tt
+            zs[k] = (x - wx, y - wy)
+            mx = max(mx, abs(wx) + abs(wy))
+        if mx <= tol_ulps:
+            done_rounds += 1
+            if done_rounds >= 2:
+                return zs, it + 1
+        else:
+            done_rounds = 0
+    return zs, None
+
+
+def magnitude_bits(a, z):
+    """Bits of a bound on the Horner partial sums of a at the points z (floats; chooses precision only)."""
+    R = max([1.0] + [abs(x) for x in z]) * 1.25
+    lr = math.log2(R)
+    return int(max(abs(c).bit_length() + j * lr for j, c in enumerate(a) if c)) + (len(a)).bit_length() + 4
+
+
+def approx_roots(a, final_bits, start=None):
+    """Our own Aberth iteration: floats for a start, then fixed point with Mb + 64 bits until every point moves less
+    than 2^-40, then with Mb + final_bits bits until every point moves less than 2^-(final_bits - 40); Mb bounds the
+    size of Horner's partial sums, so the attainable accuracy is about 2^-(final_bits). Returns (zs, prec, sweeps)."""
+    z0 = float_aberth(a, z=start)
+    Mb = magnitude_bits(a, z0)
+    p1 = Mb + 64
+    zs, its1 = fx_aberth(a, [_to_fixed(z, p1) for z in z0], p1, 1 << (p1 - 40), maxit=600)
+    if its1 is None:
+        return None, None, None
+    p2 = Mb + final_bits
+    zs = [(x << (p2 - p1), y << (p2 - p1)) for x, y in zs]
+    zs, its2 = fx_aberth(a, zs, p2, 1 << (p2 - final_bits + 40), maxit=30)
+    if its2 is None:
+        return None, None, None
+    return zs, p2, its1 + its2
+
+
+def gershgorin(a, zs, prec):
+    """Certify all roots of the integer polynomial a (ascending) from distinct approximations zs (integer pairs at
+    scale 2^-prec). Returns a list of discs (cx, cy, rad) at scale 2^-prec, pairwise disjoint, each containing
+    exactly one root; raises ValueError otherwise."""
+    n = len(a) - 1
+    if len(zs) != n:
+        raise ValueError("%d approximations for a polynomial of degree %d" % (len(zs), n))
+    if len(set(zs)) != n:
+        raise ValueError("approximations not distinct")
+    one = 1 << prec
+    lc = a[-1]
+    ash = [c << prec for c in a]
+    discs = []
+    for i in range(n):
+        x, y = zs[i]
+        mz = abs(x) + abs(y)                         # >= |z| 2^prec
+        px, py, pr = ash[n], 0, 0                    # Horner in balls: z exact, coefficients exact
+        for j in range(n - 1, -1, -1):
+            nx = px * x - py * y
+            ny = px * y + py * x
+            px = (nx >> prec) + ash[j]
+            py = ny >> prec
+            pr = cdiv(pr * mz, one) + 2
+        qx, qy, qr = lc << prec, 0, 0                # lc prod_{j != i} (z_i - z_j)
+        for j in range(n):
+            if j == i:
+                continue
+            dx, dy = x - zs[j][0], y - zs[j][1]
+            md = abs(dx) + abs(dy)
+            nx = qx * dx - qy * dy
+            ny = qx * dy + qy * dx
+            qx, qy = nx >> prec, ny >> prec
+            qr = cdiv(qr * md, one) + 2
+        mq = isqrt(qx * qx + qy * qy)                # |q| >= mq (scale 2^-prec)
+        if mq <= qr:
+            raise ValueError("root %d: the product of differences is not separated from 0" % i)
+        qq = qx * qx + qy * qy
+        wx = ((px * qx + py * qy) << prec) // qq
+        wy = ((py * qx - px * qy) << prec) // qq
+        mw = isqrt(wx * wx + wy * wy) + 1
+        wr = cdiv((pr << prec) + (mw + 2) * qr, mq - qr) + 2
+        rad = wr + (n - 1) * (mw + wr)
+        discs.append((x - wx, y - wy, rad))
+    for i in range(n):
+        xi, yi, ri = discs[i]
+        for j in range(i):
+            xj, yj, rj = discs[j]
+            dx, dy = xi - xj, yi - yj
+            if dx * dx + dy * dy <= (ri + rj) ** 2:
+                raise ValueError("discs %d and %d overlap" % (j, i))
+    return discs
+
+
+def certified_discs(Q):
+    """Every root of the integer polynomial Q (constant term first) in its own disc: pairwise disjoint discs
+    (cx, cy, rad) as Fractions, each holding exactly one root. Returns (discs, working precision in bits)."""
+    zs, prec, _ = approx_roots(Q, ROOT_BITS)
+    if zs is None:
+        raise ValueError("Aberth iteration did not converge")
+    discs = gershgorin(Q, zs, prec)
+    return [(Fraction(x, 1 << prec), Fraction(y, 1 << prec), Fraction(r, 1 << prec)) for x, y, r in discs], prec
+
+
+def split_discs(discs, nreal):
+    """Discs above, below and meeting the real axis. When there are nreal (the exact Sturm count) discs meeting the
+    axis and the rest split evenly, the discs off the axis hold exactly the nonreal roots (each disc holds one
+    root, and an off-axis disc cannot hold a real one)."""
+    up = [d for d in discs if d[1] - d[2] > 0]
+    down = [d for d in discs if d[1] + d[2] < 0]
+    mid = [d for d in discs if not (d[1] - d[2] > 0 or d[1] + d[2] < 0)]
+    return len(mid) == nreal and len(up) == len(down), up, down, mid
+
+
+def round_disc(cx, cy, rad):
+    """Centre rounded to the grid 2^-KC (integers CX, CY), radius enlarged by the rounding."""
+    CX = (2 * cx.numerator * (1 << KC) + cx.denominator) // (2 * cx.denominator)
+    CY = (2 * cy.numerator * (1 << KC) + cy.denominator) // (2 * cy.denominator)
+    return CX, CY, rad + Fraction(1, 1 << KC)
+
+
+# ---- arctangent and pi (rigorous) ----
+
+def atan_inv(m, bits):
+    """Exact rationals lo <= atan(1/m) <= hi with hi - lo < 2^-bits (alternating series, decreasing terms)."""
+    S = Fraction(0)
+    i = 0
+    m2 = m * m
+    pw = m
+    while True:
+        a = Fraction(1, (2 * i + 1) * pw)
+        S2 = S + a if i % 2 == 0 else S - a
+        if i >= 1 and a < Fraction(1, 2 ** bits):
+            return min(S, S2), max(S, S2)
+        S = S2
+        i += 1
+        pw *= m2
+
+
+def pi_machin(bits):
+    a = atan_inv(5, bits)
+    b = atan_inv(239, bits)
+    return 16 * a[0] - 4 * b[1], 16 * a[1] - 4 * b[0]
+
+
+_PI_FR = pi_machin(LP + 40)
+PI_LP = ((_PI_FR[0].numerator << LP) // _PI_FR[0].denominator, cdiv(_PI_FR[1].numerator << LP, _PI_FR[1].denominator))
+
+
+def _atan_euler(p, q):
+    """atan(p/q) for integers 0 <= p <= q, q > 0, at scale 2^-LP, by Euler's series
+    atan(x) = (x/(1 + x^2)) sum_n c_n y^n, y = x^2/(1 + x^2) <= 1/2, c_0 = 1, c_n = c_{n-1} 2n/(2n + 1):
+    positive terms whose ratio is at most y <= 1/2, so the tail after a term is at most that term."""
+    if p == 0:
+        return 0, 0
+    S = LP + 20
+    B = p * p + q * q
+    tl = ((p * q) << S) // B
+    th = cdiv((p * q) << S, B)
+    lo = hi = 0
+    n = 0
+    while True:
+        lo += tl
+        hi += th
+        if th <= 1:
+            hi += th                          # the tail
+            break
+        n += 1
+        tl = (tl * 2 * n * p * p) // ((2 * n + 1) * B)
+        th = cdiv(th * 2 * n * p * p, (2 * n + 1) * B)
+    return lo >> 20, cdiv(hi, 1 << 20)
+
+
+_ATAN_TAB = []
+
+
+def atan_tab():
+    if not _ATAN_TAB:
+        _ATAN_TAB.extend(_atan_euler(j, 256) for j in range(257))      # atan(j/256)
+    return _ATAN_TAB
+
+
+def _atan_small(dn, dd):
+    """atan(dn/dd) for |dn/dd| <= 1/512 (dd > 0), at scale 2^-LP: the alternating series with decreasing terms, so
+    the error of a partial sum is at most the next term."""
+    if dn == 0:
+        return 0, 0
+    neg = dn < 0
+    dn = -dn if neg else dn
+    S = LP + 16
+    pl, ph = (dn << S) // dd, cdiv(dn << S, dd)
+    d2l, d2h = ((dn * dn) << S) // (dd * dd), cdiv((dn * dn) << S, dd * dd)
+    lo = hi = 0
+    k = 0
+    while True:
+        tl, th = pl // (2 * k + 1), cdiv(ph, 2 * k + 1)
+        if k % 2 == 0:
+            lo += tl
+            hi += th
+        else:
+            lo -= th
+            hi -= tl
+        k += 1
+        pl, ph = (pl * d2l) >> S, cdiv(ph * d2h, 1 << S)
+        if ph <= 1:                           # the next term, which bounds the error, is below one unit
+            lo -= 2
+            hi += 2
+            break
+    lo, hi = lo >> 16, cdiv(hi, 1 << 16)
+    return (-hi, -lo) if neg else (lo, hi)
+
+
+def atan_q(p, q):
+    """atan(p/q) for integers p >= 0, q > 0, as an interval at scale 2^-LP."""
+    if p == 0:
+        return 0, 0
+    if p > q:                                 # atan x = pi/2 - atan(1/x)
+        lo, hi = atan_q(q, p)
+        return (PI_LP[0] >> 1) - hi, cdiv(PI_LP[1], 2) - lo
+    j = (512 * p + q) // (2 * q)              # nearest integer to 256 p/q, in [0, 256]
+    dn, dd = 256 * p - j * q, 256 * q + j * p  # atan x = atan(j/256) + atan((x - j/256)/(1 + x j/256))
+    T = atan_tab()[j]
+    a = _atan_small(dn, dd)
+    return T[0] + a[0], T[1] + a[1]
+
+
+def atan2_lp(Y, n):
+    """arg(n + iY) in (0, pi) for integers Y > 0, n, at scale 2^-LP."""
+    if n > 0:
+        return atan_q(Y, n)
+    if n == 0:
+        return PI_LP[0] >> 1, cdiv(PI_LP[1], 2)
+    lo, hi = atan_q(Y, -n)
+    return PI_LP[0] - hi, PI_LP[1] - lo
+
+
+# ---- the certificate as data ----
+
+class PLCert:
+    """Nodes e_k, heights h_k (linear between nodes, zero outside), polynomials A (constant term first), weights b."""
+
+    def __init__(self, e, h, A, b, bound):
+        self.e, self.h, self.A, self.b, self.bound = list(e), list(h), [list(Q) for Q in A], list(b), bound
+        N = len(self.e)
+        e, h = self.e, self.h
+        self.m = sum((h[k] + h[k + 1]) / 2 * (e[k + 1] - e[k]) for k in range(N - 1))
+        self.T = sum((e[k + 1] - e[k]) * (h[k] * (2 * e[k] + e[k + 1]) + h[k + 1] * (e[k] + 2 * e[k + 1])) / 6
+                     for k in range(N - 1))
+        s = [(h[k + 1] - h[k]) / (e[k + 1] - e[k]) for k in range(N - 1)]
+        self.jump = [s[0]] + [s[k] - s[k - 1] for k in range(1, N - 1)] + [-s[N - 2]]
+        self.support = [k for k in range(N - 1) if h[k] > 0 or h[k + 1] > 0]
+
+
+PL = {}            # module globals for E4 and E5 (forked workers inherit them)
+_LNT_CACHE = {}
+
+
+def pl_prepare(cert, rroots, croots):
+    """rroots[j]: the real roots of Q_j as enclosures (lo, hi); croots[j]: the roots of Q_j in the upper half-plane
+    as (CX, CY, rad), centre (CX + i CY)/2^KC, radius rad."""
+    PL.clear()
+    e, jump = cert.e, cert.jump
+    Le = 1
+    for x in e:
+        Le = Le * x.denominator // math.gcd(Le, x.denominator)
+    D = 2 * Le                                  # D e_k is even, so cell midpoints and half-widths are k/D
+    DJ = 1
+    for x in jump:
+        DJ = DJ * x.denominator // math.gcd(DJ, x.denominator)
+    EI = []
+    for x in e:
+        v = x * D
+        assert v.denominator == 1
+        EI.append(v.numerator)
+    nz = [k for k in range(len(e)) if jump[k] != 0]
+    NE = [EI[k] for k in nz]
+    NJ = []
+    for k in nz:
+        v = jump[k] * DJ
+        assert v.denominator == 1
+        NJ.append(v.numerator)
+    s0, s1 = cert.support[0], cert.support[-1]
+    x0lo, x0hi = (EI[s0] + EI[s0 + 1]) // 2, (EI[s1] + EI[s1 + 1]) // 2
+    nmax = max(max(NE) - x0lo, x0hi - min(NE))
+    key = (D, nmax)
+    if key not in _LNT_CACHE:
+        _LNT_CACHE.clear()
+        LNT, W = [0] * (nmax + 1), 0
+        for n in range(1, nmax + 1):
+            lo, hi = ln_int_lp(n)
+            LNT[n] = lo
+            W = max(W, hi - lo)
+        _LNT_CACHE[key] = (LNT, W)
+    LNT, W = _LNT_CACHE[key]
+    rr, cr = [], []
+    for j in range(len(cert.A)):
+        if cert.b[j] == 0:
+            continue
+        for lo, hi in rroots[j]:
+            rr.append((cert.b[j], (lo + hi) / 2, (hi - lo) / 2, j))
+        for CX, CY, rad in croots[j]:
+            cr.append((2 * cert.b[j], CX, CY, rad, j))
+    lc = (0, 0)
+    for j, Q in enumerate(cert.A):
+        if abs(Q[-1]) != 1 and cert.b[j] != 0:
+            t = ivq(ln_int_lp(abs(Q[-1])), -cert.b[j].numerator, cert.b[j].denominator)
+            lc = (lc[0] + t[0], lc[1] + t[1])
+    PL.update(D=D, DJ=DJ, EI=EI, NE=NE, NJ=NJ, LNT=LNT, LNTW=W, LND=ln_int_lp(D), rr=rr, cr=cr, lc=lc, m=cert.m,
+              A=cert.A, b=cert.b, e=e, jabs=sum(abs(x) for x in jump), rroots=rroots, croots=croots, cert=cert)
+
+
+def lnM_lp(k):
+    """ln(D 2^k) at scale 2^-LP."""
+    L = PL["LND"]
+    return L[0] + k * _LN2[0], L[1] + k * _LN2[1]
+
+
+# ---- the potential and f at single points (direct sums over every node) ----
+
+def U_real_lp(p, q):
+    """U(p/q) (q > 0) at scale 2^-LP: sum_k j_k G2(u_k), u_k = n_k/M with n_k = p D - E_k q, M = D q, so
+    4 DJ M^2 U = 2 sum J_k n_k^2 ln|n_k| - (2 ln M + 3) sum J_k n_k^2 (J_k = DJ j_k, E_k = D e_k integers)."""
+    D, DJ = PL["D"], PL["DJ"]
+    alo = ahi = B = 0
+    pD = p * D
+    for Ek, Jk in zip(PL["NE"], PL["NJ"]):
+        n = pD - Ek * q
+        if n == 0:
+            continue
+        c = Jk * n * n
+        L = ln_int_lp(n if n > 0 else -n)
+        if c > 0:
+            alo += c * L[0]
+            ahi += c * L[1]
+        else:
+            alo += c * L[1]
+            ahi += c * L[0]
+        B += c
+    M = D * q
+    lm = ln_int_lp(M)
+    xb = (lm[0] * B, lm[1] * B) if B >= 0 else (lm[1] * B, lm[0] * B)
+    nlo = 2 * (alo - xb[1]) - 3 * B * (1 << LP)
+    nhi = 2 * (ahi - xb[0]) - 3 * B * (1 << LP)
+    den = 4 * DJ * M * M
+    return nlo // den, cdiv(nhi, den)
+
+
+def U_complex_lp(CX, CY, K):
+    """U(c) at c = (CX + i CY)/2^K, CY > 0, at scale 2^-LP. With n_k = CX D - E_k 2^K, Y = CY D, M = D 2^K:
+    4 DJ M^2 U = sum J_k (n_k^2 - Y^2) ln(n_k^2 + Y^2) - (2 ln M + 3) sum J_k (n_k^2 - Y^2) - 4 Y sum J_k n_k theta_k,
+    theta_k = arg(n_k + iY) in (0, pi)."""
+    D, DJ = PL["D"], PL["DJ"]
+    Y = CY * D
+    Y2 = Y * Y
+    cxD = CX * D
+    alo = ahi = B = clo = chi = 0
+    for Ek, Jk in zip(PL["NE"], PL["NJ"]):
+        n = cxD - (Ek << K)
+        L = ln_int_lp(n * n + Y2)
+        c = Jk * (n * n - Y2)
+        if c > 0:
+            alo += c * L[0]
+            ahi += c * L[1]
+        else:
+            alo += c * L[1]
+            ahi += c * L[0]
+        B += c
+        th = atan2_lp(Y, n)
+        cn = Jk * n
+        if cn > 0:
+            clo += cn * th[0]
+            chi += cn * th[1]
+        else:
+            clo += cn * th[1]
+            chi += cn * th[0]
+    M = D << K
+    lm = ln_int_lp(M)
+    xb = (lm[0] * B, lm[1] * B) if B >= 0 else (lm[1] * B, lm[0] * B)
+    nlo = alo - 2 * xb[1] - 3 * B * (1 << LP) - 4 * Y * chi
+    nhi = ahi - 2 * xb[0] - 3 * B * (1 << LP) - 4 * Y * clo
+    den = 4 * DJ * M * M
+    return nlo // den, cdiv(nhi, den)
+
+
+def P_direct_lp(p, q):
+    """sum_j b_j ln|Q_j(p/q)| at scale 2^-LP (exact polynomial values; p/q must not be a root)."""
+    lo = hi = 0
+    for Q, bb in zip(PL["A"], PL["b"]):
+        if bb == 0:
+            continue
+        v = ev_int(Q, p, q)
+        if v == 0:
+            raise ValueError("a root of an auxiliary polynomial")
+        t = ivq(ln_q_lp(abs(v), q ** (len(Q) - 1)), bb.numerator, bb.denominator)
+        lo += t[0]
+        hi += t[1]
+    return lo, hi
+
+
+def f_direct_pl(x):
+    """f(x) = U(x) - sum_j b_j ln|Q_j(x)| at a rational x (Fraction), interval at scale 2^-P (direct sums)."""
+    p, q = x.numerator, x.denominator
+    u = U_real_lp(p, q)
+    pp = P_direct_lp(p, q)
+    return (u[0] - pp[1]) >> SH, cdiv(u[1] - pp[0], 1 << SH)
+
+
+# ---- E4 ----
+
+def pl_E4_one(j):
+    """int log|Q_j| d mu = m log|lc| + sum over real roots U(r) + 2 sum over upper roots U(r), at scale 2^-P.
+    A real root r in [c - rad, c + rad] costs |U(r) - U(c)| <= 5 rad sum_k |j_k| (|G2'(u)| <= 5 for |u| <= 6); a
+    nonreal root in the disc D(c, rad) costs at most rad m/(Im c - rad) (|grad U| <= m/|Im z|)."""
+    Q = PL["A"][j]
+    m = PL["m"]
+    lo = hi = 0
+    if abs(Q[-1]) != 1:
+        t = ivq(ln_int_lp(abs(Q[-1])), m.numerator, m.denominator)
+        lo, hi = t
+    lip = 5 * PL["jabs"]
+    for rlo, rhi in PL["rroots"][j]:
+        c, rad = (rlo + rhi) / 2, (rhi - rlo) / 2
+        u = U_real_lp(c.numerator, c.denominator)
+        w = cdiv((lip * rad).numerator << LP, (lip * rad).denominator) if rad else 0
+        lo += u[0] - w
+        hi += u[1] + w
+    for CX, CY, rad in PL["croots"][j]:
+        u = U_complex_lp(CX, CY, KC)
+        cy = Fraction(CY, 1 << KC)
+        bnd = rad * m / (cy - rad)
+        w = cdiv(bnd.numerator << LP, bnd.denominator)
+        lo += 2 * (u[0] - w)
+        hi += 2 * (u[1] + w)
+    return j, (lo >> SH, cdiv(hi, 1 << SH))
+
+
+def _pl_E4_quad(j):
+    """int log|Q_j| d mu in floats: brute-force quadrature of U at the centres of Q_j's root enclosures (self-test)."""
+    nodes, weights = _gauss_legendre(20)
+    cert = PL["cert"]
+    Q = cert.A[j]
+    v = float(cert.m) * math.log(abs(Q[-1]))
+    for lo, hi in PL["rroots"][j]:
+        v += pl_quad_U(cert, float((lo + hi) / 2), nodes, weights)
+    for CX, CY, _ in PL["croots"][j]:
+        v += 2 * pl_quad_U(cert, complex(CX / 2.0 ** KC, CY / 2.0 ** KC), nodes, weights)
+    return j, v
+
+
+def pl_E4_all(workers, fn=None):
+    fn = fn or pl_E4_one
+    jobs = list(range(len(PL["A"])))
+    if workers <= 1:
+        return [fn(j) for j in jobs]
+    import multiprocessing as mp
+    with mp.get_context("fork").Pool(min(workers, len(jobs))) as pool:
+        out = list(pool.imap_unordered(fn, sorted(jobs, key=lambda j: -len(PL["A"][j])), chunksize=1))
+    return sorted(out)
+
+# ---- E5: the per-cell model ----
+#
+# On support cell [e_i, e_{i+1}] write x = x0 + r sigma, sigma in [-1, 1]. Nodes and roots within LAM r of x0 are
+# "near" and enter exactly on each piece; the others ("far") form S(sigma), a Taylor polynomial of degree NTP in
+# sigma with explicit remainder bounds for S, S' and S'' (derivatives in sigma). For a far node, t = x0 - e_k,
+# zeta = r/t: the coefficients of G2(t + r sigma) are G2(t), r t (ln|t| - 1), r^2 ln|t|/2 and
+# (-1)^(n-1) r^2 zeta^(n-2)/(n (n-1) (n-2)) for n >= 3; Lagrange's remainder (|G2^(N+1)(v)| = (N-2)!/|v|^(N-1))
+# is at most r^2 q^(N-1)/((N+1) N (N-1)), with q = r/(|t| - r), and r^2 q^(N-1)/(N (N-1)), r^2 q^(N-1)/(N-1) for
+# the first two sigma-derivatives. For a far root c, w = x0 - c, z = r/w: -wt ln|w| - wt Re sum_n (-1)^(n-1) z^n
+# sigma^n/n, remainders wt |z|^(N+1)/((N+1)(1-|z|)), wt |z|^(N+1)/(1-|z|) and
+# wt |z|^(N+1)(N/(1-|z|) + |z|/(1-|z|)^2); the distance from the true root to the centre c adds
+# wt rad/(d - rad), wt r rad/(d - rad)^2 and 3 wt r^2 rad/(d - rad)^3, d = |w| - r.
+# Every near node has |x - e_k| < 1 on the cell (checked), where G2'' = ln|u| < 0: j_k G2 is concave for j_k > 0
+# (it enters through its chord) and convex for j_k < 0 (through its tangent). A near real root outside a piece
+# enters through its tangent (-ln|x - r| is convex), one that may lie in the piece through -wt ln(largest distance).
+
+NTP = 24                        # degree of the per-cell polynomial (in sigma)
+LAM = 4                         # near: |x0 - e_k| < LAM r (so |zeta| <= 1/4 and q <= 1/3 for far nodes)
+KT = 24                         # extra binary digits of a tangent point
+
+
+def iv_mul_lp(a, b):
+    c = (a[0] * b[0], a[0] * b[1], a[1] * b[0], a[1] * b[1])
+    return min(c) >> LP, -((-max(c)) >> LP)
+
+
+def fix_lp(fr):
+    return (fr.numerator << LP) // fr.denominator, cdiv(fr.numerator << LP, fr.denominator)
+
+
+def up32(fr):
+    """A rational upper bound of fr >= 0 with denominator 2^32."""
+    return Fraction(cdiv(fr.numerator << 32, fr.denominator), 1 << 32)
+
+
+def lo32(fr):
+    """A rational lower bound of fr with denominator 2^32."""
+    return Fraction((fr.numerator << 32) // fr.denominator, 1 << 32)
+
+
+def sqrt_lo32(fr):
+    """A rational lower bound of sqrt(fr), fr >= 0, denominator 2^32."""
+    return Fraction(isqrt((fr.numerator << 64) // fr.denominator), 1 << 32)
+
+
+def sqrt_up32(fr):
+    return Fraction(isqrt(cdiv(fr.numerator << 64, fr.denominator)) + 1, 1 << 32)
+
+
+class PLCell:
+    def __init__(self, i):
+        D, DJ, EI = PL["D"], PL["DJ"], PL["EI"]
+        Ea, Eb = EI[i], EI[i + 1]
+        X0, R = (Ea + Eb) // 2, (Eb - Ea) // 2
+        assert 2 * X0 == Ea + Eb and 2 * R == Eb - Ea and R > 0
+        self.i, self.X0, self.R = i, X0, R
+        x0, r = Fraction(X0, D), Fraction(R, D)
+        self.x0, self.r = x0, r
+        lim = LAM * R
+        self.nn, ns, Js = [], [], []
+        for Ek, Jk in zip(PL["NE"], PL["NJ"]):
+            n = X0 - Ek
+            if -lim < n < lim:
+                self.nn.append((Ek, Jk))
+            else:
+                ns.append(n)
+                Js.append(Jk)
+        self.supported = (LAM + 1) * R < D          # every near node within distance 1 of the cell: G2 concave
+        N = NTP
+        ONEL = 1 << LP
+        # ---- far nodes: the logarithmic coefficients (exact integer sums of table logarithms) ----
+        LNT, W = PL["LNT"], PL["LNTW"]
+        Ls = [LNT[n if n > 0 else -n] for n in ns]
+        lnD = PL["LND"]
+
+        def lsum(cs):
+            """Interval of sum_k cs_k ln|t_k| at scale 2^-LP, ln|t_k| = ln|n_k| - ln D, ln|n_k| in [L, L + W]."""
+            S = sum(map(mul, cs, Ls))
+            Bs = sum(cs)
+            Ps = sum(c for c in cs if c > 0)
+            xb = (lnD[0] * Bs, lnD[1] * Bs) if Bs >= 0 else (lnD[1] * Bs, lnD[0] * Bs)
+            return (S + W * (Bs - Ps) - xb[1], S + W * Ps - xb[0]), Bs
+
+        l0, B0 = lsum([J * n * n for J, n in zip(Js, ns)])
+        l1, B1 = lsum([J * n for J, n in zip(Js, ns)])
+        l2, _ = lsum(Js)
+        DD = DJ * D * D
+        co = [None] * (N + 1)
+        co[0] = ivq((2 * l0[0] - 3 * B0 * ONEL, 2 * l0[1] - 3 * B0 * ONEL), 1, 4 * DD)
+        co[1] = ivq((l1[0] - B1 * ONEL, l1[1] - B1 * ONEL), R, DD)
+        co[2] = ivq(l2, R * R, 2 * DD)
+        # ---- far nodes: power sums sum_k J_k zeta_k^p, zeta_k = R/n_k (outward fixed point) ----
+        Zl = [(R << LP) // (n if n > 0 else -n) for n in ns]
+        Zh = [z + 1 for z in Zl]
+        Jep = [J if J > 0 else 0 for J in Js]
+        Jen = [J if J < 0 else 0 for J in Js]
+        Jo = [J if n > 0 else -J for J, n in zip(Js, ns)]
+        Jop = [J if J > 0 else 0 for J in Jo]
+        Jon = [J if J < 0 else 0 for J in Jo]
+        pl, ph = Zl, Zh
+        for p in range(1, N - 1):
+            jp, jn = (Jop, Jon) if p % 2 else (Jep, Jen)
+            P_ = (sum(map(mul, jp, pl)) + sum(map(mul, jn, ph)), sum(map(mul, jp, ph)) + sum(map(mul, jn, pl)))
+            n = p + 2
+            co[n] = ivq(P_, (1 if n % 2 else -1) * R * R, DD * n * (n - 1) * (n - 2))
+            if p < N - 2:
+                pl = [(a * z) >> LP for a, z in zip(pl, Zl)]
+                ph = [-((-(a * z)) >> LP) for a, z in zip(ph, Zh)]
+        # remainders of the far nodes, in three distance tiers
+        s1 = s2 = s3 = 0
+        for J, n in zip(Js, ns):
+            an = n if n > 0 else -n
+            aJ = J if J > 0 else -J
+            if an >= 64 * R:
+                s3 += aJ
+            elif an >= 8 * R:
+                s2 += aJ
+            else:
+                s1 += aJ
+        tiers = s1 * Fraction(1, 3) ** (N - 1) + s2 * Fraction(1, 7) ** (N - 1) + s3 * Fraction(1, 63) ** (N - 1)
+        base = Fraction(R * R, DD) * tiers
+        Rm = [qiv(base / ((N + 1) * N * (N - 1)), LP)[1], qiv(base / (N * (N - 1)), LP)[1], qiv(base / (N - 1), LP)[1]]
+        # ---- roots ----
+        acc = [(0, 0)] * (N + 1)
+        self.nr, self.nc = [], []
+        for wt, c, rad, j in PL["rr"]:
+            w = x0 - c
+            aw = abs(w)
+            if aw < LAM * r:
+                self.nr.append((wt, c, rad))
+                continue
+            t = ivq(ln_q_lp(aw.numerator, aw.denominator), -wt.numerator, wt.denominator)
+            acc[0] = (acc[0][0] + t[0], acc[0][1] + t[1])
+            zi = fix_lp(r / w)
+            pw = zi
+            for n in range(1, N + 1):
+                if n > 1:
+                    pw = iv_mul_lp(pw, zi)
+                t = ivq(pw, (-1 if n % 2 else 1) * wt.numerator, wt.denominator * n)
+                acc[n] = (acc[n][0] + t[0], acc[n][1] + t[1])
+            self._root_rem(Rm, wt, up32(r / aw), rad, lo32(aw - r))
+        for wt, CX, CY, rad, j in PL["cr"]:
+            cx, cy = Fraction(CX, 1 << KC), Fraction(CY, 1 << KC)
+            a = x0 - cx
+            g = a * a + cy * cy
+            if g < (LAM * r) ** 2:
+                self.nc.append((wt, cx, cy, rad))
+                continue
+            t = ivq(ln_q_lp(g.numerator, g.denominator), -wt.numerator, 2 * wt.denominator)
+            acc[0] = (acc[0][0] + t[0], acc[0][1] + t[1])
+            zr, zim = fix_lp(r * a / g), fix_lp(r * cy / g)
+            pr, pim = zr, zim
+            for n in range(1, N + 1):
+                if n > 1:
+                    a1, a2 = iv_mul_lp(pr, zr), iv_mul_lp(pim, zim)
+                    b1, b2 = iv_mul_lp(pr, zim), iv_mul_lp(pim, zr)
+                    pr, pim = (a1[0] - a2[1], a1[1] - a2[0]), (b1[0] + b2[0], b1[1] + b2[1])
+                t = ivq(pr, (-1 if n % 2 else 1) * wt.numerator, wt.denominator * n)
+                acc[n] = (acc[n][0] + t[0], acc[n][1] + t[1])
+            self._root_rem(Rm, wt, sqrt_up32(r * r / g), rad, sqrt_lo32(g) - r)
+        lc = PL["lc"]
+        acc[0] = (acc[0][0] + lc[0], acc[0][1] + lc[1])
+        coef = []
+        for n in range(N + 1):
+            lo, hi = co[n][0] + acc[n][0], co[n][1] + acc[n][1]
+            coef.append((lo >> SH, cdiv(hi, 1 << SH)))
+        self.coef = coef
+        self.d1 = [(n * coef[n][0], n * coef[n][1]) for n in range(1, N + 1)]
+        self.d2 = [(n * (n - 1) * coef[n][0], n * (n - 1) * coef[n][1]) for n in range(2, N + 1)]
+        self.R0, self.R1, self.R2 = (cdiv(x, 1 << SH) + 1 for x in Rm)
+        self.Rlp = Rm
+        # floats for the heuristics (they choose points only)
+        self.cf = [ivfl(c) for c in coef]
+        self.rf = float(r)
+        self.nnf = [(float(Fraction(Ek - X0, R)), Jk / float(DJ)) for Ek, Jk in self.nn]
+        self.nrf = [(float(wt), float((c - x0) / r)) for wt, c, _ in self.nr]
+        self.ncf = [(float(wt), float((cx - x0) / r), float(cy / r)) for wt, cx, cy, _ in self.nc]
+        self.nn_cav = [(Ek, Jk) for Ek, Jk in self.nn if Jk > 0]      # j G2 concave: chords
+        self.nn_cvx = [(Ek, Jk) for Ek, Jk in self.nn if Jk < 0]      # j G2 convex: tangents
+        self.cache, self.ccache, self.lnM = {}, {}, {}
+
+    def _root_rem(self, Rm, wt, qz, rad, d):
+        """Add a far root's remainder bounds (value, sigma-derivative, second sigma-derivative) to Rm, integers at
+        scale 2^-LP rounded up: qz >= |z|, rad >= the centre's distance to the root, 0 < d <= min over the cell of
+        |x - centre|."""
+        N = NTP
+        if qz >= 1 or d <= rad:
+            raise ValueError("a far root too close to the cell")
+        a = wt * qz ** (N + 1)
+        r = self.r
+        for idx, v in enumerate((a / ((N + 1) * (1 - qz)) + wt * rad / (d - rad),
+                                 a / (1 - qz) + wt * r * rad / (d - rad) ** 2,
+                                 a * (N / (1 - qz) + qz / (1 - qz) ** 2) + 3 * wt * r * r * rad / (d - rad) ** 3)):
+            Rm[idx] += cdiv(v.numerator << LP, v.denominator)
+
+    # ---- exact pieces of f ----
+    def xs(self, num, k):
+        """x at sigma = num/2^k."""
+        return Fraction((self.X0 << k) + self.R * num, PL["D"] << k)
+
+    def _lnM(self, k):
+        v = self.lnM.get(k)
+        if v is None:
+            v = self.lnM[k] = lnM_lp(k)
+        return v
+
+    def _lu(self, Ek, num, k):
+        nu = ((self.X0 - Ek) << k) + self.R * num          # D 2^k (x - e_k)
+        if nu == 0:
+            return 0, None
+        L = ln_int_lp(nu if nu > 0 else -nu)
+        lm = self._lnM(k)
+        return nu, (L[0] - lm[1], L[1] - lm[0])
+
+    def node_val(self, Ek, Jk, num, k):
+        """j_k G2(x - e_k) at sigma = num/2^k, scale 2^-P."""
+        nu, lu = self._lu(Ek, num, k)
+        if nu == 0:
+            return 0, 0
+        s2 = nu * nu
+        M = PL["D"] << k
+        v = ivq((s2 * (2 * lu[0] - 3 * (1 << LP)), s2 * (2 * lu[1] - 3 * (1 << LP))), Jk, 4 * M * M * PL["DJ"])
+        return v[0] >> SH, cdiv(v[1], 1 << SH)
+
+    def node_vd(self, Ek, Jk, num, k):
+        """(value, sigma-derivative r j_k G2'(u)) of j_k G2(x - e_k) at sigma = num/2^k, scale 2^-P."""
+        nu, lu = self._lu(Ek, num, k)
+        if nu == 0:
+            return (0, 0), (0, 0)
+        s2 = nu * nu
+        M = PL["D"] << k
+        v = ivq((s2 * (2 * lu[0] - 3 * (1 << LP)), s2 * (2 * lu[1] - 3 * (1 << LP))), Jk, 4 * M * M * PL["DJ"])
+        d = ivq((lu[0] - (1 << LP), lu[1] - (1 << LP)), Jk * self.R * nu, PL["DJ"] * PL["D"] * M)
+        return (v[0] >> SH, cdiv(v[1], 1 << SH)), (d[0] >> SH, cdiv(d[1], 1 << SH))
+
+    def conc_at(self, num, k):
+        """Sum of the lower ends of the concave near terms (j_k > 0) at sigma = num/2^k (cached)."""
+        while k > 0 and num % 2 == 0:
+            num //= 2
+            k -= 1
+        key = (num, k)
+        v = self.ccache.get(key)
+        if v is None:
+            v = self.ccache[key] = sum(self.node_val(Ek, Jk, num, k)[0] for Ek, Jk in self.nn_cav)
+        return v
+
+    def S_pt(self, num, k):
+        lo, hi = horner_point(self.coef, num, k)
+        return lo - self.R0, hi + self.R0
+
+    def S_at(self, num, k):
+        while k > 0 and num % 2 == 0:
+            num //= 2
+            k -= 1
+        key = (num, k)
+        v = self.cache.get(key)
+        if v is None:
+            v = self.cache[key] = self.S_pt(num, k)
+        return v
+
+    def dS_pt(self, num, k):
+        lo, hi = horner_point(self.d1, num, k)
+        return lo - self.R1, hi + self.R1
+
+    def d2S_rng(self, n1, n2, k):
+        lo, hi = horner_range(self.d2, n1, n2, k)
+        return lo - self.R2, hi + self.R2
+
+    @staticmethod
+    def _neg_wt_ln_lo(wt, d):
+        """Lower end of -wt ln d (d > 0 rational), scale 2^-P."""
+        L = ln_q_lp(d.numerator, d.denominator)
+        return ivq(L, -wt.numerator, wt.denominator)[0] >> SH
+
+    @staticmethod
+    def _neg_wt_ln_hi(wt, d):
+        L = ln_q_lp(d.numerator, d.denominator)
+        return cdiv(ivq(L, -wt.numerator, wt.denominator)[1], 1 << SH)
+
+    def nc_lo(self, wt, cx, cy, rad, xa, xb):
+        """Lower bound of -wt ln|x - alpha| on [xa, xb] for a nonreal near root: the largest distance."""
+        dd = max((xa - cx) ** 2, (xb - cx) ** 2) + cy * cy
+        return self._neg_wt_ln_lo(wt, sqrt_up32(dd) + rad)
+
+    def tangent(self, tn, tk, convex, troots):
+        """Lower end of the tangent group's value at t = tn/2^tk, and the interval of its sigma-derivative."""
+        Phi = Dlo = Dhi = 0
+        for Ek, Jk in convex:
+            v, d = self.node_vd(Ek, Jk, tn, tk)
+            Phi += v[0]
+            Dlo += d[0]
+            Dhi += d[1]
+        if troots:
+            x = self.xs(tn, tk)
+            for wt, c, rad in troots:
+                Phi += self._neg_wt_ln_lo(wt, abs(x - c) + rad)
+                v1, v2 = -wt * self.r / (x - c + rad), -wt * self.r / (x - c - rad)
+                Dlo += qiv(min(v1, v2))[0]
+                Dhi += qiv(max(v1, v2))[1]
+        return Phi, Dlo, Dhi
+
+    def piece(self, j, s, goal, hint=None):
+        """Certified lower bound of f on sigma in [na, nb]/2^s, na = 2j - 2^s, nb = na + 2. Returns (lb, t)."""
+        na = 2 * j - (1 << s)
+        nb = na + 2
+        SA, SB = self.S_at(na, s), self.S_at(nb, s)
+        conc_a, conc_b = self.conc_at(na, s), self.conc_at(nb, s)
+        convex = self.nn_cvx
+        termw = 0
+        troots = []
+        if self.nr or self.nc:
+            xa, xb = self.xs(na, s), self.xs(nb, s)
+            for wt, c, rad in self.nr:
+                if c - rad <= xb and c + rad >= xa:
+                    termw += self._neg_wt_ln_lo(wt, max(xb - c + rad, c + rad - xa))
+                else:
+                    troots.append((wt, c, rad))
+            for wt, cx, cy, rad in self.nc:
+                termw += self.nc_lo(wt, cx, cy, rad, xa, xb)
+        d2 = self.d2S_rng(na, nb, s)
+        M2 = max(d2[1], 0)
+        lossA = cdiv(M2, 1 << (2 * s + 1))            # (width/2)^2 / 2 sup S'', width = 2^(1-s)
+        LA, LB = SA[0] + conc_a, SB[0] + conc_b
+        best, tbest = None, None
+        if not convex and not troots:
+            best = min(LA, LB) - lossA + termw
+            if best >= goal:
+                return best, None
+        lo_s, hi_s = Fraction(na, 1 << s), Fraction(nb, 1 << s)
+        tries = [hint, None] if hint is not None and lo_s <= hint <= hi_s else [None]
+        m2 = min(d2[0], 0)
+        for t in tries:
+            if t is None:
+                t = self.choose_t(na, nb, s)
+            tn, tk = dyadic(t)
+            Phi, Dlo, Dhi = self.tangent(tn, tk, convex, troots)
+            K = max(tk, s)
+            da = (na << (K - s)) - (tn << (K - tk))       # (sigma_a - t) 2^K <= 0
+            db = (nb << (K - s)) - (tn << (K - tk))       # (sigma_b - t) 2^K >= 0
+            if convex or troots:
+                lbA = min(LA + Phi + ((Dhi * da) >> K), LB + Phi + ((Dlo * db) >> K)) - lossA + termw
+                if best is None or lbA > best:
+                    best, tbest = lbA, t
+                if best >= goal:
+                    return best, tbest
+            St = self.S_pt(tn, tk)
+            dSt = self.dS_pt(tn, tk)
+            ca = (m2 * da * da) >> (2 * K + 1)
+            cb = (m2 * db * db) >> (2 * K + 1)
+            lbB = min(conc_a + St[0] + Phi + (((dSt[1] + Dhi) * da) >> K) + ca,
+                      conc_b + St[0] + Phi + (((dSt[0] + Dlo) * db) >> K) + cb) + termw
+            if best is None or lbB > best:
+                best, tbest = lbB, t
+            if best >= goal:
+                return best, tbest
+        return best, tbest
+
+    def f_upper(self, num, k):
+        """Rigorous upper bound of f at sigma = num/2^k (None at a possible root)."""
+        v = self.S_pt(num, k)[1]
+        for Ek, Jk in self.nn:
+            v += self.node_val(Ek, Jk, num, k)[1]
+        if self.nr or self.nc:
+            x = self.xs(num, k)
+            for wt, c, rad in self.nr:
+                d = abs(x - c) - rad
+                if d <= 0:
+                    return None
+                v += self._neg_wt_ln_hi(wt, d)
+            for wt, cx, cy, rad in self.nc:
+                d = sqrt_lo32((x - cx) ** 2 + cy * cy) - rad
+                if d <= 0:
+                    return None
+                v += self._neg_wt_ln_hi(wt, d)
+        return v
+
+    def f_interval(self, num, k):
+        lo, hi = self.S_pt(num, k)
+        for Ek, Jk in self.nn:
+            a = self.node_val(Ek, Jk, num, k)
+            lo += a[0]
+            hi += a[1]
+        x = self.xs(num, k)
+        for wt, c, rad in self.nr:
+            lo += self._neg_wt_ln_lo(wt, abs(x - c) + rad)
+            hi += self._neg_wt_ln_hi(wt, abs(x - c) - rad)
+        for wt, cx, cy, rad in self.nc:
+            dd = (x - cx) ** 2 + cy * cy
+            lo += self._neg_wt_ln_lo(wt, sqrt_up32(dd) + rad)
+            hi += self._neg_wt_ln_hi(wt, sqrt_lo32(dd) - rad)
+        return lo, hi
+
+    # ---- floats (heuristics only: they choose tangent points and goals) ----
+    def f_float(self, sg):
+        acc = 0.0
+        for c in reversed(self.cf):
+            acc = acc * sg + c
+        rf = self.rf
+        for sk, jf in self.nnf:
+            u = rf * (sg - sk)
+            if u != 0.0:
+                acc += jf * u * u * (0.5 * math.log(abs(u)) - 0.75)
+        for wf, sc in self.nrf:
+            d = abs(sg - sc)
+            if d == 0.0:
+                return float("inf")
+            acc -= wf * math.log(rf * d)
+        for wf, sr, si in self.ncf:
+            acc -= wf * 0.5 * math.log(rf * rf * ((sg - sr) ** 2 + si * si))
+        return acc
+
+    def _golden(self, a, b, iters=40):
+        gr = (math.sqrt(5) - 1) / 2
+        x1, x2 = b - gr * (b - a), a + gr * (b - a)
+        f1, f2 = self.f_float(x1), self.f_float(x2)
+        for _ in range(iters):
+            if f1 < f2:
+                b, x2, f2 = x2, x1, f1
+                x1 = b - gr * (b - a)
+                f1 = self.f_float(x1)
+            else:
+                a, x1, f1 = x1, x2, f2
+                x2 = a + gr * (b - a)
+                f2 = self.f_float(x2)
+        return (x1, f1) if f1 < f2 else (x2, f2)
+
+    def choose_t(self, na, nb, s):
+        """A dyadic point of [na, nb]/2^s near the minimiser of f there (floats; any point gives a valid bound)."""
+        a, b = na / float(1 << s), nb / float(1 << s)
+        cands = [(self.f_float(a), a), (self.f_float(b), b)]
+        x, fx_ = self._golden(a, b)
+        cands.append((fx_, x))
+        v = min(cands)[1]
+        k = s + KT
+        t = Fraction(int(round(v * (1 << k))), 1 << k)
+        return min(max(t, Fraction(na, 1 << s)), Fraction(nb, 1 << s))
+
+    def float_scan(self):
+        """Float estimate of min f on the cell and where (for the goal and the upper bound)."""
+        pts = [-1 + k / 128.0 for k in range(257)]
+        for e_ in range(3, 53):
+            pts += [-1 + 2.0 ** -e_, 1 - 2.0 ** -e_]
+        vals = sorted((self.f_float(p), p) for p in pts)
+        best = vals[0]
+        for v, p in vals[:6]:
+            w = max(min(1 + p, 1 - p) / 2, 1.0 / 128)
+            x, fx_ = self._golden(max(-1.0, p - w), min(1.0, p + w), 60)
+            if fx_ < best[0]:
+                best = (fx_, x)
+        return best
+
+    def bisect(self, goal, smax=50, max_pieces=200000):
+        stack = [(0, 0, None)]
+        npieces = 0
+        minlb, minat = None, None
+        fails, maxs = [], 0
+        while stack:
+            j, s, hint = stack.pop()
+            lb, t = self.piece(j, s, goal, hint)
+            npieces += 1
+            if lb >= goal:
+                if minlb is None or lb < minlb:
+                    minlb, minat = lb, (j, s)
+                maxs = max(maxs, s)
+                continue
+            if s >= smax or npieces > max_pieces:
+                fails.append((j, s, lb))
+                continue
+            h = t if t is not None else hint
+            stack.append((2 * j + 1, s + 1, h))
+            stack.append((2 * j, s + 1, h))
+        return {"pieces": npieces, "minlb": minlb, "minat": minat, "fails": fails, "maxdepth": maxs}
+
+
+def _pl_job(args):
+    """Model, float scan and bisection of one support cell. goal None: certify f >= 0.9 x (float minimum) on the cell,
+    falling back to 0.5 x and to 0."""
+    i, goal = args
+    t0 = time.time()
+    cm = PLCell(i)
+    if not cm.supported:
+        return {"cell": i, "unsupported": True, "fails": [(0, 0, None)], "pieces": 0, "minlb": None, "maxdepth": 0,
+                "v": None, "sigma": None, "ub": None, "goal": goal, "time": time.time() - t0, "build": 0.0}
+    tb = time.time() - t0
+    v, sg = cm.float_scan()
+    if goal is not None:
+        goals = [goal]
+    elif v > 0:
+        goals = [qiv(Fraction(v) * Fraction(9, 10))[0], qiv(Fraction(v) / 2)[0], 0]
+    else:
+        goals = [0]
+    for g in goals:
+        res = cm.bisect(g)
+        if not res["fails"]:
+            break
+    sgf = Fraction(min(max(sg, -1.0), 1.0))
+    num, k = dyadic(sgf)
+    res.update(cell=i, v=v, sigma=sgf, x=cm.x0 + cm.r * sgf, ub=cm.f_upper(num, k), goal=g, build=tb,
+               time=time.time() - t0, unsupported=False)
+    return res
+
+
+def pl_run_cells(jobs, workers):
+    if workers <= 1:
+        return [_pl_job(a) for a in jobs]
+    import multiprocessing as mp
+    order = sorted(jobs, key=lambda a: (a[0] * 7919) % 104729)
+    with mp.get_context("fork").Pool(workers) as pool:
+        out = list(pool.imap_unordered(_pl_job, order, chunksize=2))
+    return sorted(out, key=lambda r: r["cell"])
+
+
+# ---- E5 driver ----
+
+def pl_check_E5(rep, cert, workers):
+    """Every support cell: f >= 0.9 x (its float minimum) certified (else 0.5 x, else 0); then the cells whose
+    certified bound lies below (1 - 1e-8) x the smallest float minimum are re-run with that goal. The enclosure of
+    min_S f: lower end the smallest certified piece bound, upper end f at the float minimiser from the direct sums."""
+    t0 = time.time()
+    res = pl_run_cells([(i, None) for i in cert.support], workers)
+    uns = [r["cell"] for r in res if r["unsupported"]]
+    rep.check("E5 every support cell has all its near nodes within distance 1 (where G2 is concave)", not uns,
+              "%d cells outside" % len(uns))
+    if uns:
+        return None
+    rmin = min(res, key=lambda r: r["v"])
+    vmin = rmin["v"]
+    rep.info("E5 float scan (heuristic only)", "smallest f found %.7e in cell %d [%s, %s] at x = %.9f" % (
+        vmin, rmin["cell"], cert.e[rmin["cell"]], cert.e[rmin["cell"] + 1], float(rmin["x"])))
+    failed = [r for r in res if r["fails"]]
+    fb = sum(1 for r in res if r["v"] > 0 and r["goal"] < qiv(Fraction(r["v"]) * Fraction(9, 10))[0])
+    npieces = sum(r["pieces"] for r in res)
+    build = sum(r["build"] for r in res)
+    tot = sum(r["time"] for r in res)
+    lb1 = min(r["minlb"] for r in res if r["minlb"] is not None)
+    rep.check("E5 f >= 0.9 x (the cell's float minimum) certified on every support cell (%d cells, %d pieces, max "
+              "depth %d)" % (len(res), npieces, max(r["maxdepth"] for r in res)), not failed,
+              "%d cells failed, %d needed the weaker goal 0.5 x or 0; models %.0f s and bisection %.0f s summed over "
+              "the cells' jobs, %.0f s wall" % (len(failed), fb, build, tot - build, time.time() - t0))
+    rep.info("E5 smallest certified piece bound, first pass", sci_floor(Fraction(lb1, ONE), 8))
+    # tighten the cells whose certified bound lies below (1 - 1e-8) x the smallest float minimum
+    target = qiv(Fraction(vmin) * (1 - Fraction(1, 10 ** 8)))[0]
+    redo = [r["cell"] for r in res if not r["fails"] and r["minlb"] < target]
+    t1 = time.time()
+    if redo:
+        byc = {r["cell"]: r for r in pl_run_cells([(i, target) for i in redo], workers)}
+        tight_fail = [i for i in redo if byc[i]["fails"]]
+        res = [byc[r["cell"]] if r["cell"] in byc and not byc[r["cell"]]["fails"] else r for r in res]
+    else:
+        tight_fail = []
+    LB = min(r["minlb"] for r in res if r["minlb"] is not None)
+    rep.check("E5 re-run of the %d cells below (1 - 1e-8) x the smallest float minimum, at that goal" % len(redo),
+              not tight_fail, "%.1f s; cells %s" % (time.time() - t1, ", ".join(str(i) for i in redo[:12])))
+    xs = rmin["x"]                                # a dyadic point of the closed cell, so of S
+    UBd = f_direct_pl(xs)
+    UB = UBd[1]
+    rep.check("E5 min over S of f enclosed", LB <= UB,
+              "min_S f in [%s, %s]; upper end: f at x = %.12f (cell %d, [%s, %s]) from the direct sums over all "
+              "nodes and exact polynomial values; lower end: the smallest certified piece bound over all cells" % (
+                  sci_floor(Fraction(LB, ONE), 8), sci_ceil(Fraction(UB, ONE), 8), float(xs), rmin["cell"],
+                  cert.e[rmin["cell"]], cert.e[rmin["cell"] + 1]))
+    ok = not failed and LB > 0
+    rep.check("E5: f > 0 on S (every closed support cell, cell ends included)", ok,
+              "certified f >= %s" % sci_floor(Fraction(LB, ONE), 6))
+    return {"LB": LB, "UB": UB, "x": xs, "rmin": rmin, "res": res, "ok": ok}
+
+
+# ---- the exact conditions for this format ----
+
+def p298_E2(rep, A, b, quiet=False):
+    """Every Q_j with b_j > 0: primitive, irreducible (mod-p factor-degree sieve), positive leading coefficient, no
+    two equal. Returns the list of failures."""
+    bad = []
+    seen = set()
+    for j, Q in enumerate(A):
+        if b[j] == 0:
+            continue
+        g = 0
+        for c in Q:
+            g = math.gcd(g, c)
+        ok = len(Q) >= 2 and Q[-1] != 0
+        sieve, sdet = irreducible_sieve(Q, maxp=2000) if ok else (False, "degree < 1")
+        nreal, sqf = real_root_count(Q) if ok else (0, False)
+        dup = tuple(Q) in seen or tuple(-c for c in Q) in seen
+        seen.add(tuple(Q))
+        ok = ok and Q[-1] > 0 and g == 1 and sieve and sqf and not dup
+        if not ok:
+            bad.append((j, "gcd %d, lc %d, %s%s" % (g, Q[-1], sdet, ", repeated" if dup else "")))
+        if not quiet:
+            rep.check("E2 Q%d (degree %d, lc %d): primitive, irreducible, positive lc, distinct" % (
+                j, len(Q) - 1, Q[-1]), ok, "%s; %d of %d roots real" % (sdet, nreal, len(Q) - 1))
+    return bad
+
+
+def p298_roots(rep, cert):
+    """Real roots by exact Sturm isolation (width 2^-112), all roots by Gershgorin discs; the two agree, and the
+    discs off the real axis hold exactly the nonreal roots. Returns (rroots, croots, discs, nreal)."""
+    rroots, croots, alld, nreals = [], [], [], []
+    okall = True
+    worst = Fraction(0)
+    for j, Q in enumerate(cert.A):
+        nreal, _ = real_root_count(Q)
+        rr = isolate_roots(Q)
+        discs, prec = certified_discs(Q)
+        ok, up, down, mid = split_discs(discs, nreal)
+        matched = len(rr) == nreal and all(sum(1 for d in mid if d[0] - d[2] <= hi and d[0] + d[2] >= lo) == 1
+                                           for lo, hi in rr)
+        conj = all(any(abs(u[0] - w[0]) <= u[2] + w[2] and abs(u[1] + w[1]) <= u[2] + w[2] for w in down) for u in up)
+        okall &= ok and matched and conj
+        worst = max([worst] + [d[2] for d in discs])
+        rroots.append(rr)
+        croots.append([round_disc(*u) for u in up])
+        alld.append(discs)
+        nreals.append(nreal)
+    rep.check("roots: every Q_j has deg Q_j disjoint Gershgorin discs (one root each); exactly nreal of them meet the "
+              "real axis, each holding one Sturm-isolated real root; the others pair up under conjugation", okall,
+              "%d real roots (exact Sturm counts, enclosures of width <= 2^-112), %d nonreal in %d conjugate pairs; "
+              "largest disc radius 2^%d" % (sum(nreals), sum(len(Q) - 1 for Q in cert.A) - sum(nreals),
+                                             sum(len(c) for c in croots), worst.numerator.bit_length() -
+                                             worst.denominator.bit_length()))
+    return rroots, croots, alld, nreals
+
+
+def vieta_pl(Q, rr, discs):
+    """e1 = -a_{n-1}/a_n, e2 = a_{n-2}/a_n and prod |root|^2 = (a_0/a_n)^2 for the roots in the real enclosures and
+    the discs off the axis, within the propagated radii (exact rationals)."""
+    n = len(Q) - 1
+    zs = [((lo + hi) / 2, Fraction(0), (hi - lo) / 2) for lo, hi in rr]
+    zs += [d for d in discs if d[1] - d[2] > 0 or d[1] + d[2] < 0]
+    if len(zs) != n:
+        return False
+    an = Q[n]
+    R = sum(z[2] for z in zs)
+    ok = abs(sum(z[0] for z in zs) + Fraction(Q[n - 1], an)) <= R and abs(sum(z[1] for z in zs)) <= R
+    if n >= 2:
+        A_ = sum(abs(z[0]) + abs(z[1]) for z in zs)
+        ex, ey = sum(z[0] for z in zs), sum(z[1] for z in zs)
+        px = sum(z[0] * z[0] - z[1] * z[1] for z in zs)
+        py = sum(2 * z[0] * z[1] for z in zs)
+        e2x, e2y = (ex * ex - ey * ey - px) / 2, (2 * ex * ey - py) / 2
+        B = (A_ + R) ** 2 - A_ ** 2
+        ok &= abs(e2x - Fraction(Q[n - 2], an)) <= B and abs(e2y) <= B
+    plo, phi = Fraction(1), Fraction(1)
+    for x, y, r in zs:
+        m2 = x * x + y * y
+        bb = abs(x) + abs(y)
+        plo *= max(Fraction(0), m2 - 2 * r * bb)
+        phi *= m2 + 2 * r * bb + r * r
+    t = Fraction(Q[0], an) ** 2
+    return ok and plo <= t <= phi
+
+
+def _wlog(x, p, q, rp, rq, nodes, weights):
+    """int_p^q log|x - y| rho(y) dy for rho linear from rp (at p) to rq (at q), x outside (p, q), in floats:
+    Gauss-Legendre in the distance from the end nearer to x, on a mesh graded geometrically towards it."""
+    if abs(x - p) <= abs(x - q):
+        near, far, rn, rf_ = p, q, rp, rq
+    else:
+        near, far, rn, rf_ = q, p, rq, rp
+    L = abs(far - near)
+    d0 = abs(x - near)
+    sl = (rf_ - rn) / L
+    cuts, w = [L], L
+    while w > 1e-30 * L and w > 0.25 * d0:
+        w /= 2
+        cuts.append(w)
+    pts = sorted(set(cuts + [0.0]))
+    s = 0.0
+    if d0 == 0.0:
+        eps = pts[1]
+        le = math.log(eps)
+        s += rn * eps * (le - 1) + sl * (eps * eps * le / 2 - eps * eps / 4)
+        pts = pts[1:]
+    for u, v in zip(pts, pts[1:]):
+        h = (v - u) / 2
+        for z, wt in zip(nodes, weights):
+            t = u + h * (z + 1)
+            s += wt * h * math.log(d0 + t) * (rn + sl * t)
+    return s
+
+
+def pl_quad_U(cert, z, nodes, weights):
+    """U(z) by brute-force quadrature over every support cell, in floats (self-test only)."""
+    tot = 0.0
+    if isinstance(z, complex):
+        zr, zi2 = z.real, z.imag ** 2
+        for k in cert.support:
+            a, b = float(cert.e[k]), float(cert.e[k + 1])
+            ha, hb = float(cert.h[k]), float(cert.h[k + 1])
+            h = (b - a) / 2
+            for t, wt in zip(nodes, weights):
+                y = a + h * (t + 1)
+                tot += wt * h * 0.5 * math.log((y - zr) ** 2 + zi2) * (ha + (hb - ha) * (t + 1) / 2)
+        return tot
+    for k in cert.support:
+        a, b = float(cert.e[k]), float(cert.e[k + 1])
+        ha, hb = float(cert.h[k]), float(cert.h[k + 1])
+        if a < z < b:
+            hz = ha + (hb - ha) * (z - a) / (b - a)
+            tot += _wlog(z, a, z, ha, hz, nodes, weights) + _wlog(z, z, b, hz, hb, nodes, weights)
+        else:
+            tot += _wlog(z, a, b, ha, hb, nodes, weights)
+    return tot
+
+
+def pl_selftests(rep, cert, rng, alld):
+    """Our logarithms and arctangents, the jump identities, the closed-form U against quadrature, Vieta."""
+    getcontext().prec = 70
+    bad = 0
+    ns = [rng.randrange(1, 10 ** rng.randrange(1, 80)) for _ in range(600)] + list(range(1, 300))
+    for n in ns:
+        lo, hi = ln_int(n)
+        ref = Fraction(Decimal(n).ln())
+        tol = Fraction(1, 10 ** 60)
+        if not Fraction(lo, ONE) - tol <= ref <= Fraction(hi, ONE) + tol:
+            bad += 1
+    rep.check("self-test: our ln encloses the correctly rounded decimal ln (70 digits) at %d integers" % len(ns),
+              bad == 0)
+    # arctangent: 4 atan 1 and 4 (atan 1/2 + atan 1/3) enclose pi (pi from Machin's formula, exact series), the
+    # addition formula atan a + atan b = atan((a + b)/(1 - ab)) at random rationals (both sides of atan 1), math.atan2
+    one = 1 << LP
+    t1 = atan_q(1, 1)
+    a2, a3 = atan_q(1, 2), atan_q(1, 3)
+    ok = 4 * t1[0] <= PI_LP[1] and PI_LP[0] <= 4 * t1[1]
+    ok &= 4 * (a2[0] + a3[0]) <= PI_LP[1] and PI_LP[0] <= 4 * (a2[1] + a3[1])
+    worst_w, worst_f = 0, 0.0
+    for _ in range(400):
+        q1, q2 = rng.randrange(2, 10 ** rng.randrange(2, 40)), rng.randrange(2, 10 ** rng.randrange(2, 40))
+        p1, p2 = rng.randrange(0, q1), rng.randrange(0, q2)          # a = p1/q1, b = p2/q2 in [0, 1), ab < 1
+        u, v = atan_q(p1, q1), atan_q(p2, q2)
+        w = atan_q(p1 * q2 + p2 * q1, q1 * q2 - p1 * p2)
+        ok &= u[0] + v[0] <= w[1] and w[0] <= u[1] + v[1]
+        worst_w = max(worst_w, u[1] - u[0], w[1] - w[0])
+        worst_f = max(worst_f, abs((u[0] + u[1]) / 2 / one - math.atan2(p1, q1)))
+        n_ = rng.randrange(-10 ** 30, 10 ** 30)
+        th = atan2_lp(q2, n_)
+        worst_f = max(worst_f, abs((th[0] + th[1]) / 2 / one - math.atan2(q2, n_)))
+        ok &= 0 < th[0] <= th[1] < PI_LP[1]
+    rep.check("self-test: our arctangent: 4 atan 1 and 4 (atan 1/2 + atan 1/3) enclose pi (from Machin's formula), "
+              "atan a + atan b encloses atan((a + b)/(1 - ab)) at 400 random rationals, agreement with math.atan2",
+              ok and worst_f < 1e-15, "widest enclosure 2^%d, largest float difference %.1e" % (
+                  worst_w.bit_length() - LP, worst_f))
+    # the slope-jump identities
+    jsum = sum(cert.jump)
+    j1 = sum(j * x for j, x in zip(cert.jump, cert.e))
+    j2 = sum(j * x * x for j, x in zip(cert.jump, cert.e)) / 2
+    rep.check("self-test: the slope jumps satisfy sum j_k = 0, sum j_k e_k = 0, sum j_k e_k^2/2 = m exactly",
+              jsum == 0 and j1 == 0 and j2 == cert.m, "%d nonzero jumps, sum |j_k| = %.6e" % (
+                  sum(1 for x in cert.jump if x), float(sum(abs(x) for x in cert.jump))))
+    # U against brute-force quadrature: random points of the support (one at a node), outside it, and complex points
+    nodes, weights = _gauss_legendre(20)
+    pts = []
+    for _ in range(16):
+        k = rng.choice(cert.support)
+        pts.append(cert.e[k] + Fraction(rng.randrange(1, 1000), 1000) * (cert.e[k + 1] - cert.e[k]))
+    pts += [cert.e[rng.choice(cert.support)] for _ in range(3)]
+    pts += [Fraction(1, 40), Fraction(1), Fraction(6)]
+    worst = 0.0
+    for x in pts:
+        iv = U_real_lp(x.numerator, x.denominator)
+        worst = max(worst, abs((iv[0] + iv[1]) / 2 / (1 << LP) - pl_quad_U(cert, float(x), nodes, weights)))
+    cpts = [(c[1], c[2]) for c in PL["cr"]]
+    for _ in range(4):
+        cpts.append((round(rng.uniform(0.1, 5.0) * (1 << KC)), round(rng.uniform(0.01, 0.5) * (1 << KC))))
+    worstc = 0.0
+    for CX, CY in cpts:
+        iv = U_complex_lp(CX, CY, KC)
+        z = complex(CX / 2.0 ** KC, CY / 2.0 ** KC)
+        worstc = max(worstc, abs((iv[0] + iv[1]) / 2 / (1 << LP) - pl_quad_U(cert, z, nodes, weights)))
+    rep.check("self-test: closed-form U agrees with brute-force Gauss-Legendre quadrature over every support cell at "
+              "%d real points (three of them nodes, three outside S) and %d complex points (the %d nonreal roots in the "
+              "upper half-plane and four random points)" % (len(pts), len(cpts), len(PL["cr"])),
+              worst < 1e-10 and worstc < 1e-10,
+              "largest differences %.1e (real), %.1e (complex)" % (worst, worstc))
+    # Vieta
+    vbad = [j for j, Q in enumerate(cert.A) if not vieta_pl(Q, PL["rroots"][j], alld[j])]
+    rep.check("self-test: Vieta: for every Q_j the root enclosures give e1 = -a_{n-1}/a_n, e2 = a_{n-2}/a_n and "
+              "prod |root|^2 = (a_0/a_n)^2 within their radii (exact rationals)", not vbad,
+              "failed for %s" % vbad if vbad else "all %d polynomials" % len(cert.A))
+
+
+def pl_model_tests(rep, cert, rng, count=48, pieces=160):
+    """The cell model against the direct sums, and piece bounds against rigorous point values."""
+    ok, worst = True, 0.0
+    models = {}
+    for _ in range(count):
+        i = rng.choice(cert.support)
+        cm = models.get(i) or models.setdefault(i, PLCell(i))
+        num, k = rng.randrange(-(1 << 30), (1 << 30) + 1), 30
+        a = cm.f_interval(num, k)
+        b = f_direct_pl(cm.xs(num, k))
+        ok &= a[0] <= b[1] and b[0] <= a[1]
+        worst = max(worst, abs((a[0] + a[1]) / 2 - (b[0] + b[1]) / 2) / ONE)
+    rep.check("self-test: the cell model (Taylor polynomial, remainders, near terms) and the direct sums over all "
+              "nodes agree (enclosures overlap) at %d random points" % count, ok,
+              "largest midpoint difference %.1e" % worst)
+    bad, n, tight = 0, 0, []
+    cells = list(cert.support)
+    for trial in range(pieces):
+        i = rng.choice(cells)
+        cm = models.get(i) or models.setdefault(i, PLCell(i))
+        s = rng.choice([0, 1, 2, 3, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40])
+        mode = trial % 3
+        j = 0 if mode == 0 else ((1 << s) - 1 if mode == 1 else rng.randrange(1 << s))
+        lb, t = cm.piece(j, s, 1 << 400)
+        na = 2 * j - (1 << s)
+        pts = [(na, s), (na + 2, s)] + [((na << 5) + 2 * q, s + 5) for q in range(1, 32)]
+        pts += [((na << (e_ + 1)) + 1, s + e_ + 1) for e_ in range(1, 40)]
+        pts += [(((na + 2) << (e_ + 1)) - 1, s + e_ + 1) for e_ in range(1, 40)]
+        best = None
+        for num, k in pts:
+            ub = cm.f_upper(num, k)
+            if ub is None:
+                continue
+            n += 1
+            bad += ub < lb
+            best = ub if best is None else min(best, ub)
+        if best is not None:
+            tight.append((best - lb) / ONE)
+    tight.sort()
+    rep.check("self-test: piece lower bounds never exceed rigorous point values of f (%d random pieces, depths 0-40, "
+              "%d points crowded towards both ends)" % (pieces, n), bad == 0,
+              "%d violations; sampled minimum minus bound: median %.1e, max %.1e" % (
+                  bad, tight[len(tight) // 2], tight[-1]))
+
+
+# ---- red controls ----
+
+def pl_controls(rep, cert, e5, rroots, croots, alld, workers):
+    """Each must come out wrong."""
+    xs, i_star = e5["x"], e5["rmin"]["cell"]
+    UB = Fraction(e5["UB"], ONE)
+    # 1. a weight raised just enough to break E5 at its minimiser: the one with the largest log|Q(x*)| > 0
+    lq = []
+    for j, Q in enumerate(cert.A):
+        v = ev_frac(Q, xs)
+        lq.append((math.log(abs(float(v))), j))
+    lmax, jw = max(lq)
+    # f_new(x*) = f(x*) - delta ln|Q(x*)|: delta = 2 UB / (a lower bound of ln|Q(x*)|) makes it <= -UB
+    Lq = ln_q_lp(abs(ev_int(cert.A[jw], xs.numerator, xs.denominator)), xs.denominator ** (len(cert.A[jw]) - 1))
+    lqlo = Fraction(Lq[0], 1 << LP)
+    delta = Fraction(cdiv((2 * UB / lqlo).numerator * 10 ** 16, (2 * UB / lqlo).denominator), 10 ** 16)
+    b2 = list(cert.b)
+    b2[jw] += delta
+    c2 = PLCert(cert.e, cert.h, cert.A, b2, cert.bound)
+    pl_prepare(c2, rroots, croots)
+    fv = f_direct_pl(xs)
+    cm = PLCell(i_star)
+    r = cm.bisect(0, smax=30, max_pieces=20000)
+    s_ = sum(bb * (len(Q) - 1) for bb, Q in zip(b2, cert.A))
+    rep.check("control: b of Q%d (the largest log|Q(x*)| = %.4f at the minimiser) raised by %s (relative %.2e, twice "
+              "what breaks E5 there): E5 refuted at x*, and the bisection does not certify f >= 0 on cell %d" % (
+                  jw, lmax, sci_ceil(delta, 3), float(delta / cert.b[jw]), i_star), fv[1] < 0 and bool(r["fails"]),
+              "f(x*) <= %s (rigorous upper end); %d pieces, %d uncertified; E3 still holds (sum/m = %s)" % (
+                  sci_ceil(Fraction(fv[1], ONE), 4), r["pieces"], len(r["fails"]), dec(s_ / cert.m, 8)))
+    # 2. the highest node lowered by 1%: E4 must fail for some Q (and the stated bound is no longer T/m)
+    k = max(range(len(cert.h)), key=lambda k: cert.h[k])
+    h2 = list(cert.h)
+    h2[k] = h2[k] * Fraction(99, 100)
+    c3 = PLCert(cert.e, h2, cert.A, cert.b, cert.bound)
+    pl_prepare(c3, rroots, croots)
+    t0 = time.time()
+    vals = pl_E4_all(workers)
+    neg = [j for j, iv in vals if iv[1] < 0]
+    worst = min(vals, key=lambda v: v[1][1])
+    rep.check("control: the highest node (e = %s, height %.4f) lowered by 1%% (mass and trace recomputed): E4 refuted" % (
+        cert.e[k], float(cert.h[k])), bool(neg) and c3.T / c3.m != cert.bound,
+        "int log|Q| d mu < 0 rigorously for %d of %d polynomials, most negative Q%d in %s; E6 refuses the old bound; "
+        "%.0f s" % (len(neg), len(vals), worst[0], enc(worst[1], 6), time.time() - t0))
+    # 3. E3: weights scaled by 1.3; 4. E6: a bound 1e-15 low; 5. E1: a negative height, edges out of order
+    s = sum(bb * Fraction(13, 10) * (len(Q) - 1) for bb, Q in zip(cert.b, cert.A))
+    rep.check("control: weights scaled by 1.3 violate E3", not s < cert.m, "sum/m = %s" % dec(s / cert.m, 6))
+    b = cert.T / cert.m
+    low = b - Fraction(1, 10 ** 15)
+    rep.check("control: a bound 1e-15 below T/m is refused by E6", low != b and low < b)
+    kk = cert.support[len(cert.support) // 2]
+    h3 = list(cert.h)
+    h3[kk] = -Fraction(1, 10 ** 9)
+    e3 = list(cert.e)
+    e3[kk], e3[kk + 1] = e3[kk + 1], e3[kk]
+    rep.check("control: a height -1e-9 and two swapped nodes are refused by E1",
+              not all(x >= 0 for x in h3) and not all(x < y for x, y in zip(e3, e3[1:])))
+    # 6. E2: reducible, non-primitive, repeated, negative leading coefficient
+    quiet = Report.__new__(Report)
+    quiet.fails = []
+    for label, Q in (("x^2 - 3x + 2 = (x - 1)(x - 2)", [2, -3, 1]), ("2x^2 - 6x + 2 (not primitive)", [2, -6, 2]),
+                     ("Q1 again, negated", [-c for c in cert.A[1]]), ("-x + 3 (negative leading coefficient)", [3, -1]),
+                     ("(x^2 + 1)(x^2 - 3x + 1), no real factor", [1, -3, 2, -3, 1])):
+        bad = p298_E2(quiet, list(cert.A) + [Q], list(cert.b) + [Fraction(1, 10 ** 6)], quiet=True)
+        rep.check("control: E2 refuses %s" % label, any(j == len(cert.A) for j, _ in bad),
+                  "; ".join(d for j, d in bad if j == len(cert.A))[:150])
+    # 7. a nonreal root moved by 1e-12 (radius kept) is caught by the Vieta test
+    pl_prepare(cert, rroots, croots)
+    jc = max(range(len(cert.A)), key=lambda j: len(cert.A[j]) if croots[j] else 0)
+    disc = alld[jc]
+    k_ = next(i for i, d_ in enumerate(disc) if d_[1] - d_[2] > 0)
+    moved = list(disc)
+    moved[k_] = (disc[k_][0] + Fraction(1, 10 ** 12), disc[k_][1], disc[k_][2])
+    rep.check("control: a nonreal root of Q%d moved by 1e-12 (radius kept) fails the Vieta test" % jc,
+              vieta_pl(cert.A[jc], rroots[jc], disc) and not vieta_pl(cert.A[jc], rroots[jc], moved))
+    # 8. the bisection cannot certify a goal above a rigorous upper bound of f
+    cm = PLCell(i_star)
+    r = cm.bisect(e5["UB"] + qiv(Fraction(1, 10 ** 12))[1], smax=24, max_pieces=20000)
+    rep.check("control: goal min_S f + 1e-12 is not certified in cell %d (bisection to depth 24)" % i_star,
+              bool(r["fails"]), "%d pieces, %d uncertified" % (r["pieces"], len(r["fails"])))
+
+
 # ----------------------------------------------------------------------------------------------------------------
 # Rows
 # ----------------------------------------------------------------------------------------------------------------
@@ -1867,11 +3373,11 @@ def run_row(key, root, do_controls, workers):
     return rep.done()
 
 
-def run_p298(root):
-    """PR #298 (rpinho/math-certificates @0d82162, c86/adaptive-cone): a piecewise-linear density on rational nodes
-    with auxiliaries that may have nonreal roots. Only the exact conditions are replayed here (E1, E2 without the
-    real-root clause, E3, E6); E4 and E5 need complex-root enclosures and a hat-density potential, not built."""
-    rep = Report("ROW p298: PR #298 @0d82162 (c86/adaptive-cone), C86 <= 1.80560940* -- PARTIAL replay")
+def run_p298(root, do_controls, workers):
+    """PR #298 (rpinho/math-certificates @0d82162, c86/adaptive-cone): a piecewise-linear density on 5,375
+    rational nodes, 28 auxiliaries, ten with nonreal roots. Every condition, E1 to E6."""
+    rep = Report("ROW p298: PR #298 @0d82162 (c86/adaptive-cone), C86 <= 1.80560940*")
+    rng = random.Random(298)
     rel = "p298/certificate.json"
     path = os.path.join(root, rel)
     h = sha256(path)
@@ -1887,60 +3393,106 @@ def run_p298(root):
     bound = rat(d["bound"])
     rep.info("keys read", "edges, node_densities, A, b, bound; ignored: %s" % ", ".join(
         k for k in d if k not in ("edges", "node_densities", "A", "b", "bound")))
+    # ---- E1
     rep.check("E1 %d nodes, strictly increasing, %d heights, %d polynomials and weights" % (len(e), len(hgt), len(A)),
               len(e) == len(hgt) and len(A) == len(b) and all(x < y for x, y in zip(e, e[1:])))
     rep.check("E1 every node height >= 0 and every weight >= 0", all(x >= 0 for x in hgt) and all(x >= 0 for x in b),
               "%d positive heights, %d positive weights" % (sum(1 for x in hgt if x > 0), sum(1 for x in b if x > 0)))
-    m = sum((hgt[k] + hgt[k + 1]) / 2 * (e[k + 1] - e[k]) for k in range(len(e) - 1))
-    T = sum((e[k + 1] - e[k]) * (hgt[k] * (2 * e[k] + e[k + 1]) + hgt[k + 1] * (e[k] + 2 * e[k + 1])) / 6
-            for k in range(len(e) - 1))
-    pos = [k for k in range(len(e) - 1) if hgt[k] > 0 or hgt[k + 1] > 0]
-    lo, hi = e[pos[0]], e[pos[-1] + 1]
+    cert = PLCert(e, hgt, A, b, bound)
+    m, T = cert.m, cert.T
+    lo, hi = e[cert.support[0]], e[cert.support[-1] + 1]
     rep.check("E1 m > 0 and min S > 0 (density zero outside the nodes)", m > 0 and lo > 0 and hgt[0] == 0 and
               hgt[-1] == 0, "m = %s, S in [%s, %s]" % (dec(m, 18), lo, hi))
-    allok = True
-    seen = set()
-    for j, Q in enumerate(A):
-        if b[j] == 0:
-            continue
-        g = 0
-        for c in Q:
-            g = math.gcd(g, c)
-        sieve, sdet = irreducible_sieve(Q, maxp=2000)
-        nreal, sqf = real_root_count(Q)
-        assoc = tuple(Q) in seen or tuple(-c for c in Q) in seen
-        seen.add(tuple(Q))
-        ok = Q[-1] > 0 and g == 1 and sieve and sqf and not assoc
-        allok &= ok
-        rep.check("E2 Q%d (degree %d, lc %d): primitive, irreducible, positive lc, distinct" % (j, len(Q) - 1, Q[-1]),
-                  ok, "%s; %d of %d roots real" % (sdet, nreal, len(Q) - 1))
+    gaps = sum(1 for a_, c_ in zip(cert.support, cert.support[1:]) if c_ != a_ + 1)
+    widths = sorted(set(e[k + 1] - e[k] for k in cert.support))
+    rep.info("support", "%d cells with a positive end height, widths %s to %s, in [%s, %s] (%d gaps)" % (
+        len(cert.support), widths[0], widths[-1], lo, hi, gaps))
+    # ---- E2
+    bad = p298_E2(rep, A, b)
+    if bad:
+        return rep.done()
+    # ---- E3
     s = sum(bb * (len(Q) - 1) for bb, Q in zip(b, A))
     rep.check("E3 sum_j b_j deg Q_j < m", s < m, "sum/m = %s" % dec(s / m, 10))
+    # ---- E6
     rep.check("E6 T/m equals the certificate's bound exactly", T / m == bound, "T/m = %s = %s..." % (T / m,
                                                                                                     dec(T / m, 20)))
     rep.check("E6 the README's 288897505229428473/160000001279369600", bound == Fraction(288897505229428473,
                                                                                          160000001279369600))
     rep.check("E6 printed upper bound 1.80560940 (PR #298 title) >= T/m", Fraction("1.80560940") >= T / m,
               "difference %.3e" % float(Fraction("1.80560940") - T / m))
-    rep.info("E4, E5", "NOT REPLAYED: they need certified enclosures of the nonreal roots (degrees up to %d) and the "
-             "potential of a piecewise-linear density on %d non-uniform nodes; this checker's engine handles step "
-             "densities on equal cells with real-rooted auxiliaries" % (max(len(Q) - 1 for Q in A), len(e)))
+    # ---- roots, and the data for E4 and E5
+    t0 = time.time()
+    rroots, croots, alld, nreals = p298_roots(rep, cert)
+    pl_prepare(cert, rroots, croots)
+    rep.info("prepared", "%d nodes with a nonzero slope jump, D = %d (D e_k integers), lcm of the jump denominators "
+             "2^%d; roots %.1f s" % (len(PL["NE"]), PL["D"], PL["DJ"].bit_length(), time.time() - t0))
+    pl_selftests(rep, cert, rng, alld)
+    # ---- E4
+    t0 = time.time()
+    span = max(abs(c - x) + rad for _, c, rad, _ in PL["rr"] for x in (cert.e[min(cert.support)],
+                                                                       cert.e[max(cert.support) + 1]))
+    rep.check("E4 every real root within distance 6 of every node with a nonzero jump (the Lipschitz bound used)",
+              span <= 6, "largest distance %.4f" % float(span))
+    e4 = pl_E4_all(workers)
+    for j, iv in e4:
+        rep.info("E4 int log|Q%d| dmu, Q%d = %s" % (j, j, pstr(A[j])), enc(iv, 12))
+    worst = min(e4, key=lambda v: v[1][0])
+    rep.check("E4 int log|Q_j| dmu > 0 for every j (rigorous lower ends)", all(iv[0] > 0 for _, iv in e4),
+              "smallest: Q%d = %s, in %s; %.1f s" % (worst[0], pstr(A[worst[0]]), enc(worst[1], 12), time.time() - t0))
+    t0 = time.time()
+    quad = dict(pl_E4_all(workers, _pl_E4_quad))
+    dq = max(abs((iv[0] + iv[1]) / 2 / ONE - quad[j]) for j, iv in e4)
+    rep.check("self-test: every E4 value agrees with brute-force quadrature of U at its %d roots (floats)" % sum(
+        len(Q) - 1 for Q in A), dq < 1e-11, "largest difference %.1e; %.1f s" % (dq, time.time() - t0))
+    # ---- E5
+    inS = sum(1 for _, c, rad, _ in PL["rr"] for k in cert.support if e[k] <= c - rad and c + rad <= e[k + 1])
+    rep.info("E5 roots on the support", "%d of the %d real roots lie in S, where f tends to +infinity; a piece that "
+             "may hold one takes -b log(its largest distance to the root), the others the tangent" % (inS, len(PL["rr"])))
+    pl_model_tests(rep, cert, rng)
+    e5 = pl_check_E5(rep, cert, workers)
+    if e5 is None:
+        return rep.done()
+    # ---- consequences, checked separately
+    pts = []
+    sup = cert.support
+    for a_, c_ in zip(sup, sup[1:]):
+        if c_ != a_ + 1:
+            pts.append((e[a_ + 1] + e[c_]) / 2)
+    pts += [lo / 2, hi + Fraction(1, 5), Fraction(10)]
+    worstg = None
+    for x in pts:
+        lo_, hi_ = f_direct_pl(x)
+        if worstg is None or lo_ < worstg[1]:
+            worstg = (x, lo_)
+    rep.check("minimum principle, sampled: f > 0 at the %d gap midpoints and 3 exterior points (not needed; a "
+              "consistency check)" % (len(pts) - 3), worstg[1] > 0,
+              "smallest f >= %s at x = %s" % (sci_floor(Fraction(worstg[1], ONE), 6), float(worstg[0])))
+    if do_controls:
+        pl_controls(rep, cert, e5, rroots, croots, alld, workers)
+    rep.info("what rests on the cited theorems",
+             "f >= 0 on S gives f >= 0 on C (minimum principle: f is harmonic off S and the roots, tends to +inf at "
+             "the roots and at infinity by E3); E2-E5 make mu/m arithmetic ([Smi24] Prop. 5.15); Smith's Thm 1.5 on "
+             "an interval containing S of capacity > 1 ([1/1000, 13], as PROOF.md says) then gives C86 <= T/m")
+    tms = os.times()
+    rep.info("CPU time", "%.0f s (this process and its workers)" % (tms[0] + tms[1] + tms[2] + tms[3]))
     ok = rep.done()
-    print("  ROW STATUS: PARTIAL (E1, E2, E3, E6 only)")
+    print("  ROW STATUS: FULL (E1-E6)")
     return ok
 
 
 def main():
-    if len(sys.argv) >= 3 and sys.argv[1] == "p298":
-        sys.exit(0 if run_p298(sys.argv[2]) else 1)
-    if len(sys.argv) < 3 or sys.argv[1] not in ROWS:
+    if len(sys.argv) < 3 or sys.argv[1] not in list(ROWS) + ["p298"]:
         print(__doc__)
         sys.exit(2)
     workers = os.cpu_count() or 1
     for a in sys.argv:
         if a.startswith("--workers="):
             workers = int(a.split("=")[1])
-    ok = run_row(sys.argv[1], sys.argv[2], "--controls" in sys.argv, workers)
+    if sys.argv[1] == "p298":
+        ok = run_p298(sys.argv[2], "--controls" in sys.argv, workers)
+    else:
+        ok = run_row(sys.argv[1], sys.argv[2], "--controls" in sys.argv, workers)
     sys.exit(0 if ok else 1)
 
 

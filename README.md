@@ -68,20 +68,31 @@ log|Q| d mu) from rigorous logarithms at scale 2^-128 and isolated roots; E5 (U_
 support) by per-cell Taylor models with explicit remainder bounds, exact handling of each cell's edge cusps and nearby
 roots, and adaptive bisection. Floats only choose split and tangent points; they never decide anything.
 
+#298 needs more: its density is piecewise linear on 5,375 unequally spaced rational nodes, and ten of its 28
+auxiliaries have nonreal roots. There U(z) = Re sum_k j_k F(z - e_k), with j_k the slope jumps and
+F(w) = w^2 log(w)/2 - 3w^2/4 (checked against brute-force quadrature at 22 real and 20 complex points). Every root is
+enclosed in a Gershgorin disc of the Weierstrass matrix (the code of our C82 replay, radius at most 2^-305), the real
+ones also by exact Sturm isolation, and the enclosures satisfy Vieta's formulas. E4 uses our own arctangent at the
+nonreal roots; E5 a degree-24 Taylor model per support cell, with the nodes and roots within four half-widths of the
+cell handled exactly on each piece.
+
 | Row | Certificate (SHA-256) | Result |
 | --- | --- | --- |
 | [Kos2026], 1.8084990 | `certificate/c86_A19d7_robust_1.8084990.json` @90c57242 (`1a9e108e...845c`) | 19 auxiliary polynomials pass E2; E3 ratio 0.83542405; smallest E4 integral 1.99999997804e-6; E5: f >= 1.01159e-6 on all 633 cells (4,403 pieces), min f in [1.011592e-6, 1.011601e-6] near x = 2.869309284; T/m = 144679917840593158601/79999999999999881200 = 1.80849897300741716813... |
 | [Pin2026], 1.8117251 | `cert_n1200_A11.json` @116a58f (`722a287b...e53d`) | 11 polynomials pass E2; E3 ratio 0.82977960; smallest E4 9.99999986901e-5; E5: f >= 5.03972e-5 on all 629 cells, min f near x = 0.709342054; T/m = 144938007612277893/79999999999994000 = 1.81172509515360954188... |
 | #270, 1.8077686 | `c86_deg8_h400_1.807768536863.json` (`7ca02d70...1134`) | 19 polynomials (two of degree 8) pass E2; E3 ratio 0.84520107; smallest E4 9.98933032188e-11 (thin but rigorous); E5: f >= 4.86106e-7 on all 1,243 cells; T/m = 578485931795944337659/319999999999999303200 = 1.80776853686232999160... |
-| #298, 1.80560940 | `c86/adaptive-cone/certificate.json` @0d82162 (`10d68ec2...0dad5`) | partial: E1, E2 (28 polynomials, 10 with non-real roots, degree up to 21), E3 and E6 pass exactly; E4 and E5 not replayed (complex roots and a piecewise-linear density need a different engine) |
+| #298, 1.80560940 | `c86/adaptive-cone/certificate.json` @0d82162 (`10d68ec2...0dad5`) | 28 polynomials (10 with nonreal roots, degree up to 21) pass E2; E3 ratio 0.8950913258; smallest E4 8.94715228390e-8 (x^2 - 4x + 2); E5: f >= 5.57254e-7 on all 3,791 support cells (118,757 pieces), min f in [5.5725403e-7, 5.5725405e-7] near x = 0.285640644; T/m = 288897505229428473/160000001279369600 = 1.80560939324616691129... |
 
 Each printed bound is T/m rounded up, so each holds as printed. Red controls, all as expected: lowering the densest
 cell by 1% makes E5 fail (and E4 for some Q); raising the largest weight by 0.1% makes E5 fail; reducible,
 non-primitive and non-totally-real polynomials are refused; weights times 1.3 break E3; a bound 1e-15 low is refused
-by E6. What rests on theorems rather than computation: the minimum principle, Smith's Prop. 5.15 and Thm 1.5 (we
-check their hypotheses).
+by E6. For #298 also: the weight of x - 2 raised to twice what breaks E5 at the minimiser makes f < 0 there and the
+bisection refuses that cell; the highest node lowered by 1% makes E4 fail for two polynomials; a nonreal root moved by
+1e-12 fails the Vieta test. What rests on theorems rather than computation: the minimum principle, Smith's Prop. 5.15
+and Thm 1.5 (we check their hypotheses).
 
-Reproduce: `cd c86 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 2 minutes).
+Reproduce: `cd c86 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 3.5 minutes; the #298 row about 1.5 minutes and 5
+CPU-minutes on a loaded 18-core Mac).
 
 ## C44 and C70 (4 November 2026)
 
