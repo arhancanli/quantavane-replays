@@ -57,6 +57,30 @@ IRSI README's convention, which differs from the later rows' (conjugate matrices
 
 Reproduce: `cd c49 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 9 minutes on a loaded 18-core Mac).
 
+## C86: the Schur-Siegel-Smyth trace constant (4 November 2026)
+
+`c86/c86_check.py`, our own code, standard library only: the six finite conditions of Smith's criterion as the 86a
+page states them. E1 (density, support, mass m), E3 and E6 in exact rationals; E2 (primitive, irreducible over Q by a
+mod-p factor-degree sieve and by an exact root-subset test, totally real by exact Sturm counts); E4 (integral of
+log|Q| d mu) from rigorous logarithms at scale 2^-128 and isolated roots; E5 (U_mu(x) - sum b_Q log|Q(x)| >= c on the
+support) by per-cell Taylor models with explicit remainder bounds, exact handling of each cell's edge cusps and nearby
+roots, and adaptive bisection. Floats only choose split and tangent points; they never decide anything.
+
+| Row | Certificate (SHA-256) | Result |
+| --- | --- | --- |
+| [Kos2026], 1.8084990 | `certificate/c86_A19d7_robust_1.8084990.json` @90c57242 (`1a9e108e...845c`) | 19 auxiliary polynomials pass E2; E3 ratio 0.83542405; smallest E4 integral 1.99999997804e-6; E5: f >= 1.01159e-6 on all 633 cells (4,403 pieces), min f in [1.011592e-6, 1.011601e-6] near x = 2.869309284; T/m = 144679917840593158601/79999999999999881200 = 1.80849897300741716813... |
+| [Pin2026], 1.8117251 | `cert_n1200_A11.json` @116a58f (`722a287b...e53d`) | 11 polynomials pass E2; E3 ratio 0.82977960; smallest E4 9.99999986901e-5; E5: f >= 5.03972e-5 on all 629 cells, min f near x = 0.709342054; T/m = 144938007612277893/79999999999994000 = 1.81172509515360954188... |
+| #270, 1.8077686 | `c86_deg8_h400_1.807768536863.json` (`7ca02d70...1134`) | 19 polynomials (two of degree 8) pass E2; E3 ratio 0.84520107; smallest E4 9.98933032188e-11 (thin but rigorous); E5: f >= 4.86106e-7 on all 1,243 cells; T/m = 578485931795944337659/319999999999999303200 = 1.80776853686232999160... |
+| #298, 1.80560940 | `c86/adaptive-cone/certificate.json` @0d82162 (`10d68ec2...0dad5`) | partial: E1, E2 (28 polynomials, 10 with non-real roots, degree up to 21), E3 and E6 pass exactly; E4 and E5 not replayed (complex roots and a piecewise-linear density need a different engine) |
+
+Each printed bound is T/m rounded up, so each holds as printed. Red controls, all as expected: lowering the densest
+cell by 1% makes E5 fail (and E4 for some Q); raising the largest weight by 0.1% makes E5 fail; reducible,
+non-primitive and non-totally-real polynomials are refused; weights times 1.3 break E3; a bound 1e-15 low is refused
+by E6. What rests on theorems rather than computation: the minimum principle, Smith's Prop. 5.15 and Thm 1.5 (we
+check their hypotheses).
+
+Reproduce: `cd c86 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 2 minutes).
+
 ## Reproduce
 
 ```

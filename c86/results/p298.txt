@@ -1,0 +1,43 @@
+ROW p298: PR #298 @0d82162 (c86/adaptive-cone), C86 <= 1.80560940* -- PARTIAL replay
+  sha256 p298/certificate.json: 10d68ec249f47c0504182d419fd8ddd1ca1c917e42a4bba59d944b9d1de0dad5
+  check sha256 matches the README and SHA256SUMS of c86/adaptive-cone (10d68ec249f47c0504182d419fd8ddd1ca1c917e42a4bba59d944b9d1de0dad5): PASS
+  keys read: edges, node_densities, A, b, bound; ignored: bound_float
+  check E1 5375 nodes, strictly increasing, 5375 heights, 28 polynomials and weights: PASS
+  check E1 every node height >= 0 and every weight >= 0: PASS (3699 positive heights, 28 positive weights)
+  check E1 m > 0 and min S > 0 (density zero outside the nodes): PASS (m = 1.000000007996060000, S in [17/320, 5237/1000])
+  check E2 Q0 (degree 1, lc 1): primitive, irreducible, positive lc, distinct: PASS (degree 1; 1 of 1 roots real)
+  check E2 Q1 (degree 1, lc 1): primitive, irreducible, positive lc, distinct: PASS (degree 1; 1 of 1 roots real)
+  check E2 Q2 (degree 1, lc 1): primitive, irreducible, positive lc, distinct: PASS (degree 1; 1 of 1 roots real)
+  check E2 Q3 (degree 2, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[2]; 2 of 2 roots real)
+  check E2 Q4 (degree 3, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[3]; 3 of 3 roots real)
+  check E2 Q5 (degree 4, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4]; 4 of 4 roots real)
+  check E2 Q6 (degree 4, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4]; 4 of 4 roots real)
+  check E2 Q7 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q8 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q9 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q10 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q11 (degree 10, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[10]; 10 of 10 roots real)
+  check E2 Q12 (degree 10, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4, 6], 3[10]; 10 of 10 roots real)
+  check E2 Q13 (degree 10, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 3[10]; 10 of 10 roots real)
+  check E2 Q14 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 8 of 8 roots real)
+  check E2 Q15 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 8 of 8 roots real)
+  check E2 Q16 (degree 7, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[1, 6], 3[3, 4]; 7 of 7 roots real)
+  check E2 Q17 (degree 2, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 3[2]; 2 of 2 roots real)
+  check E2 Q18 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 6 of 8 roots real)
+  check E2 Q19 (degree 12, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5, 7], 3[5, 7], 5[2, 4, 6]; 8 of 12 roots real)
+  check E2 Q20 (degree 12, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[12]; 8 of 12 roots real)
+  check E2 Q21 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4, 10], 3[3, 5, 6]; 10 of 14 roots real)
+  check E2 Q22 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[14]; 12 of 14 roots real)
+  check E2 Q23 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[14]; 10 of 14 roots real)
+  check E2 Q24 (degree 15, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 3[3, 4, 4, 4], 5[3, 12], 7[4, 5, 6]; 13 of 15 roots real)
+  check E2 Q25 (degree 16, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[1, 15], 3[4, 12]; 12 of 16 roots real)
+  check E2 Q26 (degree 17, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8, 9], 3[1, 16]; 15 of 17 roots real)
+  check E2 Q27 (degree 21, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[3, 18], 3[6, 15]; 17 of 21 roots real)
+  check E3 sum_j b_j deg Q_j < m: PASS (sum/m = 0.8950913258)
+  check E6 T/m equals the certificate's bound exactly: PASS (T/m = 288897505229428473/160000001279369600 = 1.80560939324616691129...)
+  check E6 the README's 288897505229428473/160000001279369600: PASS
+  check E6 printed upper bound 1.80560940 (PR #298 title) >= T/m: PASS (difference 6.754e-09)
+  E4, E5: NOT REPLAYED: they need certified enclosures of the nonreal roots (degrees up to 21) and the potential of a piecewise-linear density on 5375 non-uniform nodes; this checker's engine handles step densities on equal cells with real-rooted auxiliaries
+  run time: 0.2 s
+  RESULT: ALL CHECKS PASS
+  ROW STATUS: PARTIAL (E1, E2, E3, E6 only)

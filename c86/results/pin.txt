@@ -1,0 +1,76 @@
+ROW pin: [Pin26] @116a58f, C86 <= 1.8117251*
+  sha256 pin/cert_n1200_A11.json: 722a287b74a9f84f8c6c2f505e7e6bb987ca634710b031287a5b01619bffe53d
+  86a page: states the commit only (no hash) for this row
+  check sha256 matches [Pin26] README (722a287b74a9f84f8c6c2f505e7e6bb987ca634710b031287a5b01619bffe53d): PASS
+  check sha256 matches PR #242 thread (722a287b74a9...): PASS
+  keys read: edges, densities, A, b, bound (all exact rationals or integers); other keys ignored: n, delta, bound_float, report
+  check E1 shapes: 1201 edges, 1200 densities, 11 polynomials, 11 weights: PASS
+  check E1 edges strictly increasing: PASS
+  check E1 every density >= 0: PASS (629 nonzero cells)
+  check E1 every weight b_j >= 0: PASS (11 positive)
+  check E1 mass m > 0: PASS (m = 39999999999997/40000000000000 = 0.999999999999925000)
+  check E1 min S > 0: PASS (S lies in [1/20, 1037/200])
+  support: 629 nonzero cells of width 1/200 in [1/20, 1037/200] (1027 cells in the hull, 24 gaps)
+  check support and cell count as on the 86a page (629 cells in [1/20, 1037/200]): PASS
+  check mass m = 39999999999997/40000000000000 as on the 86a page: PASS
+  check E2 Q0 = x: primitive, irreducible, all roots real, not associate to another: PASS (deg 1, gcd 1, degree 1, roots-method irreducible, 1 distinct real roots, b = 38759530583/1000000000000)
+  check E2 Q1 = -x + 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 1, gcd 1, degree 1, roots-method irreducible, 1 distinct real roots, b = 39934194061/500000000000)
+  check E2 Q2 = x^2 - 3x + 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 2, gcd 1, primes 2[2], roots-method irreducible, 2 distinct real roots, b = 4631766723/100000000000)
+  check E2 Q3 = x^3 - 5x^2 + 6x - 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 3, gcd 1, primes 2[3], roots-method irreducible, 3 distinct real roots, b = 53369420893/1000000000000)
+  check E2 Q4 = x^4 - 7x^3 + 14x^2 - 8x + 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 4, gcd 1, primes 2[4], roots-method irreducible, 4 distinct real roots, b = 77163819/3906250000)
+  check E2 Q5 = x^4 - 7x^3 + 13x^2 - 7x + 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 4, gcd 1, primes 2[4], roots-method irreducible, 4 distinct real roots, b = 36545507753/1000000000000)
+  check E2 Q6 = x^5 - 9x^4 + 28x^3 - 35x^2 + 15x - 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 5, gcd 1, primes 2[5], roots-method irreducible, 5 distinct real roots, b = 8024683547/500000000000)
+  check E2 Q7 = x^5 - 9x^4 + 26x^3 - 29x^2 + 11x - 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 5, gcd 1, primes 2[5], roots-method irreducible, 5 distinct real roots, b = 9731525491/1000000000000)
+  check E2 Q8 = x^5 - 9x^4 + 27x^3 - 32x^2 + 13x - 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 5, gcd 1, primes 2[5], roots-method irreducible, 5 distinct real roots, b = 7106935573/1000000000000)
+  check E2 Q9 = x^3 - 6x^2 + 9x - 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 3, gcd 1, primes 2[3], roots-method irreducible, 3 distinct real roots, b = 18100957401/1000000000000)
+  check E2 Q10 = x^5 - 9x^4 + 27x^3 - 31x^2 + 12x - 1: primitive, irreducible, all roots real, not associate to another: PASS (deg 5, gcd 1, primes 2[5], roots-method irreducible, 5 distinct real roots, b = 1446829237/500000000000)
+  check the 11 polynomials are those listed on the 86a page (up to sign): PASS
+  check the weights b_Q printed on the 86a page are the certificate's exact weights: PASS
+  check E3 sum_j b_j deg Q_j < m: PASS (sum = 0.829779602875, sum/m = 0.82977960)
+  check sum b deg / m rounds to 0.82978, as on the 86a page: PASS
+  T = int x dmu: 144938007612277893/80000000000000000
+  check E6 T/m equals the certificate's bound exactly: PASS (T/m = 144938007612277893/79999999999994000 = 1.8117250951536095418821...)
+  check E6 printed upper bound 1.8117251 (86a page) >= T/m: PASS (it is T/m rounded up at 7 decimals)
+  check T/m = 144938007612277893/79999999999994000 as stated for this row: PASS
+  check T/m begins 1.81172509515... (86a page): PASS
+  check T/m begins 1.81172509515360... ([Pin26] README): PASS
+  check T/m begins 1.81172509515360954... (PR #242): PASS
+  check self-test: our ln encloses the correctly rounded decimal ln (70 digits) at 899 integers: PASS
+  check self-test: closed-form U agrees with Gauss-Legendre quadrature at 3 random points: PASS (largest difference 1.28e-15)
+  E4 int log|Q0| dmu, Q0 = x: [1.00000000069e-4, 1.00000000070e-4]
+  E4 int log|Q1| dmu, Q1 = -x + 1: [1.00000000091e-4, 1.00000000092e-4]
+  E4 int log|Q2| dmu, Q2 = x^2 - 3x + 1: [1.00000000134e-4, 1.00000000135e-4]
+  E4 int log|Q3| dmu, Q3 = x^3 - 5x^2 + 6x - 1: [1.00000000299e-4, 1.00000000300e-4]
+  E4 int log|Q4| dmu, Q4 = x^4 - 7x^3 + 14x^2 - 8x + 1: [1.00000000750e-4, 1.00000000751e-4]
+  E4 int log|Q5| dmu, Q5 = x^4 - 7x^3 + 13x^2 - 7x + 1: [9.99999990896e-5, 9.99999990897e-5]
+  E4 int log|Q6| dmu, Q6 = x^5 - 9x^4 + 28x^3 - 35x^2 + 15x - 1: [9.99999996328e-5, 9.99999996329e-5]
+  E4 int log|Q7| dmu, Q7 = x^5 - 9x^4 + 26x^3 - 29x^2 + 11x - 1: [1.00000000394e-4, 1.00000000395e-4]
+  E4 int log|Q8| dmu, Q8 = x^5 - 9x^4 + 27x^3 - 32x^2 + 13x - 1: [9.99999986901e-5, 9.99999986902e-5]
+  E4 int log|Q9| dmu, Q9 = x^3 - 6x^2 + 9x - 1: [1.00000000377e-4, 1.00000000378e-4]
+  E4 int log|Q10| dmu, Q10 = x^5 - 9x^4 + 27x^3 - 31x^2 + 12x - 1: [1.00000000185e-4, 1.00000000186e-4]
+  check E4 int log|Q_j| dmu > 0 for every j (rigorous lower ends): PASS (smallest: Q8 = x^5 - 9x^4 + 27x^3 - 32x^2 + 13x - 1, in [9.99999986901e-5, 9.99999986902e-5])
+  check every E4 within 1% of 1e-4 (86a page and [Pin26] README: each about 1e-4): PASS (largest relative deviation 1.31e-08)
+  check self-test: the cell Taylor model and direct termwise sums agree (enclosures overlap) at 24 random points: PASS (largest midpoint difference 0.00e+00)
+  check self-test: piece lower bounds never exceed rigorous point values of f (240 random pieces, depths 0-44, 29759 points): PASS (0 violations; sampled minimum minus bound: median 1.3e-15, max 2.4e-04)
+  E5 float scan (heuristic only): smallest f found 5.039776e-05 in cell 141 at x = 0.7093421; 0.5 s
+  check E5 f >= 5.03972e-5 on every support cell (629 cells, 1563 pieces, max depth 10): PASS (0.4 s; 0 cells failed)
+  E5 smallest certified piece bound (all cells, goal 5.03972e-5): 5.0397623e-5
+  check E5 min over S of f enclosed: PASS (min_S f in [5.039762e-5, 5.039777e-5]; upper end: rigorous f at x = 0.709342054 (cell 141); lower end: cell 141 re-run with goal (1 - 1e-5) x the float minimum, 25 pieces)
+  check E5: f >= 0 on S: PASS
+  energy I(mu) = int int log|x - y| dmu dmu: [2.41307089461e-3, 2.41307089462e-3]
+  check consistency: int f dmu = I(mu) - sum_j b_j E4_j >= m min_S f (E4, E5 and the energy are computed by different code): PASS (int f dmu in [2.3802212e-3, 2.3802213e-3], m x (certified min f) = 5.0397623e-5)
+  check energy of nu = mu/m is positive, as Smith's criterion needs (a consequence of E4, E5): PASS (I(nu) = I(mu)/m^2)
+  check minimum principle, sampled: f > 0 at the 24 gap midpoints and 3 exterior points (not needed; a consistency check): PASS (smallest f >= 6.21297e-3 at x = 1.4175)
+  check control: density of cell 48 (the largest, 4.0464) lowered by 1%: E4 or E5 refuted: PASS (E4 negative for none; f < -2.577e-4 at x = 5.170696282 (rigorous upper bound))
+  check control: largest weight (Q1 = -x + 1, b = 0.079868) raised by 0.1%: E5 refuted: PASS (f < -4.913e-5 at x = 5.170696282 (rigorous upper bound))
+  check control: E2 refuses x^2 - 3x + 2 = (x - 1)(x - 2): PASS (E2 on it: deg 2, gcd 1, sieve: factor degrees still possible: [1], roots-method REDUCIBLE rational root 2 of a polynomial of degree 2, 2 distinct real roots, b = 1/100000)
+  check control: E2 refuses x^2 + 1 (not totally real): PASS (E2 on it: deg 2, gcd 1, primes 3[2], roots-method n/a, 0 distinct real roots, b = 1/1000000)
+  check control: E2 refuses 2x^2 - 6x + 2 (not primitive): PASS (E2 on it: deg 2, gcd 2, primes 3[2], roots-method n/a, 2 distinct real roots, b = 1/1000000)
+  check control: E2 refuses (x - 1)(x^2 - 3x + 1) = x^3 - 4x^2 + 4x - 1: PASS (E2 on it: deg 3, gcd 1, sieve: factor degrees still possible: [1, 2], roots-method REDUCIBLE rational root 1 of a polynomial of degree 3, 3 distinct real roots, b = 1/100)
+  check control: E2 accepts x^4 - 10x^2 + 1 (irreducible, reducible mod every prime) only through the root method (the sieve cannot prove it): PASS (E2 on it: deg 4, gcd 1, sieve: factor degrees still possible: [2], roots-method irreducible, 4 distinct real roots, b = 1/1000000)
+  check control: weights scaled by 1.3 violate E3: PASS (sum/m = 1.078713)
+  check control: a bound 1e-15 below T/m is refused by E6: PASS
+  check control: goal min_S f + 1e-12 is not certified in cell 141 (bisection to depth 24): PASS (1797 pieces, 873 uncertified)
+  what rests on the cited theorems: f >= 0 on S gives f >= 0 on C (minimum principle); E2-E5 make mu/m arithmetic ([Smi24] Prop. 5.15); Smith's Thm 1.5 on [min S, max S] (capacity 1027/200/4 > 1) then gives C86 <= T/m
+  run time: 19.3 s
+  RESULT: ALL CHECKS PASS
