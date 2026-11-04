@@ -1,0 +1,12 @@
+self-tests of the arithmetic, root certification and integrator
+  check S1 ln n against decimal's correctly rounded ln (5 values): PASS
+  check S1 pi (Machin) brackets 100 digits of pi: PASS
+  check S1 exp(2 pi i c) balls contain the decimal cos/sin (8 points): PASS
+  check S2 roots of (z(1-z))^8 - 1: 16 disjoint discs, one per known root: PASS (max radius 2^-311)
+  check S2 red: a missing root approximation is refused: PASS
+  check S2 red: (z(1-z) - 1)^2, with two double roots, is refused: PASS
+  check S3 int max(0, ln|S(T(u))|) for S = x - 9 equals ln M(S o T) (Jensen): PASS ([2.197224567441231, 2.197224587231208] vs [2.197224577336219, 2.197224577336220])
+  check S3 int g for g = -3 ln|Q1(T(u))| equals -3 ln M(Q1 o T) (Jensen; every panel by the series): PASS ([-21.277608381049539, -21.277607252529486] vs [-21.277607815205792, -21.277607815205791], 365 panels)
+  check S3 a sign-changing g (5/2 ln|T - 3| - 3 ln|Q1 o T|) against a 200000-point midpoint sum (floats): PASS ([6.181356121923, 6.181356404704] vs 6.1813562641; 1 crude panels)
+  run time: 3.1 s
+  RESULT: ALL CHECKS PASS

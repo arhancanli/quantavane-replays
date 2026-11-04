@@ -1,0 +1,35 @@
+[Epi26] C_82 <= 0.2535744749068227* (82a page; PR #242 asks to remove the asterisk)
+  check SHA-256 of epi/construction.json matches result.json artifact_sha256: PASS (e85e26fa7122a2e68b19b2fa01e27e78bbd802450bce2a0d45717f09b930e559)
+  factors: 6 denominators (R1^3, R2^3, R3^2, R4^2, R5^1, R6^2), 7 numerators; 402 roots after composing with T
+  check H1 R1: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 16, lc 1, m 3)
+  check H1 R2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 3)
+  check H1 R3: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 2)
+  check H1 R4: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 2)
+  check H1 R5: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 R6: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 2)
+  check H1 S1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 272781246728/4042782885)
+  check H1 S2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc -1, q = 356041004776/6403451817)
+  check H1 S3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 3, lc 1, q = 25240882532/5257623853)
+  check H1 S4: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 4, lc 1, q = 17813294612/1236617705)
+  check H1 S5: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 20173451447/2560006260)
+  check H1 S6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 12, lc 1, q = 16112250969/7447019425)
+  check H1 S7: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 16, lc 1, q = 430601737/914745001)
+  check H2 deg A < D: PASS (D = 328, deg A = 27175028613322485517029724720260023699180681176199046874509994546/93182110283361001291484824468135357040364518079641628457395975 = 0.889126643944 D)
+  check H3 gcd(S_i, R_j) = 1 for all 42 pairs with q_i > 0: PASS (modulo prime(s) [2305843009213693951])
+  check E1 every root of every F o T enclosed (13 factors, 402 discs, pairwise disjoint per factor): PASS (largest disc radius 2^-303; 1.0 s)
+  check E1 self-test: root sums match Vieta and sum ln|r| encloses ln|a_0/a_n|: PASS
+  E2 log M(Q o T): [83.1552972514, 83.1552972515]  (/D: [0.2535222477177, 0.2535222477178])
+  check E3 self-test: g from the certified roots overlaps g from Horner on the exact coefficients (12 of 12 random points compared): PASS
+  E3 int_0^1 max(0, g) dt: [0.01531187, 0.01531189]  (862 panels: 544 negative, 282 positive, 36 crude, 606 split; depth 9..27; crude width 3.292e-11; 0.7 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 6 denominators: PASS ([-83.155298, -83.155296] vs [-83.155298, -83.155297]; 612 panels, 0.2 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 4 numerators away from the circle: PASS ([28.884481, 28.884483] vs [28.884482, 28.884483]; 354 panels, 0.1 s)
+  B: [0.2535689302577047, 0.2535689302831411]  (width 2.54e-11)
+  check E4 B < 0.2535744749068227, the printed upper bound (B_hi = 0.2535689302831411; margin 5.545e-06): PASS
+  check consistent with the displayed digits: 82a page: [Pin26]'s Arb re-evaluation 'encloses it at' 0.25356893 (rounded or truncated): PASS
+  check inside the enclosure PR #242 [T2026c] [0.253568930187, 0.253568930424]: PASS
+  check R1 red: the bound 0.2535689302576, just below our enclosure, is not implied (B_lo > it): PASS
+  check R2 red: R1 added as a numerator (q = 1/1000) is caught by H3 (exact gcd of degree 16): PASS
+  check R3 red: R1 doubled (not monic) is refused by H1: PASS
+  check R4 red: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+  run time: 3.0 s
+  RESULT: ALL CHECKS PASS

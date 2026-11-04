@@ -1,0 +1,27 @@
+positive control: Doche 2001b, C_82 <= 0.25444 (data as in [Pin26] controls/doche2001.json)
+  check SHA-256 of doche/doche2001.json matches as fetched: PASS (835a10b9ac5454798475a3c171796f87296ff14ed9d979d7bf14ab88d1c37fc2)
+  factors: 2 denominators (Q1^1, Q2^1), 5 numerators; 164 roots after composing with T
+  check H1 Q1: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 Q2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 P1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 131/10)
+  check H1 P2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc -1, q = 53/5)
+  check H1 P4: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 4, lc 1, q = 16/5)
+  check H1 P6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 23/20)
+  check H1 P8: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 12, lc 1, q = 6/25)
+  check H2 deg A < D: PASS (D = 56, deg A = 2429/50 = 0.867500000000 D)
+  check H3 gcd(S_i, R_j) = 1 for all 10 pairs with q_i > 0: PASS (modulo prime(s) [2305843009213693951])
+  check E1 every root of every F o T enclosed (7 factors, 164 discs, pairwise disjoint per factor): PASS (largest disc radius 2^-303; 1.0 s)
+  check E1 self-test: root sums match Vieta and sum ln|r| encloses ln|a_0/a_n|: PASS
+  E2 log M(Q o T): [14.1931136291, 14.1931136292]  (/D: [0.2534484576636, 0.2534484576637])
+  check E3 self-test: g from the certified roots overlaps g from Horner on the exact coefficients (12 of 12 random points compared): PASS
+  E3 int_0^1 max(0, g) dt: [0.05531106, 0.05531112]  (682 panels: 383 negative, 279 positive, 20 crude, 426 split; depth 9..26; crude width 1.705e-11; 0.2 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 2 denominators: PASS ([-14.193115, -14.193113] vs [-14.193114, -14.193113]; 436 panels, 0.1 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 2 numerators away from the circle: PASS ([3.127678, 3.127680] vs [3.127678, 3.127679]; 320 panels, 0.0 s)
+  B: [0.2544361553382034, 0.2544361560626948]  (width 7.24e-10)
+  check E4 B < 0.25444, the printed upper bound (B_hi = 0.2544361560626948; margin 3.844e-06): PASS
+  check R1 red: the bound 0.2544361553381, just below our enclosure, is not implied (B_lo > it): PASS
+  check R2 red: Q1 added as a numerator (q = 1/1000) is caught by H3 (exact gcd of degree 28): PASS
+  check R3 red: Q1 doubled (not monic) is refused by H1: PASS
+  check R4 red: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+  run time: 2.3 s
+  RESULT: ALL CHECKS PASS

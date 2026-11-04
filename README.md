@@ -98,6 +98,28 @@ n = 10^12, k = 367879441172 in our own interval arithmetic at 2^-400: R in [1.20
 
 Reproduce: `cd c44 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 30 s), the same in `c70` (under a second).
 
+## C82: the essential minimum of the Zhang-Zagier height (4 November 2026)
+
+`c82/c82_check.py`, standard library only: the bound B = [sum_j m_j log M(R_j o T) + int_0^1 max(0, g) dt] / D with
+T(z) = z(1 - z). The hypotheses (integer coefficients, monic denominators, deg A < D, coprimality of every pair) are
+checked exactly; every root of every composed factor is enclosed in a disc of radius at most 2^-303 by Gershgorin's
+theorem on the Weierstrass matrix; the integral is enclosed on an adaptive dyadic tiling with per-root series and
+rigorous remainders; the comparison with the printed bound is exact.
+
+| Row | Certificate (SHA-256) | Enclosure of B | Printed upper bound |
+| --- | --- | --- | --- |
+| [Pin26] | rpinho/c82-height-certificate @69d8964 `certificate.json` (`b33626f3...0fce`) | [0.2534446873318462, 0.2534446873318463] | 0.2534449 |
+| [Epi26] | BakeLab/Epi-results @97fa6a4 `construction.json` (`e85e26fa...e559`) | [0.2535689302577047, 0.2535689302831411] | 0.2535744749068227 (valid, 5.5e-6 loose) |
+| #280 | vidigoat/optimization-records @32898ac (`557da3e3...5fe0`) | [0.2534350401279890, 0.2534350401279891] | 0.2534350402 |
+| #301 | rpinho @6d4e80c `degree44-denominators-v2` (`adfca075...7ac2`) | [0.2530918335514613, 0.2530918335514614] | 0.253091834 |
+| #301 first filing | rpinho @6d4e80c `degree44-denominators` (`6a24d45c...f056`) | [0.2531232746206604, 0.2531232746206605] | 0.253123275 |
+| control: Doche 2001 | [Pin26] `controls/doche2001.json` (`835a10b9...7fc2`) | [0.2544361553, 0.2544361561] | 0.25444 |
+
+What rests on mathematics: that C82 <= B for any certificate meeting the hypotheses (the direct argument in the
+certificates' notes, read step by step), Gershgorin's theorem and the series bounds.
+
+Reproduce: `cd c82 && ./fetch.sh ROOT && ./run_all.sh ROOT --workers=14` (about 5.5 minutes).
+
 ## Reproduce
 
 ```

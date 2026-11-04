@@ -1,0 +1,72 @@
+[Pin26] C_82 < 0.2534449* (82a page; PR #242 asks to remove the asterisk)
+  check SHA-256 of pin/certificate.json matches 82a page: PASS (b33626f367b6f52922746c0fee7bb008449cd0bb18efcb983ab20ff073350fce)
+  factors: 7 denominators (Q1^9297152, Q2^5575669, R0^3376055, R2^854210, P7^4177785, P9^14295157, Ed5^6652059), 31 numerators; 2058 roots after composing with T
+  check H1 Q1: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 9297152)
+  check H1 Q2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 5575669)
+  check H1 R0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 3376055)
+  check H1 R2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 854210)
+  check H1 P7: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 12, lc 1, m 4177785)
+  check H1 P9: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 16, lc 1, m 14295157)
+  check H1 Ed5: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 6652059)
+  check H1 P1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 309690889482955/4194304)
+  check H1 P2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 630788667754879/8773059)
+  check H1 P3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 3, lc 1, q = 21260800937839/8055645)
+  check H1 P4: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 4, lc 1, q = 52745169098993/7487927)
+  check H1 P6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 29007076082772/3169231)
+  check H1 P8: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 12, lc 1, q = 3410042187423/8533421)
+  check H1 select2_1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 34, lc 4, q = 1992723892935/9974618)
+  check H1 select2_11: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 702728210855/1985031)
+  check H1 select2_15: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 27, lc 4, q = 450900060781/9270228)
+  check H1 select2_22: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 28, lc 1, q = 6599318260539/9993640)
+  check H1 select2_25: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 32, lc 1, q = 562420442071/2264313)
+  check H1 select2_36: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 18, lc 2, q = 3362145432269/9532037)
+  check H1 select3_7: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 28, lc 1, q = 4352002110254/4887323)
+  check H1 select4_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 2, q = 3578264620002/7819705)
+  check H1 select4_1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 42, lc 1, q = 13531153728682/6884769)
+  check H1 select4_3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 38, lc 2, q = 5381514591569/5240791)
+  check H1 select5_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 39, lc 1, q = 4617249463684/4001225)
+  check H1 select5_7: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 34, lc 1, q = 4710839667389/9906458)
+  check H1 select5_9: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 32, lc 1, q = 1079755879201/2164874)
+  check H1 select5_10: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 35, lc 1, q = 6714480457493/8818907)
+  check H1 select7_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 42, lc 1, q = 9317325406677/3194929)
+  check H1 select8_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 22, lc 1, q = 10953669139763/9925694)
+  check H1 select9_1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 3449087714362/9861087)
+  check H1 select9_2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 37, lc 1, q = 4659890228461/8743052)
+  check H1 select9_3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 42, lc 1, q = 6289381318901/9096035)
+  check H1 select9_5: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 42, lc 1, q = 651575276147/7044436)
+  check H1 select9_6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 36, lc 1, q = 11838421919974/8950455)
+  check H1 select9_7: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 39, lc 2, q = 127103111402/1055161)
+  check H1 select10_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 41, lc 1, q = 4884194025059/4010746)
+  check H1 select11_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 42, lc 1, q = 6519687014701/5871539)
+  check H1 merged_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 30, lc 1, q = 3775427748764/6478995)
+  check H2 deg A < D: PASS (D = 999999992, deg A = 4851685791254297479023240472937232092433245400888624864168651067812970130808251674972813522487945091574097280090922134451822304324944578282942846201827263362816319224302614256272725198910823/5135894597120519008571873276817021764375808757039756538192986189549325273851371096119126644482178773146248036903549418229817198600164264165458976358829030754026625748184922901708800 = 0.944662266392 D)
+  check H3 gcd(S_i, R_j) = 1 for all 217 pairs with q_i > 0: PASS (modulo prime(s) [2305843009213693951])
+  check E1 every root of every F o T enclosed (38 factors, 2058 discs, pairwise disjoint per factor): PASS (largest disc radius 2^-303; 5.1 s)
+  check E1 self-test: root sums match Vieta and sum ln|r| encloses ln|a_0/a_n|: PASS
+  E2 log M(Q o T): [253422905.1836227923, 253422905.1836227924]  (/D: [0.2534229072110, 0.2534229072111])
+  check E3 self-test: g from the certified roots overlaps g from Horner on the exact coefficients (12 of 12 random points compared): PASS
+  E3 int_0^1 max(0, g) dt: [21780.12066593, 21780.12066596]  (2680 panels: 1474 negative, 1124 positive, 82 crude, 2424 split; depth 9..38; crude width 7.360e-11; 14.4 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 7 denominators: PASS ([-253422905.183624, -253422905.183622] vs [-253422905.183623, -253422905.183622]; 620 panels, 0.3 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 16 numerators away from the circle: PASS ([109126906.159644, 109126906.159645] vs [109126906.159644, 109126906.159645]; 875 panels, 1.5 s)
+  check D = 999999992 as stated: PASS
+  B: [0.2534446873318462, 0.2534446873318463]  (width 1.47e-17)
+  check E4 B < 0.2534449, the printed upper bound (B_hi = 0.2534446873318463; margin 2.127e-07): PASS
+  check consistent with the stated upper bound: README: verify.py certified upper bound 0.25344468733362658 (our B_lo is not above it): PASS
+  check consistent with the stated upper bound: README: independent_check.py certified upper bound 0.25344468733741928 (our B_lo is not above it): PASS
+  check consistent with the stated upper bound: README: referee's evaluator, below 0.253444687331849 (our B_lo is not above it): PASS
+  check consistent with the displayed digits: 82a page: certified upper bound 0.2534446873 (rounded or truncated): PASS
+  check inside the enclosure PR #242 [T2026c] [0.253444687248, 0.253444687515]: PASS
+  check R1 red: the bound 0.2534446873317, just below our enclosure, is not implied (B_lo > it): PASS
+  check R2 red: Q1 added as a numerator (q = 1/1000) is caught by H3 (exact gcd of degree 28): PASS
+  check R3 red: Q1 doubled (not monic) is refused by H1: PASS
+  check R4 red: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+    [R5] select7_0 with constant term + 1
+  check R5 red: perturbed factor select7_0 (constant term + 1) changes B: PASS (B becomes [0.2585842893107, 0.2585842893108] (above the printed 0.2534449000))
+    [R6] m(Q1) + 1
+  check R6 red: m(Q1) + 1 changes B: PASS (B becomes [0.25344468733209487, 0.25344468733209489], was [0.25344468733184622, 0.25344468733184625])
+    [S4] first level 11, remainder target 2^-20
+  check S4 the same certificate on another tiling (first level 2^-11, remainder target 2^-20): the enclosures overlap: PASS (B = [0.25344468733184623, 0.25344468733184624], 5528 panels)
+    [R7] /private/tmp/claude-501/-Users-arhancanli/84d40635-3436-42ac-8c29-072827473345/scratchpad/tao/c82/repro_1428/pinm/mutated_v3_should_fail.json
+  check R7 red: [Pin26] controls/mutated_v3_should_fail.json (sha 17fd1cede550..., m(Q1) doubled) fails the target 0.2534449: PASS (B = [0.2630644524951, 0.2630644524952])
+  run time: 92.9 s
+  RESULT: ALL CHECKS PASS
