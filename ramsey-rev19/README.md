@@ -91,8 +91,7 @@ diagonal on exactly n vertices. Every script that reads a downloaded file runs u
 - Our own R(8,12) >= 519 colouring was checked to the end by both programs on 3 November 2026 (same file, same
   SHA-256; `results/qv_R8_12_n518.2026-11-03.*.txt`) and was not run again.
 - Bounds that follow from these by the survey's own recursions: R(4,21) >= 257 (2.3.e from R(4,20) >= 252) and
-  R(7,16) >= 649 (2.3.i from R(4,15) >= 163). Revision 18 also gives R(4,15) as 159 in Table Ia but 158 in
-  Table IIa, and its own R(4,15) >= 159 already gives R(7,16) >= 633 by 2.3.i, where Table IIa has 629.
+  R(7,16) >= 649 (2.3.i from R(4,15) >= 163).
 
 ## Red controls
 
