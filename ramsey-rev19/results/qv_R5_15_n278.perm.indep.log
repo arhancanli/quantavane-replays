@@ -1,0 +1,26 @@
+# 2026-11-04 18:58:50 +0400 host Mac load { 92.75 106.47 117.61 }
+# matrix ROOT/matrices/relabelled/qv_R5_15_n278.perm.txt sha256 83679eac57e3c422e816ec7f98b8e7e80016f4e7c88600de884bf916ecac1c50
+# command: nice -n 10 ROOT/build/ramsey_indep ROOT/matrices/relabelled/qv_R5_15_n278.perm.txt   (CPU cap 900 s)
+n 278 symmetric 1 circulant 0
+entries '1': degree of vertex 0 95, largest clique 4 (27856 branch nodes)
+entries '0': degree of vertex 0 182, largest clique 14 (34312370 branch nodes)
+# exit status 0
+       23.52 real        11.36 user         0.02 sys
+             1998848  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 461  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                5777  involuntary context switches
+         90434629272  instructions retired
+         39786273367  cycles elapsed
+             1589560  peak memory footprint
+# summary qv_R5_15_n278.perm indep exit 0 cpu_user 11.36 cpu_sys 0.02 wall 23.52

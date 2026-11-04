@@ -1,0 +1,26 @@
+# 2026-11-04 19:00:46 +0400 host Mac load { 100.54 106.29 116.27 }
+# matrix ROOT/controls/qv_R5_15_n278.ctrl_blue.txt sha256 36660ed0328815e4779dc8a3cd2eb8fbd45603a4188765851971a0b06e183f3b
+# command: nice -n 10 ROOT/build/ramsey_indep ROOT/controls/qv_R5_15_n278.ctrl_blue.txt   (CPU cap 300 s)
+n 278 symmetric 1 circulant 0
+entries '1': degree of vertex 0 95, largest clique 4 (34872 branch nodes)
+entries '0': degree of vertex 0 182, largest clique 15 (8206214 branch nodes)
+# exit status 0
+        6.90 real         3.44 user         0.00 sys
+             2015232  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 462  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                1229  involuntary context switches
+         28068385235  instructions retired
+         11939469394  cycles elapsed
+             1605944  peak memory footprint
+# summary qv_R5_15_n278.ctrl_blue indep exit 0 cpu_user 3.44 cpu_sys 0.00 wall 6.90

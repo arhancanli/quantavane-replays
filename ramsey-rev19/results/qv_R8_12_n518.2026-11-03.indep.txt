@@ -1,0 +1,5 @@
+# 3 Nov 2026, same packet: independent/ramsey_indep colouring_518.txt (finished 17:37 +04; CPU time was not recorded)
+# matrix sha256 d84b57685cc96c916e2a1f12f08ff9dc73c94cb25ec888bfcfa2f035f7432407
+n 518 symmetric 1 circulant 0
+entries '1': degree of vertex 0 160, largest clique 7 (3962775 branch nodes)
+entries '0': degree of vertex 0 357, largest clique 11 (24448820731 branch nodes)

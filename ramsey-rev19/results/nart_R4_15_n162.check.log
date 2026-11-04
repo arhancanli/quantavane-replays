@@ -1,0 +1,24 @@
+# 2026-11-04 18:49:41 +0400 host Mac load { 132.48 122.83 126.98 }
+# matrix ROOT/matrices/nart_R4_15_n162.txt sha256 f7135b51c3e4e3c43b9c058f2d45ae162bf54e4f98135ce6733ff26ba33a630a
+# command: nice -n 10 ROOT/build/ramsey_check 4 15 ROOT/matrices/nart_R4_15_n162.txt   (CPU cap 600 s)
+n 162 red_K4 none blue_K15 none nodes 3670825 seconds 1.08
+# exit status 0
+        1.08 real         0.57 user         0.00 sys
+             1933312  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 457  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 184  involuntary context switches
+          5467804104  instructions retired
+          1981732320  cycles elapsed
+             1524024  peak memory footprint
+# summary nart_R4_15_n162 check exit 0 cpu_user 0.57 cpu_sys 0.00 wall 1.08

@@ -1,0 +1,26 @@
+# 2026-11-04 18:53:00 +0400 host Mac load { 109.93 120.53 125.43 }
+# matrix ROOT/matrices/cremer_R8_10_n344_1.txt sha256 17881b78e3d8b55372995f4e53ac068ca22560cf30b291c1e649eacaef21c21d
+# command: nice -n 10 ROOT/build/ramsey_indep ROOT/matrices/cremer_R8_10_n344_1.txt   (CPU cap 1800 s)
+n 344 symmetric 1 circulant 0
+entries '1': degree of vertex 0 155, largest clique 7 (463037 branch nodes)
+entries '0': degree of vertex 0 188, largest clique 9 (8390726 branch nodes)
+# exit status 0
+        4.76 real         2.18 user         0.00 sys
+             2031616  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 463  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                1138  involuntary context switches
+         16106472273  instructions retired
+          7461430912  cycles elapsed
+             1622328  peak memory footprint
+# summary cremer_R8_10_n344_1 indep exit 0 cpu_user 2.18 cpu_sys 0.00 wall 4.76

@@ -1,0 +1,24 @@
+# 2026-11-04 19:02:56 +0400 host Mac load { 155.20 124.09 121.83 }
+# matrix ROOT/matrices/yu_R4_20_n251_Gprime.txt sha256 2ad113c25d7096179ae9c55a74eef80b686e3fb2d90ea568100a5de7f423e69a
+# command: nice -n 10 ROOT/build/ramsey_check 4 20 ROOT/matrices/yu_R4_20_n251_Gprime.txt   (CPU cap 600 s)
+n 251 red_K4 none blue_K20 none nodes 123902736 seconds 68.64
+# exit status 0
+       68.64 real        33.37 user         0.05 sys
+             2195456  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 473  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               12688  involuntary context switches
+        312252579384  instructions retired
+        116736043970  cycles elapsed
+             1786168  peak memory footprint
+# summary yu_R4_20_n251_Gprime check exit 0 cpu_user 33.37 cpu_sys 0.05 wall 68.64

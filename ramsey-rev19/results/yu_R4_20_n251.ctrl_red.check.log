@@ -1,0 +1,25 @@
+# 2026-11-04 18:54:41 +0400 host Mac load { 116.69 119.01 124.21 }
+# matrix ROOT/controls/yu_R4_20_n251.ctrl_red.txt sha256 c498a5bed3169fd5b590a67306e464dc33dd2137f056a19d7d38dd45133a2b19
+# command: nice -n 10 ROOT/build/ramsey_check 4 20 ROOT/controls/yu_R4_20_n251.ctrl_red.txt   (CPU cap 900 s)
+n 251 red_K4 found blue_K20 none nodes 140684596 seconds 73.66
+red: 23 30 5 48
+# exit status 1
+       73.67 real        36.40 user         0.07 sys
+             2195456  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 473  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               18203  involuntary context switches
+        349626779254  instructions retired
+        127050232162  cycles elapsed
+             1786168  peak memory footprint
+# summary yu_R4_20_n251.ctrl_red check exit 1 cpu_user 36.40 cpu_sys 0.07 wall 73.67

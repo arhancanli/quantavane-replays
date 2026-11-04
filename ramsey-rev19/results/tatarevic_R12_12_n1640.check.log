@@ -1,0 +1,25 @@
+# 2026-11-04 19:01:36 +0400 host Mac load { 121.84 111.06 117.46 }
+# matrix ROOT/matrices/tatarevic_R12_12_n1640.txt sha256 de07986c080ab0fa64d4550af1c76f43ec9f19b123341e9f8cb2f7e0ab601088
+# command: nice -n 10 ROOT/build/ramsey_check 12 12 ROOT/matrices/tatarevic_R12_12_n1640.txt   (CPU cap 120 s)
+# exit status 152
+time: command terminated abnormally
+      247.57 real       119.82 user         0.21 sys
+             5685248  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 686  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               54435  involuntary context switches
+       1298932880815  instructions retired
+        419940583651  cycles elapsed
+             5292368  peak memory footprint
+ramsey-rev19/check_one.sh: line 19: 20247 Cputime limit exceeded: 24  /usr/bin/time -l nice -n 10 $cmd
+# summary tatarevic_R12_12_n1640 check exit 152 cpu_user 119.82 cpu_sys 0.21 wall 247.57

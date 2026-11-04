@@ -1,0 +1,48 @@
+Printed cells that the revision-18 data already beat through these recursions:
+  R(7,16): printed 629, implied 633 by i: 4 R(4,15) - 3
+
+Cells raised by the new bounds (printed value or, for a blank cell, the revision-18 closure):
+  R(3,17) >= 93   (printed 92; rev-18 closure 92)   colouring: NaRT repository, 22 Oct 2026
+  R(3,24) >= 151   (printed 143; rev-18 closure 143)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,25) >= 160   (printed 154; rev-18 closure 154)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,26) >= 163   (printed 161; rev-18 closure 161)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,28) >= 181   (printed 179; rev-18 closure 179)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,29) >= 194   (printed 190; rev-18 closure 190)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,30) >= 199   (printed 197; rev-18 closure 197)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,31) >= 210   (printed 208; rev-18 closure 208)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,32) >= 219   (printed 217; rev-18 closure 217)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,33) >= 230   (printed 227; rev-18 closure 227)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,34) >= 239   (printed 234; rev-18 closure 234)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,35) >= 253   (printed 248; rev-18 closure 248)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,36) >= 261   (printed 255; rev-18 closure 255)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,37) >= 272   (printed 267; rev-18 closure 267)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,38) >= 281   (printed 278; rev-18 closure 278)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,39) >= 294   (printed 290; rev-18 closure 290)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,40) >= 305   (printed 298; rev-18 closure 298)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,41) >= 317   (printed 311; rev-18 closure 311)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,42) >= 327   (printed 320; rev-18 closure 320)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,43) >= 340   (printed 333; rev-18 closure 333)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,44) >= 348   (printed 339; rev-18 closure 339)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,45) >= 364   (printed 354; rev-18 closure 354)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,46) >= 371   (printed 362; rev-18 closure 362)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,47) >= 385   (printed 380; rev-18 closure 380)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,48) >= 391   (printed 384; rev-18 closure 384)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,49) >= 411   (printed 402; rev-18 closure 402)   colouring: Coniglio et al., arXiv:2608.18769
+  R(3,50) >= 414   (blank; rev-18 closure 405)   e: R(3,49) + 3
+  R(4,15) >= 163   (printed 159; rev-18 closure 159)   colouring: NaRT repository, 22 Oct 2026
+  R(4,16) >= 174   (printed 170; rev-18 closure 170)   colouring: NaRT, arXiv:2603.09172v3-v5 and repository
+  R(4,18) >= 209   (printed 205; rev-18 closure 205)   colouring: NaRT, arXiv:2603.09172v3-v5 and repository
+  R(4,19) >= 219   (printed 213; rev-18 closure 213)   colouring: NaRT, arXiv:2603.09172v3-v5 and repository
+  R(4,20) >= 252   (printed 234; rev-18 closure 234)   colouring: Yu, arXiv:2608.18169
+  R(4,21) >= 257   (printed 242; rev-18 closure 242)   e: R(4,20) + 5
+  R(5,15) >= 279   (printed 275; rev-18 closure 275)   colouring: Canli, Zenodo 23857057
+  R(6,8) >= 135   (printed 134; rev-18 closure 134)   colouring: Cremer, arXiv:2610.12122
+  R(7,13) >= 513   (printed 511; rev-18 closure 511)   colouring: NaRT repository, 22 Oct 2026
+  R(7,16) >= 649   (printed 629; rev-18 closure 633)   i: 4 R(4,15) - 3
+  R(8,10) >= 345   (printed 343; rev-18 closure 343)   colouring: Cremer, arXiv:2610.12122
+  R(8,12) >= 519   (blank; rev-18 closure 471)   colouring: Canli, Zenodo 23920916
+  R(8,18) >= 1052   (printed 1049; rev-18 closure 1049)   colouring: NaRT repository, 22 Oct 2026
+  R(9,11) >= 617   (blank; rev-18 closure 608)   colouring: NaRT repository, 22 Oct 2026
+  R(10,12) >= 856   (blank; rev-18 closure 846)   colouring: NaRT repository, 22 Oct 2026
+  R(12,12) >= 1641   (printed 1640; rev-18 closure 1640)   colouring: Tatarevic, arXiv:2608.06531 (his inequality from R(11,11) >= 1597; colouring in his repository)
+  R(24,24) >= 49513   (blank; rev-18 closure 49511)   T: R(23,23) + 92

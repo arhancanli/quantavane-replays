@@ -1,0 +1,26 @@
+# 2026-11-04 18:58:16 +0400 host Mac load { 91.65 107.99 118.59 }
+# matrix ROOT/matrices/relabelled/yu_R4_20_n251.perm.txt sha256 72942f185e74ac966d0ac4e7dcba7d6456579df48a106b4ef3d9527b4c9c6fe9
+# command: nice -n 10 ROOT/build/ramsey_indep ROOT/matrices/relabelled/yu_R4_20_n251.perm.txt   (CPU cap 900 s)
+n 251 symmetric 1 circulant 0
+entries '1': degree of vertex 0 64, largest clique 3 (3667 branch nodes)
+entries '0': degree of vertex 0 186, largest clique 19 (72804716 branch nodes)
+# exit status 0
+       69.46 real        32.96 user         0.05 sys
+             2031616  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 461  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               15568  involuntary context switches
+        279324950596  instructions retired
+        115390698130  cycles elapsed
+             1622328  peak memory footprint
+# summary yu_R4_20_n251.perm indep exit 0 cpu_user 32.96 cpu_sys 0.05 wall 69.46

@@ -1,0 +1,26 @@
+# 2026-11-04 18:58:20 +0400 host Mac load { 91.92 107.77 118.45 }
+# matrix ROOT/matrices/relabelled/nart_R4_19_n218.perm.txt sha256 b9fcc4ace6e9e6b0943c0d868d8b3b680827e5929021243a5badde5895e6b92b
+# command: nice -n 10 ROOT/build/ramsey_indep ROOT/matrices/relabelled/nart_R4_19_n218.perm.txt   (CPU cap 600 s)
+n 218 symmetric 1 circulant 0
+entries '1': degree of vertex 0 56, largest clique 3 (2622 branch nodes)
+entries '0': degree of vertex 0 161, largest clique 18 (19227303 branch nodes)
+# exit status 0
+       17.26 real         7.99 user         0.01 sys
+             1966080  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 459  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                3340  involuntary context switches
+         66951390158  instructions retired
+         27920013454  cycles elapsed
+             1556792  peak memory footprint
+# summary nart_R4_19_n218.perm indep exit 0 cpu_user 7.99 cpu_sys 0.01 wall 17.26

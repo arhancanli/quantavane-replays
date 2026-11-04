@@ -226,6 +226,16 @@ bounds above.
 
 Reproduce: `cd c68 && ./fetch.sh && ./run_all.sh` (seconds).
 
+## Ramsey lower bounds since Small Ramsey Numbers revision 18 (4 November 2026)
+
+`ramsey-rev19/`: every new lower bound for a classical two-colour Ramsey number R(s,t) since revision 18 (24 April
+2026) of Radziszowski's survey, each witness taken from its authors' own repository or data record and checked by two
+exact clique programs (`ramsey_check`, Bron-Kerbosch with Tomita's pivot; `ramsey_indep`, MCQ branch and bound), with
+one-edge red controls. Results, notes and the witnesses still too large for our budget are in
+[`ramsey-rev19/README.md`](ramsey-rev19/README.md).
+
+Reproduce: `cd ramsey-rev19 && ./fetch.sh ROOT && ./run_all.sh ROOT`.
+
 ## Reproduce
 
 ```

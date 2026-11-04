@@ -1,0 +1,25 @@
+# 2026-11-04 18:54:40 +0400 host Mac load { 115.53 118.83 124.18 }
+# matrix ROOT/controls/nart_R4_15_n162.ctrl_red.txt sha256 4b98461dde23000dd3b4957935ff9da3b3b81d9b59f2ba6395334fcc5afc2491
+# command: nice -n 10 ROOT/build/ramsey_check 4 15 ROOT/controls/nart_R4_15_n162.ctrl_red.txt   (CPU cap 300 s)
+n 162 red_K4 found blue_K15 none nodes 3657082 seconds 1.09
+red: 4 26 24 51
+# exit status 1
+        1.10 real         0.57 user         0.00 sys
+             1933312  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 457  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 444  involuntary context switches
+          5452955462  instructions retired
+          1962716039  cycles elapsed
+             1524024  peak memory footprint
+# summary nart_R4_15_n162.ctrl_red check exit 1 cpu_user 0.57 cpu_sys 0.00 wall 1.10

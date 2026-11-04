@@ -1,0 +1,24 @@
+# 2026-11-04 18:57:17 +0400 host Mac load { 99.63 112.12 120.65 }
+# matrix ROOT/matrices/nbhd/coniglio_R3_28_n180.N0.txt sha256 10744bc507e444ce80a8f3ffdd9715ea6fcd522f2028fb89e81bd7960d02f1bd
+# command: nice -n 10 ROOT/build/ramsey_check 153 27 ROOT/matrices/nbhd/coniglio_R3_28_n180.N0.txt   (CPU cap 1200 s)
+n 152 red_K153 none blue_K27 none nodes 118773939 seconds 61.67
+# exit status 0
+       61.68 real        27.17 user         0.05 sys
+             1933312  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 457  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               14201  involuntary context switches
+        325424509695  instructions retired
+         95194751374  cycles elapsed
+             1524024  peak memory footprint
+# summary coniglio_R3_28_n180.nbhd0 check exit 0 cpu_user 27.17 cpu_sys 0.05 wall 61.68

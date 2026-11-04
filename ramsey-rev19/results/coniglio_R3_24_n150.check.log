@@ -1,0 +1,25 @@
+# 2026-11-04 18:48:13 +0400 host Mac load { 108.85 118.45 126.13 }
+# matrix ROOT/matrices/coniglio_R3_24_n150.txt sha256 c0c66371cdab60276e01cb71b12900532ebd3add30cdab21f36ca42b4ef090e9
+# command: nice -n 10 ROOT/build/ramsey_check 3 24 ROOT/matrices/coniglio_R3_24_n150.txt   (CPU cap 300 s)
+# exit status 152
+time: command terminated abnormally
+      591.42 real       299.48 user         0.61 sys
+             1884160  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 454  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+              153854  involuntary context switches
+       3787827803533  instructions retired
+       1040935374572  cycles elapsed
+             1491280  peak memory footprint
+ramsey-rev19/check_one.sh: line 19: 98861 Cputime limit exceeded: 24  /usr/bin/time -l nice -n 10 $cmd
+# summary coniglio_R3_24_n150 check exit 152 cpu_user 299.48 cpu_sys 0.61 wall 591.42

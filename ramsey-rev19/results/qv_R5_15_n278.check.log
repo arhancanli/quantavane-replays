@@ -1,0 +1,24 @@
+# 2026-11-04 18:49:40 +0400 host Mac load { 130.61 122.30 126.82 }
+# matrix ROOT/matrices/qv_R5_15_n278.txt sha256 489cb8320e80e04adc2b4ccfa82247fb3104a3a2674ea99561a172dfd8e54b10
+# command: nice -n 10 ROOT/build/ramsey_check 5 15 ROOT/matrices/qv_R5_15_n278.txt   (CPU cap 900 s)
+n 278 red_K5 none blue_K15 none nodes 161037774 seconds 48.84
+# exit status 0
+       48.85 real        22.89 user         0.05 sys
+             2228224  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 473  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               15002  involuntary context switches
+        251037718066  instructions retired
+         79631255368  cycles elapsed
+             1818936  peak memory footprint
+# summary qv_R5_15_n278 check exit 0 cpu_user 22.89 cpu_sys 0.05 wall 48.85

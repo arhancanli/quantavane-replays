@@ -1,0 +1,25 @@
+# 2026-11-04 19:01:36 +0400 host Mac load { 121.84 111.06 117.46 }
+# matrix ROOT/matrices/nart_R8_18_n1051.txt sha256 1a6496a5aaeac94553ab46015dcb65fff7d71f128b3d12a0c4f3a253509006b7
+# command: nice -n 10 ROOT/build/ramsey_check 8 18 ROOT/matrices/nart_R8_18_n1051.txt   (CPU cap 120 s)
+# exit status 152
+time: command terminated abnormally
+      247.69 real       119.81 user         0.21 sys
+             4177920  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 593  page reclaims
+                   2  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               55532  involuntary context switches
+       1362759981357  instructions retired
+        419765573624  cycles elapsed
+             3785016  peak memory footprint
+ramsey-rev19/check_one.sh: line 19: 20244 Cputime limit exceeded: 24  /usr/bin/time -l nice -n 10 $cmd
+# summary nart_R8_18_n1051 check exit 152 cpu_user 119.81 cpu_sys 0.21 wall 247.69

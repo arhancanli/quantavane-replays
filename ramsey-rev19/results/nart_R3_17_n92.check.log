@@ -1,0 +1,24 @@
+# 2026-11-04 19:04:56 +0400 host Mac load { 146.78 129.57 124.20 }
+# matrix ROOT/matrices/nart_R3_17_n92.txt sha256 ab4bd67260eb4bc0d6be183472ab58f2aae695de318e09ab2cf25a364c210772
+# command: nice -n 10 ROOT/build/ramsey_check 3 17 ROOT/matrices/nart_R3_17_n92.txt   (CPU cap 300 s)
+n 92 red_K3 none blue_K17 none nodes 7542955 seconds 0.94
+# exit status 0
+        0.94 real         0.50 user         0.00 sys
+             1753088  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 443  page reclaims
+                   3  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 235  involuntary context switches
+          5944898656  instructions retired
+          1723783975  cycles elapsed
+             1343800  peak memory footprint
+# summary nart_R3_17_n92 check exit 0 cpu_user 0.50 cpu_sys 0.00 wall 0.94

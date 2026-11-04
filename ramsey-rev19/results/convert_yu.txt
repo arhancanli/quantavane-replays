@@ -1,0 +1,4 @@
+connection set (S02): 32 distances, 1,2,4,9,10,13,18,25,26,33,36,37,43,45,50,52,65,66,71,72,74,79,86,90,93,100,103,104,107,109,119,121
+in  DOWNLOADS/yu_zenodo_21941603/CERTIFICATE_R4_20.txt sha256 cfc6579095789c59e15c51476abb8fc350e5c33a4dc0c06863776a4b572b712a (882 bytes, format circulant)
+out ROOT/matrices/yu_R4_20_n251.txt sha256 7a81a5ed6b2d8010f9cfb8dad6dd2199e4ee7c11ea49557aaccc825a57e06bcb
+n 251 ones 8032 degree 64..64 circulant 1 complemented 0

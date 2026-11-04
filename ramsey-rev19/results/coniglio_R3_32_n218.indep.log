@@ -1,0 +1,26 @@
+# 2026-11-04 19:13:03 +0400 host Mac load { 80.80 107.06 118.06 }
+# matrix ROOT/matrices/coniglio_R3_32_n218.txt sha256 a2480cad1d8487d0a91a12913abb953932a738f67e422e0490ce857fda13dd10
+# command: nice -n 10 ROOT/build/ramsey_indep ROOT/matrices/coniglio_R3_32_n218.txt   (CPU cap 1800 s)
+n 218 symmetric 1 circulant 1
+entries '1': degree 31, largest clique 2 (1 branch nodes)
+entries '0': degree 186, largest clique 31 (1148597970 branch nodes)
+# exit status 0
+     1198.71 real       614.48 user         0.94 sys
+             2080768  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 471  page reclaims
+                   4  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   1  voluntary context switches
+              218659  involuntary context switches
+       6022988770884  instructions retired
+       2147990210365  cycles elapsed
+             1671480  peak memory footprint
+# summary coniglio_R3_32_n218 indep exit 0 cpu_user 614.48 cpu_sys 0.94 wall 1198.71

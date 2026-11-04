@@ -1,0 +1,25 @@
+# 2026-11-04 18:54:40 +0400 host Mac load { 115.53 118.83 124.18 }
+# matrix ROOT/controls/cremer_R6_8_n134.ctrl_red.txt sha256 84ba774194914af56c48be56585a1dcef777486a05a732362dfb9611b96092d2
+# command: nice -n 10 ROOT/build/ramsey_check 6 8 ROOT/controls/cremer_R6_8_n134.ctrl_red.txt   (CPU cap 300 s)
+n 134 red_K6 found blue_K8 none nodes 164139 seconds 0.01
+red: 1 9 35 36 43 70
+# exit status 1
+        0.02 real         0.01 user         0.00 sys
+             1867776  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                 449  page reclaims
+                   4  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                  15  involuntary context switches
+           139256442  instructions retired
+            50586562  cycles elapsed
+             1474896  peak memory footprint
+# summary cremer_R6_8_n134.ctrl_red check exit 1 cpu_user 0.01 cpu_sys 0.00 wall 0.02

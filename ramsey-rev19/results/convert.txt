@@ -1,0 +1,180 @@
+## nart_R3_17_n92.txt
+in  DOWNLOADS/nart_witnesses/R(3, 17) >= 93.txt sha256 71810667cd353e766375041e7968596e6ba7f67cd7d722158b09ab9a30e2336b (17389 bytes, format numpy)
+out ROOT/matrices/nart_R3_17_n92.txt sha256 ab4bd67260eb4bc0d6be183472ab58f2aae695de318e09ab2cf25a364c210772
+n 92 ones 723 degree 14..16 circulant 0 complemented 0
+## nart_R4_15_n162.txt
+in  DOWNLOADS/nart_witnesses/R(4, 15) >= 163.txt sha256 56f3cf76b87efe7d845b2bd59505d44638a9b49e04dfd33dcb4e86426cb4ec23 (53299 bytes, format numpy)
+out ROOT/matrices/nart_R4_15_n162.txt sha256 f7135b51c3e4e3c43b9c058f2d45ae162bf54e4f98135ce6733ff26ba33a630a
+n 162 ones 3809 degree 28..52 circulant 0 complemented 0
+## nart_R4_16_n173.txt
+in  DOWNLOADS/nart_witnesses/R(4, 16) >= 174.txt sha256 def3d53ed5879f8984434b93861b3a6a66049f2491fa04da212d704504b82f6f (61762 bytes, format numpy)
+out ROOT/matrices/nart_R4_16_n173.txt sha256 ee1e2b075083ee7d1eb48637c303a8ccd268bb008e046d049cbba53462eff018
+n 173 ones 4152 degree 48..48 circulant 1 complemented 0
+## nart_R4_18_n208.txt
+in  DOWNLOADS/nart_witnesses/R(4, 18) >= 209.txt sha256 5317e46e94f27bca829f0aa7b7f1bb2dcdf56e040ea9b98c199b00b7685f9945 (89233 bytes, format numpy)
+out ROOT/matrices/nart_R4_18_n208.txt sha256 8e43c09c8cf1572db694fa12393775aeeebb296dced2b61aa9576de0b5cab9c2
+n 208 ones 5724 degree 30..58 circulant 0 complemented 0
+## nart_R4_19_n218.txt
+in  DOWNLOADS/nart_witnesses/R(4, 19) >= 219.txt sha256 8d2378420e281725f4fa6d510b2be0ec458dcb2a155ef7a61ec5c4b85bfd0f2c (98319 bytes, format numpy)
+out ROOT/matrices/nart_R4_19_n218.txt sha256 9a7345de8243a10b21ff492a61d6ecda77bb302e742851e5935ee10576e94827
+n 218 ones 6104 degree 56..56 circulant 1 complemented 0
+## nart_R4_20_n236.txt
+in  DOWNLOADS/nart_witnesses/R(4, 20) >= 237.txt sha256 d33838caf70a91612889c26d8ac63a9bd96513a9d5e95803042361ed7a999e3e (114933 bytes, format numpy)
+out ROOT/matrices/nart_R4_20_n236.txt sha256 68e5247a8a73c6504e566722f940c6244045df661a073de3cc4079163ff12e43
+n 236 ones 7552 degree 64..64 circulant 1 complemented 0
+## nart_R4_21_n243.txt
+in  DOWNLOADS/nart_witnesses/R(4,21)>=244.txt sha256 3cdf3083ccf1dde21e41b512d93443cfe55e28e9071976336fff3f9d27d7599e (121743 bytes, format numpy)
+out ROOT/matrices/nart_R4_21_n243.txt sha256 6516e2a82606c7a01a6b8dfff56e078281b7322ebeb3cad2fa55d1b93eb40565
+n 243 ones 7417 degree 55..66 circulant 0 complemented 0
+## nart_R7_13_n512.txt
+in  DOWNLOADS/nart_witnesses/R(7, 13) >= 513.txt sha256 e8160ebe4e877ac22bb2689e2fbb0eca8f517c65d5516e11745d4ef93829d70c (540161 bytes, format numpy)
+out ROOT/matrices/nart_R7_13_n512.txt sha256 7cb7bda5021d18ea8049ac5faaeb465fa50b55e2d50cf33031f06c8679f05810
+n 512 ones 42918 degree 153..226 circulant 0 complemented 0
+## nart_R8_12_n510.txt
+in  DOWNLOADS/nart_witnesses/R(8, 12) >= 511.txt sha256 5db94f26576014f66792c665096e7dd84dd0835a3c048d0b82af5bf0d735a2df (536011 bytes, format numpy)
+out ROOT/matrices/nart_R8_12_n510.txt sha256 a3a7ea922368e251dea1465fe182608926bbdecbfadaa7459b667064dd2b116d
+n 510 ones 49492 degree 101..304 circulant 0 complemented 0
+## nart_R8_18_n1051.txt
+in  DOWNLOADS/nart_witnesses/R(8, 18) >= 1052.txt sha256 c5a4706f05436f1d74b56fa401b7ed0e0348422c92f14c03aa522752a72bf1ad (2273314 bytes, format numpy)
+out ROOT/matrices/nart_R8_18_n1051.txt sha256 1a6496a5aaeac94553ab46015dcb65fff7d71f128b3d12a0c4f3a253509006b7
+n 1051 ones 172622 degree 114..434 circulant 0 complemented 0
+## nart_R9_11_n616.txt
+in  DOWNLOADS/nart_witnesses/R(9, 11) >= 617.txt sha256 ce12b6cb8becabd658780db0ab8d3248b89f25e3841ed749c55c80902be5afa1 (781705 bytes, format numpy)
+out ROOT/matrices/nart_R9_11_n616.txt sha256 5e64c8ae7903f5135590eb06b9f6c2e3614f7d6c8a74b03fcd83b23d41572f9a
+n 616 ones 85035 degree 37..321 circulant 0 complemented 0
+## nart_R10_12_n855.txt
+in  DOWNLOADS/nart_witnesses/R(10, 12) >= 856.txt sha256 4d270464208e92dcda82232a2618879810c3e11b29af9d001a7484df665f79e2 (1503946 bytes, format numpy)
+out ROOT/matrices/nart_R10_12_n855.txt sha256 091e08b6a92274a7ed9f7ef5618f2ba2325a0d632cfe5c836d5bea080b244cc3
+n 855 ones 167445 degree 41..445 circulant 0 complemented 0
+## yu_R4_20_n251.txt
+Traceback (most recent call last):
+  File "ramsey-rev19/to_matrix.py", line 134, in <module>
+    main()
+  File "ramsey-rev19/to_matrix.py", line 110, in main
+    text = raw.decode('ascii')
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 774: ordinal not in range(128)
+FAILED yu_R4_20_n251.txt
+## cremer_R6_8_n134.txt
+in  DOWNLOADS/cremer_v1.1.0/n134-gpt-6.1-sol.txt sha256 8ef378ad4d66478c33939e438d3a64572ec2cf7d1647ae29d3568817fedfc982 (18090 bytes, format rows)
+out ROOT/matrices/cremer_R6_8_n134.txt sha256 8ef378ad4d66478c33939e438d3a64572ec2cf7d1647ae29d3568817fedfc982
+n 134 ones 3913 degree 36..65 circulant 0 complemented 0
+## cremer_R8_10_n344_1.txt
+in  DOWNLOADS/cremer_v1.1.0/n344-gpt-6.1-sol-1.txt sha256 17881b78e3d8b55372995f4e53ac068ca22560cf30b291c1e649eacaef21c21d (118680 bytes, format rows)
+out ROOT/matrices/cremer_R8_10_n344_1.txt sha256 17881b78e3d8b55372995f4e53ac068ca22560cf30b291c1e649eacaef21c21d
+n 344 ones 25854 degree 146..161 circulant 0 complemented 0
+## cremer_R8_10_n344_2.txt
+in  DOWNLOADS/cremer_v1.1.0/n344-gpt-6.1-sol-2.txt sha256 fd3c5a55434179a596dacd9f94a1208211e3ce0da7eee9502c640a3b1860ad89 (118680 bytes, format rows)
+out ROOT/matrices/cremer_R8_10_n344_2.txt sha256 fd3c5a55434179a596dacd9f94a1208211e3ce0da7eee9502c640a3b1860ad89
+n 344 ones 25855 degree 145..161 circulant 0 complemented 0
+## tatarevic_R12_12_n1640.txt
+in  DOWNLOADS/tatarevic_increment/r1212_1640.graph sha256 de07986c080ab0fa64d4550af1c76f43ec9f19b123341e9f8cb2f7e0ab601088 (2691240 bytes, format rows)
+out ROOT/matrices/tatarevic_R12_12_n1640.txt sha256 de07986c080ab0fa64d4550af1c76f43ec9f19b123341e9f8cb2f7e0ab601088
+n 1640 ones 672363 degree 23..1615 circulant 0 complemented 0
+## qv_R5_15_n278.txt
+in  DOWNLOADS/quantavane_records/R5_15_K278.txt sha256 489cb8320e80e04adc2b4ccfa82247fb3104a3a2674ea99561a172dfd8e54b10 (77562 bytes, format rows)
+out ROOT/matrices/qv_R5_15_n278.txt sha256 489cb8320e80e04adc2b4ccfa82247fb3104a3a2674ea99561a172dfd8e54b10
+n 278 ones 13205 degree 95..95 circulant 1 complemented 0
+## qv_R8_12_n518.txt
+in  DOWNLOADS/quantavane_records/R8_12_K518.txt sha256 d84b57685cc96c916e2a1f12f08ff9dc73c94cb25ec888bfcfa2f035f7432407 (268842 bytes, format rows)
+out ROOT/matrices/qv_R8_12_n518.txt sha256 d84b57685cc96c916e2a1f12f08ff9dc73c94cb25ec888bfcfa2f035f7432407
+n 518 ones 51579 degree 102..307 circulant 0 complemented 0
+## coniglio_R3_24_n150.txt
+in  DOWNLOADS/coniglio_certificates/R_3_24_graphSize_150.clq sha256 95d80b57dc0db81688f46c022dbe513744bef22f35692995426c0cfb7c75100f (91076 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_24_n150.txt sha256 c0c66371cdab60276e01cb71b12900532ebd3add30cdab21f36ca42b4ef090e9
+n 150 ones 1650 degree 22..22 circulant 1 complemented 1
+## coniglio_R3_25_n159.txt
+in  DOWNLOADS/coniglio_certificates/R_3_25_graphSize_159.clq sha256 313ce54a1a6290b553c71669bd6d913f04d5e15d49525bbf48feca64c703a67f (102729 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_25_n159.txt sha256 c881bdaab8f12989a220209cb5eb690991d8147c91c96280b497af39f140cf30
+n 159 ones 1908 degree 24..24 circulant 1 complemented 1
+## coniglio_R3_26_n162.txt
+in  DOWNLOADS/coniglio_certificates/R_3_26_graphSize_162.clq sha256 2cac81e02a9c42feb9394feae1bcbb14c6d6f0be6d41d0d3c005690053e2e9e8 (106506 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_26_n162.txt sha256 39bd5091391fc8ad2d04db59d99902b96cf28d2c57f09f061cb5fb1592fc87b9
+n 162 ones 2025 degree 25..25 circulant 1 complemented 1
+## coniglio_R3_28_n180.txt
+in  DOWNLOADS/coniglio_certificates/R_3_28_graphSize_180.clq sha256 f6c9ff19bdb2188ec4a6811d0af7de030d0012761eef7875a0b5ce44c68ff6bb (134082 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_28_n180.txt sha256 4d5616e23bfeaa69b13f2d90a9fe7958d0e3e7b5a3f18f1995bf498730b6bf72
+n 180 ones 2430 degree 27..27 circulant 1 complemented 1
+## coniglio_R3_29_n193.txt
+in  DOWNLOADS/coniglio_certificates/R_3_29_graphSize_193.clq sha256 31dc46a632d4b0a8150e36f46353cc01a98af8c4f6b2997d24b1f2b42adfeb7b (156392 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_29_n193.txt sha256 aa4da0589210e23fd3a6ff414625e3ee67062f610afacf6f3fff180e258f475c
+n 193 ones 2702 degree 28..28 circulant 1 complemented 1
+## coniglio_R3_30_n198.txt
+in  DOWNLOADS/coniglio_certificates/R_3_30_graphSize_198.clq sha256 a445a4328d108309edad70d203b9bfda918af0b56d64951ec07ced6b579ce08e (164826 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_30_n198.txt sha256 b53dd2869ff443024e869d01f4f947f2689d3c42bf3f6456d8a32d085e12d63c
+n 198 ones 2871 degree 29..29 circulant 1 complemented 1
+## coniglio_R3_31_n209.txt
+in  DOWNLOADS/coniglio_certificates/R_3_31_graphSize_209.clq sha256 0da33eabaee4f5164350f7fab51e8cb2dda8068eae0c3871236d1e9cbed61f81 (185405 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_31_n209.txt sha256 2a4fc450d2e1c86a705cd1e252685189b4c237f654690f6079733d1e2d2d7095
+n 209 ones 3135 degree 30..30 circulant 1 complemented 1
+## coniglio_R3_32_n218.txt
+in  DOWNLOADS/coniglio_certificates/R_3_32_graphSize_218.clq sha256 9ef8db1dc0dd701a57867503ad11319e1854f71dee0e5af5410067e1a8bd54ae (202944 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_32_n218.txt sha256 a2480cad1d8487d0a91a12913abb953932a738f67e422e0490ce857fda13dd10
+n 218 ones 3379 degree 31..31 circulant 1 complemented 1
+## coniglio_R3_33_n229.txt
+in  DOWNLOADS/coniglio_certificates/R_3_33_graphSize_229.clq sha256 a41c978ab7726e58167ec849eb5a27eca0e5e1a1264a414b626457a90bc58d76 (225712 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_33_n229.txt sha256 9a614dcd8637f063bce8349301018b35bc27e2e0d7c01185809c8c2a64ff5780
+n 229 ones 3664 degree 32..32 circulant 1 complemented 1
+## coniglio_R3_34_n238.txt
+in  DOWNLOADS/coniglio_certificates/R_3_34_graphSize_238.clq sha256 21cc082ca57aa764e5a4da9b477bfd5ade769592239b340d63c91901dca8dd0c (245022 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_34_n238.txt sha256 8fd63a548f8e96d8ccb7379bdebb30798b475821d5b79304a384949adb2379b2
+n 238 ones 3927 degree 33..33 circulant 1 complemented 1
+## coniglio_R3_35_n252.txt
+in  DOWNLOADS/coniglio_certificates/R_3_35_graphSize_252.clq sha256 265c8af65ded1a2e6053a60a5915e0ffc4ee3ece3d7578769a63a1c8d7c6b03b (277344 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_35_n252.txt sha256 b94491952f269493fdb02f313f2961dae9d8261311ba790519e04b0e040699d9
+n 252 ones 4284 degree 34..34 circulant 1 complemented 1
+## coniglio_R3_36_n260.txt
+in  DOWNLOADS/coniglio_certificates/R_3_36_graphSize_260.clq sha256 04ecd5b0b65084874626b6a07f2172f96bfbe6685b772623f4351d466cf58bb9 (296146 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_36_n260.txt sha256 025840566f45218720ea2e107e43bc26b2c4d042aa517c8c302973ba8fde9233
+n 260 ones 4550 degree 35..35 circulant 1 complemented 1
+## coniglio_R3_37_n271.txt
+in  DOWNLOADS/coniglio_certificates/R_3_37_graphSize_271.clq sha256 ca6931f562d9deea3afc8864a601f7b50858e53e09e7400e2c0b473e485b11b4 (323523 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_37_n271.txt sha256 00a17259f892f9cf9c6b70ad503c14ef036ce033cd4f1cb615be41e554b62f65
+n 271 ones 4878 degree 36..36 circulant 1 complemented 1
+## coniglio_R3_38_n280.txt
+in  DOWNLOADS/coniglio_certificates/R_3_38_graphSize_280.clq sha256 b2151ed35ebe14b26b69a69ba018d5301dfa4f704f386fe03eebe039c1253990 (346562 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_38_n280.txt sha256 13ec7b4dccad1121ca015201778f645f404bede99505791404b1c0ac4f72177d
+n 280 ones 5180 degree 37..37 circulant 1 complemented 1
+## coniglio_R3_39_n293.txt
+in  DOWNLOADS/coniglio_certificates/R_3_39_graphSize_293.clq sha256 57f83e875ade7615bd815033ffd1123a30652abd49d8c3ab0b8831ae981ff02d (381907 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_39_n293.txt sha256 d6a372c6de0707845bcd2b02ea983cc1eabe9d19b58e14a66adfc26af4c26667
+n 293 ones 5567 degree 38..38 circulant 1 complemented 1
+## coniglio_R3_40_n304.txt
+in  DOWNLOADS/coniglio_certificates/R_3_40_graphSize_304.clq sha256 64f89a704eadca132caa42e4c486cc408dafb21a31a262de5ac765ae27551343 (412914 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_40_n304.txt sha256 30a0b7574990ee0487efd5bb6e08967335f6fc8049a504f996b95dcb218f2f66
+n 304 ones 5928 degree 39..39 circulant 1 complemented 1
+## coniglio_R3_41_n316.txt
+in  DOWNLOADS/coniglio_certificates/R_3_41_graphSize_316.clq sha256 5898ffb6aa24426b63340808c6643119cb4edb7a48b33dc54e9571f6b7bf7f50 (448268 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_41_n316.txt sha256 bbec0082b50a0b093601bde80e1164b0e0163a7ad80ea747bf05267c486f9ed8
+n 316 ones 6320 degree 40..40 circulant 1 complemented 1
+## coniglio_R3_42_n326.txt
+in  DOWNLOADS/coniglio_certificates/R_3_42_graphSize_326.clq sha256 0721f315c4bca1e0dbceae8975f0bf6b19df88d293fe048312e208e99803a6df (478558 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_42_n326.txt sha256 abdd2ef762da6165e246f2037c27af61edcb4c576eb0d2814881162ea4dd6e92
+n 326 ones 6683 degree 41..41 circulant 1 complemented 1
+## coniglio_R3_43_n339.txt
+in  DOWNLOADS/coniglio_certificates/R_3_43_graphSize_339.clq sha256 a84e603287a21e2d0c7ffba93e54097752541eed47b2d660285e409bbe435aec (519942 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_43_n339.txt sha256 4fda65c0cd47aa7550f7cbb652ff19f8467a96ec29ccbe387c685ee1c08f28e1
+n 339 ones 7119 degree 42..42 circulant 1 complemented 1
+## coniglio_R3_44_n347.txt
+in  DOWNLOADS/coniglio_certificates/R_3_44_graphSize_347.clq sha256 33c102723e15bfe03e8c91c6986d1c6c3b02392143f4ae2ef15e02ad58ceabed (547370 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_44_n347.txt sha256 af85718f2fc3fd43835c5e0b45bdc53df0b1afaaa326c0bcd53a9e47bf84bc06
+n 347 ones 7287 degree 42..42 circulant 1 complemented 1
+## coniglio_R3_45_n363.txt
+in  DOWNLOADS/coniglio_certificates/R_3_45_graphSize_363.clq sha256 3db3bf27bb88a8c88f85abd139042793a2247bb2b013f6671f73690d51fcb88f (600561 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_45_n363.txt sha256 e40bb86a3f60b1ba8892f77ef130192f1cfd513e6f0159ce4235d888231002c6
+n 363 ones 7986 degree 44..44 circulant 1 complemented 1
+## coniglio_R3_46_n370.txt
+in  DOWNLOADS/coniglio_certificates/R_3_46_graphSize_370.clq sha256 8d7cbebd35768d5c673c9b31c21f58b563265133c0a5f2fe39ba85141c436495 (624366 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_46_n370.txt sha256 19363c8428a4365eec8ce524f8b11b1eaedda5ab3256ec2fc01f4286d8c77ef9
+n 370 ones 8325 degree 45..45 circulant 1 complemented 1
+## coniglio_R3_47_n384.txt
+in  DOWNLOADS/coniglio_certificates/R_3_47_graphSize_384.clq sha256 7781ebdcc5c2283df7f9f7c5c74ef37159987055d91ce1c499d7ad1f0ef55797 (675366 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_47_n384.txt sha256 b656cf6216c0a769ab82bf18fe7e66926d377731e38484da2b28ae68842183b0
+n 384 ones 8832 degree 46..46 circulant 1 complemented 1
+## coniglio_R3_48_n390.txt
+in  DOWNLOADS/coniglio_certificates/R_3_48_graphSize_390.clq sha256 0a7502d4196e5158ca72133996524bba108c7c77e683b0668f123cf49ca49e9c (696672 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_48_n390.txt sha256 8b2f0dff1e24c1fea380317fb41ed9fab518831bb9943ccbf05a5170f121b62f
+n 390 ones 9165 degree 47..47 circulant 1 complemented 1
+## coniglio_R3_49_n410.txt
+in  DOWNLOADS/coniglio_certificates/R_3_49_graphSize_410.clq sha256 4142c5ce70b2b9776e2b8440e6d5640171ecf2223bb9b7ba6e155caf639c9aaf (775085 bytes, format dimacs)
+out ROOT/matrices/coniglio_R3_49_n410.txt sha256 4d72bbac50ccee1510dc171321061b39a0b5b33e58a4934331a9e71a2701e026
+n 410 ones 9840 degree 48..48 circulant 1 complemented 1
