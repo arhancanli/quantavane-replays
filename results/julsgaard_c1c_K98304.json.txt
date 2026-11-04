@@ -1,0 +1,12 @@
+1c certs/pr318/certificate.json
+  n: 98368
+  K: 98304
+  S: 79324910784481
+  argmin_k: 47318
+  min_A: 26266762762526611965043
+  ties: 1
+  bound = 2582127846607416062611587072/6292441470965870058830439361
+  decimal: floor 0.4103538918115781099170  ceil 0.4103538918115781099171
+  control: corrupted coefficient 32789 rejected: True
+  control: old coefficients rejected for weight 49184 + 1: True
+  control: bound unchanged when every value is scaled by 3: True
