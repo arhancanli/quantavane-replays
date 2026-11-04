@@ -19,6 +19,9 @@ get epi construction.json BakeLab/Epi-results 97fa6a420f417458e11723c8bceb70f152
 # PR #280, 0.2534350402* (vidigoat/optimization-records @ 32898ac, tao/certificates/c82)
 get pr280 certificate.json vidigoat/optimization-records 32898ac1dc0d75bf7f6d8a4e0a779eea629467a4 \
     tao/certificates/c82/certificate.json
+# PR #280 updated 4 Nov, 0.2524177045* (vidigoat/optimization-records @ 3a7a84f, tao/certificates/c82/v2)
+get pr280b certificate.json vidigoat/optimization-records 3a7a84fec9c64ae426f06a5f52597c84b3453ba0 \
+    tao/certificates/c82/v2/certificate.json
 # PR #301, 0.253091834* (rpinho/c82-height-certificate @ 6d4e80c, degree44-denominators-v2) and its first filing
 get pr301 certificate.json rpinho/c82-height-certificate 6d4e80cb0b375c767df91eae7985ae3e8bef7203 \
     degree44-denominators-v2/certificate.json

@@ -1,0 +1,51 @@
+PR #280 [Pat26] updated 4 Nov: C_82 < 0.2524177045* (open; tao/certificates/c82/v2 at 3a7a84f)
+  check SHA-256 of pr280b/certificate.json matches SHA256SUMS of the folder: PASS (1125ddf42e9a544c6fc566aa2ebdfb59ec7c35177030c5d50767427e52f841d1)
+  factors: 4 denominators (D101_11_0^2132912095, D111_0_0^208845989, D111_3_0^6281105155, D111_3_1^992521376), 24 numerators; 1798 roots after composing with T
+  check H1 D101_11_0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 2132912095)
+  check H1 D111_0_0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 208845989)
+  check H1 D111_3_0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 6281105155)
+  check H1 D111_3_1: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 992521376)
+  check H1 P1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 5945330344964853/32768)
+  check H1 P2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 683163270945085/4096)
+  check H1 P3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 3, lc 1, q = 4543885523106639/524288)
+  check H1 P4: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 4, lc 1, q = 5661721437303915/262144)
+  check H1 P6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 6326646780099415/262144)
+  check H1 MS192: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 7251336959033/131072)
+  check H1 MS360: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 20, lc 1, q = 350523365530559/524288)
+  check H1 cg2_4_0_c2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 30, lc 1, q = 337838606174523/131072)
+  check H1 n21_7_2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 16, lc 1, q = 351518320892769/1048576)
+  check H1 n22_6_3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 16, lc 1, q = 281655607896691/1048576)
+  check H1 n22_7_5: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 19, lc 1, q = 289175663921961/1048576)
+  check H1 n101_7_34: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 20, lc 1, q = 165462099415705/1048576)
+  check H1 n121_1_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 22, lc 6, q = 210999431003005/262144)
+  check H1 n121_2_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 26, lc 2, q = 1357562472884255/1048576)
+  check H1 n121_2_1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 21, lc 1, q = 2106400921450377/1048576)
+  check H1 n121_2_6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 36, lc 2, q = 308568954026433/1048576)
+  check H1 n121_3_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 42, lc 1, q = 46854757632071/524288)
+  check H1 n121_3_25: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 20, lc 1, q = 56879476649203/1048576)
+  check H1 n121_3_30: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 20, lc 9, q = 23888737129789/1048576)
+  check H1 n121_3_33: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 38, lc 1, q = 171930787621621/1048576)
+  check H1 n121_3_44: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 211117928477017/524288)
+  check H1 n121_3_47: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 38, lc 1, q = 247402046351235/1048576)
+  check H1 n121_5_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 6435168792531/65536)
+  check H1 n121_5_1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 10, lc 2, q = 312974383938047/1048576)
+  check H2 deg A < D: PASS (D = 999999999960, deg A = 473650268755560921/524288 = 0.903416192578 D)
+  check H3 gcd(S_i, R_j) = 1 for all 96 pairs with q_i > 0: PASS (modulo prime(s) [2305843009213693951])
+  check E1 every root of every F o T enclosed (28 factors, 1798 discs, pairwise disjoint per factor): PASS (largest disc radius 2^-303; 153.2 s)
+  check E1 self-test: root sums match Vieta and sum ln|r| encloses ln|a_0/a_n|: PASS
+  E2 log M(Q o T): [252416471519.2846035811, 252416471519.2846035812]  (/D: [0.2524164715293, 0.2524164715294])
+  check E3 self-test: g from the certified roots overlaps g from Horner on the exact coefficients (11 of 12 random points compared): PASS
+  E3 int_0^1 max(0, g) dt: [1232917.93106338, 1232917.93106339]  (2691 panels: 1643 negative, 980 positive, 68 crude, 2435 split; depth 9..44; crude width 6.282e-11; 31.8 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 4 denominators: PASS ([-252416471519.284604, -252416471519.284603] vs [-252416471519.284604, -252416471519.284603]; 1536 panels, 7.4 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 10 numerators away from the circle: PASS ([93067155572.315957, 93067155572.315959] vs [93067155572.315957, 93067155572.315958]; 696 panels, 1.4 s)
+  B: [0.2524177044473123, 0.2524177044473124]  (width 1.68e-21)
+  check E4 B < 0.2524177045, the printed upper bound (B_hi = 0.2524177044473124; margin 5.269e-11): PASS
+  check consistent with the stated upper bound: README: vcheck.py tol 1e-11, 192-bit 0.25241770444734 (our B_lo is not above it): PASS
+  check consistent with the stated upper bound: README: Pinho's verify_exact.py (unmodified), 256-bit 0.25241770444732 (our B_lo is not above it): PASS
+  check consistent with the displayed digits: README: certified value 0.25241770445 (rounded or truncated): PASS
+  check R1 red: the bound 0.2524177044472, just below our enclosure, is not implied (B_lo > it): PASS
+  check R2 red: D101_11_0 added as a numerator (q = 1/1000) is caught by H3 (exact gcd of degree 104): PASS
+  check R3 red: D101_11_0 doubled (not monic) is refused by H1: PASS
+  check R4 red: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+  run time: 195.1 s
+  RESULT: ALL CHECKS PASS

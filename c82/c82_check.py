@@ -7,7 +7,7 @@ the [Epi26] README and result.json, the PR #280 README). The claimants' checkers
 Standard library only (Python 3.9+); run with python3 -I. No floating-point number decides anything: floats only
 pick starting points for root refinement and truncation orders; every decision is an exact integer comparison.
 
-  c82_check.py ROW CERTS_ROOT [--controls] [--workers=N]       ROW in: pin epi pr280 pr301 pr301a doche
+  c82_check.py ROW CERTS_ROOT [--controls] [--workers=N]       ROW in: pin epi pr280 pr280b pr301 pr301a doche
 
 The certificate (every note states the same): integer polynomials R_j (denominators) with multiplicities m_j >= 1,
 integer polynomials S_i (numerators) with rational exponents q_i >= 0, coefficient arrays in descending order.
@@ -1358,6 +1358,14 @@ ROWS = {
                          ("PR body: Pinho's independent_check.py", "0.2534350401334", "upper"),
                          ("PR body: certified upper bound", "0.25343504013", "digits")],
               "encl": None},
+    "pr280b": {"title": "PR #280 [Pat26] updated 4 Nov: C_82 < 0.2524177045* (open; tao/certificates/c82/v2 at 3a7a84f)",
+               "file": "pr280b/certificate.json",
+               "sha": "1125ddf42e9a544c6fc566aa2ebdfb59ec7c35177030c5d50767427e52f841d1",
+               "sha_src": "SHA256SUMS of the folder", "printed": "0.2524177045", "D": None,
+               "stated": [("README: vcheck.py tol 1e-11, 192-bit", "0.25241770444734", "upper"),
+                          ("README: Pinho's verify_exact.py (unmodified), 256-bit", "0.25241770444732", "upper"),
+                          ("README: certified value", "0.25241770445", "digits")],
+               "encl": None},
     "pr301": {"title": "PR #301 [Pin26b] C_82 < 0.253091834* (open; degree44-denominators-v2 at 6d4e80c)",
               "file": "pr301/certificate.json",
               "sha": "adfca0754f4d8b3a64398df22a506932743de7b0e49df542961530cb26c67ac2",
