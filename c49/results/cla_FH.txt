@@ -1,0 +1,32 @@
+ROW cla_FH: [Cla2026] F alternated with 121 sets on Z_11, mu_3 >= 1.5666969*
+  sha256 cla_z11/z11_family_masks.txt: 09c02bec8fed9ba8d0439a37c0eba5a172b68e4b53ff7c044fbc85be7085a807
+  stated hash: none stated for this file (pinned by commit only)
+  check family rebuilt from the page's words equals z11_family_masks.txt: PASS
+  set sizes: {5: 11, 7: 110}
+  check H: members distinct: PASS (121 members)
+  check H: Sperner and 3-sunflower-free, brute method: PASS (7260 pairs, 287980 triples; 0.0 s)
+  check H: Sperner and 3-sunflower-free, pivot method: PASS (121 pivots; 0.0 s)
+  check H: Sperner and 3-sunflower-free, pair method: PASS (7260 pairs; 0.0 s)
+  check every point lies in 75 members, every pair of points in 44: PASS
+  check for every ordered pair of ports the matrix has rows (31, 44), (15, 31): PASS
+  check the link of every point is a copy of F (explicit isomorphism found for each of the 11 points): PASS
+  check product of the two matrices has rows (980, 1624), (641, 1104): PASS (trace 2084, det 40936)
+  check Perron root equals 1042 + 2 sqrt(261207) (and is the same for the other order): PASS
+  points per period: (10 - 2) + (11 - 2) = 17
+  rho: (2084 + sqrt(4179312))/2, in [2064.1682836010, 2064.1682836011)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/17): in [1.5666969787543153309231993, 1.5666969787543153309231994)
+  check printed lower bound 1.5666969 <= rho^(1/17) (exact: 1.5666969^17 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5666970 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5666969... agrees (truncation): PASS (rho^(1/17) in [1.5666969, 1.5666970))
+  check value 1.5666969787... stated in PR #235 and [Cla2026] README agrees (truncated): PASS (rho^(1/17) in [1.5666969787, 1.5666969788))
+  check control: 1.5666969788 (10-decimal truncation + 1e-10) is refuted: PASS
+  check control H: planted 3-sunflower caught by the brute method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control H: planted containment caught by the brute method: PASS (witness verified)
+  check control H: planted 3-sunflower caught by the pivot method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control H: planted containment caught by the pivot method: PASS (witness verified)
+  check control H: planted 3-sunflower caught by the pair method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control H: planted containment caught by the pair method: PASS (witness verified)
+  check control: N11(H) + 1 moves the period's Perron root: PASS
+  run time: 0.5 s
+  RESULT: ALL CHECKS PASS

@@ -1,0 +1,38 @@
+ROW irsi_v11: [IRSI2026] tag v1.1, mu_3 >= 1.5621220*
+  sha256 irsi_v11/cert_c49_chain20_s17.json: c12d0dd62500a97484cb4f72743803ea7b54e74272e2b474cbabeac7b256fc7b
+  check sha256 matches 49a page (c12d0dd6...fc7b): PASS
+  check sha256 matches PR #235 (c12d0dd62500...): PASS
+  check one base family B on 20 points, chained with ports u = 18, v = 19: PASS (word [('B', 18, 19)])
+  check family size 6150: PASS (6150 sets)
+  layer sizes (set size: count): {7: 2, 10: 360, 11: 1108, 12: 3600, 13: 1080}
+  check layer sizes as on the 49a page: PASS
+  check B: members distinct: PASS (6150 members)
+  check B: Sperner and 3-sunflower-free, pivot method: PASS (6150 pivots; 1.2 s)
+  check B: Sperner and 3-sunflower-free, pair method: PASS (18908175 pairs; 12.7 s)
+  port counts N00, N01, N10, N11 (u = 18, v = 19; [IRSI2026] README convention): 1080, 1802, 1908, 1360
+  check transfer matrix rows (1802, 1360), (1080, 1908) as on the 49a page (u = 18, v = 19; [IRSI2026] README convention): PASS (computed (1802, 1360), (1080, 1908))
+  same map in the FORMAT.md / [Cla2026] convention: T = (1908, 1360), (1080, 1802) (same trace and determinant)
+  characteristic polynomial: x^2 - 3710 x + 1969416
+  check characteristic polynomial as on the 49a page: PASS
+  check Perron root equals 1855 + sqrt(1471609) as on the 49a page: PASS
+  check same Perron root in both conventions: PASS
+  rho: (3710 + sqrt(5886436))/2, in [3068.0989242431, 3068.0989242432)
+  check rho is irrational (D not a perfect square): PASS
+  check stated rho ~ 3068.0989 agrees: PASS (rho in [3068.0989, 3068.0990))
+  bound rho^(1/18): in [1.5621220560068153440498439, 1.5621220560068153440498440)
+  check printed lower bound 1.5621220 <= rho^(1/18) (exact: 1.5621220^18 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5621221 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5621220560... agrees (truncation): PASS (rho^(1/18) in [1.5621220560, 1.5621220561))
+  check value 1.5621220560... stated in PR #235 agrees (truncated): PASS (rho^(1/18) in [1.5621220560, 1.5621220561))
+  check value 1.56212205600681... stated in [IRSI2026] README agrees (truncated): PASS (rho^(1/18) in [1.56212205600681, 1.56212205600682))
+  check control: 1.5621220561 (10-decimal truncation + 1e-10) is refuted: PASS
+  points per copy: 20 - 2 = 18, so the bound is rho^(1/18)
+  check control B: planted 3-sunflower caught by the pivot method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B: planted containment caught by the pivot method: PASS (witness verified)
+  check control B: planted 3-sunflower caught by the pair method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B: planted containment caught by the pair method: PASS (witness verified)
+  check control: N11 + 1 no longer gives the page's matrix and moves the exact rate: PASS (rate 1.5621220560068153440498439 -> 1.5621346441373034851590295)
+  check control: with N11 lowered by 0.1% (to 1359) the printed bound 1.5621220 is refuted: PASS (rate would be 1.5621094615)
+  check control: dropping one member changes the port counts: PASS
+  run time: 30.3 s
+  RESULT: ALL CHECKS PASS

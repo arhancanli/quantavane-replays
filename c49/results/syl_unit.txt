@@ -1,0 +1,52 @@
+ROW syl_unit: [Syl2026] @914de15, the unit chain, mu_3 >= 1.5675517*
+  sha256 syl_F/F.txt: 2ce1fd40924e062e78fc3ee04a7edd21c1fe9a5dcee94408e9426f5c61b8699c
+  check sha256 matches Syl2026 SHA256SUMS (2ce1fd40924e062e78fc3ee04a7edd21c1fe9a5dcee94408e9426f5c61b8699c): PASS
+  sha256 syl_H/H.txt: ead114dde62ca9472239aefddd69dbea00494d113aca9c93ad4b9e71ef036d83
+  check sha256 matches Syl2026 SHA256SUMS (ead114dde62ca9472239aefddd69dbea00494d113aca9c93ad4b9e71ef036d83): PASS
+  sha256 syl_B/B.txt: 340cef5e71124ed624425abf81e9621839406cbf44b3fd242594d8edcb7d37af
+  check sha256 matches Syl2026 SHA256SUMS (340cef5e71124ed624425abf81e9621839406cbf44b3fd242594d8edcb7d37af): PASS
+  check lemma hypotheses: F and H are Sperner and 3-sunflower-free (brute force over all pairs and triples): PASS
+  check data/F.txt and data/H.txt equal F and H rebuilt from the page's words: PASS
+  check data/B.txt equals the gluing of F at (0,3) and H at 0 (4349 sets on 19 points): PASS
+  check B: members distinct: PASS (4349 members)
+  check B: Sperner and 3-sunflower-free, box method: PASS (blocks 9+10, 2 boxes, 4 box triples; 0.1 s)
+  check B: Sperner and 3-sunflower-free, pivot method: PASS (4349 pivots; 0.7 s)
+  check B: Sperner and 3-sunflower-free, pair method: PASS (9454726 pairs; 5.6 s)
+  port counts N00, N01, N10, N11 of B, ports (0,1) -> (0,2): 622, 1123, 1123, 1481
+  check transfer matrix rows (1123, 1481), (622, 1123) as on the 49a page of B, ports (0,1) -> (0,2): PASS (computed (1123, 1481), (622, 1123))
+  check first step: Perron root 1123 + sqrt(921182): PASS
+  check first step: (1123 + sqrt(921182))^(1/17) = 1.5675245...: PASS (in [1.5675245285, 1.5675245286))
+  check gadget G: 250659 sets on 28 points, 98308 avoiding and 152351 containing the root (0,1): PASS (250659 sets, 98308 / 152351)
+  check G: members distinct: PASS (250659 members)
+  check G: Sperner and 3-sunflower-free, box method: PASS (blocks 8+10+10, 4 boxes, 20 box triples; 1.5 s)
+  check G: Sperner and 3-sunflower-free, box2 method: PASS (blocks 4+4+10+10, 42 boxes, 13244 box triples; 2.0 s)
+  G, second path: G is two applications of the gluing lemma to F and H, which are valid
+  check G, spot check by the generic pivot method: no containment and no 3-sunflower through 400 random members (each scanned against all others; not exhaustive): PASS (20.7 s)
+  port counts N00, N01, N10, N11 of the 62-point unit (gluing count): 148811965456, 279351870092, 279351870092, 378843386627
+  check unit port counts as on the 49a page: PASS
+  check count formula against an explicit unit with F as the gadget (98920 sets on 26 points): PASS
+  check explicit F-gadget unit: members distinct: PASS (98920 members)
+  check explicit F-gadget unit: Sperner and 3-sunflower-free, box method: PASS (blocks 8+9+9, 4 boxes, 20 box triples; 0.6 s)
+  check Perron root equals 279351870092 + sqrt(378843386627 * 148811965456): PASS
+  points: unit 10 + 2 (28 - 2) = 62, 60 added per unit
+  rho: (558703740184 + sqrt(225505715855884705427648))/2, in [516789080663.4923032289, 516789080663.4923032290)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/60): in [1.5675517557581882197767405, 1.5675517557581882197767406)
+  check printed lower bound 1.5675517 <= rho^(1/60) (exact: 1.5675517^60 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5675518 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5675517... agrees (truncation): PASS (rho^(1/60) in [1.5675517, 1.5675518))
+  check value 1.5675517557... stated in PR #237 agrees (truncated): PASS (rho^(1/60) in [1.5675517557, 1.5675517558))
+  check value 1.5675517557582... stated in [Syl2026] README agrees (rounded up, not truncated): PASS (rho^(1/60) in [1.5675517557581, 1.5675517557582))
+  check control: 1.5675517558 (10-decimal truncation + 1e-10) is refuted: PASS
+  check control B: planted 3-sunflower caught by the box method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B: planted containment caught by the box method: PASS (witness verified)
+  check control B: planted 3-sunflower caught by the pivot method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B: planted containment caught by the pivot method: PASS (witness verified)
+  check control B: planted 3-sunflower caught by the pair method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B: planted containment caught by the pair method: PASS (witness verified)
+  check control G: planted 3-sunflower caught by the box method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control G: planted containment caught by the box method: PASS (witness verified)
+  check control: N11 + 1 no longer gives the page's matrix and moves the exact rate: PASS (rate 1.5675517557581882197767405 -> 1.5675517557582040620093320)
+  check control: with N11 lowered by 0.1% (to 378464543241) the printed bound 1.5675517 is refuted: PASS (rate would be 1.5675457518)
+  run time: 44.5 s
+  RESULT: ALL CHECKS PASS

@@ -1,0 +1,35 @@
+ROW syl_Bprime: [Syl2026] @8e21d02, mu_3 >= 1.5678015*
+  sha256 syl_Bprime/Bprime.txt: 2a72385704b8203269cda4f4b0dfdabc74d5adb8f4a2bc1dac1f570cb96b5cec
+  check sha256 matches Syl2026 README and SHA256SUMS (2a72385704b8203269cda4f4b0dfdabc74d5adb8f4a2bc1dac1f570cb96b5cec): PASS
+  check sha256 matches PR #237 thread (2a723857...5cec): PASS
+  check B' = B (the 4349-set gluing) plus 15 sets: PASS
+  check the 15 added sets lie in the F-part and are the 15 listed in the [Syl2026] README: PASS
+  check B': members distinct: PASS (4364 members)
+  check B': Sperner and 3-sunflower-free, box method: PASS (blocks 9+10, 3 boxes, 10 box triples; 0.1 s)
+  check B': Sperner and 3-sunflower-free, pivot method: PASS (4364 pivots; 0.7 s)
+  check B': Sperner and 3-sunflower-free, pair method: PASS (9520066 pairs; 5.8 s)
+  port counts N00, N01, N10, N11 of B', ports (0,1) -> (0,2): 622, 1127, 1127, 1488
+  check transfer matrix rows (1127, 1488), (622, 1127) as on the 49a page of B', ports (0,1) -> (0,2): PASS (computed (1127, 1488), (622, 1127))
+  check start vector (u1, w1) = (1749, 2615): PASS
+  check Perron root equals 1127 + sqrt(925536): PASS
+  points per copy: 19 - 2 = 17 (chain families on 17k + 2 points)
+  rho: (2254 + sqrt(3702144))/2, in [2089.0478158594, 2089.0478158595)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/17): in [1.5678015201687483404702436, 1.5678015201687483404702437)
+  check printed lower bound 1.5678015 <= rho^(1/17) (exact: 1.5678015^17 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5678016 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5678015... agrees (truncation): PASS (rho^(1/17) in [1.5678015, 1.5678016))
+  check value 1.5678015201... stated in PR #237 agrees (truncated): PASS (rho^(1/17) in [1.5678015201, 1.5678015202))
+  check value 1.5678015201687... stated in [Syl2026] README agrees (truncated): PASS (rho^(1/17) in [1.5678015201687, 1.5678015201688))
+  check control: 1.5678015202 (10-decimal truncation + 1e-10) is refuted: PASS
+  check control B': planted 3-sunflower caught by the box method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B': planted containment caught by the box method: PASS (witness verified)
+  check control B': planted 3-sunflower caught by the pivot method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B': planted containment caught by the pivot method: PASS (witness verified)
+  check control B': planted 3-sunflower caught by the pair method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control B': planted containment caught by the pair method: PASS (witness verified)
+  check control: N11 + 1 no longer gives the page's matrix and moves the exact rate: PASS (rate 1.5678015201687483404702436 -> 1.5678157878350771750343426)
+  check control: with N11 lowered by 0.1% (to 1487) the printed bound 1.5678015 is refuted: PASS (rate would be 1.5677872456)
+  check control: dropping one added set changes the port counts: PASS
+  run time: 15.2 s
+  RESULT: ALL CHECKS PASS

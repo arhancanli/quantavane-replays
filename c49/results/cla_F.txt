@@ -1,0 +1,31 @@
+ROW cla_F: [Cla2026] 75 sets on the edges of K5, mu_3 >= 1.5664286*
+  sha256 cla_k5/k5_family_masks.txt: 34cab736a5c3447c0300242bce9e2ce0fea08762bd2c74a492339af38aba7659
+  stated hash: none stated for this file (pinned by commit only)
+  check family rebuilt from the page's words equals k5_family_masks.txt (edges in lexicographic order): PASS
+  set sizes: {4: 5, 6: 70}
+  check S5-invariant (all 120 vertex permutations): PASS
+  check F: members distinct: PASS (75 members)
+  check F: Sperner and 3-sunflower-free, brute method: PASS (2775 pairs, 67525 triples; 0.0 s)
+  check F: Sperner and 3-sunflower-free, pivot method: PASS (75 pivots; 0.0 s)
+  check F: Sperner and 3-sunflower-free, pair method: PASS (2775 pairs; 0.0 s)
+  check every edge lies in 44 members, every pair of edges in 24: PASS
+  check for every ordered pair of ports the matrix has rows (20, 24), (11, 20): PASS
+  check Perron root equals 20 + 2 sqrt(66): PASS
+  rho: (40 + sqrt(1056))/2, in [36.2480768092, 36.2480768093)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/8): in [1.5664286622500366604103785, 1.5664286622500366604103786)
+  check printed lower bound 1.5664286 <= rho^(1/8) (exact: 1.5664286^8 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5664287 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5664286... agrees (truncation): PASS (rho^(1/8) in [1.5664286, 1.5664287))
+  check value 1.5664286622... stated in PR #235 and [Cla2026] README agrees (truncated): PASS (rho^(1/8) in [1.5664286622, 1.5664286623))
+  check control: 1.5664286623 (10-decimal truncation + 1e-10) is refuted: PASS
+  check control F: planted 3-sunflower caught by the brute method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control F: planted containment caught by the brute method: PASS (witness verified)
+  check control F: planted 3-sunflower caught by the pivot method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control F: planted containment caught by the pivot method: PASS (witness verified)
+  check control F: planted 3-sunflower caught by the pair method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control F: planted containment caught by the pair method: PASS (witness verified)
+  check control: N11 + 1 no longer gives the page's matrix and moves the exact rate: PASS (rate 1.5664286622500366604103785 -> 1.5682312312765577082827431)
+  check control: with N11 lowered by 0.1% (to 23) the printed bound 1.5664286 is refuted: PASS (rate would be 1.5645730262)
+  run time: 0.0 s
+  RESULT: ALL CHECKS PASS

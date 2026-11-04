@@ -1,0 +1,20 @@
+ROW irsi_degkm: [IRSI2026] DEGKM control (not an asterisked row): DEGKM's families F, L chained
+  sha256 irsi_degkm/cert_degkm_control.json: 294a4cd2c1c22a3f01293324a5b814b59fc552ff5352dc1b644032828c345f99
+  stated hash: none stated for this file (pinned by commit only)
+  check F: members distinct: PASS (388 members)
+  check F: Sperner and 3-sunflower-free, pivot method: PASS (388 pivots; 0.0 s)
+  check F: Sperner and 3-sunflower-free, pair method: PASS (75078 pairs; 0.4 s)
+  F: 388 sets on 14 points, ports 0 -> 1, N00, N01, N10, N11: 50, 93, 93, 152
+  check L: members distinct: PASS (352 members)
+  check L: Sperner and 3-sunflower-free, pivot method: PASS (352 pivots; 0.0 s)
+  check L: Sperner and 3-sunflower-free, pair method: PASS (61776 pairs; 0.3 s)
+  L: 352 sets on 14 points, ports 12 -> 13, N00, N01, N10, N11: 120, 106, 106, 20
+  period matrix (FORMAT.md convention): (28098, 17972), (16460, 10858)
+  rho: (38956 + sqrt(1480494080))/2, in [38716.5945432612, 38716.5945432613)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/24): in [1.5529675508362534564462327, 1.5529675508362534564462328)
+  check printed lower bound 1.5529675 <= rho^(1/24) (exact: 1.5529675^24 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5529676 (printed bound + 1e-7) is refuted: PASS
+  check control: 1.5529675509 (10-decimal truncation + 1e-10) is refuted: PASS
+  run time: 0.7 s
+  RESULT: ALL CHECKS PASS

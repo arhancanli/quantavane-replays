@@ -1,0 +1,45 @@
+ROW kos: [Kos2026] @c4ee817, mu_3 >= 1.5678599*
+  sha256 kos/two_pendant_extra_1.5678599.txt.xz: 1304bc12d9c51be5c72233c56485746218b10dd3340a8dc9b1c1f351e2499af0
+  check sha256 matches Kos2026 SHA256SUMS (1304bc12d9c51be5c72233c56485746218b10dd3340a8dc9b1c1f351e2499af0): PASS
+  check sha256 matches PR #260 thread (1304bc12...9af0): PASS
+  sha256 kos/two_pendant_extra_1.5678599.txt: 10ee18f93204468f3611d2c909a9eee443f3b4769cf7fddd964209edfebd4838
+  check sha256 matches 49a page (10ee18f9...4838): PASS
+  check sha256 matches Kos2026 README and SHA256SUMS (10ee18f93204468f3611d2c909a9eee443f3b4769cf7fddd964209edfebd4838): PASS
+  check the .xz decompresses to the same certificate as the .txt: PASS
+  check one block: 28 points, in-port 0 = (0,1), out-port 1 = (0,2), 252292 members: PASS
+  set sizes: {6: 5, 8: 15, 9: 34, 11: 438, 12: 146, 13: 1141, 14: 5313, 16: 57900, 18: 187300}
+  check block: members distinct: PASS (252292 members)
+  check block: Sperner and 3-sunflower-free, box method: PASS (blocks 8+10+10, 10 boxes, 220 box triples; 1.7 s)
+  check block: Sperner and 3-sunflower-free, box2 method: PASS (blocks 4+4+10+10, 62 boxes, 41664 box triples; 2.4 s)
+  port counts N00, N01, N10, N11 (ports 0 -> 1): 33969, 64728, 64728, 88867
+  check transfer matrix rows (64728, 88867), (33969, 64728) as on the 49a page (ports 0 -> 1): PASS (computed (64728, 88867), (33969, 64728))
+  check port counts N00 = 33969, N01 = N10 = 64728, N11 = 88867 as on the 49a page: PASS
+  check lemma hypotheses: F and H (rebuilt from the page's words) are Sperner and 3-sunflower-free (brute): PASS
+  check the certificate equals the block rebuilt from the page's description and the lists in PROOF.md: PASS
+  composition: {'product': 250659, 'additions at H1': 806, 'additions at H2': 806, 'inside H1': 20, 'extra set': 1}
+  check composition 250659 + 806 + 806 + 20 + 1 = 252292: PASS
+  port counts by part (N00, N01 + N10, N11): {'product': [33948, 128720, 87991], 'additions at H1': [0, 368, 438], 'additions at H2': [0, 368, 438], 'inside H1': [20, 0, 0], 'extra set': [1, 0, 0]}
+  check port counts by part as in PR #260: PASS
+  check second path: no containment and no 3-sunflower through any of the 1633 added sets (each scanned against all 252292 members; the 250659 product sets are valid by the gluing lemma): PASS (310.0 s)
+  check spot check of the gluing-lemma part: no containment and no 3-sunflower through 400 random product sets (each scanned against all members; not exhaustive): PASS (10.2 s)
+  check Perron root equals 64728 + sqrt(3018723123), 3018723123 = 88867 * 33969: PASS
+  points per copy: 28 - 2 = 26 (chain families on 26k + 2 points)
+  rho: (129456 + sqrt(12074892492))/2, in [119670.9078498763, 119670.9078498764)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/26): in [1.5678599024245898858529154, 1.5678599024245898858529155)
+  check printed lower bound 1.5678599 <= rho^(1/26) (exact: 1.5678599^26 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5678600 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5678599... agrees (truncation): PASS (rho^(1/26) in [1.5678599, 1.5678600))
+  check value 1.5678599024... stated in PR #260 agrees (truncated): PASS (rho^(1/26) in [1.5678599024, 1.5678599025))
+  check value 1.5678599024245... stated in certificate header agrees (truncated): PASS (rho^(1/26) in [1.5678599024245, 1.5678599024246))
+  check value 1.5678599024245898858529... stated in PR #260 (their independent check) agrees (truncated): PASS (rho^(1/26) in [1.5678599024245898858529, 1.5678599024245898858530))
+  check control: 1.5678599025 (10-decimal truncation + 1e-10) is refuted: PASS
+  check control block: planted 3-sunflower caught by the box method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control block: planted containment caught by the box method: PASS (witness verified)
+  check control block: planted 3-sunflower caught by the box2 method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control block: planted containment caught by the box2 method: PASS (witness verified)
+  check control: N11 + 1 no longer gives the page's matrix and moves the exact rate: PASS (rate 1.5678599024245898858529154 -> 1.5678600581948998864855018)
+  check control: with N11 lowered by 0.1% (to 88779) the printed bound 1.5678599 is refuted: PASS (rate would be 1.5678461896)
+  check control: dropping the extra set changes the port counts: PASS
+  run time: 340.2 s
+  RESULT: ALL CHECKS PASS

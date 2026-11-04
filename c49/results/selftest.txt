@@ -1,0 +1,8 @@
+ROW selftest: the pivot, pair and box methods against brute force on random families
+  check 3000 random families on 4-11 points: brute, pivot, pair and box (two random point partitions) give the same verdicts: PASS ((Sperner, sunflower-free) outcomes {(True, False): 766, (False, False): 1762, (True, True): 291, (False, True): 179}; 4.7 s)
+  check 400 glued families on 12 points (as glued, and with a planted sunflower, a planted containment or a random extra set): all methods agree: PASS ((variant, verdict) outcomes {(0, (True, True)): 100, (1, (True, False)): 100, (2, (False, True)): 99, (3, (False, False)): 1, (3, (False, True)): 14, (3, (True, False)): 27, (3, (True, True)): 55}; 0.5 s)
+  check the glued families themselves are all valid (the gluing lemma on these instances): PASS
+  check 1500 random side triples: the fast pattern step equals the cubic reference: PASS (0.3 s)
+  check control: a box split with an element removed, or with a box repeated, is refused: PASS
+  run time: 5.7 s
+  RESULT: ALL CHECKS PASS

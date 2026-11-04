@@ -30,6 +30,33 @@ Every hash above is the one stated in the pull request (for #269 also the archiv
 - Red controls, each run on every certificate: one corrupted coefficient is rejected by the identity; the old
   coefficients are rejected after one weight changes by 1; scaling every value by 3 leaves the bound unchanged.
 
+## C49: the 3-sunflower-free capacity (4 November 2026)
+
+`c49/sunflower_check.py`, our own code: every base family is checked Sperner and 3-sunflower-free exhaustively (a pivot
+method and a pair method, plus a box method for the two 250,000-set families; all agree with brute force on 3,400
+random and glued test families), the port counts and transfer matrix are recomputed, and the rate is enclosed by exact
+integer comparisons. Every printed bound is the 7-decimal truncation of the exact value.
+
+| Row | Certificate (SHA-256) | Exact value |
+| --- | --- | --- |
+| IRSI v1.0, 1.5617847 | `cert_c49_chain20.json` (`c30a74fe...715b`), 6,127 sets on 20 points | rho^(1/18) = 1.56178470895053727967... |
+| IRSI v1.1, 1.5621220 | `cert_c49_chain20_s17.json` (`c12d0dd6...fc7b`), 6,150 sets | 1.56212205600681534404... |
+| IRSI v1.2, 1.5647730 | `cert_c49_chain20_v12.json` (`7472112c...2e82e`), 6,341 sets | 1.56477309608283129921... |
+| [Cla2026] F, 1.5664286 | F rebuilt from the page, equal to `k5_family_masks.txt` (`34cab736...7659`), 75 sets | rho = 20 + 2 sqrt(66), rho^(1/8) = 1.56642866225003666041... |
+| [Cla2026] F and H, 1.5666969 | H rebuilt from the page, equal to `z11_family_masks.txt` (`09c02bec...a807`), 121 sets | rho^(1/17) = 1.56669697875431533092... |
+| [Syl2026] unit chain, 1.5675517 | `F.txt`, `H.txt`, `B.txt` (hashes as in their SHA256SUMS); gadget G (250,659 sets on 28 points) rebuilt from the page | rho^(1/60) = 1.56755175575818821977... |
+| [Syl2026] B', 1.5678015 | `Bprime.txt` (`2a723857...5cec`), 4,364 sets | rho = 1127 + sqrt(925536), rho^(1/17) = 1.56780152016874834047... |
+| [Kos2026], 1.5678599 | `two_pendant_extra_1.5678599.txt` (`10ee18f9...4838`), 252,292 sets on 28 points | rho = 64728 + sqrt(3018723123), rho^(1/26) = 1.56785990242458988585... |
+
+What rests on mathematics rather than computation: the gluing lemma (DEGKM 1997, Lemma 4.4, as stated in the
+claimants' READMEs; we proved it by hand and tested it on 80,889 small gluings and on explicit chains up to 155,892
+sets), the chain argument, and the page's limit step. The 62-point unit of the 1.5675517 row (about 1.09e12 members)
+is valid by that lemma. Two notes on the page: the [Kos2026] row says 15 sets are added at each pendant, but the
+certificate (correctly) adds 806 per pendant, 11 x 46 + 4 x 75, as #260 says; and the IRSI rows print matrices in the
+IRSI README's convention, which differs from the later rows' (conjugate matrices, the same rho).
+
+Reproduce: `cd c49 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 9 minutes on a loaded 18-core Mac).
+
 ## Reproduce
 
 ```

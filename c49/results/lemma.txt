@@ -1,0 +1,21 @@
+ROW lemma: the gluing lemma ([DEGKM1997] Lemma 4.4) and the chain count, tested on instances
+  valid (Sperner, 3-sunflower-free) families: 19 on 3 points, 130 on 4 points
+  check every gluing of two valid families is valid and has |A_a||B_not b| + |A_not a||B_b| members: PASS (80889 gluings: all valid families on 3+3 and 4+3 points, 3000 random 4+4 pairs; 0.7 s)
+  check control: with a non-Sperner input the glued family can fail (so the hypothesis is used): PASS
+  check F+F: 2728 sets on 18 points, as the recursion and the [Cla2026] README say: PASS
+  check F+F: members distinct: PASS (2728 members)
+  check F+F: Sperner and 3-sunflower-free, box method: PASS (blocks 9+9, 2 boxes, 4 box triples; 0.1 s)
+  check F+F: Sperner and 3-sunflower-free, pivot method: PASS (2728 pivots; 3.0 s)
+  check F+H: 4349 sets on 19 points, as the recursion and the [Cla2026] README say: PASS
+  check F+H: members distinct: PASS (4349 members)
+  check F+H: Sperner and 3-sunflower-free, box method: PASS (blocks 9+10, 2 boxes, 4 box triples; 0.1 s)
+  check F+H: Sperner and 3-sunflower-free, pivot method: PASS (4349 pivots; 0.7 s)
+  check F+F+F: 98920 sets on 26 points, as the recursion and the [Cla2026] README say: PASS
+  check F+F+F: members distinct: PASS (98920 members)
+  check F+F+F: Sperner and 3-sunflower-free, box method: PASS (blocks 9+8+9, 4 boxes, 20 box triples; 0.7 s)
+  check F+H+F: 155892 sets on 27 points, as the recursion and the [Cla2026] README say: PASS
+  check F+H+F: members distinct: PASS (155892 members)
+  check F+H+F: Sperner and 3-sunflower-free, box method: PASS (blocks 9+9+9, 4 boxes, 20 box triples; 0.9 s)
+  check two-copy chains by the recursion: B+B has 9,087,960 members, B'+B' 9,147,270 (as stated): PASS
+  run time: 8.5 s
+  RESULT: ALL CHECKS PASS
