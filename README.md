@@ -81,6 +81,23 @@ check their hypotheses).
 
 Reproduce: `cd c86 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 2 minutes).
 
+## C44 and C70 (4 November 2026)
+
+`c44/c44_check.py`: Pinho's C44 <= 4.3576549226 (rpinho/c44-certificate @f3fb25d). The paper's recurrence
+U(b,d) = min(c_d, d 2^-d + max_{k<=d} U(min(b-1, B_k), k)), caps c_d = d/2 and c_3 = 5/4, with B_d from the 48
+degree certificates (each checked exactly: integer nodes, moment identities, positivity) intersected with Wellens's
+3b(b-1) <= 2(d^4-d^2) to degree 96, plus Wellens's tail 233045/2^95, computed exactly three ways: the bound is
+172624496193406565421448533795/39614081257132168796771975168 = 4.35765492257445791338..., the page's rational, and
+the printed value is it rounded up. As a function of the degree-3 cap c the bound is this value + clamp(c - 173/128,
+0, 1/128), so the claim needs only D <= 173/128 at degree 3 (a cap of 11/8, from R_3 <= 11, returns Epi's bound).
+
+`c70/c70_check.py`: Pinho's C70 >= 1.20194336 (rpinho/c70-certificate @680e074). The single Steiner term at
+n = 10^12, k = 367879441172 in our own interval arithmetic at 2^-400: R in [1.201943368443150566994802779735524137849309813,
+...814] (width 4.4e-117); the printed bound is R truncated (margin 8.44e-9). exp(1/(2e)) is enclosed too
+(1.20194336847031446719...).
+
+Reproduce: `cd c44 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 30 s), the same in `c70` (under a second).
+
 ## Reproduce
 
 ```

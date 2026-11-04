@@ -1,0 +1,50 @@
+ROW [Pin2026] (R. Pinho, PR #259): C70 >= 1.20194336*, rpinho/c70-certificate @680e074
+  sha256 pin/certificates/c70_candidate.json: 03ff0d6df3dfa6ea06f901a9319c968eb7c013f5d0cc3f1f00cfa58e9490c0cc (320 bytes)
+  check sha256 matches SHA256SUMS @680e074 (the 70a page states the commit only): PASS
+  c70_candidate.json: {"baseline_claim": "1.201927", "baseline_n": 300000, "baseline_side": "13/1000", "claim": "1.20194336", "k": 367879441172, "limit_claim": "1.20194336847", "limit_formula": "exp(1/(2*e))", "n": 1000000000000, "normalized_side": "632120558828/367879441172", "schema": "c70-cube-ball-single-term-v1"}
+  check certificate: n = 10^12, k = 367879441172, both even, 0 < k < n (as on the 70a page): PASS
+  check normalized side a/kappa_n^(1/n) = 632120558828/367879441172 = (n-k)/k exactly, as on the page: PASS
+  check claim 1.20194336 = 3756073/3125000 (the page's bound, the paper's Theorem 1): PASS
+  check limit claim 1.20194336847 and formula exp(1/(2e)) as on the page: PASS
+  t = k/n: 91969860293/250000000000 = 0.367879441172 (1/e = 0.36787944117144233...)
+  check rigorous log of 12 integers (2 ... 3^70) contains the correctly rounded decimal ln (to 1e-118): PASS (widest enclosure 8.6e-119)
+  check pi: Machin and Euler enclosures overlap, each narrower than 2^-400, and both begin with the 50 known digits: PASS
+  check Bernoulli numbers B_2..B_12 recomputed: 1/6, -1/30, 1/42, -1/30, 5/66, -691/2730: PASS
+  check Stirling enclosure (4 Bernoulli terms, remainder between 0 and the B_10 term) contains log m! from the exact integer m! for m = 1..60, 500, 3000: PASS
+  check control: the same test catches a remainder put on the wrong side (fails at 60 of 60 m): PASS
+  check rigorous exp at 1/7, -1/7, -2.7, 3.1 contains the correctly rounded decimal exp: PASS
+  check algebra: the criterion's single term at s = (n-k)/k equals the factorial form (pi cancels) at 7 small (n, k), to 1e-55: PASS (largest difference 1.0e-69)
+  check the full criterion sum exceeds the single retained term at those (n, k) (the dropped terms are positive): PASS
+  log R_{n,k}: [0.183939720563121177377314897488667042805771552, 0.183939720563121177377314897488667042805771553]
+  R_{n,k} enclosure: [1.201943368443150566994802779735524137849309813, 1.201943368443150566994802779735524137849309814]
+  enclosure width: 4.37e-117 (computed in 0.00 s)
+  check log R > log(1.20194336): the claim holds (C70 >= R > 1.20194336): PASS (margin in R: 0.000000008443150566994802779735)
+  check R > 1.20194336 also compared directly after exp: PASS
+  check every point of the enclosure begins 1.20194336844315056699 and rounds to it (the 70a page's digits): PASS
+  check every point of the enclosure begins 1.2019433684431505669948027797355 and rounds to it (the README's and the claimant's Arb digits, 31 decimals): PASS
+  R_{n,k} to 75 decimals: [1.201943368443150566994802779735524137849309813717929771943136555327187674306, 1.201943368443150566994802779735524137849309813717929771943136555327187674307]
+  check our enclosures of log R and R lie inside the claimant's 256-bit Arb balls (c70_arb.log: radius 1.65e-75 and 5.01e-75): the same value, 117-digit-narrow here: PASS
+  check cross-check: the general-s form with explicit pi and kappa's at s = (n-k)/k gives an overlapping enclosure: PASS (width 3.9e-117)
+  check cross-check: Stirling with 3 and 5 Bernoulli terms gives overlapping enclosures: PASS
+  check cross-check at n = 20000, k = 7358: Stirling enclosure overlaps the one from the exact integers m!: PASS (R_{20000,7358} = 1.2014546847962311473267981...)
+  check cross-check (non-rigorous, other code): 90-digit decimal, pi by Gauss-Legendre AGM, Stirling with 6 terms, decimal ln and exp, lies in the enclosure up to 1e-80: PASS
+  check sanity: double-precision lgamma gives the same R to 1e-11: PASS (1.201943368443153)
+  exp(1/(2e)) enclosure: [1.201943368470314467194241139381297080440187153, 1.201943368470314467194241139381297080440187154]
+  check exp(1/(2e)) lies inside the claimant's Arb ball (radius 3.43e-76): PASS
+  check exp(1/(2e)) > 1.20194336847 (the page's limit decimal; the limit itself is the paper's prose argument): PASS
+  check exp(1/(2e)) rounds to 1.2019433684703144671942411393813 (FINAL_LIVE_CHECK's Arb digits, rounded to nearest; truncation gives ...3812) and begins 1.20194336847031446719424113938 (the README's): PASS
+  check the finite R_{n,k} is below the limit, as expected: PASS (limit - R = 2.7164e-11)
+  check R_{n,k} with k the even integer nearest n/e increases toward exp(1/(2e)) at n = 10^14, 10^16, 10^18: PASS (n = 10^14: 1.2019433684699976580009; n = 10^16: 1.2019433684703108474003; n = 10^18: 1.2019433684703144264792)
+  -- red controls (each must fire)
+  check control: a bound raised to 1.2019433685 (just above the enclosure) is refuted: PASS
+  check control: a bound raised to 1.20194336844316 (just above the enclosure) is refuted: PASS
+  check control: a limit bound raised to 1.20194336848 is refuted: PASS
+  check control: k -+ 2 and n -+ 2 give enclosures disjoint from the certificate's: PASS (n+0, k-2: 1.201943368443150566994771380745 (below); n+0, k+2: 1.201943368443150566994827644284 (above); n-2, k+0: 1.201943368443150566994760320580 (below); n+2, k+0: 1.201943368443150566994844354549 (above))
+  note: k + 2 gives a larger term than the certificate's k (by 2.49e-23): k is not the exact maximiser over even k at n = 10^12 (none is claimed)
+  check control: the valid but insufficient half-dimensional term k = n/2 does not reach the claim: PASS (R = 1.189207114977)
+  check control: odd k is refused by the factorial form: PASS
+  check control: a side 1e-6 off (n-k)/k gives a strictly smaller, disjoint enclosure (s = (n-k)/k is the maximiser): PASS (R(s') = 1.201943368443010814692614477255)
+  check control: a scale error (normalized side 13/1000) does not reach the claim: PASS (R = 0.147145118232)
+  what rests on mathematics: Patankar's criterion (Gram-Schmidt / Szasz, AM-GM, zonotope intrinsic volumes, Steiner), the positivity of the dropped terms, the Stirling remainder theorem; the limit exp(1/(2e)) is a separate prose argument (its decimal is enclosed above)
+  run time: 0.1 s
+  RESULT: ALL CHECKS PASS

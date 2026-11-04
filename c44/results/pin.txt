@@ -1,0 +1,81 @@
+ROW [P2026] (R. Pinho, PR #258): C44 <= 4.3576549226*, rpinho/c44-certificate @f3fb25d
+  sha256 pin/certificates/c44_candidate.json: 95bd09f3c2684abd46f663ce4b444ae482119a56722384f8c797939a0beb823c (358 bytes)
+  sha256 pin/sources/wellens-certificate.json: ce66f1097a7284e9845113fa1dc39267932cc934fd23d9019ff13d3dcb39cf49 (108347 bytes)
+  sha256 pin/sources/wellens-result.json: 554994f8a2f7bce361d72f8f9100890d19d7f7343f56d59a6aa61e0f76627df3 (916 bytes)
+  sha256 epi/certificate.json: ce66f1097a7284e9845113fa1dc39267932cc934fd23d9019ff13d3dcb39cf49 (108347 bytes)
+  sha256 epi/result.json: 554994f8a2f7bce361d72f8f9100890d19d7f7343f56d59a6aa61e0f76627df3 (916 bytes)
+  check sha256 of c44_candidate.json matches SHA256SUMS @f3fb25d: PASS
+  check sha256 of wellens-certificate.json matches SHA256SUMS, the paper (Section 4), THIRD_PARTY_NOTICES and BakeLab's checksums.sha256 (ce66f109...cf49): PASS
+  check sha256 of wellens-result.json matches SHA256SUMS and BakeLab's checksums.sha256: PASS
+  check the certificate and result are byte-identical to BakeLab/Epi-results @97fa6a4 mathematics/wellens/: PASS
+  c44_candidate.json: {"claim": "4.3576549226", "degree_cutoff": 48, "degree_three_cap": "5/4", "external_theorem_R3": 10, "horizon": 96, "lemma": "degree-three-local-potential-v1", "schema": "c44-low-degree-cap-v1", "source_certificate": "sources/wellens-certificate.json", "source_sha256": "ce66f1097a7284e9845113fa1dc39267932cc934fd23d9019ff13d3dcb39cf49"}
+  check candidate's source_sha256 is the source file's hash: PASS
+  check BakeLab's result.json lists the certificate with this hash and 108347 bytes: PASS
+  check candidate fields: horizon 96, degree_cutoff 48, degree_three_cap 5/4, R_3 = 10, claim 4.3576549226 (the 44a page's bound): PASS
+  check Epi's file has degree-d certificates for exactly d = 1..48: PASS
+  check all 48 certificates: 1 = x_0 < ... < x_d integers, sum_i w_i x_i^j = 0 exactly for j = 1..d, w_0 > 0, w_0 + sum_{w_i<0} w_i > 0: PASS
+  check all 48 certificates: w_i x_i prod_{j!=i}(x_i - x_j) is one nonzero constant (the Lagrange form): PASS
+  weights alternate in sign, w_0 > 0: True
+  B_d = x_d - 1 (Epi), d = 1..48: 1 3 6 10 15 21 29 38 47 58 71 84 99 114 131 149 168 189 210 233 257 282 308 336 364 394 425 457 490 524 560 596 634 673 713 755 797 841 886 932 979 1027 1076 1127 1179 1232 1286 1341
+  check Epi's B_d equal Wellens's LP Table 1 for d = 1..14 (1 3 6 10 15 21 29 38 47 58 71 84 99 114): PASS
+  where Epi's bound is below Wellens's 3b(b-1) <= 2(d^4-d^2): 46 degrees; equal at d = [1, 2]; Wellens smaller at d = none
+  B_d used, d = 49..96 (Wellens): 1960 2041 2123 2207 2293 2380 2469 2560 2652 2746 2842 2939 3038 3138 3240 3344 3449 3556 3665 3775 3887 4000 4116 4232 4351 4471 4592 4716 4841 4967 5095 5225 5357 5490 5624 5761 5899 6038 6180 6323 6467 6613 6761 6910 7061 7214 7368 7524
+  check B_d is strictly increasing in d = 1..96: PASS
+  B_96, sum of B_d: 7524, 235647
+  check recurrence A (rows, scale 2^97) and B (columns, explicit max, scale 2^195) agree on every U(B_d, d), d = 1..96: PASS (0.1 s and 2.7 s)
+  check recurrence C (literal memoised definition, Fractions) agrees with A for d = 1..30: PASS (0.2 s)
+  U(B_d, d) for d = 1..12: 1/2, 1, 5/4, 2, 5/2, 3, 7/2, 503/128, 2093/512, 537/128, 8735/2048, 8813/2048
+  U(B_d, d) for d = 24, 48, 72, 96: 4.357609033584594, 4.357654922513106, 4.357654922574457, 4.357654922574457
+  check every degree d <= 96 is covered: max_d U(B_d, d) is attained at d = 96 (so D(f) <= U(B_96, 96) for deg f <= 96 directly): PASS (argmax d = 96)
+  check tail identity S(m) - S(m+1) = (2m^2 - m)/2^m, coefficient by coefficient: PASS
+  check T_96 summed term by term to k = 4000, plus the exact remainder S(4001), equals the paper's closed form ((H+1)^3 + 2H^2 + 11H + 19)/2^(H+1) = 233045 / 2^95: PASS
+  check the term-by-term sum alone (no closed form) is below T_96 by less than 2^-3900: PASS
+  T_96: 233045 / 2^95 = 5.882883e-24
+  U(B_96, 96): 86312248096703282710724150375 / 2^94 = 4.357654922574457913385608422828
+  bound U(B_96, 96) + T_96: 172624496193406565421448533795/39614081257132168796771975168 = 4.357654922574457913385614305710...
+  as a dyadic: 172624496193406565421448533795 / 2^95
+  check bound equals the exact value printed on the 44a page and in the paper: PASS (172624496193406565421448533795/39614081257132168796771975168)
+  check claim 4.3576549226 = 21788274613/5000000000 exactly: PASS
+  check bound < 4.3576549226 (the printed bound holds): PASS (margin 2.554209e-11)
+  check claim - bound and T_96 equal the margin and tail in the claimant's c44_exact.log: PASS
+  check the printed bound is the exact value rounded up at 10 decimals: PASS
+  cap 3/2 at degree 3 (Wellens's influence cap, Epi's method): 172933981203227910490173314851/39614081257132168796771975168 = 4.365467422574457913385614305710...
+  check with cap 3/2 the recurrence gives the paper's reproduced preceding value: PASS (172933981203227910490173314851/39614081257132168796771975168)
+  check Epi's printed 4.3654674227 holds for that value (Epi's bound reproduced): PASS (the 10-decimal round-up would be 4.3654674226; Epi prints 4.3654674227, 1.26e-10 above the exact value)
+  check the gain is exactly 1/128, as the page says: PASS
+  degrees whose U(B_d, d) the cap changes: 90 of 96 (d = [3, 8, 9] ... [95, 96]); U(B_3, 3): 3/2 -> 5/4
+  check with cap 3/2, U(B_8, 8) = 63/16 = 3.9375: the 44a page's [Wel2019] Table 2 value (R_8 <= 256 * 3.9375 = 1008): PASS
+  by-product with cap 5/4 (not on the page): U(B_8, 8) = 503/128, so R_8 <= 1006 under the same premises
+  horizon 72: 10289221775138769568521/2361183241434822606848 = 4.357654922574457953872608648214...
+  check horizon 72 gives the README's second exact value 10289221775138769568521/2361183241434822606848: PASS
+  check horizon 72 bound < 4.3576549226 too: PASS
+  check Wellens (3.18) reproduced: Table 1 for d <= 14, B_d = d^2 above, caps d/2: D(30^2, 30) = 4.41570856... (Wellens: 4.4157...), plus T_30 <= 4.4158: PASS
+  check Wellens's Theorem 3.13 reproduced: Table 1 with his Section 4 inequality gives 4.39345627... <= 4.3935 (his D_inf <= 4.3935, rounded up at 4 decimals): PASS
+  affine {-1,0,1}-valued forms depending on exactly 0 sign variables: 2 (of 3 truth tables), p in {1}
+  affine {-1,0,1}-valued forms depending on exactly 1 sign variables: 6 (of 9 truth tables), p in {1/2, 1}
+  affine {-1,0,1}-valued forms depending on exactly 2 sign variables: 4 (of 81 truth tables), p in {1/2}
+  affine {-1,0,1}-valued forms depending on exactly 3 sign variables: 0 (of 6561 truth tables)
+  check lemma, finite part: no {-1,0,1}-valued affine form depends on 3 variables (so none on >= 3: fixing variables of such a form leaves one on 3): PASS
+  check lemma, finite part: the forms are, up to signs, 1, x_j, (1 + x_j)/2, (x_j + x_k)/2 (2, 2 + 4 and 4 truth tables for s = 0, 1, 2): PASS
+  check lemma, finite part: max over the cases of s/4 + p/2 + (1 - p) is 5/4 (cases s=0 p=1 -> 1/2; s=1 p=1/2 -> 1; s=1 p=1 -> 3/4; s=2 p=1/2 -> 5/4): PASS
+  check witness F is Boolean (every one of the 1024 values is +1 or -1): PASS
+  check witness F: 16 nonzero monomials, all cubic, every one of the 10 variables in one (Walsh transform): PASS (16 monomials, degrees [3], coefficients [Fraction(-1, 4), Fraction(1, 4)])
+  check witness F equals its cubic expansion at all 1024 points (a second evaluation): PASS
+  check D(F) = 10 * 2^-3 = 5/4: the cap 5/4 is attained, so no smaller cap can hold: PASS
+  -- red controls (each must fire)
+  check control: the printed bound lowered by 1e-10 (4.3576549225) is refuted (exact bound above it): PASS (bound - 4.3576549225 = 7.4458e-11)
+  check control: with the old cap 3/2 the claim 4.3576549226 is not reached (the new cap is load-bearing): PASS (4.365467422574...)
+  check control: over 39 dyadic caps c in [1, 3/2] the exact bound is new + clamp(c - 173/128, 0, 1/128): constant for c <= 173/128, slope 1 up to 87/64, Epi's value from 87/64 on: PASS (checked at c = 173/128 +- 2^-20, +- 2^-40 too)
+  check control: a cap of 11/8 (what R_3 <= 11 would give in the all-cubic case) gives exactly Epi's bound, above the claim: R_3 <= 10 is load-bearing: PASS
+  check control: a cap of 347/256 gives an intermediate exact bound (172779238698317237955810924323 / 2^95), above the claim: PASS (4.361561172574...)
+  check control: caps 1 and 9/8 (false: the witness F has D(F) = 5/4) give the same bound as 5/4, so the computation cannot see a false cap, and a smaller cap gains nothing: PASS
+  check control: weight w_5 of the degree-17 certificate times (1 + 1e-30) is rejected (moment identity fails at j = 1): PASS
+  check control: without the degree-17 certificate, B_17 falls back from 168 to Wellens's 236 and the exact bound rises above the claim: PASS (4.363802784055170...)
+  check control: the last node of the degree-48 certificate raised by one (claiming B_48 one higher) is rejected (moment identity fails at j = 1): PASS
+  check control: raising a single B_d by one changes the exact bound for 89 of the 96 degrees: PASS (unchanged for d = [1, 2, 3, 4, 5, 6, 7]; largest rise 1.367e-02 at d = 8)
+  lowering a single B_d by one changes the bound for: 89 degrees (unchanged for d = [1, 2, 3, 4, 5, 6, 7])
+  check control: with bs <= d^2 instead of Wellens's Section 4 inequality for d = 49..96 the bound rises above the claim (that inequality is load-bearing): PASS (4.357654922614527...)
+  check other horizons, each a valid bound by the same argument, are all below the claim too: PASS (H=60: 4.357654922574554; H=84: 4.357654922574457; H=95: 4.357654922574457; H=97: 4.357654922574457; H=110: 4.357654922574457)
+  what rests on mathematics: r(f) <= D(f) 2^deg; Wellens (3.2), Lemma 3.8, Lemma 3.9, Corollary 3.10 (3.14)-(3.15) with bs <= deg^2 above 96; D <= I/2 <= deg/2; Wellens's B^2 - B <= (2/3)(d^4 - d^2); the symmetrization giving bs <= x_d - 1; the paper's Lemma 2 (cap 5/4), whose prose proof rests on the published R_3 <= 10 (finite cases computed above)
+  run time: 30.7 s
+  RESULT: ALL CHECKS PASS
