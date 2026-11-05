@@ -1,0 +1,8 @@
+  envelope: w = 0.807324225622345, A = 12.2250814330279, Psi = 25480.0151184429; sech^2(A/2) = 1.962e-05 < 1/3, 8 cosh^4(A/6) = 1852.521830 < Psi
+  first family: k = 1..5755 explicit, smallest relative margin A_k / (R^(k+1)/(k+1)) 8.4733e-07 at k = 9; from k = 5756 the atom at R alone
+  second family: k = 1..1323 explicit, smallest relative margin B_k / (R^(k+1)/(k+1)) 8.1559e-07 at k = 44; from k = 1324: the piece [9749241/9765625, 48762589/48828125] alone gives 1.6821e-09 > sum w_j t_j^k <= 1.6740e-09
+RESULT C68 >= 8921/20000 = 0.44605: all hypotheses hold
+control: half of atom 8's mass moved to atom 7 rejected: True
+control: half of atom 2's mass moved to atom 3 rejected: True
+control: c raised to 0.447 (first node at the new c^2) rejected: True
+run time 1 s

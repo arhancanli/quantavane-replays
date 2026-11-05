@@ -13,4 +13,9 @@ get() {  # get DIR FILE REPO COMMIT PATH: one file into a directory that must be
 }
 # [Pin2026], C68 >= 0.432* (68a page; added in PR #239)
 get pin certificate-jung.json rpinho/korenblum-c68-certificate 9d48de64987911f5a07a397323345be8b97770a8 certificate-jung.json
+# PR #274 (vidigoat): C68 >= 0.446 and the supplementary 0.44605 (flux and half-diameter lemmas)
+get vid0446 certificate-c0446.json vidigoat/optimization-records 1a76f9dd053d51cce531b57b2ad5a68e3205ca75 \
+    tao/certificates/c68/certificate-c0446.json
+get vid044605 certificate-c044605.json vidigoat/optimization-records 1a76f9dd053d51cce531b57b2ad5a68e3205ca75 \
+    tao/certificates/c68/certificate-c044605.json
 shasum -a 256 -c "$here/SHA256SUMS"

@@ -177,27 +177,153 @@ def check(cert, note=print):
     return ok
 
 
+def g_flux(t, w, Psi):
+    """g = 1/G, G = (1 + sqrt(1 + Psi/(2 sigma)))/2, sigma = sin^2(pi log t/(2w)) (PR #274's PROOF.md, Lemma 6)."""
+    v = -PI * t.ln() / (2 * w)
+    s = sin_dec(v)
+    sig = s * s
+    if sig <= 0:
+        return D(0)
+    return 2 / (1 + (1 + Psi / (2 * sig)).sqrt())
+
+
+def check_flux(cert, note=print):
+    """PR #274 (flux and half-diameter lemmas): the same moment lemma with G from Lemma 6, the hypotheses
+    sech^2(A/2) < 1/3 and 8 cosh^4(A/6) < Psi of Lemmas 1 and 4, and on each tail piece [a, b] of [R, 1] our own
+    slope bound g(t) >= l_i (1 - t): -log t >= d (1 + d_lo/2) (d = 1 - t), sin x >= x (1 - U^2/6) for x <= U = -pi log a/(2w),
+    so sigma >= (b_i d)^2 with b_i = (pi/(2w)) (1 + d_lo/2)(1 - U^2/6), and g increasing in sigma gives
+    l_i = 2 sqrt2 b_i / (sqrt2 b_i d_hi + sqrt(2 b_i^2 d_hi^2 + Psi)). The second tail starts at the first k where one piece
+    alone gives l_i (1 - b)(b - a) a^k > sum_j w_j t_j^k (found here, not read from the certificate)."""
+    c = F(cert["c"]); R = F(cert["R"])
+    t = [F(x) for x in cert["nodes"]]; wts = [F(x) for x in cert["weights"]]
+    tau = [F(x) for x in cert["tail_partition"]]
+    ok = True
+    def need(cond, msg):
+        nonlocal ok
+        if not cond:
+            ok = False; note("FAIL: " + msg)
+        return cond
+    need(len(t) == len(wts) and len(t) > 0, "nodes and weights differ in number")
+    need(all(c * c <= x < 1 for x in t), "a node outside [c^2, 1)")
+    need(all(x > 0 for x in wts), "a weight is not positive")
+    need(sum(wts) == R, f"sum of weights {float(sum(wts))} is not R (total mass would not be 1)")
+    need(tau[0] == R and tau[-1] == 1 and all(a < b for a, b in zip(tau, tau[1:])), "tail partition is not R < ... < 1")
+    need(t[-1] == R and max(t) <= R, "the last node is not R")
+    w = -dec(c).ln()
+    A = PI * PI / w
+    q = (-A).exp()
+    Psi = (1 + q) ** 2 / (8 * q)
+    ch6 = ((A / 6).exp() + (-A / 6).exp()) / 2
+    sech2 = 4 / ((A / 2).exp() + (-A / 2).exp()) ** 2
+    need(sech2 + WIDEN < D(1) / 3, "sech^2(A/2) >= 1/3")
+    need(8 * ch6 ** 4 + WIDEN < Psi, "8 cosh^4(A/6) >= Psi")
+    note(f"  envelope: w = {float(w):.15f}, A = {float(A):.13f}, Psi = {float(Psi):.10f}; sech^2(A/2) = {float(sech2):.3e} < 1/3, "
+         f"8 cosh^4(A/6) = {float(8 * ch6 ** 4):.6f} < Psi")
+    beta_hi = []
+    for x in t:
+        g = g_flux(dec(x), w, Psi) - WIDEN
+        beta_hi.append(fx_dec_ceil(min(D(1), 1 - max(g, D(0)))))
+    # slopes on the tail pieces, rounded down
+    slopes = []
+    for a_, b_ in zip(tau, tau[1:]):
+        dlo, dhi = 1 - dec(b_), 1 - dec(a_)
+        U = -PI * dec(a_).ln() / (2 * w)
+        need(U * U < 6, "U^2 >= 6 on a tail piece")
+        bi = PI / (2 * w) * (1 + dlo / 2) * (1 - U * U / 6)
+        li = 2 * D(2).sqrt() * bi / (D(2).sqrt() * bi * dhi + (2 * bi * bi * dhi * dhi + Psi).sqrt()) - WIDEN
+        slopes.append(fx_dec_floor(li))
+    lo = lambda x, y: x * y >> P
+    hi = lambda x, y: -((-x * y) >> P)
+    tl = [fx_floor(x) for x in t]; th = [fx_ceil(x) for x in t]
+    wl = [fx_floor(x) for x in wts]; wh = [fx_ceil(x) for x in wts]
+    taul = [fx_floor(x) for x in tau]; tauh = [fx_ceil(x) for x in tau]
+    Rl, Rh = fx_floor(R), fx_ceil(R)
+    pl = [ONE] * len(t); ph = [ONE] * len(t)
+    Tl = list(taul); Th = list(tauh)                       # tau_i^(k+1) at k = 0
+    Rkl, Rkh = Rl, Rh
+    K1 = 0
+    while wts[-1] * (K1 + 1) < R:
+        K1 += 1
+    minI = minII = None
+    K2 = None
+    k = 0
+    while k < K1 or K2 is None:
+        k += 1
+        pl = [lo(pl[j], tl[j]) for j in range(len(t))]
+        ph = [hi(ph[j], th[j]) for j in range(len(t))]
+        Rkl, Rkh = lo(Rkl, Rl), hi(Rkh, Rh)
+        Tl = [lo(Tl[i], taul[i]) for i in range(len(tau))]  # tau_i^(k+1)
+        Th = [hi(Th[i], tauh[i]) for i in range(len(tau))]
+        target_hi = -((-Rkh) // (k + 1))
+        if k < K1:
+            s_lo = sum(lo(wl[j], pl[j]) for j in range(len(t)))
+            if not need(s_lo >= target_hi, f"first family fails at k = {k}"):
+                break
+            m = (s_lo - target_hi) / target_hi
+            if minI is None or m < minI[0]:
+                minI = (m, k)
+        if K2 is None:
+            s_atoms = sum(hi(wh[j], ph[j]) for j in range(len(t)))      # sum w_j t_j^k (beta <= 1)
+            # one piece alone, at this k: l_i (1 - b)(b - a) a^k
+            for i in range(len(tau) - 1):
+                a_k_lo = (Tl[i] << P) // tauh[i]                     # a^k = a^(k+1)/a, rounded down
+                piece = lo(lo(slopes[i], fx_floor((1 - tau[i + 1]) * (tau[i + 1] - tau[i]))), a_k_lo)
+                if piece > s_atoms:
+                    K2 = k; tail = (i, piece, s_atoms)
+                    break
+            if K2 is None:
+                s_hi = sum(hi(hi(wh[j], ph[j]), beta_hi[j]) for j in range(len(t)))
+                integ = 0
+                for i in range(len(tau) - 1):                       # l_i int_a^b (1 - t) t^k dt, rounded down
+                    # [t^(k+1)/(k+1) - t^(k+2)/(k+2)]_a^b
+                    b1l, b1h = Tl[i + 1], Th[i + 1]; a1l, a1h = Tl[i], Th[i]
+                    up_lo = b1l // (k + 1) - (-((-a1h) // (k + 1)))          # lower bound of (b^(k+1) - a^(k+1))/(k+1)
+                    dn_hi = -((-(hi(b1h, tauh[i + 1]) - lo(a1l, taul[i]))) // (k + 2))  # upper bound of (b^(k+2) - a^(k+2))/(k+2)
+                    piece_int = max(up_lo - dn_hi, 0)
+                    integ += lo(slopes[i], piece_int)
+                lhs_lo = integ + Rkl // (k + 1)
+                if not need(lhs_lo >= s_hi, f"second family fails at k = {k}"):
+                    break
+                m = (lhs_lo - s_hi) / target_hi
+                if minII is None or m < minII[0]:
+                    minII = (m, k)
+        if k > 10 ** 6:
+            need(False, "no tail found below k = 10^6"); break
+    if ok:
+        i, piece, sat = tail
+        note(f"  first family: k = 1..{K1 - 1} explicit, smallest relative margin A_k / (R^(k+1)/(k+1)) {minI[0]:.4e} at k = {minI[1]}; "
+             f"from k = {K1} the atom at R alone")
+        note(f"  second family: k = 1..{K2 - 1} explicit, smallest relative margin B_k / (R^(k+1)/(k+1)) {minII[0]:.4e} at k = {minII[1]}; "
+             f"from k = {K2}: the piece [{tau[i]}, {tau[i + 1]}] alone gives {piece / ONE:.4e} > sum w_j t_j^k <= {sat / ONE:.4e}")
+    return ok
+
+
 def main():
     t_start = time.time()
     cert = json.load(open(sys.argv[1]))
-    ok = check(cert)
+    check_fn = check_flux if cert.get("model") == "flux_halfdiameter" else check
+    ok = check_fn(cert)
     print(f"RESULT C68 >= {cert['c']} = {float(F(cert['c']))}: {'all hypotheses hold' if ok else 'FAILED'}")
     if "--controls" in sys.argv:
         quiet = lambda m: None
-        # 1. mass moved between two atoms (total mass kept): shifts moments, must fail one family
-        bad = json.loads(json.dumps(cert)); wv = [F(x) for x in bad["weights"]]
-        shift = wv[-1] / 2; wv[-1] -= shift; wv[-2] += shift
-        bad["weights"] = [str(x) for x in wv]
-        print("control: half the last atom's mass moved to the one before rejected:", not check(bad, quiet))
-        # 2. slope raised 1% above the certificate's (still a rational): must exceed the analytic bound or fail (II)
-        bad = json.loads(json.dumps(cert)); bad["linear_slope"] = str(F(cert["linear_slope"]) * F(101, 100))
-        print("control: slope raised by 1% rejected:", not check(bad, quiet))
-        # 3. a false second-tail cutoff K2 = 2000
-        bad = json.loads(json.dumps(cert)); bad["second_tail_k"] = 2000
-        print("control: second tail cut off at k = 2000 rejected:", not check(bad, quiet))
-        # 4. c raised to 0.44 with the first node moved to the new c^2 (support kept valid): the envelope weakens
-        bad = json.loads(json.dumps(cert)); bad["c"] = "11/25"; bad["nodes"][0] = str(F(11, 25) ** 2)
-        print("control: c raised to 0.44 (first node at the new c^2) rejected:", not check(bad, quiet))
+        def moved(src, dst):
+            bad = json.loads(json.dumps(cert)); wv = [F(x) for x in bad["weights"]]
+            shift = wv[src] / 2; wv[src] -= shift; wv[dst] += shift
+            bad["weights"] = [str(x) for x in wv]
+            return bad
+        n = len(cert["weights"])
+        print(f"control: half of atom {n}'s mass moved to atom {n - 1} rejected:", not check_fn(moved(n - 1, n - 2), quiet))
+        if check_fn is check:
+            bad = json.loads(json.dumps(cert)); bad["linear_slope"] = str(F(cert["linear_slope"]) * F(101, 100))
+            print("control: slope raised by 1% rejected:", not check(bad, quiet))
+            bad = json.loads(json.dumps(cert)); bad["second_tail_k"] = 2000
+            print("control: second tail cut off at k = 2000 rejected:", not check(bad, quiet))
+            bad = json.loads(json.dumps(cert)); bad["c"] = "11/25"; bad["nodes"][0] = str(F(11, 25) ** 2)
+            print("control: c raised to 0.44 (first node at the new c^2) rejected:", not check(bad, quiet))
+        else:
+            print("control: half of atom 2's mass moved to atom 3 rejected:", not check_fn(moved(1, 2), quiet))
+            bad = json.loads(json.dumps(cert)); bad["c"] = "447/1000"; bad["nodes"][0] = str(F(447, 1000) ** 2)
+            print("control: c raised to 0.447 (first node at the new c^2) rejected:", not check_fn(bad, quiet))
     print(f"run time {time.time() - t_start:.0f} s")
 
 

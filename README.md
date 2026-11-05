@@ -172,7 +172,8 @@ Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (under a minute).
 ## C68: Korenblum's constant (5 November 2026)
 
 `c68/c68_check.py`, standard library only: the quantitative hypotheses of the 68a row [Pin2026], $C_{68} \ge 54/125$
-(added in [#239](https://github.com/teorth/optimizationproblems/pull/239)). Wikström's moment lemma (arXiv:2607.17748,
+(added in [#239](https://github.com/teorth/optimizationproblems/pull/239)), and of the two certificates of
+[#274](https://github.com/teorth/optimizationproblems/pull/274) (0.446 and 0.44605). Wikström's moment lemma (arXiv:2607.17748,
 Lemma 3.1, as the certificate's NOTE.md recalls it) needs a probability measure $\mu$ on $[c^2, 1]$ with no atom at 1 and
 $\int t^k\,d\mu \ge 1/(k+1)$ for $k \ge 0$, $\int \beta\, t^k\,d\mu \le 1/(k+1)$ for $k \ge 1$, where $\beta = 1 - g$ and
 $g = 1/G$ is the envelope of the certificate's GEOMETRIC_LEMMA.md. We check, from the exact rationals of
@@ -185,6 +186,8 @@ $[t_0, t_1]$ for the second).
 | Row | Certificate (SHA-256) | Our result | Printed bound |
 | --- | --- | --- | --- |
 | [Pin2026] | rpinho/korenblum-c68-certificate @9d48de6 `certificate-jung.json` (`80a056f2...002b`, as stated) | all hypotheses hold: slope $l$ = 0.02563746486913 below the analytic bound 0.025637464869136; first family $k \le 31278$ explicit (smallest margin $A_k/(R^{k+1}/(k+1))$ = 2.0961e-6, at $k$ = 5714), then the atom at $R$; second family $k \le 23999$ explicit (smallest margin $B_k/(R^{k+1}/(k+1))$ = 2.2848e-7, at $k$ = 8502), then the strip (gap 2.1063e-12) | 0.432 |
+| #274 | vidigoat/optimization-records @1a76f9d `tao/certificates/c68/certificate-c0446.json` (`2b04f03e...d019`, as in its SHA256SUMS) | all hypotheses hold: $A$ = 12.2233841499591, $\Psi$ = 25436.8054244252, $\mathrm{sech}^2(A/2) < 1/3$, $8\cosh^4(A/6) < \Psi$; first family $k \le 5806$ explicit (smallest margin 6.9901e-6, at $k$ = 407), then the atom at $R$; second family $k \le 1322$ explicit (smallest margin 6.9824e-6, at $k$ = 44), then one tail piece alone from $k$ = 1323 | 0.446 |
+| #274, supplementary | same commit, `certificate-c044605.json` (`b8ea516b...054d`, as in its SHA256SUMS) | all hypotheses hold; margins 8.4733e-7 (at $k$ = 9) and 8.1559e-7 (at $k$ = 44); one tail piece alone from $k$ = 1324 | 0.44605 |
 
 The two smallest margins were also recomputed in exact rational arithmetic (2.096105e-6 and 2.2847831e-7); every figure
 agrees with the certificate's NOTE_JUNG.md. This certificate was replayed before by the two checkers of
@@ -193,8 +196,16 @@ with the certificate's own. Red controls,
 all as expected: half the last atom's mass moved to the one before, the slope raised by 1%, a false second-tail cutoff
 at $k$ = 2000, and $c$ raised to 0.44 (first node moved to the new $c^2$) are each refused.
 
-What rests on mathematics: Wikström's Lemma 3.1, the envelope of GEOMETRIC_LEMMA.md (two covering zeros, hyperbolic Jung,
-the coefficient identity), and the elementary bounds above.
+For #274 the envelope is $G = (1 + \sqrt{1 + \Psi/(2\sigma)})/2$ (its PROOF.md, Lemma 6), and on each of its 64 tail pieces
+$[a, b]$ we derive our own slope: $-\log t \ge \delta(1 + \delta_{lo}/2)$ and $\sin x \ge x(1 - U^2/6)$ give $\sigma \ge (b_i\delta)^2$, and
+$g$ is increasing in $\sigma$. Our second-tail start is found by the checker (the first $k$ at which one piece alone covers
+all atoms), here 27 below #274's 1350; its smallest margins agree with those #274 states. Controls for #274: mass moved
+between atoms 8 and 7, and between 2 and 3, and $c$ raised to 0.447 (its PROOF.md puts the framework's limit near
+0.44607) are each refused.
+
+What rests on mathematics: Wikström's Lemma 3.1, the envelopes (for [Pin2026] GEOMETRIC_LEMMA.md: two covering zeros,
+hyperbolic Jung, the coefficient identity; for #274 PROOF.md: the flux and half-diameter lemmas), and the elementary
+bounds above.
 
 Reproduce: `cd c68 && ./fetch.sh && ./run_all.sh` (seconds).
 
