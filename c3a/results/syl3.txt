@@ -1,0 +1,29 @@
+Row syl3 ([Syl2026] k = 3, PR #238): G = [1971, 2016, 2100, 2628, 2688, 2800], B = 26972, q = 27022, Q = q^3 = 19731153214648, l = 10^24, x = 0x1.ffde3d0d5025dp-1
+  self-test: rows 0 and 13512, folded = plain triple loop: True
+  self-test: rows 9007 and 22519, folded = plain triple loop: True
+  |M|: 5869 (stated 5869) agrees
+  |M+M|: 31274 (stated 31274) agrees
+  distinct costs: 54099 (stated 54099) agrees
+  max cost: 80643 (stated 80643) agrees
+  c(h), h = Q/2: 24367 (stated 24367) agrees
+  histogram read from bin/k3_parts: every one of the 19731153214648 residues is reached, and only r = 0 has cost 0: True (712402776 folded (X_0, X_-1) pairs swept)
+  the odd cost classes are exactly those of 0 and h (c(-r) = c(r)): True ([0, 24367])
+  our histogram in the package's layout: sha256 3186f6e220fd4a36369bf23ce841a9d54e6179cfaff00b5f3189c058f0d85c63 (byte-identical to its k3/data/k3_cost_hist.tsv, as the note states)
+  the fetched data file (sha256 3186f6e2...) equals ours byte for byte: True
+  x = 0x1.ffde3d0d5025dp-1 = 9004879181054557 / 2^53 (as the note states)
+  exact type counts: N_0 = 5794476231064238 (stated 5794476231064238) agrees; smallest N_r = 5484373 (every N_r >= 1: True)
+  C = sum N_r c(r) = 39290318538006294714264853344 (stated 39290318538006294714264853344) agrees; even: True
+  interval bounds (ours, then the note's):
+    log M                  >= 29091636209390427206933565.6328474043966867295  | 29091636209390427206933565.63284740439668
+    log(x^-C P+^3l)        <= 23165014522649654717578745.1649169527937912617  | 23165014522649654717578745.16491695279380
+    log(4Bq^3l/(q-1)+1)    <= 30613219884059713225423555.6818107580506426127  | 30613219884059713225423555.68181075805065
+    Z_3(x)                 >= 173196158.486920854972319981746994298926763596  | 173196158.486920854972319981746
+    P_+(x)                 <= 77.3059734705102016646138966527769099485133475  | 77.3059734705102016646138966528
+    theta                  >= 1.19359680912973029490196359640645777794320101  | 1.19359680912973029490196359640645777794320100728768251031863
+  theta >= 1.19359680912973029490196359641: C_3a > 1.19359680 holds
+Red controls:
+  C1 the claim one unit higher in the eighth decimal (1.19359681): not shown, as expected
+  C2 x moved down by one unit in its last bit: N_0 = 5794485264316308, C = 39290318537999833652917652006: neither matches the note, as expected
+  C3 one residue moved from the top cost 80643 to 80642: the symmetry check refuses it, as expected
+RESULT: syl3 PASS
+run time 259 s

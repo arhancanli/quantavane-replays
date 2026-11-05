@@ -11,6 +11,8 @@
      and theta = 1 + (log M + C log x - 2 l log P_+(x)) / log(4 B q^(2l) / (q - 1) + 1) from below.
 
 Usage: python3 -I c3a_check.py syl2 [CERTS] [--controls] [--workers=N]   Python 3.9+, standard library only, and cc.
+       python3 -I c3a_check.py syl3 [CERTS] [--controls] [--workers=N] [--parts=DIR]   the k = 3 instance (1.19359680*):
+       its q^3 histogram by c3a_hist3.c (about 6 CPU hours; --parts reads the 64 part outputs of an earlier run)
        python3 -I c3a_check.py m2026|m2026b|k2026b [CERTS] [--controls]   [M2026]'s finite bounds in the odd base
        q = 27995 (Theorems 1-4 of its README, rebuilt from the statements), and [K2026b]'s 1.19102809 as a control.
 (CERTS/syl2026/k2_cost_hist.tsv, the package's histogram fetched by fetch.sh, is compared byte for byte if present.)
@@ -43,12 +45,27 @@ SYL2 = dict(
     claim="1.19281555",
 )
 
+SYL3 = dict(
+    G=[1971, 2016, 2100, 2628, 2688, 2800], B=26972, q=27022, k=3, xhex="0x1.ffde3d0d5025dp-1", X53=9004879181054557,
+    ell=10 ** 24,
+    hist_sha="3186f6e220fd4a36369bf23ce841a9d54e6179cfaff00b5f3189c058f0d85c63",   # the note's k3/data/k3_cost_hist.tsv
+    stated=dict(M=5869, MM=31274, costs=54099, cmax=80643, ch=24367, n0=5794476231064238,
+                C=39290318538006294714264853344),
+    stated_bounds=dict(logM="29091636209390427206933565.63284740439668", logU="23165014522649654717578745.16491695279380",
+                       logden="30613219884059713225423555.68181075805065", Z="173196158.486920854972319981746",
+                       Pplus="77.3059734705102016646138966528",
+                       theta="1.19359680912973029490196359640645777794320100728768251031863"),
+    claim="1.19359680",
+)
+EXE3 = os.path.join(BIN, "c3a_hist3")
+NPARTS3 = 64
 
 def build():
     os.makedirs(BIN, exist_ok=True)
-    src = os.path.join(HERE, "c3a_hist.c")
-    if not os.path.exists(EXE) or os.path.getmtime(EXE) < os.path.getmtime(src):
-        subprocess.run(["cc", "-O2", "-std=c99", "-o", EXE, src], check=True)
+    for src, exe in (("c3a_hist.c", EXE), ("c3a_hist3.c", EXE3)):
+        src = os.path.join(HERE, src)
+        if not os.path.exists(exe) or os.path.getmtime(exe) < os.path.getmtime(src):
+            subprocess.run(["cc", "-O2", "-std=c99", "-o", exe, src], check=True)
 
 
 def histogram(B, q, G, workers):
@@ -270,6 +287,149 @@ def check_syl2(root, controls, workers):
     return ok
 
 
+
+def parse_hist(text, hist, info):
+    for line in text.split("\n"):
+        f = line.split()
+        if not f:
+            continue
+        if f[0] == "c":
+            hist[int(f[1])] = hist.get(int(f[1]), 0) + int(f[2])
+        elif f[0] in ("unreached", "pairs"):
+            info[f[0]] = info.get(f[0], 0) + int(f[1])
+        else:
+            info[f[0]] = int(f[1])
+
+
+def histogram3(B, q, G, workers, parts_dir=None):
+    """The k = 3 histogram as the sum of NPARTS3 row parts of c3a_hist3, run `workers` at a time, or read from
+    parts_dir/part_i.txt if all parts are there (outputs of the same program and arguments)."""
+    hist, info = {}, {}
+    if parts_dir and all(os.path.exists(os.path.join(parts_dir, f"part_{i}.txt")) for i in range(NPARTS3)):
+        for i in range(NPARTS3):
+            parse_hist(open(os.path.join(parts_dir, f"part_{i}.txt")).read(), hist, info)
+        return hist, info, "read from " + parts_dir
+    pending, running = list(range(NPARTS3)), []
+    while pending or running:
+        while pending and len(running) < workers:
+            i = pending.pop(0)
+            running.append(subprocess.Popen([EXE3, str(B), str(q), str(i), str(NPARTS3), *map(str, G)],
+                                            stdout=subprocess.PIPE, text=True))
+        p = running.pop(0)
+        out, _ = p.communicate()
+        if p.returncode:
+            raise RuntimeError("c3a_hist3 failed")
+        parse_hist(out, hist, info)
+    return hist, info, f"computed with {workers} workers"
+
+
+def check_syl3(root, controls, workers, parts_dir):
+    global PI
+    PI = pi_interval()
+    r = SYL3
+    st = r["stated"]
+    t0 = time.time()
+    B, q, G, ell, k = r["B"], r["q"], r["G"], r["ell"], r["k"]
+    Q = q ** k
+    print(f"Row syl3 ([Syl2026] k = 3, PR #238): G = {G}, B = {B}, q = {q}, Q = q^3 = {Q}, l = 10^24, x = {r['xhex']}")
+    ok = True
+    # self-test on the real data: the folded rows equal the plain triple loop on a few rows
+    for part in (0, 9007):
+        a = subprocess.run([EXE3, str(B), str(q), str(part), str(q // 2 + 1), *map(str, G)], capture_output=True, text=True).stdout
+        b = subprocess.run([EXE3, str(B), str(q), str(part), str(q // 2 + 1), *map(str, G), "--plain"], capture_output=True,
+                           text=True).stdout
+        ha, ia, hb, ib = {}, {}, {}, {}
+        parse_hist(a, ha, ia)
+        parse_hist(b, hb, ib)
+        same = ha == hb and ia.get("unreached") == ib.get("unreached")
+        ok &= same
+        print(f"  self-test: rows {part} and {part + q // 2 + 1}, folded = plain triple loop: {same}")
+    hist, info, how = histogram3(B, q, G, workers, parts_dir)
+    cmax, ch = max(hist), info["h"]
+    facts = [("|M|", info["M"], st["M"]), ("|M+M|", info["MM"], st["MM"]), ("distinct costs", len(hist), st["costs"]),
+             ("max cost", cmax, st["cmax"]), ("c(h), h = Q/2", ch, st["ch"])]
+    for name, ours, theirs in facts:
+        ok &= ours == theirs
+        print(f"  {name}: {ours} (stated {theirs}) {'agrees' if ours == theirs else 'DIFFERS'}")
+    good = info["unreached"] == 0 and sum(hist.values()) == Q and hist.get(0) == 1
+    ok &= good
+    print(f"  histogram {how}: every one of the {Q} residues is reached, and only r = 0 has cost 0: {good} "
+          f"({info['pairs']} folded (X_0, X_-1) pairs swept)")
+    odd = sorted(c for c, m in hist.items() if m % 2)
+    sym = odd == sorted({0, ch})
+    ok &= sym
+    print(f"  the odd cost classes are exactly those of 0 and h (c(-r) = c(r)): {sym} ({odd})")
+    ours = "# cost\tmultiplicity\n" + "".join(f"{c}\t{hist[c]}\n" for c in sorted(hist))
+    h_ours = hashlib.sha256(ours.encode()).hexdigest()
+    same = h_ours == r["hist_sha"]
+    print(f"  our histogram in the package's layout: sha256 {h_ours} "
+          f"({'byte-identical to its k3/data/k3_cost_hist.tsv, as the note states' if same else 'DIFFERENT from the stated sha256'})")
+    ok &= same
+    fetched = os.path.join(root, "syl2026k3", "k3_cost_hist.tsv") if root else None
+    if fetched and os.path.exists(fetched):
+        theirs = open(fetched, "rb").read()
+        print(f"  the fetched data file (sha256 {hashlib.sha256(theirs).hexdigest()[:8]}...) equals ours byte for byte: "
+              f"{theirs == ours.encode()}")
+        ok &= theirs == ours.encode()
+    xn, xd = float.fromhex(r["xhex"]).as_integer_ratio()
+    assert 2 ** 53 % xd == 0, xd
+    X = xn * (2 ** 53 // xd)
+    assert 0 < X < 2 ** 53 and X == r["X53"], X
+    print(f"  x = {r['xhex']} = {X} / 2^53 (as the note states)")
+    mprime = {c: (m - 1 if c == ch else m) for c, m in hist.items() if c != 0}
+    Znum, counts, N0, Ctot = types(hist, mprime, cmax, X, ell)
+    nmin = min(counts[c] for c in mprime if mprime[c])
+    print(f"  exact type counts: N_0 = {N0} (stated {st['n0']}) {'agrees' if N0 == st['n0'] else 'DIFFERS'}; "
+          f"smallest N_r = {nmin} (every N_r >= 1: {nmin >= 1})")
+    print(f"  C = sum N_r c(r) = {Ctot} (stated {st['C']}) {'agrees' if Ctot == st['C'] else 'DIFFERS'}; "
+          f"even: {Ctot % 2 == 0}")
+    ok &= N0 == st["n0"] and Ctot == st["C"] and nmin >= 1 and N0 >= 0 and Ctot % 2 == 0
+    Zk = ratio(Znum, (1 << (53 * cmax)))
+    Mset = semigroup_mask(G, B)
+    MM = sorted({a + b for a in Mset for b in Mset})
+    smax, sset, Pnum = MM[-1], set(MM), 0
+    for s in range(smax, -1, -1):
+        Pnum = Pnum * X + ((1 << (53 * (smax - s))) if s in sset else 0)
+    Pp = ratio(Pnum, (1 << (53 * smax)))
+    logM = lnfact(ell) - lnfact(N0)
+    acc = I(0)
+    for c, m in mprime.items():
+        if m:
+            acc = acc + lnfact(counts[c]) * I(m)
+    logM = logM - acc
+    lnx = iln(I(X)) - iln(I(2)) * I(53)
+    logU = I(-Ctot) * lnx + I(k * ell) * iln(Pp)          # log(x^-C P_+^(k l)), from above
+    logden = I(k * ell) * iln(I(q)) + iln(I(4 * B) / I(q - 1)) + I(0, Decimal("1e-100"))
+    theta = I(1) + (logM - logU) / logden
+    sb = r["stated_bounds"]
+    print("  interval bounds (ours, then the note's):")
+    for name, val, side, theirs in (("log M", logM, "lo", sb["logM"]), ("log(x^-C P+^3l)", logU, "hi", sb["logU"]),
+                                    ("log(4Bq^3l/(q-1)+1)", logden, "hi", sb["logden"]), ("Z_3(x)", Zk, "lo", sb["Z"]),
+                                    ("P_+(x)", Pp, "hi", sb["Pplus"]), ("theta", theta, "lo", sb["theta"])):
+        v = val.lo if side == "lo" else val.hi
+        print(f"    {name:22s} {'>=' if side == 'lo' else '<='} {NEAR.create_decimal(v):.45}  | {theirs}")
+    holds = theta.lo > Decimal(r["claim"])
+    print(f"  theta >= {NEAR.create_decimal(theta.lo):.30}: C_3a > {r['claim']} {'holds' if holds else 'NOT shown'}")
+    ok &= holds
+    if controls:
+        print("Red controls:")
+        c1 = not theta.lo > Decimal("1.19359681")
+        print(f"  C1 the claim one unit higher in the eighth decimal (1.19359681): {'not shown, as expected' if c1 else 'SHOWN (control failed)'}")
+        _, _, N0b, Cb = types(hist, mprime, cmax, X - 1, ell)
+        c2 = N0b != st["n0"] and Cb != st["C"]
+        print(f"  C2 x moved down by one unit in its last bit: N_0 = {N0b}, C = {Cb}: "
+              f"{'neither matches the note, as expected' if c2 else 'MATCHES (control failed)'}")
+        h2 = dict(hist)
+        h2[cmax] -= 1
+        h2[cmax - 1] = h2.get(cmax - 1, 0) + 1
+        c3 = sorted(c for c, m in h2.items() if m % 2) != sorted({0, ch})
+        print(f"  C3 one residue moved from the top cost {cmax} to {cmax - 1}: the symmetry check "
+              f"{'refuses it, as expected' if c3 else 'ACCEPTS it (control failed)'}")
+        ok &= c1 and c2 and c3
+    print(f"RESULT: syl3 {'PASS' if ok else 'FAIL'}")
+    print(f"run time {time.time() - t0:.0f} s")
+    return ok
+
 # [M2026]: explicit depth-N masked-digit bounds in an odd base q with a pruned difference alphabet (the 3a row
 # 1.19230254*, and its value on the [K2026] mask), and [K2026b]'s finite certificate 1.19102809 as a positive control.
 GM = (1518, 1524, 1587, 2024, 2032, 2116)
@@ -457,13 +617,16 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     workers = next((int(a.split("=")[1]) for a in sys.argv[1:] if a.startswith("--workers=")),
                    min(8, os.cpu_count() or 1))
-    if not args or args[0] not in ("syl2", *M2026):
+    if not args or args[0] not in ("syl2", "syl3", *M2026):
         print(__doc__)
         sys.exit(2)
     root = args[1] if len(args) > 1 else os.path.join(HERE, "certs")
     if args[0] in M2026:
         sys.exit(0 if check_m2026(root, args[0], "--controls" in sys.argv) else 1)
     build()
+    if args[0] == "syl3":
+        parts = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--parts=")), None)
+        sys.exit(0 if check_syl3(root, "--controls" in sys.argv, workers, parts) else 1)
     sys.exit(0 if check_syl2(root, "--controls" in sys.argv, workers) else 1)
 
 

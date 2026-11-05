@@ -288,13 +288,17 @@ $\langle 1971, 2016, 2100, 2628, 2688, 2800\rangle \cap [0, 26972]$, $q = 27022$
 | Row | Data | Our result | Printed bound |
 | --- | --- | --- | --- |
 | 3a [Syl2026] $k = 2$ | xSyllaa/c3a-controlled-carry-k2 @5ca7cb8 `proof/THEOREM.md` (the histogram file `4d16010f...6c63` only compared) | $\theta \ge 1.1928155570929862489856\ldots$; every certified quantity agrees with the note to the digits it prints | 1.19281555 |
+| 3a [Syl2026] $k = 3$ | xSyllaa/c3a-controlled-carry-k2 @5ca7cb8 `k3/proof/THEOREM_k.md` (the histogram `3186f6e2...5c63` only compared) | the min-cost histogram of all $q^3 = 19{,}731{,}153{,}214{,}648$ residues by `c3a_hist3.c` (Lemma 0's carry automaton; equal to a plain triple loop and to a scatter of $D^3$ on seven small cases), byte-identical to the package's; $N_0 = 5794476231064238$ and $C = 39290318538006294714264853344$ exactly as stated, every $N_r \ge 1$; $\theta \ge 1.19359680912973029490196359640645\ldots$, every bound agreeing with the note to the digits it prints | 1.19359680 |
 
 Red controls, all as expected: the claim raised to 1.19281556 is not shown; dropping the generator 2800 changes the
 data; $x$ one unit lower in its last bit changes $N_0$ and $C$.
 
 What rests on mathematics: Lemmas A-D of the note (the encoding, injectivity, the sumset bound and [GHR2007] with
-$V = 2U$), Kleinwaks's [K2026b] Proposition 3, and Robbins' bounds. The $k = 3$ instance (1.19359680\*) needs the
-min-cost histogram of $q^3 \approx 2 \cdot 10^{13}$ residues and is not replayed here.
+$V = 2U$), Kleinwaks's [K2026b] Proposition 3, Lemma 0 of the general-$k$ note (the carry automaton), and Robbins'
+bounds. The $k = 3$ histogram takes about 6 CPU hours (`python3 -I c3a_check.py syl3 certs --controls`, 64 row
+parts; `--parts=DIR` reads the outputs of an earlier run). Its red controls: the claim raised to 1.19359681 is not
+shown, $x$ one unit lower changes $N_0$ and $C$, and a histogram with one residue moved fails the symmetry check
+(only the classes of 0 and $h$ may be odd).
 
 [M2026] (merged in [#236](https://github.com/teorth/optimizationproblems/pull/236)), rebuilt from Theorems 1-4 of its
 package's README alone (`c3a_check.py m2026|m2026b|k2026b`): $M = \langle G \rangle \cap [0, B]$ by reachability;

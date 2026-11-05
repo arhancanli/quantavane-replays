@@ -10,6 +10,14 @@ if [ -d syl2026 ] && [ -n "$(ls -A syl2026)" ]; then echo "refusing: $root/syl20
 mkdir -p syl2026
 curl -s -f -L -o syl2026/k2_cost_hist.tsv \
   "https://raw.githubusercontent.com/xSyllaa/c3a-controlled-carry-k2/5ca7cb88820995bf7666096773fd3799f5714b18/data/k2_cost_hist.tsv"
+# [Syl2026]'s k = 3 theorem note, certificate summary and cost histogram (compared only; the histogram is rebuilt by
+# c3a_hist3.c).
+if [ -d syl2026k3 ] && [ -n "$(ls -A syl2026k3)" ]; then echo "refusing: $root/syl2026k3 is not empty"; exit 1; fi
+mkdir -p syl2026k3
+for f in proof/THEOREM_k.md data/k3_cost_hist.tsv certificates/cert_k3_primary_ell_1e24.json; do
+  curl -s -f -L -o "syl2026k3/$(basename $f)" \
+    "https://raw.githubusercontent.com/xSyllaa/c3a-controlled-carry-k2/5ca7cb88820995bf7666096773fd3799f5714b18/k3/$f"
+done
 # [M2026]'s data files (its finite certificates, mask, sum support and pruned-difference table) at the commit the 3a page
 # pins, compared with what we rebuild; none of its code is fetched.
 if [ -d m2026 ] && [ -n "$(ls -A m2026)" ]; then echo "refusing: $root/m2026 is not empty"; exit 1; fi
