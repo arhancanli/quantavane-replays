@@ -7,7 +7,7 @@ the [Epi26] README and result.json, the PR #280 README). The claimants' checkers
 Standard library only (Python 3.9+); run with python3 -I. No floating-point number decides anything: floats only
 pick starting points for root refinement and truncation orders; every decision is an exact integer comparison.
 
-  c82_check.py ROW CERTS_ROOT [--controls] [--workers=N]       ROW in: pin epi pr280 pr280b pr301 pr301a doche
+  c82_check.py ROW CERTS_ROOT [--controls] [--workers=N]       ROW in: pin epi pr280 pr280b pr280c pr301 pr301a doche
 
 The certificate (every note states the same): integer polynomials R_j (denominators) with multiplicities m_j >= 1,
 integer polynomials S_i (numerators) with rational exponents q_i >= 0, coefficient arrays in descending order.
@@ -1366,6 +1366,12 @@ ROWS = {
                           ("README: Pinho's verify_exact.py (unmodified), 256-bit", "0.25241770444732", "upper"),
                           ("README: certified value", "0.25241770445", "digits")],
                "encl": None},
+    "pr280c": {"title": "PR #280 [Pat26] updated 5 Nov: C_82 < 0.2520591386* (open; tao/certificates/c82/v3 at 88c39d5)",
+               "file": "pr280c/certificate.json",
+               "sha": "00125f6984ad2646a79d8782ee38f5161bd24c17d4899e4af74ff3e529ba1dbe",
+               "sha_src": "SHA256SUMS of the folder", "printed": "0.2520591386", "D": None,
+               "stated": [("README: vcheck.py (Arb, 192 bits, --tol 1e-11) enclosure 0.2520591385260044869 +/- 1.67e-26, midpoint", "0.2520591385260044869", "noted")],
+               "encl": None},
     "pr301": {"title": "PR #301 [Pin26b] C_82 < 0.253091834* (open; degree44-denominators-v2 at 6d4e80c)",
               "file": "pr301/certificate.json",
               "sha": "adfca0754f4d8b3a64398df22a506932743de7b0e49df542961530cb26c67ac2",
@@ -1478,6 +1484,11 @@ def run_row(key, root, do_controls, workers):
         if kind == "upper":
             rep.check("consistent with the stated upper bound: %s %s (our B_lo is not above it)" % (what, v),
                       B[0] <= fv)
+        elif kind == "noted":   # a stated value compared and reported, not a condition of the bound
+            gap = fv - B[1] if fv > B[1] else (B[0] - fv if fv < B[0] else Fraction(0))
+            rep.info("stated value", "%s %s: %s our enclosure by %.2e%s" % (
+                what, v, "above" if fv > B[1] else "below" if fv < B[0] else "inside", float(gap),
+                "" if gap == 0 else " (not a condition of the bound; reported in the replay)"))
         else:                   # displayed digits: rounded or truncated, so B meets [v - ulp/2, v + ulp)
             ulp = Fraction(1, 10 ** (len(v.split(".")[1])))
             rep.check("consistent with the displayed digits: %s %s (rounded or truncated)" % (what, v),
