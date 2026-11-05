@@ -1,0 +1,26 @@
+Row syl2 ([Syl2026] k = 2, PR #238): G = [1971, 2016, 2100, 2628, 2688, 2800], B = 26972, q = 27022, Q = q^2 = 730188484, l = 10^18, x = 0x1.ffde1bafccc06p-1
+  |M|: 5869 (stated 5869) agrees
+  |M+M|: 31274 (stated 31274) agrees
+  distinct costs: 26540 (stated 26540) agrees
+  max cost: 53762 (stated 53762) agrees
+  c(h), h = Q/2: 24367 (stated 24367) agrees
+  every one of the 730188484 residues is reached, and only r = 0 has cost 0: True (1 s)
+  our histogram in the package's layout: sha256 4d16010f1b41d875c2912f397e76e8d4010e49b635e139ad1f9bcbd741956c63 (byte-identical to its data/k2_cost_hist.tsv, as the note states)
+  the fetched data file (sha256 4d16010f...) equals ours byte for byte: True
+  x = 0x1.ffde1bafccc06p-1 = 9004870224628742 / 2^53 (as the note states)
+  exact type counts: N_0 = 3362808316958 (stated 3362808316958) agrees; smallest N_r = 3074302 (every N_r >= 1: True)
+  C = sum N_r c(r) = 26096544438312721237750 (stated 26096544438312721237750) agrees; even: True
+  interval bounds (ours, then the note's):
+    log M                  >= 19353442719252255618.41914067403361703004  | 19353442719252255618.41914067403
+    log(x^-C P+^2l)        <= 15418306021682217276.01171204408365342440  | 15418306021682217276.01171204408
+    log(4Bq^2l/(q-1)+1)    <= 20408813256039808818.33351550874347568087  | 20408813256039808818.33351550874
+    Z_2(x)                 >= 297948.1726354331717941410490361943237579  | 297948.172635433171794
+    P_+(x)                 <= 76.30733448716651847590728335103835365742  | 76.30733448716651847590
+    theta                  >= 1.192815557092986248985610217132855947488  | 1.192815557092986248985
+  theta >= 1.192815557092986248985610: C_3a > 1.19281555 holds
+Red controls:
+  C1 the claim one unit higher in the eighth decimal (1.19281556): not shown, as expected
+  C2 the generator 2800 dropped: |M| = 2625, 13595 distinct costs: the stated data no longer match, as expected
+  C3 x moved down by one unit in its last bit: N_0 = 3362808085684, C = 26096544438315573781124: neither matches the note, as expected
+RESULT: syl2 PASS
+run time 114 s

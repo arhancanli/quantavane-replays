@@ -236,6 +236,31 @@ one-edge red controls. Results, notes and the witnesses still too large for our 
 
 Reproduce: `cd ramsey-rev19 && ./fetch.sh ROOT && ./run_all.sh ROOT`.
 
+## C3a: the Gyarmati-Hennecart-Ruzsa sum-difference constant (5 November 2026)
+
+`c3a/c3a_check.py` with `c3a_hist.c`: the finite $k = 2$ controlled-carry bound of [Syl2026] ($C_{3a} > 1.19281555$\*,
+[#238](https://github.com/teorth/optimizationproblems/pull/238)), rebuilt from its theorem note alone (mask
+$\langle 1971, 2016, 2100, 2628, 2688, 2800\rangle \cap [0, 26972]$, $q = 27022$, $x$ = `0x1.ffde1bafccc06p-1`, $\ell = 10^{18}$):
+- $M$ and $M + M$, and the min-cost histogram of all $q^2 = 730{,}188{,}484$ residues. Each residue is a min over at most
+  four digit pairs, since $B < q$; a full scatter of $D \times D$ gives the same histogram on small cases. The histogram
+  is byte-identical to the package's `k2_cost_hist.tsv`.
+- $Z_2(x)$, the type counts and $C$ in exact integer arithmetic: $N_0 = 3362808316958$ and $C = 26096544438312721237750$,
+  as stated, and every $N_r \ge 1$.
+- The bound in 90-digit decimal interval arithmetic with Robbins' bounds on $\ln n!$.
+
+| Row | Data | Our result | Printed bound |
+| --- | --- | --- | --- |
+| 3a [Syl2026] $k = 2$ | xSyllaa/c3a-controlled-carry-k2 @5ca7cb8 `proof/THEOREM.md` (the histogram file `4d16010f...6c63` only compared) | $\theta \ge 1.1928155570929862489856\ldots$; every certified quantity agrees with the note to the digits it prints | 1.19281555 |
+
+Red controls, all as expected: the claim raised to 1.19281556 is not shown; dropping the generator 2800 changes the
+data; $x$ one unit lower in its last bit changes $N_0$ and $C$.
+
+What rests on mathematics: Lemmas A-D of the note (the encoding, injectivity, the sumset bound and [GHR2007] with
+$V = 2U$), Kleinwaks's [K2026b] Proposition 3, and Robbins' bounds. The $k = 3$ instance (1.19359680\*) needs the
+min-cost histogram of $q^3 \approx 2 \cdot 10^{13}$ residues and is not replayed here.
+
+Reproduce: `cd c3a && ./fetch.sh && ./run_all.sh` (about 2 minutes).
+
 ## C89b and C89c: Ramsey multiplicity of $K_5$ and $K_6$ (5 November 2026)
 
 The minimum density of monochromatic $K_t$ over 2-coloured graphons; an upper bound is the exact density of one step
