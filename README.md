@@ -134,6 +134,36 @@ certificates' notes, read step by step), Gershgorin's theorem and the series bou
 
 Reproduce: `cd c82 && ./fetch.sh ROOT && ./run_all.sh ROOT --workers=14` (about 5.5 minutes).
 
+## C16: the Brezis-Gallouet-Wainger remainder constant on the torus (5 November 2026)
+
+`c16/c16_check.py`, standard library only, written from the definition on the 16a page ($\mathbb T^2 = [0, 2\pi]^2$,
+unnormalized $L^2$ norms). Both sides of the update of 4 November in
+[#270](https://github.com/teorth/optimizationproblems/pull/270):
+
+- Upper bound, from the certificate's 353 $\delta$-intervals, each with its own $\mu$. Cauchy-Schwarz with weights
+  $\lvert k\rvert^2(1 + \mu\lvert k\rvert^2)$ gives $4\pi\lvert u(0)\rvert^2/\lVert\nabla u\rVert^2 \le G(\mu)(1 + \mu\delta)/\pi$
+  with $G(\mu) = \sum_{k \ne 0} 1/(\lvert k\rvert^2(1 + \mu\lvert k\rvert^2))$. Minus $\ln\delta + \ln(1 + \ln\delta)$ this is
+  convex in $\delta$, so each interval is checked at its two ends. $G$ is summed by rows,
+  $\sum_y 1/(y^2 + s^2) = (\pi/s)\coth(\pi s)$; rows past $N$ are bracketed by convexity with closed-form integrals; 50-digit
+  decimal arithmetic, refined until $G$ is enclosed to $10^{-19}$ near the peak. For $\delta \ge 2^{18}$ we use our own
+  bound: the lattice count $\#\{0 < \lvert k\rvert \le \rho\} \le \pi(\rho + 1/\sqrt 2)^2$ with $\mu = 1/(\delta\ln\delta)$.
+- Lower bound: the untruncated conditional extremal $c_k = 1/(\lvert k\rvert^2(1 + \mu\lvert k\rvert^2))$ at the pull
+  request's $\mu$ = `0x1.f42a1d5c1aabdp-4`, with $S_1 = G - H/\mu$ and $S_2 = H/\mu^2$,
+  $H = \sum_{k \ne 0}(\lvert k\rvert^2 + 1/\mu)^{-2}$, enclosed the same way.
+
+| Side | Certificate (SHA-256) | Our result | Printed bound |
+| --- | --- | --- | --- |
+| upper | vidigoat/optimization-records @5da2dc1 `tao/certificates/c16_pinned/certificate.json` (`2783dfb9...c88b`; no hash stated, this is the file at that commit) | largest interval-end value 2.15622552815421974 (2.6e-16 below the printed bound); tail $\delta \ge 2^{18}$ at most 2.0163 | 2.15622552815422 |
+| lower | the trial function above | 2.15622552815421292 (enclosure width 2.7e-17; $\delta$ = 3.928836059681948) | 2.1562255281542128 |
+
+So $2.15622552815421292 \le C_{16} \le 2.15622552815421974$. Red controls, all as expected: a target $10^{-17}$ below the
+largest interval-end value is refused, one $\mu$ raised by 1% is refused, and one interval removed (a gap) is refused.
+
+What rests on mathematics: Cauchy-Schwarz, translation invariance, the convexity in $\delta$, the row-sum identities,
+the convexity of the row tails and the lattice count.
+
+Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (under a minute).
+
 ## Reproduce
 
 ```
