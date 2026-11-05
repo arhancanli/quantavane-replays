@@ -158,6 +158,7 @@ unnormalized $L^2$ norms). Both sides of the update of 4 November in
 | --- | --- | --- | --- |
 | upper | vidigoat/optimization-records @5da2dc1 `tao/certificates/c16_pinned/certificate.json` (`2783dfb9...c88b`; no hash stated, this is the file at that commit) | largest interval-end value 2.15622552815421974 (2.6e-16 below the printed bound); tail $\delta \ge 2^{18}$ at most 2.0163 | 2.15622552815422 |
 | lower | the trial function above | 2.15622552815421292 (enclosure width 2.7e-17; $\delta$ = 3.928836059681948) | 2.1562255281542128 |
+| lower, [#319](https://github.com/teorth/optimizationproblems/pull/319) (Julsgaard) | the same family at $\mu = 128042/2^{20}$ | [2.15622552815420610, 2.15622552815420614] ($\delta$ = 3.928838101027620) | 2.156225528 (stated enclosure 2.1562255281542061 $\pm$ 6.1e-17) |
 
 So $2.15622552815421292 \le C_{16} \le 2.15622552815421974$ for the page's "Equivalently" definition, the maximum
 over $\delta \ge 1$ (which reading is meant is asked in [#325](https://github.com/teorth/optimizationproblems/issues/325));

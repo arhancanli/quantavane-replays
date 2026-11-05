@@ -19,6 +19,7 @@ Lattice sums by rows: sum_y 1/(y^2 + s^2) = (pi/s) coth(pi s), sum_y 1/(y^2 + s^
 integrals. Arithmetic: decimal at 50 digits; every enclosure is widened by SLACK = 1e-30, far above the accumulated
 rounding (each operation is correctly rounded, at most 1e6 operations per sum, all values below 1e3: under 1e-40).
 Standard library only.  python3 -I c16_check.py certificate.json [--lower MU_HEX_OR_DECIMAL] [--controls]
+                        python3 -I c16_check.py --lower-only MU   (MU as p/q, hex float or decimal)
 """
 import json, math, sys, time
 from decimal import Decimal as D, getcontext
@@ -190,6 +191,14 @@ def lower(mu, n_min=2048):
 
 def main():
     t0 = time.time()
+    if sys.argv[1] == "--lower-only":                 # a trial function only (no certificate): mu as p/q or hex
+        arg = sys.argv[2]
+        mu = D(arg.split("/")[0]) / D(arg.split("/")[1]) if "/" in arg else hexdec(arg)
+        lo, hi, (dlo, dhi), n = lower(mu)
+        print(f"RESULT lower: mu = {arg} = {mu}: C16 >= {lo:.20f} (enclosure [{lo:.20f}, {hi:.20f}], width {hi - lo:.2e}; "
+              f"delta in [{dlo:.15f}, {dhi:.15f}], rows {n})")
+        print(f"run time {time.time() - t0:.0f} s")
+        return
     cert = json.load(open(sys.argv[1]))
     ok, msg, worst = upper(cert)
     u, i, n, w = worst

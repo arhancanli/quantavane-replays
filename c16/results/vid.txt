@@ -6,4 +6,4 @@ RESULT lower: mu = 0.12211047619499999783432286903916974551975727081298828125: C
 control: T lowered to 1e-17 below the largest endpoint value rejected: True
 control: mu of interval 77 raised by 1% rejected: True
 control: interval 77 removed (a gap) rejected: True
-run time 43 s
+run time 48 s
