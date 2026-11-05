@@ -1,4 +1,4 @@
-1c certs/pr318/certificate.json
+1c certs/julsgaard_c1c_K98304.json
   n: 98368
   K: 98304
   S: 79324910784481
