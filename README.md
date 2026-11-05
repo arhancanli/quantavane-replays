@@ -169,6 +169,32 @@ the convexity of the row tails and the lattice count.
 
 Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (under a minute).
 
+## C68: Korenblum's constant (5 November 2026)
+
+`c68/c68_check.py`, standard library only: the quantitative hypotheses of the 68a row [Pin2026], $C_{68} \ge 54/125$
+(added in [#239](https://github.com/teorth/optimizationproblems/pull/239)). Wikström's moment lemma (arXiv:2607.17748,
+Lemma 3.1, as the certificate's NOTE.md recalls it) needs a probability measure $\mu$ on $[c^2, 1]$ with no atom at 1 and
+$\int t^k\,d\mu \ge 1/(k+1)$ for $k \ge 0$, $\int \beta\, t^k\,d\mu \le 1/(k+1)$ for $k \ge 1$, where $\beta = 1 - g$ and
+$g = 1/G$ is the envelope of the certificate's GEOMETRIC_LEMMA.md. We check, from the exact rationals of
+`certificate-jung.json`: the measure (support, positive weights, total mass exactly 1); the admissible range of the
+linear slope $l$ with $g(t) \ge l(1-t)$ on $[R, 1]$, re-derived ($y \ge a(1-t)^2$ from $-\log t \ge 1-t$ and
+$\sin v \ge v - v^3/6$; $g$ increasing in $y$); $\beta$ at the twelve atoms; both moment families at every finite index in
+320-bit fixed point with outward rounding; and both infinite tails (the atom at $R$ for the first family; the strip
+$[t_0, t_1]$ for the second).
+
+| Row | Certificate (SHA-256) | Our result | Printed bound |
+| --- | --- | --- | --- |
+| [Pin2026] | rpinho/korenblum-c68-certificate @9d48de6 `certificate-jung.json` (`80a056f2...002b`, as stated) | all hypotheses hold: slope $l$ = 0.02563746486913 below the analytic bound 0.025637464869136; first family $k \le 31278$ explicit (smallest margin $A_k/(R^{k+1}/(k+1))$ = 2.0961e-6, at $k$ = 5714), then the atom at $R$; second family $k \le 23999$ explicit (smallest margin $B_k/\sum_j w_j\beta_j t_j^k$ = 2.2512e-7, at $k$ = 8502), then the strip (gap 2.1063e-12) | 0.432 |
+
+The two smallest margins were also recomputed in exact rational arithmetic (2.096105e-6 and 2.251249e-7). Red controls,
+all as expected: half the last atom's mass moved to the one before, the slope raised by 1%, a false second-tail cutoff
+at $k$ = 2000, and $c$ raised to 0.44 (first node moved to the new $c^2$) are each refused.
+
+What rests on mathematics: Wikström's Lemma 3.1, the envelope of GEOMETRIC_LEMMA.md (two covering zeros, hyperbolic Jung,
+the coefficient identity), and the elementary bounds above.
+
+Reproduce: `cd c68 && ./fetch.sh && ./run_all.sh` (seconds).
+
 ## Reproduce
 
 ```

@@ -1,0 +1,9 @@
+  envelope: w = 0.839329690738027, X = 31971.5751655050, a = 0.000109549409; slope bound 0.025637464869136, certificate slope 0.025637464869130 (ratio 1.000000000000)
+  first family: k = 1..31278 explicit, smallest relative margin A_k / (R^(k+1)/(k+1)) 2.0961e-06 at k = 5714; from k = 31279 the atom at R alone (w_last (k + 1) >= R)
+  second family: k = 1..23999 explicit, smallest relative margin B_k / sum_j w_j beta_j t_j^k 2.2512e-07 at k = 8502; from k = 24000: (t1 - t0) l (1 - t1) t0^k = 2.1089e-12 > sum w_j t_j^k <= 2.5718e-15
+RESULT C68 >= 54/125 = 0.432: all hypotheses hold
+control: half the last atom's mass moved to the one before rejected: True
+control: slope raised by 1% rejected: True
+control: second tail cut off at k = 2000 rejected: True
+control: c raised to 0.44 (first node at the new c^2) rejected: True
+run time 2 s
