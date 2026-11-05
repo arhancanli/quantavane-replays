@@ -2068,6 +2068,7 @@ class PLCert:
 
 PL = {}            # module globals for E4 and E5 (forked workers inherit them)
 _LNT_CACHE = {}
+LNT_TABLE_MAX = 4_000_000   # beyond this, logarithms are taken term by term
 
 
 def pl_prepare(cert, rroots, croots):
@@ -2098,7 +2099,9 @@ def pl_prepare(cert, rroots, croots):
     x0lo, x0hi = (EI[s0] + EI[s0 + 1]) // 2, (EI[s1] + EI[s1 + 1]) // 2
     nmax = max(max(NE) - x0lo, x0hi - min(NE))
     key = (D, nmax)
-    if key not in _LNT_CACHE:
+    if nmax > LNT_TABLE_MAX:
+        LNT, W = None, None                     # nodes far apart in units of 1/D (dyadic edges): logarithms per term
+    elif key not in _LNT_CACHE:
         _LNT_CACHE.clear()
         LNT, W = [0] * (nmax + 1), 0
         for n in range(1, nmax + 1):
@@ -2106,7 +2109,8 @@ def pl_prepare(cert, rroots, croots):
             LNT[n] = lo
             W = max(W, hi - lo)
         _LNT_CACHE[key] = (LNT, W)
-    LNT, W = _LNT_CACHE[key]
+    if nmax <= LNT_TABLE_MAX:
+        LNT, W = _LNT_CACHE[key]
     rr, cr = [], []
     for j in range(len(cert.A)):
         if cert.b[j] == 0:
@@ -2344,16 +2348,27 @@ class PLCell:
         ONEL = 1 << LP
         # ---- far nodes: the logarithmic coefficients (exact integer sums of table logarithms) ----
         LNT, W = PL["LNT"], PL["LNTW"]
-        Ls = [LNT[n if n > 0 else -n] for n in ns]
         lnD = PL["LND"]
+        if LNT is not None:
+            Ls = [LNT[n if n > 0 else -n] for n in ns]
 
-        def lsum(cs):
-            """Interval of sum_k cs_k ln|t_k| at scale 2^-LP, ln|t_k| = ln|n_k| - ln D, ln|n_k| in [L, L + W]."""
-            S = sum(map(mul, cs, Ls))
-            Bs = sum(cs)
-            Ps = sum(c for c in cs if c > 0)
-            xb = (lnD[0] * Bs, lnD[1] * Bs) if Bs >= 0 else (lnD[1] * Bs, lnD[0] * Bs)
-            return (S + W * (Bs - Ps) - xb[1], S + W * Ps - xb[0]), Bs
+            def lsum(cs):
+                """Interval of sum_k cs_k ln|t_k| at scale 2^-LP, ln|t_k| = ln|n_k| - ln D, ln|n_k| in [L, L + W]."""
+                S = sum(map(mul, cs, Ls))
+                Bs = sum(cs)
+                Ps = sum(c for c in cs if c > 0)
+                xb = (lnD[0] * Bs, lnD[1] * Bs) if Bs >= 0 else (lnD[1] * Bs, lnD[0] * Bs)
+                return (S + W * (Bs - Ps) - xb[1], S + W * Ps - xb[0]), Bs
+        else:
+            Lp = [ln_int_lp(n if n > 0 else -n) for n in ns]   # each ln|n_k| in its own [lo_k, hi_k]
+
+            def lsum(cs):
+                """The same interval with each term's own enclosure: sum c lo (c >= 0) or c hi (c < 0) below."""
+                lo = sum(c * (l if c >= 0 else h) for c, (l, h) in zip(cs, Lp))
+                hi = sum(c * (h if c >= 0 else l) for c, (l, h) in zip(cs, Lp))
+                Bs = sum(cs)
+                xb = (lnD[0] * Bs, lnD[1] * Bs) if Bs >= 0 else (lnD[1] * Bs, lnD[0] * Bs)
+                return (lo - xb[1], hi - xb[0]), Bs
 
         l0, B0 = lsum([J * n * n for J, n in zip(Js, ns)])
         l1, B1 = lsum([J * n for J, n in zip(Js, ns)])
@@ -2446,7 +2461,7 @@ class PLCell:
         # floats for the heuristics (they choose points only)
         self.cf = [ivfl(c) for c in coef]
         self.rf = float(r)
-        self.nnf = [(float(Fraction(Ek - X0, R)), Jk / float(DJ)) for Ek, Jk in self.nn]
+        self.nnf = [(float(Fraction(Ek - X0, R)), float(Fraction(Jk, DJ))) for Ek, Jk in self.nn]
         self.nrf = [(float(wt), float((c - x0) / r)) for wt, c, _ in self.nr]
         self.ncf = [(float(wt), float((cx - x0) / r), float(cy / r)) for wt, cx, cy, _ in self.nc]
         self.nn_cav = [(Ek, Jk) for Ek, Jk in self.nn if Jk > 0]      # j G2 concave: chords
@@ -3373,17 +3388,29 @@ def run_row(key, root, do_controls, workers):
     return rep.done()
 
 
-def run_p298(root, do_controls, workers):
+PLW = {   # certificates in the format of PR #298 (piecewise-linear density, auxiliaries A with weights b, bound T/m)
+    "p298": {"title": "ROW p298: PR #298 @0d82162 (c86/adaptive-cone), C86 <= 1.80560940*", "rel": "p298/certificate.json",
+             "sha": "10d68ec249f47c0504182d419fd8ddd1ca1c917e42a4bba59d944b9d1de0dad5",
+             "sha_src": "the README and SHA256SUMS of c86/adaptive-cone", "printed": "1.80560940", "printed_src": "PR #298 title"},
+    "vid2": {"title": "ROW vid2: PR #270 update of 5 Nov (vidigoat c86_v2 @fd4373c), C86 <= 1.8055311*", "rel": "vid2/certificate.json",
+             "sha": "09c05af07a4ef559983e2dc203d4c3e002c5b1f2248fde8b1c306fa2feb98d1f",
+             "sha_src": "the c86_v2 README and the PR comment", "printed": "1.8055311", "printed_src": "PR #270 comment of 5 Nov"},
+}
+
+
+def run_p298(root, do_controls, workers, key="p298"):
     """PR #298 (rpinho/math-certificates @0d82162, c86/adaptive-cone): a piecewise-linear density on 5,375
-    rational nodes, 28 auxiliaries, ten with nonreal roots. Every condition, E1 to E6."""
-    rep = Report("ROW p298: PR #298 @0d82162 (c86/adaptive-cone), C86 <= 1.80560940*")
+    rational nodes, 28 auxiliaries, ten with nonreal roots. Every condition, E1 to E6. key = "vid2": the same format
+    for vidigoat's c86_v2 (PR #270, 5 Nov: #298's 28 auxiliaries plus 3, the density re-optimised on 5,734 knots)."""
+    cfg = PLW[key]
+    rep = Report(cfg["title"])
     rng = random.Random(298)
-    rel = "p298/certificate.json"
+    rel = cfg["rel"]
     path = os.path.join(root, rel)
     h = sha256(path)
     rep.info("sha256 " + rel, h)
-    full = "10d68ec249f47c0504182d419fd8ddd1ca1c917e42a4bba59d944b9d1de0dad5"
-    rep.check("sha256 matches the README and SHA256SUMS of c86/adaptive-cone (%s)" % full, h == full)
+    full = cfg["sha"]
+    rep.check("sha256 matches %s (%s)" % (cfg["sha_src"], full), h == full)
     d = json.load(open(path))
     e = [rat(x) for x in d["edges"]]
     hgt = [rat(x) for x in d["node_densities"]]
@@ -3417,10 +3444,10 @@ def run_p298(root, do_controls, workers):
     # ---- E6
     rep.check("E6 T/m equals the certificate's bound exactly", T / m == bound, "T/m = %s = %s..." % (T / m,
                                                                                                     dec(T / m, 20)))
-    rep.check("E6 the README's 288897505229428473/160000001279369600", bound == Fraction(288897505229428473,
+    if key == "p298": rep.check("E6 the README's 288897505229428473/160000001279369600", bound == Fraction(288897505229428473,
                                                                                          160000001279369600))
-    rep.check("E6 printed upper bound 1.80560940 (PR #298 title) >= T/m", Fraction("1.80560940") >= T / m,
-              "difference %.3e" % float(Fraction("1.80560940") - T / m))
+    rep.check("E6 printed upper bound %s (%s) >= T/m" % (cfg["printed"], cfg["printed_src"]), Fraction(cfg["printed"]) >= T / m,
+              "difference %.3e" % float(Fraction(cfg["printed"]) - T / m))
     # ---- roots, and the data for E4 and E5
     t0 = time.time()
     rroots, croots, alld, nreals = p298_roots(rep, cert)
@@ -3482,15 +3509,15 @@ def run_p298(root, do_controls, workers):
 
 
 def main():
-    if len(sys.argv) < 3 or sys.argv[1] not in list(ROWS) + ["p298"]:
+    if len(sys.argv) < 3 or sys.argv[1] not in list(ROWS) + list(PLW):
         print(__doc__)
         sys.exit(2)
     workers = os.cpu_count() or 1
     for a in sys.argv:
         if a.startswith("--workers="):
             workers = int(a.split("=")[1])
-    if sys.argv[1] == "p298":
-        ok = run_p298(sys.argv[2], "--controls" in sys.argv, workers)
+    if sys.argv[1] in PLW:
+        ok = run_p298(sys.argv[2], "--controls" in sys.argv, workers, key=sys.argv[1])
     else:
         ok = run_row(sys.argv[1], sys.argv[2], "--controls" in sys.argv, workers)
     sys.exit(0 if ok else 1)

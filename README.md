@@ -103,6 +103,13 @@ and Thm 1.5 (we check their hypotheses).
 Reproduce: `cd c86 && ./fetch.sh ROOT && ./run_all.sh ROOT` (about 3.5 minutes; the #298 row about 1.5 minutes and 5
 CPU-minutes on a loaded 18-core Mac).
 
+
+PR #270, update of 5 Nov (vidigoat c86_v2 @fd4373c, `certificate.json`, `09c05af0...8d1f` as stated): the format of #298 with
+#298's 28 auxiliaries plus 3, the density re-optimised on 5,734 knots with dyadic edges (denominators up to 2^57; our
+checker now takes the logarithms term by term when the edge grid is too fine to tabulate). Every condition E1-E6 holds:
+T/m = 195153337643980465525925899810927/108086391056860991292157728915456 = 1.8055310732071364922... exactly, below the
+printed 1.8055311 (the README's decimal 1.80553107320710 is 3.6e-14 low); smallest log integral 9.09e-8 (Q23); f certified
+positive on all 5,732 support cells, min f in [1.0049371e-6, 1.0049372e-6]. `python3 -I c86_check.py vid2 certs --controls`.
 ## C44 and C70 (4 November 2026)
 
 `c44/c44_check.py`: Pinho's C44 <= 4.3576549226 (rpinho/c44-certificate @f3fb25d). The paper's recurrence

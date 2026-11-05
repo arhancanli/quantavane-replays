@@ -21,4 +21,7 @@ get vid c86_deg8_h400_1.807768536863.json vidigoat/optimization-records fb800103
     tao/certificates/c86/c86_deg8_h400_1.807768536863.json
 # PR #298, 1.80560940* (piecewise-linear density on 5,375 nodes; auxiliaries with nonreal roots)
 get p298 certificate.json rpinho/math-certificates 0d821621bab3d3d9408015f2679b89d5d5e9b379 c86/adaptive-cone/certificate.json
+# PR #270 update of 5 Nov (vidigoat c86_v2), 1.8055311* (the format of #298; 31 auxiliaries, 5,734 knots)
+get vid2 certificate.json vidigoat/optimization-records fd4373c76ec2fa9969501fa9a9663773e8668aa0 \
+    tao/certificates/c86_v2/certificate.json
 shasum -a 256 -c "$here/SHA256SUMS"
