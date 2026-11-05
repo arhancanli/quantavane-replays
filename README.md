@@ -8,7 +8,7 @@ have no connection with any of the authors.
 An index of every asterisked bound in that repository, with the replays posted for each (ours and others'), is in
 [ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026).
 
-## C1c and C1d (3 to 5 November 2026)
+## C1a, C1c and C1d (3 to 5 November 2026)
 
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
 | --- | --- | --- | --- | --- |
@@ -16,12 +16,15 @@ An index of every asterisked bound in that repository, with the replays posted f
 | $C_{1c} \geq$ | [#318](https://github.com/teorth/optimizationproblems/pull/318) | Julsgaard/c1c-certificate @ `91e47b1a`, `cert/certificate.json` (K = 98,304, 98,368 weights), `fe11336b...52d2` | 2582127846607416062611587072/6292441470965870058830439361 = 0.4103538918115781099..., minimum only at k = 47318: the printed 0.4103538918 is a valid rounding down |
 | $C_{1c} \geq$ | [#270](https://github.com/teorth/optimizationproblems/pull/270) (update of 4 Nov) | vidigoat/optimization-records @ `9f82508a`, `tao/certificates/c1c_v2/c1c_K98304_v2.json` (K = 98,304), `3bba62b0...4729` (no hash stated; this is the file at that commit) | 645458795582745374892957696/1572931393892132517694378321 = 0.4103540676275733581..., minimum only at k = 93282: the printed 0.4103540676 is a valid rounding down |
 | $C_{1c} \geq$ | [#270](https://github.com/teorth/optimizationproblems/pull/270) (update of 5 Nov) | vidigoat/optimization-records @ `42d6a89f`, `tao/certificates/c1c_v3/c1c_K98304_v3.json` (K = 98,304, 98,368 weights), `e0786a59...ec66` | 640823574552569898220412928/1561614482809354047911104009 = 0.4103596512499835112..., minimum only at k = 98301: the printed 0.4103596512 is a valid rounding down |
+| $C_{1a} \leq$ | [#270](https://github.com/teorth/optimizationproblems/pull/270) | vidigoat/optimization-records @ `9f82508a`, `tao/certificates/c1a/c1a_n262144.json` (262,144 cells, decimal strings read exactly), `1848a920...f3de` | 3756858380445445962687721679242267976826786797829957539923492864000000000000/2500000000000000227858304266031237715040682299126697825903032255969919203361 = 1.50274335217817824811..., maximum only at m = 100329 | 1.5027433522, above the exact value |
+| $C_{1a} \leq$ | #270 (its first refinement) | same commit, `c1a_n131072.json` (131,072 cells), `ad1b7ff4...8bef` | 88396668012481333418540698869863464003678707923912272976102136217600000/58823529411764719617703895028066775569135640608648734518121194077814337 = 1.50274335621218231722..., maximum only at m = 131071 | 1.502743356212 (its README), above |
 | $C_{1d} \leq$ | [#312](https://github.com/teorth/optimizationproblems/pull/312) | Julsgaard/c1d-certificate @ `cc455ca0`, `cert/certificate.json` (81,920 cells), `04c9c759...237` | 9900630255081376929482866688 / 6805830738283663732311831361 = 1.45472766452875064884..., maximum only at i + j = 29124 | 1.454727664528751, above the exact value |
 | $C_{1d} \leq$ | [#271](https://github.com/teorth/optimizationproblems/pull/271) | Keremozdemirra/tao-1c-1d-certificates @ `408f8d0b`, `c1d_n40960_1.4556234448.json` (40,960 cells), `be35060a...2da` | 279676466330630562685427712000 / 192135175720687825901095191121 = 1.45562344470022455281..., maximum only at i + j = 15313 | 1.4556234448, above |
 | $C_{1d} \leq$ | [#269](https://github.com/teorth/optimizationproblems/pull/269) | echul-seal/c1d-upper-bound @ `2be42dfd`, `ub/c_f10240.json` from `c1d_records.tgz` (10,240 cells), `30d501e1...973` | 76358168487433178963290071040 / 52455219864513498497744894329 = 1.45568293650581519488..., maximum only at i + j = 3168 | 1.455682936505816, above |
 | $C_{1d} \leq$ | [#286](https://github.com/teorth/optimizationproblems/pull/286) | huiihao/c1d-certificate @ `302817dc`, `construction.json` (400 cells, JSON floats), `c489b46b...8df` | read as binary64: 4563650116209721766004955898613711667200 / 3127595284199802099438492053245424408273 = 1.45915622115964902113...; read as the printed decimals: 1.45915622115964903535... | 1.4591562211596491, above both |
 
-Every hash above is the one stated in the pull request (for #269 also the archive's, `b526326d...`), except the 4 Nov #270 row, where none was stated.
+Every hash above is the one stated in the pull request (for #269 also the archive's, `b526326d...`), except the 4 Nov
+#270 row and the two $C_{1a}$ rows, where none was stated (these are the files at the commit the pull request links).
 
 ## Method
 
@@ -30,6 +33,8 @@ Every hash above is the one stated in the pull request (for #269 also the archiv
   $S = \sum_i w_i$ (we check $n > K$, so no $A_k$ in the range is an empty sum).
 - $C_{1d}$: $n$ equal cells on $[-1/4,1/4]$, so $h = 1/(2n)$. $f*f$ is linear between multiples of $h$ and equals
   $h \sum_{i+j=m-1} v_i v_j$ at the knots, so the bound is $2n \max_m \lvert c_m \rvert / S^2$ with $c = v * v$.
+- $C_{1a}$: the same knot formula for a non-negative step function on $[-1/4,1/4]$ (non-negativity is checked), since
+  $\max_t (f*f)(t) \ge C_{1a}(\int f)^2$ for every such $f$ gives $C_{1a} \le 2n \max_m c_m / S^2$.
 - All sums are exact integers: every $A_k$ (or $c_m$) comes from one big-integer product (Kronecker substitution;
   positive and negative parts packed separately for signed values). The whole sequence is then confirmed by a
   polynomial identity at four random points modulo $2^{61}-1$, and the deciding lag is summed again directly.
@@ -214,7 +219,7 @@ Reproduce: `cd c68 && ./fetch.sh && ./run_all.sh` (seconds).
 
 ```
 ./fetch.sh      # downloads the certificates at the pinned commits and checks every SHA-256
-./run_all.sh    # writes results/*.txt (Python 3.9+, standard library only; about two minutes)
+./run_all.sh    # writes results/*.txt (Python 3.9+, standard library only; about eight minutes)
 ```
 
 Prepared with AI assistance (Claude, Anthropic), as the repository's AI use policy asks. Questions or corrections:

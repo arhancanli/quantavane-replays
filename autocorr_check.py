@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Independent exact check of step-function certificates for C_1c and C_1d (teorth/optimizationproblems).
+"""Independent exact check of step-function certificates for C_1a, C_1c and C_1d (teorth/optimizationproblems).
 
 Written from the definitions on the constant pages, without reading or running the certificates' own verifiers.
 
   autocorr_check.py 1c FILE    lower bound C_1c >= K * min_{0<=k<=K} A_k / S^2,  A_k = sum_i w_i w_{i+k}
   autocorr_check.py 1d FILE    upper bound C_1d <= 2n * max_m |c_m| / S^2,      c = v * v (autoconvolution)
+  autocorr_check.py 1a FILE    upper bound C_1a <= 2n * max_m c_m / S^2, as 1d for a non-negative f (checked)
 
 1c: f = sum_i w_i 1_[i/K,(i+1)/K) with non-negative integer w; the autocorrelation is linear between multiples of
 1/K, so its minimum over t in [0,1] is (1/K) min_{0<=k<=K} A_k and int f = S/K.
@@ -139,6 +140,15 @@ def check_1d(d):
             "sign_at_max": "+" if c[m] > 0 else "-", "ties": sum(1 for x in c if abs(x) == cmax)}
 
 
+def check_1a(d):
+    """C_1a: max_t (f*f)(t) >= C_1a (int f)^2 for every non-negative f, so a non-negative step function on [-1/4, 1/4]
+    with n equal cells gives C_1a <= 2n max_m c_m / S^2: the knot formula of 1d, where every c_m >= 0."""
+    vals = next(d[k] for k in ("values", "v_int", "v", "cells", "construction") if k in d)
+    v, _ = as_ints(vals)
+    assert min(v) >= 0, "C_1a needs a non-negative f"
+    return check_1d(d)
+
+
 def controls(kind, d):
     """Red controls: a corrupted coefficient must fail the identity, a changed weight must change the bound or the
     identity, and scaling every value by 3 must leave the bound unchanged."""
@@ -173,7 +183,7 @@ def main():
     d = json.load(open(path), parse_float=Fraction) if "--decimal" in sys.argv else json.load(open(path))
     if isinstance(d, list):
         d = {"values": d}
-    r = check_1c(d) if kind == "1c" else check_1d(d)
+    r = check_1c(d) if kind == "1c" else check_1a(d) if kind == "1a" else check_1d(d)
     b = r["bound"]
     print(f"{kind} {path}")
     for k, val in r.items():
