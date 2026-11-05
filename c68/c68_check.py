@@ -158,7 +158,7 @@ def check(cert, note=print):
             lhs_lo = lo(lfx, I_lo) + Rkl // (k + 1)
             if not need(lhs_lo >= s_hi, f"second family fails at k = {k}"):
                 break
-            m = (lhs_lo - s_hi) / s_hi
+            m = (lhs_lo - s_hi) / -((-Rkh) // (k + 1))   # B_k against R^(k+1)/(k+1), as for the first family
             if minII is None or m < minII[0]:
                 minII = (m, k)
         if k == K2:                                       # (II) tail: sum_j w_j t_j^K2, beta <= 1
@@ -172,7 +172,7 @@ def check(cert, note=print):
     if ok:
         note(f"  first family: k = 1..{K1 - 1} explicit, smallest relative margin A_k / (R^(k+1)/(k+1)) {minI[0]:.4e} at k = {minI[1]}; "
              f"from k = {K1} the atom at R alone (w_last (k + 1) >= R)")
-        note(f"  second family: k = 1..{K2 - 1} explicit, smallest relative margin B_k / sum_j w_j beta_j t_j^k {minII[0]:.4e} at k = {minII[1]}; "
+        note(f"  second family: k = 1..{K2 - 1} explicit, smallest relative margin B_k / (R^(k+1)/(k+1)) {minII[0]:.4e} at k = {minII[1]}; "
              f"from k = {K2}: (t1 - t0) l (1 - t1) t0^k = {tail_lo / ONE:.4e} > sum w_j t_j^k <= {s_tail_hi / ONE:.4e}")
     return ok
 

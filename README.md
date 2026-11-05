@@ -184,9 +184,12 @@ $[t_0, t_1]$ for the second).
 
 | Row | Certificate (SHA-256) | Our result | Printed bound |
 | --- | --- | --- | --- |
-| [Pin2026] | rpinho/korenblum-c68-certificate @9d48de6 `certificate-jung.json` (`80a056f2...002b`, as stated) | all hypotheses hold: slope $l$ = 0.02563746486913 below the analytic bound 0.025637464869136; first family $k \le 31278$ explicit (smallest margin $A_k/(R^{k+1}/(k+1))$ = 2.0961e-6, at $k$ = 5714), then the atom at $R$; second family $k \le 23999$ explicit (smallest margin $B_k/\sum_j w_j\beta_j t_j^k$ = 2.2512e-7, at $k$ = 8502), then the strip (gap 2.1063e-12) | 0.432 |
+| [Pin2026] | rpinho/korenblum-c68-certificate @9d48de6 `certificate-jung.json` (`80a056f2...002b`, as stated) | all hypotheses hold: slope $l$ = 0.02563746486913 below the analytic bound 0.025637464869136; first family $k \le 31278$ explicit (smallest margin $A_k/(R^{k+1}/(k+1))$ = 2.0961e-6, at $k$ = 5714), then the atom at $R$; second family $k \le 23999$ explicit (smallest margin $B_k/(R^{k+1}/(k+1))$ = 2.2848e-7, at $k$ = 8502), then the strip (gap 2.1063e-12) | 0.432 |
 
-The two smallest margins were also recomputed in exact rational arithmetic (2.096105e-6 and 2.251249e-7). Red controls,
+The two smallest margins were also recomputed in exact rational arithmetic (2.096105e-6 and 2.2847831e-7); every figure
+agrees with the certificate's NOTE_JUNG.md. This certificate was replayed before by the two checkers of
+[#274](https://github.com/teorth/optimizationproblems/pull/274) (vidigoat, 26 October); ours shares no code with them or
+with the certificate's own. Red controls,
 all as expected: half the last atom's mass moved to the one before, the slope raised by 1%, a false second-tail cutoff
 at $k$ = 2000, and $c$ raised to 0.44 (first node moved to the new $c^2$) are each refused.
 
