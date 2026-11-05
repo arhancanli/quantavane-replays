@@ -24,4 +24,7 @@ get p298 certificate.json rpinho/math-certificates 0d821621bab3d3d9408015f2679b8
 # PR #270 update of 5 Nov (vidigoat c86_v2), 1.8055311* (the format of #298; 31 auxiliaries, 5,734 knots)
 get vid2 certificate.json vidigoat/optimization-records fd4373c76ec2fa9969501fa9a9663773e8668aa0 \
     tao/certificates/c86_v2/certificate.json
+# PR #270 update of 5 Nov, night (vidigoat c86_v3), 1.8054956* (#298's format; 33 auxiliaries, 6,999 knots)
+get vid3 certificate.json vidigoat/optimization-records 9e2b86ca420ab00390cf9b81b4002da0a0248001 \
+    tao/certificates/c86_v3/certificate.json
 shasum -a 256 -c "$here/SHA256SUMS"

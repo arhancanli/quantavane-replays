@@ -1,0 +1,9 @@
+RESULT upper: C16 <= 2.15622552815421296: CERTIFIED
+  383 intervals cover [1, 2^18] without gaps; largest endpoint bound 2.15622552815421295831
+  at interval 95 (rows 262144, G bracket width 2.04e-21); margin below T 1.693e-18
+  tail delta >= 2^18: U <= 2.016305486212 (A = 0.824995406516)
+RESULT lower: mu = 0.1221104705136482893035321239949553273618221282958984375: C16 >= 2.15622552815421295612 (enclosure width 6.66e-21; delta in [3.928836165718341, 3.928836165718341], rows 262144)
+control: T lowered to 1e-17 below the largest endpoint value rejected: True
+control: mu of interval 95 raised by 1% rejected: True
+control: interval 95 removed (a gap) rejected: True
+run time 351 s

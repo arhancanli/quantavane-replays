@@ -110,6 +110,14 @@ checker now takes the logarithms term by term when the edge grid is too fine to 
 T/m = 195153337643980465525925899810927/108086391056860991292157728915456 = 1.8055310732071364922... exactly, below the
 printed 1.8055311 (the README's decimal 1.80553107320710 is 3.6e-14 low); smallest log integral 9.09e-8 (Q23); f certified
 positive on all 5,732 support cells, min f in [1.0049371e-6, 1.0049372e-6]. `python3 -I c86_check.py vid2 certs --controls`.
+
+PR #270, night update of 5 Nov (vidigoat c86_v3 @9e2b86c, `certificate.json`, `182e76bf...d397` as stated): the same
+format with 33 auxiliaries and 6,999 knots. Every condition E1-E6 holds: T/m =
+780597977251274792019360777060007/432345564227458232572250425393152 = 1.80549551525085145363... exactly, as the
+folder's README states, 8.5e-8 below the printed 1.8054956; sum b deg Q / m = 0.8987818231; smallest log integral
+[9.05960954785e-8, 9.05960954786e-8] (Q22); f certified positive on all 6,997 support cells (247,249 pieces), min f in
+[1.0085284e-6, 1.0085286e-6]. `python3 -I c86_check.py vid3 certs --controls` (about 11 minutes on 12 cores).
+
 ## C44 and C70 (4 November 2026)
 
 `c44/c44_check.py`: Pinho's C44 <= 4.3576549226 (rpinho/c44-certificate @f3fb25d). The paper's recurrence
@@ -175,8 +183,10 @@ unnormalized $L^2$ norms). Both sides of the update of 4 November in
 | upper | vidigoat/optimization-records @5da2dc1 `tao/certificates/c16_pinned/certificate.json` (`2783dfb9...c88b`; no hash stated, this is the file at that commit) | largest interval-end value 2.15622552815421974 (2.6e-16 below the printed bound); tail $\delta \ge 2^{18}$ at most 2.0163 | 2.15622552815422 |
 | lower | the trial function above | 2.15622552815421292 (enclosure width 2.7e-17; $\delta$ = 3.928836059681948) | 2.1562255281542128 |
 | lower, [#319](https://github.com/teorth/optimizationproblems/pull/319) (Julsgaard) | the same family at $\mu = 128042/2^{20}$ | [2.15622552815420610, 2.15622552815420614] ($\delta$ = 3.928838101027620) | 2.156225528 (stated enclosure 2.1562255281542061 $\pm$ 6.1e-17) |
+| upper, #270 night update (18 digits) | vidigoat/optimization-records @1e8e786 `tao/certificates/c16_pinned_v2/certificate.json` (`8c13abbb...05e8`, as in its SHA256SUMS) | all 383 intervals hold: the largest interval-end value is 2.15622552815421295831 (G bracket width 2.0e-21 there), 1.7e-18 below the printed bound | 2.15622552815421296 |
+| lower, #270 night update | the same family at $\mu$ = `0x1.f42a1bd5af466p-4` | 2.15622552815421295612 (enclosure width 6.7e-21; 262,144 explicit rows) | 2.156225528154212956 |
 
-So $2.15622552815421292 \le C_{16} \le 2.15622552815421974$ for the page's "Equivalently" definition, the maximum
+So $2.15622552815421295612 \le C_{16} \le 2.15622552815421295831$ (from the night update; $2.15622552815421292 \le C_{16} \le 2.15622552815421974$ from the first) for the page's "Equivalently" definition, the maximum
 over $\delta \ge 1$ (which reading is meant is asked in [#325](https://github.com/teorth/optimizationproblems/issues/325));
 the upper bound holds for every $\delta \ge 1$, so it also covers a reading with $\delta$ large only. Red controls, all as expected: a target $10^{-17}$ below the
 largest interval-end value is refused, one $\mu$ raised by 1% is refused, and one interval removed (a gap) is refused.
@@ -184,7 +194,8 @@ largest interval-end value is refused, one $\mu$ raised by 1% is refused, and on
 What rests on mathematics: Cauchy-Schwarz, translation invariance, the convexity in $\delta$, the row-sum identities,
 the convexity of the row tails and the lattice count.
 
-Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (under a minute).
+Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (about 7 minutes; the night update refines G and H near the peak with
+`--upper-width 1e-21 --max-rows 262144 --lower-factor 128`).
 
 ## C68: Korenblum's constant (5 November 2026)
 

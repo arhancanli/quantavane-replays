@@ -20,6 +20,9 @@ integrals. Arithmetic: decimal at 50 digits; every enclosure is widened by SLACK
 rounding (each operation is correctly rounded, at most 1e6 operations per sum, all values below 1e3: under 1e-40).
 Standard library only.  python3 -I c16_check.py certificate.json [--lower MU_HEX_OR_DECIMAL] [--controls]
                         python3 -I c16_check.py --lower-only MU   (MU as p/q, hex float or decimal)
+Precision options (defaults reproduce the 4 November runs): --upper-width W (refine G near the peak until its
+bracket is narrower than W; default 1e-19), --max-rows R (default 2^17), --lower-factor F (explicit rows for the
+lower bound: F times the base count; default 16).
 """
 import json, math, sys, time
 from decimal import Decimal as D, getcontext
@@ -148,7 +151,7 @@ def tail_bound(mu0_exp=-20, n=1 << 14):
     return A * (1 + 1 / t0) + 1 - (1 + 1 / t0).ln() + t0.ln() / t0 + SLACK, A
 
 
-def upper(cert, n_min=2048, controls=False):
+def upper(cert, n_min=2048, controls=False, width=D("1e-19"), max_rows=1 << 17):
     T = D(cert["T"])
     iv = [[hexdec(x) for x in row] for row in cert["intervals"]]
     assert iv[0][0] == 1 and iv[-1][1] == D(2) ** 18, "intervals must run from 1 to 2^18"
@@ -158,12 +161,12 @@ def upper(cert, n_min=2048, controls=False):
     for i, (d0, d1, mu) in enumerate(iv):
         assert d0 < d1 and mu > 0
         n = n_rows(1 / mu, n_min)
-        # refine until the interval is clearly below T, or G is enclosed to 1e-19 (so the endpoint values near the
-        # peak are reproduced to about 1e-19, not just shown to be below T), or 2^17 rows
+        # refine until the interval is clearly below T, or G is enclosed to `width` (so the endpoint values near the
+        # peak are reproduced to about that, not just shown to be below T), or max_rows rows
         while True:
             lo, hi = G_bracket(mu, n)
             u = max(U_hi(hi, mu, d0), U_hi(hi, mu, d1))
-            if u <= T - D("1e-14") or hi - lo < D("1e-19") or n >= 1 << 17:
+            if u <= T - D("1e-14") or hi - lo < width or n >= max_rows:
                 break
             n *= 2
         if worst is None or u > worst[0]:
@@ -176,8 +179,8 @@ def upper(cert, n_min=2048, controls=False):
     return True, f"tail delta >= 2^18: U <= {tb:.12f} (A = {A:.12f})", worst
 
 
-def lower(mu, n_min=2048):
-    n = n_rows(1 / mu, n_min) * 16
+def lower(mu, n_min=2048, factor=16):
+    n = n_rows(1 / mu, n_min) * factor
     Glo, Ghi = G_bracket(mu, n)
     Hlo, Hhi = H_bracket(mu, n)
     # S0 = G, S1 = G - H/mu, S2 = H/mu^2; bound B = S0^2/(pi S1) - ln(S2/S1) - ln(1 + ln(S2/S1)), lower end:
@@ -189,18 +192,24 @@ def lower(mu, n_min=2048):
     return B_lo, B_hi, (dlo, dhi), n
 
 
+def opt(name, default, conv):
+    return conv(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else default
+
+
 def main():
     t0 = time.time()
+    width, max_rows = opt("--upper-width", D("1e-19"), D), opt("--max-rows", 1 << 17, int)
+    factor = opt("--lower-factor", 16, int)
     if sys.argv[1] == "--lower-only":                 # a trial function only (no certificate): mu as p/q or hex
         arg = sys.argv[2]
         mu = D(arg.split("/")[0]) / D(arg.split("/")[1]) if "/" in arg else hexdec(arg)
-        lo, hi, (dlo, dhi), n = lower(mu)
+        lo, hi, (dlo, dhi), n = lower(mu, factor=factor)
         print(f"RESULT lower: mu = {arg} = {mu}: C16 >= {lo:.20f} (enclosure [{lo:.20f}, {hi:.20f}], width {hi - lo:.2e}; "
               f"delta in [{dlo:.15f}, {dhi:.15f}], rows {n})")
         print(f"run time {time.time() - t0:.0f} s")
         return
     cert = json.load(open(sys.argv[1]))
-    ok, msg, worst = upper(cert)
+    ok, msg, worst = upper(cert, width=width, max_rows=max_rows)
     u, i, n, w = worst
     print(f"RESULT upper: C16 <= {cert['T']}: {'CERTIFIED' if ok else 'FAILED'}")
     print(f"  {len(cert['intervals'])} intervals cover [1, 2^18] without gaps; largest endpoint bound {u:.20f}")
@@ -208,7 +217,7 @@ def main():
     print("  " + msg)
     if "--lower" in sys.argv:
         mu = hexdec(sys.argv[sys.argv.index("--lower") + 1])
-        lo, hi, (dlo, dhi), n = lower(mu)
+        lo, hi, (dlo, dhi), n = lower(mu, factor=factor)
         print(f"RESULT lower: mu = {mu}: C16 >= {lo:.20f} (enclosure width {hi - lo:.2e}; delta in [{dlo:.15f}, {dhi:.15f}], rows {n})")
     if "--controls" in sys.argv:
         # red controls: a target just below our largest endpoint value must fail; one mu perturbed must fail;

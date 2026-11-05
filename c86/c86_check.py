@@ -3395,6 +3395,12 @@ PLW = {   # certificates in the format of PR #298 (piecewise-linear density, aux
     "vid2": {"title": "ROW vid2: PR #270 update of 5 Nov (vidigoat c86_v2 @fd4373c), C86 <= 1.8055311*", "rel": "vid2/certificate.json",
              "sha": "09c05af07a4ef559983e2dc203d4c3e002c5b1f2248fde8b1c306fa2feb98d1f",
              "sha_src": "the c86_v2 README and the PR comment", "printed": "1.8055311", "printed_src": "PR #270 comment of 5 Nov"},
+    "vid3": {"title": "ROW vid3: PR #270 update of 5 Nov, night (vidigoat c86_v3 @9e2b86c), C86 <= 1.8054956*",
+             "rel": "vid3/certificate.json",
+             "sha": "182e76bfa2289c31ba262fbd4e515eee734ebd0c78a5c23f40f70db18072d397",
+             "sha_src": "the c86_v3 README and the PR comment", "printed": "1.8054956",
+             "printed_src": "PR #270 comment of 5 Nov, night",
+             "stated": Fraction(780597977251274792019360777060007, 432345564227458232572250425393152)},
 }
 
 
@@ -3446,6 +3452,7 @@ def run_p298(root, do_controls, workers, key="p298"):
                                                                                                     dec(T / m, 20)))
     if key == "p298": rep.check("E6 the README's 288897505229428473/160000001279369600", bound == Fraction(288897505229428473,
                                                                                          160000001279369600))
+    if "stated" in cfg: rep.check("E6 the README's exact bound %s" % cfg["stated"], bound == cfg["stated"])
     rep.check("E6 printed upper bound %s (%s) >= T/m" % (cfg["printed"], cfg["printed_src"]), Fraction(cfg["printed"]) >= T / m,
               "difference %.3e" % float(Fraction(cfg["printed"]) - T / m))
     # ---- roots, and the data for E4 and E5
