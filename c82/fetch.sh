@@ -30,6 +30,8 @@ get pr301 certificate.json rpinho/c82-height-certificate 6d4e80cb0b375c767df91ea
     degree44-denominators-v2/certificate.json
 get pr301a certificate.json rpinho/c82-height-certificate 6d4e80cb0b375c767df91eae7985ae3e8bef7203 \
     degree44-denominators/certificate.json
+# PR #330, 0.252404806* (rpinho/math-certificates @ 5461d49, c82/degree104-cvp; six degree-104 denominators)
+get pr330 certificate.json rpinho/math-certificates 5461d490552a518667c3fd3fceff33ebdb4d347c c82/degree104-cvp/certificate.json
 # positive control: Doche 2001b's polynomials and weights as [Pin26] records them; red control file of [Pin26]
 get doche doche2001.json rpinho/c82-height-certificate 69d89640dffd8bf3e2067dab769a54c7b8e8c490 controls/doche2001.json
 get pinm mutated_v3_should_fail.json rpinho/c82-height-certificate 69d89640dffd8bf3e2067dab769a54c7b8e8c490 \

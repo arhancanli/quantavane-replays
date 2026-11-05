@@ -1,0 +1,42 @@
+PR #330 [Pin26c] C_82 < 0.252404806* (open; rpinho/math-certificates c82/degree104-cvp at 5461d49)
+  check SHA-256 of pr330/certificate.json matches SHA256SUMS of the folder: PASS (27a4e61121b0c882c249fe3f06ed04d3c6b16067b7d1a0f6d2d6a80d40b3d3f9)
+  factors: 6 denominators (D101_11_0^58639231, D111_3_0^4024425223, C82r3_2^3546471684, C82r3_56e044d57633^103210760, C82r3_11b375537096^753145351, C82r3_1d86166ad1c2^1129492365), 13 numerators; 1644 roots after composing with T
+  check H1 D101_11_0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 58639231)
+  check H1 D111_3_0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 4024425223)
+  check H1 C82r3_2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 3546471684)
+  check H1 C82r3_56e044d57633: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 103210760)
+  check H1 C82r3_11b375537096: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 753145351)
+  check H1 C82r3_1d86166ad1c2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 104, lc 1, m 1129492365)
+  check H1 P1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 5963135880573223/32768)
+  check H1 P2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 5396663886577605/32768)
+  check H1 P3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 3, lc 1, q = 4639200009363899/524288)
+  check H1 P4: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 4, lc 1, q = 5458371827276695/262144)
+  check H1 P6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 919662655196181/32768)
+  check H1 MS192: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 116673792411555/131072)
+  check H1 MS360: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 20, lc 1, q = 117656619991111/131072)
+  check H1 cg2_4_0_c2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 30, lc 1, q = 2793998020691827/1048576)
+  check H1 n22_6_3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 16, lc 1, q = 980876750280119/1048576)
+  check H1 n101_7_34: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 20, lc 1, q = 1141892057911327/1048576)
+  check H1 n121_2_0: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 26, lc 2, q = 127507583969461/131072)
+  check H1 n121_2_1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 21, lc 1, q = 1118775370914015/1048576)
+  check H1 n121_3_44: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 24, lc 1, q = 517148265910787/524288)
+  check H2 deg A < D: PASS (D = 999999999856, deg A = 952533595715278899/1048576 = 0.908406825879 D)
+  check H3 gcd(S_i, R_j) = 1 for all 78 pairs with q_i > 0: PASS (modulo prime(s) [2305843009213693951])
+  check E1 every root of every F o T enclosed (19 factors, 1644 discs, pairwise disjoint per factor): PASS (largest disc radius 2^-303; 183.2 s)
+  check E1 self-test: root sums match Vieta and sum ln|r| encloses ln|a_0/a_n|: PASS
+  E2 log M(Q o T): [252403463192.1175213107, 252403463192.1175213108]  (/D: [0.2524034632284, 0.2524034632285])
+  check E3 self-test: g from the certified roots overlaps g from Horner on the exact coefficients (11 of 12 random points compared): PASS
+  E3 int_0^1 max(0, g) dt: [1342726.58984186, 1342726.58984187]  (1959 panels: 1265 negative, 652 positive, 42 crude, 1703 split; depth 9..44; crude width 3.444e-11; 10.5 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 6 denominators: PASS ([-252403463192.117522, -252403463192.117520] vs [-252403463192.117522, -252403463192.117521]; 1774 panels, 6.4 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 6 numerators away from the circle: PASS ([104770310641.551447, 104770310641.551449] vs [104770310641.551448, 104770310641.551449]; 570 panels, 0.3 s)
+  B: [0.2524048059550536, 0.2524048059550537]  (width 2.04e-21)
+  check E4 B < 0.252404806, the printed upper bound (B_hi = 0.2524048059550537; margin 4.495e-11): PASS
+  check R1 red: the bound 0.2524048059549, just below our enclosure, is not implied (B_lo > it): PASS
+  check R2 red: D101_11_0 added as a numerator (q = 1/1000) is caught by H3 (exact gcd of degree 104): PASS
+  check R3 red: D101_11_0 doubled (not monic) is refused by H1: PASS
+  check R4 red: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+  run time: 202.0 s
+  RESULT: ALL CHECKS PASS
+real 202.11
+user 387.62
+sys 1.38

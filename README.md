@@ -135,6 +135,7 @@ rigorous remainders; the comparison with the printed bound is exact.
 | #280 | vidigoat/optimization-records @32898ac (`557da3e3...5fe0`) | [0.2534350401279890, 0.2534350401279891] | 0.2534350402 |
 | #301 | rpinho @6d4e80c `degree44-denominators-v2` (`adfca075...7ac2`) | [0.2530918335514613, 0.2530918335514614] | 0.253091834 |
 | #301 first filing | rpinho @6d4e80c `degree44-denominators` (`6a24d45c...f056`) | [0.2531232746206604, 0.2531232746206605] | 0.253123275 |
+| #330 | rpinho/math-certificates @5461d49 `c82/degree104-cvp/certificate.json` (`27a4e611...d3f9`) | [0.2524048059550536, 0.2524048059550537] | 0.252404806 |
 | control: Doche 2001 | [Pin26] `controls/doche2001.json` (`835a10b9...7fc2`) | [0.2544361553, 0.2544361561] | 0.25444 |
 
 What rests on mathematics: that C82 <= B for any certificate meeting the hypotheses (the direct argument in the
