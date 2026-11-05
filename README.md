@@ -144,6 +144,7 @@ rigorous remainders; the comparison with the printed bound is exact.
 | #301 first filing | rpinho @6d4e80c `degree44-denominators` (`6a24d45c...f056`) | [0.2531232746206604, 0.2531232746206605] | 0.253123275 |
 | #330 | rpinho/math-certificates @5461d49 `c82/degree104-cvp/certificate.json` (`27a4e611...d3f9`) | [0.2524048059550536, 0.2524048059550537] | 0.252404806 |
 | #330, updated 5 Nov | rpinho/math-certificates @98208a4 `c82/degree104-joint/certificate.json` (`a4061273...e36e`) | [0.2520179247552093, 0.2520179247552094] | 0.2520179248 |
+| #330, final certificate (5 Nov) | rpinho/math-certificates @3be6b2f `c82/degree104-joint/certificate.json` (`b71150bb...4171`) | [0.2519964889882011, 0.2519964889882012] | 0.2519964890 |
 | #280 v4, 5 Nov | vidigoat/optimization-records @79ce0df `tao/certificates/c82/v4/certificate.json` (`c1981f1c...c72f`) | [0.2520079723284296, 0.2520079723284297] | 0.2520079724 |
 | control: Doche 2001 | [Pin26] `controls/doche2001.json` (`835a10b9...7fc2`) | [0.2544361553, 0.2544361561] | 0.25444 |
 

@@ -34,6 +34,8 @@ get pr301a certificate.json rpinho/c82-height-certificate 6d4e80cb0b375c767df91e
 get pr330 certificate.json rpinho/math-certificates 5461d490552a518667c3fd3fceff33ebdb4d347c c82/degree104-cvp/certificate.json
 # PR #330 updated 5 Nov, 0.2520179248* (c82/degree104-joint @ 98208a4; ten degree-104 denominators)
 get pr330b certificate.json rpinho/math-certificates 98208a40e043e578d35183b418452f316112a658 c82/degree104-joint/certificate.json
+# PR #330 final certificate of the search, 0.2519964890* (rpinho/math-certificates @ 3be6b2f, c82/degree104-joint)
+get pr330c certificate.json rpinho/math-certificates 3be6b2f133db43374ea30767b58c62ce2d39686a c82/degree104-joint/certificate.json
 # PR #280 updated 5 Nov, 0.2520079724* (vidigoat tao/certificates/c82/v4 @ 79ce0df)
 get pr280d certificate.json vidigoat/optimization-records 79ce0dfb211a67ff7e387b58b0d19ff1d6accfba tao/certificates/c82/v4/certificate.json
 # positive control: Doche 2001b's polynomials and weights as [Pin26] records them; red control file of [Pin26]

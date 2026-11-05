@@ -9,7 +9,7 @@ mkdir -p "$here/results"
 status=0
 python3 -I "$here/c82_check.py" selftest "$@" > "$here/results/selftest.txt" 2>&1 || status=1
 grep -H "RESULT\|run time" "$here/results/selftest.txt" | tr '\n' ' '; echo
-for row in pin epi doche pr280 pr280b pr280c pr280d pr301 pr301a pr330 pr330b; do   # pin: every red control; the others: R1-R4
+for row in pin epi doche pr280 pr280b pr280c pr280d pr301 pr301a pr330 pr330b pr330c; do   # pin: every red control; the others: R1-R4
   python3 -I "$here/c82_check.py" $row "$root" --controls "$@" > "$here/results/$row.txt" 2>&1 || status=1
   grep -H "RESULT\|run time" "$here/results/$row.txt" | tr '\n' ' '; echo
 done
