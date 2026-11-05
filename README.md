@@ -5,6 +5,9 @@ Independent exact replays of certificates submitted to the
 written from the definition on the constant page. The certificates' own verifiers were neither read nor run, and we
 have no connection with any of the authors.
 
+An index of every asterisked bound in that repository, with the replays posted for each (ours and others'), is in
+[ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026).
+
 ## C1c and C1d (3 to 5 November 2026)
 
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
@@ -156,7 +159,9 @@ unnormalized $L^2$ norms). Both sides of the update of 4 November in
 | upper | vidigoat/optimization-records @5da2dc1 `tao/certificates/c16_pinned/certificate.json` (`2783dfb9...c88b`; no hash stated, this is the file at that commit) | largest interval-end value 2.15622552815421974 (2.6e-16 below the printed bound); tail $\delta \ge 2^{18}$ at most 2.0163 | 2.15622552815422 |
 | lower | the trial function above | 2.15622552815421292 (enclosure width 2.7e-17; $\delta$ = 3.928836059681948) | 2.1562255281542128 |
 
-So $2.15622552815421292 \le C_{16} \le 2.15622552815421974$. Red controls, all as expected: a target $10^{-17}$ below the
+So $2.15622552815421292 \le C_{16} \le 2.15622552815421974$ for the page's "Equivalently" definition, the maximum
+over $\delta \ge 1$ (which reading is meant is asked in [#325](https://github.com/teorth/optimizationproblems/issues/325));
+the upper bound holds for every $\delta \ge 1$, so it also covers a reading with $\delta$ large only. Red controls, all as expected: a target $10^{-17}$ below the
 largest interval-end value is refused, one $\mu$ raised by 1% is refused, and one interval removed (a gap) is refused.
 
 What rests on mathematics: Cauchy-Schwarz, translation invariance, the convexity in $\delta$, the row-sum identities,
