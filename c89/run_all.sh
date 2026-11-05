@@ -1,7 +1,7 @@
 #!/bin/sh
 # Replay the C89c (Ramsey multiplicity of K_6) upper bounds of PRs #279 and #331 and the C89b (K_5) bounds of PRs #307
-# and #277 exactly (and the PPSS 2024 value as a control); one output file per row in results/, red controls included, after the self-tests (brute force, f = 1/2,
-# Franek 2002).
+# and #277 exactly, and the PPSS 2024 value as a control; one output file per row in results/, red controls included,
+# after the self-tests (brute force, f = 1/2, Franek 2002).
 # Usage: ./run_all.sh [CERTS_ROOT] [--workers=N]   (default: ./certs). Python 3.9+, standard library only, and cc.
 here=$(cd "$(dirname "$0")" && pwd)
 root=${1:-$here/certs}
