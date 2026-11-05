@@ -118,6 +118,31 @@ folder's README states, 8.5e-8 below the printed 1.8054956; sum b deg Q / m = 0.
 [9.05960954785e-8, 9.05960954786e-8] (Q22); f certified positive on all 6,997 support cells (247,249 pieces), min f in
 [1.0085284e-6, 1.0085286e-6]. `python3 -I c86_check.py vid3 certs --controls` (about 11 minutes on 12 cores).
 
+The lower bound $C_{86} \ge 1.80220$\* (D. Niedbala Giraudin, arXiv:2609.29298, the row proposed in
+[#315](https://github.com/teorth/optimizationproblems/pull/315)), from the certificate `CERTIFICAT_C86.json` (an
+ancillary file of arXiv v1, `3caa7297...abe5`) and the paper's Proposition 2: if
+$x \ge \lambda + \sum_Q \lambda_Q \log\lvert Q(x)\rvert + \lambda_0 (2U_\eta(x) - I(\eta))$ for every $x \ge 0$, with
+$\lambda_Q, \lambda_0 \ge 0$, integer $Q$ and $\eta$ a probability measure of finite energy, then $C_{86} \ge \lambda$.
+`c86/c86_lower.py` with `c86_lower.c`, written from the paper (its `prove_SSS_C86.py` and `verify_C86.py` were
+neither read nor run):
+- the data: 18 monic integer polynomials (14 with $\lambda_Q > 0$), $\lambda_0 \ge 0$, 6,932 cells on [0, 8], masses
+  $\ge 0$ summing to $1 + 7.9 \cdot 10^{-17}$ (scaled to exactly 1);
+- $I(\eta)$ as a double sum over the 3,891 cells with mass, by the closed-form double antiderivative for near cells
+  and its series for far ones, with explicit error bounds: $3.130515030 \cdot 10^{-5}$ ($\pm 8.9 \cdot 10^{-9}$; the
+  paper gives $3.1305148803 \cdot 10^{-5}$);
+- the inequality on [0, 14] by bisection (819,821 intervals): $U_\eta$ bounded cell by cell (each cell's potential
+  is unimodal with its minimum at the centre), $\max\lvert Q\rvert$ by the centred Taylor form with a fourth-order
+  remainder; the smallest value of the left side minus the sum seen is 1.8022211884, against the certificate's
+  1.8022211894912388;
+- the tail $x \ge 14$: $U_\eta(x) \le \log x$ and $\log\lvert Q(x)\rvert \le \deg Q \log x + \log K_Q$, so the
+  left side minus the sum is at least an increasing $h$ with $h(14) \ge 6.7073$.
+
+Binary64 arithmetic; libm's log is taken to be within one ulp (8 ulp allowed), every sum carries its rounding
+bound, and the margin is $2.1 \cdot 10^{-5}$. Red controls, all as expected: $\lambda$ one millionth above the
+certificate's own value is refused (at $x = 0.0795$), dropping the energy term ($\lambda_0 = 0$) is refused at
+1.80220, and a negative weight is refused. `python3 -I c86_lower.py ng certs --controls` (about 5 minutes on 12 cores
+with the controls).
+
 ## C44 and C70 (4 November 2026)
 
 `c44/c44_check.py`: Pinho's C44 <= 4.3576549226 (rpinho/c44-certificate @f3fb25d). The paper's recurrence

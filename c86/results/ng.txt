@@ -1,0 +1,13 @@
+Row ng (arXiv:2609.29298 ancillary CERTIFICAT_C86.json, PR #315's 86a row): sha256 3caa729730c5c52d755353ccf5e643372aadd0d792c37b14fcdb932ec6f1abe5 (as fetched from arXiv v1)
+  18 monic integer polynomials (degrees [1, 4, 4, 2, 6, 10, 10, 10, 6, 6, 6, 6, 6, 1, 6, 5, 6, 6]), 14 with lambda_Q > 0; lambda_0 = 0.5346669850888335
+  eta: 6932 cells on [0, 8], 3891 with positive mass; total mass 1 + 7.87e-17 (scaled to exactly 1: U and I change by under 1e-15)
+  I(eta) = 3.130515030303e-05 (error bound 8.938e-09); lower bound used 3.129621224995e-05 (the paper: 3.1305148803e-5)
+  tail x >= 14: h(14) >= 6.707302, h'(x) >= 0.8055 > 0 there (sum lambda_Q deg Q = 1.6535906937, 2 lambda_0 = 1.0693339702): holds
+  [0, 14]: PASS on 819821 intervals; smallest interval lower bound 1.8022000000 (at x = 0.076364); smallest point value seen 1.8022211884 (at x = 0.087855)
+  => for every x >= 0 the inequality holds with lambda = 1.80220: C86 >= 1.80220 (Proposition 2)
+Red controls:
+  C1 lambda one millionth above the certificate's own value 1.8022211894912388: refused, as expected (FAIL [0, 1.16667]: FAIL at [0.07948189429919239, 0.079481894299258712]: lower bound 1.80222218949 < 1.80222218)
+  C2 the energy term dropped (lambda_0 = 0): refused at 1.80220, as expected
+  C3 one weight made negative: refused (lambda_Q >= 0, lambda_0 >= 0)
+RESULT: ng PASS
+run time 300 s

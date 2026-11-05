@@ -27,4 +27,7 @@ get vid2 certificate.json vidigoat/optimization-records fd4373c76ec2fa9969501fa9
 # PR #270 update of 5 Nov, night (vidigoat c86_v3), 1.8054956* (#298's format; 33 auxiliaries, 6,999 knots)
 get vid3 certificate.json vidigoat/optimization-records 9e2b86ca420ab00390cf9b81b4002da0a0248001 \
     tao/certificates/c86_v3/certificate.json
+# arXiv:2609.29298 (D. Niedbala Giraudin), the lower bound 1.80220* of PR #315: the certificate, an ancillary file of v1
+if [ -d ng ] && [ -n "$(ls -A ng)" ]; then echo "refusing: $root/ng is not empty"; exit 1; fi
+mkdir -p ng && curl -s -f -L -o ng/CERTIFICAT_C86.json "https://arxiv.org/src/2609.29298v1/anc/CERTIFICAT_C86.json"
 shasum -a 256 -c "$here/SHA256SUMS"
