@@ -12,7 +12,13 @@ blocks indexed by F_2^8 with red densities 0, p = 2648/4041 and 1.
   3. The density sum_k [red_k p^k + blue_k (1 - p)^k] / 256^4 is formed in exact rationals, as a polynomial in p and
      at p = 2648/4041 (and at 19/29 for the simpler alternative), and compared with the stated values.
 
-Usage: python3 -I c89b_check.py selftest | pr307 [CERTS] [--controls] [--workers=N]
+PR #277 ([SK2026], 192 blocks, every block-pair density free) is checked with c89b_general.c, which assumes no
+symmetry: the two count numerators N(R) and N(D - R) over all 192^5 tuples, by two organisations of the sum (pairs
+then a weighted triangle; a triangle then a weighted edge), modulo ten primes below 2^28, rebuilt by the Chinese
+remainder theorem from nine and confirmed by the tenth. The same code reproduces the published value of the
+Parczyk-Pokutta-Spiegel-Szabo 192-vertex graph (FoCM 2024, Theorem 1.2) from its Zenodo record.
+
+Usage: python3 -I c89b_check.py selftest | pr307 | pr277 | ppss [CERTS] [--controls] [--workers=N]
 Python 3.9+, standard library only, and a C compiler (cc).
 """
 import gzip
@@ -22,6 +28,7 @@ import os
 import random
 import subprocess
 import sys
+import tempfile
 import time
 from fractions import Fraction
 from itertools import product
@@ -43,11 +50,91 @@ PR307 = dict(
 )
 
 
+GEN = os.path.join(BIN, "c89b_general")
+PR277 = dict(
+    matrix=("pr277/c89b_stepgraphon_m192_D20.json.gz", "19c433540936fcdf6d90256dcee9585729bcf36a443d7f76ef4b8bb91e6abc06"),
+    claimed=Fraction(107218716425177032911811117405568916263805081691166740697,
+                     63555655070790142733837367909977622463036348875198349443072),
+    printed="0.0016870052",
+)
+# Parczyk, Pokutta, Spiegel, Szabo, FoCM 2024, Theorem 1.2: c_5 <= 2320651 * 2^-24 * 3^-4, from the 192-vertex graph
+# c5.graph6.txt in graphs.zip of Zenodo record 6602512 (CC BY 4.0); red between blocks joined by an edge, blue inside
+PPSS = dict(zip=("ppss/graphs.zip", "6ff8a2496c545e86def3a12bd69ef557c50a890c732a8506d30b1bbe8467ec89"),
+            member="graphs/c5.graph6.txt", value=Fraction(2320651, 2 ** 24 * 3 ** 4))
+
+
+def primes_below(n, k):
+    out, x = [], n - 1
+    while len(out) < k:
+        if x % 2 and all(x % q for q in range(3, int(x ** 0.5) + 1, 2)):
+            out.append(x)
+        x -= 1
+    return out
+
+
+PRIMES = primes_below(2 ** 28, 10)
+
+
 def build():
     os.makedirs(BIN, exist_ok=True)
-    src = os.path.join(HERE, "c89b_count.c")
-    if not os.path.exists(EXE) or os.path.getmtime(EXE) < os.path.getmtime(src):
-        subprocess.run(["cc", "-O2", "-std=c99", "-o", EXE, src], check=True)
+    for src, exe in ((os.path.join(HERE, "c89b_count.c"), EXE), (os.path.join(HERE, "c89b_general.c"), GEN)):
+        if not os.path.exists(exe) or os.path.getmtime(exe) < os.path.getmtime(src):
+            subprocess.run(["cc", "-O3", "-std=c99", "-o", exe, src], check=True)
+
+
+def run_parallel(cmds, text):
+    """Start every command at once, each reading the same input from its own handle on a temporary file."""
+    fd, path = tempfile.mkstemp(suffix=".txt")
+    try:
+        with os.fdopen(fd, "w") as f:
+            f.write(text)
+        handles = [open(path) for _ in cmds]
+        procs = [subprocess.Popen(c, stdin=h, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+                 for c, h in zip(cmds, handles)]
+        outs = []
+        for pr in procs:
+            out, err = pr.communicate()
+            if pr.returncode:
+                raise ValueError(err.strip())
+            outs.append(out)
+        for h in handles:
+            h.close()
+    finally:
+        os.unlink(path)
+    return outs
+
+
+def general(R, D, workers, primes=PRIMES):
+    """N(R) and N(D - R) exactly, by both organisations of the sum; raises if they differ anywhere."""
+    text = f"{len(R)} {D}\n" + "\n".join(" ".join(map(str, row)) for row in R) + "\n"
+    res = {}
+    for mode in ("pairs", "triples"):
+        outs = run_parallel([[GEN, mode, str(i), str(workers), *map(str, primes)] for i in range(workers)], text)
+        acc = {}
+        for out in outs:
+            for line in out.split("\n"):
+                if line.strip():
+                    q, c, r = line.split()
+                    acc[(int(q), c)] = (acc.get((int(q), c), 0) + int(r)) % int(q)
+        res[mode] = acc
+    if res["pairs"] != res["triples"]:
+        raise AssertionError("the two organisations of the sum differ")
+    bound = len(R) ** 5 * D ** 10
+    out = {}
+    for c in "RB":
+        x, mod = 0, 1
+        for q in primes[:-1]:   # Chinese remainder theorem on all primes but the last
+            r = res["pairs"][(q, c)]
+            x += mod * ((r - x) * pow(mod, -1, q) % q)
+            mod *= q
+        assert mod > bound, "the primes do not cover the numerator"
+        assert x % primes[-1] == res["pairs"][(primes[-1], c)], "the check prime disagrees"
+        out[c] = x
+    return out, res
+
+
+def gdensity(N, m, D):
+    return Fraction(N["R"] + N["B"], m ** 5 * D ** 10)
 
 
 def codes_of(R, D):
@@ -67,13 +154,8 @@ def count(t, codes, mode, workers=1):
         runs = [[EXE, str(t), "root"]]
     else:
         runs = [[EXE, str(t), "all", str(i), str(workers)] for i in range(workers)]
-    procs = [subprocess.Popen(r, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-             for r in runs]
     tab = {}
-    for pr in procs:
-        out, err = pr.communicate(text)
-        if pr.returncode:
-            raise ValueError(err.strip())
+    for out in run_parallel(runs, text):
         for line in out.split("\n"):
             if line.strip():
                 c, k, n = line.split()
@@ -155,6 +237,17 @@ def selftest(workers):
         good = v == Fraction(2, 2 ** (t * (t - 1) // 2))
         ok &= good
         print(f"  t={t}: {v} {'as expected' if good else 'WRONG'}")
+    print("3. The general counter (no symmetry assumed) against brute force, random symmetric matrices, K_5:")
+    for trial in range(4):
+        m, D = (4, 5, 5, 6)[trial], rng.choice([7, 1000, 2 ** 20])
+        R = [[0] * m for _ in range(m)]
+        for i in range(m):
+            for j in range(i, m):
+                R[i][j] = R[j][i] = rng.randint(0, D)
+        N, _ = general(R, D, 2)
+        good = gdensity(N, m, D) == brute(R, D, 5)
+        ok &= good
+        print(f"  m={m} D={D}: both organisations agree with each other and with brute force: {good}")
     print("RESULT: selftest", "PASS" if ok else "FAIL")
     return ok
 
@@ -245,19 +338,124 @@ def check_pr307(root, controls, workers):
     return ok
 
 
+def check_pr277(root, controls, workers):
+    c = PR277
+    t0 = time.time()
+    raw = open(os.path.join(root, c["matrix"][0]), "rb").read()
+    h = hashlib.sha256(raw).hexdigest()
+    print(f"Row pr277 (PR #277, [SK2026]): {c['matrix'][0]} sha256 {h} ({'as pinned' if h == c['matrix'][1] else 'NOT AS PINNED'})")
+    assert h == c["matrix"][1]
+    d = json.loads(gzip.decompress(raw))
+    D, R, wts = d["edge_probability_denominator"], d["red_probability_numerators"], d["block_weights"]
+    m = len(R)
+    assert all(len(row) == m for row in R) and len(wts) == m and len(set(wts)) == 1, "not m equal blocks"
+    vals = sorted({x for row in R for x in row})
+    print(f"  {m} blocks of equal weight; denominator {D}; entries {vals} (diagonal {sorted({R[i][i] for i in range(m)})})")
+    N, _ = general(R, D, workers)
+    v = gdensity(N, m, D)
+    print(f"  N(R) = {N['R']}\n  N(D-R) = {N['B']}\n  (both organisations agree modulo all ten primes; CRT on nine, the tenth confirms)")
+    print(f"  exact density = {v.numerator}/{v.denominator} = {float(v):.16f}")
+    same = v == c["claimed"]
+    print(f"  stated fraction: {'IDENTICAL' if same else 'DIFFERENT'}")
+    bound = Fraction(c["printed"])
+    holds = v <= bound
+    print(f"  printed bound {c['printed']}: {'implied' if holds else 'NOT implied'} (margin {float(bound - v):.3e})")
+    ok = same and holds
+    if controls:
+        print("Red controls:")
+        last = Fraction(1, 10 ** len(c["printed"].split(".")[1]))
+        c1 = not v <= bound - last
+        print(f"  C1 a bound one last-digit unit lower ({float(bound - last):.10f}): "
+              f"{'not implied, as expected' if c1 else 'IMPLIED (control failed)'}")
+        i, j = next((i, j) for i in range(m) for j in range(i + 1, m) if 0 < R[i][j] < D)
+        bump = [row[:] for row in R]
+        bump[i][j] += 1
+        bump[j][i] += 1
+        v2 = gdensity(general(bump, D, workers)[0], m, D)
+        c2 = v2 != v
+        print(f"  C2 R[{i}][{j}] = R[{j}][{i}] raised by one unit: density {float(v2):.16f}, "
+              f"{'differs, as expected' if c2 else 'SAME (control failed)'}")
+        asym = [row[:] for row in R]
+        asym[i][j] += 1
+        try:
+            general(asym, D, 1, primes=PRIMES[:2])
+            c3 = False
+        except ValueError as e:
+            c3 = True
+            print(f"  C3 an asymmetric matrix: refused by the counter ({e})")
+        if not c3:
+            print("  C3 an asymmetric matrix: ACCEPTED (control failed)")
+        big = [row[:] for row in R]
+        big[i][j] = big[j][i] = D + 1
+        try:
+            general(big, D, 1, primes=PRIMES[:2])
+            c4 = False
+        except ValueError as e:
+            c4 = True
+            print(f"  C4 a density above 1: refused by the counter ({e})")
+        if not c4:
+            print("  C4 a density above 1: ACCEPTED (control failed)")
+        ok &= c1 and c2 and c3 and c4
+    print(f"RESULT: pr277 {'PASS' if ok else 'FAIL'}")
+    print(f"run time {time.time() - t0:.0f} s")
+    return ok
+
+
+def graph6(data):
+    s = data.strip()
+    if s.startswith(b">>graph6<<"):
+        s = s[10:]
+    b = [x - 63 for x in s]
+    assert all(0 <= x < 64 for x in b), "not graph6"
+    n, rest = (b[0], b[1:]) if b[0] < 63 else ((b[1] << 12) | (b[2] << 6) | b[3], b[4:])
+    bits = [(x >> (5 - i)) & 1 for x in rest for i in range(6)]
+    A = [[0] * n for _ in range(n)]
+    k = 0
+    for j in range(1, n):
+        for i in range(j):
+            A[i][j] = A[j][i] = bits[k]
+            k += 1
+    return A
+
+
+def check_ppss(root, workers):
+    import zipfile
+    c = PPSS
+    t0 = time.time()
+    path = os.path.join(root, c["zip"][0])
+    h = hashlib.sha256(open(path, "rb").read()).hexdigest()
+    print(f"Control ppss (Parczyk-Pokutta-Spiegel-Szabo, FoCM 2024, Thm 1.2): {c['zip'][0]} sha256 {h} "
+          f"({'as pinned' if h == c['zip'][1] else 'NOT AS PINNED'})")
+    assert h == c["zip"][1]
+    A = graph6(zipfile.ZipFile(path).read(c["member"]))
+    m = len(A)
+    print(f"  {c['member']}: {m} vertices, {sum(map(sum, A)) // 2} edges, degrees {sorted({sum(r) for r in A})}")
+    N, _ = general(A, 1, workers)
+    v = gdensity(N, m, 1)
+    good = v == c["value"]
+    print(f"  exact density = {v} = 2320651 * 2^-24 * 3^-4: {'reproduced exactly' if good else 'DIFFERENT'}")
+    print(f"RESULT: ppss {'PASS' if good else 'FAIL'}")
+    print(f"run time {time.time() - t0:.0f} s")
+    return good
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     workers = next((int(a.split("=")[1]) for a in sys.argv[1:] if a.startswith("--workers=")),
                    min(8, os.cpu_count() or 1))
-    if not args or args[0] not in ("selftest", "pr307"):
+    if not args or args[0] not in ("selftest", "pr307", "pr277", "ppss"):
         print(__doc__)
         sys.exit(2)
     build()
+    root = args[1] if len(args) > 1 else os.path.join(HERE, "certs")
     if args[0] == "selftest":
         ok = selftest(workers)
+    elif args[0] == "pr307":
+        ok = check_pr307(root, "--controls" in sys.argv, workers)
+    elif args[0] == "pr277":
+        ok = check_pr277(root, "--controls" in sys.argv, workers)
     else:
-        ok = check_pr307(args[1] if len(args) > 1 else os.path.join(HERE, "certs"), "--controls" in sys.argv,
-                         workers)
+        ok = check_ppss(root, workers)
     sys.exit(0 if ok else 1)
 
 

@@ -1,6 +1,6 @@
 #!/bin/sh
-# Replay the C89c (Ramsey multiplicity of K_6) upper bounds of PRs #279 and #331 and the C89b (K_5) bound of PR #307
-# exactly; one output file per row in results/, red controls included, after the self-tests (brute force, f = 1/2,
+# Replay the C89c (Ramsey multiplicity of K_6) upper bounds of PRs #279 and #331 and the C89b (K_5) bounds of PRs #307
+# and #277 exactly (and the PPSS 2024 value as a control); one output file per row in results/, red controls included, after the self-tests (brute force, f = 1/2,
 # Franek 2002).
 # Usage: ./run_all.sh [CERTS_ROOT] [--workers=N]   (default: ./certs). Python 3.9+, standard library only, and cc.
 here=$(cd "$(dirname "$0")" && pwd)
@@ -15,6 +15,10 @@ for row in sk2026 sciel2026; do
   python3 -I "$here/c89_check.py" $row "$root" --controls "$@" > "$here/results/$row.txt" 2>&1 || status=1
   grep -H "RESULT\|run time" "$here/results/$row.txt" | tr '\n' ' '; echo
 done
-python3 -I "$here/c89b_check.py" pr307 "$root" --controls "$@" > "$here/results/pr307.txt" 2>&1 || status=1
-grep -H "RESULT\|run time" "$here/results/pr307.txt" | tr '\n' ' '; echo
+for row in pr307 pr277; do
+  python3 -I "$here/c89b_check.py" $row "$root" --controls "$@" > "$here/results/$row.txt" 2>&1 || status=1
+  grep -H "RESULT\|run time" "$here/results/$row.txt" | tr '\n' ' '; echo
+done
+python3 -I "$here/c89b_check.py" ppss "$root" "$@" > "$here/results/ppss.txt" 2>&1 || status=1
+grep -H "RESULT\|run time" "$here/results/ppss.txt" | tr '\n' ' '; echo
 exit $status

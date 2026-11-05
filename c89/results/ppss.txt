@@ -1,0 +1,5 @@
+Control ppss (Parczyk-Pokutta-Spiegel-Szabo, FoCM 2024, Thm 1.2): ppss/graphs.zip sha256 6ff8a2496c545e86def3a12bd69ef557c50a890c732a8506d30b1bbe8467ec89 (as pinned)
+  graphs/c5.graph6.txt: 192 vertices, 9504 edges, degrees [99]
+  exact density = 2320651/1358954496 = 2320651 * 2^-24 * 3^-4: reproduced exactly
+RESULT: ppss PASS
+run time 94 s

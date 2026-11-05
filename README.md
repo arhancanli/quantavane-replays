@@ -253,13 +253,19 @@ The tables must agree exactly and each must sum to $2^{50}$; the density is then
 weights, entries $0$, $2648$, $4041$ over $4041$, symmetric, $R[x][y] = R[0][x \oplus y]$ for all 65,536 pairs, row 0 as
 the two-mask definition says). `c89b_count.c` counts the 5-tuples behind each $p^k$ and $(1-p)^k$ with the first vertex
 in block 0, and again over every ordered tuple with no symmetry assumed, which must give exactly 256 times as much.
+For #277 (192 blocks, every block-pair density free), `c89b_general.c` assumes no symmetry: the numerators
+$N(R)$ and $N(D - R)$ over all $192^5$ tuples, both as $\sum_{a,b} R_{ab}\operatorname{tr}(S^3)$ with $S = \operatorname{diag}(R_a \circ R_b) R$
+and as $\sum_{c,d,e} R_{cd}R_{de}R_{ec}\, v^{\mathsf T} R v$ with $v_x = R_{xc}R_{xd}R_{xe}$, modulo ten primes below $2^{28}$; the two agree at
+every prime, the numerators are rebuilt by the Chinese remainder theorem from nine and the tenth confirms.
 
 | Row | Data (SHA-256) | Exact density | Printed upper bound |
 | --- | --- | --- | --- |
 | 89c [SK2026], [#279](https://github.com/teorth/optimizationproblems/pull/279) | JeetuSK0808/tao-constants-certificates @98b6ee3 `construction.json` (`f90cc190...ac49`, as in its SHA256SUMS.txt) | identical to the stated fraction: $0.742254861593625\ldots \cdot 2^{-14}$ | $0.7422548616 \cdot 2^{-14}$ |
 | 89c [SCIEL2026], [#331](https://github.com/teorth/optimizationproblems/pull/331) | the eleven $n_w / 2^{32}$ stated in the pull request (the Zenodo record is restricted) | identical to the stated fraction: $0.742204211528050\ldots \cdot 2^{-14}$ | $0.7422042116 \cdot 2^{-14}$ |
 | 89b round 4, [#307](https://github.com/teorth/optimizationproblems/pull/307) | rpinho/math-certificates @1d38853 `c89b/round4/certificates/c5_cayley256_fine.json.gz` (`78978a9f...0125`, as in its SHA256SUMS) | identical to the stated fraction 15058298592194934908767847/9131939205947984819238469632 $= 0.0016489705256017\ldots$; as a polynomial in $p$, exactly the stated $(8734 - 5530p + \ldots + 10p^6)/2^{22}$; at $p = 19/29$ the stated simpler alternative | 0.001648970526 |
+| 89b [SK2026], [#277](https://github.com/teorth/optimizationproblems/pull/277) | JeetuSK0808/tao-constants-certificates @82a6e4d `c89b_stepgraphon_m192_D20.json.gz` (`19c43354...bc06`, as in its SHA256SUMS.txt) | identical to the stated fraction: $0.0016870051344094\ldots$ | 0.0016870052 |
 | control: Franek 2002 | red iff $\lvert x \oplus y\rvert \in \{0, 1, 3, 4, 7, 8, 10\}$ | exactly $51162598917 / 2^{50}$, as published | |
+| control: Parczyk-Pokutta-Spiegel-Szabo 2024 | their 192-vertex graph, `c5.graph6.txt` in Zenodo record 6602512 (`graphs.zip`, `6ff8a249...ec89`) | exactly $2320651 \cdot 2^{-24} \cdot 3^{-4}$, as their Theorem 1.2 states | |
 
 Self-tests, all passing: brute force over every tuple on small cases against the programs ($t = 4, 5, 6$; Cayley and
 arbitrary symmetric matrices), and $f \equiv 1/2$ giving exactly $2^{1 - \binom{t}{2}}$. Red controls, all as expected: a
@@ -270,7 +276,7 @@ asymmetric matrix are refused.
 What rests on mathematics: that a step graphon's monochromatic $K_t$ density bounds the constant from above (random
 colourings of blow-ups), translation invariance on $\mathbb Z_2^n$, and the counting identities above.
 
-Reproduce: `cd c89 && ./fetch.sh && ./run_all.sh` (about 15 minutes).
+Reproduce: `cd c89 && ./fetch.sh && ./run_all.sh` (about 20 minutes).
 
 ## Reproduce
 

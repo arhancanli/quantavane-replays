@@ -3,7 +3,7 @@ Row pr307 (PR #307, rpinho, round 4): pr307/c5_cayley256_fine.json.gz sha256 789
   symmetric: True; R[x][y] = R[0][x xor y] for all 65,536 pairs: True
   two-mask definition (pr307/c5_cayley256_definition.json, sha256 52ba8e51...): masks disjoint, p and row 0 match: True (120 red, 16 fractional, 120 zero)
   counts, root: [(('B', 0), 2154496), (('B', 1), 3153920), (('B', 2), 1443840), (('B', 3), 256000), (('B', 4), 81920), (('B', 6), 10240), (('R', 0), 1843200), (('R', 1), 1536000), (('R', 2), 1566720), (('R', 3), 368640), (('R', 4), 168960)] (1 s)
-  every ordered tuple, no symmetry used: exactly 256 x root in every cell: True (299 s)
+  every ordered tuple, no symmetry used: exactly 256 x root in every cell: True (30 s)
   exact density = 15058298592194934908767847/9131939205947984819238469632 = 0.0016489705256017
   stated fraction: IDENTICAL
   printed bound 0.001648970526: implied (margin 3.983e-13)
@@ -15,4 +15,4 @@ Red controls:
   C3 a second fractional value (R[1][0] = 1/4041): refused (2 different fractional densities (this counter takes one))
   C4 an asymmetric matrix: refused by the counter (matrix not symmetric)
 RESULT: pr307 PASS
-run time 301 s
+run time 31 s

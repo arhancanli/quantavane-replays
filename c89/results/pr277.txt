@@ -1,0 +1,15 @@
+Row pr277 (PR #277, [SK2026]): pr277/c89b_stepgraphon_m192_D20.json.gz sha256 19c433540936fcdf6d90256dcee9585729bcf36a443d7f76ef4b8bb91e6abc06 (as pinned)
+  192 blocks of equal weight; denominator 1048576; entries [0, 706864, 913211, 1048576] (diagonal [0])
+  N(R) = 339276008057083285552025752874382890664005300766433223694741028208640
+  N(D-R) = 368053344491115197442986447654720259867382092844579164211604820590592
+  (both organisations agree modulo all ten primes; CRT on nine, the tenth confirms)
+  exact density = 107218716425177032911811117405568916263805081691166740697/63555655070790142733837367909977622463036348875198349443072 = 0.0016870051344094
+  stated fraction: IDENTICAL
+  printed bound 0.0016870052: implied (margin 6.559e-11)
+Red controls:
+  C1 a bound one last-digit unit lower (0.0016870051): not implied, as expected
+  C2 R[0][1] = R[1][0] raised by one unit: density 0.0016870051344094, differs, as expected
+  C3 an asymmetric matrix: refused by the counter (matrix not symmetric)
+  C4 a density above 1: refused by the counter (bad entry)
+RESULT: pr277 PASS
+run time 189 s

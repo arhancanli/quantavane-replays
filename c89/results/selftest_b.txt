@@ -11,4 +11,9 @@
 2. f = 1/2 everywhere (m = 4, one block pair class) gives 2^(1 - C(t,2)):
   t=4: 1/32 as expected
   t=5: 1/512 as expected
+3. The general counter (no symmetry assumed) against brute force, random symmetric matrices, K_5:
+  m=4 D=1000: both organisations agree with each other and with brute force: True
+  m=5 D=1048576: both organisations agree with each other and with brute force: True
+  m=5 D=7: both organisations agree with each other and with brute force: True
+  m=6 D=1048576: both organisations agree with each other and with brute force: True
 RESULT: selftest PASS
