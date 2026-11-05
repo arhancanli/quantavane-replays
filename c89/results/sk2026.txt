@@ -1,0 +1,14 @@
+Row sk2026 (#279): K_6 on Z_2^10, n_w / 1048576 = [1048576, 461327, 0, 1048576, 1048576, 13579, 0, 1048576, 1048576, 0, 799568]
+  sk2026/construction.json: sha256 f90cc19090067c5a480257e802a3e47bd55cb75f6b71d3a545419e91cd11ac49 (as pinned)
+  the file's D and n are the row's
+  classes R,0,B,R,R,1,B,R,R,B,2; method A 103 cells, total 1125899906842624 (109 s); method B 103 cells, total 1125899906842624 (6 s); 2^(n(t-1)) = 1125899906842624
+  exact density = 180244428715156181493112659521741405180580225001966676111887908798425648907356856409/3978585891278293137243057985174566720803649206378781739523711815145275976100267004264448
+               = 4.530364145468903e-05 = 0.742254861593625 * 2^-14
+  stated fraction: IDENTICAL
+  printed bound 0.7422548616 * 2^-14: implied, margin 6.375e-12 * 2^-14
+Red controls:
+  C1 a bound one last-digit unit lower (0.7422548615 * 2^-14): not implied, as expected
+  C2 n_1 = D + 1 (a density above 1): refused (n_1 = 1048577 is outside [0, 1048576])
+  C3 n_1 raised by one unit: density 0.742254861593975 * 2^-14, differs from the stated fraction, as expected
+RESULT: sk2026 PASS
+run time 248 s

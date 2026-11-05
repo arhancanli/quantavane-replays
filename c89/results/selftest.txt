@@ -1,0 +1,18 @@
+1. Brute force on small cases (every tuple enumerated in Python) against both programs:
+  t=4 n=3 n_w/D=[7, 0, 6, 7]/7: agree (0.0779053317495)
+  t=4 n=3 n_w/D=[7, 3, 4, 7]/7: agree (0.0684765136922)
+  t=4 n=4 n_w/D=[2, 2, 2, 0, 1]/7: agree (0.250906942921)
+  t=4 n=4 n_w/D=[7, 4, 7, 4, 0]/7: agree (0.15086517906)
+  t=5 n=3 n_w/D=[3, 0, 3, 0]/7: agree (0.0777637921916)
+  t=5 n=3 n_w/D=[4, 4, 7, 7]/7: agree (0.0868930264565)
+  t=6 n=2 n_w/D=[0, 0, 7]/7: agree (0.0615234375)
+  t=6 n=2 n_w/D=[1, 5, 1]/7: agree (0.0031801439782)
+  t=6 n=3 n_w/D=[2, 1, 1, 1]/7: agree (0.0721244154314)
+  t=6 n=3 n_w/D=[5, 6, 5, 0]/7: agree (0.00360779317492)
+2. f = 1/2 everywhere gives 2^(1 - C(t,2)) exactly:
+  t=6 n=6: 1/16384 = 2^(1-C(t,2))
+  t=5 n=8: 1/512 = 2^(1-C(t,2))
+3. Franek 2002 (red iff |x xor y| in {1,3,4,7,8,10}, red inside blocks), stated 51162598917/2^50:
+  classes R,R,B,R,R,B,B,R,R,B,R; method A 2 cells, total 1125899906842624 (95 s); method B 2 cells, total 1125899906842624 (0 s); 2^(n(t-1)) = 1125899906842624
+  51162598917/1125899906842624 = 0.744513802303 * 2^-14: reproduced exactly
+RESULT: selftest PASS

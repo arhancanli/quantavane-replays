@@ -1,0 +1,14 @@
+1. Random small matrices, every ordered tuple enumerated in Python, against the C counts:
+  Cayley m=8 t=4 q=[9, 5, 9, 5, 5, 5, 0, 9]/9: all = m x root True, brute force agrees
+  Cayley m=8 t=5 q=[9, 0, 9, 7, 0, 0, 9, 7]/9: all = m x root True, brute force agrees
+  Cayley m=8 t=4 q=[5, 9, 9, 0, 0, 5, 9, 0]/9: all = m x root True, brute force agrees
+  Cayley m=8 t=5 q=[0, 4, 0, 9, 0, 0, 4, 4]/9: all = m x root True, brute force agrees
+  Cayley m=4 t=4 q=[0, 0, 9, 0]/9: all = m x root True, brute force agrees
+  Cayley m=4 t=5 q=[0, 5, 5, 0]/9: all = m x root True, brute force agrees
+  arbitrary symmetric m=5 t=4: all-tuple count against brute force agrees
+  arbitrary symmetric m=5 t=4: all-tuple count against brute force agrees
+  arbitrary symmetric m=5 t=4: all-tuple count against brute force agrees
+2. f = 1/2 everywhere (m = 4, one block pair class) gives 2^(1 - C(t,2)):
+  t=4: 1/32 as expected
+  t=5: 1/512 as expected
+RESULT: selftest PASS
