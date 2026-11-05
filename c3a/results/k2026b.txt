@@ -1,0 +1,18 @@
+Row k2026b: positive control: [K2026b]'s finite certificate, B = 17032, carry-free base Q = 2B + 1 = 34065 (3a row 1.19102809); G = (1518, 1524, 1587, 2024, 2032, 2116), N = 10^13, x = 9996789017186568/10000000000000000
+  check hypotheses: q odd, B + 1 <= q, 0 in M, B in M: PASS (|M| = 3121, |M + M| = 18730, max(M + M) = 34064)
+  check |M|, |M + M| and max(M + M) as the certificate states: PASS
+  check the pruned alphabet {0, +-d} has pairwise distinct residues mod q: PASS (|D+| = 16184, |D| = 32369)
+  check every count n_d = floor(N x^kappa(d) / Z(x)) is decided by the enclosure: PASS
+  check n_0 = N - 2 sum n_d >= 0 and L = sum n_d kappa(d) >= B: PASS (n_0 = 14962802398, L = 51500691976683641)
+  check n_0 and L as stated: PASS (stated n_0 = 14962802398, L = 51500691976683641)
+  log D_N >= 98126619915169.7944769543365164475966964 (certificate: 98126619915169.79447695433652)
+  log S_N(x) <= 78190878820128.0914499967132209784733656 (certificate: 78190878820128.09144999671322)
+  log(2 q^N) <= 104360257432078.3784839163157349512232390 (certificate: 104360257432078.3784839163157)
+  theta >= 1.1910280942725408754867810 (stated, pure-integer bounds: 1.19102809424738956213)
+  check theta > 1.19102809, the printed bound: PASS
+Red controls (the same check functions, on altered data):
+  R1 (not applicable: in the carry-free base every pair has a single member in M - M)
+  R3 every count raised by 2% (n_0 = -184737925890): refused by the count check, as expected
+  R4 a claim 1e-5 above the printed one is not implied by our theta: refused, as expected
+RESULT: k2026b PASS
+run time 3 s

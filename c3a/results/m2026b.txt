@@ -1,0 +1,18 @@
+Row m2026b: [M2026] on the [K2026] mask B = 17032, odd base q = 27995 (3a row comment 1.1922990483828); G = (1518, 1524, 1587, 2024, 2032, 2116), N = 10^13, x = 9996683050229444/10000000000000000
+  check hypotheses: q odd, B + 1 <= q, 0 in M, B in M: PASS (|M| = 3121, |M + M| = 18730, max(M + M) = 34064)
+  check |M|, |M + M| and max(M + M) as the certificate states: PASS
+  check the pruned alphabet {0, +-d} has pairwise distinct residues mod q: PASS (|D+| = 13997, |D| = 27995, a complete residue system)
+  check every count n_d = floor(N x^kappa(d) / Z(x)) is decided by the enclosure: PASS
+  check n_0 = N - 2 sum n_d >= 0 and L = sum n_d kappa(d) >= B: PASS (n_0 = 17075622128, L = 50029864065809249)
+  check n_0 and L as stated: PASS (stated n_0 = 17075622128, L = 50029864065809249)
+  log D_N >= 96921708022122.2567269127207878784137408 (certificate: 96921708022122.25672691272079)
+  log S_N(x) <= 77230706212341.3318427303077935514351519 (certificate: 77230706212341.33184273030779)
+  log(5 q^N) <= 102397812017831.5460528881017728853566381 (certificate: 102397812017831.5460528881018)
+  theta >= 1.1922990484049789613338855 (stated, pure-integer bounds: 1.19229904838280822699)
+  check theta > 1.1922990483828, the printed bound: PASS
+Red controls (the same check functions, on altered data):
+  R1 both members of the pair {10963, 17032} kept in the alphabet: refused by the residue check, as expected
+  R3 every count raised by 2% (n_0 = -182582851698): refused by the count check, as expected
+  R4 a claim 1e-5 above the printed one is not implied by our theta: refused, as expected
+RESULT: m2026b PASS
+run time 3 s

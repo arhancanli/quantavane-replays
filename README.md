@@ -296,6 +296,28 @@ What rests on mathematics: Lemmas A-D of the note (the encoding, injectivity, th
 $V = 2U$), Kleinwaks's [K2026b] Proposition 3, and Robbins' bounds. The $k = 3$ instance (1.19359680\*) needs the
 min-cost histogram of $q^3 \approx 2 \cdot 10^{13}$ residues and is not replayed here.
 
+[M2026] (merged in [#236](https://github.com/teorth/optimizationproblems/pull/236)), rebuilt from Theorems 1-4 of its
+package's README alone (`c3a_check.py m2026|m2026b|k2026b`): $M = \langle G \rangle \cap [0, B]$ by reachability;
+$\kappa(d) = \min\{a + b : a, b \in M, a - b = d\}$ over all pairs; one representative $d(r)$ for each complementary
+residue pair $\{r, q - r\}$ (the cheaper one in $M - M$, $r$ on a tie), with the check that $0$ and the $\pm d(r)$ are
+pairwise distinct mod $q$; the counts $n_d = \lfloor N x^{\kappa(d)} / Z(x) \rfloor$ with $Z(x) = 1 + 2\sum x^{\kappa(d)}$,
+$n_0 = N - 2\sum n_d$ and $L = \sum n_d \kappa(d)$; then $\log D_N = \ln N! - \ln n_0! - 2\sum \ln n_d!$ from below
+(Robbins), $\log S_N(x) = N \ln P_+(x) - 2L \ln x$ from above and $\log(5q^N)$ ($\log(2Q^N)$ in the carry-free base)
+from above, in 90-digit decimal interval arithmetic. The package's data files are only compared.
+
+| Row | Data | Our result | Printed bound |
+| --- | --- | --- | --- |
+| 3a [M2026], $B = 17086$, $q = 27995$, $N = 10^{13}$ | mizopl/ghr-c3a-odd-base-finite-bound @464ceda `object/` (`b1230dd4...1fe21` and the mask, sum-support and pruned-difference files, hashes as in its README) | $M$, $M + M$ and all 13,997 rows of the pruned table ($r$, $d$, $\kappa(d)$, both residues, $n_d$) equal ours; a complete residue system mod $q$; $n_0$ and $L$ as stated; $\theta \ge 1.19230254070568368329\ldots$ | 1.19230254 (row comment 1.1923025406835) |
+| 3a [M2026] on the [K2026] mask, $B = 17032$, $q = 27995$ | `finite_certificate_17032_27995.json` (`db1517d0...ad04b`) only compared | $n_0$ and $L$ as stated; $\theta \ge 1.19229904840497896133\ldots$ | 1.1922990483828 |
+| control: [K2026b]'s finite certificate, $B = 17032$, $Q = 2B + 1 = 34065$ | `kleinwaks_finite_certificate_17032_34065.json` (`5c85a63a...8d9b`) only compared | $n_0$ and $L$ as stated; $\theta \ge 1.19102809427254087548\ldots$ | 1.19102809 |
+
+Red controls, all as expected (the same check functions on altered data): both members of a residue pair kept in the
+alphabet are refused; a witness shifted to cost $\kappa(d) + 2$ is refused; counts raised by 2% (so $n_0 < 0$) are
+refused; a claim $10^{-5}$ above the printed one is not implied. What rests on mathematics: Theorems 1-4 of the
+package's README (base-$q$ injectivity on words with pairwise distinct residues, the multinomial count, the sumset bound
+$\lvert U + U\rvert \le P_+(x)^N / x^{2L}$, and the [GHR2007] lemma for $V = 2U$ with $2\max V + 1 < 5q^N$), and
+Robbins' bounds.
+
 Reproduce: `cd c3a && ./fetch.sh && ./run_all.sh` (about 2 minutes).
 
 ## C89b and C89c: Ramsey multiplicity of $K_5$ and $K_6$ (5 November 2026)
