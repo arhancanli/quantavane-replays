@@ -41,6 +41,33 @@ Every hash above is the one stated in the pull request (for #269 also the archiv
 - Red controls, each run on every certificate: one corrupted coefficient is rejected by the identity; the old
   coefficients are rejected after one weight changes by 1; scaling every value by 3 leaves the bound unchanged.
 
+## C5a: a Sidon set constant, Erdős problem 30 (6 November 2026)
+
+`c5a/c5a_check.py`, standard library only, exact integer and rational arithmetic: the bound $C_{5a} \le 0.9428095$\*
+([Akw26] on the 5a page) through the independent certificate of
+[#335](https://github.com/teorth/optimizationproblems/pull/335) (A. Varlamov, `sidon-c5a-certificate` @091844e,
+`certificate.json`, `fece8394...80ab`), written from its `PROOF.md` alone (its `verify.py`, `audit_checker.py`,
+`build_certificate.py` and `reproduce.py` were neither read nor run). Hou and Zhao's vector-valued smoothing in the
+symmetric case: centred uniform kernels $p^{(\ell)}$ on $[n-\ell, n+\ell)$ with weights $\lambda_\ell = 4\ell^3/n^4$
+($\ell < n$) and $(2n-1)/n^2$, $n = 512$, $m = 1024$, boundary depth $L = 12$, and boundary weights
+$W^{(\ell)}_j = \lfloor \ell^{-1}\sum V_k \rfloor + r$ rebuilt from the 6,144 integers $V_k$ and $r = 43922$ (our
+window sums use prefix sums over the even sites).
+
+| Check | Result |
+| --- | --- |
+| kernels and weights | nonnegative, symmetric, masses 1, $\sum_\ell \lambda_\ell = 1$ |
+| covering inequalities, $0 \le q \le M = 12288$, over the denominator $2n^4D$ | all 12,289 hold; the least sum is exactly 1, at $q = M$ only |
+| $a$, $b$ | $a = 349525/262144$, $b = 0.666667938238285\ldots > 0$, both equal to the note's exact fractions |
+| bound | $\sqrt{ab} = 0.94280949115162893061\ldots$, so $ab \le 0.942809491151629^2 < 0.9428095^2$ by cross-multiplication |
+
+Red controls, all as expected: the repair lowered to $r - 1$ breaks one covering inequality (so $r = 43922$ is the least
+that works), $V_{100}$ halved breaks 1,224, and the claim lowered by one unit in its last digit is not implied. What
+rests on mathematics: Hou and Zhao's Theorem 2.1 in the symmetric case, as `PROOF.md` restates it (the Sidon energy
+bound, the covering sums at the boundary, weighted Cauchy-Schwarz and the choice $H \approx \sqrt{a/b}\,N^{3/4}$),
+which we read step by step.
+
+Reproduce: `cd c5a && ./fetch.sh && ./run_all.sh` (about 20 seconds).
+
 ## C49: the 3-sunflower-free capacity (4 November 2026)
 
 `c49/sunflower_check.py`, our own code: every base family is checked Sperner and 3-sunflower-free exhaustively (a pivot

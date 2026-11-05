@@ -1,0 +1,13 @@
+Row var2026 (PR #335, ArseniyVarlamov/sidon-c5a-certificate @ 091844e, certificate.json): sha256 fece83947509adf9c342c5e0e6a5739c3915ed62a6a5d3ec8d9141ab6e4f80ab (as fetched)
+  data: n = 512, m = 1024, L = 12, M = 12288, D = 10^18, repair r = 43922, 6144 integers V_k; kernels symmetric with mass 1, sum of lambda_l = 1: True
+  covering inequalities q = 0..12288: 12289 of 12289 hold; the least sum is exactly 1 at q = [12288]; below 1 at []
+  a = 349525/262144; b = 0.666667938238285... (exact fraction 160/161 bits), b > 0: True
+  ab <= (0.942809491151629)^2: True; (0.942809491151629)^2 < (0.9428095)^2: True
+  a and b equal PROOF.md's exact fractions: True
+  sqrt(ab) = 0.94280949115162893061... (floor to 20 digits): C_5a <= 0.942809491151629 < 0.9428095 (by Hou-Zhao, Theorem 2.1, as restated in PROOF.md)
+Red controls (the same checks on altered data):
+  C1 repair r - 1 = 43921: 1 covering inequalities fail: refused, as expected
+  C2 V_100 halved: 1224 covering inequalities fail: refused, as expected
+  C3 the claim lowered by one unit in its last digit (0.942809491151628): not implied, as expected
+RESULT: var2026 PASS
+run time 17 s
