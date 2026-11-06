@@ -1,0 +1,48 @@
+Theorems C1-C3 by brute force (B = 15, Q = 31, N = 1..3, up to five L each; C2 for every d): PASS (1.7 s)
+  note: M - M = [-B, B] needs B >= 15, not B >= 12 as the README's section 2 says: the d missing from M - M are B = 12: [11], B = 13: [11], B = 14: [11], B = 15: none (B = 80 and 160 are unaffected)
+  R0 the same with Q = 2B = 30 (digit differences can reach Q, so evaluation can merge two differences): refused by the brute force, as expected
+     N = 2, L = 30: |A+A| 604 vs |V+V| 625, |A-A| 931 vs |V-V| 961
+     N = 3, L = 30: |A+A| 10678 vs |V+V| 10956, |A-A| 24527 vs |V-V| 25411
+  R0b the same with L = kappa(d) - 1 in Theorem C2's small cases (the words' preimages no longer fit under L): refused by the brute force, as expected
+Row 80_161: B = 80, Q = 2B + 1 = 161, N = 1e+13, x = 8149/10000, y = 42571/50000
+  check hypotheses: B >= 12, 0 and B in M, M - M = [-B, B] (every d = 1..B has a witness): PASS (|M| = 75, gaps below 12: [1, 2, 3, 6, 7, 11], |M + M| = 155, max 160)
+  check every witness (alpha_d, beta_d) lies in M^2 with difference d and sum kappa(d): PASS (kappa from 4 to 80)
+  check |M|, |M + M|, max(M + M), the number of positive differences and |D| as the certificate states: PASS
+  check every count n_d is positive and n_0 = N - 2 sum n_d > 0 (Theorem C2's hypotheses): PASS (n_0 = 1917647564302, smallest n_d = 148290 (d = 80), L = 38217661572815)
+  check n_0 and 2L as the README states: PASS
+  check n_0, L and 2L as the certificate states: PASS
+  log D_N >= 32160395410643.406799067968756741495211436061  (certificate: 32160395410643.40679906796876)
+  log S_N(y) <= 25272243943117.818855608524183860082445987586  (certificate: 25272243943117.81885560852418)
+  C_3e >= log D_N / log S_N(y) >= 1.272557968458569792127171208104
+           README, pure-integer bounds: 1.27255796845801701855
+  check C_3e > 1.27255796, the printed bound: PASS
+  check and above [HRY1999]'s 1.2715533031: PASS (margin 0.00100467)
+  (our enclosures: log D_N in [lo, lo + 1.9e-12], log S_N(y) in [hi - 5.0e-76, hi])
+  check the certificate's log D N lower bound is a lower bound up to the rounding of its printed digits: PASS (inside our enclosure of width 1.9e-12)
+  check the certificate's log S N upper bound is an upper bound up to the rounding of its printed digits: PASS (as printed it is 3.86e-15 below the exact value, less than half a unit (5e-15) of its last digit: rounded to nearest, not up)
+Red controls (the same check functions, on altered data):
+  R1 every count raised by 25% (n_0 = -102940544568): refused by the count check, as expected
+  R2 a claim 1e-6 above the printed one is not implied by our bound: refused, as expected
+  R3 the witness for d = 11 shifted to (16, 5) (same difference, cost kappa + 2): refused by the witness check, as expected
+RESULT: 80_161 PASS  (0.0 s)
+Row 160_321: B = 160, Q = 2B + 1 = 321, N = 1e+15, x = 814897/1000000, y = 851418/1000000
+  check hypotheses: B >= 12, 0 and B in M, M - M = [-B, B] (every d = 1..B has a witness): PASS (|M| = 155, gaps below 12: [1, 2, 3, 6, 7, 11], |M + M| = 315, max 320)
+  check every witness (alpha_d, beta_d) lies in M^2 with difference d and sum kappa(d): PASS (kappa from 4 to 160)
+  check |M|, |M + M|, max(M + M), the number of positive differences and |D| as the certificate states: PASS
+  check every count n_d is positive and n_0 = N - 2 sum n_d > 0 (Theorem C2's hypotheses): PASS (n_0 = 191770127525052, smallest n_d = 1 (d = 158), L = 3821702190893496)
+  check n_0, L and 2L as the certificate states: PASS
+  log D_N >= 3216013485006550.394998978768702216987616025098  (certificate: 3216013485006550.379498195163)
+  log S_N(y) <= 2527203816196844.664348056595457451146407844434  (certificate: 2527203816196844.664348056595)
+  C_3e >= log D_N / log S_N(y) >= 1.272558020209975078103205429383
+           README, pure-integer bounds: 1.27255802020996480086
+  check C_3e > 1.27255802, the printed bound: PASS
+  check and above [HRY1999]'s 1.2715533031: PASS (margin 0.00100472)
+  (our enclosures: log D_N in [lo, lo + 7.0e-5], log S_N(y) in [hi - 5.0e-74, hi])
+  check the certificate's log D N lower bound is a lower bound up to the rounding of its printed digits: PASS (valid as printed, 1.55e-2 looser than ours)
+  check the certificate's log S N upper bound is an upper bound up to the rounding of its printed digits: PASS (as printed it is 4.57e-13 below the exact value, less than half a unit (5e-13) of its last digit: rounded to nearest, not up)
+Red controls (the same check functions, on altered data):
+  R1 every count raised by 25% (n_0 = -10287340593572): refused by the count check, as expected
+  R2 a claim 1e-6 above the printed one is not implied by our bound: refused, as expected
+  R3 the witness for d = 11 shifted to (16, 5) (same difference, cost kappa + 2): refused by the witness check, as expected
+RESULT: 160_321 PASS  (0.1 s)
+ALL PASS
