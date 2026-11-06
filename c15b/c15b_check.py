@@ -27,6 +27,9 @@ series with explicit remainders, log 2 = 2 atanh(1/3)):
 Red controls go through the same check function: the 15-step bound raised by 10^-8, the 15-step script without its
 last step, a plus step re-centred on the smaller inactive colour, and the paper's script against the 15-step bound.
 
+Also: python3 -I c15b_check.py longer   checks the longer scripts in longer_scripts.json (our own data: a beam search
+over sizes 2 to 8 and every choice of centre found nothing above 0.4665256234; these are its best at 15 and 42 steps).
+
 Usage: python3 -I c15b_check.py var2026 [CERTS] [--controls]   Python 3.9+, standard library only.
 """
 import hashlib
@@ -349,6 +352,14 @@ def check_paper_text():
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     controls = "--controls" in sys.argv
+    if args and args[0] == "longer":
+        ok = True
+        for entry in json.load(open(os.path.join(HERE, "longer_scripts.json"))):
+            print(entry["name"])
+            ok = check_script(entry["script"], Fraction(entry["bound"]), f"alpha > {entry['bound']}",
+                              entry["base_factors"])[0] and ok
+        print(f"RESULT: {'OK' if ok else 'FAIL'}")
+        return 0 if ok else 1
     if not args or args[0] != "var2026":
         print(__doc__)
         return 2

@@ -66,6 +66,13 @@ $0.4613601\ldots$, and the paper's script does not reach the 15-step bound. What
 completion and entropy arguments (Lemma 10.2, Theorem 9.3 and the output-size bound behind (12.7), and the proof of
 Lemma 12.1), which we read but did not formalize.
 
+Longer scripts (our own data, `c15b/longer_scripts.json`, checked by `c15b_check.py longer`): a beam search over every
+script with completion sizes 2 to 8 and every choice of centre (B, or either inactive colour, which Lemma 12.1 also
+allows) found nothing above $0.4665256234$. Its best 15-step script is the [Var2026] script with $-3$ as the 14th step,
+$2D/\log 2 = 0.466525082245893813\ldots$, and its best overall needs 42 completions ($b \approx 8.0 \times 10^{15}$),
+$2D/\log 2 = 0.466525623382331283\ldots$. So within this construction the 15-step script is within
+$6 \times 10^{-7}$ of the best value found.
+
 Reproduce: `cd c15b && ./fetch.sh && ./run_all.sh` (under a second).
 
 ## C5a: a Sidon set constant, Erdős problem 30 (6 November 2026)
