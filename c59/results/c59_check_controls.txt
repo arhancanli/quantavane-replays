@@ -1,0 +1,17 @@
+C59 certificate: U = Ut/den, den has 149 digits; N = 40; r = 75706319872747/250000000000000
+  check block sizes 1, 1, 1 as stated (n = m = 1), a 3 x 3 matrix: PASS
+  check U* U = I and U U* = I exactly: PASS
+  check f is not constant: PASS
+  check the coefficients sum to the closed form at z = +0.10+0.00i, w = +0.00+0.20i: PASS (difference 6.3e-59, tail bound 8.8e-29)
+  check the coefficients sum to the closed form at z = -0.06+0.04i, w = +0.05-0.10i: PASS (difference 1.3e-70, tail bound 3.9e-39)
+  sum_(j,k <= 40) |f_jk| r^(j+k) - 1 in [2.2259e-42, 2.2259e-42]  (README: the lower bound minus 1 is 2.2e-42)
+  check the finite Bohr sum at r = 0.302825279490988 exceeds 1, so K_2 < r: PASS
+  check and r is below the page's 0.302825279492 (P2026): PASS (by 1.012e-12)
+Red controls (the same check functions, on altered data):
+  R1 r lowered to 0.30282527949097 (below the search's limit 0.3028252794909793): the sum is below 1, so nothing is certified, as expected (minus 1 in [-1.581e-39, -1.581e-39])
+  R2 one entry of Ut changed by one unit: refused by the unitarity check, as expected
+  R3 the sum cut at N = 20: below 1, so the certificate needs the higher terms, as expected (minus 1 = -4.118e-38)
+RESULT: PASS  (60.8 s)
+real 60.92
+user 50.85
+sys 0.08
