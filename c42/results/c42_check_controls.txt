@@ -42,4 +42,4 @@ Finite n (floating point, not part of the proof):
   n = 1000: |Y_n| / sum_F |P_m| = 0.6977699933  (floating point; C = 0.6888863712)
   n = 2000: |Y_n| / sum_F |P_m| = 0.6945901873  (floating point; C = 0.6888863712)
   n = 4000: |Y_n| / sum_F |P_m| = 0.6925546551  (floating point; C = 0.6888863712)
-RESULT Pin26: PASS  (75.2 s)
+RESULT Pin26: PASS  (86.1 s)

@@ -55,7 +55,8 @@ class I:
         return I(LO.subtract(self.lo, o.hi), HI.subtract(self.hi, o.lo))
 
     def __neg__(self):
-        return I(-self.hi, -self.lo)
+        # copy_negate is exact; unary minus would round in decimal's default context (28 digits, half-even)
+        return I(self.hi.copy_negate(), self.lo.copy_negate())
 
     def __mul__(self, o):
         o = o if isinstance(o, I) else I(o)
@@ -69,8 +70,8 @@ class I:
         return I(min(LO.divide(a, b) for a, b in ps), max(HI.divide(a, b) for a, b in ps))
 
     def mag(self):
-        """An upper bound for |x| over the interval."""
-        return max(abs(self.lo), abs(self.hi))
+        """An upper bound for |x| over the interval (copy_abs is exact; abs() would round to 28 digits)."""
+        return max(self.lo.copy_abs(), self.hi.copy_abs())
 
     def widen(self, r):
         """[lo - r, hi + r] for a decimal r >= 0."""

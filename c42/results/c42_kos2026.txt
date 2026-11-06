@@ -1,0 +1,58 @@
+Kos2026: certs/koshta/c42_tau41_200_M64_0.6873358063.json; C = 6873358063/10000000000 = 0.6873358063; alpha = 0.6928404180017845 + 0.6148849499318954i (exact decimals); tau = 41/200; 64 middle blocks
+  check the cut-off 0 < tau < 1/2: PASS (tau = 41/200, d* = 4)
+  check breaks increase from tau to 1 - tau, one more than the middle values: PASS
+  check a = Re alpha > 0 and 0 < C < 1: PASS
+  check |s| < C and every |eta_j| < C (exact): PASS (least C^2 - |.|^2 = 1.559853e-10 = 15598531512002677452107/100000000000000000000000000000000)
+  (C < 0.69368, the page's best unstarred upper bound: yes)
+  d* = 4: T_2 on 1056 pairs; T_3 on 2443 triples (2000 with q = L/min u <= 4/5, 250 with q >= 1; largest q = 1.8780); T_4 on 609 quadruples (607 with q = L/min u <= 4/5, 0 with q >= 1; largest q = 0.8780) (multisets of breaks with sum < 1, decided exactly)
+  series lengths 30 to 369 terms; largest tail bound added: 1.58e-47 (to a T), 6.66e-48 (to a constant V); 57 s with 4 worker(s)
+  K = I_alpha(tau): Re [-0.0349471582007077906110709828418145109052, -0.0349471582007077906110709828418145109052]
+       Im [-0.3994150014178469582849384212975164276926, -0.3994150014178469582849384212975164276926]
+  D = I_a(tau) in [0.5279442381796109763080888864545980365465, 0.5279442381796109763080888864545980365465]
+  sum_j delta_j (I_alpha(1 - t_j) - K): Re [0.5621851705459818547214852396104159763856, 0.5621851705459818547214852396104159763856]
+       Im [0.1595487653662529598602650737332099287663, 0.1595487653662529598602650737332099287663]
+  sum over ordered 2-tuples of delta...delta T_2: Re [0.1311175707020923717812938688252087727790, 0.1311175707020923717812938688252087727790]
+       Im [-0.0116385448897829161206697773295687980837, -0.0116385448897829161206697773295687980837]
+  sum over ordered 3-tuples of delta...delta T_3: Re [0.0044756949327213736649135865617289356607, 0.0044756949327213736649135865617289356607]
+       Im [-0.0004671086303615310011767430282528725093, -0.0004671086303615310011767430282528725093]
+  sum over ordered 4-tuples of delta...delta T_4: Re [0.0000121416003147624837323278060746709179, 0.0000121416003147624837323278060746709179]
+       Im [-0.0000034536406197224918387691952541683328, -0.0000034536406197224918387691952541683328]
+  Y in Re [0.2462995438958082129836094724467546643342, 0.2462995438958082129836094724467546643342]
+       Im [-0.2664859935332616032702038348261574484367, -0.2664859935332616032702038348261574484367]   (width 5.1e-45)
+  |Y|/D in [0.6873358061865166162499615262590993967077, 0.6873358061865166162499615262590993967077]   (width 1.4e-44)
+  C^2 D^2 - |Y|^2 in [4.348178358021260e-11, 4.348178358021260e-11]   (C = 0.6873358063)
+  check |Y|^2 < C^2 D^2, so C_42 <= C: PASS
+Comparison with the claimant's printed numbers (after our computation; not part of the check):
+  the note prints |Y|/D = 0.687335806186516616249961526259 +- 1e-31: both ends of our enclosure round to it at 30 places: yes; within its +- 1e-31: yes
+  the note prints C^2D^2 - |Y|^2 = 4.348178358e-11: ours is 4.348178358021e-11
+  the note prints sum delta^4 T_4 = 1.214e-5 - 3.45e-6i: ours is 1.214160e-5 -3.453641e-6i (the four-fold term of Y is this over 24)
+  the note counts 1056 T_2 pairs, 2000 T_3 by the series of its section 7.1 (q <= 4/5), 443 by its integral, 609 T_4; ours: 1056 T_2, 2443 T_3, 609 T_4
+Control (a): the same code at tau >= 1/3 (d* = 2) against c42_check.py on Griego's and Pinho's certificates
+  Gri26 (tau = 36988243/100000000, 1 block(s), 1 pairs): new PASS = True, |Y|/D in [0.6906536951516311844467907320, 0.6906536951516311844467907320], C^2D^2 - |Y|^2 >= 1.550063e-7 (1 s)
+    c42_check.py: PASS = True, |Y|/D <= 0.6906536951516311844467907 (0 s); Y and D overlap: yes; Y midpoints differ by 1.2e-48
+  Pin26 (tau = 1/3, 256 block(s), 16512 pairs): new PASS = True, |Y|/D in [0.6888863709834656458227678031, 0.6888863709834656458227678031], C^2D^2 - |Y|^2 >= 2.374726e-10 (80 s)
+    c42_check.py: PASS = True, |Y|/D <= 0.6888863709834656458227678 (44 s); Y and D overlap: yes; Y midpoints differ by 1.1e-48
+Control (b): altered data must be refused (the T_d values are reused; only C or the deltas change)
+  C lowered to 0.687335806186515 (below our |Y|/D): |Y|^2 < C^2 D^2 fails, C^2D^2 - |Y|^2 <= -6.193e-16; exact checks failing too: |s| < C and every |eta_j| < C (exact)
+  eta_0 replaced by s (the first step removed): |Y|/D >= 0.6877401889: refused, as expected
+  (for scale: without the d* = 4 term, |Y|/D would be in [0.687334955614, 0.687334955614], PASS; that term moves |Y|/D by 8.506e-7)
+Control (c): T_d by other methods
+  T_2 = J on all 1056 pairs against c42_check.py's series: all overlap; largest midpoint difference 1.2e-46
+  T_3(3, 3, 35) (q = 0.030): vertex series (30 terms, tail <= 8.6e-52) and face series overlap: yes; midpoints differ by 3.3e-53, widths 1.6e-51 and 1.9e-51 (0 s)
+  T_3(9, 9, 16) (q = 0.249): vertex series (70 terms, tail <= 5.9e-46) and face series overlap: yes; midpoints differ by 1.9e-49, widths 2.2e-49 and 1.2e-45 (0 s)
+  T_3(7, 7, 13) (q = 0.505): vertex series (150 terms, tail <= 2.4e-47) and face series overlap: yes; midpoints differ by 1.1e-50, widths 6.1e-49 and 4.9e-47 (0 s)
+  T_3(2, 2, 22) (q = 0.650): vertex series (230 terms, tail <= 1.2e-45) and face series overlap: yes; midpoints differ by 2.3e-50, widths 1.9e-48 and 2.5e-45 (0 s)
+  T_3(4, 4, 14) (q = 0.753): vertex series (350 terms, tail <= 2.0e-45) and face series overlap: yes; midpoints differ by 1.2e-49, widths 2.6e-48 and 4.0e-45 (0 s)
+  T_3(1, 1, 20) (q = 0.850): vertex series (610 terms, tail <= 3.6e-45) and face series overlap: yes; midpoints differ by 3.0e-50, widths 3.0e-48 and 7.3e-45 (0 s)
+  T_4(4, 4, 4, 6) (q = 0.058): vertex series (40 terms, tail <= 2.5e-56) and face series overlap: yes; midpoints differ by 2.0e-55, widths 8.8e-52 and 4.9e-53 (0 s)
+  T_4(2, 2, 2, 4) (q = 0.393): vertex series (110 terms, tail <= 1.5e-48) and face series overlap: yes; midpoints differ by 8.0e-52, widths 1.9e-49 and 3.1e-48 (0 s)
+  T_4(0, 0, 0, 4) (q = 0.698): vertex series (270 terms, tail <= 4.0e-45) and face series overlap: yes; midpoints differ by 5.0e-51, widths 1.6e-47 and 8.0e-45 (0 s)
+  T_4(0, 0, 0, 0) (q = 0.878): vertex series (750 terms, tail <= 8.0e-45) and face series overlap: yes; midpoints differ by 2.8e-50, widths 2.7e-47 and 1.6e-44 (1 s)
+  T_3(4, 4, 7) (q = 1.020) by int_0^L H_2 K, tanh-sinh (not rigorous): -7.813944e-2 -1.469685e-1i differs from the face series by 1.2e-46 (step h against 2h: 8.2e-48); within 1e-20: yes (1 s)
+  T_3(2, 2, 4) (q = 1.393) by int_0^L H_2 K, tanh-sinh (not rigorous): -1.044687e-1 -3.172363e-1i differs from the face series by 3.1e-46 (step h against 2h: 1.1e-46); within 1e-20: yes (1 s)
+  T_3(0, 0, 0) (q = 1.878) by int_0^L H_2 K, tanh-sinh (not rigorous): -9.984667e-2 -6.420305e-1i differs from the face series by 8.2e-46 (step h against 2h: 6.9e-44); within 1e-20: yes (1 s)
+  T_4(0, 0, 0, 0) (q = 0.878) by the scaling identity, tanh-sinh (not rigorous): -2.349320e-2 -1.989147e-2i differs from the face series by 2.6e-50 (step h against 2h: 3.4e-49); within 1e-20: yes (2 s)
+  T_4(1, 1, 1, 5) (q = 0.496) by the scaling identity, tanh-sinh (not rigorous): -3.876241e-3 -1.397323e-3i differs from the face series by 2.5e-51 (step h against 2h: 6.0e-52); within 1e-20: yes (2 s)
+  controls: all as expected
+time 197 s
+RESULT C42 <= 6873358063/10000000000: PASS

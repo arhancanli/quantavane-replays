@@ -472,7 +472,41 @@ corrections would then reach $b_n$). A floating-point look at the construction i
 proof): $\lvert Y_n\rvert / \sum_F \lvert P_m\rvert$ falls toward $\lvert Y\rvert/D$ like $n^{-a}$ ($a = \mathrm{Re}\,\alpha$), from
 0.70436 at $n = 500$ to 0.69447 at $n = 4000$ for [Gri26], and from 0.70268 to 0.69255 for [Pin26]. What rests on
 mathematics: the asymptotic reduction (the limits of the normalized sums), which the rows mark as unrefereed.
-Reproduce: `cd c42 && ./fetch.sh && ./run_all.sh` (about 80 seconds).
+
+`c42/kos_check.py`, standard library only: Koshta's $C_{42} \le 0.6873358063$ [Kos2026]
+([#263](https://github.com/teorth/optimizationproblems/pull/263)), with first-block cut-off $\tau = 41/200$. It rests on
+the theorem in section 4 of his note, which extends the criterion to any $0 < \tau < 1/2$: $Y$ gains the terms
+$\frac{(-1)^d}{d!} \sum \delta_{j_1} \cdots \delta_{j_d} T_d(t_{j_1}, \ldots, t_{j_d})$ over ordered tuples for
+$2 \le d \le d^* = \lceil 1/\tau \rceil - 1$ (here $d^* = 4$), where
+$T_d(u) = \int_{x \ge u,\ \sum x_i \le 1} (1 - \sum x_i)^{\alpha - 1} / (x_1 \cdots x_d)\,dx$ and $T_2 = J$. The note's
+checker, verifier and cross-check code were neither read nor run, and $T_d$ comes from a series of our own, not from the
+note's sections 5 and 7. On the slice $\sum x_i = S$, $1/(x_1 \cdots x_d) = S^{-1} \sum_k \prod_{i \ne k} 1/x_i$. So the
+integral of $1/(x_1 \cdots x_d)$ over a slice is a sum of volume integrals for the tuple's sub-tuples, and each volume
+integral is the integral of the sub-tuple's own slice integral. Expanded about the face $\sum x_i = 1$, all these series
+converge with ratio $L/(L + \min u)$, where $L = 1 - \sum u$. That ratio is below 1 for every tuple: at most 0.742, 0.653
+and 0.468 for $T_2$, $T_3$ and $T_4$ here, including the 250 triples with $L \ge \min u$, where the note's series about
+the vertex diverges. A majorant carried through the same recursion bounds every tail. The arithmetic is
+`c42_check.py`'s, with the angle in $x^{ib}$ reduced by an enclosure of $2\pi$ from Machin's formula.
+
+| Row | Certificate (SHA-256) | Our result | Printed bound |
+| --- | --- | --- | --- |
+| [Kos2026] | DennisKoshta/c42-turan-power-sum-certificate @ `8e1797e0`, `certificates/c42_tau41_200_M64_0.6873358063.json` (`be0c406f...cbef`, as the note states; 64 blocks; 1,056 pairs, 2,443 triples and 609 quadruples with sum below 1) | $\lvert Y\rvert/D = 0.687335806186516616249961526259099396\ldots$ (enclosure width $1.4 \cdot 10^{-44}$), $C^2D^2 - \lvert Y\rvert^2 = 4.348178358021 \cdot 10^{-11}$; the note's 30 decimals of $\lvert Y\rvert/D$, its margin $4.348178358 \cdot 10^{-11}$ and its four-fold sum $1.214 \cdot 10^{-5} - 3.45 \cdot 10^{-6} i$ all agree | 0.6873358063 |
+
+Controls (`--controls`), all as expected. The same code at $\tau \ge 1/3$ ($d^* = 2$) reproduces both rows above, with
+$Y$ within $1.2 \cdot 10^{-48}$ of `c42_check.py`'s. $C$ lowered to 0.687335806186515 and $\eta_0$ replaced by $s$ are both
+refused by $\lvert Y\rvert < CD$. $T_2$ on all 1,056 pairs overlaps `c42_check.py`'s $J$. On ten tuples with
+$L < \min u$ (up to $L/\min u = 0.878$), $T_3$ and $T_4$ overlap the note's series about the vertex, which we also
+evaluate rigorously. $T_3$ with $L \ge \min u$ (up to 1.878) agrees with $\int_0^L H_2(\sigma) K(L - \sigma)\,d\sigma$ to
+$10^{-45}$, and $T_4$ with the note's scaling identity to $10^{-49}$, both by tanh-sinh quadrature (not rigorous). The
+four-fold term raises $\lvert Y\rvert/D$ by $8.5 \cdot 10^{-7}$, about 7,500 times the gap $C - \lvert Y\rvert/D$, so it
+cannot be left out. What rests on mathematics: the general-cut-off reduction of section 4, which the row marks as
+unrefereed; this replay checks the limiting inequality.
+
+A fix in `c42_check.py` (6 November): `abs()` and unary minus on a decimal round in Python's default context (28
+digits, half-even), not outward. `I.mag` and `I.__neg__` now use the exact `copy_abs` and `copy_negate`. The effect was
+below $10^{-28}$ relative, and the outputs for [Gri26] and [Pin26] are unchanged in every printed digit.
+
+Reproduce: `cd c42 && ./fetch.sh && ./run_all.sh` (all three rows with their controls, about five minutes).
 
 ## C12a: the Euclidean travelling salesman constant (6 November 2026)
 
