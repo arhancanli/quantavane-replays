@@ -1,0 +1,42 @@
+certificate var2026/certificate.json: sha256 8a81020fd6ac36a64b5e8b03e2dbf8c2860160a7e019e9c31bfe4dc50d5db345 (pinned)
+script [-2, 2, 2, -3, 2, 2, -4, 2, -2, 2, -3, 2, 2, -2, 2], base factors 147456, bound 23326253/50000000
+interval arithmetic: 448 fractional bits; log 2 in [0.69314718055994530941723212145817656807550013436025...]
+
+[Var2026] the 15-step script
+  b = 147456; centres BACBCABCBABCABC
+  2D/log 2 by (12.9):     0.466525061423431426876062217019873866731831479818840821820549...  (enclosure width 5.7e-131)
+  2D/log 2 by Lemma 12.1: 0.466525061423431426876062217019873866731831479818840821820549...
+  2D/log 2 > 23326253/50000000 = 0.46652506: yes
+  alpha > 23326253/50000000: OK
+  agrees with the printed 2D/log 2 = 0.466525061423431...: yes
+
+[OAI2026] the paper's seven-step script (12.8)
+  b = 288; centres BACBCBA
+  2D/log 2 by (12.9):     0.466101554898471852177070942205244319883790237966135846343174...  (enclosure width 4.6e-131)
+  2D/log 2 by Lemma 12.1: 0.466101554898471852177070942205244319883790237966135846343174...
+  2D/log 2 > 93/200 = 0.465: yes
+  alpha > 0.465: OK
+  agrees with the printed 0.466101554898 (README of [Var2026] and the 15b row): yes
+  centres B, A, C, B, C, B, A as stated after (12.8): yes
+  the certified information after (12.9) and the chain (12.10):
+    ok   rho_8 = 1 - (3/4)^4
+    ok   delta_8 = log(9/7)
+    ok   D_8 = (0.5625/4) log 3
+    ok   plus steps at b = 4, 8: z = log 3, log(7/9)
+    ok   rho_24 = rho_8^3, 0.3194 < rho_24 < 0.3195
+    ok   0.348 < delta_24 < 0.354
+    ok   1 - rho_48 = (1 - rho_24)^2 > 0.463, 0.536 < rho_48 < 0.537
+    ok   0.635 < z_48 < 0.651
+    ok   rho_96 = rho_48^2, delta_96 = 2 delta_48/(1 + rho_48) < 0.86
+    ok   1 - rho_288 = (1 - rho_48^2)^3 > 0.360, z_288 > 0.628
+    ok   log 2 < 0.6932 and log 3 > 1.098
+    ok   (12.10): the chain equals 1548637/3327360 and exceeds 0.465
+
+Red controls (each must FAIL):
+  C1 the 15-step bound raised by 10^-8: 2D/log 2 = 0.466525061423431...: fails, as it must
+  C2 the 15-step script without its last step: 2D/log 2 = 0.466519506667404...: fails, as it must
+  C3 its fifth step re-centred on the smaller inactive colour: 2D/log 2 = 0.461360098719644...: fails, as it must
+  C4 the paper's seven-step script against the 15-step bound: 2D/log 2 = 0.466101554898471...: fails, as it must
+
+RESULT: OK: alpha > 23326253/50000000 = 0.46652506 ([Var2026]) and alpha > 0.465 ([OAI2026]), given Section 12.1 of [OAI2026]
+run time 0.0 s

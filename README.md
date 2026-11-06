@@ -41,6 +41,33 @@ Every hash above is the one stated in the pull request (for #269 also the archiv
 - Red controls, each run on every certificate: one corrupted coefficient is rejected by the identity; the old
   coefficients are rejected after one weight changes by 1; scaling every value by 3 leaves the bound unchanged.
 
+## C15b: the dual matrix multiplication exponent (6 November 2026)
+
+`c15b/c15b_check.py`, standard library only, interval arithmetic of our own (fixed point with 448 fractional bits,
+outward rounding, exp and log by series with explicit remainders): the two rows proposed for the 15b page in
+[#337](https://github.com/teorth/optimizationproblems/pull/337), $\alpha > 0.465$\* ([OAI2026], the seven-step
+completion script (12.8)) and $\alpha > 0.46652506$\* ([Var2026], a 15-step script, `dual-alpha-witness` @d2868fa,
+`certificate.json`, `8a81020f...d345`), written from Section 12.1 of the preprint and the certificate data alone
+(Varlamov's `verify.py` was neither read nor run). Base two, distinguished side $X$ and its colour $B$; each completion
+of size $m$ updates $(\rho, b, h_A, h_B, h_C)$ by Lemma 12.1, and $\alpha \ge \min\{1, 2D/\log 2\}$ with
+$D = (\rho h_B + (1-\rho)\max(h_A, h_C))/b$.
+
+| Check | Result |
+| --- | --- |
+| the 15-step script | sizes multiply to $b = 147456$, as the certificate says |
+| $2D/\log 2$, reduced recurrence (12.9) and full Lemma 12.1, which agree | $0.466525061423431426876062217\ldots$ (enclosure width $6 \times 10^{-131}$) |
+| the claim | $2D/\log 2 > 23326253/50000000$, by exact comparison of the interval ends |
+| the paper's script (12.8) | $2D/\log 2 = 0.466101554898471852177\ldots > 0.465$; centres B, A, C, B, C, B, A as stated |
+| the certified information after (12.9) and the chain (12.10) | all eleven statements hold ($\rho$ exactly, as a dyadic rational), and the chain equals $1548637/3327360 > 0.465$ |
+
+Red controls, all as expected, through the same check: the 15-step bound raised by $10^{-8}$ is not implied, the
+script without its last step gives $0.4665195\ldots$, its fifth step re-centred on the smaller inactive colour gives
+$0.4613601\ldots$, and the paper's script does not reach the 15-step bound. What rests on mathematics: the preprint's
+completion and entropy arguments (Lemma 10.2, Theorem 9.3 and the output-size bound behind (12.7), and the proof of
+Lemma 12.1), which we read but did not formalize.
+
+Reproduce: `cd c15b && ./fetch.sh && ./run_all.sh` (under a second).
+
 ## C5a: a Sidon set constant, Erdős problem 30 (6 November 2026)
 
 `c5a/c5a_check.py`, standard library only, exact integer and rational arithmetic: the bound $C_{5a} \le 0.9428095$\*
