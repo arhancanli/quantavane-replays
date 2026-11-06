@@ -17,4 +17,7 @@ get vid certificate.json vidigoat/optimization-records 5da2dc1f4c5294a3f3bcb8fb1
 # PR #270 update of 5 Nov, night: C16 <= 2.15622552815421296 (383 delta-intervals with their mu; c16_pinned_v2)
 get vid2 certificate.json vidigoat/optimization-records 1e8e7869fce3e273f3e0cdd59a35b356cccc8880 \
     tao/certificates/c16_pinned_v2/certificate.json
+# 16a row of PR #326 (maximusrufus): the truncated trial function, R = 4000 and mu = 1221/10000 only
+get maxr lower_certificate.json maximusrufus/c16-bgw-certificates 0c570700f080ca23549e10380901addfc8b7b8ae \
+    lower_certificate.json
 shasum -a 256 -c "$here/SHA256SUMS"

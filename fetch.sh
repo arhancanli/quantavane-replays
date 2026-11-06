@@ -14,4 +14,9 @@ get kerem_c1d_n40960_1.4556234448.json https://raw.githubusercontent.com/Keremoz
 get echul_c1d_records.tgz https://raw.githubusercontent.com/echul-seal/c1d-upper-bound/2be42dfdb6ecc60e2fe1345a38c4db21688f5726/c1d_records.tgz
 get huiihao_construction.json https://raw.githubusercontent.com/huiihao/c1d-certificate/302817dc3227ce281e9cfb486f12ff0df7fe2876/construction.json
 python3 -I -c "import tarfile; t = tarfile.open('echul_c1d_records.tgz'); m = t.getmember('ub/c_f10240.json'); assert m.isfile(); open('echul_c_f10240.json', 'wb').write(t.extractfile(m).read())"
+# PR #326's two 1d rows: STEPS2026 (construction.json) and AER2026 (a Python file, parsed with ast as text and never run;
+# its N = 600 list is copied verbatim into aer2026_n600.json)
+get steps_construction.json https://raw.githubusercontent.com/steps-re/c1d-certificate/9a091494facc801eaf6b92b175b63c58b7c3b30b/construction.json
+get aer_problem_4_signed_autoconvolution_bounds.py https://raw.githubusercontent.com/unclegareth-create/alphaevolve_repository_of_problems/4b3bbd2a44db92442e4ebb4e64e0bb90f229aad1/experiments/autocorrelation_problems/problem_4_signed_autoconvolution_bounds.py
+python3 -I -c "import ast; src = open('aer_problem_4_signed_autoconvolution_bounds.py').read(); n = next(a for a in ast.parse(src).body if isinstance(a, ast.Assign) and getattr(a.targets[0], 'id', '') == 'STEP_FUNCTION_C4_PRIME_N600'); t = [ast.get_source_segment(src, e).strip() for e in n.value.elts]; assert len(t) == 600; open('aer2026_n600.json', 'w').write('{\"values\": [' + ', '.join(t) + ']}\\n')"
 shasum -a 256 -c ../SHA256SUMS

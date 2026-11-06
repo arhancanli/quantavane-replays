@@ -1,0 +1,13 @@
+1d certs/aer2026_n600.json
+  n: 600
+  S: 1372286625175992783609
+  argmax_m: 599
+  max_abs_c: 2291173685536947313386827610108832667648
+  scaled_by: 2305843009213693952
+  sign_at_max: +
+  ties: 1
+  bound = 916469474214778925354731044043533067059200/627723527212305237039091106377481433021627
+  decimal: floor 1.4599890469053832431503  ceil 1.4599890469053832431504
+  control: corrupted coefficient 399 rejected: True
+  control: old coefficients rejected for weight 300 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

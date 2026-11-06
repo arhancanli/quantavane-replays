@@ -1,0 +1,12 @@
+trial function: 0 < |k| <= R = 4000, mu = 1221/10000; 21 s
+  S0 = sum c_k in [9.3135820311868365962235728829811456032607, 9.3135820311868365962235728829811456032607]
+  S1 = sum |k|^2 c_k^2 in [6.2940899274264383035169402342434433155488, 6.2940899274264383035169402342434433155488]
+  S2 = sum |k|^4 c_k^2 in [24.7296650594627214799888013819631636995240, 24.7296650594627214799888013819631636995240]
+  L >= 2.15622477064423579034   (enclosure [2.15622477064423579034, 2.15622477064423579034])
+  check L >= 2.1562247706, the printed bound: PASS
+  the certificate's three sum enclosures (scale 2^120) overlap ours: yes
+  its stated lower bound 2.156224770644235 lies in our enclosure: yes
+Red controls (the same code, other trial functions):
+  R = 400 (truncated ten times shorter): L >= 2.156149785253, below the printed bound, as expected
+  mu = 0.14 instead of 0.1221: L >= 2.156040993624, below the printed bound, as expected
+RESULT: PASS  (41 s)

@@ -1,0 +1,13 @@
+1d certs/steps_construction.json
+  n: 600
+  S: 691752902764108117793
+  argmax_m: 631
+  max_abs_c: 582288508155665299546236144731024746368
+  scaled_by: 576460752303423488
+  sign_at_max: +
+  ties: 1
+  bound = 698746209786798359455483373677229695641600/478522078482569620433992386249161163190849
+  decimal: floor 1.4602172840228739852488  ceil 1.4602172840228739852489
+  control: corrupted coefficient 399 rejected: True
+  control: old coefficients rejected for weight 300 + 1: True
+  control: bound unchanged when every value is scaled by 3: True
