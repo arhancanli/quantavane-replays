@@ -493,13 +493,13 @@ each of `k7`, `k8` and `k9` by Held-Karp in every cell.
 | `k6.txt` | 6,192, all equal | 12593568504391125 | 0.872868757138 | 8729/10000 |
 | `k7.txt` | 19,680, all equal | 92054418307910785 | 0.868075379727 | 8681/10000 |
 | `k8.txt` | 70,482, all equal | 628708228549677266 | 0.864607001369 | 8647/10000 |
-| `k9.txt` | <K9_COMPARED> | <K9_TOTAL> | <K9_BOUND> | 8618/10000 |
+| `k9.txt` | 269,290, all equal | 4430997795015293889 | 0.861715646305 | 8618/10000 |
 
 The test cases `tiny`, `rounding`, `bhh` and `k4` (146, 971, 8 and 952 numbers) agree as well. Red controls: one cell
 sum of `k5` increased by 1 (refused; that number alone differs), the `k7` threshold set $10^{-12}$ below its rounded-up
 bound (refused by the test; accepted at the bound), and mesh 127 in place of 128 for `k5` (refused; 1,779 of the 2,280
 numbers differ). Not checked here: that `RECIPE.md` defines the integers of Section 4.1 of the paper, and the proof that
-this number bounds $\beta$. Reproduce: `cd c12a && ./run_all.sh` (a C11 compiler; `k9` took <K9_TIME> on 12 threads of a
+this number bounds $\beta$. Reproduce: `cd c12a && ./run_all.sh` (a C11 compiler; `k9` took 73 minutes on 12 threads of a
 loaded Apple M5 Pro, and `./run_all.sh quick` leaves it out and takes about 7 minutes).
 
 ## Reproduce

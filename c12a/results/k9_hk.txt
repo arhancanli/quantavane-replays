@@ -1,0 +1,15 @@
+spec certs/tsp/data/specs/k9.txt
+values certs/tsp/data/specs/../values/k9.txt
+parameters: k 9, h 11/5, mesh 128, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 8618/10000
+masses: 4 compared, 4 equal
+tail_term: 1 compared, equal (484)
+table: 714 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 7140 numbers compared, 0 lines differ
+cell sum S_0 (Held-Karp in every cell): 2219970843097268420, stored 2219970843097268420, equal
+cell sum S_1 (Held-Karp in every cell): 2292762492493066974, stored 2292762492493066974, equal
+cell sum S_4 (Held-Karp in every cell): 2373787891719458830, stored 2373787891719458830, equal
+cell sum S_65536 (Held-Karp in every cell): 2292762492493066974, stored 2292762492493066974, equal
+cell sum S_100000 (Held-Karp in every cell): 3961464779379549648, stored 3961464779379549648, equal
+cell sum S_199999 (Held-Karp in every cell): 5568743848209118236, stored 5568743848209118236, equal
+cell sum S_262143 (Held-Karp in every cell): 7601315648653131264, stored 7601315648653131264, equal
+section 7 run time 658.2 s, 12 threads
+RESULT: AGREE: 7 cell sums recomputed by Held-Karp in every cell, 0 differ (masses, tail term and table: 0 numbers differ)

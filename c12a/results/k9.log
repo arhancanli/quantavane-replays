@@ -1,0 +1,58 @@
+start 2026-11-06T10:48:13Z: c12a_check certs/tsp/data/specs/k9.txt -j 12
+sections 2-3 0.02 s, 4 0.18 s, 5 0.04 s, 6 0.00 s
+section 7: 166 of 8320 done, 89 s, about 4348 s left
+section 7: 332 of 8320 done, 200 s, about 4808 s left
+section 7: 498 of 8320 done, 313 s, about 4914 s left
+section 7: 664 of 8320 done, 427 s, about 4929 s left
+section 7: 830 of 8320 done, 524 s, about 4729 s left
+section 7: 996 of 8320 done, 605 s, about 4450 s left
+section 7: 1162 of 8320 done, 692 s, about 4264 s left
+section 7: 1328 of 8320 done, 778 s, about 4098 s left
+section 7: 1494 of 8320 done, 866 s, about 3955 s left
+section 7: 1660 of 8320 done, 950 s, about 3813 s left
+section 7: 1826 of 8320 done, 1037 s, about 3687 s left
+section 7: 1992 of 8320 done, 1120 s, about 3558 s left
+section 7: 2158 of 8320 done, 1206 s, about 3444 s left
+section 7: 2324 of 8320 done, 1297 s, about 3345 s left
+section 7: 2490 of 8320 done, 1386 s, about 3245 s left
+section 7: 2656 of 8320 done, 1475 s, about 3145 s left
+section 7: 2822 of 8320 done, 1564 s, about 3048 s left
+section 7: 2988 of 8320 done, 1650 s, about 2945 s left
+section 7: 3154 of 8320 done, 1736 s, about 2844 s left
+section 7: 3320 of 8320 done, 1823 s, about 2746 s left
+section 7: 3486 of 8320 done, 1910 s, about 2648 s left
+section 7: 3652 of 8320 done, 1995 s, about 2550 s left
+section 7: 3818 of 8320 done, 2079 s, about 2452 s left
+section 7: 3984 of 8320 done, 2177 s, about 2369 s left
+section 7: 4150 of 8320 done, 2258 s, about 2269 s left
+section 7: 4316 of 8320 done, 2343 s, about 2173 s left
+section 7: 4482 of 8320 done, 2428 s, about 2079 s left
+section 7: 4648 of 8320 done, 2512 s, about 1985 s left
+section 7: 4814 of 8320 done, 2597 s, about 1891 s left
+section 7: 4980 of 8320 done, 2681 s, about 1798 s left
+section 7: 5146 of 8320 done, 2763 s, about 1704 s left
+section 7: 5312 of 8320 done, 2848 s, about 1613 s left
+section 7: 5478 of 8320 done, 2938 s, about 1524 s left
+section 7: 5644 of 8320 done, 3024 s, about 1434 s left
+section 7: 5810 of 8320 done, 3110 s, about 1344 s left
+section 7: 5976 of 8320 done, 3196 s, about 1254 s left
+section 7: 6142 of 8320 done, 3277 s, about 1162 s left
+section 7: 6308 of 8320 done, 3361 s, about 1072 s left
+section 7: 6474 of 8320 done, 3446 s, about 983 s left
+section 7: 6640 of 8320 done, 3530 s, about 893 s left
+section 7: 6806 of 8320 done, 3614 s, about 804 s left
+section 7: 6972 of 8320 done, 3697 s, about 715 s left
+section 7: 7138 of 8320 done, 3776 s, about 625 s left
+section 7: 7304 of 8320 done, 3859 s, about 537 s left
+section 7: 7470 of 8320 done, 3942 s, about 449 s left
+section 7: 7636 of 8320 done, 4025 s, about 361 s left
+section 7: 7802 of 8320 done, 4108 s, about 273 s left
+section 7: 7968 of 8320 done, 4190 s, about 185 s left
+section 7: 8134 of 8320 done, 4269 s, about 98 s left
+section 7: 8300 of 8320 done, 4351 s, about 10 s left
+section 7: 8320 of 8320 done, 4361 s, about 0 s left
+section 7 4361.0 s
+finish 2026-11-06T12:00:55Z: status 0
+start 2026-11-06T12:00:55Z: c12a_check certs/tsp/data/specs/k9.txt -j 12 --hk 0,1,4,65536,100000,199999,262143
+sections 2-3 0.02 s, 4 0.18 s, 5 0.03 s, 6 0.00 s
+finish 2026-11-06T12:11:53Z: status 0
