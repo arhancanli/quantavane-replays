@@ -1,0 +1,13 @@
+spec certs/tsp/data/specs/tiny.txt
+values certs/tsp/data/specs/../values/tiny.txt
+parameters: k 3, h 2/1, mesh 16, gaps 11 28 (m = 3), heights 3, height_mesh 4, tail 12, threshold 95/100
+masses: 3 compared, 3 equal
+tail_term: 1 compared, equal (26390)
+table: 19 lines of m + n = 6 numbers (key and Tab(key, 0..n-1)), 114 numbers compared, 0 lines differ
+sums: 27 compared, 27 equal (shared paths, reversal, reflection on a_1)
+total: 1 compared, equal (1907697663974)
+bound 0.913931018519 (rounded up)
+test: A_0 h_2 theta_2 = 190769766397400 <= theta_1 n^(k+1) F k h_1 = 198298640056320
+numbers compared: 146, differ: 0
+run time 0.0 s (section 7 0.0 s), 12 threads
+RESULT: ACCEPTED: all 146 stored numbers equal the recomputed ones and B <= 95/100

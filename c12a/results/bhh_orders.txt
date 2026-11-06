@@ -1,0 +1,13 @@
+spec certs/tsp/data/specs/bhh.txt
+values certs/tsp/data/specs/../values/bhh.txt
+parameters: k 2, h 26/15, mesh 128, gaps (m = 1), heights 1, height_mesh 256, tail 16, threshold 9212/10000
+masses: 1 compared, 1 equal
+tail_term: 1 compared, equal (484)
+table: 2 lines of m + n = 2 numbers (key and Tab(key, 0..n-1)), 4 numbers compared, 0 lines differ
+sums: 1 compared, 1 equal (all (k-1)! orders in every cell, no identities)
+total: 1 compared, equal (13715469540)
+bound 0.921167769524 (rounded up)
+test: A_0 h_2 theta_2 = 2057320431000000 <= theta_1 n^(k+1) F k h_1 = 2057392413999104
+numbers compared: 8, differ: 0
+run time 0.0 s (section 7 0.0 s), 12 threads
+RESULT: ACCEPTED: all 8 stored numbers equal the recomputed ones and B <= 9212/10000

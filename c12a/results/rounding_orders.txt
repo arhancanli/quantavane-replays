@@ -1,0 +1,13 @@
+spec certs/tsp/data/specs/rounding.txt
+values certs/tsp/data/specs/../values/rounding.txt
+parameters: k 3, h 21/10, mesh 1023, gaps 202 450 579 829 963 (m = 6), heights 3, height_mesh 1, tail 1, threshold 987/1000
+masses: 6 compared, 6 equal
+tail_term: 1 compared, equal (1580030169)
+table: 83 lines of m + n = 9 numbers (key and Tab(key, 0..n-1)), 747 numbers compared, 0 lines differ
+sums: 216 compared, 216 equal (all (k-1)! orders in every cell, no identities)
+total: 1 compared, equal (2161286413694)
+bound 0.986113476036 (rounded up)
+test: A_0 h_2 theta_2 = 21612864136940000 <= theta_1 n^(k+1) F k h_1 = 21632294276038656
+numbers compared: 971, differ: 0
+run time 0.0 s (section 7 0.0 s), 12 threads
+RESULT: ACCEPTED: all 971 stored numbers equal the recomputed ones and B <= 987/1000

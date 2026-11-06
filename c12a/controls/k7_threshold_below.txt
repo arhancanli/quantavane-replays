@@ -1,0 +1,9 @@
+k 7
+h 21 10
+mesh 128
+gaps 48 112 208
+heights 6
+height_mesh 64
+tail 16
+threshold 868075379726 1000000000000
+values ../certs/tsp/data/values/k7.txt

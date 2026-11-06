@@ -1,0 +1,13 @@
+spec certs/tsp/data/specs/k7.txt
+values certs/tsp/data/specs/../values/k7.txt
+parameters: k 7, h 21/10, mesh 128, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 8681/10000
+masses: 4 compared, 4 equal
+tail_term: 1 compared, equal (484)
+table: 329 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 3290 numbers compared, 0 lines differ
+sums: 16384 compared, 16384 equal (shared paths, reversal, reflection on a_1)
+total: 1 compared, equal (92054418307910785)
+bound 0.868075379727 (rounded up)
+test: A_0 h_2 theta_2 = 9205441830791078500000 <= theta_1 n^(k+1) F k h_1 = 9205702914683229437952
+numbers compared: 19680, differ: 0
+run time 7.1 s (section 7 7.0 s), 12 threads
+RESULT: ACCEPTED: all 19680 stored numbers equal the recomputed ones and B <= 8681/10000

@@ -471,6 +471,34 @@ proof): $\lvert Y_n\rvert / \sum_F \lvert P_m\rvert$ falls toward $\lvert Y\rver
 mathematics: the asymptotic reduction (the limits of the normalized sums), which the rows mark as unrefereed.
 Reproduce: `cd c42 && ./fetch.sh && ./run_all.sh` (about 80 seconds).
 
+## C12a: the Euclidean travelling salesman constant (6 November 2026)
+
+`c12a/c12a_check.c`, C11 with 128-bit integers: the computation behind $\beta \le 0.8618$ [O2026]
+([#222](https://github.com/teorth/optimizationproblems/pull/222)), written from `RECIPE.md` of
+devinokeefe/travelling-sales-person-constant-bounds @ `69b864b9` alone (its three checkers were neither read nor run).
+Every integer of Sections 2 to 8 is recomputed from the parameters of a spec file and compared with its values file
+(the masses, the tail term, every table line, every cell sum and the total), then the test
+$A_0 h_2 \theta_2 \le \theta_1 n^{k+1} F k h_1$. The cell sums (Section 7; for $k = 9$, $4^9 \cdot 6^{10}$ cells, each
+the least cost over $8!$ orders) use the shared-paths identity, with $H$ built in nested loops over the middle heights
+(Held-Karp path costs over subsets, then the two-path covers), the reversal and the reflection on $a_1$ only. Without
+any of the three identities, all cell sums of `tiny` to `k6` were also recomputed by all orders in every cell, and seven
+each of `k7`, `k8` and `k9` by Held-Karp in every cell.
+
+| Spec | Numbers compared | Total $A_0$ | Bound (rounded up) | Threshold |
+| --- | --- | --- | --- | --- |
+| `k5.txt` | 2,280, all equal | 1761033937996622 | 0.878820870371 | 8789/10000 |
+| `k6.txt` | 6,192, all equal | 12593568504391125 | 0.872868757138 | 8729/10000 |
+| `k7.txt` | 19,680, all equal | 92054418307910785 | 0.868075379727 | 8681/10000 |
+| `k8.txt` | 70,482, all equal | 628708228549677266 | 0.864607001369 | 8647/10000 |
+| `k9.txt` | <K9_COMPARED> | <K9_TOTAL> | <K9_BOUND> | 8618/10000 |
+
+The test cases `tiny`, `rounding`, `bhh` and `k4` (146, 971, 8 and 952 numbers) agree as well. Red controls: one cell
+sum of `k5` increased by 1 (refused; that number alone differs), the `k7` threshold set $10^{-12}$ below its rounded-up
+bound (refused by the test; accepted at the bound), and mesh 127 in place of 128 for `k5` (refused; 1,779 of the 2,280
+numbers differ). Not checked here: that `RECIPE.md` defines the integers of Section 4.1 of the paper, and the proof that
+this number bounds $\beta$. Reproduce: `cd c12a && ./run_all.sh` (a C11 compiler; `k9` took <K9_TIME> on 12 threads of a
+loaded Apple M5 Pro, and `./run_all.sh quick` leaves it out and takes about 7 minutes).
+
 ## Reproduce
 
 ```

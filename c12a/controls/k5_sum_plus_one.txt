@@ -1,0 +1,9 @@
+k 5
+h 2 1
+mesh 128
+gaps 48 112 208
+heights 6
+height_mesh 64
+tail 16
+threshold 8789 10000
+values k5_sum_plus_one_values.txt

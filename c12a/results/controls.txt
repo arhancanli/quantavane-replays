@@ -1,0 +1,112 @@
+== (a) k5 values file with the cell sum S_100 increased by 1: controls/k5_sum_plus_one.txt, expected status 1
+spec controls/k5_sum_plus_one.txt
+values controls/k5_sum_plus_one_values.txt
+parameters: k 5, h 2/1, mesh 128, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 8789/10000
+masses: 4 compared, 4 equal
+tail_term: 1 compared, equal (484)
+table: 125 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 1250 numbers compared, 0 lines differ
+differs: cell sum S_100 stored 1444861320243099, recomputed 1444861320243098
+sums: 1024 compared, 1023 equal (shared paths, reversal, reflection on a_1)
+total: 1 compared, equal (1761033937996622)
+bound 0.878820870371 (rounded up)
+test: A_0 h_2 theta_2 = 17610339379966220000 <= theta_1 n^(k+1) F k h_1 = 17611925026913648640
+numbers compared: 2280, differ: 1
+run time 0.1 s (section 7 0.0 s), 12 threads
+RESULT: REJECTED: 1 stored numbers differ from the recomputed ones
+status 1, as expected
+
+== (b) k7 spec with the threshold 10^-12 below the printed (rounded-up) bound: controls/k7_threshold_below.txt, expected status 1
+spec controls/k7_threshold_below.txt
+values controls/../certs/tsp/data/values/k7.txt
+parameters: k 7, h 21/10, mesh 128, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 868075379726/1000000000000
+masses: 4 compared, 4 equal
+tail_term: 1 compared, equal (484)
+table: 329 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 3290 numbers compared, 0 lines differ
+sums: 16384 compared, 16384 equal (shared paths, reversal, reflection on a_1)
+total: 1 compared, equal (92054418307910785)
+bound 0.868075379727 (rounded up)
+test: A_0 h_2 theta_2 = 920544183079107850000000000000 > theta_1 n^(k+1) F k h_1 = 920544183078952813656740462592
+numbers compared: 19680, differ: 0
+run time 7.1 s (section 7 7.0 s), 12 threads
+RESULT: REJECTED: the stored values agree, but B > 868075379726/1000000000000
+status 1, as expected
+
+== (b, green) k7 spec with the threshold equal to the printed bound: controls/k7_threshold_at.txt, expected status 0
+spec controls/k7_threshold_at.txt
+values controls/../certs/tsp/data/values/k7.txt
+parameters: k 7, h 21/10, mesh 128, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 868075379727/1000000000000
+masses: 4 compared, 4 equal
+tail_term: 1 compared, equal (484)
+table: 329 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 3290 numbers compared, 0 lines differ
+sums: 16384 compared, 16384 equal (shared paths, reversal, reflection on a_1)
+total: 1 compared, equal (92054418307910785)
+bound 0.868075379727 (rounded up)
+test: A_0 h_2 theta_2 = 920544183079107850000000000000 <= theta_1 n^(k+1) F k h_1 = 920544183080013256337846697984
+numbers compared: 19680, differ: 0
+run time 7.2 s (section 7 7.1 s), 12 threads
+RESULT: ACCEPTED: all 19680 stored numbers equal the recomputed ones and B <= 868075379727/1000000000000
+status 0, as expected
+
+== (c) k5 spec and values file with mesh 127 in place of 128, nothing else changed: controls/k5_mesh127.txt, expected status 1
+spec controls/k5_mesh127.txt
+values controls/k5_mesh127_values.txt
+parameters: k 5, h 2/1, mesh 127, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 8789/10000
+differs: mass P_0 stored 88020242969484, recomputed 88590625063021
+differs: mass P_1 stored 76118506460608, recomputed 76353764733010
+differs: mass P_2 stored 61910518088409, recomputed 61809547112901
+differs: mass P_3 stored 55425709192157, recomputed 54721039801726
+masses: 4 compared, 0 equal
+tail_term: 1 compared, equal (484)
+differs: table line 1 entry 0 stored 11340909281, recomputed 11395486304
+differs: table line 1 entry 1 stored 11726697021, recomputed 11779242770
+differs: table line 1 entry 2 stored 12800231964, recomputed 12847946470
+differs: table line 1 entry 3 stored 14385025340, recomputed 14427197345
+differs: table line 1 entry 4 stored 16318928096, recomputed 16355994317
+differs: table line 1 entry 5 stored 18487998906, recomputed 18520713106
+differs: table line 2 entry 0 stored 22580713410, recomputed 22690450643
+differs: table line 2 entry 1 stored 22771854667, recomputed 22880579228
+differs: table line 2 entry 2 stored 23334089112, recomputed 23439959425
+differs: table line 2 entry 3 stored 24237212092, recomputed 24338846511
+differs: table line 2 entry 4 stored 25439866769, recomputed 25536427532
+differs: table line 2 entry 5 stored 26897604038, recomputed 26988726778
+differs: table line 3 entry 0 stored 33843939417, recomputed 34008694744
+differs: table line 3 entry 1 stored 33969874206, recomputed 34133973798
+differs: table line 3 entry 2 stored 34344488744, recomputed 34506673041
+differs: table line 3 entry 3 stored 34958646034, recomputed 35117799268
+differs: table line 3 entry 4 stored 35798420219, recomputed 35953631855
+differs: table line 3 entry 5 stored 36846641913, recomputed 36997231406
+differs: table line 4 entry 0 stored 45112814472, recomputed 45332554837
+differs: table line 4 entry 1 stored 45206540168, recomputed 45425798835
+differs: table line 4 entry 2 stored 45486416819, recomputed 45704251224
+differs: table line 4 entry 3 stored 45948640196, recomputed 46164167621
+differs: table line 4 entry 4 stored 46587175901, recomputed 46799605198
+differs: table line 4 entry 5 stored 47394162492, recomputed 47602815669
+differs: table line 5 entry 0 stored 56383898070, recomputed 56658610959
+differs: table line 5 entry 1 stored 56458488151, recomputed 56732821235
+differs: table line 5 entry 2 stored 56681609432, recomputed 56954813361
+differs: table line 5 entry 3 stored 57051345310, recomputed 57322700684
+differs: table line 5 entry 4 stored 57564598901, recomputed 57833433653
+differs: table line 5 entry 5 stored 58217227864, recomputed 58482931174
+table: 125 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 1250 numbers compared, 125 lines differ
+differs: cell sum S_0 stored 1002399031478762, recomputed 1003552141910786
+differs: cell sum S_1 stored 1053009916955698, recomputed 1054704520122956
+differs: cell sum S_2 stored 1142276135155702, recomputed 1144833656698784
+differs: cell sum S_3 stored 1388741997080544, recomputed 1392171971176922
+differs: cell sum S_4 stored 1099397228882828, recomputed 1101446123249904
+sums: 1024 compared, 0 equal (shared paths, reversal, reflection on a_1)
+differs: total stored 1761033937996622, recomputed 1761037979879317
+total: 1 compared, differs (1761037979879317)
+bound 0.878822887420 (rounded up)
+test: A_0 h_2 theta_2 = 17610379798793170000 <= theta_1 n^(k+1) F k h_1 = 17611925026913648640
+numbers compared: 2280, differ: 1779
+run time 0.1 s (section 7 0.0 s), 12 threads
+RESULT: REJECTED: 1779 stored numbers differ from the recomputed ones
+status 1, as expected
+
+== (c') k5 spec with mesh 127 and the unaltered values file: controls/k5_mesh127_orig.txt, expected status 1
+spec controls/k5_mesh127_orig.txt
+values controls/../certs/tsp/data/values/k5.txt
+parameters: k 5, h 2/1, mesh 127, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 8789/10000
+REJECTED: parameter line 'mesh' of the values file differs from the spec file
+status 1, as expected
+

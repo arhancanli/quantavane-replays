@@ -1,0 +1,13 @@
+spec certs/tsp/data/specs/k6.txt
+values certs/tsp/data/specs/../values/k6.txt
+parameters: k 6, h 2/1, mesh 128, gaps 48 112 208 (m = 4), heights 6, height_mesh 64, tail 16, threshold 8729/10000
+masses: 4 compared, 4 equal
+tail_term: 1 compared, equal (484)
+table: 209 lines of m + n = 10 numbers (key and Tab(key, 0..n-1)), 2090 numbers compared, 0 lines differ
+sums: 4096 compared, 4096 equal (all (k-1)! orders in every cell, no identities)
+total: 1 compared, equal (12593568504391125)
+bound 0.872868757138 (rounded up)
+test: A_0 h_2 theta_2 = 125935685043911250000 <= theta_1 n^(k+1) F k h_1 = 125940192698997669888
+numbers compared: 6192, differ: 0
+run time 91.6 s (section 7 91.5 s), 12 threads
+RESULT: ACCEPTED: all 6192 stored numbers equal the recomputed ones and B <= 8729/10000
