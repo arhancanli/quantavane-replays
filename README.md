@@ -427,6 +427,50 @@ colourings of blow-ups), translation invariance on $\mathbb Z_2^n$, and the coun
 
 Reproduce: `cd c89 && ./fetch.sh && ./run_all.sh` (about 20 minutes).
 
+## C3e: a sums-and-differences constant (6 November 2026)
+
+`c3e/c3e_check.py`, standard library only: mizopl's finite carry-free lower bounds $C_{3e} > 1.27255802$ ($B = 160$) and
+$1.27255796$ ($B = 80$) from Theorems C1-C3 of their certificate folder's README alone (posted on
+[#339](https://github.com/teorth/optimizationproblems/pull/339)). The counts $n_d$, $n_0$ and $L$ in exact integers,
+$\log D_N$ from Robbins' bounds and $\log S_N(y)$ in decimal interval arithmetic at 90 digits: $1.27255802020997507810\ldots$
+and $1.27255796845856979212\ldots$. Theorems C1-C3 are also checked by brute force on small cases ($B = 15$), with five
+red controls. Reproduce: `cd c3e && ./fetch.sh && ./run_all.sh`.
+
+## C59: the Bohr radius of the bidisc (6 November 2026)
+
+`c59/c59_check.py`, standard library only, integers only: the certificate of
+[#297](https://github.com/teorth/optimizationproblems/pull/297), $K_2 < 0.302825279490988$. $U^*U = UU^* = I$ exactly
+for the $3 \times 3$ Gaussian-rational colligation, so the transfer function is in the Schur class; its 1,681
+coefficients $f_{jk}$ ($j, k \le 40$) as exact Gaussian integers, checked against the closed form at two points; and the
+finite Bohr sum minus 1 in $[2.2259 \cdot 10^{-42}, 2.2259 \cdot 10^{-42}]$ by integer square roots. Red controls: $r$
+lowered to 0.30282527949097 (the sum falls below 1), one matrix entry changed by one unit (refused by unitarity), the
+sum cut at $N = 20$ (below 1). Reproduce: `cd c59 && ./fetch.sh && ./run_all.sh` (about a minute).
+
+## C42: Turán's pure power-sum constant (6 November 2026)
+
+`c42/c42_check.py`, standard library only: the two rows whose first-block cut-off is $\tau \ge 1/3$, Griego's
+$C_{42} \le 0.6906538$ [Gri26] (added in [#85](https://github.com/teorth/optimizationproblems/pull/85)) and Pinho's
+$0.6888863712$ [Pin26] ([#251](https://github.com/teorth/optimizationproblems/pull/251)), from the criterion as Griego's
+note (section 4) and Pinho's paper (section 2) state it: with $K = I_\alpha(\tau)$, $D = I_a(\tau)$,
+$I_A(x) = \int_0^x v^{A-1}/(1-v)\,dv$ and the pair integrals $J(t, r)$,
+$Y = 1 + sK - \sum_j \delta_j (I_\alpha(1 - t_j) - K) + \tfrac12 \sum_{i,j} \delta_i \delta_j J(t_i, t_j)$, and the bound
+holds if $|s| < C$, every $|\eta_j| < C$ and $|Y| < CD$. The radius conditions in exact rationals; $I$ and $J$ by their
+power series with explicit tails, in decimal interval arithmetic at 50 digits ($x^\alpha$ through $e^{a \ln x}$ and
+Taylor series for sine and cosine with bounded remainders).
+
+| Row | Certificate (SHA-256) | Our result | Printed bound |
+| --- | --- | --- | --- |
+| [Gri26] | sebastian-griego/turan-c42-certificate @ `c8ddce14` (v1.0.0), `certificate/turan42_certificate.json` (`a76e9132...3a81`, as its .sha256 file states) | $\lvert Y\rvert/D \le 0.69065369515163118444\ldots$, $C^2D^2 - \lvert Y\rvert^2 \ge 1.550 \cdot 10^{-7}$; our $K$, $D$ and $Y$ overlap the certificate's printed enclosures | 0.6906538 |
+| [Pin26] | rpinho/c42-certificate @ `a8a9bc30`, `certificates/c42_256.json` (`705a7291...afcab`, as the page states; 256 blocks, 16,512 pairs) | $\lvert Y\rvert/D \le 0.68888637098346564582276780\ldots$, $C^2D^2 - \lvert Y\rvert^2 \ge 2.3747 \cdot 10^{-10}$, both as the paper prints; $D$ to 30 digits as printed | 0.6888863712 |
+
+Red controls, for each row: $C$ lowered just below our $\lvert Y\rvert/D$ (refused by the radius condition, which binds as
+tightly), $\eta_0$ replaced by $s$ (refused by $\lvert Y\rvert < CD$), and the cut-off moved to $\tau = 3/10$ (refused: three
+corrections would then reach $b_n$). A floating-point look at the construction itself (`--finite`, not part of the
+proof): $\lvert Y_n\rvert / \sum_F \lvert P_m\rvert$ falls toward $\lvert Y\rvert/D$ like $n^{-a}$ ($a = \mathrm{Re}\,\alpha$), from
+0.70436 at $n = 500$ to 0.69447 at $n = 4000$ for [Gri26], and from 0.70268 to 0.69255 for [Pin26]. What rests on
+mathematics: the asymptotic reduction (the limits of the normalized sums), which the rows mark as unrefereed.
+Reproduce: `cd c42 && ./fetch.sh && ./run_all.sh` (about 80 seconds).
+
 ## Reproduce
 
 ```
