@@ -1,8 +1,8 @@
 #!/bin/sh
 # Replay both sides of C16 in PR #270 (4 Nov): the upper bound from the certificate fetched by fetch.sh, and the lower
 # bound of the untruncated conditional extremal at the PR's mu = 0x1.f42a1d5c1aabdp-4; red controls included. Then the
-# lower bound of PR #319 (Julsgaard), the same family at mu = 128042/2^20, and the night update of #270 (c16_pinned_v2,
-# 18 digits).
+# lower bound of PR #319 (Julsgaard), the same family at mu = 128042/2^20, the night update of #270 (c16_pinned_v2,
+# 18 digits), and the 16a upper row of PR #246 (maximusrufus).
 # Usage: ./run_all.sh [CERTS_ROOT]   (default: ./certs). Python 3.9+, standard library only; about 7 minutes.
 here=$(cd "$(dirname "$0")" && pwd)
 root=${1:-$here/certs}
@@ -20,4 +20,7 @@ grep -H "RESULT\|run time" "$here/results/julsgaard_319.txt"
 # PR #326 (16a row, maximusrufus): the trial function truncated at R = 4000, mu = 1221/10000; red controls included
 python3 -I "$here/c16_trunc_check.py" "$root/maxr/lower_certificate.json" --controls > "$here/results/maxr_trunc.txt" 2>&1 || status=1
 grep -H "RESULT" "$here/results/maxr_trunc.txt"
+# the 16a upper row (maximusrufus, PR #246): its delta-boxes with their own mu below 2^18, our tail bound above
+python3 -I "$here/c16_boxes_check.py" "$root/maxu/upper_certificate.json" --controls > "$here/results/maxr_upper.txt" 2>&1 || status=1
+grep -H "RESULT\|run time" "$here/results/maxr_upper.txt"
 exit $status

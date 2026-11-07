@@ -1,0 +1,16 @@
+canonical form (n, m) = (8, 8): 65536 pairs, 0 where the rule-obeying minimum differs from the edit distance
+canonical form (n, m) = (7, 9): 65536 pairs, 0 where the rule-obeying minimum differs from the edit distance
+canonical form (n, m) = (6, 10): 65536 pairs, 0 where the rule-obeying minimum differs from the edit distance
+canonical form (n, m) = (4, 12): 65536 pairs, 0 where the rule-obeying minimum differs from the edit distance
+(n, m) = (3, 3): 12 move sequences obey rules 1, 2, 4; each probability (all 64 letter assignments) equals its block product
+(n, m) = (4, 4): 40 move sequences obey rules 1, 2, 4; each probability (all 256 letter assignments) equals its block product
+(n, m) = (3, 5): 42 move sequences obey rules 1, 2, 4; each probability (all 256 letter assignments) equals its block product
+(n, m) = (2, 6): 26 move sequences obey rules 1, 2, 4; each probability (all 256 letter assignments) equals its block product
+(n, m) = (5, 2): 19 move sequences obey rules 1, 2, 4; each probability (all 128 letter assignments) equals its block product
+(n, m) = (5, 5): automaton, sum of block products (136 sequences) and brute-force expected counts by cost agree
+(n, m) = (4, 6): automaton, sum of block products (136 sequences) and brute-force expected counts by cost agree
+(n, m) = (6, 6): automaton, sum of block products (468 sequences) and brute-force expected counts by cost agree
+(n, m) = (7, 5): automaton, sum of block products (452 sequences) and brute-force expected counts by cost agree
+(n, m) = (3, 8): automaton, sum of block products (142 sequences) and brute-force expected counts by cost agree
+RESULT selftest: canonical form, block products and automaton counts all agree
+run time 67 s

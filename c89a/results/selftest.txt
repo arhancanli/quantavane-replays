@@ -1,0 +1,11 @@
+selftest 0: m=6 s=3 den=65536 n=18 fractional_blocks 26 triangles 13; agree with brute force
+selftest 1: m=7 s=2 den=1073741824 n=14 fractional_blocks 42 triangles 35; agree with brute force
+selftest 2: m=5 s=4 den=1048576 n=20 fractional_blocks 18 triangles 7; agree with brute force
+selftest 3: m=6 s=2 den=17 n=12 fractional_blocks 16 triangles 1; agree with brute force
+selftest 4: m=5 s=3 den=1073741824 n=15 fractional_blocks 20 triangles 10; agree with brute force
+selftest 5: m=8 s=2 den=65536 n=16 fractional_blocks 24 triangles 5; agree with brute force
+selftest 6: m=4 s=5 den=1000 n=20 fractional_blocks 10 triangles 2; agree with brute force
+selftest 7: m=6 s=3 den=1073741824 n=18 fractional_blocks 26 triangles 13; agree with brute force
+selftest: constant block of 50/100 refused
+RESULT selftest: all cases agree with brute force; the 50/100 constant block is refused
+run time 0 s

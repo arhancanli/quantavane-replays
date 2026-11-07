@@ -1,0 +1,14 @@
+[SK2026] 0.0301388794*: n 3840 s 20 m 192 den 1048576 fractional_blocks 2496 triangles 1152
+  N_red  = 4348131949084831248639221983730378288140567843680
+  N_blue = 4362536357934235409369525556701151556853304529760
+  F = 27220838459434583306277336063848530765605851167/903180180540490237232196590042258640992206848000 = 0.0301388793132559809675441...
+  stated fraction: EQUAL; printed upper bound 0.0301388794 is above the exact value
+  root 2247 colour 0: k4_block 27632132802285177, k4_dense 27632132802285177 mod 2^61-1: agree
+  root 2432 colour 0: k4_block 480455554677586511, k4_dense 480455554677586511 mod 2^61-1: agree
+  root 2247 colour 1: k4_block 2247274148034894441, k4_dense 2247274148034894441 mod 2^61-1: agree
+  root 2432 colour 1: k4_block 20346477842328692, k4_dense 20346477842328692 mod 2^61-1: agree
+  control: entry (0,1242) raised by 1/den: F changes by 2.143e-18, FAILS the stated fraction
+  control: the same entry changed on one side only: refused (k4_block: matrix not symmetric)
+  control: the claim one unit lower in its last digit, 0.0301388793, is not implied (below F)
+RESULT [SK2026] 0.0301388794*: PASS, F = 0.0301388793132559... exactly the stated fraction; printed bound 0.0301388794 holds
+run time 280 s

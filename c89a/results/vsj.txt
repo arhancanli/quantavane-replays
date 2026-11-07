@@ -1,0 +1,14 @@
+[VSJ2026] 0.0301388876*: n 3840 s 20 m 192 den 65536 fractional_blocks 2496 triangles 1152
+  N_red  = 259147196226119060009588075500947710392320
+  N_blue = 260049236146899152657783450211330231613440
+  F = 8450462766487926638466333426306607129/280384030360880691940646801777885184000 = 0.0301388875664972218251783...
+  stated fraction: EQUAL; printed upper bound 0.0301388876 is above the exact value
+  root 2756 colour 0: k4_block 950773911566512745, k4_dense 950773911566512745 mod 2^61-1: agree
+  root 3178 colour 0: k4_block 1230378999626608080, k4_dense 1230378999626608080 mod 2^61-1: agree
+  root 2756 colour 1: k4_block 991005721065475955, k4_dense 991005721065475955 mod 2^61-1: agree
+  root 3178 colour 1: k4_block 9035679483040120, k4_dense 9035679483040120 mod 2^61-1: agree
+  control: entry (0,1242) raised by 1/den: F changes by -6.601e-17, FAILS the stated fraction
+  control: the same entry changed on one side only: refused (k4_block: matrix not symmetric)
+  control: the claim one unit lower in its last digit, 0.0301388875, is not implied (below F)
+RESULT [VSJ2026] 0.0301388876*: PASS, F = 0.0301388875664972... exactly the stated fraction; printed bound 0.0301388876 holds
+run time 263 s

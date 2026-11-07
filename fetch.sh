@@ -19,4 +19,6 @@ python3 -I -c "import tarfile; t = tarfile.open('echul_c1d_records.tgz'); m = t.
 get steps_construction.json https://raw.githubusercontent.com/steps-re/c1d-certificate/9a091494facc801eaf6b92b175b63c58b7c3b30b/construction.json
 get aer_problem_4_signed_autoconvolution_bounds.py https://raw.githubusercontent.com/unclegareth-create/alphaevolve_repository_of_problems/4b3bbd2a44db92442e4ebb4e64e0bb90f229aad1/experiments/autocorrelation_problems/problem_4_signed_autoconvolution_bounds.py
 python3 -I -c "import ast; src = open('aer_problem_4_signed_autoconvolution_bounds.py').read(); n = next(a for a in ast.parse(src).body if isinstance(a, ast.Assign) and getattr(a.targets[0], 'id', '') == 'STEP_FUNCTION_C4_PRIME_N600'); t = [ast.get_source_segment(src, e).strip() for e in n.value.elts]; assert len(t) == 600; open('aer2026_n600.json', 'w').write('{\"values\": [' + ', '.join(t) + ']}\\n')"
+# the starred 1d row [CERT2026] (#224): the Extremal Values Registry copy the page cites (EV-000004, LF line endings)
+get cert2026_construction.json https://raw.githubusercontent.com/extremal-values-registry/extremal-values-registry/50520b971e5d234bc9c4ccbdcd5a5107d5bb8791/certificates/third_autocorrelation_abs_inside/construction.json
 shasum -a 256 -c ../SHA256SUMS

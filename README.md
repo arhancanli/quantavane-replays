@@ -24,9 +24,11 @@ An index of every asterisked bound in that repository, with the replays posted f
 | $C_{1d} \leq$ | [#286](https://github.com/teorth/optimizationproblems/pull/286) | huiihao/c1d-certificate @ `302817dc`, `construction.json` (400 cells, JSON floats), `c489b46b...8df` | read as binary64: 4563650116209721766004955898613711667200 / 3127595284199802099438492053245424408273 = 1.45915622115964902113...; read as the printed decimals: 1.45915622115964903535... | 1.4591562211596491, above both |
 | $C_{1d} \leq$ | [#326](https://github.com/teorth/optimizationproblems/pull/326) (the STEPS2026 row) | steps-re/c1d-certificate @ `9a091494`, `construction.json` (600 cells, JSON floats), `3dd39fae...a28c` | read as binary64: 698746209786798359455483373677229695641600 / 478522078482569620433992386249161163190849 = 1.46021728402287398524...; read as the printed decimals: 1.46021728402287397507... | 1.460217284022874, above both |
 | $C_{1d} \leq$ | [#326](https://github.com/teorth/optimizationproblems/pull/326) (the AER2026 row) | unclegareth-create/alphaevolve_repository_of_problems @ `4b3bbd2a`, `.../problem_4_signed_autoconvolution_bounds.py`, `1a290ad1...54b2`: the list `STEP_FUNCTION_C4_PRIME_N600` (600 cells), read from the file with Python's `ast` parser and never run | read as binary64: 1.45998904690538324315...; read as the printed decimals: 1.45998904690538314495... | 1.459989046905384, above both |
+| $C_{1d} \leq$ | [#224](https://github.com/teorth/optimizationproblems/pull/224) and [#243](https://github.com/teorth/optimizationproblems/pull/243) (the two CERT2026 rows; 7 November) | extremal-values-registry @ `50520b9`, `certificates/third_autocorrelation_abs_inside/construction.json` (300 cells, JSON floats; its values equal those printed in #224), `51f864ee...0a0e` (as the 1d page states) | read as binary64: 2039224160683882663565441886346340189798400 / 1393796574908163689489385839036226787118881 = 1.46307158260755932746..., the fraction #224 states, maximum only at m = 414; read as the printed decimals: 1.46307158260755929963... | the starred 1.463071582607559 is below both, so it is not an upper bound as printed; #243's 1.4630715826075594 is above both |
 
 Every hash above is the one stated in the pull request (for #269 also the archive's, `b526326d...`), except the 4 Nov
-#270 row and the two $C_{1a}$ rows, where none was stated (these are the files at the commit the pull request links).
+#270 row and the two $C_{1a}$ rows, where none was stated (these are the files at the commit the pull request links),
+and CERT2026, whose hash is the one the 1d page states for the registry copy.
 
 ## Method
 
@@ -275,6 +277,7 @@ unnormalized $L^2$ norms). Both sides of the update of 4 November in
 | upper, #270 night update (18 digits) | vidigoat/optimization-records @1e8e786 `tao/certificates/c16_pinned_v2/certificate.json` (`8c13abbb...05e8`, as in its SHA256SUMS) | all 383 intervals hold: the largest interval-end value is 2.15622552815421295831 (G bracket width 2.0e-21 there), 1.7e-18 below the printed bound | 2.15622552815421296 |
 | lower, #270 night update | the same family at $\mu$ = `0x1.f42a1bd5af466p-4` | 2.15622552815421295612 (enclosure width 6.7e-21; 262,144 explicit rows) | 2.156225528154212956 |
 | lower, the 16a row of [#326](https://github.com/teorth/optimizationproblems/pull/326) (maximusrufus) | the trial function truncated at $0 < \lvert k\rvert \le 4000$, $\mu = 1221/10000$ (maximusrufus/c16-bgw-certificates @ `0c570700`, `lower_certificate.json`, `de314c10...6991`: only $R$ and $\mu$ used), `c16_trunc_check.py`: the three sums over the disc in integers at the scale $2^{256}$, every term rounded both ways | 2.15622477064423579034; the certificate's three sum enclosures overlap ours | 2.1562247706 |
+| upper, the 16a row of [#246](https://github.com/teorth/optimizationproblems/pull/246) (maximusrufus; 7 November) | maximusrufus/c16-bgw-certificates @ `0c570700`, `upper_certificate.json` (`f46adc04...25a3`; no hash stated, this is the file at the commit #326 cites): 84 boxes tiling $[1, 4.9 \cdot 10^8]$ exactly, each with its own $\mu$ (read exactly from its decimal string). `c16_boxes_check.py` checks the 82 boxes that start below $2^{18}$ with their own $\mu$ (each endpoint rounded outward; the one that crosses $2^{18}$ up to $2^{18}$); for $\delta \ge 2^{18}$ our own tail bound replaces the certificate's | largest endpoint value 2.15622564574899300283, on the box $[3.928106, 3.931069]$ ($\mu$ = 0.12206997134993264), $8.5 \cdot 10^{-10}$ below the printed bound; tail at most 2.0163. Controls: the bound $10^{-15}$ below that value, one $\mu$ raised by 1%, and one box removed are each refused | 2.1562256466 |
 
 So $2.15622552815421295612 \le C_{16} \le 2.15622552815421295831$ (from the night update; $2.15622552815421292 \le C_{16} \le 2.15622552815421974$ from the first) for the page's "Equivalently" definition, the maximum
 over $\delta \ge 1$ (which reading is meant is asked in [#325](https://github.com/teorth/optimizationproblems/issues/325));
@@ -284,7 +287,7 @@ largest interval-end value is refused, one $\mu$ raised by 1% is refused, and on
 What rests on mathematics: Cauchy-Schwarz, translation invariance, the convexity in $\delta$, the row-sum identities,
 the convexity of the row tails and the lattice count.
 
-Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (about 7 minutes; the night update refines G and H near the peak with
+Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (about 10 minutes, the #246 upper row about 3; the night update refines G and H near the peak with
 `--upper-width 1e-21 --max-rows 262144 --lower-factor 128`).
 
 ## C68: Korenblum's constant (5 November 2026)
@@ -833,6 +836,78 @@ $\lvert A - A\rvert > \lvert W\rvert/2$ and $\lvert A + A\rvert \le 2\lvert\math
 finite-set lemma in Kleinwaks's form. Not checked: the limiting theorem of sections 3 to 5 (the display values
 $1.2141808960977855\ldots$ and $1.2141811809505\ldots$). Reproduce: `cd c3a && python3 -I o2026_check.py --controls`
 (about 20 seconds; `./run_all.sh` includes it).
+
+## C89: the Ramsey multiplicity of $K_4$ (7 November 2026)
+
+`c89a/k4_check.py` with `k4_block.c` and `k4_dense.c`: the four upper bounds on the 89a page and in
+[#270](https://github.com/teorth/optimizationproblems/pull/270) that come with a public step graphon, [VSJ2026]
+$0.0301388876$\* and [SK2026] $0.0301388794$\* (added in [#255](https://github.com/teorth/optimizationproblems/pull/255)),
+[Kos2026] $0.0301388857$\* ([#264](https://github.com/teorth/optimizationproblems/pull/264)) and #270's [Pat2026]
+$0.0301388585$\*, written from the definition on the 89a page. None of the repositories' programs was read or run
+(lukevs/k4-ramsey's Lean and Python; `exact_eval.py`, `float_eval.py` and `refine.py`; `rebuild.py` and the `verifier/`
+folder; `exact89.py` and `refine_lbfgs.py`). For an equal-weight step graphon $W = M/D$ on $n$ classes the density is
+$(N_{\rm red} + N_{\rm blue})/(n^4D^6)$, where $N_X = \sum_{a,b,c,d} X_{ab}X_{ac}X_{ad}X_{bc}X_{bd}X_{cd} = \sum_a
+\operatorname{tr}((XD_a)^3)$ runs over all ordered 4-tuples, repeats included ($X = M$ or $D - M$,
+$D_a = \operatorname{diag}(X_{a\cdot})$).
+
+- The coarse structure is checked, not assumed: the classes fall into 192 groups of $s$ consecutive classes ($s = 20$;
+  40 for [Kos2026]). In all four graphons, 34,368 of the 36,864 group blocks are constant at 0 or $D$, the 192 diagonal
+  ones among them, and the other 2,496 (13 per group) are general; they form 1,152 triangles.
+- `k4_block.c` writes $X = PKP^{\mathsf T} + F$ ($K$ the constant blocks, $F$ the general ones). With
+  $A = PKP^{\mathsf T}D_a$ and $B = FD_a$, $\operatorname{tr}((A+B)^3) = \operatorname{tr}A^3 + 3\operatorname{tr}A^2B +
+  3\operatorname{tr}AB^2 + \operatorname{tr}B^3$. The first three are sums over the 192 groups. $\operatorname{tr}B^3$
+  runs over the triangles of general blocks, each treated by how many of its groups meet the root's group in a general
+  block. First-level sums are exact in 128-bit integers, the rest modulo $2^{64}$ and five primes; the Chinese
+  remainder theorem uses four moduli and the other two check it.
+- `k4_dense.c` is a second program with no coarse structure: $\operatorname{tr}((XD_a)^3)$ by dense products modulo
+  $2^{61} - 1$ for sampled roots (two per colour, one for [Kos2026]). It equals `k4_block`'s value at every root.
+- Self-tests: both programs against brute force over all $n^4$ tuples, per root and in total, on eight random
+  block-structured graphons ($n \le 20$, denominators up to $2^{30}$).
+- [Kos2026]'s 7680-class witness is rebuilt from VSJ's table and its amplitudes as its `FORMAT.md` (section 6) states,
+  $M'_{2i+s,\,2j+t} = M_{ij} + (-1)^{s+t}A_{ij}$. Its dense SHA-256 is the one the delta file states (`c7f0e7cb...802e`).
+
+| Row | Data (SHA-256) | Exact density | Printed upper bound |
+| --- | --- | --- | --- |
+| [VSJ2026] | lukevs/k4-ramsey @ `2cf216b`, `data/constructions/final3840.json.gz` (`d7fd4c92...7370`; the JSON inside, `05302cbc...1a29`, as VSJ state) | the page's fraction exactly, $0.0301388875664972218\ldots$; $N_{\rm red} + N_{\rm blue} = 519196432373018212667371525712277942005760$, the integer of VSJ's Lean certificate | 0.0301388876 (margin $3.4 \cdot 10^{-11}$) |
+| [SK2026] | JeetuSK0808/tao-constants-certificates @ `3d9431a`, `c89_stepgraphon_D20.json.gz` (`82c28f77...631a`, as its SHA256SUMS.txt states) | the page's fraction exactly, $0.0301388793132559809\ldots$ | 0.0301388794 ($8.7 \cdot 10^{-11}$) |
+| [Kos2026] | DennisKoshta/c89-k4-ramsey-multiplicity-certificate @ `4fdbe0c`, the amplitudes `delta/c89_sign3_crude_0.03013888570.delta.json.gz` (`514adc3a...d7ad3`, as its SHA256SUMS states), with VSJ's table | the page's fraction exactly, $0.0301388856953920524\ldots$, $1.87 \cdot 10^{-9}$ below [VSJ2026]; $N_{\rm red} + N_{\rm blue} = 8307142402237973815060289107446603942297600$, the $S$ its README states (249,480 amplitude entries; the witness's dense SHA-256 as the delta states) | 0.0301388857 ($4.6 \cdot 10^{-12}$) |
+| #270 [Pat2026] | vidigoat/optimization-records @ `fb80010`, `tao/certificates/c89/c89_stepgraphon_D30_round2.json.gz` (`60ebbced...e7d8`, as the row states) | the row's fraction exactly, $0.0301388584652867313\ldots$; the first round (`c89_stepgraphon_D30.json.gz`, `079b0d0f...8480`) gives the fraction of the folder's README exactly, $0.0301388617423003\ldots$, as the row's parenthesis says | 0.0301388585 ($3.5 \cdot 10^{-11}$) |
+
+Red controls, for each row, all as expected: one general entry raised by $1/D$ (with its mirror) changes the fraction;
+the same entry changed on one side only is refused (not symmetric); the bound one unit lower in its last printed digit
+is below the exact value. What rests on mathematics: $C_{89} \le F(W)$ for every step graphon (random colourings of
+blow-ups, the first-moment argument the page states), which we re-derived.
+
+Reproduce: `cd c89a && ./fetch.sh && ./run_all.sh` (Python 3.9+ and a C compiler; about 45 minutes on a loaded 18-core
+Mac, of which the 7680-class row with its controls takes about 27).
+
+## C91: the average edit distance of two random binary strings (7 November 2026)
+
+`c91a/ed_check.py`, standard library only: [J2026]'s $C_{91} \ge 0.216276$\*, the lower bound of the new 91a page in
+[#273](https://github.com/teorth/optimizationproblems/pull/273), from the argument in its README alone and the two
+numbers $x$, $t$ of `certify_rule5_R32.log` (leandrejack-afk/chvatal-sankoff-bound @ `574220e`,
+`edit-distance-lower/`, `7bb076dd...3fc9`). Its `certify_*.py`, `count_check*.py`, `canon_check*.c` and the review
+code were neither read nor run. Every pair of strings has an optimal alignment obeying five local rules: no I next to
+a D; no S right after an indel; the match ending a run avoids the run's letters; no single match between a D and an I;
+a run right after a substitution avoids the substituted letter. We re-derived the rewriting argument. The expected
+number of rule-obeying valid alignments of cost at most $an$ is at most $x^{-2n}t^{-an}G(x, t)$, and $G$ is finite when
+the transfer matrix $A(x, t)$ of an automaton with run lengths capped at $R$ has spectral radius below 1 (capping only
+raises the weights). So $\rho(A) < 1$ and $x^2t^a > 1$ give $C_{91} \ge a$.
+
+| Check | Result |
+| --- | --- |
+| canonical form: the least cost over rule-obeying alignments (our dynamic programme over rule states) against the edit distance | equal for all 262,144 binary pairs of sizes $(8, 8)$, $(7, 9)$, $(6, 10)$ and $(4, 12)$ |
+| each move sequence obeying the three sequence rules: its probability, by enumeration of every letter assignment, against the product of block factors | equal for all 139 sequences of sizes $(3, 3)$, $(4, 4)$, $(3, 5)$, $(2, 6)$, $(5, 2)$ |
+| our automaton (uncapped) against the sum of block products and the brute-force expected counts over all string pairs, by cost | equal at sizes $(5, 5)$, $(4, 6)$, $(6, 6)$, $(7, 5)$, $(3, 8)$ |
+| the certificate: $k = 2$, $R = 32$, $x = 1178119585379/950178956526$, $t = 86841948745/634295171877$ | a rational $v > 0$ with $(Av)_i < v_i$ on all 132 states, exactly: $\max_i (Av)_i/v_i = 0.999999998115539$ (the log prints 0.999999998116). Second method: the run states eliminated in closed form, a $4 \times 4$ nonnegative matrix whose spectral radius is below 1 exactly when $\rho(A)$ is, certified the same way (0.999999997869369) |
+| $a^* = -2\ln x/\ln t$, 60-digit decimal arithmetic with error bounds | $0.2162762712874192826\ldots$: $C_{91} \ge 0.216276$ holds with margin $2.7 \cdot 10^{-7}$ |
+
+Red controls, all as expected: $x$ raised by 1% gives $\rho(A) \ge 1.0189$ (a Collatz-Wielandt lower bound, so no
+certificate exists); without rule 5, the automaton at the same $x$ and $t$ has $\rho \ge 1.0062$; the claim $0.216277$
+is above $a^*$. What rests on mathematics: the rewriting argument for the five rules (checked exhaustively at the sizes
+above), the independence of the block factors (checked by enumeration) and the first-moment step.
+
+Reproduce: `cd c91a && ./fetch.sh && ./run_all.sh` (about two minutes).
 
 ## Reproduce
 

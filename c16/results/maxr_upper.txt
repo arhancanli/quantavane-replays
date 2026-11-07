@@ -1,0 +1,8 @@
+certificate: 84 boxes on [1, 490000000]; the stated U = 2.156225646551083, rational 700331617402.../324795143088...
+  82 boxes that start below 2^18 checked with their own mu (up to 2^18); delta >= 2^18 by our tail bound, U <= 2.016305486212
+  largest endpoint bound 2.15622564574899300283, box [3.928105808, 3.931069067] (mu = 0.12206997134993264, 131072 rows); margin below 2.1562256466: 8.510e-10
+RESULT 16a upper (maximusrufus): C16 <= 2.1562256466 CERTIFIED
+control: the bound 1e-15 below our largest endpoint value refused: True
+control: mu of box 31 raised by 1% refused: True
+control: box 31 removed (a gap) refused: True
+run time 132 s

@@ -4,3 +4,5 @@ ruvector.db
 certs/
 __pycache__/
 bin/
+work/
+agentdb.rvf

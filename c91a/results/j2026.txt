@@ -1,0 +1,10 @@
+certificate (k = 2, R = 32): x = 1178119585379/950178956526 = 1.239892314271, t = 86841948745/634295171877 = 0.136910940829, x t = 0.169755
+  rules 1-5, R = 32: 132 states, positive rational v; max_i (A v)_i / v_i = 0.999999998115539 < 1
+  run states eliminated (4 x 4): 4 states, positive rational v; max_i (A v)_i / v_i = 0.999999997869369 < 1
+  a* = -2 ln x / ln t in [0.2162762712874192826102, 0.2162762712874192826102]
+  x^2 t^0.216276 > 1 and rho < 1: C_91 >= 0.216276 holds (margin a* - 0.216276 >= 2.712874e-07)
+  control: x raised by 1%: rho(A) >= 1.018931280 (Collatz-Wielandt), so no certificate exists (as expected)
+  control: rule 5 dropped (rules 1-4) at the same x, t: rho(A) >= 1.006218209 (no certificate, as expected)
+  control: the claim 0.216277 is not implied (above a*)
+RESULT [J2026] C_91 >= 0.216276: PASS
+run time 0 s

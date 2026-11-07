@@ -20,4 +20,7 @@ get vid2 certificate.json vidigoat/optimization-records 1e8e7869fce3e273f3e0cdd5
 # 16a row of PR #326 (maximusrufus): the truncated trial function, R = 4000 and mu = 1221/10000 only
 get maxr lower_certificate.json maximusrufus/c16-bgw-certificates 0c570700f080ca23549e10380901addfc8b7b8ae \
     lower_certificate.json
+# the 16a upper row (maximusrufus, PR #246): the certificate's delta-boxes and their mu
+get maxu upper_certificate.json maximusrufus/c16-bgw-certificates 0c570700f080ca23549e10380901addfc8b7b8ae \
+    upper_certificate.json
 shasum -a 256 -c "$here/SHA256SUMS"

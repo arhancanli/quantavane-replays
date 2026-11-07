@@ -1,0 +1,13 @@
+1d certs/cert2026_construction.json
+  n: 300
+  S: 1180591620717411194641
+  argmax_m: 414
+  max_abs_c: 3398706934473137772609069810577233649664
+  scaled_by: 1180591620717411303424
+  sign_at_max: +
+  ties: 1
+  bound = 2039224160683882663565441886346340189798400/1393796574908163689489385839036226787118881
+  decimal: floor 1.4630715826075593274614  ceil 1.4630715826075593274615
+  control: corrupted coefficient 199 rejected: True
+  control: old coefficients rejected for weight 150 + 1: True
+  control: bound unchanged when every value is scaled by 3: True
