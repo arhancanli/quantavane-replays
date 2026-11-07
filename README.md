@@ -862,7 +862,7 @@ $D_a = \operatorname{diag}(X_{a\cdot})$).
   block. First-level sums are exact in 128-bit integers, the rest modulo $2^{64}$ and five primes; the Chinese
   remainder theorem uses four moduli and the other two check it.
 - `k4_dense.c` is a second program with no coarse structure: $\operatorname{tr}((XD_a)^3)$ by dense products modulo
-  $2^{61} - 1$ for sampled roots (two per colour, one for [Kos2026]). It equals `k4_block`'s value at every root.
+  $2^{61} - 1$ for two sampled roots per colour and row. It equals `k4_block`'s value at every root.
 - Self-tests: both programs against brute force over all $n^4$ tuples, per root and in total, on eight random
   block-structured graphons ($n \le 20$, denominators up to $2^{30}$).
 - [Kos2026]'s 7680-class witness is rebuilt from VSJ's table and its amplitudes as its `FORMAT.md` (section 6) states,
@@ -881,7 +881,7 @@ is below the exact value. What rests on mathematics: $C_{89} \le F(W)$ for every
 blow-ups, the first-moment argument the page states), which we re-derived.
 
 Reproduce: `cd c89a && ./fetch.sh && ./run_all.sh` (Python 3.9+ and a C compiler; about 45 minutes on a loaded 18-core
-Mac, of which the 7680-class row with its controls takes about 27).
+Mac, of which the 7680-class row with its controls takes about 29).
 
 ## C91: the average edit distance of two random binary strings (7 November 2026)
 

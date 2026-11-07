@@ -5,9 +5,11 @@ Kos witness: 249480 amplitude entries, n = 7680, block 40; dense SHA-256 c7f0e7c
   F = 1126728298914655736634696330762614467/37384537381450758925419573570384691200 = 0.0301388856953920524670648...
   stated fraction: EQUAL; printed upper bound 0.0301388857 is above the exact value
   root 903 colour 0: k4_block 397652658369200589, k4_dense 397652658369200589 mod 2^61-1: agree
+  root 4133 colour 0: k4_block 1400747955103626412, k4_dense 1400747955103626412 mod 2^61-1: agree
   root 903 colour 1: k4_block 1928438827985313270, k4_dense 1928438827985313270 mod 2^61-1: agree
+  root 4133 colour 1: k4_block 2088129866387728922, k4_dense 2088129866387728922 mod 2^61-1: agree
   control: entry (0,2484) raised by 1/den: F changes by -1.585e-17, FAILS the stated fraction
   control: the same entry changed on one side only: refused (k4_block: matrix not symmetric)
   control: the claim one unit lower in its last digit, 0.0301388856, is not implied (below F)
 RESULT [Kos2026] 0.0301388857*: PASS, F = 0.0301388856953920... exactly the stated fraction; printed bound 0.0301388857 holds
-run time 1593 s
+run time 1713 s

@@ -3,7 +3,7 @@
 # (brute force over every 4-tuple on random block-structured graphons), then each row with its red controls; one
 # output file per row in results/.  The first round of #270 (vid1) is replayed too.
 # Usage: ./run_all.sh [CERTS_ROOT]   (default: ./certs). Python 3.9+ (standard library only) and a C compiler;
-# about 45 minutes on a loaded 18-core Mac (the 7680-class row with its controls about 27).
+# about 45 minutes on a loaded 18-core Mac (the 7680-class row with its controls about 29).
 here=$(cd "$(dirname "$0")" && pwd)
 root=${1:-$here/certs}
 mkdir -p "$here/bin" "$here/results"
