@@ -789,11 +789,17 @@ a glue reading of a page step is dropped, a used transported cross form is chang
 multiplier.
 
 Rational closures are sound in torsion-free groups: clear the denominators, and multiplication by an integer is
-injective. That covers $\mathbb R$, the setting of $C_{3b}$. Not replayed: the paper's domain audits over $\mathbb Z[1/2]$
-and $\mathbb Z$, which carry the record to every group without 2-torsion and the second certificate to every abelian group.
-What rests on mathematics: Lemma 4 (conditional copies), Lemma 6 (removal of difference injectivity, which needs
+injective. That covers $\mathbb R$, the setting of $C_{3b}$. For the paper's wider statements we also replay its domain
+audits (Section 4, Lemma 9 and Proposition 10). The relation module is rebuilt over $R = \mathbb Z[1/2]$ for the record
+(groups without 2-torsion) and over $\mathbb Z$ for the other certificates (every abelian group), with prefix
+$R$-closures and integer echelon bases. Its rational span must be the rational module above; every equal-law gen kept
+as determined by the glue must be $R$-determined at its prefix; and cl$_R(T)$ = cl$_{\mathbb Q}(T)$ must hold on every
+queried tuple. All three hold for all four certificates (record: 480 kept gens and 1,643 tuples over $\mathbb Z[1/2]$;
+all groups: 511 and 1,775 over $\mathbb Z$; standard: 1,172 and 2,453; five-page: 70 and 344). Audit control: the record over
+$\mathbb Z$ instead of $\mathbb Z[1/2]$ is refused on 9 tuples, each missing a form $f$ whose double $2f$ is determined.
+That agrees with the paper: the record needs 2 inverted. What rests on mathematics: Lemma 4 (conditional copies), Lemma 6 (removal of difference injectivity, which needs
 $a, b, c \ge 0$: checked), Lemma 7 (shared and transported readings) and Corollary 12. We read them and found no gap. Reproduce:
-`cd c3b && ./fetch.sh && ./run_all.sh` (under a minute).
+`cd c3b && ./fetch.sh && ./run_all.sh` (about a minute).
 
 ## C3a: the finite inputs of the 1.21418 bound (7 November 2026)
 

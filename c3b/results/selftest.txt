@@ -7,7 +7,8 @@ Certificate standard: f2026/standard.json, sha256 f0cc88a42829a4fd515dcad2bfecd9
   counts as the paper's table of certificate sizes states: True
   a = 359/503, b = 962/1509, c = 241/503; all >= 0: True
   C = a + b + c = 2762/1509 = 1.8303512259774685222001...; as stated: True
-  [9.3 s]
+  domain audit over Z: relation module rank 177, rational span equal to Rel_Q: True; equal-law gens kept as glue-determined and determined over Z: 1172 of 1172; cl_Z(T) = cl_Q(T) on 2453 of 2453 queried tuples [6.8 s]
+  [14.9 s]
 RESULT standard: PASS
 Certificate fivepage: f2026/standard-five-page.json, sha256 209f5044bc7c745d3c89e6a3ca0979d48bbacf0fc2dcab1554662ed6b79e9654 (as stated)
   lemma library: all 0 lemmas verified from their own conditional-copy proofs (0 proof rows) [0.0 s]
@@ -18,6 +19,7 @@ Certificate fivepage: f2026/standard-five-page.json, sha256 209f5044bc7c745d3c89
   counts as the paper's table of certificate sizes states: True
   a = 59/83, b = 52/83, c = 41/83; all >= 0: True
   C = a + b + c = 152/83 = 1.8313253012048192771084...; as stated: True
-  [0.2 s]
+  domain audit over Z: relation module rank 46, rational span equal to Rel_Q: True; equal-law gens kept as glue-determined and determined over Z: 70 of 70; cl_Z(T) = cl_Q(T) on 344 of 344 queried tuples [0.2 s]
+  [0.4 s]
 RESULT fivepage: PASS
-run time 10 s
+run time 15 s

@@ -32,8 +32,11 @@ Our checker, written from that description:
     p = 2^127 - 1 on integer image vectors, which is exact because p exceeds Hadamard's bound for every minor (checked);
   - every row, equal law (with its fixed/moved gens re-derived at its prefix) and the target; every class must cancel.
 Rational closures are sound in torsion-free groups (clear denominators: n f = known and n is injective), in particular
-in R, which is what C_3b concerns. The paper's Z[1/2] (no 2-torsion) and Z (every abelian group) domain audits are not
-replayed here; for those wider statements see its Section 4 (Lemma 9, Proposition 10).
+in R, which is what C_3b concerns. For the paper's wider statements (Section 4, Lemma 9 and Proposition 10) we also
+replay its domain audits: the relation module is rebuilt over R = Z[1/2] (the record: groups without 2-torsion) or Z
+(the other certificates: every abelian group), with prefix R-closures and integer echelon bases (extended-gcd row
+operations; R-membership by the triangular solve, coordinates required in R); its rational span must be Rel_Q, every
+equal-law gen kept as glue-determined must be R-determined at its prefix, and cl_R(T) = cl_Q(T) on every queried tuple.
 
   python3 -I c3b_check.py [record|allgroups|both|selftest] [CERTS] [--controls]
 (selftest: the paper's two standard-form certificates, 2762/1509 and 152/83, a different configuration)
@@ -223,6 +226,118 @@ class RSpan:
         return s
 
 
+# ------------------------------------------------------------------------------- integer lattices (domain audits)
+def egcd(a, b):
+    """(g, s, t) with s a + t b = g = gcd(a, b) > 0."""
+    s0, s1, t0, t1 = 1, 0, 0, 1
+    while b:
+        q, a, b = a // b, b, a - (a // b) * b
+        s0, s1 = s1, s0 - q * s1
+        t0, t1 = t1, t0 - q * t1
+    return (a, s0, t0) if a > 0 else (-a, -s0, -t0)
+
+
+class ZLat:
+    """The Z-span of integer vectors (dicts col -> int) as an echelon basis under a column order: each row's least
+    column (in that order) is its pivot, and no two rows share a pivot. Rows are combined by extended gcd steps, so the
+    rows always generate the same Z-module. Membership over a ring R (Z, or Z[1/2] for R = 'Z2') of the R-span: solve
+    for the unique rational coordinates in the echelon basis; f is in the R-span iff they all lie in R."""
+
+    def __init__(self, order=None):
+        self.pos = None if order is None else {c: i for i, c in enumerate(order)}
+        self.rows = {}
+
+    def key(self, c):
+        return c if self.pos is None else self.pos[c]
+
+    def copy(self):
+        z = ZLat()
+        z.pos, z.rows = self.pos, {p: dict(r) for p, r in self.rows.items()}
+        return z
+
+    @staticmethod
+    def lin(u, a, v, b):
+        """a u + b v."""
+        out = {k: a * x for k, x in u.items()} if a else {}
+        if b:
+            for k, x in v.items():
+                y = out.get(k, 0) + b * x
+                if y:
+                    out[k] = y
+                else:
+                    out.pop(k, None)
+        return {k: x for k, x in out.items() if x}
+
+    def add(self, v):
+        """Add v to the module; True if the module grew (a new row, or a gcd step that refined a pivot: v was not
+        already in the Z-span), False if v was already in it."""
+        v = {k: int(x) for k, x in v.items() if x}
+        changed = False
+        while v:
+            p = min(v, key=self.key)
+            r = self.rows.get(p)
+            if r is None:
+                self.rows[p] = v if v[p] > 0 else {k: -x for k, x in v.items()}
+                return True
+            a, b = r[p], v[p]
+            if b % a == 0:
+                v = self.lin(v, 1, r, -(b // a))
+            else:
+                g, s, t = egcd(a, b)
+                self.rows[p] = self.lin(r, s, v, t)
+                v = self.lin(v, a // g, r, -(b // g))
+                changed = True
+        return changed
+
+    def member(self, v, ring):
+        """Integer version of coords_ok (for R = Z[1/2] the vector is rescaled by powers of 2, units of R)."""
+        v = {k: int(x) for k, x in v.items() if x}
+        for p in sorted(self.rows, key=self.key):
+            x = v.get(p)
+            if not x:
+                continue
+            r = self.rows[p]
+            a = r[p]
+            if x % a:
+                if ring != "Z2":
+                    return False
+                o, e = a, 0
+                while o % 2 == 0:
+                    o //= 2
+                    e += 1
+                if x % o:
+                    return False
+                v = {k: y << e for k, y in v.items()}
+            c = v[p] // a
+            for k, y in r.items():
+                z = v.get(k, 0) - c * y
+                if z:
+                    v[k] = z
+                else:
+                    v.pop(k, None)
+        return not v
+
+    def coords_ok(self, v, ring):
+        """Is v in the R-span? (rational coordinates by the triangular solve, each checked to lie in R)."""
+        v = {k: Fraction(x) for k, x in v.items() if x}
+        for p in sorted(self.rows, key=self.key):
+            if v.get(p):
+                r = self.rows[p]
+                c = v[p] / r[p]
+                den = c.denominator
+                if ring == "Z" and den != 1:
+                    return False
+                if ring == "Z2" and den & (den - 1):
+                    return False
+                for k, x in r.items():
+                    y = v.get(k, 0) - c * x
+                    if y:
+                        v[k] = y
+                    else:
+                        v.pop(k, None)
+        return not v
+
+
 # ---------------------------------------------------------------------------------------------- the configuration
 class Config:
     def __init__(self, d, out):
@@ -314,6 +429,71 @@ class Config:
             st["added"] = added
         self.rank = len(self.rel.rows)
 
+    # ---- the domain audits: the same construction over R = Z or Z[1/2]
+    def closure_ring(self, T, rel, nvert, ring, only=None):
+        """cl_R(T): labelled forms (on vertices < nvert; only those in `only` if given) in the R-span of T and the
+        R-relations, closed under the difference-injectivity rule."""
+        lat = rel.copy()
+        for f in T:
+            lat.add(self.vec[f])
+        cand = [f for f in (only if only is not None else self.labels) if self.top(f) < nvert]
+        members = set()
+        while True:
+            members = {f for f in cand if f in members or lat.member(self.vec[f], ring)}
+            grew = False
+            for v in range(nvert):
+                if ("v", v, (1, -1)) in members:
+                    for sl in ((1, 0), (0, 1)):
+                        g = ("v", v, sl)
+                        if g not in members:
+                            if lat.add(self.vec[g]):
+                                grew = True
+                            if only is not None and g not in cand:
+                                cand.append(g)
+            if not grew:
+                return members, lat
+
+    def domain_audit(self, ring, kept, out):
+        """Rebuild the relations over R with prefix R-closures; check that their rational span is Rel_Q, that every
+        gen kept in an equal law is R-determined by its glue, and that cl_R(T) = cl_Q(T) on every queried tuple."""
+        t0 = time.time()
+        rel = ZLat()
+        bad_kept = []
+        for s, st in enumerate(self.steps):
+            nprev = st["nprev"]
+            clV, _ = self.closure_ring(st["V"], rel, nprev, ring)
+            for (si, f) in kept:
+                if si == s and f not in clV:
+                    bad_kept.append((s, f))
+            ucols = sorted(c for u in st["U"] for c in (2 * u, 2 * u + 1))
+            other = [c for c in range(2 * nprev) if c not in set(ucols)]
+            W = ZLat(other + ucols)
+            for f in clV:
+                W.add(self.vec[f])
+            for r in rel.rows.values():
+                W.add(r)
+            nother = len(other)
+            for p, row in list(W.rows.items()):
+                if W.pos[p] >= nother:                       # zero on every non-source coordinate
+                    relv = dict(row)
+                    for c, x in row.items():
+                        u, xy = divmod(c, 2)
+                        cc = 2 * st["phi"][u] + xy
+                        relv[cc] = relv.get(cc, 0) - x
+                    rel.add({k: x for k, x in relv.items() if x})
+        same_span = len(rel.rows) == self.rank and all(self.rel.contains(r) for r in rel.rows.values())
+        bad = 0
+        for T, name in self.cache.items():
+            clR, _ = self.closure_ring(T, rel, self.nv, ring, only=list(name))
+            if set(name) - clR:
+                bad += 1
+        rname = {"Z": "Z", "Z2": "Z[1/2]"}[ring]
+        out(f"  domain audit over {rname}: relation module rank {len(rel.rows)}, rational span equal to Rel_Q: "
+            f"{same_span}; equal-law gens kept as glue-determined and determined over {rname}: "
+            f"{len(kept) - len(bad_kept)} of {len(kept)}; cl_{rname}(T) = cl_Q(T) on {len(self.cache) - bad} of "
+            f"{len(self.cache)} queried tuples [{time.time() - t0:.1f} s]")
+        return same_span and not bad_kept and not bad
+
     # ---- the final quotient, integer images and exact-rank membership modulo p
     def quotient(self):
         piv = set(self.rel.rows)
@@ -396,7 +576,7 @@ def form_list(lst, cfg):
     return [cfg.fkey(g) for g in lst]
 
 
-def check_certificate(which, certs, out=print, mutate=None):
+def check_certificate(which, certs, out=print, mutate=None, audit=True, ring=None):
     path = os.path.join(certs, CERTS[which][0])
     raw = open(path, "rb").read()
     digest = hashlib.sha256(raw).hexdigest()
@@ -484,6 +664,7 @@ def check_certificate(which, certs, out=print, mutate=None):
         return x
 
     nfixed = nmoved = 0
+    kept = []
     for e in d["eqlaw"]:
         s = cfg.steps[e["step"]]
         src, img = [], []
@@ -493,6 +674,7 @@ def check_certificate(which, certs, out=print, mutate=None):
             if f in s["clV"]:                          # determined by the glue at that prefix: kept
                 img.append(f)
                 nfixed += 1
+                kept.append((e["step"], f))
                 continue
             vec = cfg.vec[f]
             if not all(c // 2 in s["phi"] for c in vec):
@@ -543,6 +725,8 @@ def check_certificate(which, certs, out=print, mutate=None):
     ok &= min(a, b, c) >= 0
     out(f"  C = a + b + c = {C} = {dec(C, 22)}...; as stated: {C == st['C'] and C == fr(d['claimed_C'])}")
     ok &= C == st["C"] and C == fr(d["claimed_C"])
+    if audit:
+        ok &= cfg.domain_audit(ring or ("Z2" if which == "record" else "Z"), kept, out)
     out(f"  [{time.time() - t0:.1f} s]")
     return ok
 
@@ -561,7 +745,7 @@ def controls(which, certs):
 
     def run(desc, mut):
         nonlocal ok
-        res = check_certificate(which, certs, out=quiet, mutate=mut)
+        res = check_certificate(which, certs, out=quiet, mutate=mut, audit=False)
         print(f"  {desc}: {'refused, as expected' if not res else 'ACCEPTED (control failed)'}")
         ok &= not res
 
@@ -607,6 +791,13 @@ def controls(which, certs):
         r = next(r for r in d["rows"] if r["type"] == "lemma")
         r["mult"] = "-" + r["mult"].lstrip("-")
     run("a lemma row with a negative multiplier", m8)
+    if which == "record":
+        lines = []
+        res = check_certificate(which, certs, out=lines.append, audit=True, ring="Z")
+        detail = next((x.strip() for x in lines if "domain audit" in x), "")
+        print(f"  the record audited over Z instead of Z[1/2]: {'refused, as expected' if not res else 'ACCEPTED (control failed)'}"
+              f" ({detail.split('; ')[-1].split(' [')[0]})")
+        ok &= not res
     return ok
 
 
