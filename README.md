@@ -795,6 +795,39 @@ What rests on mathematics: Lemma 4 (conditional copies), Lemma 6 (removal of dif
 $a, b, c \ge 0$: checked), Lemma 7 (shared and transported readings) and Corollary 12. We read them and found no gap. Reproduce:
 `cd c3b && ./fetch.sh && ./run_all.sh` (under a minute).
 
+## C3a: the finite inputs of the 1.21418 bound (7 November 2026)
+
+`c3a/o2026_check.py`, standard library only: the finite numbers behind Olafson's $C_{3a} > 1.21418$ [O2026]
+([#148](https://github.com/teorth/optimizationproblems/pull/148); the Lean proof of the finite bound is registered as
+Palomar entry PALOMAR-2026-10-29-000038), from section 6 of `c3a_two_temperature_proof.md`
+(carson-olaf/c3a-two-temperature-bound @ `033952dc`) alone. The package's Python and GMP verifiers, its small-model test
+and its Lean files were neither read nor run. The alphabet is $M = \langle 4, 5\rangle \cap [0, 80]$, $D = M - M$,
+$\kappa(d) = \min\{a + b : a - b = d\}$, with $N = 10^{13}$, $x = 8149/10000$ and $y = 42571/50000$; these are the same $M$, $N$, $x$
+and $y$ as the $B = 80$ row of our C3e replay. The counts are $n_d = n_{-d} = \lfloor Nx^{\kappa(d)}/Z\rfloor$,
+$n_0 = N - 2\sum n_d$ and $L = \sum_{d>0} n_d\kappa(d)$; $W$ is the type class with these counts and
+$\mathcal V = \{a \in M^N : \sum a_i \le L\}$.
+
+| Check | Result |
+| --- | --- |
+| $M$, $M \pm M$, $\kappa$ | $\lvert M\rvert = 75$, $\lvert M + M\rvert = 155$, $M - M = [-80, 80]$; $\kappa(d) = d$ on $M$ and 9, 18, 13, 14, 17, 19 at the gaps 1, 2, 3, 6, 7, 11, as stated |
+| counts (exact integers) | $n_0 = 1917647564302$ and $2L = 76435323145630$, as stated; every $n_d \ge 148290$ |
+| $\log\lvert W\rvert = \log N! - \sum_d \log n_d!$ (Robbins' bounds) | $\ge 32160395410643.4068 \ge a = 32160395000000$ |
+| $\log\lvert\mathcal V + \mathcal V\rvert \le N\log P_+(y) - 2L\log y$ | $\le 25272243943117.8189 \le b = 25272245000000$ |
+| $\log\lvert\mathcal V - \mathcal V\rvert \le N\log Z - 2L\log x$ | $\le 32160395412376.7043 \le r = 32160396000000$ |
+| (6.1) $\alpha(r + 8) + b + 2 < a$, $\alpha = 10709/50000$ | slack exactly $227404476791/6250 = 36384716.28656$, as stated |
+| our own enclosures in the same final step | $1 + (\log\lvert W\rvert - \log 4 - \log\lvert\mathcal V+\mathcal V\rvert)/(\log 1296 + \log\lvert\mathcal V-\mathcal V\rvert) \ge 1.214181180897$ |
+
+The three finite statements the proof uses, $W \subset \mathcal V - \mathcal V$ (symmetric minimum witnesses: both budgets equal
+$L$), $\lvert\mathcal V + \mathcal V\rvert y^{2L} \le P_+(y)^N$ and $\lvert\mathcal V - \mathcal V\rvert x^{2L} \le Z^N$, are also checked by
+enumeration on 63 small cases ($M = \langle4,5\rangle \cap [0,10]$, $N \le 4$, $x \in \{1/2, 4/5\}$). Red controls, all as
+expected: $\alpha = 10710/50000$ breaks (6.1); $x$ one unit lower changes $n_0$ and $L$; $a$ raised by $10^9$ is refused; and
+in a small case, with the budget lowered by one, $W \not\subset \mathcal V - \mathcal V$. What rests on mathematics, proved in
+Lean and read here: the tilted counting bounds and the type count; cyclic compression to a prime $p$ (Bertrand), with
+$\lvert A - A\rvert > \lvert W\rvert/2$ and $\lvert A + A\rvert \le 2\lvert\mathcal V + \mathcal V\rvert$; the dilation $V = 2A$; and the GHR
+finite-set lemma in Kleinwaks's form. Not checked: the limiting theorem of sections 3 to 5 (the display values
+$1.2141808960977855\ldots$ and $1.2141811809505\ldots$). Reproduce: `cd c3a && python3 -I o2026_check.py --controls`
+(about 20 seconds; `./run_all.sh` includes it).
+
 ## Reproduce
 
 ```

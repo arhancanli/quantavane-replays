@@ -1,0 +1,15 @@
+M = <4,5> cap [0,80]: |M| = 75, |M + M| = 155, |M - M| = 161 (M - M = [-80, 80]: True)
+  kappa(d) = d on M, and at the six gaps {1: 9, 2: 18, 3: 13, 6: 14, 7: 17, 11: 19}: as the note states: True
+counts (exact integers): n_0 = 1917647564302, 2L = 76435323145630, smallest n_d = 148290 (d = 80), all positive; n_0 and 2L as stated: True
+  log|W| >= 32160395410643.406799 >= a = 32160395000000: True
+  log|V + V| <= 25272243943117.818856 <= b = 25272245000000: True
+  log|V - V| <= 32160395412376.704268 <= r = 32160396000000: True
+  (6.1) alpha (r + 8) + b + 2 < a with alpha = 10709/50000: slack 227404476791/6250 = 36384716.28656 (the note's 36384716.28656: True)
+  our own exponent bound 1 + (log|W| - log 4 - log|V+V|) / (log 1296 + log|V-V|) >= 1 + 0.214181180897
+brute force on small cases (M = <4,5> cap [0,10], N <= 4, symmetric counts on one or two positive d, x in {1/2, 4/5}): W subset V - V and both tilted counting bounds hold in 63 of 63 cases
+Red controls:
+  C1 alpha = 10710/50000 (1.2142): (6.1) fails, as expected
+  C2 x = 8148/10000 (one unit lower): n_0 = 1919446675954, 2L = 76389308606276: differ from the stated values, as expected
+  C3 a raised by 10^9 (to 32161395000000): log|W| >= a refused, as expected
+  C4 a small case (M = <4,5> cap [0,10], N = 3, n_1 = n_-1 = n_0 = 1) with the budget lowered from L = 9 to 8: W subset V - V fails, as expected
+RESULT o2026: PASS  (16.7 s)
