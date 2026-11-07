@@ -1,0 +1,43 @@
+Certificate record: f2026/record.json, sha256 12e2e356274bad4e044c1558908671cc7c543707b82450f83c22ee7a88046a70 (as stated)
+  lemma library: all 72 lemmas verified from their own conditional-copy proofs (1797 proof rows) [0.0 s]
+  configuration: 42 vertices, 9 copy steps, 78 extra forms; relation rank 71 (per step [1, 3, 3, 11, 10, 11, 11, 11, 10]), quotient dimension 13
+  integer images: largest entry 4; Hadamard bound for minors 4.504e+15 < p = 2^127 - 1: True
+  rows: 519 sub, 0 mono, 9 ci, 12 lemma; 167 equal laws (480 gens kept as determined by the glue, 707 moved to the copy); 1643 distinct tuples named
+  identity sum_r m_r R_r = a h(x0) + b h(y0) + c h(s0) - h(x0,y0): every class cancels exactly (519 classes after the equal-law identifications)
+  counts as the paper's table of certificate sizes states: True
+  a = 80908638342740092/114631769327023765, b = 74518340847137328/114631769327023765, c = 53930565379970708/114631769327023765; all >= 0: True
+  C = a + b + c = 209357544569848128/114631769327023765 = 1.8263483657186587536748...; as stated: True
+  [2.1 s]
+RESULT record: PASS
+Red controls for record (the same checks on altered copies of the certificate):
+  one sub multiplier raised by 10%: refused, as expected
+  c lowered by 10^-12 (a better claimed bound): refused, as expected
+  one equal-law entry removed: refused, as expected
+  one equal-law gen changed to another reading: refused, as expected
+  one coefficient in the proof of dfz109 changed: refused, as expected
+  one glue reading dropped from page step 4: refused, as expected
+  one coefficient of a transported cross form that the rows use changed: refused, as expected
+  a lemma row with a negative multiplier: refused, as expected
+RESULT record controls: PASS
+Certificate allgroups: f2026/all-groups.json, sha256 798485494f517e1ec7cbf8916cbbf046fdcf233d705dfc92dcf2c0fff07e03f1 (as stated)
+  lemma library: all 77 lemmas verified from their own conditional-copy proofs (1877 proof rows) [0.1 s]
+  configuration: 42 vertices, 9 copy steps, 85 extra forms; relation rank 71 (per step [1, 3, 3, 10, 11, 11, 10, 11, 11]), quotient dimension 13
+  integer images: largest entry 4; Hadamard bound for minors 4.504e+15 < p = 2^127 - 1: True
+  rows: 566 sub, 1 mono, 9 ci, 11 lemma; 179 equal laws (511 gens kept as determined by the glue, 754 moved to the copy); 1775 distinct tuples named
+  identity sum_r m_r R_r = a h(x0) + b h(y0) + c h(s0) - h(x0,y0): every class cancels exactly (573 classes after the equal-law identifications)
+  counts as the paper's table of certificate sizes states: True
+  a = 31837334702369419045/45134665396306242632, b = 29267304885161681931/45134665396306242632, c = 2666255477545804740/5641833174538280329; all >= 0: True
+  C = a + b + c = 10304335425987192362/5641833174538280329 = 1.8264161855212042214076...; as stated: True
+  [2.4 s]
+RESULT allgroups: PASS
+Red controls for allgroups (the same checks on altered copies of the certificate):
+  one sub multiplier raised by 10%: refused, as expected
+  c lowered by 10^-12 (a better claimed bound): refused, as expected
+  one equal-law entry removed: refused, as expected
+  one equal-law gen changed to another reading: refused, as expected
+  one coefficient in the proof of dfz109 changed: refused, as expected
+  one glue reading dropped from page step 4: refused, as expected
+  one coefficient of a transported cross form that the rows use changed: refused, as expected
+  a lemma row with a negative multiplier: refused, as expected
+RESULT allgroups controls: PASS
+run time 38 s

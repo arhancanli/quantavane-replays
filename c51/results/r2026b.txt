@@ -1,0 +1,22 @@
+Row r2026b ([R2026b], Roehrig, PR #184): r2026b/maximum_term.json, sha256 dcf9d1bc0f6d7b295e0eff548cf73faf092efd8d038829e4d19755f07df33683
+  parameters read as exact decimals: K = 3.5681854310698435, alpha = 3.9615431126097391; claim C_51 >= 0.5850788196744
+  K = 7136370862139687/2000000000000000 = 3.5681854310698435, alpha = 39615431126097391/10000000000000000 = 3.961543112609739; N = 12, tail |R_N| <= 1.067e-50, G3 = 311.85
+    local maximum of |P_N| near theta = 0.645541554518260: |P_N| in [1.70917142506767253052782348672240, 1.70917142506767253052782348672240]
+    local maximum of |P_N| near theta = 0.000000000000000: |P_N| in [1.70917142506767137072418609109783, 1.70917142506767137072418609109783]
+    cover of [0, 3927/2500] (> pi/2): 1,050 cells accepted (1,076 evaluated, depth up to 18, smallest width 5.85e-09); largest cell bound for |P_N| 1.7091714250676726116751070
+    A = max |P| in [1.709171425067672530527823486722, 1.709171425067672530527824486723]  (width 1.0e-24; 3.4 s)
+  beta = 1/A in [0.585078819674513477028433803123, 0.585078819674513477028434145442]
+  claim 0.5850788196744 < 1/A_hi: implied (margin 1.1348e-13)
+  |P_N| at the interior local maximum (theta = 0.645541554518259...) minus |P_N(0)| lies in [1.159804e-15, 1.159804e-15]: the global maximum is interior
+  Roehrig's upper bound 1.709171425067816128872617735945 >= our A_lo: True; it exceeds our A_hi by 1.436e-13
+  Roehrig's reciprocal 0.585078819674464320841496314106 lies in our beta enclosure or below it: True
+Red controls:
+  (not a control) the claim one unit higher, 0.5850788196745, is also implied: the printed bound is not tight
+  C1 the least 13-decimal claim above our enclosure, 0.5850788196746: false (above 1/A_lo), as expected
+  C2 the claim with the previous parameters (K = 3.568182317714, alpha = 3.961543335688): beta <= 1/(|P(0)| - tail) = 0.5850788196533529508547 < claim: refused, as expected
+  C3 alpha raised by 10^-6: beta <= 0.5850786302160329 < claim: refused, as expected
+  C4 truncation at N = 2 (tail bound 9.751e-04): the best bound it gives, 0.5847380164311861, does not reach the claim: refused, as expected
+  C5 a cover of [0, 3/2] only: the range check (end >= pi/2) refuses it and accepts [0, 3927/2500]: as expected
+  C6 the cover with |P_N| <= (our lower bound - 10^-20) as target: refused, as expected (stopped at the cell [0.645541554399, 0.645541554399])
+RESULT: r2026b PASS
+run time 10 s

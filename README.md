@@ -702,6 +702,99 @@ and, for the level-set values only, that the union of the box rectangles with ex
 supremum in $M\mu$ is reached at the sup-distance of an atom). Reproduce: `cd c47 && ./fetch.sh && ./run_all.sh` (about
 90 seconds). If the #341 file becomes available, put it at `certs/pr341/construction.json`; its SHA-256 is checked first.
 
+## C42: Röhrig's eight-step profile (7 November 2026)
+
+`c42/c42_check.py` (the code of the C42 section above) now also replays Röhrig's $C_{42} \le 0.688983$\* [R2026a], the C42
+row of [#184](https://github.com/teorth/optimizationproblems/pull/184), from the criterion as his `notes/turan.md` states it
+(Griego's, with eight middle values on the breaks $t_j = (8+j)/24$, $\tau = 1/3$) and `certificates/turan.json` alone
+(`certify_turan.py` and `audit.py` were neither read nor run).
+
+| Row | Profile (SHA-256) | Our result | Printed bound |
+| --- | --- | --- | --- |
+| [R2026a] | AndreRoehrig/optimization-constants-certificates @ `ed638739` (v1.0.2), `certificates/turan.json` (`18c20906...30f4`, as its MANIFEST states) | $\lvert s\rvert, \lvert\eta_j\rvert < C$ exactly (least $C^2 - \lvert\cdot\rvert^2 = 1.242\cdot10^{-6}$); $D \in [0.888190650452511954178223193231, \ldots232]$, $\lvert Y\rvert/D \le 0.68898209850406074850512099758364\ldots$, $C^2D^2 - \lvert Y\rvert^2 = 9.7997362463618\cdot10^{-7}$: all three 30-decimal enclosures of the note agree | 0.688983 |
+
+Red controls as for the other rows (refused: $C$ just below our $\lvert Y\rvert/D$, $\eta_0$ replaced by $s$, the cut-off moved
+to 3/10). Floating point, not part of the proof: $\lvert Y_n\rvert/\sum_F\lvert P_m\rvert$ = 0.70271, 0.69781, 0.69465, 0.69262 at
+$n$ = 500 to 4000. The displayed enclosures of `c42_check.py` are now rounded outward (they were rounded to nearest; the
+checks themselves were always exact). Reproduce: `cd c42 && ./fetch.sh && python3 -I c42_check.py certs --rows=roe --controls`.
+
+## C51: the Erdős maximum-term constant (7 November 2026)
+
+`c51/c51_check.py`, standard library only: Röhrig's $C_{51} \ge 0.5850788196744$\* [R2026b], the C51 row of
+[#184](https://github.com/teorth/optimizationproblems/pull/184), from He and Tang's reduction (arXiv:2602.12217, Theorem 2.8
+and Lemma 3.1; we read Lemmas 2.1 to 2.7 and found no gap) and the two exact parameters alone (`certify_maximum_term.py`
+and `audit.py` were neither read nor run). For $K > 1$ and $\varepsilon = e^{i\alpha}$, $\beta(f_{K,\varepsilon}) = 1/A$ with
+$A = \max_\theta\lvert P(\theta)\rvert$, $P(\theta) = 2\sum_{n\ge0}K^{-T_n}e^{i\alpha T_n}\cos((2n+1)\theta)$, $T_n = n(n+1)/2$.
+Our method is neither the note's (Bernstein subdivision in $x = \cos^2\theta$) nor He and Tang's (a mesh and a Lipschitz
+bound):
+- $P = P_{12} + R_{12}$ with $\lvert R_{12}\rvert \le 2K^{-91}/(1 - K^{-14})$ ($1.1\cdot10^{-50}$), an exact rational;
+- $F = \lvert P_{12}\rvert^2$ on $[0, 1.5708] \supset [0, \pi/2]$ (enough, as $P(-\theta) = P(\theta)$ and $P(\pi - \theta) = -P(\theta)$;
+  $\pi$ from Machin's formula). On a cell, $F(m+u) \le F(m) + F'(m)u + F''(m)u^2/2 + G_3\lvert u\rvert^3/6$ with
+  $G_3 = 2(g_0g_3 + 3g_1g_2) \ge \sup\lvert F'''\rvert$ and $g_k = \sum_n 2K^{-T_n}(2n+1)^k$ (Cauchy-Schwarz on the derivative
+  vectors). $F$, $F'$, $F''$ are taken in 60-digit decimal interval arithmetic with outward rounding, with $e^{i\alpha T_n}$
+  as powers of $e^{i\alpha}$, so no reduction modulo $2\pi$. The quadratic's maximum and every comparison are exact
+  rationals. Cells above the target are bisected;
+- a lower bound at the maxima, located in floating point and evaluated in intervals.
+
+| Row | Data (SHA-256) | Our result | Printed bound |
+| --- | --- | --- | --- |
+| [R2026b] | AndreRoehrig/optimization-constants-certificates @ `ed638739` (v1.0.2), `certificates/maximum_term.json` (`dcf9d1bc...3683`, as its MANIFEST states): $K$ = 3.5681854310698435, $\alpha$ = 3.9615431126097391 | $A \in [1.709171425067672530527823486722, \ldots824486723]$, so $\beta \in [0.585078819674513477028433803123, 0.585078819674513477028434145442]$. The maximum is interior ($\theta \approx 0.6455415545$), $1.16\cdot10^{-15}$ above $\lvert P(0)\rvert$; 1,050 cells | 0.5850788196744 (margin $1.13\cdot10^{-13}$) |
+| control: [S2026]'s parameters | $K$ = 3.568182317714, $\alpha$ = 3.961543335688 (as the note states them) | $\beta \in [0.585078819653352950854632279223, \ldots621542]$, maximum at $\theta = 0$ | 0.585078819653 holds; so does the note's $\beta(f_{\mathrm{old}}) < 0.585078819653352950854632621542$ |
+| control: [HT2026]'s parameters | $K_0$ = 7137/2000, $\alpha_0$ = 198074929/50000000 | $A \in [1.709176397414446527842885593498, \ldots886593499]$, $\beta$ = 0.5850771175595...; their mesh value at $j$ = 1794536 ($N = 5$) recomputed: 1.709176397414741464507875377..., equal to all 25 digits they print | 0.58507 |
+
+The note's upper bound 1.709171425067816128872617735945 lies $1.4\cdot10^{-13}$ above our upper end, so it holds; the printed
+0.5850788196744 is not tight (one unit higher, 0.5850788196745, is also implied). Self-tests, all passing: our sine, cosine
+and $\pi$; $F'$ and $F''$ against central differences; the two symmetries; the cell bound above $F$ at 21 points of each of
+300 random cells; the tail bound against the next 39 terms. Red controls, all as expected: the least 13-decimal claim
+above our enclosure (0.5850788196746) is false; the claim fails with the previous parameters, with $\alpha$ raised by
+$10^{-6}$, and with the truncation at $N = 2$; a cover of $[0, 3/2]$ is refused by the range check; and the cover with a
+target $10^{-20}$ below our lower bound is refused, at the cell of the maximum. What rests on mathematics: He and Tang's
+Theorem 2.8 (the scaling identity, the maximum term at $r = K^m$, the endpoint reduction and the negligible tail of
+$k - f$) and Lemma 3.1. Reproduce: `cd c51 && ./fetch.sh && ./run_all.sh` (about 20 seconds).
+
+## 3b: the Katz-Tao sum-difference constant (7 November 2026)
+
+`c3b/c3b_check.py`, standard library only: Farnamfar's $C_{3b} \le 209357544569848128/114631769327023765 = 1.82634836\ldots$\*
+[F2026] ([#329](https://github.com/teorth/optimizationproblems/pull/329)) and the paper's all-groups certificate
+($10304335425987192362/5641833174538280329 = 1.82641618\ldots$), from the paper (`main.tex`, Sections 2 to 5) and the
+certificate data alone. The package's `verify_group.py`, `stackcheck.py`, `ring_lattice.py`, `check630*.py` and
+`negative_controls.py` were neither read nor run (`fetch.sh` extracts only the JSON certificates). The certificate is a
+stacked conditional-copy entropy proof. Vertices are pairs with the law of a difference-injective $(X, Y)$, built by
+conditional copies (Lemma 4). Entropy terms are named by rational closures of labelled linear forms: $x, y, x+y, x-y$ at
+every vertex, plus the cross forms. Rows are Shannon (sub, mono), copy identities (ci) and applications of library
+lemmas; equal laws identify the tuples on a source and their images on the copy. We rebuilt:
+- each library lemma from its own conditional-copy proof (sub, equal-law, ci and apply rows in abstract variables; a lemma
+  is applied only after it is verified): the rows sum exactly to the lemma. The Matúš family $M_1, \ldots, M_{62}$ and the
+  DFZ inequalities are therefore not taken from the literature;
+- the relation module step by step: at each copy, the forms supported on the source that lie in span(cl $V$) + Rel, with
+  prefix closures over $\mathbb Q$ and the difference-injectivity rule;
+- the name of every queried tuple. Membership in the quotient is decided modulo a Mersenne prime $p$ on integer image
+  vectors, which is exact because $p$ exceeds Hadamard's bound for every minor (checked). We also re-derive which
+  equal-law gens are determined by the glue at their prefix (kept) and which are moved to the copy (their image must be
+  a labelled form);
+- the identity $\sum_r m_r R_r = a\,h(x_0) + b\,h(y_0) + c\,h(x_0+y_0) - h(x_0, y_0)$: every class must cancel after the
+  equal-law identifications.
+
+| Certificate (SHA-256) | Library | Configuration | Rows | Result |
+| --- | --- | --- | --- | --- |
+| `record.json` (`12e2e356...6a70`, as the 3b row and the index state) in Zenodo 10.5281/zenodo.23714415, `source-and-certificates.zip` (`29c07851...2f158`, as #329 states) | 72 lemmas, 1,797 proof rows, all verified | 42 vertices, 9 copies, 78 cross forms; relation rank 71, quotient dimension 13, as the paper states | 519 sub, 9 ci, 12 lemma; 167 equal laws (480 gens kept, 707 moved); 1,643 tuples | all 519 classes cancel exactly: $a + b + c = 209357544569848128/114631769327023765 = 1.8263483657186587536748\ldots$ |
+| `all-groups.json` (`79848549...03f1`) | 77 lemmas (five DFZ rule instances added), 1,877 rows | 42 vertices, 9 copies, 85 cross forms; rank 71, dimension 13 | 566 sub, 1 mono, 9 ci, 11 lemma; 179 equal laws (511 kept, 754 moved); 1,775 tuples | all 573 classes cancel: $10304335425987192362/5641833174538280329 = 1.8264161855212042214076\ldots$ |
+
+Self-tests: the paper's two standard-form certificates (a chain of pages instead of a star; Shannon rows only) pass the
+same code: `standard.json`, 108 vertices, rank 177, dimension 39 (here $p = 2^{521}-1$), $2762/1509$; and
+`standard-five-page.json`, 30 vertices, rank 46, dimension 14, $152/83$. Every count in the paper's table of certificate sizes
+agrees for all four. Red controls, all as expected for both records: refused when one sub multiplier is raised by 10%, $c$ is lowered by
+$10^{-12}$, one equal-law entry is removed, one equal-law gen is changed, a coefficient in the proof of `dfz109` is changed,
+a glue reading of a page step is dropped, a used transported cross form is changed, or a lemma row gets a negative
+multiplier.
+
+Rational closures are sound in torsion-free groups: clear the denominators, and multiplication by an integer is
+injective. That covers $\mathbb R$, the setting of $C_{3b}$. Not replayed: the paper's domain audits over $\mathbb Z[1/2]$
+and $\mathbb Z$, which carry the record to every group without 2-torsion and the second certificate to every abelian group.
+What rests on mathematics: Lemma 4 (conditional copies), Lemma 6 (removal of difference injectivity, which needs
+$a, b, c \ge 0$: checked), Lemma 7 (shared and transported readings) and Corollary 12. We read them and found no gap. Reproduce:
+`cd c3b && ./fetch.sh && ./run_all.sh` (under a minute).
+
 ## Reproduce
 
 ```

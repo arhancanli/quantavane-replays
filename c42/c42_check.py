@@ -1,9 +1,10 @@
-"""Independent check of the C_42 upper bounds 0.6906538 [Gri26] and 0.6888863712 [Pin26] (Turan's pure power-sum
-constant, constants/42a.md), from the criterion as Griego's note (section 4) and Pinho's paper (Proposition 2) state it,
-and the exact inputs of their certificates alone: verify_42a_certificate.py, verify_primary.py and
-independent/check_bounds.py were neither read nor run.
+"""Independent check of the C_42 upper bounds 0.6906538 [Gri26], 0.6888863712 [Pin26] and 0.688983 [R2026a] (Turan's
+pure power-sum constant, constants/42a.md; the last is the C42 row of PR #184), from the criterion as Griego's note
+(section 4), Pinho's paper (Proposition 2) and Roehrig's notes/turan.md state it, and the exact inputs of their
+certificates alone: verify_42a_certificate.py, verify_primary.py, independent/check_bounds.py, certify_turan.py and
+audit.py were neither read nor run.
 
-  ./fetch.sh && python3 -I c42_check.py [CERTS_ROOT] [--controls] [--finite]
+  ./fetch.sh && python3 -I c42_check.py [CERTS_ROOT] [--controls] [--finite] [--rows=gri,pin,roe]
 
 The criterion, for a first-block cut-off tau >= 1/3 (then at most two corrections reach b_n): with
 tau = t_0 < t_1 < ... < t_M = 1 - tau, alpha = a + ib (a > 0), s = 1 - alpha, middle values eta_0, ..., eta_{M-1},
@@ -262,7 +263,8 @@ def load(path):
         tau = Fraction(d["tau"])
         return ("Gri26", Fraction(d["bound"]), (Fraction(d["alpha"]["re"]), Fraction(d["alpha"]["im"])),
                 [tau, 1 - tau], [(Fraction(d["eta"]["re"]), Fraction(d["eta"]["im"]))], d)
-    return ("Pin26", Fraction(d["C"]), (Fraction(d["alpha"][0]), Fraction(d["alpha"][1])),
+    name = "R2026a" if "construction" in d else "Pin26"   # Roehrig's turan.json has Pinho's layout plus a note
+    return (name, Fraction(d["C"]), (Fraction(d["alpha"][0]), Fraction(d["alpha"][1])),
             [Fraction(b) for b in d["breaks"]], [(Fraction(e[0]), Fraction(e[1])) for e in d["eta"]], d)
 
 
@@ -315,10 +317,13 @@ def evaluate(C, alpha, breaks, etas, out=print, failed=None):
     Y = Y + double
     y2 = Y.abs2_hi()
     c2d2 = (q(C * C) * D * D).lo
-    out(f"  K = I_alpha(tau) in Re [{NEAR.plus(K.re.lo):.30f}, ...], Im [{NEAR.plus(K.im.lo):.30f}, ...]")
-    out(f"  D = I_a(tau) in [{D.lo:.30f}, {D.hi:.30f}]")
-    out(f"  Y in Re [{Y.re.lo:.30f}, {Y.re.hi:.30f}]")
-    out(f"       Im [{Y.im.lo:.30f}, {Y.im.hi:.30f}]   ({M} middle blocks, {npairs} pairs i <= j with t_i + t_j < 1)")
+    # displayed ends rounded outward to 30 decimals (in a context wide enough for the quantize)
+    dn = lambda x: decimal.Context(prec=PREC + 10, rounding=decimal.ROUND_FLOOR).quantize(x, Decimal(10) ** -30)
+    up = lambda x: decimal.Context(prec=PREC + 10, rounding=decimal.ROUND_CEILING).quantize(x, Decimal(10) ** -30)
+    out(f"  K = I_alpha(tau) in Re [{dn(K.re.lo)}, {up(K.re.hi)}], Im [{dn(K.im.lo)}, {up(K.im.hi)}]")
+    out(f"  D = I_a(tau) in [{dn(D.lo)}, {up(D.hi)}]")
+    out(f"  Y in Re [{dn(Y.re.lo)}, {up(Y.re.hi)}]")
+    out(f"       Im [{dn(Y.im.lo)}, {up(Y.im.hi)}]   ({M} middle blocks, {npairs} pairs i <= j with t_i + t_j < 1)")
     ratio = NEAR.divide(NEAR.sqrt(y2), D.lo)
     out(f"  |Y|/D <= {ratio:.25f}   (C = {float(C):.10f}; C^2 D^2 - |Y|^2 >= {HI.subtract(c2d2, y2):.6e})")
     check("|Y|^2 < C^2 D^2, so C_42 <= C", y2 < c2d2)
@@ -336,6 +341,32 @@ def compare_griego(d, res, out=print):
         overlap(res["Y"].re, enc["Y"]["re"]) and overlap(res["Y"].im, enc["Y"]["im"]) and \
         Fraction(res["D"].hi) > Fraction(enc["D_lower"])
     out(f"  our K, D and Y agree with the certificate's printed enclosures: {'yes' if good else 'NO'}")
+    return good
+
+
+# the enclosures Roehrig's notes/turan.md prints (30 decimals; the 42a row of PR #184 prints 17 of them)
+ROEHRIG_PRINTED = {"D": ("0.888190650452511954178223193231", "0.888190650452511954178223193232"),
+                   "ratio": ("0.688982098504060748505120997583", "0.688982098504060748505120997584"),
+                   "gap": ("0.000000979973624636182168032566", "0.000000979973624636182168032567")}
+
+
+def compare_roehrig(C, res, out=print):
+    """Our D, |Y|/D and C^2 D^2 - |Y|^2 against the enclosures Roehrig's note prints (each pair must overlap)."""
+    P = {k: (Fraction(a), Fraction(b)) for k, (a, b) in ROEHRIG_PRINTED.items()}
+    D, Y = res["D"], res["Y"]
+    y2_hi = Fraction(Y.abs2_hi())
+    xr, xi = Y.re, Y.im
+    # the least |Y|^2 over the rectangle (copy_abs is exact; abs() would round to 28 digits)
+    y2_lo = min(Fraction(v.copy_abs()) for v in (xr.lo, xr.hi)) ** 2 * (0 if xr.lo <= 0 <= xr.hi else 1) + \
+        min(Fraction(v.copy_abs()) for v in (xi.lo, xi.hi)) ** 2 * (0 if xi.lo <= 0 <= xi.hi else 1)
+    d_lo, d_hi = Fraction(D.lo), Fraction(D.hi)
+    gap_lo, gap_hi = C * C * d_lo * d_lo - y2_hi, C * C * d_hi * d_hi - y2_lo
+    # |Y|/D lies in [sqrt(y2_lo)/d_hi, sqrt(y2_hi)/d_lo]; compare squares to stay exact
+    r_lo2, r_hi2 = y2_lo / (d_hi * d_hi), y2_hi / (d_lo * d_lo)
+    good = d_lo <= P["D"][1] and P["D"][0] <= d_hi and r_lo2 <= P["ratio"][1] ** 2 and P["ratio"][0] ** 2 <= r_hi2 \
+        and gap_lo <= P["gap"][1] and P["gap"][0] <= gap_hi
+    out(f"  C^2 D^2 - |Y|^2 in [{float(gap_lo):.15e}, {float(gap_hi):.15e}]")
+    out(f"  our D, |Y|/D and C^2 D^2 - |Y|^2 overlap the note's printed 30-decimal enclosures: {'yes' if good else 'NO'}")
     return good
 
 
@@ -375,6 +406,8 @@ def run(path, controls, fin):
     ok, res = evaluate(C, alpha, breaks, etas)
     if ok and name == "Gri26":
         ok &= compare_griego(d, res)
+    if ok and name == "R2026a":
+        ok &= compare_roehrig(C, res)
     if controls:
         print("Red controls (the same check, on altered data):")
         quiet = lambda *a, **k: None
@@ -400,8 +433,12 @@ def run(path, controls, fin):
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     root = args[0] if args else os.path.join(HERE, "certs")
-    paths = [os.path.join(root, "griego", "turan42_certificate.json"), os.path.join(root, "pinho", "c42_256.json")]
-    ok = all([run(p, "--controls" in sys.argv, "--finite" in sys.argv) for p in paths])
+    rows = {"gri": os.path.join(root, "griego", "turan42_certificate.json"),
+            "pin": os.path.join(root, "pinho", "c42_256.json"),
+            "roe": os.path.join(root, "roehrig", "turan.json")}
+    pick = [a.split("=", 1)[1].split(",") for a in sys.argv[1:] if a.startswith("--rows=")]
+    names = pick[0] if pick else list(rows)
+    ok = all([run(rows[n], "--controls" in sys.argv, "--finite" in sys.argv) for n in names])
     sys.exit(0 if ok else 1)
 
 

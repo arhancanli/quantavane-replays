@@ -1,0 +1,8 @@
+Self-tests
+  sin 1, cos 1 by our series agree with libm; pi by Machin encloses the 66-digit value: True
+  F' and F'' against central differences at 20 random points: largest discrepancy 1.58e-15: True
+  |P(t)| = |P(-t)| = |P(pi - t)| at 20 random points (floating point): largest difference 5.6e-16: True
+  300 random cells: the cell bound is above |P_N|^2 at 21 points of each: True
+  the tail bound 1.067370e-50 against the sum of the next 39 terms 1.067370e-50: True
+RESULT: selftest PASS
+run time 1 s
