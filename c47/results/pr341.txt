@@ -1,0 +1,6 @@
+Row pr341 (#341): pr341/construction.json (sha256 5f7a8d9dfc88514c24995fd81b085b7c05ab4e2b9e43dcb923e48b3b6a7e310b) is not in /Users/arhancanli/quantavane-replays/c47/certs.
+  Its only source, Zenodo record 10.5281/zenodo.24022791, is restricted (files: HTTP 403), so the
+  63-atom measure could not be replayed. Arithmetic on the stated fraction alone:
+  printed bound 1.7032090736: implied (margin 3.410e-11); one last-digit unit higher, 1.7032090737: not implied, as expected
+  stated fraction = 1.7032090736341034694948588...
+RESULT: pr341 NOT RUN (no data)

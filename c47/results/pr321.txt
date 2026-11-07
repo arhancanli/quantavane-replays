@@ -1,0 +1,34 @@
+Row pr321 (#321): pr321/half59-measure.json, sha256 64585e1f89c428711dd1c36197de26326c23ac1c83e6aa132dbaec0a2dc54b16
+  59 atoms per cell, Px = 164377561597/50000000000 = 3.287551231940, Py = 2744174966813/1000000000000 = 2.744174966813, lam = 1, reach = 1396/125
+  mu(C) = 131978281545501/25000000000000 = 5.279131261820040
+Tomar's family (boxes with sides <= reach = 1396/125, radii (k-1) 2^-40):
+  boxes 3,400,540 (sides <= 11.168), rectangles of positive area 23,440, pieces in C 33,356 (2 s)
+  method A (subtraction): 759 uncovered pieces, 1,407 pieces removed area (1 s); method B (slab sweep) on those 1,407 (0 s)
+  |C| - uncovered = union K (B); uncovered pieces pairwise disjoint: True; no piece of the family meets them: True (1 s)
+  Lemma 6.2 hypotheses, re-summed from the atoms, for all 1,407 rectangles used: all hold (1 s)
+  exact ratio lam |U n C| / mu(C) = 215956002657486428307163448091951082893881/126800499112387565339223240212480000000000
+                                  = 1.7031163455127832639329472...
+  stated fraction 215956002657486428307163448091951082893881/126800499112387565339223240212480000000000: IDENTICAL
+  printed bound 1.70311: implied (margin 6.346e-06); one last-digit unit higher, 1.70312: not implied, as expected
+  printed bound 1.70311634: implied (margin 5.513e-09); one last-digit unit higher, 1.70311635: not implied, as expected
+  uncovered: 759 pieces, area 0.0306410507 = 0.3396% of C
+  the definition, point by point: centres of the 759 uncovered pieces covered: 0; 200 random points where union and definition disagree: 0 (6 s)
+The certificate pr321/half59.json (sha256 b4d88847ef0c41577213a34ef6fda3d0d9b52b672f6ce20e998b006a2031ba99): 559 witnesses
+  its embedded measure equals the measure file: True
+  every witness: S = atoms in its box (summed from the atoms), 0 < rho, 4 lam rho^2 < mu(S), rectangle inside R_S(rho) and inside C: all hold
+  lam |union of the witnesses| / mu(C) (method B) = 1.7031163455127832639329472...: equal to our ratio
+Every box up to L* = 19.612153 (beyond it mu(box) <= side^2, so no rectangle has interior):
+  boxes 10,284,032 (sides <= 19.6122), rectangles of positive area 23,440, pieces in C 33,356 (7 s)
+  method A (subtraction): 759 uncovered pieces, 1,407 pieces removed area (1 s); method B (slab sweep) on those 1,407 (0 s)
+  |C| - uncovered = union K (B); uncovered pieces pairwise disjoint: True; no piece of the family meets them: True (1 s)
+  ratio with Tomar's radii: 1.7031163455127832639329472...: the same as with reach (the reach is not binding)
+  lam |{M mu >= lam} n C| / mu(C) in [1.7031163455166802955985655, 1.7031163455166802955985655]
+  (radii on 2^-100 below and above sqrt(mu(S)/4 lam); the 2^-40 radii give up 3.897e-12 of it)
+Red controls:
+  C1 last atom moved by 1/1000000 in x: ratio 1.7031163456062620..., differs from the stated fraction, as expected
+  C2 heaviest mass raised by 10^-12: ratio 1.7031163455125639..., differs from the stated fraction, as expected
+  C3 period Px + 10^-9: ratio 1.7031163459187261..., differs from the stated fraction, as expected
+  C4 bound 1.70311635 (one unit higher in the last printed digit): not implied, as expected
+  C5 one radius raised by two grid units, to (k+1) 2^-40: refused (4 lam rho^2 >= mu(S))
+RESULT: pr321 PASS
+run time 65 s

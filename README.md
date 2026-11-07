@@ -536,6 +536,60 @@ numbers differ). Not checked here: that `RECIPE.md` defines the integers of Sect
 this number bounds $\beta$. Reproduce: `cd c12a && ./run_all.sh` (a C11 compiler; `k9` took 73 minutes on 12 threads of a
 loaded Apple M5 Pro, and `./run_all.sh quick` leaves it out and takes about 7 minutes).
 
+## C47: the centred maximal constant over squares in the plane (7 November 2026)
+
+The weak type (1,1) constant $c_2$ of the centred maximal operator over axis-parallel squares. A lower bound is
+$\lambda \lvert U \cap C\rvert/\mu(C)$ for a measure $\mu$ with finitely many atoms in each cell $C$ of the lattice
+$P_x\mathbb Z \times P_y\mathbb Z$ (Tomar's Lemma 6.2, after Lin): $U$ is the union of the lattice translates of
+rectangles $R_i \subset \bigcap_{p \in S_i} Q(p, \rho_i)$, each with a finite set $S_i$ of atoms and
+$0 < \rho_i < \sqrt{\mu(S_i)/(4\lambda)}$. We re-derived the lemma (truncate $\mu$ to $N \times N$ cells, spread each atom
+over $Q(p, \varepsilon)$, apply the weak type inequality to that function, let $N \to \infty$) and checked each step of
+its proof in the paper.
+
+`c47/c47_check.py`, standard library only, exact integers throughout: the rectangles of Tomar's Section 6. For every
+box whose sides lie on atom coordinates, with length at most the file's `reach` (1396/125), $S$ is the set of atoms in
+the box and $\rho_S = (k - 1)\,2^{-40}$, $k$ the largest integer with $(k\,2^{-40})^2 \le \mu(S)/4$. Every box with its
+lower-left corner in $C$ is enumerated, with masses from 2D prefix sums over the periodic grid, and each rectangle is cut
+into its pieces inside $C$. Two different methods then fix the area:
+- subtraction: the pieces are removed from $C$ one by one, which leaves the uncovered pieces;
+- a slab sweep: $\lvert\bigcup K\rvert$ for the pieces $K$ that removed area.
+
+Every uncovered piece is checked against every piece of the family, so the two give $\lvert U \cap C\rvert$ from both
+sides. For every rectangle in $K$, $\mu(S)$ is summed again directly from the atoms, and $0 < \rho$,
+$4\lambda\rho^2 < \mu(S)$ and the containment are checked. The definition is also applied point by point: atoms sorted
+by sup-distance $d$, covered when $\rho(\mu(\text{atoms within } d)) \ge d$. No uncovered piece has its centre covered,
+and union and definition agree at 200 random points. With `--full`, every box up to the length $L^*$ is enumerated:
+beyond $L^*$, $\mu(\text{box}) \le (L/P_x + 2)(L/P_y + 2)\mu(C) \le L^2$, so no rectangle has interior. This is run
+with Tomar's radii and with radii on $2^{-100}$ below and above $\sqrt{\mu(S)/4}$. The second pair encloses
+$\lvert\{M\mu \ge 1\} \cap C\rvert$ itself.
+
+| Row | Data (SHA-256) | Exact ratio | Printed lower bound |
+| --- | --- | --- | --- |
+| [Tom2026], Theorem 1.3 (row added by [#321](https://github.com/teorth/optimizationproblems/pull/321)) | tejasvi/square-maximal-weak-type @ `3af09fc` (v5; the same file is in Zenodo 10.5281/zenodo.23716078), `lowerbound/c2lower_1p70272.json` (`e2ca1616...9888`, 50 atoms) | 482167717377842991882283179477574801392641890014291050323/283174368139841919615520431313000857449005056000000000000 $= 1.70272373359629370268\ldots$, the 16 decimals #321 states; the level set itself gives $1.70272373360313336487\ldots$ | 1.7027237335 |
+| [#321](https://github.com/teorth/optimizationproblems/pull/321) | rpinho/math-certificates @ `3d4cd55`, `c47/round1/certificates/half59-measure.json` (`64585e1f...4b16`, 59 atoms) and `half59.json` (`b4d88847...ba99`) | identical to the stated fraction, $1.70311634551278326393\ldots$; the certificate's 559 witnesses, each checked, give the same union; the level set itself gives $1.70311634551668029559\ldots$ | 1.70311 (the row), 1.70311634 (#341's table) |
+| [#341](https://github.com/teorth/optimizationproblems/pull/341) | `construction.json` (`5f7a8d9d...310b`) in Zenodo 10.5281/zenodo.24022791, which is restricted (HTTP 403): not replayed | stated: 3132581668909806427917067970204393210052649/1839223215401194968772738622942534413844480 $= 1.70320907363410346949\ldots$ | 1.7032090736 (implied by the stated fraction) |
+| control: Lin's lattice [Lin2026] | $u = (2 + \sqrt{22})/3$ to 60 digits, radii on $2^{-300}$, every box up to $L^*$ | $\Phi$ to $1.3 \cdot 10^{-62}$; the uncovered set is exactly the four $a \times b$ slots, with $M\mu < 1$ at their centres | 1.6855099933 |
+
+For both replayed rows the reach does not bind: every box up to $L^*$ (19.58 and 19.61) gives the same union. The
+$2^{-40}$ radii give up $6.8 \cdot 10^{-12}$ and $3.9 \cdot 10^{-12}$ of the level set's ratio. Our 33,356 pieces in $C$
+for #321 are the number of rectangles #321 reports for Tomar's checker.
+
+Self-tests, all passing:
+- $\Phi$ from the 47a page's closed form and from Lin's README agree, round down to 1.6855099933 and match Lin's
+  1.68550999335552518466528;
+- a single atom per cell gives exactly $(1 - 2^{-39})^2$;
+- Tomar's measure without its 48 small atoms gives 1.6447274428 ("about 1.6447", his Section 6);
+- on eight small random measures (two with a reach shorter than $L^*$, radii on $2^{-12}$), brute force agrees exactly
+  with the fast method. Every cell of the grid of all candidate edges is decided at its centre by the pointwise
+  definition, and boxes are summed directly.
+
+Red controls, all as expected, for each replayed row: one atom moved by $10^{-6}$, the heaviest mass raised by $10^{-12}$
+and $P_x$ raised by $10^{-9}$ each change the fraction; a bound one unit higher in the last printed digit is not implied;
+one radius raised to $(k+1)\,2^{-40}$ is refused by $4\lambda\rho^2 < \mu(S)$. What rests on mathematics: Lemma 6.2 (re-derived),
+and, for the level-set values only, that the union of the box rectangles with exact radii is $\{M\mu \ge 1\}$ (the
+supremum in $M\mu$ is reached at the sup-distance of an atom). Reproduce: `cd c47 && ./fetch.sh && ./run_all.sh` (about
+90 seconds). If the #341 file becomes available, put it at `certs/pr341/construction.json`; its SHA-256 is checked first.
+
 ## Reproduce
 
 ```

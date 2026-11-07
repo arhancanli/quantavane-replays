@@ -1,0 +1,29 @@
+Row tom2026 (Tomar, Zenodo 10.5281/zenodo.23716077, Theorem 1.3 (PRs #321 and #341)): tom2026/c2lower_1p70272.json, sha256 e2ca1616be95afa6680e3ccf157cc16fdd39026ad0f5fa79ebd32e5214779888
+  50 atoms per cell, Px = 328734960629/100000000000 = 3.287349606290, Py = 1371827000331/500000000000 = 2.743654000662, lam = 1, reach = 1396/125
+  mu(C) = 65931670400277227073796193886781311/12500000000000000000000000000000000 = 5.274533632022179
+Tomar's family (boxes with sides <= reach = 1396/125, radii (k-1) 2^-40):
+  boxes 240,240 (sides <= 11.168), rectangles of positive area 3,367, pieces in C 5,135 (0 s)
+  method A (subtraction): 660 uncovered pieces, 744 pieces removed area (0 s); method B (slab sweep) on those 744 (0 s)
+  |C| - uncovered = union K (B); uncovered pieces pairwise disjoint: True; no piece of the family meets them: True (0 s)
+  Lemma 6.2 hypotheses, re-summed from the atoms, for all 744 rectangles used: all hold (0 s)
+  exact ratio lam |U n C| / mu(C) = 482167717377842991882283179477574801392641890014291050323/283174368139841919615520431313000857449005056000000000000
+                                  = 1.7027237335962937026887668...
+  stated decimals 1.7027237335962937...: agree
+  printed bound 1.7027237335: implied (margin 9.629e-11); one last-digit unit higher, 1.7027237336: not implied, as expected
+  uncovered: 660 pieces, area 0.0382763000 = 0.4244% of C
+  the definition, point by point: centres of the 660 uncovered pieces covered: 0; 200 random points where union and definition disagree: 0 (4 s)
+Every box up to L* = 19.583920 (beyond it mu(box) <= side^2, so no rectangle has interior):
+  boxes 724,140 (sides <= 19.5839), rectangles of positive area 3,367, pieces in C 5,135 (1 s)
+  method A (subtraction): 660 uncovered pieces, 744 pieces removed area (0 s); method B (slab sweep) on those 744 (0 s)
+  |C| - uncovered = union K (B); uncovered pieces pairwise disjoint: True; no piece of the family meets them: True (0 s)
+  ratio with Tomar's radii: 1.7027237335962937026887668...: the same as with reach (the reach is not binding)
+  lam |{M mu >= lam} n C| / mu(C) in [1.7027237336031333648790560, 1.7027237336031333648790560]
+  (radii on 2^-100 below and above sqrt(mu(S)/4 lam); the 2^-40 radii give up 6.840e-12 of it)
+Red controls:
+  C1 last atom moved by 1/1000000 in x: ratio 1.7027237220923009..., differs from the stated fraction, as expected
+  C2 heaviest mass raised by 10^-12: ratio 1.7027237335961455..., differs from the stated fraction, as expected
+  C3 period Px + 10^-9: ratio 1.7027237334247910..., differs from the stated fraction, as expected
+  C4 bound 1.7027237336 (one unit higher in the last printed digit): not implied, as expected
+  C5 one radius raised by two grid units, to (k+1) 2^-40: refused (4 lam rho^2 >= mu(S))
+RESULT: tom2026 PASS
+run time 11 s
