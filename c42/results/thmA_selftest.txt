@@ -1,0 +1,34 @@
+Self-tests of thmA_check.py
+0. The exact two-dimensional convolution (decimal Kronecker products) against direct summation, 6 random signed arrays with entries up to 10^60: identical
+1. Constant phase psi = 22441797/25000000, T = 34683817/50000000 (gamma = 0.43246... + 0.54237... i, Harcos's case): rho = 0 on (0,1/2], rho = gamma/t on (1/2,1], closed form F in [0.69367630664202, 0.69367630664202], so max(T, F) = 34683817/50000000, Harcos's 0.693676
+   constant phase, N = 16: T = 34683817/50000000, C = 1734191/2500000, 2 knots, grid N = 16, degree P = 10
+  hypotheses: a = Re gamma in [0.4324600010, 0.4324600010] > 0; max |psi_j - psi_0| = 0 < pi/3; sup |d| on (0,1/2] <= 0e-8; kappa = max(T, that) <= 0.69367634 < 1
+  trial rho~: floating-point collocation, 0.0 s; delta~ of degree Q = 4, |delta - delta~| <= 4.49e-20
+  residual: two exact 2-D convolutions in 0.0 s, cell bounds in 0.0 s; max |R/t| <= 6.404e-16 at cell 8, delta-error term 1.00e-19
+  majorant: 16 blocks of 1 cells; max E = 6.40e-16 (block 8); EN <= 4.09e-16, ED <= 7.60e-20
+  p~(1) = 0.7356881881942790 + 0.7450041354370954 i (series tails 1.36e-24), |p~(1)| in [1.047028305284511, 1.047028305284511]   (0.0 s)
+  denominator: far-field convolution 0.0 s, cells 0.1 s (0 with kinks treated exactly); largest error in A 1.77e-12; jump terms elsewhere exact to first order, remainder 0e-207 in total
+  int_0^(1/2) |p~| dt/(1-t) in [1.509390324073072, 1.509390327121872]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 1.047028305284511 / 1.509390324073072 = 0.6936763066422194
+  F >= 0.6936763052410701 (diagnostic lower bound); enclosure width 1.40e-9
+  claim C = 1734191/2500000: C - F_upper = 9.336e-8  ->  PASS   (0 s)
+   certified F_upper - closed-form F = 1.95e-13 (>= 0: True); closed form inside [F_lower, F_upper]: True
+   constant phase, N = 64: T = 34683817/50000000, C = 1734191/2500000, 2 knots, grid N = 64, degree P = 10
+  hypotheses: a = Re gamma in [0.4324600010, 0.4324600010] > 0; max |psi_j - psi_0| = 0 < pi/3; sup |d| on (0,1/2] <= 0e-8; kappa = max(T, that) <= 0.69367634 < 1
+  trial rho~: floating-point collocation, 0.0 s; delta~ of degree Q = 4, |delta - delta~| <= 4.49e-20
+  residual: two exact 2-D convolutions in 0.1 s, cell bounds in 0.0 s; max |R/t| <= 5.396e-16 at cell 32, delta-error term 9.04e-20
+  majorant: 64 blocks of 1 cells; max E = 5.40e-16 (block 32); EN <= 3.27e-16, ED <= 6.86e-20
+  p~(1) = 0.7356881881942790 + 0.7450041354370954 i (series tails 1.32e-24), |p~(1)| in [1.047028305284511, 1.047028305284511]   (0.1 s)
+  denominator: far-field convolution 0.0 s, cells 0.1 s (0 with kinks treated exactly); largest error in A 1.77e-12; jump terms elsewhere exact to first order, remainder 0e-212 in total
+  int_0^(1/2) |p~| dt/(1-t) in [1.509390324073321, 1.509390325327101]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 1.047028305284511 / 1.509390324073321 = 0.6936763066421047
+  F >= 0.6936763060658999 (diagnostic lower bound); enclosure width 5.76e-10
+  claim C = 1734191/2500000: C - F_upper = 9.336e-8  ->  PASS   (1 s)
+   certified F_upper - closed-form F = 8.03e-14 (>= 0: True); closed form inside [F_lower, F_upper]: True
+2. Convergence: the same certificate at other grids N and degrees P (the rows use bak 384/10, pin 9216/10, vat 18432/14):
+   [Bak26] N =    96, P = 10: max |R/t| <= 6.00e-11, EN <= 3.1e-12, ED <= 1.6e-12, F in [0.6863600795339, 0.6863600829238]   (19 s)
+   [Bak26] N =   192, P = 10: max |R/t| <= 2.99e-12, EN <= 9.6e-14, ED <= 5.1e-14, F in [0.6863600824678, 0.6863600829167]   (17 s)
+   [Bak26] N =   384, P = 10: max |R/t| <= 4.76e-12, EN <= 7.6e-14, ED <= 4.0e-14, F in [0.6863600828267, 0.6863600829166]   (17 s)
+   [Bak26] N =   768, P = 10: max |R/t| <= 1.07e-11, EN <= 8.5e-14, ED <= 4.5e-14, F in [0.6863600829089, 0.6863600829167]   (20 s)
+   [Pin26b] N =  4608, P = 12: max |R/t| <= 2.38e-8, EN <= 1.8e-10, ED <= 9.2e-11, F in [0.6863607379380, 0.6863607446243]   (77 s)
+   [Vat26] N = 18432, P = 12: max |R/t| <= 7.27e-8, EN <= 6.8e-10, ED <= 3.4e-10, F in [0.6863607455156, 0.6863607522834]   (205 s)

@@ -1,0 +1,16 @@
+[Pin26b] Pinho, PR #305: C_42 <= 0.686360795, from Bakeas's Theorem A and the profile alone
+  profile pinho_vqk/C42_compact_best.json, SHA-256 ac8d052d567069c6f2b32583791515628fde0fdfe3a1c15e8b2967d45e898765 (as pinned)
+  [Pin26b] Pinho, PR #305: T = 137272159/200000000, C = 137272159/200000000, 49 knots, grid N = 9216, degree P = 10
+  hypotheses: a = Re gamma in [0.1118265910, 0.1118265910] > 0; max |psi_j - psi_0| = 0.856099 < pi/3; sup |d| on (0,1/2] <= 0.569813; kappa = max(T, that) <= 0.686360795 < 1
+  trial rho~: floating-point collocation, 18.9 s; delta~ of degree Q = 10, |delta - delta~| <= 2.64e-19
+  residual: two exact 2-D convolutions in 13.5 s, cell bounds in 3.2 s; max |R/t| <= 2.383e-9 at cell 2, delta-error term 7.37e-17
+  majorant: 1152 blocks of 8 cells; max E = 2.53e-9 (block 0); EN <= 1.81e-11, ED <= 9.23e-12
+  p~(1) = 0.1484549765962508 + -0.1979613800400863 i (series tails 6.43e-25), |p~(1)| in [0.2474420903233095, 0.2474420903233095]   (8.5 s)
+  denominator: far-field convolution 12.1 s, cells 42.5 s (53 with kinks treated exactly); largest error in A 2.09e-12; jump terms elsewhere exact to first order, remainder 1.43e-17 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.3605131740191612, 0.3605131740251088]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.2474420903413872 / 0.3605131740099275 = 0.6863607440170087
+  F >= 0.6863607438702377 (diagnostic lower bound); enclosure width 1.47e-10
+  claim C = 137272159/200000000: C - F_upper = 5.098e-8  ->  PASS   (107 s)
+  for comparison only, read after our run: their two Arb verifiers (N = 14155776, piecewise linear): F <= 0.6863607742 and F <= 0.6863607773; Bakeas's float solve F = 0.686360744
+  floating point, not part of the proof: F_n = |P_n| / D_n of the construction itself, n = 1000: 0.6908334, n = 4000: 0.6878780, n = 16000: 0.6868586
+RESULT C42 <= 137272159/200000000: PASS

@@ -1,0 +1,16 @@
+[Vat26] Vatopoulos, PR #327: C_42 <= 0.686360751, from Bakeas's Theorem A and the profile alone
+  profile vatopoulos/c42_profile_0.686360751.json, SHA-256 d015a8295d809fa26c9f18888ece53d77c9fea71712420313e75911065855652 (as pinned)
+  [Vat26] Vatopoulos, PR #327: T = 686360751/1000000000, C = 686360751/1000000000, 34 knots, grid N = 18432, degree P = 14
+  hypotheses: a = Re gamma in [0.1016540376, 0.1016540376] > 0; max |psi_j - psi_0| = 0.870865 < pi/3; sup |d| on (0,1/2] <= 0.579018; kappa = max(T, that) <= 0.686360751 < 1
+  trial rho~: floating-point collocation, 42.5 s; delta~ of degree Q = 11, |delta - delta~| <= 2.48e-19
+  residual: two exact 2-D convolutions in 42.7 s, cell bounds in 9.7 s; max |R/t| <= 2.145e-9 at cell 1, delta-error term 1.01e-15
+  majorant: 1152 blocks of 16 cells; max E = 2.63e-9 (block 0); EN <= 2.02e-11, ED <= 1.02e-11
+  p~(1) = 0.1306444221356033 + -0.1772191272255717 i (series tails 6.27e-25), |p~(1)| in [0.2201694440419449, 0.2201694440419449]   (16.8 s)
+  denominator: far-field convolution 25.4 s, cells 69.1 s (43 with kinks treated exactly); largest error in A 2.10e-12; jump terms elsewhere exact to first order, remainder 2.18e-19 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.3207780226746417, 0.3207780234298610]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.2201694440621580 / 0.3207780226644679 = 0.6863607495094951
+  F >= 0.6863607477240084 (diagnostic lower bound); enclosure width 1.79e-9
+  claim C = 686360751/1000000000: C - F_upper = 1.491e-9  ->  PASS   (221 s)
+  for comparison only, read after our run: their checker #1 (N = 73728, P = 10): F in [0.6863607494206, 0.6863607494291]; checker #2 (P = 12): F <= 0.6863607494249
+  floating point, not part of the proof: F_n = |P_n| / D_n of the construction itself, n = 1000: 0.6908328, n = 4000: 0.6878775, n = 16000: 0.6868593
+RESULT C42 <= 686360751/1000000000: PASS

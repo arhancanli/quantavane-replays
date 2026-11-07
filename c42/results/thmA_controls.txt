@@ -1,0 +1,86 @@
+Red controls (each must FAIL or be REFUSED)
+[Bak26] Bakeas, PR #302 with T = C = 17159/25000 (below its F): T = 17159/25000, C = 17159/25000, 25 knots, grid N = 384, degree P = 10
+  hypotheses: a = Re gamma in [0.1660974806, 0.1660974806] > 0; max |psi_j - psi_0| = 0.775291 < pi/3; sup |d| on (0,1/2] <= 0.518902; kappa = max(T, that) <= 0.68636 < 1
+  trial rho~: floating-point collocation, 0.5 s; delta~ of degree Q = 9, |delta - delta~| <= 2.90e-19
+  residual: two exact 2-D convolutions in 0.5 s, cell bounds in 0.1 s; max |R/t| <= 3.169e-12 at cell 0, delta-error term 1.53e-18
+  majorant: 384 blocks of 1 cells; max E = 3.19e-12 (block 0); EN <= 5.25e-14, ED <= 2.74e-14
+  p~(1) = 0.2460948582810460 + -0.3042356995220210 i (series tails 8.41e-25), |p~(1)| in [0.3913081140687240, 0.3913081140687240]   (0.5 s)
+  denominator: far-field convolution 0.5 s, cells 14.0 s (24 with kinks treated exactly); largest error in A 2.04e-12; jump terms elsewhere exact to first order, remainder 6.87e-19 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.5701105760833208, 0.5701105761576876]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.3913081140687766 / 0.5701105760832934 = 0.6863723117664217
+  F >= 0.6863723116766392 (diagnostic lower bound); enclosure width 8.98e-11
+  claim C = 17159/25000: C - F_upper = -0.00001231  ->  FAIL   (17 s)
+   -> FAIL; F_lower - C = 0.0000123 (> 0: the claim is false, not only unproved)
+[Bak26] Bakeas, PR #302 with psi_0 + 1/20: T = 68637/100000, C = 68637/100000, 25 knots, grid N = 384, degree P = 10
+  hypotheses: a = Re gamma in [0.1991768922, 0.1991768922] > 0; max |psi_j - psi_0| = 0.725291 < pi/3; sup |d| on (0,1/2] <= 0.486978; kappa = max(T, that) <= 0.68637 < 1
+  trial rho~: floating-point collocation, 0.6 s; delta~ of degree Q = 8, |delta - delta~| <= 3.08e-19
+  residual: two exact 2-D convolutions in 0.6 s, cell bounds in 0.1 s; max |R/t| <= 3.814e-12 at cell 0, delta-error term 9.51e-19
+  majorant: 384 blocks of 1 cells; max E = 3.83e-12 (block 0); EN <= 5.39e-14, ED <= 2.95e-14
+  p~(1) = 0.2919788548882433 + -0.3564390182891938 i (series tails 8.59e-25), |p~(1)| in [0.4607607030344646, 0.4607607030344646]   (0.5 s)
+  denominator: far-field convolution 0.5 s, cells 13.7 s (24 with kinks treated exactly); largest error in A 2.01e-12; jump terms elsewhere exact to first order, remainder 7.77e-19 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.6712757821183661, 0.6712757821333919]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.4607607030345185 / 0.6712757821183366 = 0.6863955401169125
+  F >= 0.6863955401013272 (diagnostic lower bound); enclosure width 1.56e-11
+  claim C = 68637/100000: C - F_upper = -0.00002554  ->  FAIL   (17 s)
+   -> FAIL; F_lower - C = 0.0000255
+[Pin26b] Pinho, PR #305 with T = C = 17159/25000 (below its F): T = 17159/25000, C = 17159/25000, 49 knots, grid N = 4608, degree P = 12
+  hypotheses: a = Re gamma in [0.1118264614, 0.1118264614] > 0; max |psi_j - psi_0| = 0.856099 < pi/3; sup |d| on (0,1/2] <= 0.569812; kappa = max(T, that) <= 0.68636 < 1
+  trial rho~: floating-point collocation, 11.3 s; delta~ of degree Q = 11, |delta - delta~| <= 3.27e-19
+  residual: two exact 2-D convolutions in 9.7 s, cell bounds in 2.2 s; max |R/t| <= 2.378e-8 at cell 1, delta-error term 3.85e-16
+  majorant: 1152 blocks of 4 cells; max E = 2.53e-8 (block 0); EN <= 1.80e-10, ED <= 9.21e-11
+  p~(1) = 0.1484554861322632 + -0.1979615880373759 i (series tails 6.67e-25), |p~(1)| in [0.2474425624282256, 0.2474425624282256]   (4.5 s)
+  denominator: far-field convolution 6.1 s, cells 40.4 s (60 with kinks treated exactly); largest error in A 2.09e-12; jump terms elsewhere exact to first order, remainder 1.78e-21 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.3605133512025221, 0.3605133540052001]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.2474425626083867 / 0.3605133511104624 = 0.6863617168302030
+  F >= 0.6863617101443324 (diagnostic lower bound); enclosure width 6.69e-9
+  claim C = 17159/25000: C - F_upper = -0.000001717  ->  FAIL   (80 s)
+   -> FAIL; F_lower - C = 0.00000171 (> 0: the claim is false, not only unproved)
+[Pin26b] Pinho, PR #305 with psi_3 + 1/50: T = 137272159/200000000, C = 137272159/200000000, 49 knots, grid N = 4608, degree P = 12
+  hypotheses: a = Re gamma in [0.1118265910, 0.1118265910] > 0; max |psi_j - psi_0| = 0.856099 < pi/3; sup |d| on (0,1/2] <= 0.569813; kappa = max(T, that) <= 0.686360795 < 1
+  trial rho~: floating-point collocation, 10.8 s; delta~ of degree Q = 11, |delta - delta~| <= 2.81e-19
+  residual: two exact 2-D convolutions in 9.1 s, cell bounds in 2.0 s; max |R/t| <= 2.378e-8 at cell 1, delta-error term 3.30e-16
+  majorant: 1152 blocks of 4 cells; max E = 2.53e-8 (block 0); EN <= 1.83e-10, ED <= 9.35e-11
+  p~(1) = 0.1466900479549712 + -0.1965629264138902 i (series tails 6.62e-25), |p~(1)| in [0.2452650692810212, 0.2452650692810212]   (4.4 s)
+  denominator: far-field convolution 5.6 s, cells 39.5 s (60 with kinks treated exactly); largest error in A 2.09e-12; jump terms elsewhere exact to first order, remainder 1.43e-21 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.3573408218499364, 0.3573408246552566]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.2452650694636324 / 0.3573408217564413 = 0.6863617435536145
+  F >= 0.6863617367840836 (diagnostic lower bound); enclosure width 6.77e-9
+  claim C = 137272159/200000000: C - F_upper = -9.486e-7  ->  FAIL   (76 s)
+   -> FAIL; F_lower - C = 9.42e-7
+[Vat26] Vatopoulos, PR #327 with T = C = 17159/25000 (below its F): T = 17159/25000, C = 17159/25000, 34 knots, grid N = 18432, degree P = 12
+  hypotheses: a = Re gamma in [0.1016539263, 0.1016539263] > 0; max |psi_j - psi_0| = 0.870865 < pi/3; sup |d| on (0,1/2] <= 0.579017; kappa = max(T, that) <= 0.68636 < 1
+  trial rho~: floating-point collocation, 36.2 s; delta~ of degree Q = 11, |delta - delta~| <= 2.54e-19
+  residual: two exact 2-D convolutions in 42.4 s, cell bounds in 8.6 s; max |R/t| <= 7.267e-8 at cell 1, delta-error term 9.04e-16
+  majorant: 1152 blocks of 16 cells; max E = 8.90e-8 (block 0); EN <= 6.81e-10, ED <= 3.44e-10
+  p~(1) = 0.1306448650485559 + -0.1772193270992442 i (series tails 6.27e-25), |p~(1)| in [0.2201698677409429, 0.2201698677409429]   (16.5 s)
+  denominator: far-field convolution 25.7 s, cells 61.9 s (38 with kinks treated exactly); largest error in A 2.10e-12; jump terms elsewhere exact to first order, remainder 2.02e-21 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.3207782107635425, 0.3207782112544138]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.2201698684220690 / 0.3207782104198644 = 0.6863616706817153
+  F >= 0.6863616639139791 (diagnostic lower bound); enclosure width 6.77e-9
+  claim C = 17159/25000: C - F_upper = -0.000001671  ->  FAIL   (206 s)
+   -> FAIL; F_lower - C = 0.00000166 (> 0: the claim is false, not only unproved)
+[Vat26] Vatopoulos, PR #327 with psi_20 + 1/200: T = 686360751/1000000000, C = 686360751/1000000000, 34 knots, grid N = 18432, degree P = 12
+  hypotheses: a = Re gamma in [0.1016540376, 0.1016540376] > 0; max |psi_j - psi_0| = 0.870865 < pi/3; sup |d| on (0,1/2] <= 0.579018; kappa = max(T, that) <= 0.686360751 < 1
+  trial rho~: floating-point collocation, 35.9 s; delta~ of degree Q = 11, |delta - delta~| <= 2.48e-19
+  residual: two exact 2-D convolutions in 39.5 s, cell bounds in 8.4 s; max |R/t| <= 7.267e-8 at cell 1, delta-error term 8.82e-16
+  majorant: 1152 blocks of 16 cells; max E = 8.90e-8 (block 0); EN <= 6.82e-10, ED <= 3.44e-10
+  p~(1) = 0.1305272335656225 + -0.1771624048245042 i (series tails 6.27e-25), |p~(1)| in [0.2200542578217837, 0.2200542578217837]   (16.0 s)
+  denominator: far-field convolution 24.5 s, cells 60.1 s (38 with kinks treated exactly); largest error in A 2.10e-12; jump terms elsewhere exact to first order, remainder 2.24e-21 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.3206100737782036, 0.3206100742691139]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.2200542585033485 / 0.3206100734343263 = 0.6863610246121114
+  F >= 0.6863610178371553 (diagnostic lower bound); enclosure width 6.77e-9
+  claim C = 686360751/1000000000: C - F_upper = -2.736e-7  ->  FAIL   (199 s)
+   -> FAIL; F_lower - C = 2.67e-7
+[Bak26] with every phase - 0.3 (psi_0 = -1.626, Re gamma < 0): T = 68637/100000, C = 68637/100000, 25 knots, grid N = 192, degree P = 10
+  a = Re gamma = T cos psi_0 > 0 not certified: [-0.0381260, -0.0381260]
+  REFUSED: a hypothesis of Theorem A fails or is not certified
+   -> REFUSED
+[Bak26] with T = C = 1 (kappa = 1): T = 1, C = 1, 25 knots, grid N = 192, degree P = 10
+  0 < T <= C < 1 fails
+  kappa < 1 not certified
+  REFUSED: a hypothesis of Theorem A fails or is not certified
+   -> REFUSED
+[Vat26] on the grid N = 9216, which misses the knot 1/18432: T = 686360751/1000000000, C = 686360751/1000000000, 34 knots, grid N = 9216, degree P = 10
+  grid N = 9216 does not contain every knot
+  REFUSED: a hypothesis of Theorem A fails or is not certified
+   -> REFUSED

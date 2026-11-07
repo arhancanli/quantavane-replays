@@ -1,0 +1,16 @@
+[Bak26] Bakeas, PR #302: C_42 <= 0.68637, from Bakeas's Theorem A and the profile alone
+  profile bakeas/c42_profile_0.68637.json, SHA-256 dcea4edbec1d5935f2f04d4d1b5b8379e2d2d7d78072a1f089c7abbe11ded395 (as pinned)
+  [Bak26] Bakeas, PR #302: T = 68637/100000, C = 68637/100000, 25 knots, grid N = 384, degree P = 10
+  hypotheses: a = Re gamma in [0.1660999005, 0.1660999005] > 0; max |psi_j - psi_0| = 0.775291 < pi/3; sup |d| on (0,1/2] <= 0.518909; kappa = max(T, that) <= 0.68637 < 1
+  trial rho~: floating-point collocation, 0.5 s; delta~ of degree Q = 9, |delta - delta~| <= 2.98e-19
+  residual: two exact 2-D convolutions in 0.5 s, cell bounds in 0.1 s; max |R/t| <= 4.760e-12 at cell 0, delta-error term 1.57e-18
+  majorant: 384 blocks of 1 cells; max E = 4.78e-12 (block 0); EN <= 7.58e-14, ED <= 3.99e-14
+  p~(1) = 0.2460860955755622 + -0.3042338791038507 i (series tails 8.41e-25), |p~(1)| in [0.3913011878722082, 0.3913011878722082]   (0.5 s)
+  denominator: far-field convolution 0.5 s, cells 14.4 s (24 with kinks treated exactly); largest error in A 2.04e-12; jump terms elsewhere exact to first order, remainder 9.13e-19 in total
+  int_0^(1/2) |p~| dt/(1-t) in [0.5701106425209055, 0.5701106425952818]
+  F <= (|p~(1)| + EN) / (Den~ - ED) = 0.3913011878722840 / 0.5701106425208656 = 0.6863600829166466
+  F >= 0.6863600828267425 (diagnostic lower bound); enclosure width 8.99e-11
+  claim C = 68637/100000: C - F_upper = 0.000009917  ->  PASS   (18 s)
+  for comparison only, read after our run: their two Arb checkers (N = 122880): F <= 0.6863660 and F <= 0.6863615; their float solve F = 0.68636008
+  floating point, not part of the proof: F_n = |P_n| / D_n of the construction itself, n = 1000: 0.6908134, n = 4000: 0.6878859, n = 16000: 0.6868722
+RESULT C42 <= 68637/100000: PASS

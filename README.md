@@ -506,7 +506,119 @@ A fix in `c42_check.py` (6 November): `abs()` and unary minus on a decimal round
 digits, half-even), not outward. `I.mag` and `I.__neg__` now use the exact `copy_abs` and `copy_negate`. The effect was
 below $10^{-28}$ relative, and the outputs for [Gri26] and [Pin26] are unchanged in every printed digit.
 
-Reproduce: `cd c42 && ./fetch.sh && ./run_all.sh` (all three rows with their controls, about five minutes).
+Reproduce: `cd c42 && ./fetch.sh && ./run_all.sh` (all three rows with their controls, about five minutes; `run_all.sh`
+then also runs `thmA_check.py`, below).
+
+## C42: three bounds on Bakeas's Theorem A (7 November 2026)
+
+Three pending rows rest on one limit theorem: Bakeas's $C_{42} \le 0.68637$ [Bak26]
+([#302](https://github.com/teorth/optimizationproblems/pull/302)), Pinho's $0.6863607950$ [Pin26b]
+([#305](https://github.com/teorth/optimizationproblems/pull/305)) and Vatopoulos's $0.686360751$ [Vat26]
+([#327](https://github.com/teorth/optimizationproblems/pull/327)). With $T > 0$, a phase $\varphi$ piecewise linear
+through knots $0 = u_0 < \dots < u_K = \tfrac12$, $g = Te^{i\varphi}$, $\gamma = g(0)$, $a = \mathrm{Re}\,\gamma$, and
+$d = \gamma - g$ on $(0, \tfrac12]$, $d = \gamma$ on $(\tfrac12, 1]$, Theorem A of Bakeas's `NOTES.md` (v1.1.0) says: if
+$\kappa = \sup \lvert d\rvert < 1$ and $a \ge 0$, then $\limsup R_n \le \max(T, F)$, where
+$F = \lvert p(1)\rvert / \int_0^{1/2} \lvert p(t)\rvert\,dt/(1-t)$, $p(t) = t^{-\gamma} + \int_0^t (t-v)^{-\gamma}\rho(v)\,dv$
+and $\rho$ is the bounded solution of $t\rho(t) = d(t) + \int_0^t d(u)\rho(t-u)\,du$. Each row takes $T = C$ and needs
+$F < C$. ([#310](https://github.com/teorth/optimizationproblems/pull/310), the explicit lower bound, does not bear on
+these rows.)
+
+**The proof.** We re-derived every step of Lemma 1, Lemma 2 (Harcos's linearization), Theorem A (steps 1 to 5) and
+Lemma 3 with (8), and found no gap. In Lemma 2, $\sigma_k = \lambda u_k$ gives $\sum_{k>K}\sigma_k P_{n-k}/k = P_n$,
+$s_k(z) = \sigma_k$ for $k \le n$ (logarithms modulo $x^{n+1}$), and $2(K+1) > n$ kills every product of two high terms,
+so $W(1) = 0$. In the theorem: the exact identity $\sum P_m x^m = (1-x)^{\gamma - 1}\exp(\sum_k d(k/n)x^k/k)$ (also for
+$k > K$, since $k/n > \tfrac12$ there); the contraction $\lVert\mathcal K\rVert \le \kappa$, $\lvert d(u)\rvert \le T\Lambda u$ and the
+regularity of $\rho$ (one jump, at $\tfrac12$); the discrete recursion, its uniform bound $B = M/(1-\kappa)$ and the
+error recursion, whose quadrature error is $O(\omega_d + \omega_\rho)$ plus $O(1/n)$ from at most two cells; the
+splitting of $\Pi_n(j)$, the domination (B2) and the convergence (B1); dominated convergence for the denominator. The
+proof uses the knots only through $\lvert d(u)\rvert \le T\Lambda u$ and the continuity of $d$ and $d(t)/t$ on $(0, \tfrac12]$,
+so it holds verbatim for the knots $j^2/4608$ of #305 and the 34 knots of #327, as #305 says. The hypothesis
+$a \ge 0$ enters only through the monotonicity of $v^{-a}$ in the Riemann-sum bounds of step 4. For a constant phase,
+$\rho = 0$ on $(0,\tfrac12]$ and $\rho = \gamma/t$ beyond, which gives Harcos's formula
+$F = \lvert 1 + \gamma\int_0^{1/2} t^{-\gamma}dt/(1-t)\rvert / \int_0^{1/2} t^{-a}dt/(1-t)$; at $\gamma = 0.43246 + 0.54237i$ it
+is $0.6936763$ (rigorous series) with $T = \lvert\gamma\rvert = 0.6936763$. Lemma 3:
+$e = \rho - \tilde\rho$ satisfies $e = R/t + \mathcal K e$, so $\lVert e\rVert \le \lVert R/t\rVert/(1-\kappa)$, and
+$\lvert p - \tilde p\rvert \le \lVert e\rVert\,t^{1-a}/(1-a)$ gives (8). We also re-derived the integrated (Gronwall) bound of #305
+(correct; not used here). This check was made with AI assistance and is not a referee report.
+
+**The numbers.** `c42/thmA_check.py`, standard library only (with `c42_check.py`'s decimal intervals):
+- Hypotheses, rigorously: $0 < T \le C < 1$, $a = T\cos\psi_0 > 0$, and $\kappa = \max(T, 2T\sin(E/2)) < 1$ with
+  $E = \max\lvert\psi_j - \psi_0\rvert$ ($\lvert d\rvert = 2T\lvert\sin((\varphi-\psi_0)/2)\rvert$ on $(0,\tfrac12]$).
+- A trial $\tilde\rho$, a discontinuous polynomial of degree $P$ on each cell of the grid $h = 1/N$ (which contains
+  every knot, so every sum of knots too): floating-point collocation, then exact dyadic coefficients.
+- Its residual $R = d + d*\tilde\rho - t\tilde\rho$, exactly per cell: on cell $n$,
+  $(f*g) = h\sum_c \frac{\theta^{c+1}}{(c+1)!}U_{n,c} + h\sum_c\frac{(1-\theta)^{c+1}}{(c+1)!}V_{n-1,c}$, where $U$ and $V$ are
+  two-dimensional convolutions (cell, degree) of $a!\,f_{i,a}$ and $b!\,g_{j,b}$ and of the same for the reversed
+  polynomials. Each is one product of decimal integers (the arrays packed by Kronecker substitution, every rounding
+  trapped). $d$ is replaced by its Taylor polynomial of degree $Q$ on each cell, remainder bounded; $\sup\lvert R/t\rvert$
+  on each cell from the moduli of the Chebyshev coefficients, computed exactly.
+- From the residual to $e = \rho - \tilde\rho$: $\lvert e\rvert \le r + \lvert\mathcal K\rvert\,\lvert e\rvert$ with
+  $\lvert\mathcal K\rvert f(t) = t^{-1}\int_0^t\lvert d(u)\rvert f(t-u)\,du$. Any bounded $E \ge 0$ with
+  $E \ge r + \lvert\mathcal K\rvert E$ bounds $\lvert e\rvert$ (for $w = \lvert e\rvert - E$, $w^+ \le \lvert\mathcal K\rvert w^+$, and
+  $\lVert\lvert\mathcal K\rvert\rVert \le \kappa < 1$). We build $E$ on blocks of cells by a forward recursion, and
+  $EN = \int_0^1(1-v)^{-a}E \ge \lvert p(1) - \tilde p(1)\rvert$,
+  $ED = \frac{2}{1-a}\int_0^{1/2}(\tfrac12 - v)^{1-a}E \ge \int_0^{1/2}\lvert p - \tilde p\rvert\,dt/(1-t)$.
+- $\tilde p(1) = 1 + h^{1-\gamma}\sum_c\int_0^1(c-y)^{-\gamma}\tilde\rho_{N-c}(y)\,dy$, by
+  $(c-y)^{-\gamma} = c^{-\gamma}\sum_j\frac{(\gamma)_j}{j!}(y/c)^j$ ($\lvert(\gamma)_j/j!\rvert \le 1$) and $B(k+1, 1-\gamma)$ for $c = 1$.
+- The denominator from below. On cell $n \ge 1$, $\tilde p = h^{-\gamma}(A(\xi) + h\,x^{1-\gamma}J(x))$, $x = \xi + \tfrac12$:
+  $A$ is a polynomial from the series of $(n + \tfrac12 + \xi)^{-\gamma}$, of
+  $\sum_k\tilde r_{n-1,k}B(k+1,1-\gamma)(\tfrac32 + \xi)^{k+1-\gamma}$ (the previous cell's polynomial continued over cell
+  $n$) and, for the cells two or more back, of a second exact two-dimensional convolution; $J = \sum_k\Delta_kB(k+1,1-\gamma)x^k$
+  holds the jumps $\Delta_k$ of $\tilde\rho$'s Taylor coefficients at the node. Then
+  $\sqrt X \ge \tfrac32Xu - \tfrac12X^2u^3$ for $X, u \ge 0$ (the difference is $s(s-1)^2(s+2)/(2u)$, $s = u\sqrt X$), with
+  $X = \lvert A\rvert^2$ exact and $u \approx 1/\lvert A\rvert$; the jump term to first order,
+  $\lvert A + S\rvert \ge \lvert A\rvert + \mathrm{Re}(S\bar A)u - \eta\lvert S\rvert$ ($\eta \ge \sup\lvert u^2X - 1\rvert$), integrated
+  with the moments $1/(k + 2 - \gamma)$; at the cells that start at a knot, the same inequality with $X = \lvert A + S\rvert^2$
+  in generalized monomials $x^{k + m(1-\gamma) + m'(1-\bar\gamma)}$; cell 0 exactly ($\tilde p = h^{-\gamma}x^{-\gamma}q_0(x)$).
+- $F \le (\lvert\tilde p(1)\rvert + EN)/(\tilde D - ED)$, compared exactly with $C$.
+
+| Row | Profile (SHA-256) | Grid, $\sup\lvert R/t\rvert$ | Certified $F \le$ (diagnostic $F \ge$) | Claim $C = T$ |
+| --- | --- | --- | --- | --- |
+| [Bak26] ([#302](https://github.com/teorth/optimizationproblems/pull/302)) | Bakeas/turan-c42-bound @ `dc9c491c` (v1.1.0), `c42_profile_0.68637.json` (`dcea4edb...d395`, as #302 and the note state; 25 knots $j/48$; $a = 0.1660999$, $E = 0.7753$) | $N = 384$, $P = 10$; $4.8 \cdot 10^{-12}$ | 0.6863600829166 (0.6863600828267) | 0.68637: $C - F \ge 9.9 \cdot 10^{-6}$ |
+| [Pin26b] ([#305](https://github.com/teorth/optimizationproblems/pull/305)) | rpinho/c42-certificate @ `009120a8`, `volterra-quadratic-knots/certificates/C42_compact_best.json` (`ac8d052d...5765`, as its README states; 49 knots $j^2/4608$; $a = 0.1118266$, $E = 0.8561$) | $N = 9216$, $P = 10$; $2.4 \cdot 10^{-9}$ | 0.6863607440170 (0.6863607438702) | 0.6863607950: $C - F \ge 5.09 \cdot 10^{-8}$ |
+| [Vat26] ([#327](https://github.com/teorth/optimizationproblems/pull/327)) | NikosVat/turan-c42 @ `9668a60e`, `certificate/c42_profile_0.686360751.json` (`d015a829...5652`, as #327 states; 34 knots, least common denominator 18432; $a = 0.1016540$, $E = 0.8709$) | $N = 18432$, $P = 14$; $2.1 \cdot 10^{-9}$ | 0.6863607495095 (0.6863607477240) | 0.686360751: $C - F \ge 1.49 \cdot 10^{-9}$ |
+
+In every row $E < \pi/3$, so $\kappa = T$. The error terms are $EN \le 7.6 \cdot 10^{-14}$, $1.8 \cdot 10^{-11}$ and
+$2.0 \cdot 10^{-11}$ and $ED \le 4.0 \cdot 10^{-14}$, $9.2 \cdot 10^{-12}$ and $1.0 \cdot 10^{-11}$; the cells treated with
+the kink kept exact number 24, 53 and 43. Floating point, not part of the proof: the construction itself gives
+$F_n = 0.6908134$, $0.6878859$, $0.6868722$ ([Bak26]), $0.6908334$, $0.6878780$, $0.6868586$ ([Pin26b]) and $0.6908328$,
+$0.6878775$, $0.6868593$ ([Vat26]) at $n$ = 1000, 4000, 16000, falling slowly toward the limits.
+
+The three rows' own numbers, read after our runs: [Bak26]'s two Arb checkers $F \le 0.6863660$ and $0.6863615$
+($N = 122880$) and its float solve 0.68636008; [Pin26b]'s verifiers $F \le 0.6863607743$ and $0.6863607774$
+($N = 14155776$) and Bakeas's float solve 0.686360744; [Vat26]'s enclosure $[0.6863607494206, 0.6863607494291]$.
+Our upper bounds are consistent with all of these: below the certified bounds of [Bak26] and [Pin26b] and at their
+float values, and $8 \cdot 10^{-11}$ above the top of [Vat26]'s enclosure (our $EN$ and $ED$). For [Vat26] the margin is
+resolution-limited on our side: at $P = 12$ on the same grid our upper bound is 0.6863607522834, above the claim,
+because the residual on the cell after the knot $1/18432$ is then $7.3 \cdot 10^{-8}$. (#305's README prints its two
+bounds as 0.6863607742 and 0.6863607773, its PR text as 0.6863607743 and 0.6863607774.)
+
+Self-tests (`--selftest`), all passing: the exact convolution against direct summation, identical on six random
+signed arrays with entries up to $10^{60}$; Harcos's constant phase ($T = 0.69367634$, $\psi = 0.89767188$), whose
+closed form $0.69367630664\ldots$ lies inside our enclosure at $N = 16$ and 64, below its top by $2.0 \cdot 10^{-13}$ and
+$8.0 \cdot 10^{-14}$; and convergence: the [Bak26] upper bound is 0.6863600829238, 0.6863600829167, 0.6863600829166 and
+0.6863600829167 at $N$ = 96, 192, 384 and 768, [Pin26b] at $N = 4608$, $P = 12$ gives 0.6863607446243, and [Vat26] at
+$P = 12$ gives 0.6863607522834 (above).
+
+Red controls (`--controls`), all as expected. For each row, $T = C = 0.68636$ (at or below $F$) and one phase raised
+([Bak26] $\psi_0 + 0.05$, [Pin26b] $\psi_3 + 0.02$, [Vat26] $\psi_{20} + 0.005$) all FAIL, and in every case our
+diagnostic lower bound on $F$ exceeds $C$ (by $1.2 \cdot 10^{-5}$, $2.6 \cdot 10^{-5}$, $1.7 \cdot 10^{-6}$,
+$9.4 \cdot 10^{-7}$, $1.7 \cdot 10^{-6}$ and $2.7 \cdot 10^{-7}$), so these claims are false, not only unproved. Refused:
+[Bak26]'s phases all lowered by 0.3 ($\psi_0 = -1.626$, $\mathrm{Re}\,\gamma = -0.038 < 0$, which Theorem A excludes),
+$T = C = 1$ ($\kappa = 1$), and [Vat26] on a grid that misses its knot $1/18432$.
+
+Not read or run: any checker, solver or notebook of the three repositories. Read: Bakeas's `NOTES.md`, Pinho's
+`README.md`, `BAKEAS_ADAPTATION.md` and `VOLTERRA_VERIFIER_MATH.md`, Vatopoulos's `NOTES_CERTIFIER.md` (and the
+headings and opening claims of his `README.md`, `NOTES.md` and `MATH.md`), the three PR texts and the profiles. Two of
+our devices also appear in Vatopoulos's
+`NOTES_CERTIFIER.md`, the $U$/$V$ identity and the inequality $\sqrt X \ge \tfrac32Xu - \tfrac12X^2u^3$; we re-derived
+both. The rest differs from all three: exact decimal products instead of ball arithmetic, our grids and degrees, the
+comparison majorant instead of Lemma 3's sup bound or the Gronwall bound, the jump terms and the kink cells. What rests
+on mathematics: Theorem A itself (unrefereed; our check above).
+
+Reproduce: `cd c42 && ./fetch.sh && python3 -I thmA_check.py --selftest --controls --write` (the three rows take about
+6 minutes, and about 25 with the self-tests and controls, on a loaded Apple machine; `./run_all.sh` runs it after the
+checks above).
 
 ## C12a: the Euclidean travelling salesman constant (6 November 2026)
 
