@@ -1,0 +1,13 @@
+1a certs/atris_c1a_construction.json
+  n: 65536
+  S: 655360000000000027
+  argmax_m: 25072
+  max_abs_c: 4924189857249963224483323370910
+  scaled_by: 10000000000000
+  sign_at_max: +
+  ties: 1
+  bound = 645423412969467179759478160871915520/429496729600000035389440000000000729
+  decimal: floor 1.5027434867095833797432  ceil 1.5027434867095833797433
+  control: corrupted coefficient 43690 rejected: True
+  control: old coefficients rejected for weight 32768 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

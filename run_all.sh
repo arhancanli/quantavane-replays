@@ -6,7 +6,8 @@ for job in "1c koshta_K24576_0.4103333.json" "1c julsgaard_c1c_K98304.json" "1c 
            "1a vidigoat_c1a_n131072.json" "1a vidigoat_c1a_n262144.json" \
            "1d julsgaard_certificate.json" "1d kerem_c1d_n40960_1.4556234448.json" \
            "1d echul_c_f10240.json" "1d huiihao_construction.json" \
-           "1d steps_construction.json" "1d aer2026_n600.json" "1d cert2026_construction.json"; do
+           "1d steps_construction.json" "1d aer2026_n600.json" "1d cert2026_construction.json" \
+           "1c r2026_certificate.json" "1a atris_c1a_construction.json"; do
   set -- $job
   python3 -I autocorr_check.py "$1" "certs/$2" --controls > "results/$2.txt"
 done

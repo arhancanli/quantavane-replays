@@ -21,4 +21,7 @@ get aer_problem_4_signed_autoconvolution_bounds.py https://raw.githubusercontent
 python3 -I -c "import ast; src = open('aer_problem_4_signed_autoconvolution_bounds.py').read(); n = next(a for a in ast.parse(src).body if isinstance(a, ast.Assign) and getattr(a.targets[0], 'id', '') == 'STEP_FUNCTION_C4_PRIME_N600'); t = [ast.get_source_segment(src, e).strip() for e in n.value.elts]; assert len(t) == 600; open('aer2026_n600.json', 'w').write('{\"values\": [' + ', '.join(t) + ']}\\n')"
 # the starred 1d row [CERT2026] (#224): the Extremal Values Registry copy the page cites (EV-000004, LF line endings)
 get cert2026_construction.json https://raw.githubusercontent.com/extremal-values-registry/extremal-values-registry/50520b971e5d234bc9c4ccbdcd5a5107d5bb8791/certificates/third_autocorrelation_abs_inside/construction.json
+# second-party replays of two rows whose asterisks came off on one replay (#243's [R2026] 1c row, #232's [A2026] 1a row)
+get r2026_certificate.json https://raw.githubusercontent.com/rozetyp/barnard-steinerberger-lower-bound/19f397152222caaef2c838bdd9c41295adb94310/certificate.json
+get atris_c1a_construction.json https://raw.githubusercontent.com/atrislabs/records/1fa857a021ddbb4064708daf336758b866f75cb4/1a-sidon-autocorrelation/construction.json
 shasum -a 256 -c ../SHA256SUMS

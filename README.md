@@ -8,7 +8,7 @@ have no connection with any of the authors.
 An index of every asterisked bound in that repository, with the replays posted for each (ours and others'), is in
 [ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026).
 
-## C1a, C1c and C1d (3 to 5 November 2026)
+## C1a, C1c and C1d (3 to 7 November 2026)
 
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
 | --- | --- | --- | --- | --- |
@@ -25,9 +25,11 @@ An index of every asterisked bound in that repository, with the replays posted f
 | $C_{1d} \leq$ | [#326](https://github.com/teorth/optimizationproblems/pull/326) (the STEPS2026 row) | steps-re/c1d-certificate @ `9a091494`, `construction.json` (600 cells, JSON floats), `3dd39fae...a28c` | read as binary64: 698746209786798359455483373677229695641600 / 478522078482569620433992386249161163190849 = 1.46021728402287398524...; read as the printed decimals: 1.46021728402287397507... | 1.460217284022874, above both |
 | $C_{1d} \leq$ | [#326](https://github.com/teorth/optimizationproblems/pull/326) (the AER2026 row) | unclegareth-create/alphaevolve_repository_of_problems @ `4b3bbd2a`, `.../problem_4_signed_autoconvolution_bounds.py`, `1a290ad1...54b2`: the list `STEP_FUNCTION_C4_PRIME_N600` (600 cells), read from the file with Python's `ast` parser and never run | read as binary64: 1.45998904690538324315...; read as the printed decimals: 1.45998904690538314495... | 1.459989046905384, above both |
 | $C_{1d} \leq$ | [#224](https://github.com/teorth/optimizationproblems/pull/224) and [#243](https://github.com/teorth/optimizationproblems/pull/243) (the two CERT2026 rows; 7 November) | extremal-values-registry @ `50520b9`, `certificates/third_autocorrelation_abs_inside/construction.json` (300 cells, JSON floats; its values equal those printed in #224), `51f864ee...0a0e` (as the 1d page states) | read as binary64: 2039224160683882663565441886346340189798400 / 1393796574908163689489385839036226787118881 = 1.46307158260755932746..., the fraction #224 states, maximum only at m = 414; read as the printed decimals: 1.46307158260755929963... | the starred 1.463071582607559 is below both, so it is not an upper bound as printed; #243's 1.4630715826075594 is above both |
+| $C_{1c} \geq$ | [#243](https://github.com/teorth/optimizationproblems/pull/243) (the [R2026] row, whose asterisk came off on one replay; 7 November) | rozetyp/barnard-steinerberger-lower-bound @ `19f3971`, `certificate.json` (K = 6,144, 6,148 integer weights), `62ac49dd...fd0e` (as the 1c page states) | 21072342208353792 / 51354782902387969 = 0.41032871754918741449..., the page's fraction, minimum only at k = 4665 | 0.4103287, below the exact value |
+| $C_{1a} \leq$ | [#232](https://github.com/teorth/optimizationproblems/pull/232) (the [A2026] row, whose asterisk came off on one replay; 7 November) | atrislabs/records @ `1fa857a0`, `1a-sidon-autocorrelation/construction.json` (65,536 non-negative rational heights), `7387452d...7abf` (the page states `7387452d1da7`) | 645423412969467179759478160871915520 / 429496729600000035389440000000000729 = 1.50274348670958337974..., the fraction of the repository's `score_output.json`, maximum only at m = 25072 | 1.5027434868, above the exact value |
 
 Every hash above is the one stated in the pull request (for #269 also the archive's, `b526326d...`), except the 4 Nov
-#270 row and the two $C_{1a}$ rows, where none was stated (these are the files at the commit the pull request links),
+#270 row and #270's two $C_{1a}$ rows, where none was stated (these are the files at the commit the pull request links),
 and CERT2026, whose hash is the one the 1d page states for the registry copy.
 
 ## Method
