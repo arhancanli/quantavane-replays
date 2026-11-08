@@ -1,0 +1,21 @@
+Row pr350 (#350): pr350/final.json, sha256 bc342d18f9fe219828856bcaa9531669a1051c2685394e41dfbeb3e794e818eb
+  98 atoms per cell, Px = 164412227795641/50000000000000 = 3.288244555913, Py = 137238469612441/50000000000000 = 2.744769392249, lam = 1, reach = 6
+  mu(C) = 528259641268587/100000000000000 = 5.282596412685870
+The certificate pr350/final.json (sha256 bc342d18f9fe219828856bcaa9531669a1051c2685394e41dfbeb3e794e818eb): 1500 witnesses
+  its embedded measure equals the measure file: True
+  every witness: S = atoms in its box (summed from the atoms), 0 < rho, 4 lam rho^2 < mu(S), rectangle inside R_S(rho) and inside C: all hold
+  lam |union of the witnesses| / mu(C) (method B, exact) = 1.7040280575636767270638413...
+  exact ratio lam |U n C| / mu(C) = 1771220457083239070854869084751983500209800598673/1039431510074799032049552767561236480000000000000
+                                  = 1.7040280575636767270638413...
+  stated fraction 1771220457083239070854869084751983500209800598673/1039431510074799032049552767561236480000000000000: IDENTICAL
+  printed bound 1.7040280575: implied (margin 6.368e-11); one last-digit unit higher, 1.7040280576: not implied, as expected
+  the finite instance: q ((N - 2h)/N)^2 with N = 214084879817, h = 2 equals the stated fraction 1.7040280575000000000010291...: True; h min(Px, Py) = 5.4895 > the largest witness radius 2.7851: True
+  printed bound 1.7040280575: implied (margin 1.029e-21); one last-digit unit higher, 1.7040280576: not implied, as expected
+  at 400 random points of the witness rectangles, M mu >= lam from the definition: True
+Red controls:
+  C1 the first witness with its radius raised above sqrt(mu(S)/(4 lam)): refused, as expected
+  C2 the first witness rectangle extended to 10^-12 past the left edge of R_S(rho): refused, as expected
+  C3 the heaviest atom lightened by 10%: 899 witnesses fail, as expected: True
+  C4 the bound 1.7040280576, one unit higher in the last printed digit: not implied, as expected
+RESULT: pr350 PASS
+run time 34 s

@@ -61,6 +61,16 @@ ROWS = {
         witnesses=("pr321/half59.json", "b4d88847ef0c41577213a34ef6fda3d0d9b52b672f6ce20e998b006a2031ba99"),
         claimed=Fraction(215956002657486428307163448091951082893881, 126800499112387565339223240212480000000000),
         printed=["1.70311", "1.70311634"], pr="#321"),
+    # PR #350 (rpinho, stacked on #341): certificates/final.json @ 7273e97 (98 atoms and 1500 witness rectangles in one
+    # file); its radii are on the 2^-48 grid (D = 2^48), so our own family uses that grid too
+    "pr350": dict(
+        file=("pr350/final.json", "bc342d18f9fe219828856bcaa9531669a1051c2685394e41dfbeb3e794e818eb"),
+        witnesses=("pr350/final.json", "bc342d18f9fe219828856bcaa9531669a1051c2685394e41dfbeb3e794e818eb"),
+        claimed=Fraction(1771220457083239070854869084751983500209800598673,
+                         1039431510074799032049552767561236480000000000000),
+        printed=["1.7040280575"], pr="#350", e=48, witness_only=True,
+        finite=(214084879817, 2, Fraction(81179170702072811560461937774649547472268267876630428381100034109236137,
+                                          47639573975778160894755636560089704255253920609263650078720000000000000))),
     # PR #341 (Doldrums, SCiEL): construction.json in Zenodo 10.5281/zenodo.24022791, which is restricted
     "pr341": dict(
         file=("pr341/construction.json", "5f7a8d9dfc88514c24995fd81b085b7c05ab4e2b9e43dcb923e48b3b6a7e310b"),
@@ -793,11 +803,24 @@ def check_row(key, certs, controls, full):
         log(f"RESULT: {key} NOT RUN (no data)")
         return None
     d, sha = load_json(path, cfg["file"][1])
-    meas = Measure.from_json(d)
+    meas = Measure.from_json(d["measure"] if "measure" in d else d)
     row_header(key, meas, sha, cfg["file"][0], log)
     ok = True
-    log(f"Tomar's family (boxes with sides <= reach = {meas.reach}, radii (k-1) 2^-40):")
-    R = evaluate(meas, meas.reach, log=log)
+    if cfg.get("witness_only"):
+        # our own full family has 1.3 million rectangles here (over our memory cap), so the certificate's witnesses
+        # are checked one by one instead, which is what the bound rests on
+        Fw, ok1 = check_certificate(key, certs, meas, None, log)
+        ok &= ok1 and compare(key, Fw, log)
+        ok &= finite_check(key, certs, meas, log)
+        ok &= sample_definition(key, certs, meas, 400, log)
+        if controls:
+            ok &= witness_controls(key, certs, meas, Fw, log)
+        log(f"RESULT: {key} {'PASS' if ok else 'FAIL'}")
+        log(f"run time {time.time() - t0:.0f} s")
+        return ok
+    e = cfg.get("e", E_TOMAR)
+    log(f"Tomar's family (boxes with sides <= reach = {meas.reach}, radii (k-1) 2^-{e}):")
+    R = evaluate(meas, meas.reach, e=e, log=log)
     ok &= R.exact and not R.bad
     F = R.ratio
     ok &= compare(key, F, log)
@@ -806,6 +829,8 @@ def check_row(key, certs, controls, full):
     ok &= definition_checks(meas, R, 200, log)
     if "witnesses" in cfg:
         ok &= check_certificate(key, certs, meas, F, log)
+    if "finite" in cfg:
+        ok &= finite_check(key, certs, meas, log)
     if full:
         ok &= full_family(meas, F, log)
     if controls:
@@ -876,9 +901,101 @@ def check_certificate(key, certs, meas, F, log):
     D = lcm_den([v for r in rects for v in r])
     area = Fraction(union_area_sweep([tuple(int(v * D) for v in r) for r in rects]), D * D)
     Fw = meas.lam * area / meas.mass
+    if F is None:
+        log(f"  lam |union of the witnesses| / mu(C) (method B, exact) = {dec(Fw, 25)}...")
+        return Fw, ok
     log(f"  lam |union of the witnesses| / mu(C) (method B) = {dec(Fw, 25)}...: "
         f"{'equal to our ratio' if Fw == F else 'DIFFERENT from our ratio'}")
     ok &= Fw == F
+    return ok
+
+
+def finite_check(key, certs, meas, log):
+    """The row's finite value: q ((N - 2h)/N)^2 with the PR's N and h equals the stated fraction, and h min(Px, Py)
+    exceeds every witness radius (so every atom a witness of an inner cell needs is in the N x N block)."""
+    N, h, stated = ROWS[key]["finite"]
+    q_ = ROWS[key]["claimed"]
+    val = q_ * Fraction(N - 2 * h, N) ** 2
+    d, _ = load_json(os.path.join(certs, ROWS[key]["witnesses"][0]), ROWS[key]["witnesses"][1])
+    rmax = max(q(w["radius"]) for w in d["witnesses"])
+    good = val == stated and h * min(meas.Px, meas.Py) > rmax
+    log(f"  the finite instance: q ((N - 2h)/N)^2 with N = {N}, h = {h} equals the stated fraction "
+        f"{dec(stated, 25)}...: {val == stated}; h min(Px, Py) = {float(h * min(meas.Px, meas.Py)):.4f} > "
+        f"the largest witness radius {float(rmax):.4f}: {h * min(meas.Px, meas.Py) > rmax}")
+    ok = good and printed_check(stated, ROWS[key]["printed"], log)
+    return ok
+
+
+def sample_definition(key, certs, meas, n, log):
+    """at random points of random witness rectangles, M mu >= lam from the definition (every closed square about the
+    point, at each atom distance; exact rationals): a check of the witnesses against the definition, not a proof."""
+    import random
+    d, _ = load_json(os.path.join(certs, ROWS[key]["witnesses"][0]), ROWS[key]["witnesses"][1])
+    rnd = random.Random(5)
+    good = True
+    for _ in range(n):
+        w = rnd.choice(d["witnesses"])
+        x0, x1, y0, y1 = (q(v) for v in w["rectangle"])
+        X = x0 + (x1 - x0) * Fraction(rnd.randint(0, 1000), 1000)
+        Y = y0 + (y1 - y0) * Fraction(rnd.randint(0, 1000), 1000)
+        good &= covered_at(meas, X, Y, 300, None, ideal=True)
+    log(f"  at {n} random points of the witness rectangles, M mu >= lam from the definition: {good}")
+    return good
+
+
+def witness_controls(key, certs, meas, Fw, log):
+    """Each must be refused or not implied: a witness radius raised past sqrt(mu(S)/(4 lam)), a rectangle widened past
+    R_S(rho), the heaviest atom lightened by 10% (some witnesses fail), and the bound one unit higher."""
+    d, _ = load_json(os.path.join(certs, ROWS[key]["witnesses"][0]), ROWS[key]["witnesses"][1])
+    ok = True
+    log("Red controls:")
+
+    def check_one(mm, w):
+        bx0, bx1, by0, by1 = (q(v) for v in w["box"])
+        rho = q(w["radius"])
+        x0, x1, y0, y1 = (q(v) for v in w["rectangle"])
+        mass, xs, ys = Fraction(0), [], []
+        for x, y, m in mm.atoms:
+            for s_ in range(int((bx0 - x) // mm.Px) - 1, int((bx1 - x) // mm.Px) + 2):
+                for t_ in range(int((by0 - y) // mm.Py) - 1, int((by1 - y) // mm.Py) + 2):
+                    px, py = x + s_ * mm.Px, y + t_ * mm.Py
+                    if bx0 <= px <= bx1 and by0 <= py <= by1:
+                        mass += m
+                        xs.append(px)
+                        ys.append(py)
+        return bool(xs) and rho > 0 and 4 * mm.lam * rho * rho < mass and \
+            max(xs) - rho <= x0 < x1 <= min(xs) + rho and max(ys) - rho <= y0 < y1 <= min(ys) + rho
+    w0 = dict(d["witnesses"][0])
+    bx0, bx1, by0, by1 = (q(v) for v in w0["box"])
+    mass = sum(m for x, y, m in meas.atoms if bx0 <= x <= bx1 and by0 <= y <= by1)
+    big = dict(w0, radius=str(Fraction(isqrt(int(mass * 10 ** 40 / (4 * meas.lam))) + 10 ** 6, 10 ** 20)))
+    good = not check_one(meas, big)
+    log(f"  C1 the first witness with its radius raised above sqrt(mu(S)/(4 lam)): {'refused, as expected' if good else 'ACCEPTED (bad)'}")
+    ok &= good
+    x0, x1, y0, y1 = (q(v) for v in w0["rectangle"])
+    xs = [x + s_ * meas.Px for x, y, m in meas.atoms for s_ in range(-3, 4) for t_ in range(-3, 4)
+          if bx0 <= x + s_ * meas.Px <= bx1 and by0 <= y + t_ * meas.Py <= by1]
+    edge = max(xs) - q(w0["radius"])                   # the left edge of R_S(rho)
+    wide = dict(w0, rectangle=[str(edge - Fraction(1, 10 ** 12)), str(x1), str(y0), str(y1)])
+    good = not check_one(meas, wide)
+    log(f"  C2 the first witness rectangle extended to 10^-12 past the left edge of R_S(rho): "
+        f"{'refused, as expected' if good else 'ACCEPTED (bad)'}")
+    ok &= good
+    h = max(range(len(meas.atoms)), key=lambda n: meas.atoms[n][2])
+    light = meas.copy(atoms=meas.atoms[:h] + [(meas.atoms[h][0], meas.atoms[h][1], meas.atoms[h][2] * Fraction(9, 10))] +
+                      meas.atoms[h + 1:])
+    fails = sum(1 for w in d["witnesses"] if not check_one(light, w))
+    good = fails > 0
+    log(f"  C3 the heaviest atom lightened by 10%: {fails} witnesses fail, as expected: {good}")
+    ok &= good
+    p = ROWS[key]["printed"][-1]
+    nd = len(p.split(".")[1])
+    up = Fraction(p) + Fraction(1, 10 ** nd)
+    N, hh, stated = ROWS[key]["finite"]
+    good = not (stated >= up) and not (Fw >= up)
+    log(f"  C4 the bound {dec(up, nd)}, one unit higher in the last printed digit: "
+        f"{'not implied, as expected' if good else 'IMPLIED (bad)'}")
+    ok &= good
     return ok
 
 

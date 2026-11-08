@@ -37,6 +37,12 @@ if [ ! -f pr341/construction.json ]; then
     echo "pr341: Zenodo 10.5281/zenodo.24022791 is restricted; construction.json was not downloaded"
   fi
 fi
+# PR #350 (rpinho): the round-2 certificate (measure and witness rectangles, one file) at commit 7273e97
+if [ ! -f pr350/final.json ]; then
+  mkdir -p pr350
+  curl -s -f -L -o pr350/final.json \
+    "https://raw.githubusercontent.com/rpinho/math-certificates/7273e97ad18bad296571ce55b1378459fe10fc19/c47/round2/certificates/final.json"
+fi
 if [ -f pr341/construction.json ]; then
   shasum -a 256 -c "$here/SHA256SUMS"
 else
