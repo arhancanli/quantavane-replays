@@ -1,0 +1,53 @@
+17a row [WMR2026] (PR #313): C_17 <= 3.6960839126*
+wmr2026/sections/appendix.tex sha256 1d5146c5a8032002dd35528e5ca040d50670dfae677cd809bc0e690ce0d0e425
+  our transcription appears verbatim: True   with $(c_1,\; c_2,\; c_3,\; c_4,\; c_5) = (-0.25,\,0.033,\,0.08,\,0.0,\,-0.0778)$.
+  our transcription appears verbatim: True   Upper bound base $c$ & $3.7992027396\ldots$ & $\mathbf{3.6960839126\ldots}$ \\
+  our transcription appears verbatim: True   F(\lambda) = (1+\lambda)\log(1+\lambda) - \lambda\log\lambda + p(\lambda)\,e^{-\lambda},
+  our transcription appears verbatim: True   U(\mu) = G(\mu) + (1+\mu)\log(1+\mu) - \mu\log\mu, \quad G(\mu) = (-0.25\mu + 0.033\mu^2 + 0.08\mu^3)\,e^{-\mu
+  our transcription appears verbatim: True   the pair $(x,y)$ is accepted if either $(x,y) \in \mathcal{R}_0$ or $(y,x) \in \mathcal{R}_0$.
+  our transcription appears verbatim: True   A pair $(x,y) \in \mathcal{R}_0$ iff $-\log x - \mu\log y \ge U(\mu)$ for all $\mu \in (0,1]$.
+  our transcription appears verbatim: True   X(\lambda) = \bigl(1 - e^{-F'(\lambda)}\bigr)^{1/(1-M(\lambda))}\,(1 - M(\lambda)).
+  our transcription appears verbatim: True   \item $F(\lambda) > -\tfrac{1}{2}\bigl(\log X(\lambda) + \lambda\log M(\lambda) + \lambda\log Y(\lambda)\bigr)
+gnnw_v2/main.tex sha256 2dcb2a908aa7c82015fbb0cbabbc3045386be37364330134d2b947f474bc8c55
+  our transcription appears verbatim: True   R(k,\ell) \leq x^{-k}y^{-\ell}  \qquad \mathrm{for \; all} \; k, \ell \in \bb{N} \; \mathrm{such\; that \;} k+
+  our transcription appears verbatim: True   & and  \qquad F(\lambda) > -\frac{1}{2} \s{\log X(\lambda)+ \lambda \log M(\lambda) + \lambda\log Y(\lambda)} 
+  our transcription appears verbatim: True   &F'(\lambda) > 0, \qquad  X(\lambda) = (1 - e^{-F'(\lambda)})^{\frac{1}{1-M(\lambda)}}(1-M(\lambda)), \qquad (
+  our transcription appears verbatim: True   \bigl(-\tfrac14\lambda+b\lambda^2
+  our transcription appears verbatim: True   \exp\!\left(-\frac23\lambda-\frac3{10}\lambda^2\right),
+  our transcription appears verbatim: True   we expect that lowering the base of the exponent below $3.7$
+gnnw_v1/RamseyArXiv.tex sha256 9475bdc42aac1cb2c995fdfba1803f0ec4dc53ac0c5a838623cb31b5e19eaa2e
+  our transcription appears verbatim: True   such that $R(k,\ell) \leq x^{-k}y^{-\ell}$ for all $k+\ell \geq N_0$.
+  our transcription appears verbatim: True   \begin{thm}\label{t:general}
+sources contain our transcription: True
+p(1) = -0.2148 exactly; F(1) = 2 log 2 + p(1)/e in [1.307273857156264808155746, 1.307273857156264808155746]
+exp(F(1)) = 4 exp(-0.2148/e) in [3.696083912633299357815126, 3.696083912633299357815126]
+printed 3.6960839126... is exp(F(1)) truncated at 10 decimals: True
+F'(1) in [0.6496638306134808270046412, 0.6496638306134808270046412]; log(1 - e^(-F'(1))) in [-0.7386076287406284434023088, -0.7386076287406284434023088]
+U is increasing on (0,1] (U' >= log 2 - 1/4 > 0): True; U(1) in [1.335894877679403020775877, 1.335894877679403020775877]
+at mu = 0.3225: log X in [-1.479541488207068457109088, -1.479541488207068457109088]; log X + U(1) < 0, so (X, y) is in the benchmark's R_0 for EVERY y in (0,1): True
+so the benchmark's rule accepts lambda = 1: with M = 0.3225, Y = 1 - 1e-9 the slack is in [0.001677041179575643350021925, 0.001677041179575643350021925] (> 0: True)
+but (b) at s = 0.3 caps y at exp(-U(0.3) - 0.3 log X) in [0.8133107878820378504869019, 0.8133107878820378504869019] for that X
+[quintic / U, the benchmark's R_0 bound] cell (0, 0.10]: upper bound -0.51196613 (s = 1)
+[quintic / U, the benchmark's R_0 bound] cell [0.70, 1): upper bound -0.52572526 (y <= 1)
+[quintic / U, the benchmark's R_0 bound] cells in [0.10, 0.70] closed: 600; cells left open: 0
+[quintic / U, the benchmark's R_0 bound] for every M(1) in (0,1) and every Y(1) certified by this bound, condition (3) fails at lambda = 1: True; left side minus right side <= -0.0928747; s values used: 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65
+[quintic / F_0.03, GNNW Theorem 1] cell (0, 0.10]: upper bound -0.51141431 (s = 1)
+[quintic / F_0.03, GNNW Theorem 1] cell [0.70, 1): upper bound -0.52572526 (y <= 1)
+[quintic / F_0.03, GNNW Theorem 1] cells in [0.10, 0.70] closed: 600; cells left open: 0
+[quintic / F_0.03, GNNW Theorem 1] for every M(1) in (0,1) and every Y(1) certified by this bound, condition (3) fails at lambda = 1: True; left side minus right side <= -0.0928256; s values used: 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65
+[quintic / the quintic F itself] cell (0, 0.10]: upper bound -0.50033621 (s = 0.85)
+[quintic / the quintic F itself] cell [0.70, 1): upper bound -0.52572526 (y <= 1)
+[quintic / the quintic F itself] cells in [0.10, 0.70] closed: 600; cells left open: 0
+[quintic / the quintic F itself] for every M(1) in (0,1) and every Y(1) certified by this bound, condition (3) fails at lambda = 1: True; left side minus right side <= -0.0928645; s values used: 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65
+
+controls (each must come out as stated):
+[ctl GNNW F_0.08 region] (x, y) with x <= 0.224972233860, y = 0.8113: (a) max <= -0.347589, (b) max <= -0.00000153511, cells failing: 0
+[ctl GNNW F_0.03 at lambda = 1, M = exp(-2/3 - 3/10), Y = 0.8113 certified by F_0.08] slack in [0.001010071502863922299899642, 0.001010071502863922299899642]: passes: True
+[ctl F_0.03 / F_0.08] cell (0, 0.10]: upper bound -0.49309391 (s = 1)
+[ctl F_0.03 / F_0.08] cell [0.70, 1): upper bound -0.31355872 (y <= 1)
+[ctl F_0.03 / F_0.08] cells in [0.10, 0.70] closed: 627; cells left open: 2798 (first: [0.4145, 0.41451562], bound 0.00000211001)
+[ctl] the refutation does not close on GNNW's passing instance: True
+[ctl] (X(0.3225), 0.95) violates (b) for U at s = 0.3: U(0.3) + 0.3 log X + log 0.95 in [0.1553486751768164675719536, 0.1553486751768164675719536] (> 0: True)
+[ctl] 3.6960839127 refused as the truncation: True
+controls all as expected: True
+RESULT: FINDING. The printed value is exp(F(1)) for the quintic, truncated, but the quintic does not satisfy the conditions of GNNW (Theorem 13 of v1, 14 of v2) at lambda = 1 for any M(1) with Y(1) from the region U, F_0.03 or F itself certifies; the benchmark's PASS rests on accepting either orientation.
