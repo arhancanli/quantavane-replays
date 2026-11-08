@@ -1,0 +1,14 @@
+70a row [Pat2026]: C_70 >= 1.201927 (n = 300000, a/r = 13/1000, the full Steiner sum)
+the parameters equal the baseline fields of pin/certificates/c70_candidate.json (n = 300000, side = 13/1000, claim = 1.201927): True
+window: k in [104220, 116221] (both parities), anchors k0 = 110220 and 110221
+window sum / T_k0 in [576.911795549483, 576.911795549484]; largest edge term / T_k0 <= 6.196e-120
+R in [1.201927142572502, 1.201927142572503]
+the row's 1.201927 <= R: True (margin 0.000000142572)
+the largest term alone gives at most 1.2019016713 < 1.201927: True
+
+controls (each must come out as stated):
+[ctl] a/r = 0.012: R <= 1.2017258976 < 1.201927: True
+[ctl] the value 1.201928 is not certified: True
+[ctl] a narrower window (300 steps) gives a wider enclosure [1.201927106270, 1.201938838032]: True
+controls all as expected: True
+RESULT: PASS (R = 1.2019271425... >= 1.201927 from the full Steiner sum; the single largest term alone would not reach it)
