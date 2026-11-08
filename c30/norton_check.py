@@ -273,7 +273,7 @@ def bracket(Hs, dHs, f, kappa, s, q):
     B = -ivq(kappa) * iln(q)
     Bw = -ivq(kappa)
     vals = {}
-    for j in (0, 2, 3):
+    for j in sorted(f):
         h = evalF(Hs[j], s, q)
         dh = evalF(dHs[j], s, q)
         vals[j] = h
@@ -282,8 +282,10 @@ def bracket(Hs, dHs, f, kappa, s, q):
     return B, Bw, vals
 
 
-def phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, out=None):
+def phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, out=None, profile=None):
     s, Qz, f = setup(z0, kappa, alpha, beta, Hs)
+    if profile is not None:
+        f = profile
     q0i = ivq(q0)
     B0, Bw0, vals = bracket(Hs, dHs, f, kappa, s, q0i)
     _, Bw1, _ = bracket(Hs, dHs, f, kappa, s, Iv(1))
@@ -298,8 +300,8 @@ def phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, out=None):
     if out:
         out("s = sqrt(1 - 4 z0) in %s" % s)
         out("Q(z0) in %s; radius 1/Q(z0) in %s" % (Qz, radius))
-        out("profile f = (f0, f2, f3) = (%s, %s, %s)" % (f[0], f[2], f[3]))
-        for j in (0, 2, 3):
+        out("profile f = %s" % ", ".join("f%d = %s" % (j, f[j]) for j in sorted(f)))
+        for j in sorted(f):
             out("H_%d(z0, q0) in %s" % (j, vals[j]))
         out("B'(1) = dB/dw at q = 1 in %s; B'(9) = (dB/dw)/9 in %s (B' changes sign on [1, 9], inside the radius: "
             "%s)" % (Bw1, Bw9 / Iv(9), sign_change))
@@ -310,9 +312,11 @@ def phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, out=None):
     return phi_lo, sign_change, B0, Bw0, vals, s, Qz, f
 
 
-def phi_upper(z0, kappa, alpha, beta, q, Hs, dHs):
+def phi_upper(z0, kappa, alpha, beta, q, Hs, dHs, profile=None):
     """Lambda <= B(q) at any q in the range, so Phi <= 2 log(27 z/4) + 2 B(q) - kappa log Q."""
     s, Qz, f = setup(z0, kappa, alpha, beta, Hs)
+    if profile is not None:
+        f = profile
     B, _, _ = bracket(Hs, dHs, f, kappa, s, ivq(q))
     return (Iv(2) * iln(Iv(27) * ivq(z0) / Iv(4)) + Iv(2) * B - ivq(kappa) * iln(Qz)).hi
 
@@ -323,12 +327,110 @@ def float_free_entropy(g, k):
     return (gi + ki) * iln(gi + ki) - gi * iln(gi) - ki * iln(ki)
 
 
+# ============================================================================ PR #317: C30 >= 521/50 (candidate)
+PIN_TEXT = [
+    "    Phi=2 log(27z/4)+2 Lambda-kappa log Q(z)",
+    "    Lambda=min_q[-kappa log q+sum_j eta_j log H_j(z,q)].",
+    "    H_j = (d/dz)^j[z^j/(1-qQ(z))]/j!.",
+    "    alpha=555555/10^6,       beta=185185/10^6,       c2=7/50.",
+    "    e1=[3(r-B)-L-e2]/2,",
+    "    e3=[L-r+B-e2]/2.",
+    "    eta0=37037/200000,    eta1=3289/80000,",
+    "    eta2=7/50,           eta3=31259/400000.",
+    "    z=50/521,           kappa=515801757591/10^12,",
+    "    q1=1, q2=9,        q0=3049509956240/10^12.",
+    "    Phi > 0.00018309709357909 > 0.",
+]
+
+
+def main_pin2026(root, controls):
+    def out(x):
+        print(x)
+
+    out("30a candidate row [Pin2026] (PR #317): C_30 >= 521/50 = 10.42*, the exact numerical point of its Section 6")
+    ok = True
+    path = os.path.join(root, "pin2026/FIRST_MOMENT_PROOF.md")
+    with open(path, "rb") as fh:
+        raw = fh.read()
+    out("pin2026/FIRST_MOMENT_PROOF.md sha256 %s" % hashlib.sha256(raw).hexdigest())
+    lines = raw.decode("utf-8").split("\n")
+    for t in PIN_TEXT:
+        hit = t in lines
+        ok &= hit
+        out("  our transcription appears as a line: %s   %s" % (hit, t.strip()))
+    import json
+    cpath = os.path.join(root, "pin2026/candidate_certificate.json")
+    with open(cpath, "rb") as fh:
+        craw = fh.read()
+    out("pin2026/candidate_certificate.json sha256 %s" % hashlib.sha256(craw).hexdigest())
+    cert = json.loads(craw.decode("utf-8"))
+    z0, kappa, q0 = Fr(cert["z"]), Fr(cert["kappa"]), Fr(cert["q0"])
+    eta = {int(k): Fr(v) for k, v in cert["profile"].items()}
+    alpha, beta, c2 = Fr(555555, 10 ** 6), Fr(185185, 10 ** 6), Fr(7, 50)
+    same_data = (z0, kappa, q0) == (Fr(50, 521), Fr(515801757591, 10 ** 12), Fr(3049509956240, 10 ** 12)) and \
+        eta == {0: Fr(37037, 200000), 1: Fr(3289, 80000), 2: Fr(7, 50), 3: Fr(31259, 400000)} and \
+        Fr(cert["alpha"]) == alpha and Fr(cert["beta"]) == beta and Fr(cert["two_leaf_cap"]) == c2
+    out("certificate JSON agrees with the document: %s" % same_data)
+    ok &= same_data
+    # the envelope limits from Section 5: eta0 = beta, eta1 = (3 - 4 alpha - 3 beta - c2)/2,
+    # eta2 = c2, eta3 = (2 alpha - 1 + beta - c2)/2 (from r ~ (1 - alpha) m, B ~ beta m, L ~ alpha m, e2 ~ c2 m)
+    env = {0: beta, 1: (3 * (1 - alpha - beta) - alpha - c2) / 2, 2: c2, 3: (alpha - (1 - alpha) + beta - c2) / 2}
+    env_ok = env == eta and sum(eta.values()) == 1 - alpha and sum(j * v for j, v in eta.items()) == alpha \
+        and all(v > 0 for v in eta.values())
+    out("envelope limits from (alpha, beta, c2): %s; sum eta = 1 - alpha, sum j eta = alpha, all positive: %s"
+        % ({j: str(v) for j, v in env.items()}, env_ok))
+    side = Fr(1, 10) + 2 * (Fr(555556, 10 ** 6) - alpha) == Fr("0.100002") and Fr("0.100002") < c2 \
+        and Fr(1851851, 10 ** 7) > beta
+    out("Section 5 side conditions s2 + 2(a+ - alpha) = 0.100002 < c2 and b- = 0.1851851 > beta: %s" % side)
+    ok &= env_ok and side
+    H = ({(0, 0): Fr(2)}, 0, 1)
+    Hs = {0: H, 1: omega(1, H), 2: omega(2, H), 3: omega(3, H)}
+    ok2 = same(Hs[2], (pscale(H2_PAPER[0], H2_DEN), 3, 3)) and same(Hs[3], (pscale(H3_NUM, H3_DEN), 5, 4))
+    # Omega_1[H] = d/dz (z H) = H + z dH/dz, with dH/dz = q H^2/s (Norton's (eq. rules)): check it exactly
+    zdh = (pmul(ZZ, {(0, 1): Fr(4)}), 1, 2)                 # z q H^2 / s = z q 4/(s D^2)
+    h1 = same(Hs[1], (padd(pmul(H[0], pmul(S1, DD)), pmul(zdh[0], {(0, 0): Fr(1)})), 1, 2))
+    out("H_1 = Omega_1[H] = H + z q H^2/s exactly: %s; H_2, H_3 as in Norton's (H2), (H3): %s" % (h1, ok2))
+    ok &= h1 and ok2
+    dHs = {j: rd_q(Hs[j]) for j in Hs}
+    phi_lo, sc, B0, Bw0, vals, s, Qz, f = phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, out, profile=eta)
+    stated = phi_lo > D("0.00018309709357909")
+    out("Phi(50/521) > 0.00018309709357909 as stated: %s; > 0 with the sign change on [1, 9]: %s"
+        % (stated, phi_lo > 0 and sc))
+    ok &= stated and sc
+    if controls:
+        out("")
+        out("controls (each must come out as stated):")
+        ctl = True
+        zb = Fr(10000, 104208)                       # 1/z = 10.4208
+        ub = phi_upper(zb, kappa, alpha, beta, q0, Hs, dHs, profile=eta)
+        out("[ctl] the same profile at 1/z = 10.4208: Phi <= %s < 0, refused: %s" % (fmt(ub, 8), ub < 0))
+        ctl &= ub < 0
+        eta_bad = dict(eta)
+        eta_bad[2] = eta[2] + Fr(1, 100)
+        eta_bad[1] = eta[1] - Fr(1, 100)
+        refuse = not (sum(j * v for j, v in eta_bad.items()) == alpha)
+        out("[ctl] mass moved from 1-leaf to 2-leaf strips breaks sum j eta = alpha: %s" % refuse)
+        ctl &= refuse
+        noenv = {0: eta[0], 2: Fr(11111113, 50000000), 3: Fr(3703701, 100000000)}
+        plo = phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, profile=noenv)[0]
+        out("[ctl] Norton's equitable profile in place of the envelope at z = 50/521: Phi >= %s (no longer > 0: %s)"
+            % (fmt(plo, 8), plo <= 0))
+        ctl &= plo <= 0
+        out("controls all as expected: %s" % ctl)
+        ok &= ctl
+    out("RESULT: %s" % ("PASS (the exact numerical point of Section 6 re-derived: Phi(50/521) > 0.00018309709357909; "
+                        "the first-moment family and the envelope lemma are not checked)" if ok else "FAIL"))
+    return 0 if ok else 1
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
         return 2
     root = sys.argv[1]
     controls = "--controls" in sys.argv
+    if "--row=pin2026" in sys.argv:
+        return main_pin2026(root, controls)
 
     def out(x):
         print(x)

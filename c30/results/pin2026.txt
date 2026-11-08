@@ -1,0 +1,38 @@
+30a candidate row [Pin2026] (PR #317): C_30 >= 521/50 = 10.42*, the exact numerical point of its Section 6
+pin2026/FIRST_MOMENT_PROOF.md sha256 a1575a482c7bc92090013b2419e4f41fafe5cc344b5736511f2bac987dc08ee9
+  our transcription appears as a line: True   Phi=2 log(27z/4)+2 Lambda-kappa log Q(z)
+  our transcription appears as a line: True   Lambda=min_q[-kappa log q+sum_j eta_j log H_j(z,q)].
+  our transcription appears as a line: True   H_j = (d/dz)^j[z^j/(1-qQ(z))]/j!.
+  our transcription appears as a line: True   alpha=555555/10^6,       beta=185185/10^6,       c2=7/50.
+  our transcription appears as a line: True   e1=[3(r-B)-L-e2]/2,
+  our transcription appears as a line: True   e3=[L-r+B-e2]/2.
+  our transcription appears as a line: True   eta0=37037/200000,    eta1=3289/80000,
+  our transcription appears as a line: True   eta2=7/50,           eta3=31259/400000.
+  our transcription appears as a line: True   z=50/521,           kappa=515801757591/10^12,
+  our transcription appears as a line: True   q1=1, q2=9,        q0=3049509956240/10^12.
+  our transcription appears as a line: True   Phi > 0.00018309709357909 > 0.
+pin2026/candidate_certificate.json sha256 61815bb0265eb4f8b8f967718a724cccd3c531ad55d562c9c31cb1c4f1e46365
+certificate JSON agrees with the document: True
+envelope limits from (alpha, beta, c2): {0: '37037/200000', 1: '3289/80000', 2: '7/50', 3: '31259/400000'}; sum eta = 1 - alpha, sum j eta = alpha, all positive: True
+Section 5 side conditions s2 + 2(a+ - alpha) = 0.100002 < c2 and b- = 0.1851851 > beta: True
+H_1 = Omega_1[H] = H + z q H^2/s exactly: True; H_2, H_3 as in Norton's (H2), (H3): True
+s = sqrt(1 - 4 z0) in [0.7849349276793452046852, 0.7849349276793452046852]
+Q(z0) in [0.1075325361603273976574, 0.1075325361603273976574]; radius 1/Q(z0) in [9.299510973209388516410, 9.299510973209388516410]
+profile f = f0 = 37037/200000, f1 = 3289/80000, f2 = 7/50, f3 = 31259/400000
+H_0(z0, q0) in [1.487921513606201066224, 1.487921513606201066224]
+H_1(z0, q0) in [2.313367629868730494336, 2.313367629868730494336]
+H_2(z0, q0) in [3.725316154847736391142, 3.725316154847736391142]
+H_3(z0, q0) in [6.160520479600748023166, 6.160520479600748023166]
+B'(1) = dB/dw at q = 1 in [-0.3822164812888599506197, -0.3822164812888599506197]; B'(9) = (dB/dw)/9 in [3.284487152353952780461, 3.284487152353952780461] (B' changes sign on [1, 9], inside the radius: True)
+B(q0) in [-0.1408330318457033619692, -0.1408330318457033619692]; dB/dw(q0) in [0.0000000000001402802417551569164047, 0.0000000000001402802417551569164047]
+max |log q - log q0| over [1, 9] <= 1.11498090763
+Lambda = min B >= -0.1408330318458598
+Phi(z0, 1, kappa) >= 0.000183097093883
+Phi(50/521) > 0.00018309709357909 as stated: True; > 0 with the sign change on [1, 9]: True
+
+controls (each must come out as stated):
+[ctl] the same profile at 1/z = 10.4208: Phi <= -0.000023977094 < 0, refused: True
+[ctl] mass moved from 1-leaf to 2-leaf strips breaks sum j eta = alpha: True
+[ctl] Norton's equitable profile in place of the envelope at z = 50/521: Phi >= -0.0024251024 (no longer > 0: True)
+controls all as expected: True
+RESULT: PASS (the exact numerical point of Section 6 re-derived: Phi(50/521) > 0.00018309709357909; the first-moment family and the envelope lemma are not checked)
