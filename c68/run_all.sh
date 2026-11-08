@@ -14,4 +14,7 @@ done
 # PR #299 (contact-row model, 0.447): measure, row cover and red controls (a few minutes)
 python3 -I "$here/row_check.py" "$root" --controls > "$here/results/pin0447.txt" 2>&1 || status=1
 grep -H "RESULT\|run time" "$here/results/pin0447.txt"
+# the [Wik2026] row (0.4263; added with PR #239), from the paper's Table 1 alone (no file); red controls (two minutes)
+python3 -I "$here/wik_check.py" --controls > "$here/results/wik2026.txt" 2>&1 || status=1
+grep -H "RESULT" "$here/results/wik2026.txt"
 exit $status

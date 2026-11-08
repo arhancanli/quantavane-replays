@@ -1,0 +1,14 @@
+68a row [Wik2026]: C_68 >= 0.4263 (c = 4263/10000, R = 99/100, eight atoms from Table 1)
+  t_1 = c^2 = 18173169/100000000, t_8 = R, sum w_j = 99/100 = R, nodes increasing: True
+  A_k > 0 for 1 <= k <= 2183: True; smallest A_k / (R^(k+1)/(k+1)) = 6.6452117504e-06 at k = 23 (the paper: > 6.6452117503e-6 at k = 23); 2185 w_8 = 0.9901373783170365 > R: True
+  beta_c(sqrt t_j) from above, j = 2..8: 0.989685929536114, 0.995533783756722, 0.998127951092143, 0.999157174953504, 0.999573932287887, 0.999730257446456, 0.999773067105236
+  each below the paper's stated enclosure: True
+  d/dt log K_c(sqrt t) from below on [R, 0.999], [0.999, 0.9999], [0.9999, 0.99999] (1000 pieces each): 5.0284573887e-07, 5.0929878486e-08, 5.0994233424e-09 (the paper: 3.6694461888e-7, 3.6647630565e-8, 3.6642942322e-9); all positive: True (1 s)
+  35500 pieces on [R, 0.99999]: 1/G from below, K < 1 on every piece; 20 s
+  B_k > 0 for 1 <= k <= 1299: True; smallest B_k / (R^(k+1)/(k+1)) = 6.0214605309e-06 at k = 522 (the paper: > 6.0214605308e-6 at k = 522); 40 s
+  1/G > 0.0000225 on [0.998, 0.999] (through K(0.999); our bound 2.2594517e-05): True; at k = 1300 1.666810362143133e-09 > 1.611068196498003e-09, and every t_j <= 0.99 < 0.998: True
+Red controls (each must not be certified):
+  w_2 cut by 1%: A_k < 0 (rigorously) at k = 2: as expected
+  the partition 100 times coarser (300, 50, 5 pieces): B_k not certified from k = 510: as expected
+  beta_c(sqrt t_8) raised halfway to 1: B_k not certified from k = 214: as expected
+RESULT: PASS  (101 s)
