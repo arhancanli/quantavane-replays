@@ -1,0 +1,14 @@
+1a certs/ttt_ac1_sequence.json
+  n: 30000
+  S: 1212928571364057480566123507896
+  argmax_m: 33235
+  max_abs_c: 36850091041757448033908409960442033462599263876711727880
+  scaled_by: 4951760157141521099596496896
+  sign_at_max: +
+  ties: 1
+  bound = 34546960351647607531789134337914406371186809884417244887500/22987433112988335632224918188121224825925805474257380849169
+  decimal: floor 1.5028628982558265629068  ceil 1.5028628982558265629069
+  printed 1.502870: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 19999 rejected: True
+  control: old coefficients rejected for weight 15000 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

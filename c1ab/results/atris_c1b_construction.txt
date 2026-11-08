@@ -1,0 +1,13 @@
+1b certs/atris_c1b_construction.json
+  n: 114688
+  D: 1000000000000000
+  normalisation: sum h = n/2 exactly
+  argmax_shift_m: -36048
+  ties: 1
+  bound = 10919976354672639675467789613614419/28672000000000000000000000000000000
+  decimal: floor 0.3808585503164285601097  ceil 0.3808585503164285601098
+  printed 0.3808585504: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 38229 rejected: True
+  control: height 2 at cell 17920 refused: True
+  control: sum moved off n/2 by 1/D (cell 11840) refused: True
+  control: mass 1/D moved from cell 11840 to cell 114687 changes the bound: True

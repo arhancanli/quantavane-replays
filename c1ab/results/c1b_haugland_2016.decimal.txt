@@ -1,0 +1,13 @@
+1b certs/c1b_haugland_2016.json
+  n: 51
+  D: 10000000000000000
+  normalisation: sum h = n/2 exactly
+  argmax_shift_m: 2
+  ties: 2
+  bound = 64757565083624785688821235069923/170000000000000000000000000000000
+  decimal: floor 0.3809268534330869746401  ceil 0.3809268534330869746402
+  printed 0.380926: below the exact value, NOT a valid upper bound as printed
+  control: corrupted coefficient 17 rejected: True
+  control: height 2 at cell 19 refused: True
+  control: sum moved off n/2 by 1/D (cell 5) refused: True
+  control: mass 1/D moved from cell 5 to cell 50 changes the bound: True

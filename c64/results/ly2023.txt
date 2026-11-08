@@ -1,0 +1,32 @@
+main.tex sha256 6fe6f9c0de7aa5c9f19365cdc92ffd2de7a1355582aa986e61efd53854793de1
+equation (1.4) in main.tex: -\frac{8}{25}x-\frac{1}{200}\Big(\sqrt{2(1-14x)}-5\sqrt{-1-8x}\Big)^2+\frac{51}{200}=-x
+our transcription equals it: True
+[paper] route A: (1.4) <=> uv = -182/5 x + -37/5; squared: 27524 x^2 + 13168 x + 1419 = 0
+[paper] route A: root -1646/6881 + 25/13762*sqrt(1717) rejected (in interval False, uv >= 0 False, radicands >= 0 True)
+[paper] route A: x = -1646/6881 + (-25/13762)*sqrt(1717), exact residual zero: True
+[paper] theta*   = 0.31448317597406140673580717394153980294988575396771...
+[paper] 2 theta* = 0.62896635194812281347161434788307960589977150793544...
+[paper] route B: f' on the whole interval in [0.942136, 1.126821] (> 0: True); sign change at the ends: True
+[paper] route B: root in [-0.3144831759740614067358071739415398029498, -0.3144831759740614067358071739415398029498] (width 2^-334); contains route A's root: True
+[paper] 63a (PR #313, README cell and row): printed 0.3144831759741 is above the exact value 1 theta*: a valid upper bound as printed
+[paper] 64a (PR #315, README cell): printed 0.6289663519 is below the exact value 2 theta*: NOT a valid upper bound as printed
+
+red controls (each must be refused or change the verdict):
+[ctl 51/200 -> 52/200] route A: (1.4) <=> uv = -182/5 x + -15/2; squared: 110096 x^2 + 53400 x + 5825 = 0
+[ctl 51/200 -> 52/200] route A: root -6675/27524 + 5/13762*sqrt(44738) rejected (in interval False, uv >= 0 False, radicands >= 0 True)
+[ctl 51/200 -> 52/200] route A: x = -6675/27524 + (-5/13762)*sqrt(44738), exact residual zero: True
+[ctl 51/200 -> 52/200] theta*   = 0.31936259008276797980581037743097727430201396865498...
+[ctl 51/200 -> 52/200] 2 theta* = 0.63872518016553595961162075486195454860402793730997...
+[ctl 51/200 -> 52/200] route B: f' on the whole interval in [0.942136, 1.126821] (> 0: True); sign change at the ends: True
+[ctl 51/200 -> 52/200] route B: root in [-0.3193625900827679798058103774309772743020, -0.3193625900827679798058103774309772743020] (width 2^-334); contains route A's root: True
+[ctl 51/200 -> 52/200] 63a printed: printed 0.3144831759741 is below the exact value 1 theta*: NOT a valid upper bound as printed
+[ctl 63a - 1e-13] 63a lowered: printed 0.3144831759740 is below the exact value 1 theta*: NOT a valid upper bound as printed
+[ctl interval [-0.2,-0.1]] route A: (1.4) <=> uv = -182/5 x + -37/5; squared: 27524 x^2 + 13168 x + 1419 = 0
+[ctl interval [-0.2,-0.1]] route A: root -1646/6881 + 25/13762*sqrt(1717) rejected (in interval True, uv >= 0 False, radicands >= 0 True)
+[ctl interval [-0.2,-0.1]] route A: root -1646/6881 + -25/13762*sqrt(1717) rejected (in interval False, uv >= 0 True, radicands >= 0 True)
+[ctl k = -5] route A: (1.4) <=> uv = 182/5 x + 37/5; squared: 27524 x^2 + 13168 x + 1419 = 0
+[ctl k = -5] route A: root -1646/6881 + 25/13762*sqrt(1717) rejected (in interval False, uv >= 0 True, radicands >= 0 True)
+[ctl k = -5] route A: root -1646/6881 + -25/13762*sqrt(1717) rejected (in interval True, uv >= 0 False, radicands >= 0 True)
+[ctl k = -5] route A: 0 admissible solutions in the interval; expected exactly one
+red controls all as expected: True
+RESULT: PASS (route A and route B agree; exactly one solution on [-0.35, -0.3]); FINDING: 1 printed value(s) below the exact value

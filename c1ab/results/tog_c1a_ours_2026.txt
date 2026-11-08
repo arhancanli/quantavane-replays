@@ -1,0 +1,14 @@
+1a certs/tog_c1a_ours_2026.json
+  n: 30000
+  S: 1267650600228229338527519917019
+  argmax_m: 28879
+  max_abs_c: 40250125049289786126699665682810525611708039948551570020
+  scaled_by: 1267650600228229401496703205376
+  sign_at_max: +
+  ties: 1
+  bound = 2415007502957387167601979940968631536702482396913094201200000/1606938044258990115896116109606880409964399869695732645846361
+  decimal: floor 1.5028628587053108200915  ceil 1.5028628587053108200916
+  printed 1.502862: below the exact value, NOT a valid upper bound as printed
+  control: corrupted coefficient 19999 rejected: True
+  control: old coefficients rejected for weight 15000 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

@@ -1,0 +1,30 @@
+[Martinet's Example 4.2] p = 29, (q1..q4) = (3, 5, 7, 23), m = 2415, pm = 70035 = 3 . 5 . 7 . 23 . 29
+[Martinet's Example 4.2] Prop. 4.1: five distinct odd primes True; (i) p = 1 mod 4 True; (ii) m = -1 mod 4 True; (iii) q = +-1 mod 8 with (q/p) = +1: [7, 23] (at least two: True)
+[Martinet's Example 4.2] quadratic subfields of k': Q(sqrt 2) disc 8, Q(sqrt 70035) disc 280140, Q(sqrt 140070) disc 560280; product 1255654713600 = 2^8 (pm)^2: True
+[Martinet's Example 4.2]   l =   2: (e,f,g) in k (2, 2, 1), in K (4, 2, 1), in k' (4, 1, 1); primes of k above l ramified in K/k: 1
+[Martinet's Example 4.2]   l =   3: (e,f,g) in k (1, 2, 2), in K (2, 2, 2), in k' (2, 2, 1); primes of k above l ramified in K/k: 2
+[Martinet's Example 4.2]   l =   5: (e,f,g) in k (1, 2, 2), in K (2, 2, 2), in k' (2, 2, 1); primes of k above l ramified in K/k: 2
+[Martinet's Example 4.2]   l =   7: (e,f,g) in k (1, 1, 4), in K (2, 1, 4), in k' (2, 1, 2); primes of k above l ramified in K/k: 4
+[Martinet's Example 4.2]   l =  23: (e,f,g) in k (1, 1, 4), in K (2, 1, 4), in k' (2, 1, 2); primes of k above l ramified in K/k: 4
+[Martinet's Example 4.2]   l =  29: (e,f,g) in k (2, 2, 1), in K (2, 2, 2), in k' (2, 2, 1); primes of k above l ramified in K/k: 0
+[Martinet's Example 4.2] K/k' unramified at every finite prime (e_l(K) = e_l(k') for all l | 2pm): True; all three fields totally real (generators positive): True
+[Martinet's Example 4.2]   route 2, l = 3: theta = -2 sqrt 2 + -2 w + -2 sqrt 2 w mod 3 factors with degrees [2, 2]; agrees: True
+[Martinet's Example 4.2]   route 2, l = 5: alpha = sqrt 2 + sqrt p mod 5 factors with degrees [2, 2]; agrees: True
+[Martinet's Example 4.2]   route 2, l = 7: alpha = sqrt 2 + sqrt p mod 7 factors with degrees [1, 1, 1, 1]; agrees: True
+[Martinet's Example 4.2]   route 2, l = 23: alpha = sqrt 2 + sqrt p mod 23 factors with degrees [1, 1, 1, 1]; agrees: True
+[Martinet's Example 4.2] r = 13; criterion r >= n + 3 + 2 sqrt(2n+1) = 7 + 2 sqrt(9): True
+[Martinet's Example 4.2] 4 sqrt(70035) = sqrt(1120560) in [1058.565066493316696961846763087236, 1058.565066493316696961846763087237]
+[Martinet's Example 4.2] PR #332's check 1058.565^2 < 16.70035 < 1058.566^2: True
+  printed 1058.565: below 4 sqrt(70035), NOT a valid upper bound as printed
+  printed 1058.565066: below 4 sqrt(70035), NOT a valid upper bound as printed
+  printed 1058.565067: above 4 sqrt(70035), a valid upper bound as printed
+
+red controls (each must make the criterion or a check fail):
+  [q4 = 19 (19 = 3 mod 8)] hypotheses False, r = 11, criterion False, disc True, unramified True: refused
+  [q3 = 11 (11 = 3 mod 8)] hypotheses False, r = 11, criterion False, disc True, unramified True: refused
+  [p = 13] hypotheses False, r = 11, criterion False, disc True, unramified True: refused
+  [threshold r >= 14] hypotheses True, r = 13, criterion False, disc True, unramified True: refused
+  [(q) = (3, 7, 23, 31): m = 1 mod 4] hypotheses False, r = 12, criterion False, disc False, unramified True: refused
+  printed 1058.565 and 1058.565066 refused as upper bounds, 1058.565067 accepted: True
+red controls all as expected: True
+RESULT: PASS

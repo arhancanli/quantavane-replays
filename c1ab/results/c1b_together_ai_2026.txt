@@ -1,0 +1,12 @@
+1b certs/c1b_together_ai_2026.json
+  n: 600
+  D: 185691005892807040627772388107
+  normalisation: rescaled from sum h = n/2 + (-607096245493/618970019642690137449562112) to n/2 exactly
+  argmax_shift_m: -33
+  ties: 1
+  bound = 26265692367971466397578978814584692734864300713582890363053/68962299338964998175196366224397141406363835659131670086898
+  decimal: floor 0.3808703105862199034973  ceil 0.3808703105862199034974
+  printed 0.380871: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 200 rejected: True
+  control: height 2 at cell 274 refused: True
+  control: sum moved off n/2 by 1/D (cell 0) refused: True

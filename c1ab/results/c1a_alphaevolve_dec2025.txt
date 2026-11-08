@@ -1,0 +1,14 @@
+1a certs/c1a_alphaevolve_dec2025.json
+  n: 1319
+  S: 37492109337757985113793946
+  argmax_m: 1279
+  max_abs_c: 800960678797916810985542539311470326703266846912
+  scaled_by: 151115727451828646838272
+  sign_at_max: +
+  ties: 1
+  bound = 528233567667226136844965304675914680460804485538464/351414565648599875273484140518520206316670536562729
+  decimal: floor 1.5031635546815609158455  ceil 1.5031635546815609158456
+  printed 1.503164: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 879 rejected: True
+  control: old coefficients rejected for weight 659 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

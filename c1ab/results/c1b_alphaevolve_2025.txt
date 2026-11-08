@@ -1,0 +1,12 @@
+1b certs/c1b_alphaevolve_2025.json
+  n: 95
+  D: 117604303732111119656184646924
+  normalisation: rescaled from sum h = n/2 + (-1614808038589/618970019642690137449562112) to n/2 exactly
+  argmax_shift_m: 8
+  ties: 2
+  bound = 329278734110570123235339478220264557591749397615038752137/864423266019665339213567600364283852179836673173408916361
+  decimal: floor 0.3809230351084501496234  ceil 0.3809230351084501496235
+  printed 0.380924: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 31 rejected: True
+  control: height 2 at cell 47 refused: True
+  control: sum moved off n/2 by 1/D (cell 6) refused: True

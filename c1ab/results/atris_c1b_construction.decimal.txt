@@ -1,0 +1,9 @@
+1b certs/atris_c1b_construction.json
+  n: 114688
+  D: 1000000000000000
+  normalisation: sum h = n/2 exactly
+  argmax_shift_m: -36048
+  ties: 1
+  bound = 10919976354672639675467789613614419/28672000000000000000000000000000000
+  decimal: floor 0.3808585503164285601097  ceil 0.3808585503164285601098
+  printed 0.3808585504: above the exact value, a valid upper bound as printed

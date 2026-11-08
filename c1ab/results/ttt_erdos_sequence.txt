@@ -1,0 +1,12 @@
+1b certs/ttt_erdos_sequence.json
+  n: 600
+  D: 900719925474099153
+  normalisation: rescaled from sum h = n/2 + (-141/9007199254740992) to n/2 exactly
+  argmax_shift_m: -186
+  ties: 1
+  bound = 927008317610999032889703149182416203/2433889152438200196870651170625952227
+  decimal: floor 0.3808753232177187464914  ceil 0.3808753232177187464915
+  printed 0.380876: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 200 rejected: True
+  control: height 2 at cell 292 refused: True
+  control: sum moved off n/2 by 1/D (cell 0) refused: True

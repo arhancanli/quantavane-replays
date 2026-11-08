@@ -974,6 +974,84 @@ refused: the exponent tightened to 1.0152629; the split prime 53 added; 263 repl
 inert in no $\mathbb{Q}(\sqrt q)$); $T$ without 43; $R = 1$. What rests on mathematics: Sawin's Proposition 10,
 Lemma 11 (Golod-Shafarevich) and Lemma 12. Reproduce: `cd c84a && ./fetch.sh && ./run_all.sh` (about a second).
 
+## C63 and C64: the Li-Yang exponent $\theta^*$ (8 November 2026)
+
+`c63/theta_check.py`, standard library only, exact: the rows $C_{63} \le 0.3144831759741\ldots$ of
+[#313](https://github.com/teorth/optimizationproblems/pull/313) and $C_{64} \le 2\theta^* = 0.6289663519\ldots$ of
+[#315](https://github.com/teorth/optimizationproblems/pull/315), both from Li and Yang (arXiv:2308.14859v2), whose
+Definition 1.1 makes $-\theta^*$ the unique solution on $[-0.35, -0.3]$ of
+$-\tfrac{8}{25}x - \tfrac{1}{200}\big(\sqrt{2(1-14x)} - 5\sqrt{-1-8x}\big)^2 + \tfrac{51}{200} = -x$. The equation is
+read from the paper's LaTeX source (the arXiv e-print, `6fe6f9c0...93de`) and compared with our transcription first.
+
+| Check | Result |
+| --- | --- |
+| route A, exact algebra | (1.4) is $uv = -\tfrac{182}{5}x - \tfrac{37}{5}$; squared, $27524x^2 + 13168x + 1419 = 0$; of its two roots only $x = -(3292 + 25\sqrt{1717})/13762$ lies in the interval with $uv \ge 0$, and the residual is exactly zero |
+| route B, interval arithmetic ($2^{-400}$ fixed point, outward rounding) | $f' \in [0.942, 1.127]$ on the whole interval, so at most one root; a sign change at the ends; the bisection enclosure contains route A's root |
+| $\theta^*$ | $(3292 + 25\sqrt{1717})/13762 = 0.31448317597406140673\ldots$ |
+| 63a, printed $0.3144831759741$ | above $\theta^*$: a valid upper bound as printed (the paper's "$0.3144831759741\cdots$" is a rounding, not a truncation) |
+| 64a, README cell $0.6289663519$ | below $2\theta^* = 0.62896635194812281347\ldots$: not an upper bound as printed; $0.6289663520$ is |
+
+Red controls, all as expected: $51/200$ changed to $52/200$ (the root moves to $0.3193626\ldots$ and the printed 63a
+value no longer bounds it); the 63a value lowered by $10^{-13}$; the interval moved to $[-0.2, -0.1]$, which holds
+only the spurious root of the squared equation; the sign inside the square flipped. What rests on mathematics: the
+proof of Theorem 1.2, and for 64a the change to the radius normalization ($N(t) - \pi t^2 = R(t^2)$). Reproduce:
+`cd c63 && ./fetch.sh && ./run_all.sh` (under a second; `c64/run_all.sh` runs the same check).
+
+## C87: Martinet's totally real tower, $4\sqrt{70035}$ (8 November 2026)
+
+`c87/martinet_check.py`, standard library only, exact: the 87a row as
+[#332](https://github.com/teorth/optimizationproblems/pull/332) restates it, from Martinet (Invent. Math. 44 (1978),
+Proposition 4.1 and Example 4.2, p. 69): $k = \mathbb{Q}(\sqrt{29}, \sqrt 2)$, $K = k(\sqrt{3 \cdot 5 \cdot 7 \cdot 23})$
+and $k' = \mathbb{Q}(\sqrt 2, \sqrt{70035})$. Every ramification and splitting number comes from the $\mathbb{F}_2$-space
+of quadratic subfields (inertia and decomposition fields as spans of the subfields unramified at $\ell$, resp. split at
+$\ell$), and the counts in $k$ above $3, 5, 7, 23$ again from Dedekind-Kummer, with a defining polynomial whose index is
+checked prime to $\ell$.
+
+| Check | Result |
+| --- | --- |
+| Proposition 4.1 (i)-(iii) | $29 \equiv 1 \bmod 4$; $m = 2415 \equiv -1 \bmod 4$; $7$ and $23$ are $\pm 1 \bmod 8$ with $(q/29) = +1$ |
+| $\mathrm{disc}(k')$ | $8 \cdot 280140 \cdot 560280 = 2^8 \cdot 70035^2$, so $\mathrm{rd}(k') = 4\sqrt{70035}$ |
+| $K/k'$ | unramified at every prime ($e_\ell(K) = e_\ell(k')$ for $\ell \mid 2 \cdot 70035$), all fields totally real |
+| primes of $k$ ramified in $K$ | 1 above 2, 2 above 3, 2 above 5, 4 above 7, 4 above 23 (none above 29): $r = 13 \ge n + 3 + 2\sqrt{2n+1} = 13$ |
+| $4\sqrt{70035}$ | $1058.565066493316696961\ldots$; the old printed $1058.565$ is below it, as #332 says |
+
+Red controls, all refused: $q_4 = 19$ and $q_3 = 11$ ($r = 11$); $p = 13$; the threshold raised to 14; $m \equiv 1 \bmod 4$.
+What rests on mathematics: Martinet's section 2 (genus theory and the Golod-Shafarevich criterion behind
+$r \ge n + 3 + 2\sqrt{2n+1}$) and the conductor-discriminant formula. Reproduce: `cd c87 && ./run_all.sh` (no download).
+
+## C1a and C1b: eleven step-function rows (8 November 2026)
+
+`../autocorr_check.py` (a `1b` mode added: $(2/n)\max_m \sum_i h_i(1 - h_{i+m})$ over every grid shift, with $0 \le h \le 1$
+and $\sum h = n/2$ checked exactly; the autocorrelation from one big-integer product), on the heights of eleven rows,
+each from the source its row cites; `c1ab/extract_values.py` copies the numbers out as text (Python files and notebook
+cells with `ast`, the LaTeX with a regular expression; nothing downloaded is run). Both readings of the decimals are
+run: as binary64 and as printed.
+
+| Row | Source (pinned) | $n$ | Exact value (binary64; printed decimals) | Printed |
+| --- | --- | --- | --- | --- |
+| 1a [GGSWT2025] May 2025 | google-deepmind/alphaevolve_results @ `4226acb`, notebook cell 53 | 600 | 1.50529396844016080772...; 1.50529396844016081649... | 1.5053, valid |
+| 1a [GGSWT2025] Dec 2025 | alphaevolve_repository_of_problems @ `8f44745`, notebook cell 60 | 1319 | 1.50316355468156091584...; 1.50316355468156092083... | 1.503164, valid |
+| 1a [YKLBMWKCZGS2026] | test-time-training/discover @ `6c40e82`, `ttt_ac1_sequence.json` | 30000 | 1.50286289825582656290...; 1.50286289825582656243... | 1.502870, valid |
+| 1a [T2026] | togethercomputer/EinsteinArena-new-SOTA @ `c388c6f`, `ours_2026.json` | 30000 | 1.50286285870531082009...; 1.50286285870531082455... | **1.502862, below the exact value** |
+| 1a [EA2026] | EinsteinArena solution 2603 (fetched 8 Nov) | 65536 | 1.50274353195395969900...; 1.50274353195395970066... | 1.5027435320, valid |
+| 1b [GGSWT2025] | alphaevolve_results @ `4226acb`, cell 78: 48 numbers, mirrored to 95 steps | 95 | 0.38092303510845014962...; 0.38092303510845014897... (rescaled) | 0.380924, valid |
+| 1b [YKLBMWKCZGS2026] | discover @ `6c40e82`, `ttt_erdos_sequence.json` | 600 | 0.38087532321771874649...; 0.38087532321771874864... (rescaled) | 0.380876, valid |
+| 1b [T2026] | EinsteinArena-new-SOTA @ `c388c6f`, `together_ai_2026.py` | 600 | 0.38087031058621990349...; 0.38087031058621990370... (rescaled) | 0.380871, valid |
+| 1b [EA2026] | EinsteinArena solution 2507 (fetched 8 Nov) | 3584 | 0.38085857485785830914...; 0.38085857485785830932... (rescaled) | 0.3808585749, valid |
+| 1b [A2026] | atrislabs/records @ `1fa857a`, `construction.json` (`62a976fa...`) | 114688 | 0.38085855031642856010... (exact rationals) | 0.3808585504, valid |
+| 1b [H2016] | Haugland, arXiv:1609.08000, the 51-step function of section 2 (printed decimals) | 51 | 0.38092685343308697464... (the paper: 0.3809268534330870) | **0.380926, below the exact value** |
+
+"Rescaled": the heights as published sum to $n/2$ only up to about $10^{-13}$ or less, so they are scaled to
+$\sum h = n/2$ exactly (the repair described in #232), staying in $[0, 1]$. The 48 AlphaEvolve 1b numbers alone
+sum to 24.246, not 24; mirrored (the 48, then the first 47 reversed) they sum to $47.5$ up to $10^{-20}$. Every maximum
+is attained at one shift, except the AlphaEvolve and Haugland 1b functions (two, mirror images). Red controls on every
+row: a corrupted coefficient fails the polynomial identity; for 1a, the old coefficients fail after one height changes
+and scaling by 3 leaves the bound unchanged; for 1b, a height of 2 is refused, a sum moved off $n/2$ is refused, and
+moving mass $1/D$ between cells changes the bound. The 1a [T2026] row should read 1.502863 (the repository's README
+gives 1.50286286); the 1b [H2016] row read 0.380927 until
+[#158](https://github.com/teorth/optimizationproblems/pull/158) changed it to the abstract's truncated 0.380926.
+Reproduce: `cd c1ab && ./fetch.sh && ./run_all.sh` (about 70 seconds).
+
 ## Reproduce
 
 ```

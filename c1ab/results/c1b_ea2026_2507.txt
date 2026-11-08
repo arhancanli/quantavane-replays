@@ -1,0 +1,12 @@
+1b certs/c1b_ea2026_2507.json
+  n: 3584
+  D: 4543259751217974660545579448037055
+  normalisation: rescaled from sum h = n/2 + (485581395159969471/2535301200456458802993406410752) to n/2 exactly
+  argmax_shift_m: 192
+  ties: 1
+  bound = 7861381506700753544763858135527493249966514233368364969629442615292/20641209167037213005036750567119056465821996396173017596892653073025
+  decimal: floor 0.3808585748578583091444  ceil 0.3808585748578583091445
+  printed 0.3808585749: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 1194 rejected: True
+  control: height 2 at cell 1793 refused: True
+  control: sum moved off n/2 by 1/D (cell 0) refused: True
