@@ -23,4 +23,8 @@ grep -H "RESULT" "$here/results/maxr_trunc.txt"
 # the 16a upper row (maximusrufus, PR #246): its delta-boxes with their own mu below 2^18, our tail bound above
 python3 -I "$here/c16_boxes_check.py" "$root/maxu/upper_certificate.json" --controls > "$here/results/maxr_upper.txt" 2>&1 || status=1
 grep -H "RESULT\|run time" "$here/results/maxr_upper.txt"
+# the 16a row [Pat2026] (PR #226): c_k = 1/(|k|^2 (|k|^2 + 41/5)) on 0 < |k| <= 4000 (no file needed); red controls;
+# the same mu at R = 2000 and 8000 (about a minute)
+python3 -I "$here/pat_check.py" --controls --cutoffs > "$here/results/pat2026.txt" 2>&1 || status=1
+grep -H "RESULT" "$here/results/pat2026.txt"
 exit $status

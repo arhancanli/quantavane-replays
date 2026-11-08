@@ -1,0 +1,17 @@
+16a row [Pat2026]: trial function 0 < |k| <= R = 4000, c_k = 1/(|k|^2 (|k|^2 + 41/5)), i.e. mu' = 5/41 in c16_trunc_check's normalization; 9 s
+  S0 = sum c_k (scaled by mu) in [9.317263656984530731831900124578, 9.317263656984530731831900124578]
+  S1 = sum |k|^2 c_k^2 (scaled by mu) in [6.297622785935919438559697248674, 6.297622785935919438559697248674]
+  S2 = sum |k|^4 c_k^2 (scaled by mu) in [24.761055142598612604832063582415, 24.761055142598612604832063582415]
+  delta = S2/S1 in [3.931809824795, 3.931809824795] (the page: approximately 3.93181): True
+  L >= 2.15622475379391336305   (enclosure [2.15622475379391336305, 2.15622475379391336305])
+  check L >= 2.156224, the row's bound, and the page's 2.1562247...: PASS
+Red controls (the same code, other trial functions):
+  R = 400 (truncated ten times shorter): L >= 2.156149691485, below the row bound, as expected
+  mu' = 0.14 in place of 5/41: L >= 2.156040993624, below the row bound, as expected
+Other cutoffs, the same mu = 41/5 (each value rigorous):
+  R = 2000: L >= 2.156222479152
+  R = 4000: L >= 2.156224753794
+  R = 8000: L >= 2.156225322457
+  gaps 2.2746e-6 and 5.6866e-7, ratio 4.000 (the tails of S0 and S2 are of order R^-2)
+  extrapolated limit (an estimate, not a bound): 2.1562255120, far below 2.15627 and below the certified upper bound 2.1562256466 on the same page
+RESULT: PASS  (57 s)
