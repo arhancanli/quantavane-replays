@@ -1,0 +1,18 @@
+47a row [Lin2026] (PR #192): c_2 >= Phi = (2hV - 4ab)/(1 + w), Lin's periodic measure
+  the row's closed form: Phi in [1.685509993355525184665280415005, 1.685509993355525184665280415005]
+  it rounds down to the row's 1.6855099933: True
+  the measure: period 3.230138586607... x 2.615069293303..., masses 1 at (0, 0) and w = 3.973518115477... at (h, 0); every box up to L* = 19.2518, radii on the 2^-300 grid
+  boxes 192 (sides <= 19.2518), rectangles of positive area 12, pieces in C 22 (0 s)
+  method A (subtraction): 20 uncovered pieces, 20 pieces removed area (0 s); method B (slab sweep) on those 20 (0 s)
+  |C| - uncovered = union K (B); uncovered pieces pairwise disjoint: True; no piece of the family meets them: True (0 s)
+  Lemma 6.2 hypotheses, re-summed from the atoms, for all 20 rectangles used: all hold (0 s)
+  ratio = lam |U n C| / mu(C) = 1.685509993355525184665280415005... (exact rational, 263-digit denominator): exact, both methods agree
+  |ratio - Phi| < 1.3e-62: True
+  printed bound 1.6855099933: implied (margin 5.553e-11); one last-digit unit higher, 1.6855099934: not implied, as expected
+  uncovered area 0.064121745182802688838605713641... = the row's four slots 4ab = 0.064121745182802688838605713641...: True
+  the uncovered pieces of area > 10^-20 are 4 slots, and M mu < 1 at each centre (every closed square about it, from the atoms): True
+Red controls (the same evaluator, other measures; each must fall below the row's 1.6855099933):
+  u + 1/100 (h, V, w moved together): ratio = 1.681336540005..., below, as expected
+  w + 1/10, h and V kept: ratio = 1.661166697175..., below, as expected
+  w = 1 (equal masses), h and V kept: ratio = 0.999999999999..., below, as expected
+RESULT: PASS (c_2 >= 1.685509993355... >= 1.6855099933)  (0 s)

@@ -34,7 +34,8 @@ Usage:
   python3 -I c47_check.py selftest                  Lin's Phi, single atoms, Tomar's bare lattice, brute force
   python3 -I c47_check.py ROW [CERTS] [--controls] [--full]
   python3 -I c47_check.py measure FILE.json         evaluate any measure file (Tomar's input format)
-Rows: tom2026, pr321, pr341. Python 3.9+, standard library only.
+Rows: tom2026, pr321, pr341; and lin2026 [--controls] (Lin's row, built from its closed forms, no file).
+Python 3.9+, standard library only.
 """
 import hashlib
 import json
@@ -690,6 +691,63 @@ def selftest(certs):
 
 # ------------------------------------------------------------------------------------------------------- rows
 
+def lin2026(controls):
+    """The lower-bound row [Lin2026] of 47a (PR #192): c_2 >= Phi = 1.6855099933..., from the measure the row states.
+    No file is read: Lin's lattice is built from the row's closed forms, with u = (2 + sqrt 22)/3 rounded down to
+    10^-60 and w = u^2 - 1, h = (1 + u)/2, V = h + 1 formed from it exactly (the identities behind the row's w, h, V).
+    That rational lattice is itself a periodic measure, so the exact ratio our evaluator returns for it is a lower
+    bound for c_2 by Lemma 6.2 (as re-derived in the header), whatever the closed form says."""
+    log = print
+    t0 = time.time()
+    ok = True
+    log("47a row [Lin2026] (PR #192): c_2 >= Phi = (2hV - 4ab)/(1 + w), Lin's periodic measure")
+    page, _, slots = lin_phi()
+    log(f"  the row's closed form: Phi in [{dec(page.lo, 30)}, {dec(page.hi, 30)}]")
+    good = dec(page.lo, 10) == dec(page.hi, 10) == "1.6855099933"
+    log(f"  it rounds down to the row's 1.6855099933: {good}")
+    ok &= good
+    lin = lin_measure(60)
+    L = cutoff(lin)
+    log(f"  the measure: period {dec(lin.Px, 12)}... x {dec(lin.Py, 12)}..., masses 1 at (0, 0) and "
+        f"w = {dec(lin.atoms[1][2], 12)}... at (h, 0); every box up to L* = {float(L):.4f}, radii on the 2^-300 grid")
+    R = evaluate(lin, L, e=300, log=log)
+    good = R.exact and not R.bad
+    log(f"  ratio = lam |U n C| / mu(C) = {dec(R.ratio, 30)}... (exact rational, {len(str(R.ratio.denominator))}-digit "
+        f"denominator): {'exact, both methods agree' if good else 'NOT EXACT'}")
+    ok &= good
+    diff = max(abs(R.ratio - page.lo), abs(R.ratio - page.hi))
+    good = diff < Fraction(1, 10 ** 50)
+    log(f"  |ratio - Phi| < {float(diff):.1e}: {good}")
+    ok &= good
+    ok &= printed_check(R.ratio, ["1.6855099933"], log)
+    hole = sum(Fraction((u[1] - u[0]) * (u[3] - u[2]), R.fam.G ** 2) for u in R.unc)
+    good = abs(hole - slots.lo) < Fraction(1, 10 ** 50)
+    log(f"  uncovered area {dec(hole, 30)}... = the row's four slots 4ab = {dec(slots.lo, 30)}...: {good}")
+    ok &= good
+    big = [u for u in R.unc if (u[1] - u[0]) * (u[3] - u[2]) * 10 ** 20 > R.fam.G ** 2]
+    inside = [covered_at(lin, Fraction(u[0] + u[1], 2 * R.fam.G), Fraction(u[2] + u[3], 2 * R.fam.G), 300, None,
+                         ideal=True) for u in big]
+    good = len(big) == 4 and not any(inside)
+    log(f"  the uncovered pieces of area > 10^-20 are {len(big)} slots, and M mu < 1 at each centre (every closed "
+        f"square about it, from the atoms): {good}")
+    ok &= good
+    if controls:
+        log("Red controls (the same evaluator, other measures; each must fall below the row's 1.6855099933):")
+        uu = (2 + Fraction(isqrt(22 * 10 ** 120), 10 ** 60)) / 3
+        for what, (uh, ww) in (("u + 1/100 (h, V, w moved together)", (uu + Fraction(1, 100), None)),
+                               ("w + 1/10, h and V kept", (uu, (uu * uu - 1) + Fraction(1, 10))),
+                               ("w = 1 (equal masses), h and V kept", (uu, Fraction(1)))):
+            h = (1 + uh) / 2
+            w = uh * uh - 1 if ww is None else ww
+            m = Measure(2 * h, h + 1, [(0, 0, 1), (h, 0, w)])
+            Rc = evaluate(m, cutoff(m), e=300, log=None)
+            good = Rc.exact and Rc.ratio < Fraction(16855099933, 10 ** 10)
+            log(f"  {what}: ratio = {dec(Rc.ratio, 12)}..., {'below, as expected' if good else 'NOT BELOW'}")
+            ok &= good
+    log(f"RESULT: {'PASS' if ok else 'FAIL'} (c_2 >= {dec(R.ratio, 12)}... >= 1.6855099933)  ({time.time() - t0:.0f} s)")
+    return ok
+
+
 def row_header(key, meas, sha, fname, log):
     cfg = ROWS[key]
     log(f"Row {key} ({cfg['pr']}): {fname}, sha256 {sha}")
@@ -900,6 +958,8 @@ def main():
     certs = args[1] if len(args) > 1 else os.path.join(HERE, "certs")
     if args[0] == "selftest":
         return 0 if selftest(certs) else 1
+    if args[0] == "lin2026":
+        return 0 if lin2026("--controls" in sys.argv) else 1
     if args[0] == "measure":
         d, sha = load_json(args[1], None)
         meas = Measure.from_json(d)
