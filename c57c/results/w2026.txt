@@ -1,0 +1,23 @@
+57c row [W2026]: U >= 306121/500000 = 0.612242 (Wikstrom, Theorem 1.2), through Lemma 6.1
+  centre weights >= 0.2296 and 0.3472 (> 0) and <= 25/24; |c| <= 25/108 < R; p >= 0.335436 > 0 (exact): True
+  the obstruction: F(r) = 176r^4 - 96r^3 + 24r^2 - 24r + 3 is convex and changes sign in (0.612242772171, 0.612242772172), its only root in (0.6, 0.7): True
+  T(rho) by the paper's formula equals |z|^2 + Re(z^T M~ z) at 2,000 random points (largest difference 7.1e-15): True
+  Lemma 6.1 over x in [0, 1]^4, our own witnesses and enclosures:
+    ... 200,000 boxes visited, 13 open
+    ... 400,000 boxes visited, 15 open
+    ... 600,000 boxes visited, 11 open
+    ... 1,200,000 boxes visited, 13 open
+    ... 1,800,000 boxes visited, 31 open
+    ... 2,200,000 boxes visited, 23 open
+    ... 2,400,000 boxes visited, 31 open
+    ... 2,600,000 boxes visited, 23 open
+    ... 2,800,000 boxes visited, 33 open
+    ... 3,000,000 boxes visited, 21 open
+    ... 4,000,000 boxes visited, 19 open
+    ... 4,200,000 boxes visited, 13 open
+  complete: True; 4,458,577 boxes visited, 2,229,289 closed (terminal), deepest 48 (the paper: 187,263 visited, 93,632 terminal, depth 49); 4361 s
+Red controls at R = 0.6122428, just above r_* = 0.6122427721..., where Lemma 6.1 is false (each must refuse):
+  at the obstruction point x = (1, 0, 0, 0) (s = 1/3, a = 0, theta = 0; 192 R^4 det(I + M) = F(R) exactly: True): I + M and I - M are positive definite, so P > 0 for every witness (exact): True; at the row's R, det(I + M) < 0: True
+  our witness and enclosure at that point: P in [2.454112e-07, 2.454112e-07], not negative (at the row's R: P <= -6.809023e-06 < 0): refused, as expected
+  the corner box [1 - 2^-10, 1] x [0, 2^-10] x [0, 1] x [0, 2^-11] around it, the same budget of 2,000,000 boxes: at the row's R it closes (75,653 boxes, deepest 17); at R = 0.6122428 the search passes depth 120 after 1,552 boxes near x = (1.0, 0.000640869, 1.0, 2.92888e-05): refused, as expected
+RESULT: PASS  (4434 s)
