@@ -1,0 +1,23 @@
+89c candidate row [Pin2026] (PR #308): C_89c >= 8280981029/250000000000000 = 0.000033123924116*
+c89c/c6_ordered_type8.cert.xz sha256 6fc1a65ed64022e891261364bb931117d077149fca4574fda3d187d748d516a3 (as stated: True)
+c89c/c6_ordered_type8.cert sha256 888552bb82994a387f152d8a7816c011c2bad19f5ed98059152b6dd417ee3c94 (as stated: True)
+c89c/graph8.g6 sha256 546a249902101c97d3aa590f93e53366854bd0a6f405aa59bdb32d25c57f845a (as stated: True)
+header n = 8, k = 6, D = 10^12, 340 blocks, b = 8280981029/250000000000000, mode -2; nothing after the last block: True
+blocks by (t, m, colour): {(0, 4, 0): 1, (0, 4, 1): 1, (2, 3, 0): 2, (2, 3, 1): 2, (4, 2, 0): 11, (4, 2, 1): 11, (6, 1, 0): 156, (6, 1, 1): 156}
+every block: t + 2m = 8, ordered roots, rows of the right length, one block per (colour, root graph), flags whose root part is the block's root graph and no two in one orbit of the extension vertices: True
+graph list: 12346 graphs, pairwise non-isomorphic (distinct canonical forms): True; sum of 8!/|Aut| = 268435456 = 2^28: True (3.4 s)
+every one of the 12346 graphs satisfies mono_K6 - contributions >= b: True (17.4 s)
+minimum of mono_K6 - contributions: 1854939862512854832021/56000000000000000000000000 = 0.000033123926116301..., at graph 905 (0-based index in graph8.g6)
+five smallest values minus b: graph 905: 2.000e-12, graph 11716: 2.000e-12, graph 3374: 3.961e-12, graph 8763: 3.961e-12, graph 906: 4.597e-12
+slack at the minimum: 112016854832021/56000000000000000000000000; the packet's stated slack 112016854832021/56000000000000000000000000 at graph 905: equal: True
+
+controls (each must come out as stated):
+[ctl] b raised to the minimum plus 10^-30: refused: True
+[ctl] block 87 (t = 6, colour 0) with every row scaled by 101/100: 1028 graphs fall below b (first: [247]): True
+[ctl] a flag of block 3 with one root edge flipped: refused (flag_count: a flag whose root part is not the block's root graph): True
+[ctl] graph list without graph 0: orbit sum != 2^28: True; with graph 7 twice: not distinct: True
+[ctl] graph 905 recomputed in pure Python (canonical flags by minimum over extension orders): S = {6: '812466561366...', 4: '-21457742102...', 2: '234709474712...', 0: '0...'}, the same as flag_count.c: True (12.2 s)
+[ctl] graph 0 recomputed in pure Python (canonical flags by minimum over extension orders): S = {6: '374882531789...', 4: '774475853642...', 2: '155300138198...', 0: '0...'}, the same as flag_count.c: True (7.0 s)
+[ctl] graph 12345 recomputed in pure Python (canonical flags by minimum over extension orders): S = {6: '374882531789...', 4: '774475853642...', 2: '155300138198...', 0: '0...'}, the same as flag_count.c: True (6.2 s)
+controls all as expected: True
+RESULT: PASS (every 8-vertex graph satisfies the stated inequality with b = 8280981029/250000000000000; the minimum and its graph as the packet states)
