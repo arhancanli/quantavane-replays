@@ -1,0 +1,16 @@
+18a row [GT2009]: C_18 >= 1.46601 (Green and Tao, arXiv math/0703668, Section 5)
+gt2009/main.tex sha256 7a300db60f0a384ea200448e7bc64dd9b53857cc83a98cc9a7ee7279a7bb428f
+  our transcription appears verbatim: True   \frac{1}{n}\log_2 \sigma[A] = h(2\alpha) - h(\alpha) + o(1).
+  our transcription appears verbatim: True   \frac{1}{n}\log_2 \tau[A] = (1 - h(\alpha))h\big( \frac{\alpha}{1-h(\alpha)}\big) + o(1).
+  our transcription appears verbatim: True   Let $\alpha \in (0,1/10]$ be a constant to be optimised later.
+  our transcription appears verbatim: True   is largest when $\alpha = 0.0939288\ldots$, in which case it is $1.46601\ldots + o(1)$.
+ratio at alpha = 0.0939288 in [1.46601237116417891463, 1.46601237116417891463]; alpha/(1 - h(alpha)) = 0.17060885... <= 1/2 and 2 alpha <= 1/2: True
+so the example gives the exponent 1.466012371164... >= 1.46601: True
+on [0.05, 0.1] the ratio is at most 1.4660199985 (5436 cells; D is increasing there), so the paper's 'largest at 0.0939288..., 1.46601...' is the truncation of a value in [1.466012371164, 1.46602): True
+
+controls (each must come out as stated):
+[ctl] an upper bound 1.466012 (below the value at alpha0) cannot be certified on [0.09, 0.1]: True
+[ctl] alpha = 0.12 gives only 1.45093596... < 1.46601: True
+[ctl] the value 1.466013 is refused at alpha0: True
+controls all as expected: True
+RESULT: PASS (the Hamming-ball example gives 1.4660123711... >= 1.46601 at alpha = 0.0939288; the largest value on [0.05, 0.1] is below 1.46602)
