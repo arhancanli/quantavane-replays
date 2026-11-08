@@ -18,4 +18,12 @@ if [ ! -f f2026/record.json ] || [ ! -f f2026/all-groups.json ] || [ ! -f f2026/
   unzip -q -j zip/source-and-certificates.zip anc/certificates/record.json anc/certificates/all-groups.json \
     anc/certificates/standard.json anc/certificates/standard-five-page.json -d f2026
 fi
+# [MI2026] (PR #92), the 3b lower bound: Zenodo 10.5281/zenodo.20794135, then only c3b_pr92/certificate_3b_13pt.json
+if [ ! -f mi2026/certificate_3b_13pt.json ]; then
+  if [ -d mi2026 ] && [ -n "$(ls -A mi2026)" ]; then echo "refusing: $root/mi2026 is not empty"; exit 1; fi
+  mkdir -p mi2026
+  curl -s -f -L -o mi2026/sumdiff_certs_upload.zip "https://zenodo.org/records/20794135/files/sumdiff_certs_upload.zip?download=1"
+  echo "8b0ae7571bbb9e584ed8f6a4e40a9d63031c9aba1526b660d6f56b12dfabfb87  mi2026/sumdiff_certs_upload.zip" | shasum -a 256 -c -
+  unzip -p mi2026/sumdiff_certs_upload.zip c3b_pr92/certificate_3b_13pt.json > mi2026/certificate_3b_13pt.json
+fi
 shasum -a 256 -c "$here/SHA256SUMS"

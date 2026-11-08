@@ -1,0 +1,13 @@
+3b row [MI2026] (PR #92): C_3b >= 1.77898884, the 13-point law
+  13 distinct points, positive weights summing to 1 exactly: True
+  the law is symmetric under (x, y) -> (y, x), as the certificate states: True
+  H(X) in [0.687932024861073221126046776533, 0.687932024861073221126046776533]
+  H(Y) in [0.687932024861073221126046776533, 0.687932024861073221126046776533]
+  H(X+Y) in [0.687932024861073221126046776533, 0.687932024861073221126046776533]
+  H(X-Y) in [1.223823395883792401230642456659, 1.223823395883792401230642456659]
+  ratio in [1.7789888414206935498051938874772894344161, 1.7789888414206935498051938874772894344161]
+  the row's 1.77898884 <= ratio, and the certificate's prefix 1.778988841420693549 matches: True
+Red controls (each must fall below the row's value):
+  1% of the heaviest point's mass moved to the lightest: ratio <= 1.744305019955: below, as expected
+  the uniform law on the same 13 points: ratio <= 1.332357344427: below, as expected
+RESULT: PASS  (0 s)

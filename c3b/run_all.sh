@@ -10,4 +10,7 @@ status=0
 python3 -I "$here/c3b_check.py" selftest "$root" > "$here/results/selftest.txt" 2>&1 || status=1
 python3 -I "$here/c3b_check.py" both "$root" --controls > "$here/results/c3b_check.txt" 2>&1 || status=1
 grep -H "RESULT\|run time" "$here/results/selftest.txt" "$here/results/c3b_check.txt"
+# the 3b lower-bound row [MI2026] (PR #92): the 13-point law, entropy ratio, red controls
+python3 -I "$here/mi2026_check.py" "$root" --controls > "$here/results/mi2026.txt" 2>&1 || status=1
+grep -H "RESULT" "$here/results/mi2026.txt"
 exit $status
