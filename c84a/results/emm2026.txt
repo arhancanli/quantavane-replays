@@ -1,0 +1,48 @@
+84a: Sawin's criterion on the four certificates of certificate_verification_all_v23.json (arXiv 2606.03419)
+  check data file sha256 = 15fb28e3...ef86 (emmerichmtm/UnitDistanceProblemOptimizationOfSawinsLowerBound @ 2279d0a): PASS
+  -- sawin: Sawin published example
+  check T: 13 distinct odd primes, 7 of them = 3 mod 4 (odd): PASS
+  check S_Q: 22 distinct primes, k(p) a positive integer for each and only these, R = 72 > 1: PASS
+  check Q = Q(sqrt D), D = 6541380665835015 = 3 mod 4, discriminant 4D: in S_Q 10 ramified, 12 inert, 0 split: PASS
+  check (C2) every p in S_Q is 1 mod 4 or inert in some Q(sqrt q), q in T: PASS
+  check (C3) budget #T + #S_Q + #split + 1 = 36 <= (#T - 1)^2/4 = 36: PASS
+  check delta in [0.0141144286784982388940, 0.0141144286784982388940] (numerator 3.882248748200387829, denominator 275.0553236430009873): PASS
+  check delta > 0.014, so u(n) > n^(1 + 0.014) for arbitrarily large n: PASS
+  check agrees with the file's stored splitting types, and its delta 0.014114428678498238... and claimed 0.014114428678498239 lie in our enclosure to 1e-16: PASS
+  -- optimized: Optimized candidate
+  check T: 13 distinct odd primes, 7 of them = 3 mod 4 (odd): PASS
+  check S_Q: 22 distinct primes, k(p) a positive integer for each and only these, R = 6672240803/100000000 > 1: PASS
+  check Q = Q(sqrt D), D = 6541380665835015 = 3 mod 4, discriminant 4D: in S_Q 2 ramified, 20 inert, 0 split: PASS
+  check (C2) every p in S_Q is 1 mod 4 or inert in some Q(sqrt q), q in T: PASS
+  check (C3) budget #T + #S_Q + #split + 1 = 36 <= (#T - 1)^2/4 = 36: PASS
+  check delta in [0.0151718056372132585440, 0.0151718056372132585440] (numerator 4.334224996346764623, denominator 285.6762800675365464): PASS
+  check delta > 0.015, so u(n) > n^(1 + 0.015) for arbitrarily large n: PASS
+  check agrees with the file's stored splitting types, and its delta 0.015171805637213258... and claimed 0.01517180563721325 lie in our enclosure to 1e-16: PASS
+  -- simple_rudolph_integer_es: Rudolph-style integer ES certificate
+  check T: 13 distinct odd primes, 7 of them = 3 mod 4 (odd): PASS
+  check S_Q: 22 distinct primes, k(p) a positive integer for each and only these, R = 208513/3125 > 1: PASS
+  check Q = Q(sqrt D), D = 6541380665835015 = 3 mod 4, discriminant 4D: in S_Q 3 ramified, 19 inert, 0 split: PASS
+  check (C2) every p in S_Q is 1 mod 4 or inert in some Q(sqrt q), q in T: PASS
+  check (C3) budget #T + #S_Q + #split + 1 = 36 <= (#T - 1)^2/4 = 36: PASS
+  check delta in [0.0152616610684192942425, 0.0152616610684192942425] (numerator 4.421893389329434120, denominator 289.7386706142744726): PASS
+  check delta > 0.0152, so u(n) > n^(1 + 0.0152) for arbitrarily large n: PASS
+  check agrees with the file's stored splitting types, and its delta 0.015261661068419294... and claimed 0.015261661068419294 lie in our enclosure to 1e-16: PASS
+  -- rudolph_integer_es_discrete_recombination: Rudolph-style integer ES with discrete recombination
+  check T: 13 distinct odd primes, 7 of them = 3 mod 4 (odd): PASS
+  check S_Q: 22 distinct primes, k(p) a positive integer for each and only these, R = 208513/3125 > 1: PASS
+  check Q = Q(sqrt D), D = 6541380665835015 = 3 mod 4, discriminant 4D: in S_Q 3 ramified, 19 inert, 0 split: PASS
+  check (C2) every p in S_Q is 1 mod 4 or inert in some Q(sqrt q), q in T: PASS
+  check (C3) budget #T + #S_Q + #split + 1 = 36 <= (#T - 1)^2/4 = 36: PASS
+  check delta in [0.0152628688170071916614, 0.0152628688170071916614] (numerator 4.523259666356475215, denominator 296.3571082597704748): PASS
+  check delta > 0.0152, so u(n) > n^(1 + 0.0152) for arbitrarily large n: PASS
+  check agrees with the file's stored splitting types, and its delta 0.015262868817007191... and claimed 0.015262868817007192 lie in our enclosure to 1e-16: PASS
+  the 84a row's certificate (discrete recombination, delta = 0.015263...): delta = 0.01526286881700719166...
+  -- red controls (each must be refused)
+  check control: the exponent tightened to 1.0152629 (delta >= 0.0152629) is not implied: PASS
+  check control: adding 53 (split in Q) breaks the budget (36 + 2 > 36): PASS
+  check control: 263 replaced by 951851 (3 mod 4, inert in no Q(sqrt q)) fails (C2): PASS
+  check control: T without 43 (six primes = 3 mod 4, an even number) is refused: PASS
+  check control: R = 1 is refused: PASS
+  checks: 38, failed: 0
+  run time: 1.1 s
+RESULT: ALL CHECKS PASS

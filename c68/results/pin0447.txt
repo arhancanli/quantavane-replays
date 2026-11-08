@@ -1,0 +1,32 @@
+68a C_68 >= 447/1000 (PR #299, contact-row model), from PROOF.md and the two data files
+  check certificate-0447.json sha256 = d9dd308f...2afe (the packet's SHA256SUMS): PASS
+  check row-cover.json sha256 = fda0aa14...fc27 (the packet's SHA256SUMS and the certificate's cover_sha256): PASS
+  check hypotheses at c = 447/1000: Psi = 26316.4966132193 > 6: PASS
+  check sech^2(A/2) = 1.900e-05 < 1/3: PASS
+  check 16 sinh^2(A/4) = 1827.350530 < 2(1 - 8 kappa) Psi = 2105.319729: PASS
+  check tanh^2(A/8) = 0.8295488136 > (1 + 8 kappa) pi^2/64 = 0.3022566348: PASS
+  check sech^2(A/8) = 0.1704511864 < (1 - 4 kappa)/2 = 0.2600000000: PASS
+  check the certificate and the cover use the same z = 23/200 and kappa = 3/25: PASS
+  check outside the root box S > z: (17/50)^2 = 289/2500 > z and (6/25)(1 - (7/10)^2) = 306/2500 > z: PASS
+  check small region, b <= 999/1000: p = (6/25)(1 - 999/1000) - delta > 0 and 3/25 - delta/2 > z: PASS
+  check small region, b >= 999/1000: ell = 2997/6250, ell/4 > z (a = 0), X0 = a(1+a)/ell < 1 and 4 ell > (1+a)^2 for a <= delta: PASS
+  check small region: 8704 bins, u > d0, u > 2 delta/ell and gamma_v > 1 on every bin: PASS
+  check small region: log(ell/16) + sum mass * log gamma_v = -2.147124835 > log z = -2.162823151: PASS
+  check row cover: the tree tiles the root box [0,17/50]^2 x [7/10,1] exactly (287 leaves, every split strictly inside): PASS
+  check row cover: every leaf holds (265 grid, 17 PSD, 4 constant, 1 small); smallest grid ratio exp(mean log W)/(1 + D^2) = 0.11502033 at n = 16384: PASS
+  check measure: 8 atoms, increasing, t_1 = c^2, t_8 = R = 99/100, weights > 0, sum w_j = R exactly: PASS
+  check A_k >= 0 for k = 1..5998 explicitly (smallest relative margin 7.8656e-06 at k = 172); from k = 5999 the atom at R alone (w_8 (k+1) >= R): PASS
+  check B_k >= 0 for k = 1..1322 explicitly (smallest relative margin 1.9545e-06 at k = 648; B_1 >= 3.853975e-06 with the atomic eps term), and from k = 1323 the piece [9749241/9765625, 48762589/48828125] alone gives 1.6623e-09 > sum w_j t_j^k (1.6530e-09), for every larger k too: PASS
+  check contact-row lemma, sanity test on 20,000 random 2- and 3-contact configurations: max_i T(theta_i) - J >= 4.572e-09 >= 0, inequality (6) >= -7.772e-16 >= 0, and (7) equals a(q0 + a)/(1 + a): PASS
+  (main run: 140 s)
+  -- red controls (each altered input must be refused)
+  check control: z raised to 0.11503 (just above the cover's smallest ratio) is refused (first failing check: row cover: every leaf holds (265 grid, 17 PSD, 4 constant, 1 small); smallest grid ratio e): PASS
+  check control: kappa lowered from 3/25 to 29/250 is refused (first failing check: row cover: every leaf holds (265 grid, 17 PSD, 4 constant, 1 small); smallest grid ratio e): PASS
+  check control: a split point moved outside its box (17/100 to 2/5, the boxes no longer tile) is refused (first failing check: row cover: the tree tiles the root box [0,17/50]^2 x [7/10,1] exactly (5 leaves, every spl): PASS
+  check control: the first grid leaf coarsened from 4096 to 64 cells is refused (first failing check: row cover: every leaf holds (265 grid, 17 PSD, 4 constant, 1 small); smallest grid ratio e): PASS
+  check control: half of atom 2's mass moved to atom 3 is refused (first failing check: B_1 >= 0): PASS
+  check control: c raised to 0.448 (first node at the new c^2) is refused (first failing check: B_1 >= 0): PASS
+  check control: the k = 1 eps term with the old constant 19/200 instead of 23/200 is refused (first failing check: B_1 >= 0): PASS
+  checks: 26, failed: 0
+  run time: 653 s
+RESULT: ALL CHECKS PASS

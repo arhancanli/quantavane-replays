@@ -18,4 +18,11 @@ get vid0446 certificate-c0446.json vidigoat/optimization-records 1a76f9dd053d51c
     tao/certificates/c68/certificate-c0446.json
 get vid044605 certificate-c044605.json vidigoat/optimization-records 1a76f9dd053d51cce531b57b2ad5a68e3205ca75 \
     tao/certificates/c68/certificate-c044605.json
+# PR #299 (rpinho): C68 >= 0.447 (contact-row model): the measure and the row cover, both into one new directory
+if [ -d pin0447 ] && [ -n "$(ls -A pin0447)" ]; then echo "refusing: $root/pin0447 is not empty"; exit 1; fi
+mkdir -p pin0447
+for f in certificate-0447.json row-cover.json; do
+  curl -s -f -L -o "pin0447/$f" \
+    "https://raw.githubusercontent.com/rpinho/math-certificates/09c84234137d3fadee1620dbc1c2ca58d2756ce2/c68/contact-row/certificates/$f"
+done
 shasum -a 256 -c "$here/SHA256SUMS"

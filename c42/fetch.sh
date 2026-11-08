@@ -8,7 +8,9 @@
 # (rpinho/c42-certificate at 009120a8, volterra-quadratic-knots/certificates; the hash its README and SHA256SUMS
 # state) and Vatopoulos's (NikosVat/turan-c42 at 9668a60e, certificate/; the hash PR #327 states); and Roehrig's
 # eight-step profile (AndreRoehrig/optimization-constants-certificates at ed6387399cf6, the commit PR #184 pins; the
-# hash its MANIFEST.sha256 states). Their checkers are
+# hash its MANIFEST.sha256 states); and, for PR #310, Pinho's explicit value of Biro's bound (rpinho/math-certificates
+# at 36325fa, c42/biro-explicit-lower: the parameter file and the written proof, the hashes its lower_manifest.json
+# states). Their checkers are
 # neither downloaded nor run. A file already present is kept and checked again; a download goes only into a new or
 # empty directory.
 # Usage: ./fetch.sh [CERTS_ROOT]   (default: ./certs)
@@ -36,4 +38,8 @@ get vatopoulos c42_profile_0.686360751.json \
   "https://raw.githubusercontent.com/NikosVat/turan-c42/9668a60edf8877814c316a4bb1d901eff0c3988e/certificate/c42_profile_0.686360751.json"
 get roehrig turan.json \
   "https://raw.githubusercontent.com/AndreRoehrig/optimization-constants-certificates/ed6387399cf6de02eaa4cf10c43787633496619a/certificates/turan.json"
+get biro lower_certificate.json \
+  "https://raw.githubusercontent.com/rpinho/math-certificates/36325fade4b73afb787c37ee8cc4c90ae4adf856/c42/biro-explicit-lower/inputs/lower_certificate.json"
+[ -f biro/LOWER_PROOF.md ] || curl -s -f -L -o biro/LOWER_PROOF.md \
+  "https://raw.githubusercontent.com/rpinho/math-certificates/36325fade4b73afb787c37ee8cc4c90ae4adf856/c42/biro-explicit-lower/LOWER_PROOF.md"
 shasum -a 256 -c "$here/SHA256SUMS"

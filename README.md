@@ -911,6 +911,69 @@ above), the independence of the block factors (checked by enumeration) and the f
 
 Reproduce: `cd c91a && ./fetch.sh && ./run_all.sh` (about two minutes).
 
+## C42: an explicit value of Biró's lower bound (8 November 2026)
+
+`c42/biro_check.py`, standard library only: [Pin26c]'s $C_{42} \ge 1/2 + 2^{-4096}$\* of
+[#310](https://github.com/teorth/optimizationproblems/pull/310), from `LOWER_PROOF.md` and `inputs/lower_certificate.json`
+(rpinho/math-certificates @ `36325fa`, `c42/biro-explicit-lower`; the hashes of its `lower_manifest.json`). Its
+`verify_lower_exact.py` was neither read nor run. We re-derived sections 1 to 8 of the proof (Biró's first escape of
+the $b$ increments, radial balance, the summed coefficients becoming parallel, the transfer back to $b$) and found no
+false step. The program checks every numerical step, (5) to (32), exactly: inequalities in $r = 1/\sqrt 2$ and
+$\cos(\pi/8)$ in $\mathbb{Q}(\sqrt 2)$, square roots by squaring, all parameters the file's powers of two. Each stated
+intermediate exponent is shown to follow ($t_0 > 2^{1021}$ with $2^{0.5}$ to spare, $k/t_0 > 2^{1022}$,
+$b \le 2^{-254}$, the product below $2^{-340}$, $E/A < 0.0386 < 1/16$ against $r(r-1/2) = 0.1464\ldots$). The identities
+behind (11), (15), (23) and (29) are expanded exactly, and (1) and (3) are checked on 40 random tuples of Gaussian
+rationals. Red controls, all refused: the claim strengthened to $1/2 + 2^{-4094}$ with the same auxiliaries,
+$\eta = 2^{-200}$, $\lambda = 2^{-4000}$, $Z = 2^{-256}$, $\varepsilon = 2^{-252}$, $\sigma = 2^{-8}$, final error
+$1/32$, product bound $2^{-341}$, and a perturbed $b_1$ in the identities. What rests on mathematics: the geometric and
+analytic steps (read, not formalized). Reproduce: `cd c42 && ./fetch.sh && python3 -I biro_check.py certs --controls`.
+
+## C68: the contact-row certificate for 0.447 (8 November 2026)
+
+`c68/row_check.py`, standard library only: $C_{68} \ge 447/1000$\* of
+[#299](https://github.com/teorth/optimizationproblems/pull/299) (the contact-row model), from `PROOF.md`,
+`CONTACT_ROW_LEMMA.md` and the two data files `certificate-0447.json` and `row-cover.json` (rpinho/math-certificates
+@ `09c8423`, `c68/contact-row/certificates`; `d9dd308f...2afe`, `fda0aa14...fc27`). Its `verify_measure.py` and
+`verify_row.py` were neither read nor run.
+
+| Check | Result |
+| --- | --- |
+| section 1 at $c = 447/1000$ (110-digit decimal) | $\Psi = 26316.4966 > 6$; $\mathrm{sech}^2(A/2) < 1/3$; $16\sinh^2(A/4) = 1827.35 < 2(1-8\kappa)\Psi = 2105.32$; $\tanh^2(A/8) = 0.82955 > (1+8\kappa)\pi^2/64$; $\mathrm{sech}^2(A/8) = 0.17045 < (1-4\kappa)/2$ |
+| the row cover for (5), $z = 23/200$ | outside the root box $S > z$ exactly; the tree tiles $[0,17/50]^2 \times [7/10,1]$ (287 leaves); 17 PSD leaves fail (6) at their low corner and 4 constant leaves have $\max(S,J) > z$ (exact rationals); 265 grid leaves (4,096 to 32,768 cells; outward-rounded binary64, `Decimal.ln`) satisfy $\exp(\mathrm{mean}\, l_j) > z(1+D^2)$, smallest ratio 0.11502033 (the cover's `proposal_min`) |
+| the small leaf | 8,704 bins, masses bounded below by $1/(2\sqrt{X(1-X)})$: $\log(\ell/16) + \sum \mathrm{mass}\log\gamma_v = -2.147125 > \log z = -2.162823$ |
+| section 5 (320-bit fixed point) | $A_k \ge 0$ for $k \le 5998$ (smallest relative margin $7.8656 \cdot 10^{-6}$ at $k = 172$), then the atom at $R$; $B_k \ge 0$ for $k \le 1322$ with the atomic $\varepsilon$ term at $k = 1$ ($B_1 \ge 3.854 \cdot 10^{-6}$), then one piece of $[R,1]$ alone; our own slope bounds $g \ge l_i(1-t)$ on 42 pieces |
+| the contact-row lemma, sanity test | 20,000 random two- and three-contact configurations: $\max_i T(\theta_i) \ge J$, (6) to rounding, (7) equals $a(q_0+a)/(1+a)$ |
+
+Red controls, all refused: $z = 0.11503$; $\kappa = 29/250$; a split point outside its box; a grid leaf coarsened to
+64 cells; half of atom 2's mass moved to atom 3; $c = 0.448$; the $k = 1$ $\varepsilon$ term with 19/200 (the last
+three fail at $B_1$). What rests on mathematics: the Green/flux and angular inputs, the minimal enclosing disk, the
+contact-row inequality and $J$, the outer-function steps behind (8), the small-region outer factors and the norm
+implication. Reproduce: `cd c68 && ./fetch.sh && python3 -I row_check.py certs --controls` (about 11 minutes).
+
+## C84a: the unit distance exponent, Sawin's criterion (8 November 2026)
+
+`c84a/sawin_check.py`, standard library only: the 84a row $C_{84} \ge 1.0152$\* of
+[#315](https://github.com/teorth/optimizationproblems/pull/315) (Emmerich, arXiv:2606.03419v5), from the data file
+`certificate_verification_all_v23.json` (emmerichmtm/UnitDistanceProblemOptimizationOfSawinsLowerBound @ `2279d0a`,
+`15fb28e3...ef86`; its parameters are those printed in Appendix B of v5). The repository's verify and optimize scripts
+were neither read nor run. The criterion is Sawin's (arXiv:2605.20579, proof of Theorem 1 with Lemmas 11 and 12 and
+Proposition 10): $T$ odd primes with an odd number $\equiv 3 \bmod 4$; every $p \in S_{\mathbb Q}$ either $1 \bmod 4$ or
+inert in some $\mathbb{Q}(\sqrt q)$, $q \in T$; the budget $\#T + \#S_{\mathbb Q} + \#\{\text{split}\} + 1 \le (\#T-1)^2/4$
+in $Q = \mathbb{Q}(\sqrt{\prod T})$; then formula (11). Splitting is decided by our own Legendre and Kronecker symbols,
+and $\delta$ is enclosed in 60-digit decimal arithmetic.
+
+| Certificate | $\#S_{\mathbb Q}$ (ramified, inert, split) | budget | $\delta$ |
+| --- | --- | --- | --- |
+| Sawin's published example, $R = 72$ | 22 (10, 12, 0) | 36 = 36 | 0.01411442867849823889... (his .014114...) |
+| greedy, $R = 66.72240803$ | 22 (2, 20, 0) | 36 = 36 | 0.01517180563721325854... |
+| evolution strategy, $R = 66.72416$ | 22 (3, 19, 0) | 36 = 36 | 0.01526166106841929424... |
+| with discrete recombination, $R = 66.72416$ (the row) | 22 (3, 19, 0) | 36 = 36 | 0.01526286881700719166... > 0.0152 |
+
+All four agree with the file's stored values and splitting types, compared only after our run. Red controls, all
+refused: the exponent tightened to 1.0152629; the split prime 53 added; 263 replaced by 951851 ($\equiv 3 \bmod 4$,
+inert in no $\mathbb{Q}(\sqrt q)$); $T$ without 43; $R = 1$. What rests on mathematics: Sawin's Proposition 10,
+Lemma 11 (Golod-Shafarevich) and Lemma 12. Reproduce: `cd c84a && ./fetch.sh && ./run_all.sh` (about a second).
+
 ## Reproduce
 
 ```
