@@ -1,0 +1,23 @@
+PR #281, row [P2026] (21 base primes and 28 cluster primes; the row says 39 primes): C45 < 0.489596115074071
+  49 primes: 21 base primes (orders dividing 5040), 28 in 18 clusters of prime orders [11, 13, 23, 29, 37, 43, 47, 53, 73, 79, 83, 113, 131, 179, 191, 233, 239, 251]
+  G1 (orders dividing 12): [3, 5, 7, 13] -> 236 distinct vectors
+  G2 (orders dividing 36): [19, 37, 73, 109] -> 2446 distinct vectors
+  G3 (orders dividing 60): [11, 31, 41, 61, 151] -> 3420 distinct vectors
+  G4 (orders dividing 48): [17, 257, 241, 97] -> 4621 distinct vectors
+  GA (orders dividing 28): [29, 43, 127, 113] -> 83 distinct vectors
+  c45_comb: canonical states: p1 17, p12 2437
+  c45_comb: canonical states: p123 2558519
+  c45_comb: V vectors folded: 278882625 in 24 flushes
+  histogram of nu0 on Z/5040: 4559 values (5 s for the groups, 686 s for the combination)
+  checks: total = M0, sum nu0 = 5040 prod (q - 1), sum nu0^2 = 5040 sum_d prod_q (q - 1 or q - 2): all three exact
+  the packet's base_final.txt (sha256 238174d0..., 4559 entries, on Z/5040), read as data: identical to ours
+  lambda = sum_(k <= 120) 1/(k 2^k) < log 2; 9,953,280 (h1, h2) pairs of the cluster halves; 9 s
+  S = 0.489596115074070106872931527173... (exact rational)
+  S <= 0.489596115074071, and the printed value is S rounded up at its last digit: True
+Red controls:
+  without the base prime 151: S = 0.489640182196383..., above 0.489596115074071: True
+  without the cluster prime 176383 (order 239): S = 0.489596116338130..., above: True
+  the prime 53 added to the set: refused (order 52 neither divides 5040 nor is prime), as expected
+  53 placed in the cluster of order 11: refused (its order is 52), as expected
+  one a moved from nu0 = 2281 to 2282 in our histogram: the moment checks fail, as expected: True
+RESULT: PASS  (811 s)

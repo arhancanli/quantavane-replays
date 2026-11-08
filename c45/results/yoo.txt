@@ -1,0 +1,23 @@
+45a page, [Y2026] (38 primes, Yoo's README at tag v3): C45 < 0.490180063290061
+  38 primes: 14 base primes (orders dividing 5040), 24 in 18 clusters of prime orders [11, 13, 23, 29, 37, 43, 47, 53, 73, 79, 83, 113, 131, 179, 191, 233, 239, 251]
+  G1 (orders dividing 12): [3, 5, 7, 13] -> 236 distinct vectors
+  G2 (orders dividing 36): [19, 37, 73] -> 364 distinct vectors
+  G3 (orders dividing 60): [11, 31, 41, 61] -> 390 distinct vectors
+  G4 (orders dividing 48): [17, 257] -> 25 distinct vectors
+  GA (orders dividing 28): [29] -> 5 distinct vectors
+  c45_comb: canonical states: p1 17, p12 688
+  c45_comb: canonical states: p123 100950
+  c45_comb: V vectors folded: 206908 in 1 flushes
+  histogram of nu0 on Z/5040: 4217 values (0 s for the groups, 0 s for the combination)
+  checks: total = M0, sum nu0 = 5040 prod (q - 1), sum nu0^2 = 5040 sum_d prod_q (q - 1 or q - 2): all three exact
+  the packet's base_yoo14.txt (sha256 4ac1d421..., 4217 entries, on Z/5040), read as data: identical to ours
+  lambda = sum_(k <= 120) 1/(k 2^k) < log 2; 2,654,208 (h1, h2) pairs of the cluster halves; 3 s
+  S = 0.490180063290060457100450574026... (exact rational)
+  S <= 0.490180063290061, and the printed value is S rounded up at its last digit: True
+Red controls:
+  without the base prime 257: S = 0.490248905056704..., above 0.490180063290061: True
+  without the cluster prime 2089 (order 29): S = 0.490180755737821..., above: True
+  the prime 53 added to the set: refused (order 52 neither divides 5040 nor is prime), as expected
+  53 placed in the cluster of order 11: refused (its order is 52), as expected
+  one a moved from nu0 = 2200 to 2201 in our histogram: the moment checks fail, as expected: True
+RESULT: PASS  (8 s)

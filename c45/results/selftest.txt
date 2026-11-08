@@ -1,0 +1,10 @@
+Self-test: the histogram pipeline against brute force over every a mod M0 (from the definition)
+  base [3, 5, 7, 31, 73] (M0 = 237615): pipeline 25 values, brute force 25 values, identical (6 s)
+  base [3, 11, 17, 127] (M0 = 71247): pipeline 18 values, brute force 18 values, identical (3 s)
+  base [5, 13, 19, 29] (M0 = 35815): pipeline 38 values, brute force 38 values, identical (1 s)
+  base [3, 7, 241, 11] (M0 = 55671): pipeline 18 values, brute force 18 values, identical (1 s)
+  base [37, 97, 3] (M0 = 10767): pipeline 10 values, brute force 10 values, identical (0 s)
+  cluster distributions against direct enumeration of (a mod q) for q in the cluster:
+    order 11, primes [23, 89]: identical
+    order 29, primes [233, 1103]: identical
+RESULT: PASS
