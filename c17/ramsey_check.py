@@ -15,7 +15,8 @@ not both. Here we check l = 1 exactly in interval arithmetic of our own (Python 
 exp and ln are correctly rounded in decimal, and every result is widened by one unit in the last place).
 
 Our own code, standard library only, from the two papers' TeX sources (read as data, compared with our
-transcription before anything is computed). Usage: python3 -I ramsey_check.py CERTS_ROOT [--controls]
+transcription before anything is computed). Usage: python3 -I ramsey_check.py CERTS_ROOT [--controls] [--row=gri26]
+(--row=gri26: the 17a row [Gri26], see main_gri26 below.)
 """
 import os
 import sys
@@ -246,7 +247,7 @@ def refute_lambda1(F, region, out, tag, mu1=D("0.10"), mu2=D("0.70"), ncells=600
     stack = []
     w = (mu2 - mu1) / ncells
     for i in range(ncells):
-        stack.append((mu1 + i * w, mu1 + (i + 1) * w, 0))
+        stack.append((mu1 + i * w, mu2 if i == ncells - 1 else mu1 + (i + 1) * w, 0))
     ncell = 0
     open_cells = []
     while stack:
@@ -311,6 +312,8 @@ def main():
         return 2
     root = sys.argv[1]
     controls = "--controls" in sys.argv
+    if "--row=gri26" in sys.argv:
+        return main_gri26(root, controls)
     lines = []
 
     def out(s):
@@ -372,7 +375,7 @@ def main():
         out("")
         out("controls (each must come out as stated):")
         # (i) GNNW's own diagonal step passes with a region certified by F_0.08 (their Lemma 16 (2), lambda = 1)
-        M1 = iexp(Iv(D(-2) / 3) - Iv(D("0.3")))
+        M1 = iexp(Iv(D(-2)) / Iv(D(3)) - Iv(D("0.3")))
         lnP3 = iln(Iv(1) - iexp(-Fp1(F003)))
         # log X at the interval M1: log(1-M) + log P/(1-M) is decreasing in M, so use the ends
         om = Iv(1) - M1
@@ -406,6 +409,221 @@ def main():
         out("RESULT: FINDING. The printed value is exp(F(1)) for the quintic, truncated, but the quintic does not satisfy "
             "the conditions of GNNW (Theorem 13 of v1, 14 of v2) at lambda = 1 for any M(1) with Y(1) from the region "
             "U, F_0.03 or F itself certifies; the benchmark's PASS rests on accepting either orientation.")
+        return 0
+    out("RESULT: %s" % ("FAIL (a check did not come out as stated)" if not status else "no finding"))
+    return 1
+
+
+
+# ================================================================================================ the [Gri26] row
+# The 17a row [Gri26], C_17 <= 3.791993699438612 (merged in PR #127), from the note and the certificate's JSON alone
+# (maaxgrin/ramsey-3792-bound @ 0b26aa2; its verifier was neither read nor run). The note applies Theorem 13 and
+# Lemma 14 of GNNW v1 with M(l) = l e^(-l) and Y = e^a (1 - X) for X <= 1/2, Y = 1 - X e^(-a) for X > 1/2,
+# a = 0.137/e, from the bound phi(s) = h(s) - a s. v2 of GNNW replaces Lemma 14 by Lemma 15.
+
+GRI_TEXT = {
+    "gri26/ramsey_3792_bound.tex": [
+        r"The admissibility of the function \(Y\) below comes from \cite[Lemma 14]{GNNW2024}.",
+        r"H(\lambda)-\alpha\lambda, \qquad \alpha=\frac{0.137}{e},",
+        r"e^\alpha(1-X(\lambda)),&X(\lambda)\le \frac12,\\ 1-X(\lambda)e^{-\alpha},&X(\lambda)>\frac12.",
+        r"M(\lambda)=\lambda e^{-\lambda}.",
+        r"R(k,k)\le \bigl(3.791993699438612\bigr)^{k+o(k)}.",
+    ],
+    "gnnw_v1/RamseyArXiv.tex": [
+        r"\begin{lem}\label{l:y}",
+        r"\item $(x,e^{\alpha}(1-x)) \in \mc{R}$ for all $0< x <1/2$,",
+        r"\item $(x,1-xe^{-\alpha}) \in \mc{R}$ for all $0<x \leq 1$.",
+        r"For $0< x \leq e^{\alpha}(1-x)$ we further have $x^{-k-o(k)}(e^{\alpha}(1-x))^{-\ell} \leq x^{-\ell}(e^{\alpha}(1-x))^{-k-o(k)}$",
+    ],
+    "gnnw_v2/main.tex": [
+        r"\begin{lem}\label{lem:frontier}",
+        r"Numerical calculations used in derivation of \cref{t:main} from \cref{t:general} were incorrectly justified in the earliest public version.",
+    ],
+}
+
+
+def Fp_point(coeffs, lam):
+    """F'(lam) = ln((1+lam)/lam) + (p'(lam) - p(lam)) e^(-lam) at an exact lam in (0, 1]."""
+    li = Iv(lam)
+    return iln((Iv(1) + li) / li) + (dpoly(coeffs, li) - poly(coeffs, li)) * iexp(-li)
+
+
+def logX_iv(lnP, mu_iv):
+    """log X on an interval of mu (log X decreases in mu)."""
+    return Iv(logX(lnP, mu_iv.hi).lo, logX(lnP, mu_iv.lo).hi)
+
+
+def slack_bounds(fl, lam, LXs, LXi, lnmu_sup, fs):
+    """Upper bounds on F(lam) + (1/2)(log X + lam log mu + lam log y) for every y certified by a bound f, given
+    sup / inf of log X (LXs, LXi; LXi may be None) and sup of log mu on a cell. fs: {s: f(s)} for chosen s.
+    (b): log y <= -f(s) - s log X;  (a): log y <= (-f(s) - log X)/s;  and log y <= 0."""
+    half = Iv(D("0.5"))
+    lam_i = Iv(lam)
+    best = (fl + (LXs + lam_i * lnmu_sup) * half).hi
+    for s, fv in fs.items():
+        cb = (Iv(1) - lam_i * Iv(s))                     # >= 0
+        vb = (fl + (cb * LXs + lam_i * lnmu_sup - lam_i * fv) * half).hi
+        if vb < best:
+            best = vb
+        ca = Iv(1) - lam_i / Iv(s)
+        if ca.lo >= 0:
+            va = (fl + (ca * LXs + lam_i * lnmu_sup - lam_i * fv / Iv(s)) * half).hi
+        elif LXi is not None and ca.hi <= 0:
+            va = (fl + (ca * LXi + lam_i * lnmu_sup - lam_i * fv / Iv(s)) * half).hi
+        else:
+            va = None
+        if va is not None and va < best:
+            best = va
+    return best
+
+
+def refute_at(F, region, lam, out, tag, mu1, mu2, ncells, maxdepth, s_list):
+    """For every mu in (0,1) and every y the bound `region` certifies, the slack at lam is < 0?"""
+    fl = f_point(F, lam)
+    lnP = iln(Iv(1) - iexp(-Fp_point(F, lam)))
+    fs = {s: f_point(region, s) for s in s_list}
+    lnmu1 = iln(Iv(mu1)).hi
+    worst = slack_bounds(fl, lam, lnP, logX(lnP, mu1).lo, lnmu1, fs)
+    out("[%s] cell (0, %s]: upper bound %s" % (tag, mu1, fmt(worst, 8)))
+    ok = worst < 0
+    u2 = slack_bounds(fl, lam, logX(lnP, mu2).hi, None, D(0), fs)
+    out("[%s] cell [%s, 1): upper bound %s" % (tag, mu2, fmt(u2, 8)))
+    ok &= u2 < 0
+    worst = max(worst, u2)
+    w = (mu2 - mu1) / ncells
+    stack = [(mu1 + i * w, mu2 if i == ncells - 1 else mu1 + (i + 1) * w, 0) for i in range(ncells)]
+    closed, open_cells = 0, []
+    while stack:
+        a, b, d = stack.pop()
+        u = slack_bounds(fl, lam, logX(lnP, a).hi, logX(lnP, b).lo, iln(Iv(b)).hi, fs)
+        if u < 0:
+            closed += 1
+            worst = max(worst, u)
+        elif d < maxdepth:
+            m = (a + b) / 2
+            stack += [(a, m, d + 1), (m, b, d + 1)]
+        else:
+            open_cells.append((a, b, u))
+    ok &= not open_cells
+    out("[%s] cells in [%s, %s] closed: %d; left open: %d%s" % (
+        tag, mu1, mu2, closed, len(open_cells), "" if not open_cells else " (first: [%s, %s], bound %s)" % (
+            fmt(open_cells[0][0], 8), fmt(open_cells[0][1], 8), fmt(open_cells[0][2], 6))))
+    return ok, worst
+
+
+def main_gri26(root, controls):
+    lines = []
+
+    def out(s):
+        print(s)
+        lines.append(s)
+
+    status = True
+    out("17a row [Gri26] (PR #127, merged): C_17 <= 3.791993699438612 < 3.792")
+    ok = True
+    for rel, needles in GRI_TEXT.items():
+        path = os.path.join(root, rel)
+        with open(path, encoding="utf-8") as fh:
+            text = " ".join(fh.read().split())
+        out("%s sha256 %s" % (rel, sha256(path)))
+        for nd in needles:
+            hit = " ".join(nd.split()) in text
+            ok &= hit
+            out("  our transcription appears verbatim: %s   %s" % (hit, nd[:110]))
+    import json
+    cert_path = os.path.join(root, "gri26/ramsey_3792_certificate.json")
+    with open(cert_path, encoding="utf-8") as fh:
+        cert = json.load(fh)
+    out("gri26/ramsey_3792_certificate.json sha256 %s" % sha256(cert_path))
+    G = [D(c) for c in cert["coefficients"]]
+    ok &= len(G) == 14 and cert["alpha"] == "137/(1000*e)"
+    out("certificate: %d coefficients, alpha = %s, sum = %s" % (len(G), cert["alpha"], sum(G)))
+    status &= ok
+    alpha = Iv(D("0.137")) * EINV
+
+    # 1. the printed value (an upper bound must not be below exp(F(1)))
+    c = iexp(F1(G))
+    up = c.hi <= D("3.791993699438612")
+    out("exp(F(1)) = 4 exp(%s/e) in %s; the printed 3.791993699438612 is above it: %s" % (sum(G), c, up))
+    status &= up
+
+    # 2. Lemma 14 of v1 claims points that its hypothesis does not certify (phi = h - a s, both orders needed)
+    phi = lambda s: h_point(s) - alpha * Iv(s)
+    x = D("0.2")
+    y = iexp(alpha) * Iv(D("0.8"))
+    s_star = D("0.25")                                   # x/(1-x): there h(s) + s log x + log(1-x) = 0
+    vb = phi(s_star) + Iv(s_star) * iln(Iv(x)) + iln(y)
+    three_q = alpha * Iv(D("0.75"))
+    first = vb.lo > 0 and CN.subtract(vb.hi, three_q.lo) < D("1e-50") and CN.subtract(three_q.hi, vb.lo) < D("1e-50")
+    out("Lemma 14 (v1), first branch: at x = 1/5, y = e^a 4/5, condition (b) at s = 1/4 is %s = 3a/4 > 0 (the "
+        "bound phi does not give R(k,l) <= x^-k y^-l for k < l): %s" % (vb, first))
+    lam = D("0.01")
+    mu = Iv(lam) * iexp(-Iv(lam))
+    lnP = iln(Iv(1) - iexp(-Fp_point(G, lam)))
+    LX = logX_iv(lnP, mu)
+    Xi = iexp(LX)
+    y2 = Iv(1) - Xi * iexp(-alpha)
+    s7 = D("0.07")
+    va = phi(s7) + iln(Iv(Xi.hi)) + Iv(s7) * iln(Iv(y2.lo, y2.hi))
+    second = va.lo > 0
+    out("Lemma 14 (v1), second branch, at the certificate's own point lambda = 0.01, M = l e^-l: X in %s, "
+        "Y = 1 - X e^-a in %s; condition (a) at s = 0.07 is %s > 0: %s" % (Xi, y2, va, second))
+    status &= first and second
+
+    # 3. the certificate under Lemma 15 (v2) with GNNW's bound F_0.03: lambda = 0.01, every M
+    s_list = sorted(set([lam * D(k) / 8 for k in range(1, 161)] + [D(j) / 20 for j in range(1, 21)]))
+    r1, w1 = refute_at(G, F003, lam, out, "Gri26 / F_0.03, lambda = 0.01", D("0.0001"), D("0.12"), 400, 10, s_list)
+    out("[Gri26 / F_0.03] at lambda = 0.01, for every M in (0,1) and every Y certified by F_0.03 through (a) and (b), "
+        "condition (3) fails: %s; left side minus right side <= %s" % (r1, fmt(w1, 6)))
+    their = {}
+    for lv in (D("0.001"), D("0.01"), D("0.05")):
+        mu_l = Iv(lv) * iexp(-Iv(lv))
+        lnP_l = iln(Iv(1) - iexp(-Fp_point(G, lv)))
+        LXl = logX_iv(lnP_l, mu_l)
+        fs = {s: f_point(F003, s) for s in sorted(set([lv * D(k) / 8 for k in range(1, 161)] +
+                                                       [D(j) / 20 for j in range(1, 21)])) if s <= 1}
+        u = slack_bounds(f_point(G, lv), lv, LXl.hi, LXl.lo, iln(mu_l).hi, fs)
+        their[lv] = u
+        out("[Gri26 / F_0.03] lambda = %s with the note's M = l e^-l: slack <= %s (< 0: %s)" % (lv, fmt(u, 6), u < 0))
+    finding = r1 and all(u < 0 for u in their.values())
+
+    if controls:
+        out("")
+        out("controls (each must come out as stated):")
+        ctl = True
+        # (i) with the note's Y (Lemma 14, second branch) the same point passes: their PASS reproduced
+        Xl = iexp(LX)
+        Yv1 = Iv(1) - Xl * iexp(-alpha)
+        sl = f_point(G, lam) + (LX + Iv(lam) * iln(mu) + Iv(lam) * iln(Yv1)) * Iv(D("0.5"))
+        out("[ctl] lambda = 0.01, M = l e^-l, Y = 1 - X e^-a (the note's rule): slack in %s (> 0: %s)" % (sl, sl.lo > 0))
+        ctl &= sl.lo > 0
+        # (ii) with the region of the certificate's own F the refutation must not close (self-consistent there)
+        r2, _ = refute_at(G, G, lam, out, "ctl Gri26 / own F", D("0.0001"), D("0.12"), 100, 4, s_list)
+        out("[ctl] with the region of its own F the refutation does not close at lambda = 0.01: %s" % (not r2))
+        ctl &= not r2
+        # (iii) GNNW's own F_0.03 at lambda = 0.01 passes with M_1 and Y certified by F_0.08 (their Lemma 16 (2))
+        M1 = Iv(lam) * iexp(-Iv(D(2)) * Iv(lam) / Iv(3) - Iv(D("0.3")) * Iv(lam) * Iv(lam))
+        lnP3 = iln(Iv(1) - iexp(-Fp_point(F003, lam)))
+        LX3 = logX_iv(lnP3, M1)
+        y0 = D("0.0287")
+        mem = region_member(F008, iexp(Iv(LX3.hi)).hi, y0, out, "ctl F_0.08 region at lambda = 0.01")
+        sl3 = f_point(F003, lam) + (LX3 + Iv(lam) * iln(M1) + Iv(lam) * iln(Iv(y0))) * Iv(D("0.5"))
+        out("[ctl] GNNW F_0.03 at lambda = 0.01, M = M_1(lambda), Y = %s certified by F_0.08: slack in %s (passes: %s)"
+            % (y0, sl3, mem and sl3.lo > 0))
+        ctl &= mem and sl3.lo > 0
+        # (iv) the printed value lowered in its last digit is below exp(F(1))
+        low = D("3.791993699438611")
+        r4 = not (c.hi <= low)
+        out("[ctl] 3.791993699438611 is refused as an upper bound: %s" % r4)
+        ctl &= r4
+        out("controls all as expected: %s" % ctl)
+        status &= ctl
+
+    if status and finding:
+        out("RESULT: FINDING. The value is exp(F(1)) and the printed 3.791993699438612 is above it, but the note's Y "
+            "comes from Lemma 14 of GNNW v1, whose two branches the bound phi does not certify (v2 replaces it by "
+            "Lemma 15); with Lemma 15 and GNNW's F_0.03, the certificate's F fails condition (3) at lambda = 0.01 for "
+            "every M, and at lambda = 0.001, 0.01, 0.05 for the note's M = l e^-l.")
         return 0
     out("RESULT: %s" % ("FAIL (a check did not come out as stated)" if not status else "no finding"))
     return 1

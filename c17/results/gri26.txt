@@ -1,0 +1,39 @@
+17a row [Gri26] (PR #127, merged): C_17 <= 3.791993699438612 < 3.792
+gri26/ramsey_3792_bound.tex sha256 73f25b6aef0722c06362677ac891d116cb5c255b3e827647354b4e0179a5a601
+  our transcription appears verbatim: True   The admissibility of the function \(Y\) below comes from \cite[Lemma 14]{GNNW2024}.
+  our transcription appears verbatim: True   H(\lambda)-\alpha\lambda, \qquad \alpha=\frac{0.137}{e},
+  our transcription appears verbatim: True   e^\alpha(1-X(\lambda)),&X(\lambda)\le \frac12,\\ 1-X(\lambda)e^{-\alpha},&X(\lambda)>\frac12.
+  our transcription appears verbatim: True   M(\lambda)=\lambda e^{-\lambda}.
+  our transcription appears verbatim: True   R(k,k)\le \bigl(3.791993699438612\bigr)^{k+o(k)}.
+gnnw_v1/RamseyArXiv.tex sha256 9475bdc42aac1cb2c995fdfba1803f0ec4dc53ac0c5a838623cb31b5e19eaa2e
+  our transcription appears verbatim: True   \begin{lem}\label{l:y}
+  our transcription appears verbatim: True   \item $(x,e^{\alpha}(1-x)) \in \mc{R}$ for all $0< x <1/2$,
+  our transcription appears verbatim: True   \item $(x,1-xe^{-\alpha}) \in \mc{R}$ for all $0<x \leq 1$.
+  our transcription appears verbatim: True   For $0< x \leq e^{\alpha}(1-x)$ we further have $x^{-k-o(k)}(e^{\alpha}(1-x))^{-\ell} \leq x^{-\ell}(e^{\alpha
+gnnw_v2/main.tex sha256 2dcb2a908aa7c82015fbb0cbabbc3045386be37364330134d2b947f474bc8c55
+  our transcription appears verbatim: True   \begin{lem}\label{lem:frontier}
+  our transcription appears verbatim: True   Numerical calculations used in derivation of \cref{t:main} from \cref{t:general} were incorrectly justified in
+gri26/ramsey_3792_certificate.json sha256 716d404040f2a0acff84402a096d07cf3d430ee9cf284f04a50c4cfc961304fd
+certificate: 14 coefficients, alpha = 137/(1000*e), sum = -0.145162877541882482
+exp(F(1)) = 4 exp(-0.145162877541882482/e) in [3.791993699438611192890592, 3.791993699438611192890592]; the printed 3.791993699438612 is above it: True
+Lemma 14 (v1), first branch: at x = 1/5, y = e^a 4/5, condition (b) at s = 1/4 is [0.03779961258036569854394007, 0.03779961258036569854394007] = 3a/4 > 0 (the bound phi does not give R(k,l) <= x^-k y^-l for k < l): True
+Lemma 14 (v1), second branch, at the certificate's own point lambda = 0.01, M = l e^-l: X in [0.9756803788903894905550222, 0.9756803788903894905550222], Y = 1 - X e^-a in [0.07227479958265410763188996, 0.07227479958265410763188996]; condition (a) at s = 0.07 is [0.04648518227914918846836805, 0.04648518227914918846836805] > 0: True
+[Gri26 / F_0.03, lambda = 0.01] cell (0, 0.0001]: upper bound -0.021050092
+[Gri26 / F_0.03, lambda = 0.01] cell [0.12, 1): upper bound -0.028937621
+[Gri26 / F_0.03, lambda = 0.01] cells in [0.0001, 0.12] closed: 400; left open: 0
+[Gri26 / F_0.03] at lambda = 0.01, for every M in (0,1) and every Y certified by F_0.03 through (a) and (b), condition (3) fails: True; left side minus right side <= -0.0000163491
+[Gri26 / F_0.03] lambda = 0.001 with the note's M = l e^-l: slack <= -0.0000614437 (< 0: True)
+[Gri26 / F_0.03] lambda = 0.01 with the note's M = l e^-l: slack <= -0.000523843 (< 0: True)
+[Gri26 / F_0.03] lambda = 0.05 with the note's M = l e^-l: slack <= -0.000986837 (< 0: True)
+
+controls (each must come out as stated):
+[ctl] lambda = 0.01, M = l e^-l, Y = 1 - X e^-a (the note's rule): slack in [0.003706859362284238820894198, 0.003706859362284238820894198] (> 0: True)
+[ctl Gri26 / own F] cell (0, 0.0001]: upper bound -0.020370858
+[ctl Gri26 / own F] cell [0.12, 1): upper bound -0.028694430
+[ctl Gri26 / own F] cells in [0.0001, 0.12] closed: 102; left open: 156 (first: [0.020857688, 0.020932625], bound 0.00000856364)
+[ctl] with the region of its own F the refutation does not close at lambda = 0.01: True
+[ctl F_0.08 region at lambda = 0.01] (x, y) with x <= 0.977425134055, y = 0.0287: (a) max <= -0.0000000187709, (b) max <= -2.22048, cells failing: 0
+[ctl] GNNW F_0.03 at lambda = 0.01, M = M_1(lambda), Y = 0.0287 certified by F_0.08: slack in [0.001399046117273132797511055, 0.001399046117273132797511055] (passes: True)
+[ctl] 3.791993699438611 is refused as an upper bound: True
+controls all as expected: True
+RESULT: FINDING. The value is exp(F(1)) and the printed 3.791993699438612 is above it, but the note's Y comes from Lemma 14 of GNNW v1, whose two branches the bound phi does not certify (v2 replaces it by Lemma 15); with Lemma 15 and GNNW's F_0.03, the certificate's F fails condition (3) at lambda = 0.01 for every M, and at lambda = 0.001, 0.01, 0.05 for the note's M = l e^-l.
