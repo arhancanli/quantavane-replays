@@ -7,3 +7,5 @@ cd "$here"
 python3 -I c59_check.py certs/gomyway/c59_cert.json --controls | tee results/c59_check_controls.txt
 # the 59a row [P2026] (Patel, PR #169), from the construction the row states alone (no file); red controls
 python3 -I patel_check.py --controls | tee results/patel2026.txt
+# the 59a row [BPWW2026] (K_2 < 0.3177, arXiv:2504.03236 Theorem 6.4), from the paper's matrix D alone; red controls
+python3 -I bpww_check.py --controls | tee results/bpww2026.txt

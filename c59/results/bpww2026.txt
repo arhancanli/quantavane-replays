@@ -1,0 +1,9 @@
+59a row [BPWW2026]: K_2 < 0.3177 (Theorem 6.4; f = p~/p, p = det(I - D diag(z)), coefficients up to 12)
+  ||D|| < 1: I - D^T D has (1,1) entry 0.000899 > 0 and determinant 5.373e-08 > 0: True
+  169 coefficients c_jk (0 <= j, k <= 12), exact rationals; p * series = p~ through bidegree (12, 12): True
+  sum |c_jk| 0.3177^(j+k) = 1 + 7.5953899947e-08 > 1 (exact): True
+Red controls (each must leave the finite sum at or below 1):
+  rho0 = 0.3170: the finite sum is 1 - 2.152e-05: not above 1, as expected
+  rho0 = 0.3006, Knese's lower bound: the finite sum is 1 - 5.122e-04: not above 1, as expected
+  D with its off-diagonal entries set to 0: the finite sum is 1 - 5.683e-02: not above 1, as expected
+RESULT: PASS  (0 s)
