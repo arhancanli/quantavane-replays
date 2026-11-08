@@ -1,0 +1,30 @@
+4b row [Kra2026]: C_4b >= alpha_* = 0.752796455874514... (Krachun, arXiv 2608.01325v1, Theorem 1.1)
+kra2026/main.tex sha256 292a718af50f365f0fc5393b7d2e89ec3f7cde85b5a23e92f1f60273a47bfa68
+the table's ten chains, read from the source, equal our transcription: True
+the theorem's ten pairs and the stated 0.752796455874514... appear verbatim: True
+p =   3, t =  2, chain (0, 1): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =   7, t =  3, chain (0, 4, 1): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  11, t =  4, chain (0, 3, 1, 4): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  19, t =  5, chain (0, 5, 11, 9, 16): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  23, t =  5, chain (0, 18, 1, 3, 4): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  31, t =  7, chain (0, 25, 14, 1, 19, 8, 2): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  43, t =  7, chain (0, 31, 9, 23, 4, 40, 1): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  59, t =  9, chain (0, 49, 15, 7, 16, 19, 35, 36, 5): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p =  71, t =  9, chain (0, 8, 12, 18, 48, 27, 1, 37, 20): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+p = 103, t = 11, chain (0, 79, 25, 58, 55, 81, 4, 1, 34, 83, 59): prime, 3 mod 4, distinct, every forward difference a nonzero square: True
+alpha_* in [0.75279645587451418557, 0.75279645587451418557]
+the paper's 0.752796455874514... is its truncation: True; the page's 0.752796 is below it: True
+p = 3, S = (0, 1), e = 1, L = 1: 6 integers in [1, 18], no nonzero square difference: True
+p = 3, S = (0, 1), e = 1, L = 2: 36 integers in [1, 324], no nonzero square difference: True
+p = 3, S = (0, 1), e = 1, L = 3: 216 integers in [1, 5832], no nonzero square difference: True
+p = 3 and p = 7 glued (P = 441, H = 4), L = 1: 126 integers in [1, 1764], no nonzero square difference: True
+p = 3, S = (0, 1), e = 2 (P = 81, H = 4), L = 1: 36 integers, no nonzero square difference: True
+
+controls (each must come out as stated):
+[ctl] the p = 7 chain reordered as (0, 1, 4) is refused (1 - 4 = 4 is a square, 4 - 1 = 3 is not): True
+[ctl] p = 13 (1 mod 4) is refused: True
+[ctl] the p = 103 chain with its last entry 59 -> 60 is refused: True
+[ctl] the lift with all ranks set to 0 (H = 1) has a square difference: True
+[ctl] without the p = 103 chain alpha_* drops to 0.7521209560...: True
+controls all as expected: True
+RESULT: PASS (ten valid Paley chains; alpha_* = 0.752796455874514...; the construction checked by brute force on small instances)

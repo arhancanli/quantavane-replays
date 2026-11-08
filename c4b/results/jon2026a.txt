@@ -1,0 +1,24 @@
+4b row [Jon2026a]: C_4b >= alpha_inf = 0.753741541837329405... (Jones, fs-lower-bound @ c2c0687, README)
+jon2026a/README.md sha256 27187968f335df7ca47cd00d2b28ca63e6a528ef8d6c9294cd283200c4259acc
+page/4b.md sha256 945345ba82b3e106bca58ea96f7a35e5f027a5f94a38d1e35d6ca4e4bd97d519
+kra2026/main.tex sha256 292a718af50f365f0fc5393b7d2e89ec3f7cde85b5a23e92f1f60273a47bfa68
+block supports read from the README equal those printed on the 4b page row: True
+the stated alpha_inf 0.753741541837329405... appears in the README and on the page: True
+|Q_235| = 71, |Q_299| = 83 (stated 71 and 83): True
+block 1 (m = 235): 17 vertices, square-DAG: True, height 11, the exhibited ranking drops along every arc: True (ranks 0..10)
+block 2 (m = 299): 19 vertices, square-DAG: True, height 12
+Krachun's nine chains with p != 23 (from his source): valid Paley chains: True
+the eleven moduli are pairwise coprime, and 235 = 5*47, 299 = 13*23 square-free: True
+alpha_inf in [0.7537415418373294054069, 0.7537415418373294054069]
+the stated 0.753741541837329405... is its truncation: True; the Lean-certified 0.7537 < alpha_inf: True; the page's 'approximately 0.753742' is rounded up (0.753741 would be the truncation): True
+Lemma A then Lemma B at m = 235 (e = 1, L = 1): 3995 integers in [1, 607475], no nonzero square difference: True
+Lemma A then Lemma B at m = 299 (e = 1, L = 1): 5681 integers in [1, 1072812], no nonzero square difference: True
+p = 3 chain glued with the m = 235 block (P = 497025, H = 12), L = 1: 23970 integers, no nonzero square difference: True
+
+controls (each must come out as stated):
+[ctl] README Remark 1 (m = 15, S = {0, 1, 6}): valid for unit arcs only, refused with all of Q_15, and its lift has a square difference: True
+[ctl] block 1 with the ranks of 148 and 73 swapped is refused: True
+[ctl] block 2 with the residue 0 added: no longer a height-12 square-DAG: True
+[ctl] without the two composite blocks the nine chains give only 0.75235089...: True
+controls all as expected: True
+RESULT: PASS (two square-DAG blocks of heights 11 and 12, nine chains, alpha_inf = 0.753741541837329405...; small instances checked by brute force)
