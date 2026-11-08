@@ -1,0 +1,26 @@
+7a row [ZZ2020]: mu(pi) <= 7.103205334137... (Zeilberger and Zudilin, arXiv 1912.06345v2, Part II)
+zz2020/main.tex sha256 77c79211c96adc8d63a55de19e770d425be2fd2a70e9ea4de21308f240de5dc7
+  our transcription appears verbatim: True   \cP_n=\biggl\{p>\max\{5,\sqrt{3n}\}:\frac12\le\Bigl\{\frac np\Bigr\}<\frac23\biggr\}
+  our transcription appears verbatim: True   =\frac{\Gamma'(2/3)}{\Gamma(2/3)}-\frac{\Gamma'(1/2)}{\Gamma(1/2)} =\frac\pi{2\sqrt3}-\log\frac{3\sq
+  our transcription appears verbatim: True   108N^3-2359989N^2+138304N-2048.
+  our transcription appears verbatim: True   \frac{g'(y)}{g(y)}=\frac{2y^3-125y^2-500y-625}{y(y^2+6y+25)(y-25)}.
+  our transcription appears verbatim: True   \tilde R(y)=\frac{5g(y)^n}{y-25}, \quad\text{where}\; g(y)=\frac{y(y^2+6y+25)^2}{(y-25)^3},
+  our transcription appears verbatim: True   &=\log|N_1|-\frac52\,\log2+4-\frac\pi{2\sqrt3}+\log\frac{3\sqrt3}4 =-1.90291648559998\dots
+  our transcription appears verbatim: True   &=\log N_3-\frac52\,\log2+4-\frac\pi{2\sqrt3}+\log\frac{3\sqrt3}4 =11.613890045331\dots
+  our transcription appears verbatim: True   =7.10320533413700172750577342281\dotsc.
+pi in [3.14159265358979323846264338327950, 3.14159265358979323846264338327950] (Machin, alternating-series brackets)
+omega = psi(2/3) - psi(1/2) in [0.64527561023483500703863551635364, 0.64527561023483500703863551635364] (digamma route); pi/(2 sqrt 3) - log(3 sqrt 3/4) in [0.64527561023483500703863551635364, 0.64527561023483500703863551635364]; overlap: True; the stated 0.64527561... is a truncation: True
+discriminant of 108N^3 - 2359989N^2 + 138304N - 2048 is -11417871443... (< 0: one real root): True
+N_3 in [21851.6913962195616968020152813624, 21851.6913962195616968020152813624]; |N_1| = sqrt(2048/(108 N_3)) in [0.02945849592811687636790255622694, 0.02945849592811687636790255622694] (stated 21851.691396... and 0.029458495928...)
+second route: y_3 in [66.3395015246214081837884661997839, 66.3395015246214081837884661997839], g(y_3) in [21851.6913962195616968020152813624, 21851.6913962195616968020152813624]; |g(y_1)| in [0.02945849592811687636790255622694, 0.02945849592811687636790255622694]; agree with N_3 and |N_1|: True
+log|I'_n|/n -> [-1.9029164855999821682328201881542, -1.9029164855999821682328201881542] (stated -1.90291648559998...); log b'_n/n -> [11.6138900453310482052898462986673, 11.6138900453310482052898462986673] (stated 11.613890045331...)
+1 + rate_b/(-rate_I) in [7.10320533413700172750577342281030, 7.10320533413700172750577342281030] (stated 7.10320533413700172750577342281...)
+all three agree with the paper's printed digits: True
+the page prints 7.103205334137, which is 1.7275e-15 below the bound (7.103205334137... in the paper's title): True
+
+controls (each must come out as stated):
+[ctl] the set [1/2, 3/4) instead of [1/2, 2/3) changes omega to [0.87764914623495130981408957018157, 0.87764914623495130981408957018157]: True
+[ctl] a bound 7.103205334136 is refused: True
+[ctl] the constant term 2048 -> 2049 moves |N_1| to [0.02946568706600699437591211597804, 0.02946568706600699437591211597804]: True
+controls all as expected: True
+RESULT: PASS (1 + 11.613890045331.../1.90291648559998... = 7.10320533413700172750577342281...; two routes for the prime saving and for N_1, N_3)

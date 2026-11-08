@@ -1,0 +1,35 @@
+7a row [B2026]: mu(pi) < 7.101862832357 (Bai, arXiv 2609.11276v2, Theorem 1.1)
+b2026/sections/03_prime_saving.tex sha256 c9f8f020bd6ddfd3dd22e9cd7d22280d03cc481ae9137c99efbd2cc830a0d0e3
+  our transcription appears verbatim: True   \left\{1857u+\frac12\right\}+2\{3714u\}<\{5570u\}
+  our transcription appears verbatim: True   |E|=\frac{1724689}{13797510}.
+  our transcription appears verbatim: True   =\frac{7430-4645\log2-\omega}{5570}.
+b2026/sections/04_asymptotics.tex sha256 72285ef343d9d872a061f48fdd6b0af1ab9c4f948b4b90628b840bed58a76921
+  our transcription appears verbatim: True   =2+6z+9z^2+6z^3+2z^4.
+  our transcription appears verbatim: True   S(z)=\frac{(1+z)^{3714}P(z)^{3714}}{(1-z)^{7430}}.
+  our transcription appears verbatim: True   r=\frac{\log25+3716\log2+\log S(\zeta)-5570\log\zeta} {5570}.
+  our transcription appears verbatim: True   p(y)=3715y^3-232119y^2-928475y-1160625.
+  our transcription appears verbatim: True   F(y)=\alpha\log|y|+\beta\log|y^2+6y+25|-\log|25-y|.
+  our transcription appears verbatim: True   s=F(y_c),
+b2026/sections/05_measure.tex sha256 1406b9df0e6a87a5f194585041a7cc25799759369b31af4f525ac395be20d86c
+  our transcription appears verbatim: True   =1+\frac{r+\mathcal C}{-s-\mathcal C}.
+  our transcription appears verbatim: True   =7.1018628323563507957\ldots <7.101862832357.
+b2026/sections/01_introduction.tex sha256 ff8e2243846ce45888ea6cab1c037b649e92fadd29c17db7a71408ee31f1a533
+  our transcription appears verbatim: True   (a,b,c)=(1857,3714,5570).
+E: 2784 components, measure 1724689/13797510, first left endpoint 1/3714 (paper: 2784, 1724689/13797510, 1/3714): True
+omega (digamma route) in [1202.56577336129180025431473189314, 1202.56577336129180025431473189314]
+omega (series route, K = 2000, tail bounds) in [1202.56577334567065150, 1202.56577337690774389]; the two routes overlap: True
+C in [0.53999381919888011445289803661285, 0.53999381919888011445289803661285] (paper: 0.539993819198880114452898006 < C < ...061)
+zeta in [0.2391833764384531177184956393, 0.2391833764384531177184956393]; r in [3.33194398617829933828283250382326, 3.33194398617829933828283250382326] (paper: 3.33194398617829933828283250382326 < r < ...327)
+rho (real root of p) in [66.3210173805985671722177312405253, 66.3210173805985671722177312405253]; 25 (1+zeta)^2/(1-zeta)^2 in [66.3210173805985671722177312405253, 66.3210173805985671722177312405253]; overlap: True
+y_c = [-1.9197280711875742994332263201280, -1.9197280711875742994332263201280] + i [1.01257390313643584741959795746905, 1.01257390313643584741959795746905]; s in [-1.1745439413100251084425832166928, -1.1745439413100251084425832166928] (paper: -1.174543941310025108442583231 < s < ...192)
+sigma in [3.87193780537717945273573054043612, 3.87193780537717945273573054043612]; tau in [0.63455012211114499398968518007997, 0.63455012211114499398968518007997]
+1 + sigma/tau in [7.10186283235635079573367498568511, 7.10186283235635079573367498568511]
+the stated 7.1018628323563507957... is its truncation: True; inside the paper's enclosure (7.101862832356350795733674505, ...675497): True; below the printed 7.101862832357: True
+
+controls (each must come out as stated):
+[ctl] E with a = 1856: 2784 components, measure 646468/5171745: differs: True
+[ctl] zeta from m = 5571 moves r to [3.33194400130892958020206385095461, 3.33194400130892958020206385095461]: True
+[ctl] the bound 7.101862832356 is refused: True
+[ctl] F at the real critical point rho instead of y_c gives [3.33194398617829933828283250382326, 3.33194398617829933828283250382326], not s: True (it equals r, a second route to r: True)
+controls all as expected: True
+RESULT: PASS (1 + sigma/tau = 7.1018628323563507957... < 7.101862832357; E, omega, C, r and s re-derived; the analysis behind them is not checked)
