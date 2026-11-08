@@ -1,0 +1,28 @@
+improved_constant_052.tex sha256 2f6bbdcbf38c5430e79709693528219ae793451f86f400c820ada767cbe05568
+the note's numbers found in the file: 14 of 14
+eps = (phi-1)/(phi+1) = sqrt 5 - 2 = 0.236067977500, (1+eps)/(1-eps) = phi: True
+rho(1.371966384) in [101.956075832778, 101.956075832778] (the note: 101.9560759...); rho(s0) <= 103: True
+  B = eps/(103 sqrt C2) = 0.0000782645...: True
+  M2 = 163256270.4... (the note's digits rounded to one decimal): True
+  M1 = 807183391.9... (rounded to one decimal): True
+  515/1415 < 0.364: True
+  M1 e^Y/(X Y^2) < 0.136: True
+  M2/(X^2 Y^2) < 1e-1000: True
+  L <= 1432 (log(5Y+1) + log(2 eps X + 1)): True
+  -log(0.364) > 0.0007 * 1432: True
+  values: B = 0.000078264544971, M2 = 163256270.399051, M1 = 807183391.865256, 515/Y = 0.363957597173, M1 e^Y/(XY^2) <= 0.135239476999, L <= 1431.113975761
+so c >= -log(0.364)/1432 = 0.000705727243 >= 0.0007: the exponent 2 - 0.0007 = 1.9993
+c at the note's choice, without its roundings (rho = 103, Y = 1415, X = floor(e^1423)): 0.000706245573
+rho(s) >= 101.953216330 for every s > 1 (5115 cells; the binding cell [1.37196, 1.37197])
+ceiling: for every s > 1 and X, Y > 0, c <= 0.000713943636 (cell at Y = 1400.62; K = 15.113629225)
+  attained up to 4.52E-8: c = 0.000713898482 at s = s0, Y = 1400.8, X = floor(e^1407.810)
+  so c <= 0.0007150508 (PR #275) holds, and even c < 0.0007150507: True; 0.000719 is out of reach
+
+red controls (each must be refused):
+  rho(s0) <= 101.95 refused: True
+  Y = 1414 with the factor 0.364 kept: 515/1414 = 0.3642149929 >= 0.364, refused: True
+  X = floor(e^1421): M1 e^Y/(X Y^2) = 0.999292 >= 0.136, refused: True
+  L = 1444 in place of 1432: -log 0.364 > 0.0007 L refused: True
+  a ceiling of 0.0007138, below the supremum, refused: True
+red controls all as expected: True
+RESULT: PASS

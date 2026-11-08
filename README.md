@@ -1098,6 +1098,28 @@ routes); a copy of member 0 appended (refused as a duplicate); the first 500 mem
 most 2" (48,176 pairs in both routes). Reproduce: `cd c9 && ./fetch.sh && ./run_all.sh` (a C compiler; about 90 seconds
 with the controls, 40 MB).
 
+## C84b: Althoefer's chain for the sum-product exponent (8 November 2026)
+
+`c84b/althoefer_check.py`, standard library only: the 84b row $C_{84b} \le 1.9993$\* ([Al26], Althoefer's note on
+[BSSZ2026, §5]) and the ceiling that [#275](https://github.com/teorth/optimizationproblems/pull/275) restates, from the
+note's TeX alone (`improved_constant_052.tex`, `2f6bbdcb...5568`; its numbers are read from the file and compared). The
+chain: $c = -\log\max(5\rho/Y,\ M_1e^Y/(XY^2) + M_2/(X^2Y^2)) / L$ with $L > \log(5Y+1) + \log(2\varepsilon X + 1)$,
+$\varepsilon = (\varphi-1)/(\varphi+1)$, $M_2 = \rho^2C_2/\varepsilon^2$, $M_1 = 4(1+\varepsilon)M_2$, $C_2 = 857.57$, and
+$\rho(s) = \zeta(s)\Gamma(s/2)C_2^{s/2}/(2\pi^{s/2})$ bounding the regulator. $\zeta$ by Euler-Maclaurin and $\log\Gamma$ by
+Stirling's series, both with the first omitted term as the remainder bound, in 50-digit decimals.
+
+| Check | Result |
+| --- | --- |
+| the note's chain at $s_0 = 1.371966384$, $\rho = 103$, $Y = 1415$, $X = \lfloor e^{1423}\rfloor$ | $\rho(s_0) = 101.95607583\ldots \le 103$; $515/Y = 0.36395760 < 0.364$; $M_1e^Y/(XY^2) \le 0.13523948 < 0.136$; $M_2/(X^2Y^2) < 10^{-1000}$; $L \le 1431.1139758 \le 1432$; $-\log 0.364 = 1.010601 > 0.0007 \cdot 1432$: $c \ge 0.0007$, the exponent $1.9993$ |
+| $c$ at the note's choice, unrounded | $0.000706245573\ldots$ (#275 and [T2026]: about 0.000706) |
+| the ceiling over every $s > 1$, $X, Y > 0$ | $\rho(s) \ge 101.953216$ for all $s > 1$ (5,115 cells); $c \le \log(Y/(5\rho))/(Y + \log(8(1+\varepsilon)\rho C_2/\varepsilon))$ for every $X$; so $c \le 0.000713944$, which the chain approaches to $4.5 \cdot 10^{-8}$ ($Y = 1400.8$) |
+
+So the row's ceiling ($c \le 0.0007150508$, or $\le 0.0007150507$ before #275) holds with room; we did not reproduce its
+value $0.00071505073\ldots$, which lies above our supremum. Red controls, all refused: $\rho(s_0) \le 101.95$; $Y = 1414$
+with the factor $0.364$ kept; $X = \lfloor e^{1421}\rfloor$ (the additive factor becomes 0.9993); $L = 1444$; a ceiling of
+$0.0007138$. What rests on mathematics: BSSZ2026 §5, the note's lattice-doubling lemma and regulator inequality, and the
+$(1+o(1))^d$ absorption. Reproduce: `cd c84b && ./fetch.sh && ./run_all.sh` (about 25 seconds).
+
 ## Reproduce
 
 ```
