@@ -1,0 +1,16 @@
+3c row [J2026] (Jaswal, PR #221): two laws on 51 and 47 points, base 55, n = 10^20 digits: C_3c >= 1.674894211307116
+  base 55, counts 39041372760532870645 + 60958627239467129355 = 10^20, claimed 418723552826779/250000000000000 = 1.674894211307116: True
+  law 1: 51 points, distinct, weights > 0 summing to 1: True; x - y injective: True; largest |form| = 26 <= 27: True
+  law 2: 47 points, distinct, weights > 0 summing to 1: True; x - y injective: True; largest |form| = 27 <= 27: True
+  per digit, H(X) in [1.1352603123971536878443964, 1.1352603123971536878443964]
+  per digit, H(Y) in [1.1352603123971536878445928, 1.1352603123971536878445928]
+  per digit, H(X+Y) in [1.1352603123971536878442576, 1.1352603123971536878442576]
+  per digit, H(X+2Y) in [1.1352603123971536878446107, 1.1352603123971536878446107]
+  per digit, H(X-Y) in [1.9014409255607011104574842, 1.9014409255607011104574842]
+  ratio in [1.674894211307116228764343737060, 1.674894211307116228764343737060]
+  the row's 1.674894211307116 <= ratio: True (margin 2.288e-16)
+Red controls (each must fall below the row's value):
+  law 1 alone: ratio <= 1.571406563966: below, as expected
+  law 2 alone: ratio <= 1.584694474556: below, as expected
+  the counts swapped: ratio <= 1.636191640990: below, as expected
+RESULT: PASS  (0 s)
