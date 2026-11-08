@@ -1,0 +1,11 @@
+3a rows [GGSWT2025]: the notebook (sha256 1e414e3b04d4b750...): solution_1 has 2003 integers, solution_2 has 54265
+  U_1: Python sets and the C bitsets agree: True
+  U_1: distinct non-negative integers containing 0: True; |U+U| = 93803, |U-U| = 807667, max U = 1040200, |U-U| < 2 max U + 1 = 2080401: True
+  U_1: 1 + log(|U-U|/|U+U|)/log(2 max U + 1) = 1.14798889650927569576..., which truncates to the row's 1.1479: True
+  U_2: on three random subsets (400, 800, 1200 elements) Python and C agree: True
+  U_2: distinct non-negative integers containing 0: True; |U+U| = 17331529, |U-U| = 499045203, max U = 814210134, |U-U| < 2 max U + 1 = 1628420269: True
+  U_2: 1 + log(|U-U|/|U+U|)/log(2 max U + 1) = 1.15841728155689613316..., which truncates to the row's 1.1584: True
+Red controls (each must fall below the row's 1.1479):
+  U_1 without its largest element: |U+U| = 93793, |U-U| = 805593, value 1.1478195848: below, as expected
+  U_1 dilated by 2 (the same |U+U| and |U-U|, max U doubled): value 1.1412585912: below, as expected
+RESULT: PASS  (9 s)

@@ -13,5 +13,8 @@ for row in m2026 m2026b k2026b; do
   python3 -I "$here/c3a_check.py" $row "$root" --controls > "$here/results/$row.txt" 2>&1 || status=1
 done
 python3 -I "$here/o2026_check.py" --controls > "$here/results/o2026.txt" 2>&1 || status=1
-for f in syl2 m2026 m2026b k2026b o2026; do grep -H "RESULT\|run time" "$here/results/$f.txt" | tr '\n' ' '; echo; done
+# the two [GGSWT2025] (AlphaEvolve) rows, 1.1479 and 1.1584, from the notebook's sets (C helper bin/ae_count)
+mkdir -p "$here/bin" && cc -O2 -o "$here/bin/ae_count" "$here/ae_count.c" || status=1
+python3 -I "$here/ae_check.py" "$root/ae/sums_differences_problems.ipynb" "$here/bin" --controls > "$here/results/ggswt2025.txt" 2>&1 || status=1
+for f in syl2 m2026 m2026b k2026b o2026 ggswt2025; do grep -H "RESULT\|run time" "$here/results/$f.txt" | tr '\n' ' '; echo; done
 exit $status

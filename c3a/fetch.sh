@@ -27,4 +27,12 @@ for f in finite_certificate_17086_27995.json finite_certificate_17032_27995.json
   curl -s -f -L -o "m2026/$f" \
     "https://raw.githubusercontent.com/mizopl/ghr-c3a-odd-base-finite-bound/464ceda9058798f0070ab92d35cd1c51865eb0ec/object/$f"
 done
+# [GGSWT2025]'s two sets U_1, U_2 (the 3a rows 1.1479 and 1.1584): the AlphaEvolve notebook at commit 8f44745, read as
+# data (ae_check.py extracts the two list literals with Python's ast module; nothing in it is run)
+if [ ! -f ae/sums_differences_problems.ipynb ]; then
+  if [ -d ae ] && [ -n "$(ls -A ae)" ]; then echo "refusing: $root/ae is not empty"; exit 1; fi
+  mkdir -p ae
+  curl -s -f -L -o ae/sums_differences_problems.ipynb \
+    "https://raw.githubusercontent.com/google-deepmind/alphaevolve_repository_of_problems/8f44745/experiments/sums_differences_problems/sums_differences_problems.ipynb"
+fi
 shasum -a 256 -c "$here/SHA256SUMS"
