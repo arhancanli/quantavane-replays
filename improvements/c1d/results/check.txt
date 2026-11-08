@@ -1,0 +1,17 @@
+certificate c1d_upper_n163840.json
+  constant C_1d; n = 163840; deciding knot m = 47352; max |c_m| = 13326562745090819256794934817103636; knots at the maximum = 1
+  exact bound = 1091712020077839913516641060217129861120/750476704392981840387650570565448814041
+              = 1.4546914163856212164439171... (floor to 25 decimals)
+  the stated fraction: EQUAL
+  claim C_1d <= 1.454691416385622: implied
+  record 1.454727664528751: beaten strictly, margin 3.624814e-05 (the printed claim also beats it: True)
+  record 9900630255081376929482866688/6805830738283663732311831361: beaten strictly, margin 3.624814e-05 (the printed claim also beats it: True)
+  record 1.457854884921989: beaten strictly, margin 3.163469e-03 (the printed claim also beats it: True)
+  record 1.4630715826075594: beaten strictly, margin 8.380166e-03 (the printed claim also beats it: True)
+  RESULT: PASS (27 s)
+red controls (each must be refused):
+  C1 value 54613 raised by one unit: REFUSED - REFUSED: the exact value differs from the fraction stated in the certificate
+  C2 largest value 0 raised by 1%: REFUSED - REFUSED: the exact value differs from the fraction stated in the certificate
+  C3 same change, its own fraction stated: REFUSED - REFUSED: the claim 1.454691416385622 is not implied
+  C4 claim tightened by one unit of its last digit (1.454691416385621): REFUSED - REFUSED: the claim 1.454691416385621 is not implied
+  CONTROLS: all refused, as required
