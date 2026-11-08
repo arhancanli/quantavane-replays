@@ -1,0 +1,28 @@
+13a upper-bound row [K2026] (PR #314): C_13a <= 7170601298323360123534337/29109471743520000000000000*
+k2026/main.tex sha256 2afbd81dcc46ed38ace0d5a65efbb4218986e6089b81e18a632d84a8b84d0f2d
+k2026/sections/upper.tex sha256 0736c024f4e6b6b666742b1505db2a0336edf7cf2ae7e8ef1098fb24f002bd73
+side data read from the table: sigma = ['-631/58', '-1', '7/16', '37/56']; h = ['0', '0', '130783/250000', '446199/1000000']
+equal to our transcription of the table: True
+stated area: 7170601298323360123534337/29109471743520000000000000; stated decimal: 0.2463322372...
+normals are unit vectors: True
+V1 = (0, 0)
+V2 = (7977763/10350000, 0)
+V3 = (17120833/37500000, 813103273/2800000000)
+V4 = (-2452220315467/25111690600000, 52906127323101/100446762400000)
+every vertex satisfies all four side inequalities: True; each lies on exactly its two side lines: True
+turns at the four vertices all positive (convex, counterclockwise): True
+area (shoelace) = 7170601298323360123534337/29109471743520000000000000 = 0.2463322372010956543928845...
+|V2 - V4|^2 = 446001044389582665162878719566649/432327216932035361562240000000000 (> 1: True); |V1 - V3|^2 = 826318726325772289/2822400000000000000
+normal relation j = 2: a_j0 = 5541045/8027539, a_j1 = 24427652/40137695, exact: True, both positive: True
+normal relation j = 3: a_j0 = 47299645/118570699, a_j1 = 502233812/592853495, exact: True, both positive: True
+the shoelace area equals the stated fraction exactly: True
+the stated decimal 0.2463322372... is the area truncated at 10 decimals: True
+the README cell 0.24633* of PR #314 is below the area (by 0.000002237201...)
+
+controls (each must come out as stated):
+[ctl] h_2 = 130784/250000: area 0.246333948688..., no longer the stated fraction: True
+[ctl] sigma_3 = 37/57: area 0.246293078408..., refused: True
+[ctl] 0.2463322373 refused as the truncation: True
+[ctl] lines 0 and 1 swapped: refused as the quadrilateral of the paper: True
+controls all as expected: True
+RESULT: PASS (the area and the stated structure of K; the cover property is not checked)
