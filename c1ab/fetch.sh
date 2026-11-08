@@ -22,6 +22,8 @@ get haugland_1609.08000v1.gz https://arxiv.org/e-print/1609.08000v1
 gunzip -c haugland_1609.08000v1.gz > haugland_mop1.tex
 get arena_problem1.json "https://einsteinarena.com/api/solutions/best?problem_id=1"
 get arena_problem2.json "https://einsteinarena.com/api/solutions/best?problem_id=2"
+# [PBV2026] (the 1a lower bound 1.292): the certificate JSON, read as data for its 200 multiplier coefficients only
+get pbv2026_multiscale_arcsine_1292.json https://raw.githubusercontent.com/AndreiPiterbarg/sidon-autocorrelation/1ed5889100617ee086db1ce3456b75c1f8e5f6be/delsarte_dual/grid_bound_alt_kernel/certificates/multiscale_arcsine_1292.json
 X="python3 -I $here/extract_values.py"
 $X py tog_c1b_together_ai_2026.py h_values c1b_together_ai_2026.json
 $X cell dm_mathematical_results.ipynb 53 step_function_heights_1 c1a_alphaevolve_2025.json

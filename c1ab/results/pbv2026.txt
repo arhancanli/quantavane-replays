@@ -1,0 +1,13 @@
+1a row [PBV2026]: C_1a >= 1292/1000 (the master inequality with the three-scale arcsine kernel)
+  kernel as in the paper (deltas 138, 55, 25 /1000, weights 85, 10, 5 /100, sum 1), u = 638/1000, 200 coefficients with denominators dividing 10^8: True
+  K_2 <= 4.7894396926: Simpson on [0, 10^4] with h = 1/80 gives 4.7885975557, its error bound 2.453e-5, the tail beyond 10^4 8.176e-4 (161 s)
+  the paper's anchor K_2 <= 47897/10000: True
+  S_1 <= 29.840906455513; the paper's anchor S_1 <= 29841/1000: True
+  m_G >= 0.9999500132 (19638 cells, |G''| <= 674790.0); the paper's anchor m_G >= 998/1000: True (8 s)
+  a = (4/u) m_G^2 / S_1 >= 0.2100796002; the paper's anchor a >= 20925/100000: True
+  Phi(1.292) <= 3.3439108281 < 2/u + a >= 3.3448758385: True (margin 9.650e-04; with the paper's rounded anchors the margin is 9.6e-5)
+Red controls:
+  M0 = 1.2925 (above the certificate's 1.29232): Phi = 3.345311 >= 2/u + a: not certified, as expected
+  the first coefficient's sign flipped: G(0/4096) = -2.816123 < 0.998, so m_G >= 0.998 fails: as expected
+  the same bound with T = 200 (tail 8C^2/(pi^4 T) = 4.088e-02): K_2 <= 4.817178 only, which does not reach 4.7897: as expected
+RESULT: PASS  (170 s)

@@ -32,4 +32,7 @@ run 1b c1b_ea2026_2507.json 0.3808585749 --rescale
 run 1b atris_c1b_construction.json 0.3808585504
 run_decimal 1b c1b_haugland_2016.json 0.380926
 grep -H "printed\|normalisation\|Error" results/*.txt
+# the 1a lower bound [PBV2026] 1.292: the five anchors and the strict-failure inequality (about three minutes)
+python3 -I pbv_check.py "$root/pbv2026_multiscale_arcsine_1292.json" --controls > results/pbv2026.txt 2>&1 || status=1
+grep -H "RESULT" results/pbv2026.txt
 exit $status
