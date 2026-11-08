@@ -1,0 +1,19 @@
+komlos-paper.tex sha256 386c47a6e7fd79e4bde0cae4dd53d6a9ddd78642bea9733a99a744b8754d92a2
+(eq:cosine-constant) in the source: \frac{3\sqrt{2\pi}}{C_{\mathrm{cos}}}\int_0^3(1-r/3)^2\exp\!\left(-\frac{\pi^2r^2}{2C_{\mathrm{cos}}^2}\right)\,dr=1.
+our transcription equals it: True
+pi in [3.14159265358979323846264338327950288419716939937510, 3.14159265358979323846264338327950288419716939937510] (Gauss's arctangent formula)
+F(6) - 1: route A in [0.121915120992773877273791251736, 0.121915120992773877273791251736], route B in [0.121915120992773877273791251736, 0.121915120992773877273791251736]; sign +1, routes agree: True
+F(6.9012574) - 1: route A in [0.000000000185645531698193561849, 0.000000000185645531698193561849], route B in [0.000000000185645531698193561849, 0.000000000185645531698193561849]; sign +1, routes agree: True
+F(6.9012575) - 1: route A in [-0.000000012013134307291357253513, -0.000000012013134307291357253513], route B in [-0.000000012013134307291357253513, -0.000000012013134307291357253513]; sign -1, routes agree: True
+F(6.9013) - 1: route A in [-0.000005196470161279673269760787, -0.000005196470161279673269760787], route B in [-0.000005196470161279673269760787, -0.000005196470161279673269760787]; sign -1, routes agree: True
+the paper's enclosure C_cos in (6.9012574, 6.9012575): True
+the row's bound C_cos < 6.9013 (F decreasing, F(6.9013) < 1): True
+C_cos in [6.9012574015218373, 6.9012574015218373] (width 7.9e-38): 6.901257401521836873264072186907...; route B agrees at both ends: True
+
+red controls (each must be refused or move the root past the printed bound):
+  the bound tightened to 6.9012: F(6.9012) > 1 in both routes, so C_cos < 6.9012 is refused: True
+  weight (1 - r/3) instead of (1 - r/3)^2: F(6.9013) - 1 in [0.420928041798, ...] > 0, so 6.9013 would not bound that root: True
+  the 2 dropped from 2 C^2 in the exponent: the enclosure (6.9012574, 6.9012575) is refused: True
+  route A cut at three terms with its remainder bound: undecided at 6.9013 (width 3.5e-03), not a pass: True
+red controls all as expected: True
+RESULT: PASS

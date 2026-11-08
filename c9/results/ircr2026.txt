@@ -1,0 +1,21 @@
+== the set
+members read: 134753 (file 134753), C_7^10, duplicates: 0
+route 1 (bitmap, all 59048 neighbours of each member): adjacent ordered pairs 0
+route 2 (grouped by the first 5 coordinates, 243 prefix groups per member): adjacent ordered pairs 0
+routes agree: yes
+RESULT: INDEPENDENT (134753 members, no adjacent pair)
+== the printed value
+3.258020^10 <= 134753 exactly: True ; 3.258021^10 <= 134753: False
+== red controls (each must be refused)
+members read: 134754 (file 134753), C_7^10, duplicates: 0
+route 1 (bitmap, all 59048 neighbours of each member): adjacent ordered pairs 8
+route 2 (grouped by the first 5 coordinates, 243 prefix groups per member): adjacent ordered pairs 8
+routes agree: yes
+RESULT: NOT INDEPENDENT (8 adjacent ordered pairs)
+members read: 134754 (file 134753), C_7^10, duplicates: 1
+RESULT: REFUSED (duplicate members)
+members read: 500 (file 134753), C_7^10, duplicates: 0
+route 1 (bitmap, all 9765624 neighbours of each member): adjacent ordered pairs 48176
+route 2 (grouped by the first 5 coordinates, 3125 prefix groups per member): adjacent ordered pairs 48176
+routes agree: yes
+RESULT: NOT INDEPENDENT (48176 adjacent ordered pairs)

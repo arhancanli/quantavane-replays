@@ -1052,6 +1052,52 @@ gives 1.50286286); the 1b [H2016] row read 0.380927 until
 [#158](https://github.com/teorth/optimizationproblems/pull/158) changed it to the abstract's truncated 0.380926.
 Reproduce: `cd c1ab && ./fetch.sh && ./run_all.sh` (about 70 seconds).
 
+## C24: the Komlós constant of Akbas and Sra (8 November 2026)
+
+`c24/komlos_check.py`, standard library only: the row $C_{24} \le 6.9013$\* of
+[#250](https://github.com/teorth/optimizationproblems/pull/250), from Theorem 2.4 of Akbas and Sra
+(arXiv:2609.27172v2), whose constant $C_{\cos}$ is the unique solution of
+$F(C) = \tfrac{3\sqrt{2\pi}}{C}\int_0^3 (1 - r/3)^2 e^{-\pi^2 r^2/(2C^2)}\,dr = 1$. The equation is read from the paper's
+LaTeX source (`komlos-paper.tex`, `386c47a6...92a2`) and compared with our transcription first. $F$ is strictly
+decreasing in $C$ (our own one-line argument: with $s = \pi/C$, $dF/ds$ is a positive multiple of
+$\int_0^{3s} w(u) e^{-u^2/2}(1 - u^2)\,du$ with $w$ non-negative and decreasing, which is at least
+$w(1) \cdot 3s\,e^{-9s^2/2} > 0$), so $C_{\cos} < c$ exactly when $F(c) < 1$. Two evaluations in $2^{-400}$ fixed-point
+interval arithmetic, with $\pi$ from Gauss's arctangent formula: the term-by-term alternating series (route A) and the
+error-function form with positive-term series (route B).
+
+| Check | Result |
+| --- | --- |
+| $F(6) - 1$ | $+0.12191512\ldots$ (both routes) |
+| $F(6.9012574) - 1$, $F(6.9012575) - 1$ | $+1.856 \cdot 10^{-10}$, $-1.201 \cdot 10^{-8}$: the paper's enclosure $(6.9012574, 6.9012575)$ holds |
+| $F(6.9013) - 1$ | $-5.196 \cdot 10^{-6}$: $C_{\cos} < 6.9013$, the row |
+| $C_{\cos}$ by bisection | $6.901257401521836873264072186907\ldots$ (width $8 \cdot 10^{-38}$; route B agrees at both ends) |
+
+Red controls, all as expected: the bound tightened to 6.9012 is refused; with the weight $(1 - r/3)$ instead of its
+square, $F(6.9013) > 1$; with the 2 dropped from $2C^2$ the enclosure is refused; route A cut at three terms (with its
+remainder bound) cannot decide the sign at 6.9013. What rests on mathematics: the proof of Theorem 2.4. Reproduce:
+`cd c24 && ./fetch.sh && ./run_all.sh` (under a second).
+
+## C9: the 134,753-vertex independent set of [IRCR2026] (8 November 2026)
+
+`c9/strong_check.c`, our own C program: the 9a row $134753^{1/10} \approx 3.258020$ (Itty, Rosin, Carstensen and
+Reichman, arXiv:2607.21517; added in [#174](https://github.com/teorth/optimizationproblems/pull/174)), from the data file
+`c7/CC_10_7_134753.txt` of nathanielitty/lower-bounds-for-shannon-capacity @ `fe89660` (`60fb7b0a...755a`); the
+repository's `verifier.py` and construction scripts were neither read nor run. Two members $x \ne y$ of
+$\mathcal{C}_7^{\boxtimes 10}$ are adjacent when every coordinate differs by $0$ or $\pm 1 \bmod 7$. Route 1 looks up all
+$3^{10} - 1 = 59048$ neighbours of every member in a bitmap of the $7^{10}$ vertices; route 2 groups the members by their
+first five coordinates and compares each member with the members of the $3^5$ adjacent or equal groups on the last five.
+
+| Check | Result |
+| --- | --- |
+| the file | 134,753 lines of ten values in $\{0, \ldots, 6\}$, no duplicates |
+| adjacent ordered pairs | 0 in route 1, 0 in route 2: the set is independent, so $\alpha(\mathcal{C}_7^{\boxtimes 10}) \ge 134753$ |
+| the printed value | $3.258020^{10} \le 134753 < 3.258021^{10}$ exactly; $134753^{1/10} = 3.25802073729324535952\ldots$ |
+
+Red controls, each refused: member 0 with its first coordinate moved by one appended (8 adjacent ordered pairs in both
+routes); a copy of member 0 appended (refused as a duplicate); the first 500 members under the wrong graph "differ by at
+most 2" (48,176 pairs in both routes). Reproduce: `cd c9 && ./fetch.sh && ./run_all.sh` (a C compiler; about 90 seconds
+with the controls, 40 MB).
+
 ## Reproduce
 
 ```
