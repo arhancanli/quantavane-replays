@@ -1,0 +1,13 @@
+71a row [MI2026b] (PR #124): 17 variables, the spectrum in ridge_n17_g4_best2_iter14.json: C_71 >= 6.514326913930565372
+  the inverse transform of the certificate's 2578 nonzero coefficients is a table of 2^17 values in {+1, -1}: True
+  Boolean: True; Parseval sum F_S^2 = 4^n: True; balanced (F_empty = 0): True; nonzero coefficients: 2578
+  I = 261/128 exactly (the row: 261/128): True
+  the forward transform of the rebuilt table returns the certificate's spectrum: True
+  monotone (-f non-decreasing in every coordinate): True
+  H = 6.7687928090059780825197902218918823147872... (bits)
+  H/(I - 1) in [6.5143269139305653726506251759560972653591, 6.5143269139305653726506251759560972653591]
+  the row's 6.514326913930565372 < H/(I - 1): True (margin 6.506e-19)
+Red controls (each must not certify the row's value):
+  one value of the table flipped: balanced False (the rule needs balance): refused, as expected
+  two +1 and two -1 values swapped (still balanced): H/(I - 1) <= 6.512289205152: below, as expected
+RESULT: PASS  (12 s)

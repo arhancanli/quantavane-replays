@@ -1,0 +1,12 @@
+71a row [Num2026] (PR #130): 18 variables, true_hex of fei_c71_n18_artifact.json: C_71 >= 6.521845710923046575
+  Boolean: True; Parseval sum F_S^2 = 4^n: True; balanced (F_empty = 0): True; nonzero coefficients: 2770
+  I = 261/128 exactly (the row: 261/128): True
+  monotone (f non-decreasing in every coordinate): True
+  H = 6.7766053090059780825197902218918823147872... (bits)
+  H/(I - 1) in [6.5218457109230465756581439729485784683667, 6.5218457109230465756581439729485784683667]
+  the row's 6.521845710923046575 < H/(I - 1): True (margin 6.581e-19)
+  against the [MI2026b] function: the same I, H larger by 0.0078125000000000000000000000000000000000 = 1/128 (to 1e-45), so the gain is (1/128)/(133/128) = 1/133, as the row states: True
+Red controls (each must not certify the row's value):
+  one value of the table flipped: balanced False (the rule needs balance): refused, as expected
+  two +1 and two -1 values swapped (still balanced): H/(I - 1) <= 6.520815407818: below, as expected
+RESULT: PASS  (29 s)
