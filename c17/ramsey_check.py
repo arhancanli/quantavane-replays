@@ -47,7 +47,7 @@ class Iv:
     __radd__ = __add__
 
     def __neg__(a):
-        return Iv(-a.hi, -a.lo)
+        return Iv(a.hi.copy_negate(), a.lo.copy_negate())
 
     def __sub__(a, b):
         b = b if isinstance(b, Iv) else Iv(b)

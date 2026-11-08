@@ -49,7 +49,7 @@ class Iv:
     __radd__ = __add__
 
     def __neg__(a):
-        return Iv(-a.hi, -a.lo)
+        return Iv(a.hi.copy_negate(), a.lo.copy_negate())
 
     def __sub__(a, b):
         b = b if isinstance(b, Iv) else Iv(b)
@@ -294,7 +294,7 @@ def phi_lower(z0, kappa, alpha, beta, q0, Hs, dHs, out=None, profile=None):
     sign_change = Bw1.hi < 0 < Bw9.lo and Iv(9).hi < radius.lo
     lq0 = iln(q0i)
     span = Iv(max(lq0.hi, (iln(Iv(9)) - lq0).hi))
-    absBw = max(abs(Bw0.lo), abs(Bw0.hi))
+    absBw = max(Bw0.lo.copy_abs(), Bw0.hi.copy_abs())
     lam_lo = (B0 - Iv(absBw) * span).lo
     phi_lo = (Iv(2) * iln(Iv(27) * ivq(z0) / Iv(4)) + Iv(2) * Iv(lam_lo) - ivq(kappa) * iln(Qz)).lo
     if out:
@@ -474,7 +474,7 @@ def main():
               ("H_2(z0, q0) = 3.725658932481", trunc_of(vals[2], "3.725658932481")),
               ("H_3(z0, q0) = 6.161763006829", trunc_of(vals[3], "6.161763006829")),
               ("B(q0) > -0.1416704254", B0.lo > D("-0.1416704254")),
-              ("|dB/dw(q0)| < 1e-13", max(abs(Bw0.lo), abs(Bw0.hi)) < D("1e-13"))]
+              ("|dB/dw(q0)| < 1e-13", max(Bw0.lo.copy_abs(), Bw0.hi.copy_abs()) < D("1e-13"))]
     for name, ok in checks:
         out("Table 1, %s (decimals read as truncations, as the caption says): %s" % (name, ok))
     h3_rounded = (not checks[3][1]) and trunc_of(vals[3], "6.161763006828")
