@@ -6,7 +6,7 @@ here=$(cd "$(dirname "$0")" && pwd)
 root=${1:-$here/certs}
 mkdir -p "$here/results"
 status=0
-for row in selftest lemma irsi_v10 irsi_v11 irsi_v12 irsi_degkm cla_F cla_FH syl_unit syl_Bprime kos; do
+for row in selftest lemma irsi_v10 irsi_v11 irsi_v12 irsi_degkm cla_F cla_FH syl_unit syl_Bprime kos kos322; do
   python3 -I "$here/sunflower_check.py" "$row" "$root" --controls > "$here/results/$row.txt" 2>&1 || status=1
   grep -H "RESULT\|run time" "$here/results/$row.txt" | tr '\n' ' '; echo
 done

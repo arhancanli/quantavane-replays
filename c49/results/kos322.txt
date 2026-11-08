@@ -1,0 +1,28 @@
+ROW kos322: the [Kos2026] row as PR #322 writes it (49a.md at 6bed46a), checked on the certificate
+  sha256 pr322/49a.md: 62a8f28697e19b4fb936193dbbbc9d87d5e3f2e1ab4a0b12c20192320a137e13
+  check the row contains our transcription of its new sentence: PASS
+  sha256 kos/two_pendant_extra_1.5678599.txt: 10ee18f93204468f3611d2c909a9eee443f3b4769cf7fddd964209edfebd4838
+  check sha256 matches 49a page (10ee18f9...4838): PASS
+  check sha256 matches Kos2026 README and SHA256SUMS (10ee18f93204468f3611d2c909a9eee443f3b4769cf7fddd964209edfebd4838): PASS
+  check one block: 28 points, 252292 members: PASS
+  check the certificate equals the block rebuilt in row kos (fixes the point labels): PASS
+  check admissible parts: 46 H-sets avoiding the glue point, 75 through it (point removed), disjoint: PASS
+  first pendant (H at (0,3)): members whose part there is empty: 807 = 806 admissible + 1 other
+  check first pendant (H at (0,3)): 15 edge sets, 11 with every one of the 46 parts and 4 with every one of the 75, 11*46 + 4*75 = 806: PASS (15 groups, 11 complete with 46, 4 complete with 75, 806 members)
+  check first pendant (H at (0,3)): the 15 edge sets equal the list in PROOF.md: PASS
+  first pendant (H at (0,3)): edge-set sizes: {5: 3, 7: 12}
+  first pendant (H at (0,3)): edge sets that are members of F: 0 of 15 (they are sets of edges of K5, not members of F)
+  second pendant (H at (0,4)): members whose part there is empty: 826 = 806 admissible + 20 other
+  check second pendant (H at (0,4)): 15 edge sets, 11 with every one of the 46 parts and 4 with every one of the 75, 11*46 + 4*75 = 806: PASS (15 groups, 11 complete with 46, 4 complete with 75, 806 members)
+  check second pendant (H at (0,4)): the 15 edge sets equal the list in PROOF.md: PASS
+  second pendant (H at (0,4)): edge-set sizes: {5: 3, 7: 12}
+  second pendant (H at (0,4)): edge sets that are members of F: 0 of 15 (they are sets of edges of K5, not members of F)
+  check the one other member with empty first-pendant part is the extra set: three K5 edges and all of the second copy: PASS
+  check the 20 other members with empty second-pendant part lie inside the first copy of H: PASS
+  check no member has both pendant parts empty, and the rest are the 250659 glued sets: 250659 + 806 + 806 + 20 + 1 = 252292: PASS
+  check control: one admissible set removed at the first pendant is caught (10 complete groups of 46): PASS ((15, 10, 4, 805))
+  check control: a set with a non-admissible part added at the first pendant is counted apart: PASS
+  check control: the split 12*46 + 3*75 = 777 is refused: PASS
+  check control: with the kinds swapped no group is complete: PASS
+  run time: 2.0 s
+  RESULT: ALL CHECKS PASS

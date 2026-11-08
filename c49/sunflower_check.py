@@ -6,7 +6,7 @@ Written from the definitions on the constant page and the claimants' data files,
 claimants' verifiers were neither read nor run. Standard library only (Python 3.9+), run with python3 -I.
 
   sunflower_check.py ROW CERTS_ROOT [--controls] [--workers=N]   ROW in: irsi_v10 irsi_v11 irsi_v12 irsi_degkm cla_F
-                                                                  cla_FH syl_unit syl_Bprime kos lemma selftest
+                                                                  cla_FH syl_unit syl_Bprime kos kos322 lemma selftest
   (--controls adds the red controls; --workers sets the number of forked processes, default: all cores)
 
 What a row replay establishes (each step is exact: Python integers and fractions, no floating point decides anything)
@@ -1395,6 +1395,112 @@ def row_kos(root, do_controls, workers):
     return rep.done()
 
 
+KOS322_TEXT = ("Then, at each pendant, add 806 sets whose part in that pendant is empty: each of 15 edge sets of $F$ "
+               "(listed at [Kos2026]) combined with every admissible part in the other copy of $H$ "
+               "($11\\cdot 46+4\\cdot 75=806$). Add 20 sets lying inside the first copy of $H$ and one set made of "
+               "three $K\\_5$ edges and all of the second copy (all listed at [Kos2026]). The resulting family has "
+               "252292 sets")
+
+
+def pendant_groups(fam, empty_shift, other_shift, avoid, contain):
+    """Members whose part in one pendant is empty, split into admissible ones (part in the other pendant is an H-set
+    avoiding the glue point, or an H-set through it with the point removed), grouped by (core, kind), and the rest."""
+    groups, rest, n = {}, [], 0
+    for S in fam:
+        if (S >> empty_shift) & 0x3FF:
+            continue
+        n += 1
+        q = (S >> other_shift) & 0x3FF
+        kind = "avoid" if q in avoid else ("contain" if q in contain else None)
+        if kind is None:
+            rest.append(S)
+        else:
+            groups.setdefault((S & 0xFF, kind), set()).add(q)
+    return n, groups, rest
+
+
+def pendant_statement(groups, avoid, contain):
+    """(number of groups, groups holding every one of the 46 avoid-parts, groups holding every one of the 75
+    contain-parts, members in the groups)."""
+    full46 = sum(1 for (c, k), v in groups.items() if k == "avoid" and v == avoid)
+    full75 = sum(1 for (c, k), v in groups.items() if k == "contain" and v == contain)
+    return len(groups), full46, full75, sum(len(v) for v in groups.values())
+
+
+def row_kos322(root, do_controls, workers):
+    rep = Report("ROW kos322: the [Kos2026] row as PR #322 writes it (49a.md at 6bed46a), checked on the certificate")
+    path = os.path.join(root, "pr322/49a.md")
+    rep.info("sha256 pr322/49a.md", sha256(path))
+    with open(path, encoding="utf-8") as fh:
+        page = fh.read()
+    rep.check("the row contains our transcription of its new sentence", KOS322_TEXT in page)
+    hash_checks(rep, root, "kos/two_pendant_extra_1.5678599.txt")
+    blocks = read_sunflower3(os.path.join(root, "kos/two_pendant_extra_1.5678599.txt"))
+    rep.check("one block: 28 points, 252292 members", len(blocks) == 1 and blocks[0][0] == 28
+              and len(blocks[0][3]) == 252292)
+    fam = blocks[0][3]
+    # points (as identified by the rebuild in row kos, which equals the certificate): 0..7 the K5 edges other than
+    # the glue edges (0,3) and (0,4) in KOS_EDGES order, 8..17 the first copy of H (Z_11 minus its glue point 0),
+    # 18..27 the second copy
+    rep.check("the certificate equals the block rebuilt in row kos (fixes the point labels)",
+              set(m for _, m in build_kos()) == set(fam))
+    H = family_H()
+    avoid = set(mask(x - 1 for x in D) for D in H if 0 not in D)
+    contain = set(mask(x - 1 for x in D if x) for D in H if 0 in D)
+    rep.check("admissible parts: 46 H-sets avoiding the glue point, 75 through it (point removed), disjoint",
+              len(avoid) == 46 and len(contain) == 75 and not avoid & contain)
+    F = set(family_F())
+    e1, e2 = (0, 3), (0, 4)
+    totals = {}
+    for name, es, os_, eg_other, listed in (("first pendant (H at (0,3))", 8, 18, e2, KOS_A1),
+                                            ("second pendant (H at (0,4))", 18, 8, e1, KOS_A2)):
+        n, groups, rest = pendant_groups(fam, es, os_, avoid, contain)
+        g, f46, f75, size = pendant_statement(groups, avoid, contain)
+        rep.info(name + ": members whose part there is empty", "%d = %d admissible + %d other" % (n, size, len(rest)))
+        rep.check(name + ": 15 edge sets, 11 with every one of the 46 parts and 4 with every one of the 75, "
+                  "11*46 + 4*75 = 806", (g, f46, f75, size) == (15, 11, 4, 806) and 11 * 46 + 4 * 75 == 806,
+                  "%d groups, %d complete with 46, %d complete with 75, %d members" % (g, f46, f75, size))
+        Ts = [frozenset(KOS_EDGES[i] for i in range(8) if c >> i & 1) | (frozenset([eg_other]) if k == "avoid"
+              else frozenset()) for (c, k) in groups]
+        rep.check(name + ": the 15 edge sets equal the list in PROOF.md", set(Ts) == set(edge_sets(listed)))
+        rep.info(name + ": edge-set sizes", dict(sorted(Counter(len(T) for T in Ts).items())))
+        rep.info(name + ": edge sets that are members of F", "%d of 15 (they are sets of edges of K5, not members "
+                 "of F)" % sum(T in F for T in Ts))
+        totals[name] = (size, rest)
+    r1 = totals["first pendant (H at (0,3))"][1]
+    r2 = totals["second pendant (H at (0,4))"][1]
+    extra_ok = len(r1) == 1 and (r1[0] >> 18) & 0x3FF == 0x3FF and popcount(r1[0] & 0xFF) == 3
+    rep.check("the one other member with empty first-pendant part is the extra set: three K5 edges and all of the "
+              "second copy", extra_ok)
+    inside_ok = len(r2) == 20 and all(S & 0xFF == 0 and (S >> 18) & 0x3FF == 0 and (S >> 8) & 0x3FF for S in r2)
+    rep.check("the 20 other members with empty second-pendant part lie inside the first copy of H", inside_ok)
+    both_empty = sum(1 for S in fam if not (S >> 8) & 0x3FF and not (S >> 18) & 0x3FF)
+    product = len(fam) - 807 - 826 + both_empty
+    rep.check("no member has both pendant parts empty, and the rest are the 250659 glued sets: "
+              "250659 + 806 + 806 + 20 + 1 = 252292", both_empty == 0 and product == 250659
+              and 250659 + 806 + 806 + 20 + 1 == 252292 == len(fam))
+    if do_controls:
+        rng = random.Random(322)
+        n, groups, rest = pendant_groups(fam, 8, 18, avoid, contain)
+        key = sorted(k for k in groups if k[1] == "avoid")[0]
+        drop = (key[0] | min(groups[key]) << 18)
+        fam2 = [S for S in fam if S != drop]
+        _, g2, _ = pendant_groups(fam2, 8, 18, avoid, contain)
+        st = pendant_statement(g2, avoid, contain)
+        rep.check("control: one admissible set removed at the first pendant is caught (10 complete groups of 46)",
+                  st[:3] == (15, 10, 4) and st[3] == 805, str(st))
+        S_bad = rng.choice([S for S in fam if (S >> 8) & 0x3FF == 0 and ((S >> 18) & 0x3FF) in avoid])
+        fam3 = fam + [(S_bad & ~(0x3FF << 18)) | (0x3FF << 18) ^ (1 << 18)]
+        n3, g3, rest3 = pendant_groups(fam3, 8, 18, avoid, contain)
+        rep.check("control: a set with a non-admissible part added at the first pendant is counted apart",
+                  n3 == 808 and len(rest3) == 2 and pendant_statement(g3, avoid, contain)[3] == 806)
+        rep.check("control: the split 12*46 + 3*75 = 777 is refused", 12 * 46 + 3 * 75 != 806)
+        swapped = {(c, "contain" if k == "avoid" else "avoid"): v for (c, k), v in groups.items()}
+        rep.check("control: with the kinds swapped no group is complete", pendant_statement(swapped, avoid,
+                  contain)[1:3] == (0, 0))
+    return rep.done()
+
+
 # ----------------------------------------------------------------------------------------------------------------
 # The gluing lemma on instances, and the methods against brute force
 # ----------------------------------------------------------------------------------------------------------------
@@ -1602,7 +1708,8 @@ ROWS = {"irsi_v10": lambda r, c, w: row_irsi(r, "irsi_v10", c, w),
         "irsi_v11": lambda r, c, w: row_irsi(r, "irsi_v11", c, w),
         "irsi_v12": lambda r, c, w: row_irsi(r, "irsi_v12", c, w),
         "irsi_degkm": row_degkm, "cla_F": row_cla_F, "cla_FH": row_cla_FH, "syl_unit": row_syl_unit,
-        "syl_Bprime": row_syl_Bprime, "kos": row_kos, "lemma": row_lemma, "selftest": row_selftest}
+        "syl_Bprime": row_syl_Bprime, "kos": row_kos, "kos322": row_kos322, "lemma": row_lemma,
+        "selftest": row_selftest}
 
 
 def main():

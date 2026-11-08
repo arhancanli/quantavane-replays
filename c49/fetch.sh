@@ -25,6 +25,8 @@ get syl_B B.txt $SYL 914de1553ebdc6621425c4cb21d847dc1e0f5af7 data/B.txt
 get syl_Bprime Bprime.txt $SYL 8e21d0287711b4f0bfc23e9443523e2aa472cca1 data/Bprime.txt
 get kos two_pendant_extra_1.5678599.txt.xz DennisKoshta/sunflower3-49a-certificate \
     c4ee81737f9f6a4ae9793586a27004553a12d5c0 two_pendant_extra_1.5678599.txt.xz
+# the 49a page as PR #322 writes it (the row's new sentence on the per-pendant count)
+get pr322 49a.md maximusrufus/optimizationproblems 6bed46a4ba1e0d99f37f82fc1a110db22c0c2cd2 constants/49a.md
 # xz decompression with the standard library (the .txt is what the page's hash 10ee18f9...4838 refers to)
 python3 -I -c "import lzma, sys; open(sys.argv[2], 'wb').write(lzma.open(sys.argv[1]).read())" \
     kos/two_pendant_extra_1.5678599.txt.xz kos/two_pendant_extra_1.5678599.txt
