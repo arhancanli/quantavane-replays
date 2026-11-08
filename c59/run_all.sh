@@ -5,3 +5,5 @@ here=$(cd "$(dirname "$0")" && pwd)
 cd "$here"
 [ -d certs/gomyway ] || ./fetch.sh
 python3 -I c59_check.py certs/gomyway/c59_cert.json --controls | tee results/c59_check_controls.txt
+# the 59a row [P2026] (Patel, PR #169), from the construction the row states alone (no file); red controls
+python3 -I patel_check.py --controls | tee results/patel2026.txt

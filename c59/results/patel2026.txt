@@ -1,0 +1,16 @@
+59a row [P2026]: K_2 < 0.302825279492 (U = (1+z)(1-w), V = 1+zw, P = LU + iTV, Q = LV + iTU, f = (SQ - P)/(SQ + P); L = 2500000000, T = 3067398171, S = 10^15, N = 28)
+  Re(U conj V) = 1 - |z|^2|w|^2 + Re z (1 - |w|^2) - Re w (1 - |z|^2), as polynomials: True
+  Re(Q conj P) = (L^2 + T^2) Re(U conj V), as polynomials: True
+  1 - a^2 b^2 - a(1 - b^2) - b(1 - a^2) = (1 - a)(1 - b)(1 - ab) (degree <= 2 in each, on a 3 x 3 grid): True
+  at 2,000 random rational points of the bidisc, exactly: Re(U conj V) > 0 and |SQ - P| < |SQ + P|: True
+  841 coefficients f_jk = G_jk / D_00^(j+k+1), D_00 = (S + 1)(L + iT), exact Gaussian integers (largest |G| has 1387 digits)
+  the truncated series agrees with f at two rational points, exactly, to 10^-25 (the tail): True
+  sum_(j,k <= 28) |f_jk| r^(j+k) at r = 0.302825279492 >= 1 + 1.066806e-26 (rigorous): True
+  the row's 'greater than 1 + 10^-26': True
+Red controls (each must leave the finite sum below 1):
+  r = 0.3028252794 (10^-10 lower): the finite sum is 1 - 9.5909e-25 at most: below 1, as expected
+  r = 0.3006, Knese's lower bound for K_2: the finite sum is 1 - 2.3360e-17 at most: below 1, as expected
+  T = 0 (no complex phase): the finite sum is 1 - 2.6256e-16 at most: below 1, as expected
+  L = 0 (no real part): the finite sum is 1 - 2.6256e-16 at most: below 1, as expected
+  (not a control: at r = 0.302825279491, one unit lower, the same sum is still >= 1 + 1.272e-28)
+RESULT: PASS  (3 s)
