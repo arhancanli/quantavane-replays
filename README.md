@@ -1182,6 +1182,28 @@ remainder theorem, two more primes agreeing). Both programs equal brute force on
 Red controls, all refused: one unit more in each row's last digit; the cap one lower (the counts change); a digit that
 would carry. Reproduce: `cd c3a && ./run_all.sh` (the [MI2026] row about three hours).
 
+## C1c and C1a: four step functions of 9 November 2026
+
+`c1ac/` replays the certificates of [#354](https://github.com/teorth/optimizationproblems/pull/354) (SeanSagait) and of
+the two 9 November updates of [#270](https://github.com/teorth/optimizationproblems/pull/270) (vidigoat) with
+`autocorr_check.py`, the checker of the first table (its method section applies unchanged). The certificates' own
+verifiers and search programs were neither read nor run. #354's file is text (K, then the weights); `fetch.sh` copies
+its integers into JSON after checking that every token is a canonical non-negative integer.
+
+| Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
+| --- | --- | --- | --- | --- |
+| $C_{1c} \geq$ | [#354](https://github.com/teorth/optimizationproblems/pull/354) | SeanSagait/c1c-autocorrelation-certificate @ `9e7f3d19`, `K262144_0.4103768.txt` (K = 262,144, 262,400 weights), `062a2869...6769` | 935577600963641344/2279800930147535089 = 0.41037688360934932768..., minimum only at k = 46008 (S = 1509900967, A = 3568945316176) | 0.4103768, below the exact value |
+| $C_{1c} \geq$ | #270 (9 Nov, `c1c_v4`) | vidigoat/optimization-records @ `358b200b`, `tao/certificates/c1c_v4/c1c_K98304_v4.json`, `58dacf40...16f6` | 5282641762424933775753216/12873173145647069582596129 = 0.41036049951765035306..., minimum only at k = 98288 | 0.4103604995, below |
+| $C_{1c} \geq$ | #270 (9 Nov, `c1c_v5`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1c_v5/c1c_K98304_v5.json`, `7021f269...676b` | 2556315663995378551725293568/6229433836731244234885554241 = 0.41036083390473056108..., minimum only at k = 45081 | 0.4103608339, below |
+| $C_{1a} \leq$ | #270 (9 Nov, `c1a_v2`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1a_v2/c1a_n262144_v2.json` (262,144 non-negative integer heights), `4d8f8216...fd8d` | 29134419116089766846043850668467284344832/19387496227028661445940960928888412813689 = 1.50274273557163313362..., maximum only at m = 96751 | 1.5027427356, above |
+
+Every fraction, deciding lag and printed bound is the one the pull request or its thread states. The hashes of #354
+and `c1c_v4` are the ones stated there; for `c1c_v5` and `c1a_v2` none was stated, and these are the files at the
+commit the thread links (their folders' SHA256SUMS list the same hashes). Red controls, on every certificate: a
+corrupted coefficient and a weight changed by 1 are refused by the polynomial identity, scaling by 3 leaves the bound
+unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103604996,
+0.4103608340, 1.5027427355) is refused. Reproduce: `cd c1ac && ./fetch.sh && ./run_all.sh` (about two minutes).
+
 ## Reproduce
 
 ```
