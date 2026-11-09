@@ -1050,7 +1050,7 @@ and scaling by 3 leaves the bound unchanged; for 1b, a height of 2 is refused, a
 moving mass $1/D$ between cells changes the bound. The 1a [T2026] row should read 1.502863 (the repository's README
 gives 1.50286286); the 1b [H2016] row read 0.380927 until
 [#158](https://github.com/teorth/optimizationproblems/pull/158) changed it to the abstract's truncated 0.380926.
-Reproduce: `cd c1ab && ./fetch.sh && ./run_all.sh` (about 70 seconds).
+Reproduce: `cd c1ab && ./fetch.sh && ./run_all.sh` (about 70 seconds). `run_all.sh` checks every run against a table of expected outcomes (exit 0, except the three runs whose printed value the row's own heights do not support, tog_c1a_ours_2026 in both readings and c1b_haugland_2016 read as decimals, which must exit 1 with the "NOT a valid ... bound as printed" line) and exits non-zero only on an unexpected outcome, naming the row and why.
 
 ## C24: the Komlós constant of Akbas and Sra (8 November 2026)
 
