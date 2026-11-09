@@ -1,5 +1,9 @@
-"""84a: the three finite-data rows of the 84a page that reuse Sawin's argument, replayed with our own code
-(Quantavane replays).  Standard library only; run with python3 -I.
+"""84a: Sawin's own example and the three finite-data rows of the 84a page that reuse Sawin's argument, replayed with
+our own code (Quantavane replays).  Standard library only; run with python3 -I.
+
+  [S2026]     1.014       Sawin's example in the proof of Theorem 1 (arXiv 2605.20579): T (13 primes), S (22 primes),
+                          the weights k(p) and R = 72, as printed in the paper (the paper: numerator 3.8822...,
+                          denominator 275.055..., delta = .014114...);
 
   [EPF90]     1.03184...  mlewko, Erdos Problems forum thread 90 (21 May 2026): T (74 primes), S (1082 primes) and
                           the weights k(p) read from the data file the post links (read as data; its inertness
@@ -248,7 +252,8 @@ def main():
     path = os.path.join(args[0], "epf90", "mlewko_sawin_data.txt")
     raw = open(path, "rb").read()
     run = Run()
-    print("84a: the finite-data rows [EPF90] 1.03184... and [MO511514] 1.03188..., 1.03190... on Sawin's criterion")
+    print("84a: Sawin's example [S2026] 1.014 and the finite-data rows [EPF90] 1.03184..., [MO511514] 1.03188..., "
+          "1.03190... on Sawin's criterion")
     run("data file sha256 = 2783627d...3f14 (the file linked in mlewko's post, Google Drive 1ygqjOSa...)",
         hashlib.sha256(raw).hexdigest() == DATA_SHA)
     T0, S0, k0, wit_file = parse_file(raw)
@@ -256,6 +261,13 @@ def main():
         % (len(T0), len(S0), len(k0), len(wit_file)),
         len(T0) == 74 and len(S0) == 1082 and sorted(S0) == S0 and set(S0) == set(k0))
     rows = []
+
+    # ---- [S2026]: Sawin's own example (arXiv:2605.20579, proof of Theorem 1), as printed in the paper
+    TS = [3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43]
+    SS = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 47, 71, 79, 97, 101, 107, 109, 139, 151, 163, 167, 179]
+    kS = dict(zip(SS, [50, 31, 21, 17, 14, 13, 12, 11, 10, 10, 8, 7, 7, 7, 7, 7, 7, 6, 6, 6, 6, 6]))
+    rows.append(dict(name="[S2026]", T=TS, S=SS, k=kS, R=F(72), page=D("0.014"), claim="0.014114",
+                     post=dict(nS=22, U=0, n3=7, num="3.8822", den="275.055", hist=hist(kS))))
 
     # ---- [EPF90]: the file as it is
     R0 = F("32.39719232352239")
@@ -301,8 +313,9 @@ def main():
             % (name, len(S), det["nsplit"], det["n3"], hist(k)),
             (len(S), det["nsplit"], det["n3"], hist(k)) == (post["nS"], post["U"], post["n3"], post["hist"]))
         lam = float(lo)
-        run("%s: every weight is the best one for its prime at lambda = delta (k(2) = %d, k(3) = %d, k = 2 up to %d)"
-            % (name, k[2], k[3], max(p for p in S if k[p] == 2)), all(k[p] == best_k(p, lam) for p in S))
+        kmin = min(k.values())
+        run("%s: every weight is the best one for its prime at lambda = delta (k(2) = %d, k(3) = %d, k = %d from p = %d)"
+            % (name, k[2], k[3], kmin, min(p for p in S if k[p] == kmin)), all(k[p] == best_k(p, lam) for p in S))
         nd = len(post["num"].split(".")[1]); dd = len(post["den"].split(".")[1])
         run("%s: numerator %s and denominator %s, the post's %s and %s to all %d and %d printed decimals"
             % (name, str(det["num"])[:20], str(det["den"])[:20], post["num"], post["den"], nd, dd),
@@ -322,8 +335,8 @@ def main():
     run("[EPF90]: the file's witness table (%d entries, compared after our search) lists exactly the %d primes of S "
         "that are not 1 mod 4, each with a valid witness" % (len(wit_file), len(det0["wit"])),
         set(wit_file) == set(det0["wit"]) and fine)
-    print("  the three rows: 1.03184, 1.03188, 1.03190 hold (delta = %s..., %s..., %s...)"
-          % tuple(str(results[n][0])[:16] for n in ("[EPF90]", "[MO511514] 1.03188", "[MO511514] 1.03190")))
+    print("  the four rows: 1.014, 1.03184, 1.03188, 1.03190 hold (delta = %s..., %s..., %s..., %s...)"
+          % tuple(str(results[n][0])[:16] for n in ("[S2026]", "[EPF90]", "[MO511514] 1.03188", "[MO511514] 1.03190")))
 
     if "--controls" in sys.argv:
         print("  -- red controls (each must be refused)")
