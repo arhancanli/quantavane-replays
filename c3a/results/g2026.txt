@@ -1,0 +1,17 @@
+3a [G2026]: A = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10], B = 21, d = 80, T = 150 (PR #71)
+  check self-test: both programs and max U equal brute force (explicit sets) on 13 small instances: PASS
+  check max U = 10 * sum_{i=65}^{79} 21^i, the pull request's integer: PASS
+  check |U+U| = 75448362167176243488362019935078206851619643198150854886920234689186981134888 (K = 10; at most 3926 unsaturated states), the pull request's integer: PASS
+  check |U-U| = 195351744295266763842135520514417052287242446785296742323733058216909095059024572338564089814415 (21 digit types), the pull request's integer: PASS
+  check the lemma's hypotheses: 0 in U (all digits 0), distinct non-negative integers, |U-U| < 2 max U + 1: PASS
+  check 1 + log(|U-U|/|U+U|)/log(2 max U + 1) in [1.17407444769352116336353180665875567615554389638267, 1.17407444769352116336353180665875567615554389638267] (80-digit logarithms): PASS
+  check the pull request's 100-digit value lies in our enclosure (agreement to 70 digits): PASS
+  check the row's 1.1740744 holds: 1.174074447693 >= 1.1740744: PASS
+  -- red controls (each must be refused)
+  check control: 1.1740745 (one unit more in the last printed digit) is not implied: PASS
+  check control: the cap T = 149 changes all three integers (value 1.1740117539), so the certificate fixes T: PASS
+  check control: digit 11 added (11 + 11 = 22 >= 21 carries) is refused by both programs: PASS
+  check control: the small instance with T = 14 in place of 15 differs from brute force at T = 15: PASS
+  checks: 12, failed: 0
+  run time: 25.7 s
+RESULT: ALL CHECKS PASS
