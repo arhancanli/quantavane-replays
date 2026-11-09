@@ -1120,6 +1120,68 @@ with the factor $0.364$ kept; $X = \lfloor e^{1421}\rfloor$ (the additive factor
 $0.0007138$. What rests on mathematics: BSSZ2026 §5, the note's lattice-doubling lemma and regulator inequality, and the
 $(1+o(1))^d$ absorption. Reproduce: `cd c84b && ./fetch.sh && ./run_all.sh` (about 25 seconds).
 
+9 November: the record's own value, $0.00071505073\ldots$, is the same chain bounded more loosely in three places, as
+carlostoledo1891 explained on #275: $X$ only needs the additive factor below 1, so
+$L > \log(5Y+1) + \log(2\varepsilon M_1) + Y - 2\log Y$; $\rho$ is the floor $101.9$; and each $Y$-cell of width $1/2$ is
+bounded with the numerator at its right end and the denominator at its left end. With these, `record_ceiling` gives
+$0.00071505073368073619\ldots$ at $1399 \le Y \le 1399.5$ (cells from $5\rho$ to 4000, a monotone tail beyond), so #275's
+$0.0007150508$ is that value rounded up. Red control: the same chain with $\rho = 101.953216$ gives $0.0007146808$.
+
+## 84a: Sawin's example and three finite-data rows (9 November 2026)
+
+`c84a/forum_check.py`, standard library only, on the criterion of our 1.0152\* replay above (Sawin, arXiv:2605.20579,
+Lemmas 11 and 12 and Proposition 10): Sawin's own example ([S2026], the data printed in the proof of Theorem 1), and the
+three rows of the 84a page marked "Unverified": [EPF90] (mlewko's data file from Erdős Problems forum thread 90,
+`2783627d...3f14`, read as data) and spiderduckpig's two [MO511514] rows, whose $S$ we rebuild from the posts' rules.
+
+| Row | $\#T$, $\#S$, $U$ | Budget | $\delta$ |
+| --- | --- | --- | --- |
+| [S2026] $1.014$ | 13, 22, 0 | $36 = 36$ | $0.0141144286784982389\ldots$ |
+| [EPF90] $1.03184$ | 74, 1082, 175 | $1332 \le 1332.25$ | $0.0318499816702021619\ldots$ |
+| [MO511514] $1.03188$ | 74, 1092, 165 | $1332 \le 1332.25$ | $0.0318830655396396548\ldots$ |
+| [MO511514] $1.03190$ | 74, 1088, 169 | $1332 \le 1332.25$ | $0.0319083717352678483\ldots$ |
+
+The parity and inertness conditions hold (for [EPF90] the file's witness table, compared after our search, lists the
+same 546 primes); the weight histograms are the posted ones, and each weight is the best for its prime at the row's
+$\delta$; numerators and denominators equal the posts' to every printed decimal (for 1.03188 the MathOverflow answer's;
+the forum copy prints both about $5 \cdot 10^{-12}$ lower). Red controls, all refused: $10^{-15}$ above each enclosure,
+the next split and non-split primes (budget), an even parity $T$, $T$ without its primes $5 \bmod 8$ (no witness for
+$p = 2$), $R = 1$, the 1.03188 threshold raised. Reproduce: `cd c84a && ./fetch.sh && ./run_all.sh` (seconds).
+
+## 37a: no Boolean function of degree 4 has sensitivity 10 (9 November 2026)
+
+`c37/c37_check.py`, standard library only: the statement of
+[#283](https://github.com/teorth/optimizationproblems/pull/283) (DennisKoshta), from the definition and the three
+certificate files alone (`d10_4.cert.xz`, `3be6fa8b...e7e9f4`, decompressed `7dc38b37...7e6c`; `d7_3.cert`,
+`d4_2.cert`), read in the format of the packet's `WRITEUP.md` §6; its checker, generator, verifier and tools were
+neither read nor run. We rebuild the 638 Möbius conditions $a_S = 0$ ($\lvert S\rvert \ge 5$) from $(n, d) = (10, 4)$,
+walk the branch-and-bound tree (478 branchings, 479 leaves, depth 15) and check at every leaf that
+$\max_{g \in B_\ell} (y^\top A) g < 0$ exactly ($y^\top A$ by a superset-sum transform). As checks of $A$, $c \cdot h = 0$ at
+every leaf for Proskurin's symmetric point (which solves the LP relaxation exactly) and for $\mathrm{NAE}_3 \circ
+\mathrm{NAE}_3$; that function has degree 4 and sensitivity 9. Red controls, all refused: a leaf multiplier negated, the
+last leaf deleted, a branch on a fixed coordinate. Reproduce: `cd c37 && ./fetch.sh && ./run_all.sh` (about 3 seconds).
+
+## 3a: two capped digit constructions recounted exactly (9 November 2026)
+
+`c3a/g2026_check.py` and `c3a/mi2026_check.py` (with `diff2d.c`), standard library only: the rows [G2026] $1.1740744$
+([#71](https://github.com/teorth/optimizationproblems/pull/71); $A = \{0,2,\ldots,10\}$, base 21, 80 digits, digit sum
+at most 150) and [MI2026] $1.1835129324$ ([#95](https://github.com/teorth/optimizationproblems/pull/95);
+$A = \{0,3,4,6,\ldots,16\}$, base 33, 420 digits, cap 1392; parameters from the counts file of Zenodo 20794135, read as
+data). No digit operation carries, so $\lvert U+U\rvert$ counts digit vectors $s$ with a split of both digit sums at most
+$T$: that holds iff $n + \mu \le 2T$ ($n = \sum s_i$, $\mu$ the least $\lvert\sum y_i\rvert$, $y_i \in \{2a - s_i\}$),
+counted by a dynamic program over (digit sum, reachable sums) with a saturation lemma (once every value of the right
+parity in $[-K, K]$ is reachable it stays so). $\lvert U-U\rvert$ is a box sum over $[0,T]^2$ of the coefficients of a
+$d$-th power, by the coordinatewise least split (in C modulo 35 primes for [MI2026], put together by the Chinese
+remainder theorem, two more primes agreeing). Both programs equal brute force on 13 small instances.
+
+| Row | $\lvert U+U\rvert$, $\lvert U-U\rvert$, $\max U$ | Lemma value | Run |
+| --- | --- | --- | --- |
+| [G2026] | the pull request's three integers (77, 96, 106 digits) | $1.17407444769352116336\ldots$ | 26 s |
+| [MI2026] | the certificate's three integers (474, 591, 638 digits; at most 311,877 unsaturated states) | $1.18351293242186151065\ldots$ | 3.2 h |
+
+Red controls, all refused: one unit more in each row's last digit; the cap one lower (the counts change); a digit that
+would carry. Reproduce: `cd c3a && ./run_all.sh` (the [MI2026] row about three hours).
+
 ## Reproduce
 
 ```

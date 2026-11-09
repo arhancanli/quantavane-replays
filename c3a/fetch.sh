@@ -35,4 +35,12 @@ if [ ! -f ae/sums_differences_problems.ipynb ]; then
   curl -s -f -L -o ae/sums_differences_problems.ipynb \
     "https://raw.githubusercontent.com/google-deepmind/alphaevolve_repository_of_problems/8f44745/experiments/sums_differences_problems/sums_differences_problems.ipynb"
 fi
+# [MI2026]'s counts file for the 3a row 1.1835129324 (PR #95): the Zenodo archive 10.5281/zenodo.20794135, then only
+# c3a_pr95/gh3a_b33_d420_T1392_counts.json (the archive's programs are not extracted)
+if [ ! -f mi3a/gh3a_b33_d420_T1392_counts.json ]; then
+  if [ -d mi3a ] && [ -n "$(ls -A mi3a)" ]; then echo "refusing: $root/mi3a is not empty"; exit 1; fi
+  mkdir -p mi3a
+  curl -s -f -L -o mi3a/sumdiff_certs_upload.zip "https://zenodo.org/records/20794135/files/sumdiff_certs_upload.zip?download=1"
+  unzip -p mi3a/sumdiff_certs_upload.zip c3a_pr95/gh3a_b33_d420_T1392_counts.json > mi3a/gh3a_b33_d420_T1392_counts.json
+fi
 shasum -a 256 -c "$here/SHA256SUMS"
