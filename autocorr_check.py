@@ -39,6 +39,12 @@ from math import gcd
 P61 = (1 << 61) - 1
 
 
+def need(cond, msg):
+    """A check that holds under python -O too (an assert statement would be skipped); raises AssertionError."""
+    if not cond:
+        raise AssertionError(msg)
+
+
 def as_ints(vals):
     """Integers from JSON ints, or floats read exactly (scaled to a common power-of-two denominator)."""
     if all(isinstance(v, int) and not isinstance(v, bool) for v in vals):
@@ -113,17 +119,17 @@ def identity_check(w, coeffs, kind, rounds=4):
 def check_1c(d):
     K = int(d["K"])
     w, den = as_ints(d["weights_int"] if "weights_int" in d else d["weights"])
-    assert den == 1, "1c weights must be integers"
-    assert all(x >= 0 for x in w) and any(w), "weights must be non-negative and not all zero"
+    need(den == 1, "1c weights must be integers")
+    need(all(x >= 0 for x in w) and any(w), "weights must be non-negative and not all zero")
     n = len(w)
     A = autocorrelation(w)
     A += [0] * max(0, K + 1 - n)  # A_k = 0 for k >= n
-    assert identity_check(w, A[:n], "1c"), "polynomial identity failed"
+    need(identity_check(w, A[:n], "1c"), "polynomial identity failed")
     lags = A[:K + 1]
     amin = min(lags)
     kmin = lags.index(amin)
     direct = sum(w[i] * w[i + kmin] for i in range(n - kmin))
-    assert direct == amin, "direct sum at the minimising lag disagrees"
+    need(direct == amin, "direct sum at the minimising lag disagrees")
     S = sum(w)
     bound = Fraction(K * amin, S * S)
     return {"n": n, "K": K, "S": S, "argmin_k": kmin, "min_A": amin, "bound": bound,
@@ -135,13 +141,13 @@ def check_1d(d):
     v, den = as_ints(vals)
     n = len(v)
     S = sum(v)
-    assert S != 0, "integral is zero"
+    need(S != 0, "integral is zero")
     c = autoconvolution(v)
-    assert identity_check(v, c, "1d"), "polynomial identity failed"
+    need(identity_check(v, c, "1d"), "polynomial identity failed")
     cmax = max(abs(x) for x in c)
     m = next(i for i, x in enumerate(c) if abs(x) == cmax)
     direct = sum(v[i] * v[m - i] for i in range(max(0, m - n + 1), min(m, n - 1) + 1))
-    assert abs(direct) == cmax, "direct sum at the maximising knot disagrees"
+    need(abs(direct) == cmax, "direct sum at the maximising knot disagrees")
     bound = Fraction(2 * n * cmax, S * S)  # the common denominator den cancels: (c/den^2) / (S/den)^2
     return {"n": n, "S": S, "argmax_m": m, "max_abs_c": cmax, "bound": bound, "scaled_by": den,
             "sign_at_max": "+" if c[m] > 0 else "-", "ties": sum(1 for x in c if abs(x) == cmax)}
@@ -152,7 +158,7 @@ def check_1a(d):
     with n equal cells gives C_1a <= 2n max_m c_m / S^2: the knot formula of 1d, where every c_m >= 0."""
     vals = next(d[k] for k in ("values", "v_int", "v", "cells", "construction", "sequence") if k in d)
     v, _ = as_ints(vals)
-    assert min(v) >= 0, "C_1a needs a non-negative f"
+    need(min(v) >= 0, "C_1a needs a non-negative f")
     return check_1d(d)
 
 
@@ -173,10 +179,10 @@ def check_1b(d, rescale=False):
             g = gcd(g, x)
         a, D = [x // g for x in a], D // g
         T = sum(a)
-        assert 2 * T == n * D
-    assert all(0 <= x <= D for x in a), "a height outside [0, 1]"
+        need(2 * T == n * D, "failed: 2 * T == n * D")
+    need(all(0 <= x <= D for x in a), "a height outside [0, 1]")
     A = autocorrelation(a)
-    assert identity_check(a, A[:n], "1c"), "polynomial identity failed"
+    need(identity_check(a, A[:n], "1c"), "polynomial identity failed")
     P = [0]
     for x in a:
         P.append(P[-1] + x)
@@ -188,7 +194,7 @@ def check_1b(d, rescale=False):
                 best, arg = v, m
     lo, hi = max(0, -arg), min(n, n - arg)
     direct = sum(a[i] * (D - a[i + arg]) for i in range(lo, hi))
-    assert direct == best, "direct sum at the maximising shift disagrees"
+    need(direct == best, "direct sum at the maximising shift disagrees")
     bound = Fraction(2 * best, n * D * D)
     ties = 0
     for k in range(n):
@@ -273,6 +279,7 @@ def main():
     r = (check_1c(d) if kind == "1c" else check_1a(d) if kind == "1a" else
          check_1b(d, rescale="--rescale" in sys.argv) if kind == "1b" else check_1d(d))
     b = r["bound"]
+    failed = False
     print(f"{kind} {path}")
     for k, val in r.items():
         if k != "bound":
@@ -282,6 +289,7 @@ def main():
     if "score_num" in d and "score_den" in d:
         claimed = Fraction(int(d["score_num"]), int(d["score_den"]))
         print("  claimed fraction in the file:", "AGREES" if claimed == b else f"DIFFERS ({claimed})")
+        failed |= claimed != b
     for arg in sys.argv:
         if arg.startswith("--printed="):
             pv = Fraction(arg.split("=", 1)[1])
@@ -289,10 +297,15 @@ def main():
             ok = pv >= b if upper else pv <= b
             print(f"  printed {arg.split('=', 1)[1]}: {'above' if pv > b else 'below' if pv < b else 'equal to'} the "
                   f"exact value, {'a valid' if ok else 'NOT a valid'} {'upper' if upper else 'lower'} bound as printed")
+            failed |= not ok
     if "--controls" in sys.argv:
         for line in controls(kind, d):
             print("  control: " + line)
+            failed |= line.endswith(": False")
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    # exit status: 0 only when every check held; 1 when the stated fraction differs, a printed value is not implied
+    # or a red control failed; any exception (a file that does not parse, a failed check) exits non-zero as well
+    sys.exit(main())
