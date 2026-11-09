@@ -1,0 +1,17 @@
+37a: PR #283's statement, no Boolean function of degree 4 has sensitivity 10 (n = 10, d = 4)
+  check certificate sha256: d10_4.cert.xz = 3be6fa8b...e7e9f4, decompressed = 7dc38b37...7e6c (as the PR states): PASS
+  check certificate sha256: d7_3.cert = f968ea64...: PASS
+  check certificate sha256: d4_2.cert = f58ba4cf...: PASS
+  check the two test vectors solve A g = 0 for (10, 4) (all 638 Moebius coefficients of degree > 4 vanish): PASS
+  check (10, 4): 638 rows |S| > 4 rebuilt from (n, d); 478 branchings, 479 leaves, depth 15; every leaf box infeasible (max c.g < 0, exact integers; up to 638 multipliers per leaf; c.h = 0 at both test vectors at every leaf); the leaves cover all 0/1 points: no g with deg g <= 4, g(0) = 0, g(e_i) = 1: PASS
+  check (7, 3): 64 rows |S| > 3 rebuilt from (n, d); 0 branchings, 1 leaves, depth 0; every leaf box infeasible (max c.g < 0, exact integers; up to 64 multipliers per leaf); the leaves cover all 0/1 points: no g with deg g <= 3, g(0) = 0, g(e_i) = 1: PASS
+  check (4, 2): 5 rows |S| > 2 rebuilt from (n, d); 0 branchings, 1 leaves, depth 0; every leaf box infeasible (max c.g < 0, exact integers; up to 5 multipliers per leaf); the leaves cover all 0/1 points: no g with deg g <= 2, g(0) = 0, g(e_i) = 1: PASS
+  check Proskurin's symmetric point solves the LP relaxation of (*) for (10, 4) exactly (all 638 a_S = 0, bounds and fixings hold), so the proof must use integrality: PASS
+  check NAE_3 o NAE_3 on 9 variables: degree 4, sensitivity 9 (the statement is sharp): PASS
+  -- red controls (each must be refused)
+  check control: the first leaf's first multiplier negated: PASS
+  check control: the last leaf deleted (the tree is incomplete): PASS
+  check control: the first branch moved to the fixed variable g_0: PASS
+  checks: 12, failed: 0
+  run time: 2.9 s
+RESULT: ALL CHECKS PASS
