@@ -1,18 +1,19 @@
 certificate c1d_upper_n163840.json
-  constant C_1d; n = 163840; deciding knot m = 50729; max |c_m| = 10875328358506381563143376789211340; knots at the maximum = 1
-  exact bound = 3563627596515371110610821706288771891200/2449761416959550533000893662063862027289
-              = 1.4546835344228185647151944... (floor to 25 decimals)
+  constant C_1d; n = 163840; deciding knot m = 47433; max |c_m| = 10239983465522997585026331239570864; knots at the maximum = 1
+  exact bound = 167771889099128792433071411029129035776/115333032942810266163095027979519535125
+              = 1.4546733474209524515991465... (floor to 25 decimals)
   the stated fraction: EQUAL
-  claim C_1d <= 1.454683534422819: implied
-  record 1.454727664528751: beaten strictly, margin 4.413011e-05 (the printed claim also beats it: True)
-  record 9900630255081376929482866688/6805830738283663732311831361: beaten strictly, margin 4.413011e-05 (the printed claim also beats it: True)
-  record 1.454691416385622: beaten strictly, margin 7.881963e-06 (the printed claim also beats it: True)
-  record 1091712020077839913516641060217129861120/750476704392981840387650570565448814041: beaten strictly, margin 7.881963e-06 (the printed claim also beats it: True)
-  record 1.457854884921989: beaten strictly, margin 3.171350e-03 (the printed claim also beats it: True)
-  RESULT: PASS (27 s)
+  claim C_1d <= 1.454673347420953: implied
+  record 1.454683534422819: beaten strictly, margin 1.018700e-05 (the printed claim also beats it: True)
+  record 3563627596515371110610821706288771891200/2449761416959550533000893662063862027289: beaten strictly, margin 1.018700e-05 (the printed claim also beats it: True)
+  record 1.454727664528751: beaten strictly, margin 5.431711e-05 (the printed claim also beats it: True)
+  record 9900630255081376929482866688/6805830738283663732311831361: beaten strictly, margin 5.431711e-05 (the printed claim also beats it: True)
+  record 1.454691416385622: beaten strictly, margin 1.806896e-05 (the printed claim also beats it: True)
+  record 1.457854884921989: beaten strictly, margin 3.181538e-03 (the printed claim also beats it: True)
+  RESULT: PASS (26 s)
 red controls (each must be refused):
   C1 value 54613 raised by one unit: REFUSED - REFUSED: the exact value differs from the fraction stated in the certificate
   C2 largest value 163839 raised by 1%: REFUSED - REFUSED: the exact value differs from the fraction stated in the certificate
-  C3 same change, its own fraction stated: REFUSED - REFUSED: the claim 1.454683534422819 is not implied
-  C4 claim tightened by one unit of its last digit (1.454683534422818): REFUSED - REFUSED: the claim 1.454683534422818 is not implied
+  C3 same change, its own fraction stated: REFUSED - REFUSED: the claim 1.454673347420953 is not implied
+  C4 claim tightened by one unit of its last digit (1.454673347420952): REFUSED - REFUSED: the claim 1.454673347420952 is not implied
   CONTROLS: all refused, as required

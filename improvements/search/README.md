@@ -12,6 +12,7 @@ budget in seconds), each started from the previous best integer certificate.
 | C1c | 2 (CPU) | `worker_local_1c.py` | `Lc1`: two more cycles from step 1 | 0.4103598711, the certificate |
 | C1d | 1 (GPU) | `worker_kernel1_1d.py` | `dB`: #312's certificate split to 163,840 cells, polish at p = 1e8..1e11, restart of the p-norm continuation from p = 32 | 1.4546914164 |
 | C1d | 2 (CPU) | `worker_local_1d.py` | `LdB`: restarts from step 1 at p = 32, 16, 64 | 1.4546835344, the certificate |
+| C1d | 3 (CPU, 9 Nov) | `worker_cont_1d_numpy.py` | 14 restarts from the 8 Nov certificate, p0 cycling through 8, 128, 24, 48, 12, 96 (numpy and scipy; L-BFGS on log ||v*v||_p - 2 log S) | 1.4546733474, the certificate |
 | C1a | 1 (CPU) | `worker_local_1a.py` | `aA`: #270's `c1a_n262144` polished at p = 1e10..1e12, then four cycles of restarts at p0 = 1e8, 1e7, 1e9, 1e6 | 1.5027427375, the certificate |
 
 The other jobs ended with worse values: C1c from #318's certificate reached 0.4103539040; C1c from `c1c_v3` split to

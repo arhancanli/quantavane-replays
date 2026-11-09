@@ -9,7 +9,7 @@ re-derive command and the credit for the warm start.
 | --- | --- | --- | --- |
 | $C_{1a}$ (upper) | 1.5027427375 (exactly 1.50274273747657840978...) | 1.5027433522 (#270) | [`c1a`](c1a) |
 | $C_{1c}$ (lower) | 0.4103598711 (exactly 0.41035987114651620459...) | 0.4103596512 (#270) | [`c1c`](c1c) |
-| $C_{1d}$ (upper) | 1.454683534422819 (exactly 1.45468353442281856471...) | 1.454727664528751 (#312) | [`c1d`](c1d) |
+| $C_{1d}$ (upper) | 1.454673347420953 (exactly 1.45467334742095245159...; 9 Nov, superseding 1.454683534422819 of 8 Nov) | 1.454727664528751 (#312) | [`c1d`](c1d) |
 
 Pull requests [#344](https://github.com/teorth/optimizationproblems/pull/344) (C1c) and
 [#345](https://github.com/teorth/optimizationproblems/pull/345) (C1d) were opened on 8 Nov with the first certificates
