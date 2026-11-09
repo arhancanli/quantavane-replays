@@ -7,5 +7,5 @@ cd "$here" || exit 1
 root=${1:-certs}
 mkdir -p results
 python3 -I althoefer_check.py "$root/al26" --controls > results/al26.txt 2>&1; status=$?
-grep -H "RESULT\|so c >=\|ceiling:\|rho(s) >=" results/al26.txt
+grep -H "RESULT\|so c >=\|ceiling:\|rho(s) >=\|looser chain" results/al26.txt
 exit $status

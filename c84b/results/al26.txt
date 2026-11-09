@@ -17,6 +17,8 @@ rho(s) >= 101.953216330 for every s > 1 (5115 cells; the binding cell [1.37196, 
 ceiling: for every s > 1 and X, Y > 0, c <= 0.000713943636 (cell at Y = 1400.62; K = 15.113629225)
   attained up to 4.52E-8: c = 0.000713898482 at s = s0, Y = 1400.8, X = floor(e^1407.810)
   so c <= 0.0007150508 (PR #275) holds, and even c < 0.0007150507: True; 0.000719 is out of reach
+the record's looser chain (X with the additive factor below 1, rho = 101.9, Y-cells of width 1/2): c <= 0.00071505073368073619 (cell 1399.0 <= Y <= 1399.5)
+  the record's 0.00071505073...: True; so #275's 0.0007150508 is it rounded up (0.0007150507 is below it)
 
 red controls (each must be refused):
   rho(s0) <= 101.95 refused: True
@@ -24,5 +26,6 @@ red controls (each must be refused):
   X = floor(e^1421): M1 e^Y/(X Y^2) = 0.999292 >= 0.136, refused: True
   L = 1444 in place of 1432: -log 0.364 > 0.0007 L refused: True
   a ceiling of 0.0007138, below the supremum, refused: True
+  the record's chain with rho = 101.953216 in place of 101.9 (0.0007146808203) does not give 0.00071505073: True
 red controls all as expected: True
 RESULT: PASS

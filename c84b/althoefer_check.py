@@ -154,6 +154,29 @@ def ceiling(rho_lo, eps, Ymax=4000, step=D("0.05")):
     return best * (1 + W) + W, at, K
 
 
+def record_ceiling(rho_f, eps, width=D("0.5"), Ymax=4000):
+    """the looser ceiling of the record behind PR #275, as carlostoledo1891 describes it there (8 Nov): X only needs
+    the additive factor below 1 (X > M1 e^Y / Y^2), so L > log(5Y + 1) + log(2 eps M1) + Y - 2 log Y; rho is the floor
+    rho_f; each Y-cell [k w, (k+1) w] is bounded with the numerator log(Y/(5 rho)) at its right end and the denominator
+    at its left end (both increase with Y for Y > 2). Cells from 5 rho_f (below it the numerator is negative) to Ymax;
+    beyond Ymax the ratio is below log(Y/(5 rho))/(Y - 2 log Y), which decreases there. Returns (max, cell start)."""
+    K = (8 * (1 + eps) * rho_f ** 2 * C2 / eps).ln()          # log(2 eps M1), M1 = 4 (1+eps) rho^2 C2 / eps^2
+    k = int(5 * rho_f / width)
+    best, at = D(-1), None
+    while k * width < Ymax:
+        Ya, Yb = k * width, (k + 1) * width
+        if Yb > 5 * rho_f:
+            den = ((5 * Ya + 1).ln() + K + Ya - 2 * Ya.ln()) * (1 - W)
+            g = (Yb / (5 * rho_f)).ln() * (1 + W) / den
+            if g > best:
+                best, at = g, Ya
+        k += 1
+    Ym = D(Ymax)
+    tail = (Ym / (5 * rho_f)).ln() / (Ym - 2 * Ym.ln())
+    assert (Ym / (5 * rho_f)).ln() > D("1.01") and tail < best
+    return best + W, at
+
+
 def rho_lower_bound(verbose=False):
     """a lower bound of rho(s) over all s > 1, from cells; returns (rho_lo, where)"""
     lnratio = C2.ln() - PI.ln()          # log(C2/pi), up to PI_ERR/PI
@@ -247,6 +270,14 @@ def main():
     ceil_ok = cmax < D("0.0007150507")
     print(f"  so c <= 0.0007150508 (PR #275) holds, and even c < 0.0007150507: {ceil_ok}; 0.000719 is out of reach")
     ok &= ceil_ok and cmax < D("0.000719")
+    # 4. the record's own ceiling, 0.00071505073..., from its three relaxations (carlostoledo1891 on #275, 8 Nov)
+    rc, rat = record_ceiling(D("101.9"), eps)
+    print(f"the record's looser chain (X with the additive factor below 1, rho = 101.9, Y-cells of width 1/2): "
+          f"c <= {rc:.20f} (cell {rat} <= Y <= {rat + D('0.5')})")
+    rec_ok = D("0.00071505073") <= rc < D("0.00071505074") and rc < D("0.0007150508") and rc > D("0.0007150507")
+    print(f"  the record's 0.00071505073...: {rec_ok}; so #275's 0.0007150508 is it rounded up (0.0007150507 is below "
+          f"it)")
+    ok &= rec_ok
     if "--controls" in sys.argv:
         print("\nred controls (each must be refused):")
         c1 = not (rho(s0)[1] < D("101.95"))
@@ -260,7 +291,10 @@ def main():
         print(f"  L = 1444 in place of 1432: -log 0.364 > 0.0007 L refused: {c4}")
         c5 = not (ceiling(rho_lo, eps)[0] < D("0.0007138"))
         print(f"  a ceiling of 0.0007138, below the supremum, refused: {c5}")
-        cok = c1 and c2 and c3 and c4 and c5
+        rq, _ = record_ceiling(D("101.953216"), eps)
+        c6 = rq < D("0.00071505073")
+        print(f"  the record's chain with rho = 101.953216 in place of 101.9 ({rq:.13f}) does not give 0.00071505073: {c6}")
+        cok = c1 and c2 and c3 and c4 and c5 and c6
         print(f"red controls all as expected: {cok}")
         ok &= cok
     print(f"RESULT: {'PASS' if ok else 'FAIL'}")
