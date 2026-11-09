@@ -1,0 +1,57 @@
+84a: the finite-data rows [EPF90] 1.03184... and [MO511514] 1.03188..., 1.03190... on Sawin's criterion
+  check data file sha256 = 2783627d...3f14 (the file linked in mlewko's post, Google Drive 1ygqjOSa...): PASS
+  check data file: |T| = 74, flat S has 1082 primes, 1082 with weights, 546 witnesses listed: PASS
+  check [MO511514] 1.03188: T differs from mlewko's in 347, 353 -> 503, 601; S = the primes <= 13441 not split in K and the split primes < 3433 (largest 13441 and 3389): PASS
+  check [MO511514] 1.03190: T = the first 74 odd primes with 337, 349, 373 -> 389, 443, 587; S = the 919 smallest primes not split in K (to 13537) and the 169 smallest split primes (to 3517): PASS
+  -- [EPF90]
+  check [EPF90]: T has 74 distinct odd primes, 39 of them = 3 mod 4 (odd): PASS
+  check [EPF90]: S has 1082 distinct primes, k(p) a positive integer for each and only these, R = 32.39719232352239 > 1: PASS
+  check [EPF90]: D = 3 mod 4, so K = Q(sqrt D) has discriminant 4D; in S 75 ramified, 832 inert, 175 split: PASS
+  check [EPF90]: (C2) each of the 546 primes of S that are not 1 mod 4 is inert in some Q(sqrt q), q in T: PASS
+  check [EPF90]: (C3) budget #T + #S + #split + 1 = 1332 <= (#T - 1)^2/4 = 5329/4: PASS
+  check [EPF90]: |S| = 1082, U = 175, 39 primes of T are 3 mod 4, weight histogram {22: 1, 13: 1, 9: 1, 7: 1, 6: 1, 5: 2, 4: 4, 3: 13, 2: 82, 1: 976}: all as the post states: PASS
+  check [EPF90]: every weight is the best one for its prime at lambda = delta (k(2) = 22, k(3) = 13, k = 2 up to 577): PASS
+  check [EPF90]: numerator 143.2590776623007391 and denominator 4497.932813453685998, the post's 143.25907766230074 and 4497.932813453685 to all 14 and 12 printed decimals: PASS
+  check [EPF90]: delta in [0.031849981670202161904435, 0.031849981670202161904435]: PASS
+  check [EPF90]: the post's delta 0.031849981670202 is our delta rounded to its 15 printed decimals (rounded down): PASS
+  check [EPF90]: delta > 0.03184, so u(n) > n^(1 + 0.03184)/O(1) for arbitrarily large n: the page's 1.03184 holds: PASS
+  -- [MO511514] 1.03188
+  check [MO511514] 1.03188: T has 74 distinct odd primes, 39 of them = 3 mod 4 (odd): PASS
+  check [MO511514] 1.03188: S has 1092 distinct primes, k(p) a positive integer for each and only these, R = 32.36456381771092 > 1: PASS
+  check [MO511514] 1.03188: D = 3 mod 4, so K = Q(sqrt D) has discriminant 4D; in S 75 ramified, 852 inert, 165 split: PASS
+  check [MO511514] 1.03188: (C2) each of the 549 primes of S that are not 1 mod 4 is inert in some Q(sqrt q), q in T: PASS
+  check [MO511514] 1.03188: (C3) budget #T + #S + #split + 1 = 1332 <= (#T - 1)^2/4 = 5329/4: PASS
+  check [MO511514] 1.03188: |S| = 1092, U = 165, 39 primes of T are 3 mod 4, weight histogram {22: 1, 13: 1, 9: 1, 7: 1, 6: 1, 5: 2, 4: 4, 3: 13, 2: 82, 1: 986}: all as the post states: PASS
+  check [MO511514] 1.03188: every weight is the best one for its prime at lambda = delta (k(2) = 22, k(3) = 13, k = 2 up to 577): PASS
+  check [MO511514] 1.03188: numerator 144.9283984018116219 and denominator 4545.623074469570444, the post's 144.928398401812 and 4545.623074469570 to all 12 and 12 printed decimals: PASS
+  check [MO511514] 1.03188: delta in [0.031883065539639654829696, 0.031883065539639654829696]: PASS
+  check [MO511514] 1.03188: the post's delta 0.03188306553964 is our delta rounded to its 14 printed decimals (rounded up): PASS
+  check [MO511514] 1.03188: delta > 0.03188, so u(n) > n^(1 + 0.03188)/O(1) for arbitrarily large n: the page's 1.03188 holds: PASS
+  -- [MO511514] 1.03190
+  check [MO511514] 1.03190: T has 74 distinct odd primes, 41 of them = 3 mod 4 (odd): PASS
+  check [MO511514] 1.03190: S has 1088 distinct primes, k(p) a positive integer for each and only these, R = 32.33973768065121 > 1: PASS
+  check [MO511514] 1.03190: D = 3 mod 4, so K = Q(sqrt D) has discriminant 4D; in S 75 ramified, 844 inert, 169 split: PASS
+  check [MO511514] 1.03190: (C2) each of the 542 primes of S that are not 1 mod 4 is inert in some Q(sqrt q), q in T: PASS
+  check [MO511514] 1.03190: (C3) budget #T + #S + #split + 1 = 1332 <= (#T - 1)^2/4 = 5329/4: PASS
+  check [MO511514] 1.03190: |S| = 1088, U = 169, 41 primes of T are 3 mod 4, weight histogram {22: 1, 13: 1, 9: 1, 7: 1, 6: 1, 5: 2, 4: 4, 3: 13, 2: 81, 1: 983}: all as the post states: PASS
+  check [MO511514] 1.03190: every weight is the best one for its prime at lambda = delta (k(2) = 22, k(3) = 13, k = 2 up to 571): PASS
+  check [MO511514] 1.03190: numerator 144.1562069712765569 and denominator 4517.817711517471357, the post's 144.15620697127656 and 4517.817711517471 to all 14 and 12 printed decimals: PASS
+  check [MO511514] 1.03190: delta in [0.031908371735267848319163, 0.031908371735267848319163]: PASS
+  check [MO511514] 1.03190: the post's delta 0.03190837173526785 is our delta rounded to its 17 printed decimals (rounded up): PASS
+  check [MO511514] 1.03190: delta > 0.03190, so u(n) > n^(1 + 0.03190)/O(1) for arbitrarily large n: the page's 1.03190 holds: PASS
+  check [EPF90]: the file's witness table (546 entries, compared after our search) lists exactly the 546 primes of S that are not 1 mod 4, each with a valid witness: PASS
+  the three rows: 1.03184, 1.03188, 1.03190 hold (delta = 0.03184998167020..., 0.03188306553963..., 0.03190837173526...)
+  -- red controls (each must be refused)
+  check control: [EPF90]: delta >= 0.031849981670203161 (1e-15 above our enclosure) is not implied: PASS
+  check control: [MO511514] 1.03188: delta >= 0.031883065539640654 (1e-15 above our enclosure) is not implied: PASS
+  check control: [MO511514] 1.03190: delta >= 0.031908371735268848 (1e-15 above our enclosure) is not implied: PASS
+  check control: [EPF90]: the next split prime 3407 added breaks the budget (1332 + 2 > 1332.25): PASS
+  check control: [EPF90]: the next non-split prime 13441 added breaks the budget (1332 + 1 > 1332.25): PASS
+  check control: [EPF90]: T with 631 replaced by 641 (38 primes = 3 mod 4, an even number) is refused: PASS
+  check control: [EPF90]: T without its 20 primes = 5 mod 8 leaves p = 2 inert in no Q(sqrt q) (C2 fails): PASS
+  check control: [EPF90]: k(3) = 14 instead of 13 lowers delta (0.0318499541 < 0.0318499816) and moves the numerator off the post's: PASS
+  check control: [EPF90]: R = 1 is refused: PASS
+  check control: [MO511514] 1.03188: the threshold 13441 raised to the next non-split prime 13451 breaks the budget: PASS
+  checks: 48, failed: 0
+  run time: 0.6 s
+RESULT: ALL CHECKS PASS
