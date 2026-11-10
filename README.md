@@ -193,6 +193,14 @@ fraction, 6.4e-8 below the printed 1.8054838; sum b deg Q / m = 0.8991977112; sm
 [1.0206187e-6, 1.0206188e-6] near x = 0.563799192. `python3 -I c86_check.py vid4 certs --controls` (about an hour on
 one core: 3,509 CPU seconds).
 
+PR #298, update of 10 Nov (rpinho c86/round5 @2f2f12b, `certificate.json`, `e5fb93f6...c9d8` as its SHA256SUMS states):
+31 auxiliaries on 7,418 knots. Every condition E1-E6 holds: T/m =
+1561194641062402479525057156208744733/864691128455135125642991200018366464 = 1.80549399628008990359... exactly, the
+stated fraction, 2.0e-11 below the printed 1.8054939963; sum b deg Q / m = 0.8987862395; smallest log integral
+[9.99962819672e-11, 9.99962819673e-11] (Q11, thin but rigorous); f certified positive on all 6,308 support cells
+(522,236 pieces), min f in [4.0517120e-10, 4.0517124e-10] near x = 3.012541227. `python3 -I c86_check.py p298r5 certs
+--controls` (about 30 minutes on one core: 1,850 CPU seconds).
+
 The lower bound $C_{86} \ge 1.80220$\* (D. Niedbala Giraudin, arXiv:2609.29298, the row proposed in
 [#315](https://github.com/teorth/optimizationproblems/pull/315)), from the certificate `CERTIFICAT_C86.json` (an
 ancillary file of arXiv v1, `3caa7297...abe5`) and the paper's Proposition 2: if
