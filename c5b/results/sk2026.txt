@@ -1,0 +1,87 @@
+file sk2026/n6.txt sha256 50190a4a740e18a0e5ef6737d7708f706dbb413c5223f8fd37abe4824a1c9215
+[SK2026] n = 6: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 4, a largest Sidon subset [0, 4, 7, 9]
+   route b (all 4- and 5-subsets, sum test): Sidon 4-subset found [0, 4, 7, 9]; Sidon 5-subset none
+   n - floor((8n - 6)/17) = 4; page's f(6) = 4; 0.00 s
+   CONFIRMED: f(6) <= 4 by this set, equal to the lower bound
+file sk2026/n7.txt sha256 dae2a8c8a0584f4369a2a3426f3e89a00041ca399dd28b8096113c95338480fe
+[SK2026] n = 7: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 5, a largest Sidon subset [0, 11, 16, 18, 28]
+   route b (all 5- and 6-subsets, sum test): Sidon 5-subset found [0, 11, 16, 18, 28]; Sidon 6-subset none
+   n - floor((8n - 6)/17) = 5; page's f(7) = 5; 0.00 s
+   CONFIRMED: f(7) <= 5 by this set, equal to the lower bound
+file sk2026/n8.txt sha256 6f403cc448a83fd8103f19242f4f50e9fd706850dd62213b0d9fc17fe315d8bb
+[SK2026] n = 8: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 5, a largest Sidon subset [0, 10, 12, 17, 28]
+   route b (all 5- and 6-subsets, sum test): Sidon 5-subset found [0, 10, 12, 17, 28]; Sidon 6-subset none
+   n - floor((8n - 6)/17) = 5; page's f(8) = 5; 0.00 s
+   CONFIRMED: f(8) <= 5 by this set, equal to the lower bound
+file sk2026/n9.txt sha256 ed5b336ce86a22150c94152c8c0437549a4d4742584f64e32fbcdd78b9a70f89
+[SK2026] n = 9: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 6, a largest Sidon subset [0, 20, 24, 39, 41, 76]
+   route b (all 6- and 7-subsets, sum test): Sidon 6-subset found [0, 20, 24, 39, 41, 76]; Sidon 7-subset none
+   n - floor((8n - 6)/17) = 6; page's f(9) = 6; 0.00 s
+   CONFIRMED: f(9) <= 6 by this set, equal to the lower bound
+file sk2026/n10.txt sha256 9525aaddceabd6391ddc69acfc4995a25cf61dab58ba849f158a5e9bcd852096
+[SK2026] n = 10: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 6, a largest Sidon subset [0, 43, 60, 68, 79, 109]
+   route b (all 6- and 7-subsets, sum test): Sidon 6-subset found [0, 43, 60, 68, 79, 109]; Sidon 7-subset none
+   n - floor((8n - 6)/17) = 6; page's f(10) = 6; 0.00 s
+   CONFIRMED: f(10) <= 6 by this set, equal to the lower bound
+file sk2026/n11.txt sha256 18b25d8ea5a7723024a641f78b32642d43f668c099c644c891dd44e9e3f1dc13
+[SK2026] n = 11: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 7, a largest Sidon subset [0, 114, 126, 176, 224, 239, 280]
+   route b (all 7- and 8-subsets, sum test): Sidon 7-subset found [0, 114, 126, 176, 224, 239, 280]; Sidon 8-subset none
+   n - floor((8n - 6)/17) = 7; page's f(11) = 7; 0.00 s
+   CONFIRMED: f(11) <= 7 by this set, equal to the lower bound
+file sk2026/n12.txt sha256 14541dc251fed816ed5f829b1756b4615e8dbebe92751028ffa25345cb809309
+[SK2026] n = 12: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 7, a largest Sidon subset [0, 92, 95, 107, 188, 238, 261]
+   route b (all 7- and 8-subsets, sum test): Sidon 7-subset found [0, 92, 95, 107, 188, 238, 261]; Sidon 8-subset none
+   n - floor((8n - 6)/17) = 7; page's f(12) = 7; 0.00 s
+   CONFIRMED: f(12) <= 7 by this set, equal to the lower bound
+file sk2026/n13.txt sha256 b186c92608bcf5d1f531847bc9d9e95e0839912d31d193bc3102228a98bcc15c
+[SK2026] n = 13: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 8, a largest Sidon subset [0, 80, 147, 173, 242, 265, 282, 635]
+   route b (all 8- and 9-subsets, sum test): Sidon 8-subset found [0, 80, 147, 173, 242, 265, 282, 635]; Sidon 9-subset none
+   n - floor((8n - 6)/17) = 8; page's f(13) = 8; 0.00 s
+   CONFIRMED: f(13) <= 8 by this set, equal to the lower bound
+file sk2026/n14.txt sha256 a9f58d2216f0e1a1cd61ca06aa7171c51ad56304497e785e990f62b4e6ec15e1
+[SK2026] n = 14: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 8, a largest Sidon subset [0, 498, 540, 705, 768, 886, 938, 1222]
+   route b (all 8- and 9-subsets, sum test): Sidon 8-subset found [0, 498, 540, 705, 768, 886, 938, 1222]; Sidon 9-subset none
+   n - floor((8n - 6)/17) = 8; page's f(14) = 8; 0.01 s
+   CONFIRMED: f(14) <= 8 by this set, equal to the lower bound
+file sk2026/n15.txt sha256 30069e65b74c74e582d6ba6e91daa4487cb0be0099149869475679ae239b8bad
+[SK2026] n = 15: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 9, a largest Sidon subset [0, 746, 848, 1900, 2034, 2619, 2824, 3402, 5312]
+   route b (all 9- and 10-subsets, sum test): Sidon 9-subset found [0, 746, 848, 1900, 2034, 2619, 2824, 3402, 5312]; Sidon 10-subset none
+   n - floor((8n - 6)/17) = 9; page's f(15) = 9; 0.01 s
+   CONFIRMED: f(15) <= 9 by this set, equal to the lower bound
+file sk2026/n17.txt sha256 fe11462eaa7d8728f5d4a60ae63b1c22633fcfd9d45eaf6c44e68f6c397395b6
+[SK2026] n = 17: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 10, a largest Sidon subset [0, 3233, 3591, 4336, 5033, 6117, 6287, 6371, 7877, 12311]
+   route b (all 10- and 11-subsets, sum test): Sidon 10-subset found [0, 3233, 3591, 4336, 5033, 6117, 6287, 6371, 7877, 12311]; Sidon 11-subset none
+   n - floor((8n - 6)/17) = 10; page's f(17) = 10; 0.07 s
+   CONFIRMED: f(17) <= 10 by this set, equal to the lower bound
+file sk2026/n19.txt sha256 8bd0c2a4d7fcf749a3c1338a6f86376611123b99c8625a98d379ca26558bc5f6
+[SK2026] n = 19: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 11, a largest Sidon subset [0, 1804, 1848, 3586, 3597, 3806, 4444, 5931, 6435, 7897, 8149]
+   route b (all 11- and 12-subsets, sum test): Sidon 11-subset found [0, 1804, 1848, 3586, 3597, 3806, 4444, 5931, 6435, 7897, 8149]; Sidon 12-subset none
+   n - floor((8n - 6)/17) = 11; page's f(19) = 11; 0.25 s
+   CONFIRMED: f(19) <= 11 by this set, equal to the lower bound
+file sk2026/n21.txt sha256 63bb6afe220c5aeda1803fce7fef04bb6484b787230d6dba73659a5b9ac3b040
+[SK2026] n = 21: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 12, a largest Sidon subset [0, 23430, 25844, 29536, 30246, 38198, 56516, 82416, 83156, 89631, 95551, 111276]
+   route b (all 12- and 13-subsets, sum test): Sidon 12-subset found [0, 23430, 25844, 29536, 30246, 38198, 56516, 82416, 83156, 89631, 95551, 111276]; Sidon 13-subset none
+   n - floor((8n - 6)/17) = 12; page's f(21) = 12; 1.27 s
+   CONFIRMED: f(21) <= 12 by this set, equal to the lower bound
+formula n - floor((8n-6)/17) equals the page's table at all 13 sizes: True
+RED CONTROLS (each must be refused)
+  R1 the largest element of n21 replaced by 49274 = a1 + a2 - a0: both (4,5) routes refuse: True
+  R2 a Sidon set of 21 powers of two: h = 21, claim refused: True
+  R3 n21 with its last element replaced by its first (a repeat): refused: True
+  R4 each of the 13 files with h claimed one larger: refused, no Sidon subset of that size: True
+  R5 self-test, 200 random sets: the two (4,5) routes and the two h routes agree: True
+  controls all as expected
+RESULT every value CONFIRMED; run time 6.2 s

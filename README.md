@@ -1226,6 +1226,32 @@ $R = 7.9336$, as the paper's Remark 5.3 predicts), the printed bound moved to 2.
 geometric lemmas of Sections 2 to 4, which we read and re-derived by hand. Reproduce: `cd c22a && ./fetch.sh &&
 ./run_all.sh` (about ten seconds).
 
+## 5b: exact values of f(n) for Erdős problem #757 (10 November 2026)
+
+`c5b/c5b_check.py`, standard library only: the exact values of [SK2026] on the 5b page
+([#253](https://github.com/teorth/optimizationproblems/pull/253), merged 26 Oct), $f(n) = 4, 5, 5, 6, 6, 7, 7, 8, 8, 9$ for
+$6 \le n \le 15$ and $f(17) = 10$, $f(19) = 11$, $f(21) = 12$, from the thirteen data files
+(JeetuSK0808/tao-constants-certificates @ `afa2e10`, `c5b-erdos757-small-n/certificates/n6.txt` to `n21.txt`, each
+hash as the repository's SHA256SUMS states); its `verify.py` and `check_all.sh` were neither read nor run. Each file is
+checked to be a $(4,5)$-set of $n$ distinct integers by two routes (every 4-subset and its six differences; and every
+pair of pairs with equal difference, attributed to the 4-sets that contain it), and its largest Sidon subset $h(A)$ is
+computed by two routes (branch and bound with the difference test; and brute force over all subsets of sizes $h$ and
+$h+1$ with the sum test).
+
+| $n$ | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 17 | 19 | 21 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $(4,5)$-set, both routes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes | yes |
+| $h(A)$, both routes | 4 | 5 | 5 | 6 | 6 | 7 | 7 | 8 | 8 | 9 | 10 | 11 | 12 |
+| $n - \lfloor (8n-6)/17 \rfloor$ | 4 | 5 | 5 | 6 | 6 | 7 | 7 | 8 | 8 | 9 | 10 | 11 | 12 |
+
+So each set attains the lower bound, and every value in the table holds given that bound. Red controls, all as
+expected: the largest element of the $n = 21$ set replaced by $a_1 + a_2 - a_0$ (a parallelogram, two coincidences in one
+4-set) is refused by both $(4,5)$ routes; a Sidon set of 21 powers of two ($h = 21$) refutes the claim; a repeated
+element is refused; every file with $h$ claimed one larger is refused; and the routes agree on 200 random small sets.
+What rests on mathematics: the lower bound $f(n) \ge n - \lfloor (8n-6)/17 \rfloor$ (Ma and Tang, arXiv:2602.23282,
+Lemma 2.4 and Theorem 5.3 of Henning and Yeo, with the $-6$ kept), which we did not check. Not checked: the searches at
+$n = 16, 18, 20, 22, 23, 25, 30$. Reproduce: `cd c5b && ./fetch.sh && ./run_all.sh` (about ten seconds).
+
 ## Reproduce
 
 ```
