@@ -1354,6 +1354,31 @@ by 1% ($\delta \le 7.6 \cdot 10^{-6}$) no longer certify the bound, a non-zero e
 log-kernel identity, and the Chebyshev coefficient, quadrature and interpolation bounds), which we re-derived by hand.
 Reproduce: `cd c57cv && ./fetch.sh && ./run_all.sh` (about four minutes).
 
+## 41b: the ambidextrous moving sofa, $C_{41b} \le 2\sqrt2 - 1$\* (10 November 2026)
+
+`c41b/sofa_check.py`, standard library only, exact arithmetic in $\mathbb Q(\sqrt2)$: a check of the proof in
+`tao/certificates/c41b/README.md` @ `cf620ea` ([#358](https://github.com/teorth/optimizationproblems/pull/358), vidigoat;
+`check_sofa.py` was neither read nor run). We re-derived the reduction: at the moments when the left and right turns pass
+45°, the sofa lies in $H$ and in the two hallways turned by $\mp 45°$; in $s = x - y$, $t = x + y$ (areas double) these
+are the band $D = \{0 \le t - s \le 2\}$ and the two L-shapes $L_1$, $L_2$ with arms of width $r = \sqrt2$ opening in
+opposite directions, and the claim is $\mathrm{area}(D \cap L_1 \cap L_2) \le 4\sqrt2 - 2$.
+
+| Check | Result |
+| --- | --- |
+| the hallways rotated and mapped to $(s, t)$ (corner squares exactly; membership of 4,000 exact sample points each) | the left-turn hallway gives $L_2$, the right-turn hallway $L_1$, as the README states |
+| Lemma B: the largest area of $D \cap (w \times r$ rectangle$)$ over 401 exact offsets and the balanced offset, at 41 widths in $[0, r]$ | $g(w)$ as stated, attained at the balanced offset; $g(w) \le \sqrt2 - 1 + w$ with equality only at $w = r$ ($h(r) = h'(r) = 0$, $h'' = 1/2$); Lemma A is $g(r) = 2\sqrt2 - 1$ |
+| the case arithmetic | $2(r - w) + 2g(w) \le 4\sqrt2 - 2$ on $[0, r]$; $2\delta \le 2\sqrt2$ for $\delta \le r$; $2(2\sqrt2 - 1) = 4\sqrt2 - 2$ |
+| the decomposition $F = P \cup Q \cup U \cup V$ with the README's conditions on $\delta$, $\eta$ | no exception at 20,000 random exact points of $F$ |
+| sharpness of the reduced problem: $\mathrm{area}(F)$ by inclusion and exclusion over the arms, each term the exact area of $D \cap$ rectangle | exactly $4\sqrt2 - 2$ at $(a, b, c, d) = (0, 2r + 1 + u, 1, 2r + u)$, $u = 0, 1/4, 1/2, 1$ (four points of a one-parameter family of maximisers) |
+| (floats, evidence only) random search and refinement over $(b, c, d)$ | largest area $3.6568542494923797$, against $4\sqrt2 - 2 = 3.6568542494923806$ |
+
+So $\mathrm{area}(S) \le 2\sqrt2 - 1$ for every ambidextrous sofa whose two turns reach 45°, and $1/\cos\beta < \sqrt2$
+otherwise. Red controls, all as expected: Lemma B's bound lowered by 1/100 fails; $4\sqrt2 - 2 - 1/1000$ fails at the
+sharp configuration; the left hallway turned the wrong way is not $L_2$; and, as an anchor, one 45° hallway alone gives
+$\max \mathrm{area}(D \cap L_1) = 4\sqrt2$, Hammersley's $2\sqrt2$. Read, not machine-checked: the formulation (Gerver;
+Kallus and Romik: monotone rotation paths of total angle at most 90°) and the small-turn case, which we re-derived.
+Reproduce: `cd c41b && ./fetch.sh && ./run_all.sh` (under a minute).
+
 ## Reproduce
 
 ```

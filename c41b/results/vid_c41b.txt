@@ -1,0 +1,15 @@
+41b: C41b <= 2 sqrt 2 - 1 (#358), the reduced problem area(D n L1 n L2) <= 4 sqrt 2 - 2 in (s, t)
+  1. reduction: the left hallway turned by -45 degrees is L2 (corner square [0, r]^2): True; the right hallway turned by +45 degrees is L1 (corner square [-r, 0] x [0, r]): True
+  2. Lemma B: at 41 widths w in [0, r] the largest area of D n (w x r rectangle) over 401 exact offsets and the balanced offset is g(w), and g(w) <= sqrt 2 - 1 + w (smallest gap 0.000000, 0 at w = r); h(r) = h'(r) = 0; Lemma A g(r) = 2 sqrt 2 - 1: True
+  3. cases: 2(r - w) + 2 g(w) <= 4 sqrt 2 - 2 on [0, r] (101 points, exact; it is the quadratic h >= 0 doubled), 2 delta <= 2 sqrt 2 for delta <= r, 2 (2 sqrt 2 - 1) = 4 sqrt 2 - 2: True
+  4. F = P u Q u U u V with the README's conditions on delta and eta, at 20000 random exact points of F: 0 exceptions
+  5. area(F) = 4 sqrt 2 - 2 exactly at (a, b, c, d) = (0, 2r + 1 + u, 1, 2r + u), u = 0, 1/4, 1/2, 1: [True, True, True, True]
+  6. (floats) random search and refinement over (b, c, d), a = 0: largest area 3.6568542494923797 at (5.820810, 1.000000, 4.820810); 4 sqrt 2 - 2 = 3.6568542494923806
+  so area(S) <= (4 sqrt 2 - 2)/2 = 2 sqrt 2 - 1 = 1.8284271247 on the reduction, and the bound is sharp for it: True
+Red controls (each must fail):
+  1. Lemma B with its right side lowered by 1/100: fails
+  2. the bound 4 sqrt 2 - 2 - 1/1000 at the sharp configuration: fails
+  3. the left hallway turned by +45 degrees (the wrong way): it is not L2: True
+  4. anchor: one 45-degree hallway alone, max over b of area(D n L1) = 0 + 4 sqrt2 = 4 sqrt 2 (Hammersley's 2 sqrt 2 in the plane): True
+RESULT: PASS
+run time 26 s
