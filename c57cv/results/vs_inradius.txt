@@ -5,7 +5,7 @@
 Method A (exact rationals, outward-rounded series):
   1. tiling: 4993 cells, inside [0,8]^2 with l >= 6: True; pairwise distinct: True; cells inside another: 0; total area 64: True
   2. kind (a): 2799 cells, x0^2 + y0^2 >= R^2 fails on 0; kind (b): 464 cells, y0^2 > 3 x1^2 fails on 0
-  3. kind (c): 1730 cells with 610 distinct witnesses; parameter admissible and all four corners within lambda = 1.000000001 of the witness box: fails on 0 (38 s)
+  3. kind (c): 1730 cells with 610 distinct witnesses; parameter admissible and all four corners within lambda = 1.000000001 of the witness box: fails on 0 (35 s)
   counts (a, b, c, distinct witnesses) = (2799, 464, 1730, 610); the paper states 2799, 464, 1730 and 610
 Method B (50-digit decimal, directed rounding, Gauss's pi, Decimal exp and ln widened):
   kind (c): 610 witnesses; cells failing: 0
@@ -16,4 +16,4 @@ Red controls (each must be refused):
   3. the slit-point witness of the smallest such cell (side 2^-25) moved by 10^-2 along its slit: refused
   4. a kind (c) cell relabelled kind (a): refused
 RESULT: PASS
-run time 186 s
+run time 187 s

@@ -26,7 +26,8 @@ class 3: 12-17, class 4: 18-23), and the witnesses only use the slit of each cla
 it, that the checks test (a wrong reading would put q far from its cells).
 
 Checks, in exact rational arithmetic with outward-rounded series (method A) and again in 50-digit decimal arithmetic with
-directed rounding (method B, a separate implementation of exp, log, sin and cos):
+directed rounding (method B, a separate implementation of exp, log, sin and cos; negation and absolute values by
+the exact copy_negate and copy_abs, never the context-rounded unary minus or abs()):
   1. the cells tile [0, 8]^2: all inside, pairwise distinct, no cell inside another (dyadic squares are nested or have
      disjoint interiors), areas summing to 64 exactly;
   2. kind (a): x0^2 + y0^2 >= R^2; kind (b): y0^2 > 3 x1^2, exactly;
@@ -257,7 +258,7 @@ def method_b(rows, pars, lam_str="1.000000001"):
             cand = [cf.divide(cf.multiply(t_lo, x), D(k + 1)), cc.divide(cc.multiply(t_lo, x), D(k + 1)),
                     cf.divide(cf.multiply(t_hi, x), D(k + 1)), cc.divide(cc.multiply(t_hi, x), D(k + 1))]
             t_lo, t_hi = min(cand), max(cand)
-        rem = cc.add(max(abs(t_lo), abs(t_hi)), w)
+        rem = cc.add(max(t_lo.copy_abs(), t_hi.copy_abs()), w)
         return (cf.subtract(s_lo, rem), cc.add(s_hi, rem)), (cf.subtract(c_lo, rem), cc.add(c_hi, rem))
 
     def exp_iv(x):
@@ -266,7 +267,7 @@ def method_b(rows, pars, lam_str="1.000000001"):
 
     def ln_iv(x):
         v = ch.ln(x)
-        e = cc.multiply(tiny, abs(v) + 1)
+        e = cc.multiply(tiny, cc.add(v.copy_abs(), D(1)))
         return cf.subtract(v, e), cc.add(v, e)
 
     def slit_b(k):
@@ -278,7 +279,7 @@ def method_b(rows, pars, lam_str="1.000000001"):
         th, t, b1, b2 = classes[cl]
         th_iv = (cf.divide(pi_lo, 3), cc.divide(pi_hi, 3)) if th is None else (th, th)
         if eps < 0:
-            th_iv = (-th_iv[1], -th_iv[0])
+            th_iv = (th_iv[1].copy_negate(), th_iv[0].copy_negate())
         rot = (cf.divide(cf.multiply(2 * r, pi_lo), 3), cc.divide(cc.multiply(2 * r, pi_hi), 3))
         return (cf.add(th_iv[0], rot[0]), cc.add(th_iv[1], rot[1])), t, eps * b1, eps * b2
 
@@ -330,10 +331,10 @@ def method_b(rows, pars, lam_str="1.000000001"):
         good = ok
         for X in (ch.multiply(D(i), h), ch.multiply(D(i + 1), h)):        # exact at 50 digits (at most 33 digits)
             for Y in (ch.multiply(D(j), h), ch.multiply(D(j + 1), h)):
-                dx = max(abs(cc.subtract(X, box[0])), abs(cc.subtract(X, box[1])),
-                         abs(cf.subtract(X, box[0])), abs(cf.subtract(X, box[1])))
-                dy = max(abs(cc.subtract(Y, box[2])), abs(cc.subtract(Y, box[3])),
-                         abs(cf.subtract(Y, box[2])), abs(cf.subtract(Y, box[3])))
+                dx = max(cc.subtract(X, box[0]).copy_abs(), cc.subtract(X, box[1]).copy_abs(),
+                         cf.subtract(X, box[0]).copy_abs(), cf.subtract(X, box[1]).copy_abs())
+                dy = max(cc.subtract(Y, box[2]).copy_abs(), cc.subtract(Y, box[3]).copy_abs(),
+                         cf.subtract(Y, box[2]).copy_abs(), cf.subtract(Y, box[3]).copy_abs())
                 if cc.add(cc.multiply(dx, dx), cc.multiply(dy, dy)) > lam2:
                     good = False
         bad += not good

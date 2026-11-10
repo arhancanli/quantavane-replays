@@ -28,7 +28,8 @@ and on a horizontal side (y = 0.34) a cell [a, b] of x when
 using |sin(pi x)| = sin(pi |1 - x|) (|1 - x| <= 0.23), increasing in |1 - x|. Two implementations that share no code:
   A. exact rationals (Fraction), every series bounded above and below with an explicit remainder, pi from Machin's
      formula (the formula confirmed by Gaussian integers), adaptive bisection;
-  B. Python's decimal at 60 digits with directed rounding (ROUND_FLOOR / ROUND_CEILING contexts), exp from the
+  B. Python's decimal at 60 digits with directed rounding (ROUND_FLOOR / ROUND_CEILING contexts; negation and absolute
+     values by the exact copy_negate and copy_abs, never the context-rounded unary minus or abs()), exp from the
      correctly rounded Decimal.exp widened by one unit, pi from Gauss's arctangent formula, a fixed uniform grid.
 Red controls (each must be refused): 1. M0 = 1.154 (the corner z = 1.23 + 0.34i then violates the inequality,
 shown rigorously); 2. the two-sided remainder bound B'_M of the README's intermediate step, at M0 = 1.152; 3. the
@@ -249,14 +250,14 @@ def method_b(M_str="1.152", n=4000):
         term_lo = term_hi = t
         sums_lo = []
         for k in range(terms + 1):
-            s_a = cf.add(s_a, term_lo if k % 2 == 0 else -term_hi)
+            s_a = cf.add(s_a, term_lo if k % 2 == 0 else term_hi.copy_negate())   # copy_negate is exact
             sums_lo.append(s_a)
             term_lo = cf.divide(cf.multiply(cf.multiply(term_lo, t), t), D((2 * k + 2) * (2 * k + 3)))
             term_hi = cc.divide(cc.multiply(cc.multiply(term_hi, t), t), D((2 * k + 2) * (2 * k + 3)))
         return min(sums_lo[-1], sums_lo[-2])
 
     def sinh_lo(t):
-        return cf.divide(cf.subtract(exp_lo(t), exp_hi(-t)), D(2))
+        return cf.divide(cf.subtract(exp_lo(t), exp_hi(t.copy_negate())), D(2))
 
     M = D(M_str)
 
@@ -292,7 +293,7 @@ def method_b(M_str="1.152", n=4000):
         for i in range(n):
             c_ = y1 * i / n
             d_ = y1 * (i + 1) / n
-            lo = lhs_lo(abs(1 - x), c_, x, d_)
+            lo = lhs_lo(ch.subtract(D(1), x).copy_abs(), c_, x, d_)
             hi = rhs_hi(d_)
             r = lo / hi
             worst = r if worst is None or r < worst else worst
@@ -300,8 +301,8 @@ def method_b(M_str="1.152", n=4000):
     for i in range(n):
         a_ = x0 + (x1 - x0) * i / n
         b_ = x0 + (x1 - x0) * (i + 1) / n
-        dmin = D(0) if a_ <= 1 <= b_ else min(abs(1 - a_), abs(1 - b_))
-        lo = lhs_lo(dmin, y1, max(abs(a_), abs(b_)), y1)
+        dmin = D(0) if a_ <= 1 <= b_ else min(ch.subtract(D(1), a_).copy_abs(), ch.subtract(D(1), b_).copy_abs())
+        lo = lhs_lo(dmin, y1, max(a_.copy_abs(), b_.copy_abs()), y1)
         hi = rhs_hi(y1)
         r = lo / hi
         worst = r if worst is None or r < worst else worst

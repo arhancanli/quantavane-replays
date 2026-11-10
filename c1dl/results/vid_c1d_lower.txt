@@ -12,4 +12,4 @@ Red controls (each must be refused):
   3. the point z = 1 (inside R, S(1) = 0): lhs lower bound 0, rhs 0.017409: refused: True
   4. (floats, sanity only) max |h^(z)| / B_M(|y|) over random signed step functions: 0.5740 <= 1: True
 RESULT: PASS
-run time 439 s
+run time 472 s
