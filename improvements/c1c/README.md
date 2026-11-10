@@ -21,8 +21,8 @@ weights (support $[0, 262145/262144)$). Its autocorrelation is linear between mu
 $$\min_{0 \le t \le 1} \int f(x) f(x+t)\,dx \Big/ \Big(\int f\Big)^2 = K \min_{0 \le k \le K} A_k / S^2, \qquad A_k = \sum_i w_i w_{i+k},\ S = \sum_i w_i,$$
 
 the rule the 1c page uses. The minimum is attained only at $k = 219901$, with $A_k = 12914467989753767244785102041884$
-and $S = 2872212026698506854$; the next smallest lag is $5 \cdot 10^{-17}$ higher, since every lag from $t_1 K$ to $K$
-is active. The shape: one spike cell $w_0 = 2^{60}$ carrying 40.14% of the mass, $w_i = 0$ for $1 \le i < 41995$
+and $S = 2872212026698506854$; all 220,150 lags from $41995$ to $K$ lie within $4 \cdot 10^{-14}$ of the minimum (the
+next smallest is $5 \cdot 10^{-17}$ higher), and every lag below $41995$ gives at least $0.4103794$. The shape: one spike cell $w_0 = 2^{60}$ carrying 40.14% of the mass, $w_i = 0$ for $1 \le i < 41995$
 ($t_1 = 0.160198$), and a positive profile on $41995 \le i \le 262144$. The file also states the reduced fraction
 (`score_num`, `score_den`) and the printed claim (`claim`).
 
