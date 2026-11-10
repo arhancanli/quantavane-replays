@@ -1254,6 +1254,28 @@ What rests on mathematics: the lower bound $f(n) \ge n - \lfloor (8n-6)/17 \rflo
 Lemma 2.4 and Theorem 5.3 of Henning and Yeo, with the $-6$ kept), which we did not check. Not checked: the searches at
 $n = 16, 18, 20, 22, 23, 25, 30$. Reproduce: `cd c5b && ./fetch.sh && ./run_all.sh` (about ten seconds).
 
+## 9a: the arithmetic and rule layer of [Tan2026], and what PR #296 states (10 November 2026)
+
+`c9/tan_check.py`, standard library only, written from the LaTeX source of Tandon, arXiv:2608.30273v1 (Theorem 2, the
+9a row $3.25883262\ldots$; `main.tex` `aa5d31d6...6de3c8506`, `appendix.tex` `5d06cab4...b913`); its verification package
+was neither read nor run. Profiles $(a, t, s, o, h, v)$ follow Gao's product and Theorem 1 (the heterogeneous product, from
+the codebook parameters $(j_0, o_0, h_0, v_0)$, $(j_H, q_H)$, $(j_V, q_V)$), $\sigma$ swaps $h$ and $v$,
+$\Phi(a, t, s, o, h, v) = (a - t, o, v, h, t, t, t)$, and the rule $S_{3b}$ and the terminal code $K_{4a}$ are the word lists
+of Appendix A with the separation relation of Definition 4.2. Every constant typed in the file (117: profiles, $n_{25}$,
+$M_\star$, the base profile, the four counts, all 94 words) is checked to occur verbatim in the TeX.
+
+| Check | Result |
+| --- | --- |
+| $S_{3b}$ (45 words), Definition 4.4 (i) and (ii); $K_{4a}$ (49 words) | admissible; pairwise separated |
+| Theorem 2, Steps 1 to 5, from BPZ's base profile $(367, 8, 367, 322, 26, 19)$ and Tan's certified counts $C_1 = 27488$, $C_2 = 12839823$, $C_3 = 14045805$, $C_4 = 841760069965664$ (inputs; not recomputed) | all 16 displayed profiles, $\tilde n_6$, $\tilde n_8$, $\tilde n_{11}$, $\tilde n_{25}$ and the 257-digit $M_\star$ exactly as printed; $M_\star^{1/500} = 3.2588326203532663091215390518104754376\ldots$ |
+| PR #296 (LT2026, $\Theta(C_7) \ge 3.258838705444608$\*), from `certificate.json` (gomyway @ `b5d6c2c`, `8d55f746...1f2a`, as stated) | for the stated 349-digit $M$ at $d = 680$: $M^{500} > M_\star^{680}$, $M \cdot 10^{8 \cdot 680} > 325883262^{680}$ and $3.258838705444608^{680} \le M$, all exact; $M^{1/680} = 3.25883870544460883237\ldots$ |
+| PR #296's construction of $M$ | **not replayed**: the certificate gives its nine gadgets in the pattern notation of Tan's code (`N<...>`, `S<...>`, `P15A8`, ...), which neither the paper nor the pull request defines. Our natural reading (`S<L, R, P>` the heterogeneous product with Tan's codebook triple `P`, `N<.,.>` and the outer product Gao's ordinary product) gives $M' = 0.996374 M$, so the construction uses other codebooks there |
+
+Red controls, all caught: one word of $T_H$ changed in $S_{3b}$ (not admissible); a word added to $K_{4a}$ (not separated);
+$C_1 + 1$, $C_4 - 1$ and Gao's base profile $(367, 8, 367, 321, 26, 20)$ each change $M_\star$. Not checked: the counts
+$C_1$ to $C_4$ and the base profile (BPZ's Lean development), and the independence arguments of the paper, which we read.
+Reproduce: `cd c9 && ./fetch.sh && ./run_all.sh` (the Tan rows take under a second).
+
 ## Reproduce
 
 ```

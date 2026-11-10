@@ -34,4 +34,9 @@ out=results/gao2026.txt
   ./bin/strong_check 7 10 "$root/gao2026/code_k2.txt" || status=1
 } > $out 2>&1
 grep -H "RESULT" $out
+out=results/tan2026.txt
+# [Tan2026] (the 9a record row): the arithmetic and rule layer of Theorem 2 from the paper (its four certified counts
+# and BPZ's base profile are inputs), and the comparisons of PR #296 from its certificate data; red controls
+python3 -I tan_check.py "$root/lt2026/certificate.json" --tex="$root/tan2026" --controls > $out 2>&1 || status=1
+grep -H "RESULT" $out
 exit $status
