@@ -15,6 +15,31 @@ Snapshot: main at commit [87b4ebb](https://github.com/teorth/optimizationproblem
 
 That is 66 starred rows on constant pages, and 35 starred cells in the README table. Of the 25 rows in (a), 12 are in pull requests that remove the asterisk and already have a second party's confirmation in the thread: [#235](https://github.com/teorth/optimizationproblems/pull/235) (5 rows), [#242](https://github.com/teorth/optimizationproblems/pull/242) (3 rows), [#249](https://github.com/teorth/optimizationproblems/pull/249) (2 rows), [#292](https://github.com/teorth/optimizationproblems/pull/292) (2 rows).
 
+## Since the snapshot (to 10 November 2026, 05:00 UTC)
+
+The tables below are still those of the 5 November snapshot; main has not moved since 87b4ebb. What changed in the
+threads since then, for the starred rows on main:
+
+- Replays by someone other than the claimant, posted since the snapshot. 3a [M2026]: arhancanli
+  ([#236](https://github.com/teorth/optimizationproblems/pull/236), 5 Nov) and rpinho
+  ([#340](https://github.com/teorth/optimizationproblems/pull/340), 8 Nov). 3a [Syl2026] $k = 2$: arhancanli
+  ([#238](https://github.com/teorth/optimizationproblems/pull/238), 5 Nov) and rpinho (#238, 8 Nov). 3a [Syl2026]
+  $k = 3$: arhancanli (#238, 6 Nov). 42a [Gri26], [Pin26] and [Kos2026]: arhancanli
+  ([#85](https://github.com/teorth/optimizationproblems/pull/85), [#251](https://github.com/teorth/optimizationproblems/pull/251),
+  [#263](https://github.com/teorth/optimizationproblems/pull/263), 6 Nov). 12a [O2026]: arhancanli
+  ([#222](https://github.com/teorth/optimizationproblems/pull/222), 6 Nov). 89a [Kos2026]: arhancanli
+  ([#264](https://github.com/teorth/optimizationproblems/pull/264), 7 Nov). 1a [PBV2026], the numerical part: arhancanli
+  ([#89](https://github.com/teorth/optimizationproblems/pull/89), 9 Nov). Each of these rows now has a replay by a party
+  other than its claimant; under CONTRIBUTING the claimant (or a maintainer) can ask for the asterisk to go on that
+  evidence, while a replayer cannot do so on their own replay alone.
+- Pull requests that take asterisks off, opened or updated since the snapshot: [#340](https://github.com/teorth/optimizationproblems/pull/340)
+  (mizopl: 3a [M2026]), [#276](https://github.com/teorth/optimizationproblems/pull/276) (JeetuSK0808: 89a [VSJ2026] and
+  [SK2026]), [#273](https://github.com/teorth/optimizationproblems/pull/273) (leandrejack-afk: the [J2026] row of the new 91a
+  page) and [#357](https://github.com/teorth/optimizationproblems/pull/357) (arhancanli: 1d [STEPS2026], 1d [AER2026] and
+  both 49a [Syl2026] rows, stacked on #326). Two rows now have replays by two parties other than the claimant and no
+  such pull request yet: 49a [Kos2026] (maximusrufus and arhancanli, both on
+  [#260](https://github.com/teorth/optimizationproblems/pull/260)) and 3a [Syl2026] $k = 2$ (arhancanli and rpinho, both on #238).
+
 ## How to read the tables
 
 - Row: the constant page and the reference key of the row. Claimant: the account that added the row, and the source when it is someone else's work.

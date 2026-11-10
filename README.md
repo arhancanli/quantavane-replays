@@ -6,7 +6,7 @@ written from the definition on the constant page. The certificates' own verifier
 have no connection with any of the authors.
 
 An index of every asterisked bound in that repository, with the replays posted for each (ours and others'), is in
-[ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026).
+[ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026, with a section on what changed to 10 November).
 
 ## C1a, C1c and C1d (3 to 7 November 2026)
 
