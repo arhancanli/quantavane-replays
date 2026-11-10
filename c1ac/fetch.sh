@@ -2,8 +2,9 @@
 # Download the four step-function certificates of 9 November 2026 replayed here, at the commits their pull requests
 # pin, into a new directory, and check their SHA-256 against SHA256SUMS:
 #   #354 (SeanSagait): K262144_0.4103768.txt, the 1c lower bound 0.4103768 (K = 262144; the first number of the file is
-#        K, then 262400 non-negative integer weights); copied into JSON by a few lines of Python below (integers only,
-#        each token checked to be a canonical decimal integer; nothing downloaded is run);
+#        K, then 262400 non-negative integer weights), and its update of 10 Nov, K524288_0.4103772.txt (0.4103772,
+#        K = 524288, 524736 weights); each copied into JSON by a few lines of Python below (integers only, each token
+#        checked to be a canonical decimal integer; nothing downloaded is run);
 #   #270 (vidigoat): its first 1c certificate c1c_K98304.json (26 Oct; 0.4103432812, saved as c1c_K98304_v1.json); updates of 9 Nov: c1c_K98304_v4.json (0.4103604995), c1c_K98304_v5.json (0.4103608339) and
 #        c1a_n262144_v2.json (the 1a upper bound 1.5027427356); update of 10 Nov: c1d_n163840.json (the 1d upper bound
 #        1.4546733458) and c1a_n262144_v3.json (1.5027427341).
@@ -15,6 +16,8 @@ mkdir -p "$root" && cd "$root"
 if [ -n "$(ls -A . 2>/dev/null | grep -v ruvector.db)" ]; then echo "refusing: $root is not empty"; exit 1; fi
 get() { curl -s -f -L -o "$1" "$2"; }
 get sean_K262144_0.4103768.txt https://raw.githubusercontent.com/SeanSagait/c1c-autocorrelation-certificate/9e7f3d19b93a463ba6073f69d34b65d915c49f25/K262144_0.4103768.txt
+# #354, update of 10 Nov (5167c1a): K524288_0.4103772.txt, the 1c lower bound 0.4103772 (K = 524288, then 524736 weights)
+get sean_K524288_0.4103772.txt https://raw.githubusercontent.com/SeanSagait/c1c-autocorrelation-certificate/5167c1a7a41ec8318983945fc5c60dbd53c6a3be/K524288_0.4103772.txt
 V=https://raw.githubusercontent.com/vidigoat/optimization-records
 get vidigoat_c1c_K98304_v4.json $V/358b200b9810ba0b4041497dd1bbd5a31d0952e5/tao/certificates/c1c_v4/c1c_K98304_v4.json
 get vidigoat_c1c_K98304_v5.json $V/1b39a28d3cfe34ac73cf30a08b5afae9c2cdf4b2/tao/certificates/c1c_v5/c1c_K98304_v5.json
@@ -31,5 +34,10 @@ if not all(re.fullmatch(r'0|[1-9][0-9]*', t) for t in tok): sys.exit('a token is
 K, w = int(tok[0]), [int(t) for t in tok[1:]]
 if (K, len(w)) != (262144, 262400): sys.exit('unexpected K or weight count')
 json.dump({'K': K, 'weights_int': w}, open('sean_c1c_K262144.json', 'w'))
+tok = open('sean_K524288_0.4103772.txt').read().split()
+if not all(re.fullmatch(r'0|[1-9][0-9]*', t) for t in tok): sys.exit('a token is not a canonical non-negative integer')
+K, w = int(tok[0]), [int(t) for t in tok[1:]]
+if (K, len(w)) != (524288, 524736): sys.exit('unexpected K or weight count')
+json.dump({'K': K, 'weights_int': w}, open('sean_c1c_K524288.json', 'w'))
 "
 shasum -a 256 -c "$here/SHA256SUMS"

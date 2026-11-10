@@ -71,6 +71,17 @@ ROWS = {
         printed=["1.7040280575"], pr="#350", e=48, witness_only=True,
         finite=(214084879817, 2, Fraction(81179170702072811560461937774649547472268267876630428381100034109236137,
                                           47639573975778160894755636560089704255253920609263650078720000000000000))),
+    # PR #350 (rpinho), update of 10 Nov 2026 (round 8, 14:13 UTC): certificates/final.json @ 85c4680 (440 atoms and
+    # 7806 witness rectangles in one file, radii on the 2^-64 grid); the finite instance of release_validation/finite.json
+    "pr350r8": dict(
+        file=("pr350r8/final.json", "1afaf5d5c8968fffd3f98cf77de4d462dd1070b9dea4ec1456dd5a91087bfb44"),
+        witnesses=("pr350r8/final.json", "1afaf5d5c8968fffd3f98cf77de4d462dd1070b9dea4ec1456dd5a91087bfb44"),
+        claimed=Fraction(114388018195906255044427129545533845966664904690010061034899,
+                         67069990589546886330812144279013633721316147200000000000000),
+        printed=["1.7055022252"], pr="#350 (round 8)", e=64, witness_only=True,
+        finite=(708844255899, 2,
+                Fraction(2299016964454535926164008318906010429285009516613200633736490794747466283233740859,
+                         1347999979410719285506487968385821088532379413340370461131840304447488000000000000))),
     # PR #341 (Doldrums, SCiEL): construction.json in Zenodo 10.5281/zenodo.24022791, which is restricted
     "pr341": dict(
         file=("pr341/construction.json", "5f7a8d9dfc88514c24995fd81b085b7c05ab4e2b9e43dcb923e48b3b6a7e310b"),

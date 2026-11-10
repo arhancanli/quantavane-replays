@@ -1,0 +1,21 @@
+Row pr350r8 (#350 (round 8)): pr350r8/final.json, sha256 1afaf5d5c8968fffd3f98cf77de4d462dd1070b9dea4ec1456dd5a91087bfb44
+  440 atoms per cell, Px = 328960566924801/100000000000000 = 3.289605669248, Py = 274654026549117/100000000000000 = 2.746540265491, lam = 1, reach = 6
+  mu(C) = 529088934896347/100000000000000 = 5.290889348963470
+The certificate pr350r8/final.json (sha256 1afaf5d5c8968fffd3f98cf77de4d462dd1070b9dea4ec1456dd5a91087bfb44): 7806 witnesses
+  its embedded measure equals the measure file: True
+  every witness: S = atoms in its box (summed from the atoms), 0 < rho, 4 lam rho^2 < mu(S), rectangle inside R_S(rho) and inside C: all hold
+  lam |union of the witnesses| / mu(C) (method B, exact) = 1.7055022252192482589627313...
+  exact ratio lam |U n C| / mu(C) = 114388018195906255044427129545533845966664904690010061034899/67069990589546886330812144279013633721316147200000000000000
+                                  = 1.7055022252192482589627313...
+  stated fraction 114388018195906255044427129545533845966664904690010061034899/67069990589546886330812144279013633721316147200000000000000: IDENTICAL
+  printed bound 1.7055022252: implied (margin 1.925e-11); one last-digit unit higher, 1.7055022253: not implied, as expected
+  the finite instance: q ((N - 2h)/N)^2 with N = 708844255899, h = 2 equals the stated fraction 1.7055022252000000000001031...: True; h min(Px, Py) = 5.4931 > the largest witness radius 2.7864: True
+  printed bound 1.7055022252: implied (margin 1.031e-22); one last-digit unit higher, 1.7055022253: not implied, as expected
+  at 400 random points of the witness rectangles, M mu >= lam from the definition: True
+Red controls:
+  C1 the first witness with its radius raised above sqrt(mu(S)/(4 lam)): refused, as expected
+  C2 the first witness rectangle extended to 10^-12 past the left edge of R_S(rho): refused, as expected
+  C3 the heaviest atom lightened by 10%: 5394 witnesses fail, as expected: True
+  C4 the bound 1.7055022253, one unit higher in the last printed digit: not implied, as expected
+RESULT: pr350r8 PASS
+run time 685 s

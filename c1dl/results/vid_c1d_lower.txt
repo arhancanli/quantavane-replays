@@ -1,0 +1,15 @@
+C_1d >= 1.152* (#270, vidigoat, 10 Nov 2026, second update; c1d_lower README @ a5fcdef): the contour
+inequality |S(z)| > B_M(|Im z|)/M on the boundary of R = [0.87, 1.23] x [-0.34, 0.34], M = 1.152 = 144/125
+  pi (Machin, method A): an enclosure of width 6.2e-61
+  method A (exact rationals, adaptive from 64 cells per side): HOLDS on all four sides; 326 boxes
+  method A on 2,048 equal cells per side (no bisection): HOLDS; smallest certified ratio of the squares, |S|^2 over (B/M)^2, per side: x = 123/100: 1.009839, x = 87/100: 1.040764, |y| = 17/50: 1.010629
+  method B (decimal, 60 digits, directed rounding, Gauss's pi, uniform grid): HOLDS on all four sides; 12000 cells; smallest ratio 1.010354
+  zeros of S in R: the non-zero integers in [0.87, 1.23] on the real axis: [1] (simple)
+  so by Rouche every f with int f = 1 has ||f*f||_oo > 1.152, and C_1d >= 1.152: True
+Red controls (each must be refused):
+  1. M0 = 1.154: the check fails (2599 boxes left at depth 6); at z = 1.23 + 0.34i, |S|^2 <= 0.12965084 < 0.13098924 <= phi^2 rigorously, so the inequality is false there: refused: True
+  2. the two-sided remainder bound B'_M of the README's intermediate weight e^{2 pi |y| |t|}, at M = 1.152: fails on 3867 boxes at depth 6: refused: True
+  3. the point z = 1 (inside R, S(1) = 0): lhs lower bound 0, rhs 0.017409: refused: True
+  4. (floats, sanity only) max |h^(z)| / B_M(|y|) over random signed step functions: 0.5740 <= 1: True
+RESULT: PASS
+run time 439 s

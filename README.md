@@ -709,6 +709,23 @@ and, for the level-set values only, that the union of the box rectangles with ex
 supremum in $M\mu$ is reached at the sup-distance of an atom). Reproduce: `cd c47 && ./fetch.sh && ./run_all.sh` (about
 90 seconds). If the #341 file becomes available, put it at `certs/pr341/construction.json`; its SHA-256 is checked first.
 
+[#350](https://github.com/teorth/optimizationproblems/pull/350) (rpinho, stacked on #341) ships each certificate as one
+file with the measure and its witness rectangles (radii on $2^{-48}$, then $2^{-64}$). There our own full family is beyond
+our memory cap, so the witnesses are the replayed object (row option `witness_only`): every witness is checked exactly
+from the atoms (box mass summed from the periodic atoms, $0 < \rho$, $4\lambda\rho^2 < \mu(S)$, rectangle inside
+$R_S(\rho)$ and inside $C$), the union area comes from our slab sweep, the finite instance $q((N - 2h)/N)^2$ is compared
+with the stated value (with $h \min(P_x, P_y)$ above every witness radius), and $M\mu \ge \lambda$ is tested from the
+definition at 400 random points of the union.
+
+| #350 filing | Data (SHA-256) | Exact ratio | Printed lower bound |
+| --- | --- | --- | --- |
+| round 2 (9 Nov) | rpinho/math-certificates @ `7273e97`, `c47/round2/certificates/final.json` (`bc342d18...18eb`, 98 atoms, 1,500 witnesses) | 1771220457083239070854869084751983500209800598673/1039431510074799032049552767561236480000000000000 $= 1.70402805756367672706\ldots$, identical to the stated fraction; finite instance ($N = 214084879817$, $h = 2$) as stated | 1.7040280575 |
+| round 8 (10 Nov, the current row) | rpinho/math-certificates @ `85c4680`, `c47/round8/certificates/final.json` (`1afaf5d5...fb44`, as stated; 440 atoms, 7,806 witnesses) | 114388018195906255044427129545533845966664904690010061034899/67069990589546886330812144279013633721316147200000000000000 $= 1.70550222521924825896\ldots$, identical to the stated fraction; finite instance ($N = 708844255899$, $h = 2$) equal to the stated value $1.7055022252000000000001031\ldots$; largest witness radius 2.7864 $< 2\min(P_x, P_y) = 5.4931$ | 1.7055022252 (margin $1.9 \cdot 10^{-11}$) |
+
+Red controls for both: the first witness's radius raised above $\sqrt{\mu(S)/(4\lambda)}$ and its rectangle extended
+$10^{-12}$ past $R_S(\rho)$ are refused; the heaviest atom lightened by 10% makes 899 (round 2) and 5,394 (round 8)
+witnesses fail; one unit higher in the last printed digit is not implied. Round 8 takes about 11 minutes and 55 MB.
+
 ## C42: Röhrig's eight-step profile (7 November 2026)
 
 `c42/c42_check.py` (the code of the C42 section above) now also replays Röhrig's $C_{42} \le 0.688983$\* [R2026a], the C42
@@ -1195,6 +1212,7 @@ its integers into JSON after checking that every token is a canonical non-negati
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
 | --- | --- | --- | --- | --- |
 | $C_{1c} \geq$ | [#354](https://github.com/teorth/optimizationproblems/pull/354) | SeanSagait/c1c-autocorrelation-certificate @ `9e7f3d19`, `K262144_0.4103768.txt` (K = 262,144, 262,400 weights), `062a2869...6769` | 935577600963641344/2279800930147535089 = 0.41037688360934932768..., minimum only at k = 46008 (S = 1509900967, A = 3568945316176) | 0.4103768, below the exact value |
+| $C_{1c} \geq$ | #354 (update of 10 Nov) | SeanSagait/c1c-autocorrelation-certificate @ `5167c1a7`, `K524288_0.4103772.txt` (K = 524,288, 524,736 weights), `b0ae80e7...c4f6` | 151911829776891904/370176031712590489 = 0.41037727125141974306..., minimum only at k = 364178 (S = 2433683732, A = 4635981133328) | 0.4103772, below |
 | $C_{1c} \geq$ | #270 (26 Oct, its first certificate: the [Pat2026] row, replayed 10 Nov) | vidigoat/optimization-records @ `08c6bfdf`, `tao/certificates/c1c/c1c_K98304.json` (K = 98,304, 98,368 weights), `3fcd6581...f747` | 2594500369901311586790309888/6322755819680014072464230569 = 0.41034328129923190079..., minimum only at k = 97663 | 0.4103432812, below |
 | $C_{1c} \geq$ | #270 (9 Nov, `c1c_v4`) | vidigoat/optimization-records @ `358b200b`, `tao/certificates/c1c_v4/c1c_K98304_v4.json`, `58dacf40...16f6` | 5282641762424933775753216/12873173145647069582596129 = 0.41036049951765035306..., minimum only at k = 98288 | 0.4103604995, below |
 | $C_{1c} \geq$ | #270 (9 Nov, `c1c_v5`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1c_v5/c1c_K98304_v5.json`, `7021f269...676b` | 2556315663995378551725293568/6229433836731244234885554241 = 0.41036083390473056108..., minimum only at k = 45081 | 0.4103608339, below |
@@ -1203,12 +1221,12 @@ its integers into JSON after checking that every token is a canonical non-negati
 | $C_{1a} \leq$ | #270 (10 Nov, `c1a_v3`) | vidigoat/optimization-records @ `a559680e`, `tao/certificates/c1a_v3/c1a_n262144_v3.json`, `b32a20bf...5c14` | 116537598371962553887369519059399403896832/77549933019818026777245548252121251545225 = 1.50274273405473036507..., maximum only at m = 262143 | 1.5027427341, above |
 
 Every fraction, deciding lag and printed bound is the one the pull request, its rows or its thread state. The hashes of
-#354, `c1c_v4` and the first 1c certificate (the row states `3fcd6581f2c1`) are the ones stated there; for `c1c_v5`, `c1a_v2`, `c1d` and `c1a_v3` none was stated, and these are
+#354 (both files), `c1c_v4` and the first 1c certificate (the row states `3fcd6581f2c1`) are the ones stated there; for `c1c_v5`, `c1a_v2`, `c1d` and `c1a_v3` none was stated, and these are
 the files at the commit the thread links (their folders' SHA256SUMS list the same hashes). Red controls, on every certificate: a
 corrupted coefficient and a weight changed by 1 are refused by the polynomial identity, scaling by 3 leaves the bound
-unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103432813, 0.4103604996,
+unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103773, 0.4103432813, 0.4103604996,
 0.4103608340, 1.5027427355, 1.4546733457, 1.5027427340) is refused. Reproduce: `cd c1ac && ./fetch.sh && ./run_all.sh`
-(about five minutes).
+(about seven minutes; the K = 524,288 certificate alone takes two minutes and 270 MB).
 
 ## 22a: the ropelength lower bound 2.124 (10 November 2026)
 
@@ -1275,6 +1293,66 @@ Red controls, all caught: one word of $T_H$ changed in $S_{3b}$ (not admissible)
 $C_1 + 1$, $C_4 - 1$ and Gao's base profile $(367, 8, 367, 321, 26, 20)$ each change $M_\star$. Not checked: the counts
 $C_1$ to $C_4$ and the base profile (BPZ's Lean development), and the independence arguments of the paper, which we read.
 Reproduce: `cd c9 && ./fetch.sh && ./run_all.sh` (the Tan rows take under a second).
+
+## 1d: the lower bound $C_{1d} \geq 1.152$ (10 November 2026)
+
+`c1dl/c1d_lower_check.py`, standard library only: the row $C_{1d} \geq 1.152$\* of
+[#270](https://github.com/teorth/optimizationproblems/pull/270) (vidigoat, second update of 10 November, 3c99a12), from
+the proof in `tao/certificates/c1d_lower/README.md` @ `a5fcdef` alone (`check_c1d_lower.py` and `sanity_random.py` were
+neither read nor run). With $\int f = 1$, $g = f*f$, $M = \lVert g\rVert_\infty$ and $h = (M - g)1_{[-1/2,1/2]}$,
+$0 \le h \le 2M$, $\int h = M - 1$ and $\hat h = MS - F^2$ with $S(z) = \sin(\pi z)/(\pi z)$; since
+$\lvert e^{-2\pi i z t}\rvert = e^{2\pi y t}$ is monotone in $t$, the bathtub principle gives
+$\lvert\hat h(z)\rvert \le B_M(\lvert y\rvert) = (M/(\pi\lvert y\rvert))(e^{\pi\lvert y\rvert} - e^{\pi\lvert y\rvert/M})$, and
+$B_M(y)/M = \int_{1/M}^1 e^{s\pi y}\,ds$ increases in $M$ and $y$. If $\lvert S\rvert > B_M/M$ on the boundary of
+$R = [0.87, 1.23] \times [-0.34, 0.34]$, Rouché gives $F^2$ exactly one zero in $R$ (that of $S$ at 1), against the even
+multiplicity of the zeros of a square. We re-derived these steps by hand; the program checks the boundary inequality at
+$M = 1.152 = 144/125$, using $\lvert S(x+iy)\rvert^2 = (\sin^2\pi x + \sinh^2\pi y)/(\pi^2(x^2+y^2))$ and its monotonicity
+on each side, by two implementations that share no code:
+
+| Method | Result |
+| --- | --- |
+| exact rationals (Fraction), every series bounded above and below with an explicit remainder, $\pi$ from Machin's formula (confirmed by Gaussian integers), adaptive bisection from 64 cells per side | holds on all four sides, 326 boxes |
+| the same on 2,048 equal cells per side, no bisection | holds; smallest certified ratio of the squares $\lvert S\rvert^2/(B_M/M)^2$: 1.0098 on $x = 1.23$, 1.0106 on $\lvert y\rvert = 0.34$, 1.0408 on $x = 0.87$ (the README reports 1.0107, 1.0109 and 1.0416 from 80,000 smaller boxes) |
+| 60-digit decimal with directed rounding, exp from the correctly rounded `Decimal.exp` widened by one unit, $\pi$ from Gauss's arctangent formula in integers, 4,000 equal cells per side | holds; smallest ratio 1.0104 |
+
+Red controls, all as expected: $M = 1.154$ fails (at $z = 1.23 + 0.34i$ the reverse inequality holds rigorously,
+$\lvert S\rvert^2 \le 0.12965084 < 0.13098924 \le (B_M/M)^2$); the point $z = 1$ is refused; and the two-sided bound
+$(2M/(\pi y))(e^{\pi y} - e^{\pi y(M+1)/(2M)})$, which is what the README's intermediate integral
+$\int h(t) e^{2\pi\lvert y\rvert\lvert t\rvert}\,dt$ would give (its maximiser puts mass at both ends), fails at
+$M = 1.152$ on 3,867 boxes. So the README's step 2 is right with the weight $e^{2\pi y t}$ and needs only that word. As
+a sanity check of the lemma (floats, not part of the proof), $\lvert\hat h(z)\rvert / B_M(\lvert y\rvert) \le 0.574$ over
+random signed step functions. Reproduce: `cd c1dl && ./fetch.sh && ./run_all.sh` (about seven minutes; `fetch.sh` only
+pins the README the replay was written from).
+
+## 57c: the univalent Bloch-Landau constant, $U \le 0.65628589$\* [vS2026] (10 November 2026)
+
+Both halves of the 57c row [vS2026] (W. van Staden; added in [#245](https://github.com/teorth/optimizationproblems/pull/245)),
+from the paper's LaTeX source and two data files of `WynandVStaden/bloch-landau-slit-discs` @ `a6f17b5`
+(`certify/inradius_leaves_G.npz`, `certify/density_G_n64.json`); `inradius_certificate.py`, `conformal_certificate.py`
+and the other programs of the repository were neither read nor run. $D$ is the disc of radius $R = 5.001117628756668$
+minus 24 slits $z = Re^{s}e^{i(\theta + b_1 s^2 + b_2 s^4)}$, $-\log(R/t) \le s \le 0$ (five classes and their images under
+$z \mapsto e^{2\pi i/3}z$ and conjugation), and $U \le R(D)/\rho(D)$.
+
+| Half | Our check | Result |
+| --- | --- | --- |
+| $R(D) \le 1 + 10^{-9}$ (Proposition 3.1) | `c57cv/vs_inradius_check.py`: the .npz read by our own parser; the 4,993 dyadic cells tile $[0,8]^2$ (distinct, none nested, areas adding to 64, exactly); kind (a) $x_0^2 + y_0^2 \ge R^2$ and kind (b) $y_0^2 > 3x_1^2$ exactly; for kind (c) the witness (a slit point at the stored $s$, a tip, or a circle point $Re^{i\varphi}$) enclosed in exact rationals with bounded series, $-a < s \le 0$ checked, and all four corners within $1 + 10^{-9}$ of its box exactly; again in 50-digit decimal with directed rounding | 2,799, 464 and 1,730 cells of the three kinds, 610 distinct witnesses, as the paper states; every check holds in both arithmetics |
+| $\rho(D) \ge 1.523726208329$ (Proposition 4.1) | `c57cv/vs_conformal_check.py` with `vs_nodes.c`: the paper's comparison function $U(w) = (L - \mathrm{Re}\,w) + \sum_j\int \Phi(w - w_j(y))\psi_j(y)\,d\mu(y)$, $\Phi = -\log\lvert 2\sinh(w/2)\rvert$; $\log\rho \ge c - \delta$ with $c = L - (\pi/4)\sum_j a_j c_{j,1}$ and $\delta \ge \sup\lvert U\rvert$ on the slits; kernel bounds on Bernstein-ellipse rectangles by our own branch and bound in complex interval arithmetic ($\lvert 2\sinh(z/2)\rvert^2 = 4\sinh^2(\mathrm{Re}\,z/2) + 4\sin^2(\mathrm{Im}\,z/2)$; the self kernel as $\Delta\,\mathrm{shc}(\tau\Delta)$), Gauss-Chebyshev quadrature with its analytic remainder (at most $10^{-13}$ per pair), $f_i$ at the zeros of $T_M$ in interval arithmetic (C), and the discrete Chebyshev transform of the midpoints plus $\sqrt{2M}$ times the largest half-width (the transform is orthogonal up to scale) and the interpolation remainder (at most $10^{-9}$); our ellipses and $M$, $N$ are our own choices | $c = 0.4211588143614020\ldots$; $\delta_i \le$ 2.311e-8, 1.41e-9, 1.272e-8, 1.43e-9, 1.8e-10 for the five classes (max $\lvert f\rvert$ at the nodes 1.745e-8 for class 0, as the paper's log reports); $\rho(D) \ge 1.523726213595$ |
+
+So $U \le (1 + 10^{-9})/1.523726213595 = 0.656285881333\ldots < 0.65628589$: the row holds. The density file's coefficients
+are the paper's appendix table (its decimals round to the file's binary64 values, which we use exactly), but the file's
+SHA-256 is `c1164ede...da73` (unchanged since its commit `f523c9d`), not the `f2d1d4e6...843b` the appendix prints.
+Arithmetic: rationals with series bounds for $\pi$ and the logarithms; binary64 intervals widened by one ulp per
+operation and by four ulps for libm's sin, cos, sinh, log and exp, which are taken to be within one ulp.
+
+Red controls, all as expected: inradius: $\lambda = 1 - 10^{-6}$ is refused (the unit disc lies in $D$), a removed
+cell breaks the tiling, the slit-point witness of the smallest cell moved by $10^{-2}$ along its slit is refused (at
+$10^{-6}$ it is not: it is the nearest point, so the distance moves only to second order), and a kind (c) cell
+relabelled (a) is refused. Conformal radius: $c_{0,1}$ lowered by 1% ($\delta \le 1.4 \cdot 10^{-2}$) and $c_{2,5}$ raised
+by 1% ($\delta \le 7.6 \cdot 10^{-6}$) no longer certify the bound, a non-zero even coefficient is refused, and the bound
+1.5237262489, above the floating-point value 1.523726248805, is not certified. What rests on mathematics: Lemmas 2.1,
+3.2, 3.3 and 4.2 to 4.8 of the paper (the symmetry reduction, the comparison principle, the properties of $U$, the
+log-kernel identity, and the Chebyshev coefficient, quadrature and interpolation bounds), which we re-derived by hand.
+Reproduce: `cd c57cv && ./fetch.sh && ./run_all.sh` (about four minutes).
 
 ## Reproduce
 

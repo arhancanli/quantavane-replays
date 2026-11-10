@@ -13,7 +13,7 @@ grep -H "RESULT" "$here/results/selftest.txt"
 # the lower-bound row [Lin2026] (PR #192), from its closed forms (no file); red controls
 python3 -I "$here/c47_check.py" lin2026 --controls > "$here/results/lin2026.txt" 2>&1 || status=1
 grep -H "RESULT" "$here/results/lin2026.txt"
-for row in tom2026 pr321 pr341 pr350; do
+for row in tom2026 pr321 pr341 pr350 pr350r8; do
   python3 -I "$here/c47_check.py" $row "$root" --controls --full > "$here/results/$row.txt" 2>&1 || status=1
   grep -H "RESULT\|run time" "$here/results/$row.txt" | tr '\n' ' '; echo
 done
