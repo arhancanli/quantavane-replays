@@ -6,6 +6,9 @@ usage: python3 -I extract_values.py MODE SOURCE ARGS... OUT
   cell  FILE.ipynb CELL VAR [ae_reflect]           the same inside one notebook code cell
   tex51 FILE.tex                                   Haugland's 51-step function (arXiv 1609.08000, section 2)
   arena FILE.json ID                               the 'values' of solution ID in an EinsteinArena response
+  list  FILE.json                                  a JSON list of numbers (SimpleTES first autocorrelation)
+  tuple0 FILE.json                                 the first array of a SimpleTES tuple ({'items': [{'data': [...]}...]})
+  named FILE.json NAME                             the 'list' of the entry named NAME (ThetaEvolve's data.json)
 """
 import ast
 import json
@@ -74,8 +77,20 @@ def main():
         sol = [s for s in d if s["id"] == int(args[1])]
         assert len(sol) == 1, "solution not in the response"
         toks = [str(t) for t in sol[0]["data"]["values"]]
+    elif mode == "list":
+        toks = [str(t) for t in json.load(open(args[0]), parse_float=str)]
+    elif mode == "tuple0":
+        x = json.load(open(args[0]), parse_float=str)["items"][0]
+        assert x["dtype"] == "float64" and len(x["shape"]) == 1 and len(x["data"]) == x["shape"][0]
+        toks = [str(t) for t in x["data"]]
+    elif mode == "named":
+        ent = [e for e in json.load(open(args[0]), parse_float=str) if e["name"] == args[1]]
+        assert len(ent) == 1, "entry not found"
+        toks = [str(t) for t in ent[0]["list"]]
     else:
         raise SystemExit(__doc__)
+    for t in toks:
+        assert re.fullmatch(r"-?[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?", t), "not a plain number: " + t
     open(out, "w").write('{"values": [' + ", ".join(toks) + "]}\n")
     print(f"{out}: {len(toks)} heights")
 

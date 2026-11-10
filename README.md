@@ -1038,7 +1038,7 @@ Red controls, all refused: $q_4 = 19$ and $q_3 = 11$ ($r = 11$); $p = 13$; the t
 What rests on mathematics: Martinet's section 2 (genus theory and the Golod-Shafarevich criterion behind
 $r \ge n + 3 + 2\sqrt{2n+1}$) and the conductor-discriminant formula. Reproduce: `cd c87 && ./run_all.sh` (no download).
 
-## C1a and C1b: eleven step-function rows (8 November 2026)
+## C1a and C1b: fourteen step-function rows (8 and 10 November 2026)
 
 `../autocorr_check.py` (a `1b` mode added: $(2/n)\max_m \sum_i h_i(1 - h_{i+m})$ over every grid shift, with $0 \le h \le 1$
 and $\sum h = n/2$ checked exactly; the autocorrelation from one big-integer product), on the heights of eleven rows,
@@ -1059,6 +1059,9 @@ run: as binary64 and as printed.
 | 1b [EA2026] | EinsteinArena solution 2507 (fetched 8 Nov) | 3584 | 0.38085857485785830914...; 0.38085857485785830932... (rescaled) | 0.3808585749, valid |
 | 1b [A2026] | atrislabs/records @ `1fa857a`, `construction.json` (`62a976fa...`) | 114688 | 0.38085855031642856010... (exact rationals) | 0.3808585504, valid |
 | 1b [H2016] | Haugland, arXiv:1609.08000, the 51-step function of section 2 (printed decimals) | 51 | 0.38092685343308697464... (the paper: 0.3809268534330870) | **0.380926, below the exact value** |
+| 1a [YLTLYSTYLLGDHZSWZSHMELCZX2026] (SimpleTES; added 10 Nov) | wq-will/SimpleTES @ `47d3413`, `first_autocorrelation_inequality_best_construction.json` (`14837460...4c3c`) | 972 | 1.50387081393242913802...; 1.50387081393242912665..., maximum only at m = 1072 | 1.503871, valid |
+| 1b [YLTLYSTYLLGDHZSWZSHMELCZX2026] (SimpleTES; added 10 Nov) | the same commit, `erdos_minimum_overlap_best_construction.json` (`5599983a...1b4f`), its first array | 2400 | 0.38086767582732667196...; 0.38086767582732667215... (rescaled), maximum only at shift 532 | 0.380868, valid |
+| 1a [WSZXRYHHMPCHCWDS2025] (ThetaEvolve; added 10 Nov) | ypwang61/ThetaEvolve @ `7c12898`, `Results/FirstAutoCorrIneq/data.json` (`1109d263...4a7f`), the entry `8B-wo_RL@46-w_SOTA` | 1319 | 1.50313243597977722928...; 1.50313243597977723686..., maximum only at m = 1608 | 1.503133, valid |
 
 "Rescaled": the heights as published sum to $n/2$ only up to about $10^{-13}$ or less, so they are scaled to
 $\sum h = n/2$ exactly (the repair described in #232), staying in $[0, 1]$. The 48 AlphaEvolve 1b numbers alone
@@ -1319,7 +1322,8 @@ Red controls, all as expected: $M = 1.154$ fails (at $z = 1.23 + 0.34i$ the reve
 $\lvert S\rvert^2 \le 0.12965084 < 0.13098924 \le (B_M/M)^2$); the point $z = 1$ is refused; and the two-sided bound
 $(2M/(\pi y))(e^{\pi y} - e^{\pi y(M+1)/(2M)})$, which is what the README's intermediate integral
 $\int h(t) e^{2\pi\lvert y\rvert\lvert t\rvert}\,dt$ would give (its maximiser puts mass at both ends), fails at
-$M = 1.152$ on 3,867 boxes. So the README's step 2 is right with the weight $e^{2\pi y t}$ and needs only that word. As
+$M = 1.152$ on 3,867 boxes. So step 2's bound is right as stated; read with the weight $e^{2\pi y t}$, its intermediate
+integral matches it. As
 a sanity check of the lemma (floats, not part of the proof), $\lvert\hat h(z)\rvert / B_M(\lvert y\rvert) \le 0.574$ over
 random signed step functions. Reproduce: `cd c1dl && ./fetch.sh && ./run_all.sh` (about seven minutes; `fetch.sh` only
 pins the README the replay was written from).
@@ -1378,6 +1382,23 @@ sharp configuration; the left hallway turned the wrong way is not $L_2$; and, as
 $\max \mathrm{area}(D \cap L_1) = 4\sqrt2$, Hammersley's $2\sqrt2$. Read, not machine-checked: the formulation (Gerver;
 Kallus and Romik: monotone rotation paths of total angle at most 90°) and the small-turn case, which we re-derived.
 Reproduce: `cd c41b && ./fetch.sh && ./run_all.sh` (under a minute).
+
+## 26a: an explicit Bohnenblust-Hille family on the cube (10 November 2026)
+
+`c26a/bh_check.py`, standard library only, exact integers: the statement of
+[#284](https://github.com/teorth/optimizationproblems/pull/284) (DennisKoshta; a comment on 26a, no bound change), from
+`WRITEUP.md` and `problems/bh_cube/FORMAT.md` of `DennisKoshta/c26a-bohnenblust-hille-cube-family` @ `2557cdb` and the
+six instance files (`cycle.py`, `core.py` and `verify/` were neither read nor run). Two routes:
+
+| Route | Result |
+| --- | --- |
+| the six certificates (`d2_n5` to `cycle_d7_n21`, SHA-256 as `WRITEUP.md` states), read as `FORMAT.md` defines them: $F = \sum a_S x^S$ at all $2^n$ points by our own exact Walsh-Hadamard transform, $M = \max\lvert F\rvert$; every $a_S = \pm1$, so $R \ge c$ is the integer comparison $N^{d+1} \ge (cM)^{2d}$ | $M = 2^d$ and $F \in \{0, \pm 2^d\}$, non-zero on $1 - 2^{-d}$ of the cube, for $d = 2, \ldots, 7$; all six claimed 12-digit values hold |
+| our own $f_d$ from Section 3 for $d = 2, \ldots, 7$ (the cycle edges, the pair forms, the parity vector $c$, and for each proper $J$ the coset $\beta_J + V_J$ with Lemma 1's signs) | the $(2^d - 1)2^d$ frequencies are distinct and of weight $\le d$; $F \in \{0, \pm 2^d\}$ (Claim 2); $R_d^{2d} = 4^d(1 - 2^{-d})^{d+1} > 4^{d-1}$, so $R_d = 2(1 - 2^{-d})^{(d+1)/(2d)} > 2^{(d-1)/d}$; for $d = 5, 6, 7$ equal to the instance files term by term |
+
+Red controls, all refused: one coefficient's sign flipped ($M$ becomes 34 for $d = 5$); every claim raised by
+$10^{-12}$; a term of degree $d + 1$; and $c = 0$ for even $d$ (then $d + \lvert c\rvert$ is even and $F$ takes five values,
+so two live sets meet). Read, not machine-checked: Lemmas 1 and 2 and the proofs of Claims 1 and 2 for every $d$, which
+we re-derived. Reproduce: `cd c26a && ./fetch.sh && ./run_all.sh` (seconds).
 
 ## Reproduce
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Replay eleven 1a and 1b rows from the heights fetched by fetch.sh with ../autocorr_check.py (exact integers), with
+# Replay fourteen 1a and 1b rows from the heights fetched by fetch.sh with ../autocorr_check.py (exact integers), with
 # red controls; one output file per row in results/. Both readings of decimal text are run: as binary64 (what a
 # float parser gives) and as the printed decimals (--decimal). --rescale scales a 1b function whose heights do not
 # sum to n/2 exactly down or up to n/2 (and is refused if a height then leaves [0, 1]).
@@ -53,6 +53,10 @@ run 1b c1b_together_ai_2026.json 0.380871 --rescale
 run 1b c1b_ea2026_2507.json 0.3808585749 --rescale
 run 1b atris_c1b_construction.json 0.3808585504
 run_decimal 1b c1b_haugland_2016.json 0.380926
+# added 10 Nov 2026: SimpleTES (1a and 1b) and ThetaEvolve (1a)
+run 1a c1a_simpletes_2026.json 1.503871
+run 1b c1b_simpletes_2026.json 0.380868 --rescale
+run 1a c1a_thetaevolve_2025.json 1.503133
 grep -H "printed\|normalisation\|Error" results/*.txt
 # the 1a lower bound [PBV2026] 1.292: the five anchors and the strict-failure inequality (about three minutes)
 one results/pbv2026.txt python3 -I pbv_check.py "$root/pbv2026_multiscale_arcsine_1292.json" --controls

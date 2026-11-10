@@ -1,0 +1,14 @@
+1a certs/c1a_thetaevolve_2025.json
+  n: 1319
+  S: 3973890528941040637192453811
+  argmax_m: 1608
+  max_abs_c: 8998171237721972898018505417063063507216395217958832
+  scaled_by: 77371252455336267181195264
+  sign_at_max: +
+  ties: 1
+  bound = 23737175725110564504972817290212361532036850584975398816/15791805936007303734089910906068383898830073683368423721
+  decimal: floor 1.5031324359797772292836  ceil 1.5031324359797772292837
+  printed 1.503133: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 879 rejected: True
+  control: old coefficients rejected for weight 659 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

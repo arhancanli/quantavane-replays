@@ -1,5 +1,5 @@
 #!/bin/sh
-# Download the published step functions of eleven 1a and 1b rows, each from the source its row cites, into a new
+# Download the published step functions of fourteen 1a and 1b rows, each from the source its row cites, into a new
 # directory; copy their heights out as text (extract_values.py: ast, regex and json only; nothing downloaded is run);
 # check SHA-256 of the files (and of the two values files cut from the live EinsteinArena responses, fetched 8 Nov 2026).
 # Usage: ./fetch.sh [CERTS_ROOT]   (default: ./certs)
@@ -24,6 +24,12 @@ get arena_problem1.json "https://einsteinarena.com/api/solutions/best?problem_id
 get arena_problem2.json "https://einsteinarena.com/api/solutions/best?problem_id=2"
 # [PBV2026] (the 1a lower bound 1.292): the certificate JSON, read as data for its 200 multiplier coefficients only
 get pbv2026_multiscale_arcsine_1292.json https://raw.githubusercontent.com/AndreiPiterbarg/sidon-autocorrelation/1ed5889100617ee086db1ce3456b75c1f8e5f6be/delsarte_dual/grid_bound_alt_kernel/certificates/multiscale_arcsine_1292.json
+# SimpleTES (wq-will/SimpleTES @ 47d3413): the 1a and 1b rows [YLTLYSTYLLGDHZSWZSHMELCZX2026]
+ST=https://raw.githubusercontent.com/wq-will/SimpleTES/47d3413da1d85dc24341219d47452d2601e56a57/best_results/mathematics_discovery
+get simpletes_first_ac.json $ST/first_autocorrelation_inequality/first_autocorrelation_inequality_best_construction.json
+get simpletes_erdos_mo.json $ST/erdos_minimum_overlap/erdos_minimum_overlap_best_construction.json
+# ThetaEvolve (ypwang61/ThetaEvolve @ 7c12898): the 1a row [WSZXRYHHMPCHCWDS2025], entry 8B-wo_RL@46-w_SOTA of data.json
+get thetaevolve_first_ac.json https://raw.githubusercontent.com/ypwang61/ThetaEvolve/7c12898f5d7627af403e3aca643af76199fb5c20/Results/FirstAutoCorrIneq/data.json
 X="python3 -I $here/extract_values.py"
 $X py tog_c1b_together_ai_2026.py h_values c1b_together_ai_2026.json
 $X cell dm_mathematical_results.ipynb 53 step_function_heights_1 c1a_alphaevolve_2025.json
@@ -32,4 +38,7 @@ $X cell aer_autocorrelation_problems.ipynb 60 best_sequence c1a_alphaevolve_dec2
 $X tex51 haugland_mop1.tex c1b_haugland_2016.json
 $X arena arena_problem2.json 2603 c1a_ea2026_2603.json
 $X arena arena_problem1.json 2507 c1b_ea2026_2507.json
+$X list simpletes_first_ac.json c1a_simpletes_2026.json
+$X tuple0 simpletes_erdos_mo.json c1b_simpletes_2026.json
+$X named thetaevolve_first_ac.json 8B-wo_RL@46-w_SOTA c1a_thetaevolve_2025.json
 shasum -a 256 -c "$here/SHA256SUMS"

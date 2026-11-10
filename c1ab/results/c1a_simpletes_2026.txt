@@ -1,0 +1,14 @@
+1a certs/c1a_simpletes_2026.json
+  n: 972
+  S: 2417851639229258102072531
+  argmax_m: 1072
+  max_abs_c: 4522447853696301201366425606122064182260910112
+  scaled_by: 2417851639229258349412352
+  sign_at_max: +
+  ties: 1
+  bound = 8791638627585609535456331378301292770315209257728/5846006549323610476752756027822517042797584745961
+  decimal: floor 1.5038708139324291380271  ceil 1.5038708139324291380272
+  printed 1.503871: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 647 rejected: True
+  control: old coefficients rejected for weight 486 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

@@ -1,0 +1,12 @@
+1b certs/c1b_simpletes_2026.json
+  n: 2400
+  D: 2971056094284912760287806438779
+  normalisation: rescaled from sum h = n/2 + (100529908301179/2475880078570760549798248448) to n/2 exactly
+  argmax_shift_m: 532
+  ties: 1
+  bound = 3361985365624318376150044010471535947281807234282745819923616/8827174315387520421504072308628388792171424386282650275010841
+  decimal: floor 0.3808676758273266719641  ceil 0.3808676758273266719642
+  printed 0.380868: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 800 rejected: True
+  control: height 2 at cell 2285 refused: True
+  control: sum moved off n/2 by 1/D (cell 0) refused: True

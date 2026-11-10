@@ -1,0 +1,22 @@
+26a (#284): the six certificates (route A) and our own f_d from Section 3 (route B)
+Route A, the certificates as FORMAT.md defines them:
+  d2_n5.json: sha256 as stated; n = 5, d = 2, 12 terms, M = 4 (claimed_sup 4), values of F [-4, 0, 4], F != 0 on 3/4 of the cube; claim 1.611854897735: holds
+  d3_n8.json: sha256 as stated; n = 8, d = 3, 56 terms, M = 8 (claimed_sup 8), values of F [-8, 0, 8], F != 0 on 7/8 of the cube; claim 1.829652855011: holds
+  d4_n11.json: sha256 as stated; n = 11, d = 4, 240 terms, M = 16 (claimed_sup 16), values of F [-16, 0, 16], F != 0 on 15/16 of the cube; claim 1.920932230356: holds
+  cycle_d5_n15.json: sha256 as stated; n = 15, d = 5, 992 terms, M = 32 (claimed_sup 32), values of F [-32, 0, 32], F != 0 on 31/32 of the cube; claim 1.962262141550: holds
+  cycle_d6_n18.json: sha256 as stated; n = 18, d = 6, 4032 terms, M = 64 (claimed_sup 64), values of F [-64, 0, 64], F != 0 on 63/64 of the cube; claim 1.981711051583: holds
+  cycle_d7_n21.json: sha256 as stated; n = 21, d = 7, 16256 terms, M = 128 (claimed_sup 128), values of F [-128, 0, 128], F != 0 on 127/128 of the cube; claim 1.991056425313: holds
+Route B, f_d built from Section 3:
+  d = 2: 12 frequencies, distinct: True, weights <= d: True; F takes the values [-4, 0, 4], non-zero on 3/4 of the cube; R_d^(2d) = 4^d (1-2^-d)^(d+1): True; R_d > 2^((d-1)/d): True (R_d = 1.611855)
+  d = 3: 56 frequencies, distinct: True, weights <= d: True; F takes the values [-8, 0, 8], non-zero on 7/8 of the cube; R_d^(2d) = 4^d (1-2^-d)^(d+1): True; R_d > 2^((d-1)/d): True (R_d = 1.829653)
+  d = 4: 240 frequencies, distinct: True, weights <= d: True; F takes the values [-16, 0, 16], non-zero on 15/16 of the cube; R_d^(2d) = 4^d (1-2^-d)^(d+1): True; R_d > 2^((d-1)/d): True (R_d = 1.920932)
+  d = 5: 992 frequencies, distinct: True, weights <= d: True; F takes the values [-32, 0, 32], non-zero on 31/32 of the cube; R_d^(2d) = 4^d (1-2^-d)^(d+1): True; R_d > 2^((d-1)/d): True (R_d = 1.962262); equal to cycle_d5_n15.json term by term: True
+  d = 6: 4032 frequencies, distinct: True, weights <= d: True; F takes the values [-64, 0, 64], non-zero on 63/64 of the cube; R_d^(2d) = 4^d (1-2^-d)^(d+1): True; R_d > 2^((d-1)/d): True (R_d = 1.981711); equal to cycle_d6_n18.json term by term: True
+  d = 7: 16256 frequencies, distinct: True, weights <= d: True; F takes the values [-128, 0, 128], non-zero on 127/128 of the cube; R_d^(2d) = 4^d (1-2^-d)^(d+1): True; R_d > 2^((d-1)/d): True (R_d = 1.991056); equal to cycle_d7_n21.json term by term: True
+Red controls (each must be refused):
+  1. one coefficient's sign flipped in cycle_d5_n15.json: M = 34, the claim fails: refused
+  2. every claim raised by 10^-12 (the claims are 12-digit truncations): refused for all six: True
+  3. a term of degree d + 1 added: refused
+  4. d = 6 with c = 0 (d + |c| even): 0 frequencies collide and F takes 5 values (not only 0, +-64): refused
+RESULT: PASS
+run time 7 s
