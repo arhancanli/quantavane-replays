@@ -4,7 +4,7 @@
 #   #354 (SeanSagait): K262144_0.4103768.txt, the 1c lower bound 0.4103768 (K = 262144; the first number of the file is
 #        K, then 262400 non-negative integer weights); copied into JSON by a few lines of Python below (integers only,
 #        each token checked to be a canonical decimal integer; nothing downloaded is run);
-#   #270 (vidigoat, updates of 9 Nov): c1c_K98304_v4.json (0.4103604995), c1c_K98304_v5.json (0.4103608339) and
+#   #270 (vidigoat): its first 1c certificate c1c_K98304.json (26 Oct; 0.4103432812, saved as c1c_K98304_v1.json); updates of 9 Nov: c1c_K98304_v4.json (0.4103604995), c1c_K98304_v5.json (0.4103608339) and
 #        c1a_n262144_v2.json (the 1a upper bound 1.5027427356); update of 10 Nov: c1d_n163840.json (the 1d upper bound
 #        1.4546733458) and c1a_n262144_v3.json (1.5027427341).
 # Usage: ./fetch.sh [CERTS_ROOT]   (default: ./certs)
@@ -19,6 +19,8 @@ V=https://raw.githubusercontent.com/vidigoat/optimization-records
 get vidigoat_c1c_K98304_v4.json $V/358b200b9810ba0b4041497dd1bbd5a31d0952e5/tao/certificates/c1c_v4/c1c_K98304_v4.json
 get vidigoat_c1c_K98304_v5.json $V/1b39a28d3cfe34ac73cf30a08b5afae9c2cdf4b2/tao/certificates/c1c_v5/c1c_K98304_v5.json
 get vidigoat_c1a_n262144_v2.json $V/1b39a28d3cfe34ac73cf30a08b5afae9c2cdf4b2/tao/certificates/c1a_v2/c1a_n262144_v2.json
+# #270, the first 1c certificate (26 Oct, 08c6bfd): the row [Pat2026] 0.4103432812, still on the page as a history row
+get vidigoat_c1c_K98304_v1.json $V/08c6bfdfca86e7935ddaaa5766ced63abf2a17bc/tao/certificates/c1c/c1c_K98304.json
 # #270, update of 10 Nov (eb710a8): the new 1d row 1.4546733458 and the 1a row updated in place to 1.5027427341
 get vidigoat_c1d_n163840.json $V/a559680e416be0eae03955c58372efff4a551fbb/tao/certificates/c1d/c1d_n163840.json
 get vidigoat_c1a_n262144_v3.json $V/a559680e416be0eae03955c58372efff4a551fbb/tao/certificates/c1a_v3/c1a_n262144_v3.json

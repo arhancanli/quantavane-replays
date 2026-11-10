@@ -1,9 +1,9 @@
 #!/bin/sh
-# Replay the six certificates fetched by fetch.sh with ../autocorr_check.py (exact integers, red controls), and check
+# Replay the seven certificates fetched by fetch.sh with ../autocorr_check.py (exact integers, red controls), and check
 # each result against what its pull request states: the reduced fraction, the deciding lag and the printed bound.
 # Red controls in every run: a corrupted coefficient and a changed weight are refused by the polynomial identity,
 # scaling by 3 leaves the bound unchanged, and the printed bound moved one unit in its last digit past the exact value
-# (0.4103768837, 0.4103604996, 0.4103608340, 1.5027427355, 1.4546733457, 1.5027427340) is refused; that last control makes the checker exit 1,
+# (0.4103768837, 0.4103432813, 0.4103604996, 0.4103608340, 1.5027427355, 1.4546733457, 1.5027427340) is refused; that last control makes the checker exit 1,
 # so each run must exit 1 with exactly that one "NOT a valid" line. One output file per certificate in results/.
 # Exits 0 only when every expected line is printed and nothing else fails.
 # Usage: ./run_all.sh [CERTS_ROOT]   (default: ./certs). Python 3.9+, standard library only; about five minutes.
@@ -28,6 +28,8 @@ run() {  # kind file printed fraction lag-line moved-printed
 }
 # #354, 1c >= 0.4103768: the fraction, minimum at k = 46008 (S = 1509900967, min A = 3568945316176), as the PR states
 run 1c sean_c1c_K262144.json 0.4103768 935577600963641344/2279800930147535089 "argmin_k: 46008" 0.4103768837
+# #270, its first 1c certificate (26 Oct, 08c6bfd; the [Pat2026] row): 1c >= 0.4103432812, minimum at k = 97663
+run 1c vidigoat_c1c_K98304_v1.json 0.4103432812 2594500369901311586790309888/6322755819680014072464230569 "argmin_k: 97663" 0.4103432813
 # #270, 9 Nov 13:22 UTC update (c1c_v4): 1c >= 0.4103604995, minimum only at k = 98288
 run 1c vidigoat_c1c_K98304_v4.json 0.4103604995 5282641762424933775753216/12873173145647069582596129 "argmin_k: 98288" 0.4103604996
 # #270, 9 Nov 16:56 UTC update (c1c_v5): 1c >= 0.4103608339, minimum at k = 45081

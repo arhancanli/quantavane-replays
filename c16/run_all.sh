@@ -3,7 +3,8 @@
 # bound of the untruncated conditional extremal at the PR's mu = 0x1.f42a1d5c1aabdp-4; red controls included. Then the
 # lower bound of PR #319 (Julsgaard), the same family at mu = 128042/2^20, the night update of #270 (c16_pinned_v2,
 # 18 digits), and the 16a upper row of PR #246 (maximusrufus).
-# Usage: ./run_all.sh [CERTS_ROOT]   (default: ./certs). Python 3.9+, standard library only; about 7 minutes.
+# Usage: ./run_all.sh [CERTS_ROOT]   (default: ./certs). Python 3.9+ (standard library only) and, for the last row, a C
+# compiler; about 10 minutes.
 here=$(cd "$(dirname "$0")" && pwd)
 root=${1:-$here/certs}
 mkdir -p "$here/results"
@@ -27,4 +28,10 @@ grep -H "RESULT\|run time" "$here/results/maxr_upper.txt"
 # the same mu at R = 2000 and 8000 (about a minute)
 python3 -I "$here/pat_check.py" --controls --cutoffs > "$here/results/pat2026.txt" 2>&1 || status=1
 grep -H "RESULT" "$here/results/pat2026.txt"
+# the 16a row [Pat2026b] (PR #270, 2.156225504*): the same trial function at the cutoff 0 < |k| <= 40000 (5,026,547,528
+# lattice points), the three sums in C (c16_trunc_fast.c, equal to the Python sums at R = 300 and 1200), the R = 4000
+# value of the [Pat2026] row recomputed by the C path; red controls (about three minutes; a C compiler)
+mkdir -p "$here/bin" && cc -O2 -o "$here/bin/c16_trunc_fast" "$here/c16_trunc_fast.c" || status=1
+python3 -I "$here/c16_trunc_big.py" "$here/bin/c16_trunc_fast" --controls > "$here/results/pat2026b_K40000.txt" 2>&1 || status=1
+grep -H "RESULT" "$here/results/pat2026b_K40000.txt"
 exit $status

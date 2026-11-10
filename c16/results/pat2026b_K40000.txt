@@ -1,0 +1,15 @@
+self-test R = 300: C sums equal the Python sums at the scale 2^100, integer for integer: True
+self-test R = 1200: C sums equal the Python sums at the scale 2^100, integer for integer: True
+[Pat2026b]: c_k = 1/(|k|^2 (|k|^2 + 41/5)) on 0 < |k| <= 40000; terms (one eighth of the disc): 628352583; 69 s
+  S0 (times 41/5 scaling) in [9.317265250954604449458917232907, 9.317265250954604449462882479740]
+  S1 (times 41/5 scaling) in [6.297622785936331979010082128257, 6.297622785936331979014047375090]
+  S2 (times 41/5 scaling) in [24.761068213149834257678466239082, 24.761068213149834257682431485915]
+  delta = S2/S1 in [3.93181190026902397902, 3.93181190026902397902]
+  L >= 2.15622550442903480541   (enclosure [2.15622550442903480541, 2.15622550442903480542])
+  L >= 2.156225504, the printed bound: PASS (margin 4.290e-10); the row's 2.15622550442903... lies in our enclosure: True
+  cross-check, R = 4000 ([Pat2026], our #226 replay 2.15622475379391336305): L >= 2.15622475379391336305: True
+Red controls (each must be refused):
+  the printed bound raised to 2.156225504430035 (just above our enclosure): refused: True
+  the cutoff halved (R = 20000): L >= 2.156225481682566, below 2.156225504: True
+  mu = 6/41 instead of 5/41 (R = 40000): L >= 2.155899404960417, below 2.156225504: True
+RESULT: PASS  (157 s)

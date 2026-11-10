@@ -281,6 +281,7 @@ unnormalized $L^2$ norms). Both sides of the update of 4 November in
 | lower, #270 night update | the same family at $\mu$ = `0x1.f42a1bd5af466p-4` | 2.15622552815421295612 (enclosure width 6.7e-21; 262,144 explicit rows) | 2.156225528154212956 |
 | lower, the 16a row of [#326](https://github.com/teorth/optimizationproblems/pull/326) (maximusrufus) | the trial function truncated at $0 < \lvert k\rvert \le 4000$, $\mu = 1221/10000$ (maximusrufus/c16-bgw-certificates @ `0c570700`, `lower_certificate.json`, `de314c10...6991`: only $R$ and $\mu$ used), `c16_trunc_check.py`: the three sums over the disc in integers at the scale $2^{256}$, every term rounded both ways | 2.15622477064423579034; the certificate's three sum enclosures overlap ours | 2.1562247706 |
 | upper, the 16a row of [#246](https://github.com/teorth/optimizationproblems/pull/246) (maximusrufus; 7 November) | maximusrufus/c16-bgw-certificates @ `0c570700`, `upper_certificate.json` (`f46adc04...25a3`; no hash stated, this is the file at the commit #326 cites): 84 boxes tiling $[1, 4.9 \cdot 10^8]$ exactly, each with its own $\mu$ (read exactly from its decimal string). `c16_boxes_check.py` checks the 82 boxes that start below $2^{18}$ with their own $\mu$ (each endpoint rounded outward; the one that crosses $2^{18}$ up to $2^{18}$); for $\delta \ge 2^{18}$ our own tail bound replaces the certificate's | largest endpoint value 2.15622564574899300283, on the box $[3.928106, 3.931069]$ ($\mu$ = 0.12206997134993264), $8.5 \cdot 10^{-10}$ below the printed bound; tail at most 2.0163. Controls: the bound $10^{-15}$ below that value, one $\mu$ raised by 1%, and one box removed are each refused | 2.1562256466 |
+| lower, the 16a row [Pat2026b] of #270 (10 November) | the trial function the row states, $c_k = 1/(\lvert k\rvert^2(\lvert k\rvert^2 + 41/5))$ on $0 < \lvert k\rvert \le 40000$ (5,026,547,528 lattice points; no file needed), `c16_trunc_big.py`: the three sums of `c16_trunc_check.py`, computed in C (`c16_trunc_fast.c`, every term floored and ceiled at the scale $2^{100}$ by unsigned 128-bit division; equal to the Python sums integer for integer at $R = 300$ and $1200$, and giving the [Pat2026] value at $R = 4000$ again); $\delta = 3.93181190026902397902$. Controls: the bound raised just above our enclosure, the cutoff halved ($2.1562254817$) and $\mu$ = 6/41 in place of 5/41 ($2.1558994050$) are each refused | [2.15622550442903480541, 2.15622550442903480542], the row's 2.15622550442903... ; 4.3e-10 above the printed bound | 2.156225504 |
 
 So $2.15622552815421295612 \le C_{16} \le 2.15622552815421295831$ (from the night update; $2.15622552815421292 \le C_{16} \le 2.15622552815421974$ from the first) for the page's "Equivalently" definition, the maximum
 over $\delta \ge 1$ (which reading is meant is asked in [#325](https://github.com/teorth/optimizationproblems/issues/325));
@@ -290,7 +291,7 @@ largest interval-end value is refused, one $\mu$ raised by 1% is refused, and on
 What rests on mathematics: Cauchy-Schwarz, translation invariance, the convexity in $\delta$, the row-sum identities,
 the convexity of the row tails and the lattice count.
 
-Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (about 10 minutes, the #246 upper row about 3; the night update refines G and H near the peak with
+Reproduce: `cd c16 && ./fetch.sh && ./run_all.sh` (about 13 minutes, the #246 upper row about 3 and the [Pat2026b] row about 3 with a C compiler; the night update refines G and H near the peak with
 `--upper-width 1e-21 --max-rows 262144 --lower-factor 128`).
 
 ## C68: Korenblum's constant (5 November 2026)
@@ -1183,7 +1184,7 @@ remainder theorem, two more primes agreeing). Both programs equal brute force on
 Red controls, all refused: one unit more in each row's last digit; the cap one lower (the counts change); a digit that
 would carry. Reproduce: `cd c3a && ./run_all.sh` (the [MI2026] row about three hours).
 
-## C1c, C1a and C1d: six step functions of 9 and 10 November 2026
+## C1c, C1a and C1d: six step functions of 9 and 10 November 2026, and the first 1c certificate of #270
 
 `c1ac/` replays the certificates of [#354](https://github.com/teorth/optimizationproblems/pull/354) (SeanSagait) and of
 the 9 and 10 November updates of [#270](https://github.com/teorth/optimizationproblems/pull/270) (vidigoat) with
@@ -1194,6 +1195,7 @@ its integers into JSON after checking that every token is a canonical non-negati
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
 | --- | --- | --- | --- | --- |
 | $C_{1c} \geq$ | [#354](https://github.com/teorth/optimizationproblems/pull/354) | SeanSagait/c1c-autocorrelation-certificate @ `9e7f3d19`, `K262144_0.4103768.txt` (K = 262,144, 262,400 weights), `062a2869...6769` | 935577600963641344/2279800930147535089 = 0.41037688360934932768..., minimum only at k = 46008 (S = 1509900967, A = 3568945316176) | 0.4103768, below the exact value |
+| $C_{1c} \geq$ | #270 (26 Oct, its first certificate: the [Pat2026] row, replayed 10 Nov) | vidigoat/optimization-records @ `08c6bfdf`, `tao/certificates/c1c/c1c_K98304.json` (K = 98,304, 98,368 weights), `3fcd6581...f747` | 2594500369901311586790309888/6322755819680014072464230569 = 0.41034328129923190079..., minimum only at k = 97663 | 0.4103432812, below |
 | $C_{1c} \geq$ | #270 (9 Nov, `c1c_v4`) | vidigoat/optimization-records @ `358b200b`, `tao/certificates/c1c_v4/c1c_K98304_v4.json`, `58dacf40...16f6` | 5282641762424933775753216/12873173145647069582596129 = 0.41036049951765035306..., minimum only at k = 98288 | 0.4103604995, below |
 | $C_{1c} \geq$ | #270 (9 Nov, `c1c_v5`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1c_v5/c1c_K98304_v5.json`, `7021f269...676b` | 2556315663995378551725293568/6229433836731244234885554241 = 0.41036083390473056108..., minimum only at k = 45081 | 0.4103608339, below |
 | $C_{1a} \leq$ | #270 (9 Nov, `c1a_v2`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1a_v2/c1a_n262144_v2.json` (262,144 non-negative integer heights), `4d8f8216...fd8d` | 29134419116089766846043850668467284344832/19387496227028661445940960928888412813689 = 1.50274273557163313362..., maximum only at m = 96751 | 1.5027427356, above |
@@ -1201,10 +1203,10 @@ its integers into JSON after checking that every token is a canonical non-negati
 | $C_{1a} \leq$ | #270 (10 Nov, `c1a_v3`) | vidigoat/optimization-records @ `a559680e`, `tao/certificates/c1a_v3/c1a_n262144_v3.json`, `b32a20bf...5c14` | 116537598371962553887369519059399403896832/77549933019818026777245548252121251545225 = 1.50274273405473036507..., maximum only at m = 262143 | 1.5027427341, above |
 
 Every fraction, deciding lag and printed bound is the one the pull request, its rows or its thread state. The hashes of
-#354 and `c1c_v4` are the ones stated there; for `c1c_v5`, `c1a_v2`, `c1d` and `c1a_v3` none was stated, and these are
+#354, `c1c_v4` and the first 1c certificate (the row states `3fcd6581f2c1`) are the ones stated there; for `c1c_v5`, `c1a_v2`, `c1d` and `c1a_v3` none was stated, and these are
 the files at the commit the thread links (their folders' SHA256SUMS list the same hashes). Red controls, on every certificate: a
 corrupted coefficient and a weight changed by 1 are refused by the polynomial identity, scaling by 3 leaves the bound
-unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103604996,
+unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103432813, 0.4103604996,
 0.4103608340, 1.5027427355, 1.4546733457, 1.5027427340) is refused. Reproduce: `cd c1ac && ./fetch.sh && ./run_all.sh`
 (about five minutes).
 
