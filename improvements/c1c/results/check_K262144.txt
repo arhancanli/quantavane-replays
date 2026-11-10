@@ -1,0 +1,20 @@
+certificate c1c_lower_K262144.json
+  constant C_1c; K = 262144; n = 262145; deciding lag k = 219901; min A_k = 12914467989753767244785102041884; lags at the minimum = 1
+  exact bound = 846362574176502890154236447416909824/2062400481577886062273091058271244329
+              = 0.4103774129886616831701566... (floor to 25 decimals)
+  the stated fraction: EQUAL
+  claim C_1c >= 0.4103774129: implied
+  record 0.4103768: beaten strictly, margin 6.129887e-07 (the printed claim also beats it: True)
+  record 935577600963641344/2279800930147535089: beaten strictly, margin 5.293793e-07 (the printed claim also beats it: True)
+  record 0.4103608339: beaten strictly, margin 1.657909e-05 (the printed claim also beats it: True)
+  record 2556315663995378551725293568/6229433836731244234885554241: beaten strictly, margin 1.657908e-05 (the printed claim also beats it: True)
+  record 0.4103598711: beaten strictly, margin 1.754189e-05 (the printed claim also beats it: True)
+  record 11005597691381428229825143056897540096/26819380902505338613619516881482225625: beaten strictly, margin 1.754184e-05 (the printed claim also beats it: True)
+  record 0.4103333: beaten strictly, margin 4.411299e-05 (the printed claim also beats it: True)
+  RESULT: PASS (21 s)
+red controls (each must be refused):
+  C1 value 87381 raised by one unit: REFUSED - REFUSED: the exact value differs from the fraction stated in the certificate
+  C2 largest value 0 raised by 1%: REFUSED - REFUSED: the exact value differs from the fraction stated in the certificate
+  C3 same change, its own fraction stated: REFUSED - REFUSED: the claim 0.4103774129 is not implied
+  C4 claim tightened by one unit of its last digit (0.4103774130): REFUSED - REFUSED: the claim 0.4103774130 is not implied
+  CONTROLS: all refused, as required

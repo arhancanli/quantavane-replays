@@ -24,3 +24,9 @@ Warm starts (published certificate data only): `vidigoat_c1c_K98304_v3.json` (#2
 `04c9c759...f7237`), `julsgaard_c1c_K98304.json` (#318, sha256 `fe11336b...52d2`). The workers write each new best as
 integers (largest absolute value about 2^56); exactness is the job of `check.py` in each certificate folder, never of
 the search.
+
+C1c, 10 Nov: `c1c_spike/` (numpy and scipy, one CPU core): `fp.py` solves the spike-plus-profile equations of PR #354's
+structure (one spike cell of weight M, every lag from t1 K to K active) by a damped fixed-point iteration, `opt.py`
+chooses M by golden-section search, `ladder.py` runs K = 2^14, 2^16, 2^18 (about 45 s in all), and `mkcert.py`
+scales the weights to 2^60, rounds them and writes the certificate. Written from #354's description; its programs were
+not read or run.

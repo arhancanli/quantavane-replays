@@ -1,0 +1,13 @@
+self-test against brute force (12 random inputs): True
+c1c_lower_K262144.json: K = 262144, n = 262145, S = 2872212026698506854, max weight = 1152921504606846976
+  least A_k at k = 219901 (lags with that value: 1), A = 12914467989753767244785102041884
+  bound = 846362574176502890154236447416909824/2062400481577886062273091058271244329
+  decimal (floor): 0.4103774129886616831701
+  next lag value K A / S^2 = 0.4103774129886617299624
+  stated fraction: EQUAL
+  claim 0.4103774129: implied
+  control: weight 47513 raised by 1 changes the bound: True
+  control: the claim moved one unit up (410377413/1000000000) is refused: True
+  control: the changed certificate fails the stated fraction: True
+  run time 4 s
+RESULT: PASS
