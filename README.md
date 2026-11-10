@@ -185,6 +185,14 @@ folder's README states, 8.5e-8 below the printed 1.8054956; sum b deg Q / m = 0.
 [9.05960954785e-8, 9.05960954786e-8] (Q22); f certified positive on all 6,997 support cells (247,249 pieces), min f in
 [1.0085284e-6, 1.0085286e-6]. `python3 -I c86_check.py vid3 certs --controls` (about 11 minutes on 12 cores).
 
+PR #270, second update of 10 Nov (vidigoat c86_v4 @f8f3acb, `certificate.json`, `7b8c14bd...153f` as stated): #298's
+format with 37 auxiliaries and 7,873 knots. Every condition E1-E6 holds: T/m =
+260197628230434684107589673124053/144115188075815087401774532788224 = 1.80548373633979353261... exactly, the README's
+fraction, 6.4e-8 below the printed 1.8054838; sum b deg Q / m = 0.8991977112; smallest log integral
+[8.43594308498e-8, 8.43594308499e-8] (Q22); f certified positive on all 7,871 support cells (307,163 pieces), min f in
+[1.0206187e-6, 1.0206188e-6] near x = 0.563799192. `python3 -I c86_check.py vid4 certs --controls` (about an hour on
+one core: 3,509 CPU seconds).
+
 The lower bound $C_{86} \ge 1.80220$\* (D. Niedbala Giraudin, arXiv:2609.29298, the row proposed in
 [#315](https://github.com/teorth/optimizationproblems/pull/315)), from the certificate `CERTIFICAT_C86.json` (an
 ancillary file of arXiv v1, `3caa7297...abe5`) and the paper's Proposition 2: if

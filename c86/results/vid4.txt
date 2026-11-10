@@ -1,0 +1,124 @@
+ROW vid4: PR #270 update of 10 Nov, second (vidigoat c86_v4 @f8f3acb), C86 <= 1.8054838*
+  sha256 vid4/certificate.json: 7b8c14bd743593e61a2f75c0e020d100146da5e1162be71e212755537e70153f
+  check sha256 matches the c86_v4 README and SHA256SUMS (7b8c14bd743593e61a2f75c0e020d100146da5e1162be71e212755537e70153f): PASS
+  keys read: edges, node_densities, A, b, bound; ignored: bound_float
+  check E1 7873 nodes, strictly increasing, 7873 heights, 37 polynomials and weights: PASS
+  check E1 every node height >= 0 and every weight >= 0: PASS (7866 positive heights, 37 positive weights)
+  check E1 m > 0 and min S > 0 (density zero outside the nodes): PASS (m = 0.999999999999717000, S in [3098476543630901/144115188075855872, 6325868626595283/1125899906842624])
+  support: 7871 cells with a positive end height, widths 140737488355/18014398509481984 to 429530814460461/1125899906842624, in [3098476543630901/144115188075855872, 6325868626595283/1125899906842624] (1 gaps)
+  check E2 Q0 (degree 1, lc 1): primitive, irreducible, positive lc, distinct: PASS (degree 1; 1 of 1 roots real)
+  check E2 Q1 (degree 1, lc 1): primitive, irreducible, positive lc, distinct: PASS (degree 1; 1 of 1 roots real)
+  check E2 Q2 (degree 1, lc 1): primitive, irreducible, positive lc, distinct: PASS (degree 1; 1 of 1 roots real)
+  check E2 Q3 (degree 2, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[2]; 2 of 2 roots real)
+  check E2 Q4 (degree 3, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[3]; 3 of 3 roots real)
+  check E2 Q5 (degree 4, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4]; 4 of 4 roots real)
+  check E2 Q6 (degree 4, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4]; 4 of 4 roots real)
+  check E2 Q7 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q8 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q9 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q10 (degree 5, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5]; 5 of 5 roots real)
+  check E2 Q11 (degree 10, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[10]; 10 of 10 roots real)
+  check E2 Q12 (degree 10, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4, 6], 3[10]; 10 of 10 roots real)
+  check E2 Q13 (degree 10, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 3[10]; 10 of 10 roots real)
+  check E2 Q14 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 8 of 8 roots real)
+  check E2 Q15 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 8 of 8 roots real)
+  check E2 Q16 (degree 7, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[1, 6], 3[3, 4]; 7 of 7 roots real)
+  check E2 Q17 (degree 2, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 3[2]; 2 of 2 roots real)
+  check E2 Q18 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 6 of 8 roots real)
+  check E2 Q19 (degree 12, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[5, 7], 3[5, 7], 5[2, 4, 6]; 8 of 12 roots real)
+  check E2 Q20 (degree 12, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[12]; 8 of 12 roots real)
+  check E2 Q21 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[4, 10], 3[3, 5, 6]; 10 of 14 roots real)
+  check E2 Q22 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[14]; 12 of 14 roots real)
+  check E2 Q23 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[14]; 10 of 14 roots real)
+  check E2 Q24 (degree 15, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 3[3, 4, 4, 4], 5[3, 12], 7[4, 5, 6]; 13 of 15 roots real)
+  check E2 Q25 (degree 16, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[1, 15], 3[4, 12]; 12 of 16 roots real)
+  check E2 Q26 (degree 17, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8, 9], 3[1, 16]; 15 of 17 roots real)
+  check E2 Q27 (degree 21, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[3, 18], 3[6, 15]; 17 of 21 roots real)
+  check E2 Q28 (degree 12, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[12]; 10 of 12 roots real)
+  check E2 Q29 (degree 15, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[3, 12], 3[15]; 13 of 15 roots real)
+  check E2 Q30 (degree 8, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[8]; 6 of 8 roots real)
+  check E2 Q31 (degree 2, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 5[2]; 2 of 2 roots real)
+  check E2 Q32 (degree 3, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[3]; 3 of 3 roots real)
+  check E2 Q33 (degree 14, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[14]; 12 of 14 roots real)
+  check E2 Q34 (degree 20, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[7, 13], 3[20]; 14 of 20 roots real)
+  check E2 Q35 (degree 16, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[16]; 16 of 16 roots real)
+  check E2 Q36 (degree 13, lc 1): primitive, irreducible, positive lc, distinct: PASS (primes 2[6, 7], 3[6, 7], 5[13]; 11 of 13 roots real)
+  check E3 sum_j b_j deg Q_j < m: PASS (sum/m = 0.8991977112)
+  check E6 T/m equals the certificate's bound exactly: PASS (T/m = 260197628230434684107589673124053/144115188075815087401774532788224 = 1.80548373633979353261...)
+  check E6 the README's exact bound 260197628230434684107589673124053/144115188075815087401774532788224: PASS
+  check E6 printed upper bound 1.8054838 (PR #270 comment of 10 Nov, second) >= T/m: PASS (difference 6.366e-08)
+  check roots: every Q_j has deg Q_j disjoint Gershgorin discs (one root each); exactly nreal of them meet the real axis, each holding one Sturm-isolated real root; the others pair up under conjugation: PASS (289 real roots (exact Sturm counts, enclosures of width <= 2^-112), 48 nonreal in 24 conjugate pairs; largest disc radius 2^-305)
+  prepared: 7872 nodes with a nonzero slope jump, D = 288230376151711744 (D e_k integers), lcm of the jump denominators 2^3734; roots 2.2 s
+  check self-test: our ln encloses the correctly rounded decimal ln (70 digits) at 899 integers: PASS
+  check self-test: our arctangent: 4 atan 1 and 4 (atan 1/2 + atan 1/3) enclose pi (from Machin's formula), atan a + atan b encloses atan((a + b)/(1 - ab)) at 400 random rationals, agreement with math.atan2: PASS (widest enclosure 2^-166, largest float difference 2.2e-16)
+  check self-test: the slope jumps satisfy sum j_k = 0, sum j_k e_k = 0, sum j_k e_k^2/2 = m exactly: PASS (7872 nonzero jumps, sum |j_k| = 5.318909e+07)
+  check self-test: closed-form U agrees with brute-force Gauss-Legendre quadrature over every support cell at 22 real points (three of them nodes, three outside S) and 28 complex points (the 24 nonreal roots in the upper half-plane and four random points): PASS (largest differences 7.8e-15 (real), 2.0e-14 (complex))
+  check self-test: Vieta: for every Q_j the root enclosures give e1 = -a_{n-1}/a_n, e2 = a_{n-2}/a_n and prod |root|^2 = (a_0/a_n)^2 within their radii (exact rationals): PASS (all 37 polynomials)
+  check E4 every real root within distance 6 of every node with a nonzero jump (the Lipschitz bound used): PASS (largest distance 5.6185)
+  E4 int log|Q0| dmu, Q0 = x: [9.96572098211e-8, 9.96572098212e-8]
+  E4 int log|Q1| dmu, Q1 = x - 1: [1.00008315849e-7, 1.00008315850e-7]
+  E4 int log|Q2| dmu, Q2 = x - 2: [1.00412892466e-7, 1.00412892467e-7]
+  E4 int log|Q3| dmu, Q3 = x^2 - 3x + 1: [1.01019635565e-7, 1.01019635566e-7]
+  E4 int log|Q4| dmu, Q4 = x^3 - 5x^2 + 6x - 1: [9.68425904732e-8, 9.68425904733e-8]
+  E4 int log|Q5| dmu, Q5 = x^4 - 7x^3 + 13x^2 - 7x + 1: [9.17557525378e-8, 9.17557525379e-8]
+  E4 int log|Q6| dmu, Q6 = x^4 - 7x^3 + 14x^2 - 8x + 1: [1.01454749419e-7, 1.01454749420e-7]
+  E4 int log|Q7| dmu, Q7 = x^5 - 9x^4 + 28x^3 - 35x^2 + 15x - 1: [9.69631663404e-8, 9.69631663405e-8]
+  E4 int log|Q8| dmu, Q8 = x^5 - 9x^4 + 26x^3 - 29x^2 + 11x - 1: [1.02781805401e-7, 1.02781805402e-7]
+  E4 int log|Q9| dmu, Q9 = x^5 - 9x^4 + 27x^3 - 32x^2 + 13x - 1: [9.66475733739e-8, 9.66475733740e-8]
+  E4 int log|Q10| dmu, Q10 = x^5 - 9x^4 + 27x^3 - 31x^2 + 12x - 1: [9.97385226540e-8, 9.97385226541e-8]
+  E4 int log|Q11| dmu, Q11 = x^10 - 18x^9 + 134x^8 - 537x^7 + 1265x^6 - 1798x^5 + 1526x^4 - 743x^3 + 194x^2 - 24x + 1: [9.07493210887e-8, 9.07493210888e-8]
+  E4 int log|Q12| dmu, Q12 = x^10 - 18x^9 + 135x^8 - 549x^7 + 1320x^6 - 1920x^5 + 1662x^4 - 813x^3 + 206x^2 - 24x + 1: [9.03757866919e-8, 9.03757866920e-8]
+  E4 int log|Q13| dmu, Q13 = x^10 - 18x^9 + 134x^8 - 538x^7 + 1273x^6 - 1822x^5 + 1560x^4 - 766x^3 + 200x^2 - 24x + 1: [8.77965744718e-8, 8.77965744719e-8]
+  E4 int log|Q14| dmu, Q14 = x^8 - 15x^7 + 90x^6 - 277x^5 + 467x^4 - 428x^3 + 200x^2 - 42x + 3: [1.04498683881e-7, 1.04498683882e-7]
+  E4 int log|Q15| dmu, Q15 = x^8 - 15x^7 + 89x^6 - 269x^5 + 445x^4 - 402x^3 + 187x^2 - 40x + 3: [9.34685606606e-8, 9.34685606607e-8]
+  E4 int log|Q16| dmu, Q16 = x^7 - 13x^6 + 63x^5 - 143x^4 + 157x^3 - 78x^2 + 16x - 1: [8.74727693186e-8, 8.74727693187e-8]
+  E4 int log|Q17| dmu, Q17 = x^2 - 4x + 2: [1.00070659645e-7, 1.00070659646e-7]
+  E4 int log|Q18| dmu, Q18 = x^8 - 14x^7 + 78x^6 - 222x^5 + 345x^4 - 289x^3 + 120x^2 - 21x + 1: [1.04483362537e-7, 1.04483362538e-7]
+  E4 int log|Q19| dmu, Q19 = x^12 - 21x^11 + 190x^10 - 972x^9 + 3103x^8 - 6439x^7 + 8780x^6 - 7789x^5 + 4372x^4 - 1483x^3 + 283x^2 - 27x + 1: [9.75619930619e-8, 9.75619930620e-8]
+  E4 int log|Q20| dmu, Q20 = x^12 - 21x^11 + 190x^10 - 972x^9 + 3102x^8 - 6430x^7 + 8750x^6 - 7742x^5 + 4336x^4 - 1470x^3 + 281x^2 - 27x + 1: [1.00417828549e-7, 1.00417828550e-7]
+  E4 int log|Q21| dmu, Q21 = x^14 - 25x^13 + 274x^12 - 1736x^11 + 7060x^10 - 19355x^9 + 36573x^8 - 47907x^7 + 43221x^6 - 26404x^5 + 10625x^4 - 2701x^3 + 406x^2 - 32x + 1: [9.60729873053e-8, 9.60729873054e-8]
+  E4 int log|Q22| dmu, Q22 = x^14 - 25x^13 + 274x^12 - 1736x^11 + 7061x^10 - 19369x^9 + 36655x^8 - 48167x^7 + 43704x^6 - 26937x^5 + 10964x^4 - 2816x^3 + 424x^2 - 33x + 1: [8.43594308498e-8, 8.43594308499e-8]
+  E4 int log|Q23| dmu, Q23 = x^14 - 25x^13 + 274x^12 - 1735x^11 + 7044x^10 - 19248x^9 + 36183x^8 - 47058x^7 + 42081x^6 - 25460x^5 + 10155x^4 - 2568x^3 + 387x^2 - 31x + 1: [1.07233203119e-7, 1.07233203120e-7]
+  E4 int log|Q24| dmu, Q24 = x^15 - 27x^14 + 323x^13 - 2261x^12 + 10304x^11 - 32190x^10 + 70713x^9 - 110296x^8 + 121940x^7 - 94465x^6 + 50220x^5 - 17760x^4 + 3993x^3 - 532x^2 + 37x - 1: [1.22314946375e-1, 1.22314946376e-1]
+  E4 int log|Q25| dmu, Q25 = x^16 - 29x^15 + 376x^14 - 2881x^13 + 14533x^12 - 50911x^11 + 127385x^10 - 230770x^9 + 303849x^8 - 289697x^7 + 197940x^6 - 95254x^5 + 31441x^4 - 6835x^3 + 916x^2 - 67x + 2: [2.01956155817e-1, 2.01956155818e-1]
+  E4 int log|Q26| dmu, Q26 = x^17 - 31x^16 + 433x^15 - 3608x^14 + 20016x^13 - 78141x^12 + 221279x^11 - 461883x^10 + 715331x^9 - 821490x^8 + 694870x^7 - 427515x^6 + 187693x^5 - 57190x^4 + 11605x^3 - 1469x^2 + 103x - 3: [1.19280014988e-7, 1.19280014989e-7]
+  E4 int log|Q27| dmu, Q27 = x^21 - 37x^20 + 628x^19 - 6488x^18 + 45656x^17 - 232062x^16 + 881750x^15 - 2557644x^14 + 5735638x^13 - 10012934x^12 + 13642521x^11 - 14494118x^10 + 11961174x^9 - 7616692x^8 + 3707186x^7 - 1361262x^6 + 370329x^5 - 72717x^4 + 9906x^3 - 878x^2 + 45x - 1: [2.21114714896e-2, 2.21114714897e-2]
+  E4 int log|Q28| dmu, Q28 = x^12 - 22x^11 + 208x^10 - 1107x^9 + 3652x^8 - 7760x^7 + 10709x^6 - 9481x^5 + 5233x^4 - 1726x^3 + 318x^2 - 29x + 1: [1.33048133110e-1, 1.33048133111e-1]
+  E4 int log|Q29| dmu, Q29 = x^15 - 27x^14 + 322x^13 - 2237x^12 + 10058x^11 - 30777x^10 + 65693x^9 - 98793x^8 + 104703x^7 - 77645x^6 + 39727x^5 - 13710x^4 + 3079x^3 - 424x^2 + 32x - 1: [1.95340535971e-1, 1.95340535972e-1]
+  E4 int log|Q30| dmu, Q30 = x^8 - 14x^7 + 78x^6 - 221x^5 + 339x^4 - 277x^3 + 111x^2 - 19x + 1: [1.13596590426e-1, 1.13596590427e-1]
+  E4 int log|Q31| dmu, Q31 = x^2 - 4x + 1: [8.44651641512e-2, 8.44651641513e-2]
+  E4 int log|Q32| dmu, Q32 = x^3 - 6x^2 + 9x - 3: [9.86414766011e-2, 9.86414766012e-2]
+  E4 int log|Q33| dmu, Q33 = x^14 - 25x^13 + 275x^12 - 1755x^11 + 7216x^10 - 20081x^9 + 38685x^8 - 51903x^7 + 48183x^6 - 30394x^5 + 12629x^4 - 3288x^3 + 494x^2 - 37x + 1: [2.20382685198e-1, 2.20382685199e-1]
+  E4 int log|Q34| dmu, Q34 = x^20 - 36x^19 + 593x^18 - 5928x^17 + 40224x^16 - 196335x^15 + 712881x^14 - 1964326x^13 + 4154231x^12 - 6777225x^11 + 8530158x^10 - 8248947x^9 + 6078552x^8 - 3371077x^7 + 1383131x^6 - 410272x^5 + 85265x^4 - 11875x^3 + 1035x^2 - 50x + 1: [1.78982100010e-1, 1.78982100011e-1]
+  E4 int log|Q35| dmu, Q35 = x^16 - 29x^15 + 375x^14 - 2858x^13 + 14301x^12 - 49557x^11 + 122302x^10 - 217851x^9 + 281040x^8 - 261419x^7 + 173311x^6 - 80310x^5 + 25239x^4 - 5133x^3 + 626x^2 - 40x + 1: [1.86683725378e-1, 1.86683725379e-1]
+  E4 int log|Q36| dmu, Q36 = x^13 - 23x^12 + 229x^11 - 1298x^10 + 4637x^9 - 10930x^8 + 17323x^7 - 18505x^6 + 13193x^5 - 6143x^4 + 1798x^3 - 310x^2 + 28x - 1: [1.49384714433e-1, 1.49384714434e-1]
+  check E4 int log|Q_j| dmu > 0 for every j (rigorous lower ends): PASS (smallest: Q22 = x^14 - 25x^13 + 274x^12 - 1736x^11 + 7061x^10 - 19369x^9 + 36655x^8 - 48167x^7 + 43704x^6 - 26937x^5 + 10964x^4 - 2816x^3 + 424x^2 - 33x + 1, in [8.43594308498e-8, 8.43594308499e-8]; 30.0 s)
+  check self-test: every E4 value agrees with brute-force quadrature of U at its 337 roots (floats): PASS (largest difference 4.7e-14; 15.8 s)
+  E5 roots on the support: 287 of the 289 real roots lie in S, where f tends to +infinity; a piece that may hold one takes -b log(its largest distance to the root), the others the tangent
+  check self-test: the cell model (Taylor polynomial, remainders, near terms) and the direct sums over all nodes agree (enclosures overlap) at 48 random points: PASS (largest midpoint difference 0.0e+00)
+  check self-test: piece lower bounds never exceed rigorous point values of f (160 random pieces, depths 0-40, 17760 points crowded towards both ends): PASS (0 violations; sampled minimum minus bound: median 2.0e-19, max 3.1e-03)
+  check E5 every support cell has all its near nodes within distance 1 (where G2 is concave): PASS (0 cells outside)
+  E5 float scan (heuristic only): smallest f found 1.0206188e-06 in cell 2334 [5075556780046549/9007199254740992, 5080060379673919/9007199254740992] at x = 0.563799192
+  check E5 f >= 0.9 x (the cell's float minimum) certified on every support cell (7871 cells, 307163 pieces, max depth 15): PASS (0 cells failed, 0 needed the weaker goal 0.5 x or 0; models 6623 s and bisection 251 s summed over the cells' jobs, 6873 s wall)
+  E5 smallest certified piece bound, first pass: 9.2120123e-7
+  check E5 re-run of the 31 cells below (1 - 1e-8) x the smallest float minimum, at that goal: PASS (15.3 s; cells 229, 314, 391, 622, 1342, 1649, 1781, 1793, 1794, 1798, 2047, 2121)
+  check E5 min over S of f enclosed: PASS (min_S f in [1.0206187e-6, 1.0206188e-6]; upper end: f at x = 0.563799192099 (cell 2334, [5075556780046549/9007199254740992, 5080060379673919/9007199254740992]) from the direct sums over all nodes and exact polynomial values; lower end: the smallest certified piece bound over all cells)
+  check E5: f > 0 on S (every closed support cell, cell ends included): PASS (certified f >= 1.02061e-6)
+  check minimum principle, sampled: f > 0 at the 1 gap midpoints and 3 exterior points (not needed; a consistency check): PASS (smallest f >= 7.79897e-2 at x = 5.8185)
+  check control: b of Q2 (the largest log|Q(x*)| = 0.3620 at the minimiser) raised by 5.64e-6 (relative 2.98e-04, twice what breaks E5 there): E5 refuted at x*, and the bisection does not certify f >= 0 on cell 2334: PASS (f(x*) <= -1.020e-6 (rigorous upper end); 20013 pieces, 9963 uncertified; E3 still holds (sum/m = 0.89920334))
+  check control: the highest node (e = 5358720606617469/18014398509481984, height 42.9565) lowered by 1% (mass and trace recomputed): E4 refuted: PASS (int log|Q| d mu < 0 rigorously for 2 of 37 polynomials, most negative Q2 in [-7.04266e-6, -7.04265e-6]; E6 refuses the old bound; 60 s)
+  check control: weights scaled by 1.3 violate E3: PASS (sum/m = 1.168957)
+  check control: a bound 1e-15 below T/m is refused by E6: PASS
+  check control: a height -1e-9 and two swapped nodes are refused by E1: PASS
+  check control: E2 refuses x^2 - 3x + 2 = (x - 1)(x - 2): PASS (gcd 1, lc 1, factor degrees still possible: [1])
+  check control: E2 refuses 2x^2 - 6x + 2 (not primitive): PASS (gcd 2, lc 2, primes 3[2])
+  check control: E2 refuses Q1 again, negated: PASS (gcd 1, lc -1, degree 1, repeated)
+  check control: E2 refuses -x + 3 (negative leading coefficient): PASS (gcd 1, lc -1, degree 1)
+  check control: E2 refuses (x^2 + 1)(x^2 - 3x + 1), no real factor: PASS (gcd 1, lc 1, factor degrees still possible: [2])
+  check control: a nonreal root of Q27 moved by 1e-12 (radius kept) fails the Vieta test: PASS
+  check control: goal min_S f + 1e-12 is not certified in cell 2334 (bisection to depth 24): PASS (7389 pieces, 3446 uncertified)
+  what rests on the cited theorems: f >= 0 on S gives f >= 0 on C (minimum principle: f is harmonic off S and the roots, tends to +inf at the roots and at infinity by E3); E2-E5 make mu/m arithmetic ([Smi24] Prop. 5.15); Smith's Thm 1.5 on an interval containing S of capacity > 1 ([1/1000, 13], as PROOF.md says) then gives C86 <= T/m
+  CPU time: 3509 s (this process and its workers)
+  run time: 7132.3 s
+  RESULT: ALL CHECKS PASS
+  ROW STATUS: FULL (E1-E6)
