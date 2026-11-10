@@ -3401,6 +3401,18 @@ PLW = {   # certificates in the format of PR #298 (piecewise-linear density, aux
              "sha_src": "the c86_v3 README and the PR comment", "printed": "1.8054956",
              "printed_src": "PR #270 comment of 5 Nov, night",
              "stated": Fraction(780597977251274792019360777060007, 432345564227458232572250425393152)},
+    "vid4": {"title": "ROW vid4: PR #270 update of 10 Nov, second (vidigoat c86_v4 @f8f3acb), C86 <= 1.8054838*",
+             "rel": "vid4/certificate.json",
+             "sha": "7b8c14bd743593e61a2f75c0e020d100146da5e1162be71e212755537e70153f",
+             "sha_src": "the c86_v4 README and SHA256SUMS", "printed": "1.8054838",
+             "printed_src": "PR #270 comment of 10 Nov, second",
+             "stated": Fraction(260197628230434684107589673124053, 144115188075815087401774532788224)},
+    "p298r5": {"title": "ROW p298r5: PR #298 update of 10 Nov (rpinho c86/round5 @2f2f12b), C86 <= 1.8054939963*",
+               "rel": "p298r5/certificate.json",
+               "sha": "e5fb93f6c31d2e3b38c986ac71c1d076414d680429fb2cbb91db77fb2e12c9d8",
+               "sha_src": "the round5 SHA256SUMS", "printed": "1.8054939963",
+               "printed_src": "PR #298 title and body",
+               "stated": Fraction(1561194641062402479525057156208744733, 864691128455135125642991200018366464)},
 }
 
 
