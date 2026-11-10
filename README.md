@@ -247,6 +247,7 @@ rigorous remainders; the comparison with the printed bound is exact.
 | #330, final certificate (5 Nov) | rpinho/math-certificates @3be6b2f `c82/degree104-joint/certificate.json` (`b71150bb...4171`) | [0.2519964889882011, 0.2519964889882012] | 0.2519964890 |
 | #330, update of 5 Nov evening | rpinho/math-certificates @a12c362 `c82/degree104-joint/certificate.json` (`ee9622b5...fdd5`, as in its SHA256SUMS) | [0.2519923409720083, 0.2519923409720084], inside the stated [0.25199234097200838698, 0.25199234097200839540] | 0.2519923410 |
 | #280 v4, 5 Nov | vidigoat/optimization-records @79ce0df `tao/certificates/c82/v4/certificate.json` (`c1981f1c...c72f`) | [0.2520079723284296, 0.2520079723284297] | 0.2520079724 |
+| #280 v5, 9 Nov | vidigoat/optimization-records @191064e `tao/certificates/c82/v5/certificate.json` (`8a5f363c...a909`, as the PR comment states); 8 denominators of degree 104, $D$ = 999,999,999,960 as stated | [0.2519889613870203, 0.2519889613870204], below the README's 0.25198896138704 | 0.2519889614 |
 | control: Doche 2001 | [Pin26] `controls/doche2001.json` (`835a10b9...7fc2`) | [0.2544361553, 0.2544361561] | 0.25444 |
 
 What rests on mathematics: that C82 <= B for any certificate meeting the hypotheses (the direct argument in the
@@ -1182,10 +1183,10 @@ remainder theorem, two more primes agreeing). Both programs equal brute force on
 Red controls, all refused: one unit more in each row's last digit; the cap one lower (the counts change); a digit that
 would carry. Reproduce: `cd c3a && ./run_all.sh` (the [MI2026] row about three hours).
 
-## C1c and C1a: four step functions of 9 November 2026
+## C1c, C1a and C1d: six step functions of 9 and 10 November 2026
 
 `c1ac/` replays the certificates of [#354](https://github.com/teorth/optimizationproblems/pull/354) (SeanSagait) and of
-the two 9 November updates of [#270](https://github.com/teorth/optimizationproblems/pull/270) (vidigoat) with
+the 9 and 10 November updates of [#270](https://github.com/teorth/optimizationproblems/pull/270) (vidigoat) with
 `autocorr_check.py`, the checker of the first table (its method section applies unchanged). The certificates' own
 verifiers and search programs were neither read nor run. #354's file is text (K, then the weights); `fetch.sh` copies
 its integers into JSON after checking that every token is a canonical non-negative integer.
@@ -1196,13 +1197,16 @@ its integers into JSON after checking that every token is a canonical non-negati
 | $C_{1c} \geq$ | #270 (9 Nov, `c1c_v4`) | vidigoat/optimization-records @ `358b200b`, `tao/certificates/c1c_v4/c1c_K98304_v4.json`, `58dacf40...16f6` | 5282641762424933775753216/12873173145647069582596129 = 0.41036049951765035306..., minimum only at k = 98288 | 0.4103604995, below |
 | $C_{1c} \geq$ | #270 (9 Nov, `c1c_v5`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1c_v5/c1c_K98304_v5.json`, `7021f269...676b` | 2556315663995378551725293568/6229433836731244234885554241 = 0.41036083390473056108..., minimum only at k = 45081 | 0.4103608339, below |
 | $C_{1a} \leq$ | #270 (9 Nov, `c1a_v2`) | vidigoat/optimization-records @ `1b39a28d`, `tao/certificates/c1a_v2/c1a_n262144_v2.json` (262,144 non-negative integer heights), `4d8f8216...fd8d` | 29134419116089766846043850668467284344832/19387496227028661445940960928888412813689 = 1.50274273557163313362..., maximum only at m = 96751 | 1.5027427356, above |
+| $C_{1d} \leq$ | #270 (10 Nov, `c1d`) | vidigoat/optimization-records @ `a559680e`, `tao/certificates/c1d/c1d_n163840.json` (163,840 signed integer values), `b05de6ab...77b6` | 646233848324886328286774558720/444246710235775351931155445761 = 1.45467334576751329963..., maximum of $\lvert c_m\rvert$ only at m = 165229 | 1.4546733458, above |
+| $C_{1a} \leq$ | #270 (10 Nov, `c1a_v3`) | vidigoat/optimization-records @ `a559680e`, `tao/certificates/c1a_v3/c1a_n262144_v3.json`, `b32a20bf...5c14` | 116537598371962553887369519059399403896832/77549933019818026777245548252121251545225 = 1.50274273405473036507..., maximum only at m = 262143 | 1.5027427341, above |
 
-Every fraction, deciding lag and printed bound is the one the pull request or its thread states. The hashes of #354
-and `c1c_v4` are the ones stated there; for `c1c_v5` and `c1a_v2` none was stated, and these are the files at the
-commit the thread links (their folders' SHA256SUMS list the same hashes). Red controls, on every certificate: a
+Every fraction, deciding lag and printed bound is the one the pull request, its rows or its thread state. The hashes of
+#354 and `c1c_v4` are the ones stated there; for `c1c_v5`, `c1a_v2`, `c1d` and `c1a_v3` none was stated, and these are
+the files at the commit the thread links (their folders' SHA256SUMS list the same hashes). Red controls, on every certificate: a
 corrupted coefficient and a weight changed by 1 are refused by the polynomial identity, scaling by 3 leaves the bound
 unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103604996,
-0.4103608340, 1.5027427355) is refused. Reproduce: `cd c1ac && ./fetch.sh && ./run_all.sh` (about two minutes).
+0.4103608340, 1.5027427355, 1.4546733457, 1.5027427340) is refused. Reproduce: `cd c1ac && ./fetch.sh && ./run_all.sh`
+(about five minutes).
 
 ## 22a: the ropelength lower bound 2.124 (10 November 2026)
 

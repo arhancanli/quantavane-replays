@@ -1,0 +1,15 @@
+1d certs/vidigoat_c1d_n163840.json
+  n: 163840
+  S: 666518349511681
+  argmax_m: 165229
+  max_abs_c: 1972149195327411890523604
+  scaled_by: 1
+  sign_at_max: +
+  ties: 1
+  bound = 646233848324886328286774558720/444246710235775351931155445761
+  decimal: floor 1.4546733457675132996338  ceil 1.4546733457675132996339
+  printed 1.4546733458: above the exact value, a valid upper bound as printed
+  printed 1.4546733457: below the exact value, NOT a valid upper bound as printed
+  control: corrupted coefficient 109226 rejected: True
+  control: old coefficients rejected for weight 81920 + 1: True
+  control: bound unchanged when every value is scaled by 3: True
