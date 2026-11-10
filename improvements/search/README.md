@@ -32,3 +32,9 @@ scales the weights to 2^60, rounds them and writes the certificate. Written from
 not read or run.
 The K = 2^20 certificate of 10 Nov (evening) is `python ladder.py 1048576` (858 s on one core, M = 641.639118)
 followed by `python mkcert.py 1048576 OUT.json`; nothing in these files changed.
+
+C1b, 10 Nov: `c1b/` (numpy and scipy, one core): `c1b_opt.py` minimises log ||C||_p over the shifts
+(C_k = sum_i h_i (1 - h_{i+k}), 0 <= h <= 1) by L-BFGS-B with a quadratic penalty on the mass, restoring sum h = n/2
+exactly after each stage; `python c1b_opt.py construction.json out.json --ps 3e9,1e10,3e10,1e11 --iters 4000`
+(about 10 minutes) from the Atris Labs construction of the 1b page ([A2026], data only). `mkcert_1b.py out.json
+cert.json` rounds the heights to multiples of 2^-48 and fixes the mass exactly in integers.

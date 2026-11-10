@@ -1,0 +1,13 @@
+self-test against brute force (16 random inputs): True
+c1b_upper_n114688.json: n = 114688, D = 281474976710656, mass n D / 2 checked
+  largest X_k at k = 11464 (shifts with that value: 2), X = 1730339319993979413608789703258449
+  bound = 1730339319993979413608789703258449/4543259751217974174964184288067584
+  decimal (floor to 22 places): 0.3808585497516631171477
+  next shift value 2 X / (n D^2) = 0.3808585497503723456603
+  stated fraction: EQUAL
+  claim C_1b <= 0.3808585498: implied
+  control: height 0 +1 and height 44920 -1 changes the bound: True
+  control: broken mass refused: True
+  control: the claim moved one unit down (0.3808585497) is refused: True
+  run time 2 s
+RESULT: PASS

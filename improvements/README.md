@@ -8,6 +8,7 @@ re-derive command and the credit for the warm start.
 | Constant | New bound | Previous best (open pull request) | Folder |
 | --- | --- | --- | --- |
 | $C_{1a}$ (upper) | 1.5027427375 (exactly 1.50274273747657840978...) | 1.5027433522 (#270) | [`c1a`](c1a) |
+| $C_{1b}$ (upper) | 0.3808585498 (exactly 0.38085854975166311714...; 10 Nov, 114,688-step function refined from [A2026]) | 0.3808585504 ([A2026] on the page; no open pull request) | [`c1b`](c1b) |
 | $C_{1c}$ (lower) | 0.4103780000 (exactly 0.41037800003882762970...; 10 Nov evening, K = 2^20, superseding 0.4103774129 of 10 Nov morning and 0.4103598711 of 8 Nov) | 0.4103772 (#354, K = 524288) | [`c1c`](c1c) |
 | $C_{1d}$ (upper) | 1.454673347420953 (exactly 1.45467334742095245159...; 9 Nov, superseding 1.454683534422819 of 8 Nov) | 1.454727664528751 (#312) | [`c1d`](c1d) |
 

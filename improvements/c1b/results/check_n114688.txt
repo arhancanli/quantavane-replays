@@ -1,0 +1,15 @@
+certificate: c1b_upper_n114688.json
+n = 114688 cells, D = 281474976710656, sum(a) = n D / 2 checked
+max_k X_k = 1730339319993979413608789703258449 at k = [-11464, 11464] (2 shift(s))
+bound = 1730339319993979413608789703258449/4543259751217974174964184288067584
+      = 0.3808585497516631171477...
+next largest X_k is lower by 5864310146590059821029/4543259751217974174964184288067584 in the bound
+claim: C_1b <= 0.3808585498; records beaten strictly: ['119018297/312500000', '10919976354672639675467789613614419/28672000000000000000000000000000000', '3808585749/10000000000']
+RESULT: PASS (6.6 s)
+controls move mass from cell 44920 to cell 0; the 1% move gives the bound 0.3808588985239845
+control [one unit of mass moved, old fraction stated]: refused: fraction 1730339319993979414171739656679761/4543259751217974174964184288067584 differs from the stated 1730339319993979413608789703258449/4543259751217974174964
+control [1% of a cell moved, its own fraction stated]: refused: bound 0.3808588985239845 does not imply the claim 0.3808585498
+control [mass broken]: refused: mass: 2 sum(a) = 32281802128991715330 differs from n D = 32281802128991715328
+control [height above D]: refused: heights must be integers in [0, D]
+control [claim moved to 0.3808585497]: refused: bound 0.3808585497516631 does not imply the claim 0.3808585497
+CONTROLS: all refused as expected
