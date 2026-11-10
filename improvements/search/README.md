@@ -38,3 +38,5 @@ C1b, 10 Nov: `c1b/` (numpy and scipy, one core): `c1b_opt.py` minimises log ||C|
 exactly after each stage; `python c1b_opt.py construction.json out.json --ps 3e9,1e10,3e10,1e11 --iters 4000`
 (about 10 minutes) from the Atris Labs construction of the 1b page ([A2026], data only). `mkcert_1b.py out.json
 cert.json` rounds the heights to multiples of 2^-48 and fixes the mass exactly in integers.
+
+C1a and C1d, 10 Nov evening: `c1ad_modal/c1ad_retake2.py` (Modal, numpy and scipy): 16 independent one-core calls, 8 per constant, each restarting the p-norm continuation (log ||v*v||_p - 2 log S, p doubled from its own p0 between 3e7 and 1e9, 3000 L-BFGS iterations a stage) from vidigoat's 10 Nov certificates in #270 (data only), the best vector of each call checkpointed to a Modal volume after every improving stage. The certificates are the jobs 1a_3 and 1d_3 (p0 = 3e7).

@@ -1,4 +1,37 @@
-# C1d <= 1.454673347420953 (signed third autocorrelation constant, upper bound)
+# C1d <= 1.4546733414 (signed third autocorrelation constant, upper bound)
+
+A new upper bound for $C_{1d}$ of the [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/1d.html) (10 Nov 2026, evening):
+
+$$C_{1d} \leq \frac{838861227937471890002426104328885370880}{576666392427609677715360509915372739121} = 1.45467334138563686456\ldots \leq 1.4546733414.$$
+
+| | value | our margin |
+| --- | --- | --- |
+| this certificate (`c1d_upper_n163840_v2.json`) | 1.45467334138563686456... | |
+| vidigoat, #270, 10 Nov (`c1d`, refined from our #345) | 1.45467334576751329963... (1.4546733458) | -4.382e-9 |
+| our 9 Nov certificate (#345, below) | 1.45467334742095245159... (1.454673347420953) | -6.035e-9 |
+| best on the live page, [SCIEL2026] | 1.457854884921989 | -3.182e-3 |
+
+## The certificate
+
+`c1d_upper_n163840_v2.json`: $n = 163840$ equal cells on $[-1/4,1/4]$ with integer values $v_i$, the largest of size $2^{56}$. For a step function on $n$ equal cells, $f*f$ is linear between multiples of $1/(2n)$ with knot values proportional to $c = v * v$, so the bound is $2n \max_m |c_m| / S^2$ with $S = \sum_i v_i$ (the page's rule). The maximum is attained only at m = 52929. The file states the reduced fraction (`score_num`, `score_den`) and the printed claim (`claim`).
+
+## Two exact checks that share no code
+
+    python3 -I check.py c1d_upper_n163840_v2.json --record 1.4546733458 --record 646233848324886328286774558720/444246710235775351931155445761 --record 1.454673347420953 --record 167771889099128792433071411029129035776/115333032942810266163095027979519535125 --controls
+    python3 ntt_check_conv.py c1d_upper_n163840_v2.json --fraction=838861227937471890002426104328885370880/576666392427609677715360509915372739121 --claim=1.4546733414 --controls
+
+- `check.py` (Python standard library only; the same file as in `../c1c`): every $c_m$ from big-integer products (Kronecker substitution, signed values split into positive and negative parts), the whole sequence confirmed by its generating-polynomial identity at random points modulo $2^{61}-1$, the deciding knot summed again; the value must equal the stated fraction, imply the claim and beat every `--record` strictly. Red controls, all refused. Output: `results/check_v2.txt`.
+- `ntt_check_conv.py` (numpy, new on 10 Nov): every $c_m$ modulo six NTT primes below $2^{31}$, Garner's algorithm for the mixed-radix digits, the signed value recovered from the symmetric residue range ($2n \max|v|^2$ below the product of the primes is checked), $\max_m |c_m|$ over exact integers and the deciding knot summed again, after a self-test against brute force on signed and non-negative inputs. Red controls, all refused: one value moved by one unit where $|c_m|$ grows at the deciding knot raises the bound, and the claim moved one unit down. Output: `results/ntt_v2.txt`. It also reproduces vidigoat's C1d fraction exactly (positive control).
+
+Both give the same fraction and the same deciding knot.
+
+## How it was found, and credit
+
+Warm start: vidigoat's 10 Nov certificate in [#270](https://github.com/teorth/optimizationproblems/pull/270) ([vidigoat/optimization-records @ a559680e](https://github.com/vidigoat/optimization-records/tree/a559680e416be0eae03955c58372efff4a551fbb/tao/certificates), `c1d/c1d_n163840.json`, sha256 `b05de6abc8e3d7a2253a0887b6ec8d0eec58beb32e4eb76ceb98df66e26377b6`), which had refined our earlier certificate; only its published values were used, its programs were neither read nor run. Search: `../search/c1ad_modal/c1ad_retake2.py` on Modal, 16 independent one-core calls (8 per constant), each L-BFGS on $\log \lVert v*v \rVert_p - 2 \log S$ with $p$ doubled from its own restart value $p_0$ (from $3 \cdot 10^7$ to $10^9$) up to $3.3 \cdot 10^{12}$, 3000 iterations a stage, the best vector checkpointed to a Modal volume after every improving stage. This certificate is job `1d_3` ($p_0 = 3 \cdot 10^7$), rounded to integers with the largest value $2^{56}$; about 55 minutes on one core.
+
+Prepared with AI assistance (Claude, Anthropic).
+
+## Our earlier certificates (superseded; they remain valid bounds)
 
 A new upper bound for $C_{1d}$ of the
 [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/1d.html):
