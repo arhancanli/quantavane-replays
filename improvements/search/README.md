@@ -30,3 +30,5 @@ structure (one spike cell of weight M, every lag from t1 K to K active) by a dam
 chooses M by golden-section search, `ladder.py` runs K = 2^14, 2^16, 2^18 (about 45 s in all), and `mkcert.py`
 scales the weights to 2^60, rounds them and writes the certificate. Written from #354's description; its programs were
 not read or run.
+The K = 2^20 certificate of 10 Nov (evening) is `python ladder.py 1048576` (858 s on one core, M = 641.639118)
+followed by `python mkcert.py 1048576 OUT.json`; nothing in these files changed.
