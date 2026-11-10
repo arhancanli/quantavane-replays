@@ -1204,6 +1204,24 @@ corrupted coefficient and a weight changed by 1 are refused by the polynomial id
 unchanged, and the printed bound moved one unit in its last digit past the exact value (0.4103768837, 0.4103604996,
 0.4103608340, 1.5027427355) is refused. Reproduce: `cd c1ac && ./fetch.sh && ./run_all.sh` (about two minutes).
 
+## 22a: the ropelength lower bound 2.124 (10 November 2026)
+
+`c22a/c22a_check.py`, standard library only: the finite part of [V2026] $C_{22a} \geq 2.124$
+([#356](https://github.com/teorth/optimizationproblems/pull/356), Varlamov), written from the paper
+(`paper.pdf` @ `6d11254`, `cdf1c6d1...a6fcc`, Sections 4 to 6); its `verify.py` was neither read nor run. With
+$k = 50657/10000$ and $A = k(3/4)^{1/3}$ the paper needs $H(\ell) = \int_2^\infty 2t^{-3}\min\{\ell, \tfrac43(t+1)^3\}\,dt
+\le A\ell^{1/3}$ for every $\ell > 0$, and $B = (256\pi^3/(3k^3))^{1/4} > 531/250$. Our route differs from the paper's
+completed square: our own primitive of $\tfrac83(t+1)^3/t^3$, checked as an identity of Laurent polynomials, gives
+$H = \ell/4$ for $\ell \le 36$ and $h(R) = 4R + 8\log(R/2) + 3 - 4/R$ for $\ell = \tfrac43(R+1)^3$; $\ell \le 36$ needs
+$1296 < 48k^3$; for $R \ge 2$, $k(R+1) > h(R)$ is proved on $[2, 100]$ by 2,875 dyadic intervals (both sides increase,
+so $\overline{h}(b) < k(a+1)$ suffices, with rational upper bounds for $\log$ from the $\operatorname{artanh}$ series and a
+geometric tail) and beyond 100 by the tangent line of $\log$; $\pi$ comes from Gauss's formula
+$48\arctan\frac1{18} + 32\arctan\frac1{57} - 20\arctan\frac1{239}$, itself confirmed by Gaussian integers. Then
+$(531/250)^4 < B^4$ and $2.12403897858 < B < 2.12403897859$. Red controls, all refused: $k = 50655/10000$ (fails at
+$R = 7.9336$, as the paper's Remark 5.3 predicts), the printed bound moved to 2.1241, a wrong primitive. Not checked: the
+geometric lemmas of Sections 2 to 4, which we read and re-derived by hand. Reproduce: `cd c22a && ./fetch.sh &&
+./run_all.sh` (about ten seconds).
+
 ## Reproduce
 
 ```

@@ -1,0 +1,17 @@
+[V2026] C_22a >= 2.124 (#356): exact replay of the finite part, k = 50657/10000
+1. closed form of H: our primitive and the rational/log parts of h(R) as identities: True
+   sanity, float quadrature at R = 2: 9.000000000 vs h(R) = 9.000000000
+   sanity, float quadrature at R = 3: 16.910387532 vs h(R) = 16.910387532
+   sanity, float quadrature at R = 8: 45.590354888 vs h(R) = 45.590354889
+   sanity, float quadrature at R = 20: 101.220680732 vs h(R) = 101.220680744
+   sanity, l = 20 (below 36): 5.000000000 vs l/4 = 5
+2. l <= 36: l^2 <= 1296 < 48 k^3 = 6239.641485: True
+3. k (R+1) - h(R) > 0 for every R >= 2: True (2875 dyadic intervals on [2, 100], tangent-line tail beyond)
+4. pi in [3.141592653589793238462643383279, 3.141592653589793238462643383279] (Gauss's formula confirmed by Gaussian integers)
+5. B^4 = 256 pi^3/(3 k^3): (531/250)^4 < B^4: True; 2.12403897858 < B < 2.12403897859: True
+   Remark 5.3: h(8) = 69/2 + 16 log 2 > 45.590354888, h(8)/9 > 5.0655: True
+   control: k = 5.0655 refused: True (fails at R = 7.933594)
+   control: the printed bound moved to 2.1241 refused: True
+   control: a wrong primitive (7 log t) refused: True
+run time 10.6 s
+RESULT: PASS: C_22a >= 531/250 = 2.124, given the paper's Sections 2-4 (not machine-checked here)
