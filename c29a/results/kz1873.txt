@@ -1,0 +1,12 @@
+D_5 roots +-e_i +- e_j: 40 vectors; squared norm 2, max inner product 1 <= 1
+  inner products over the 780 pairs: -2: 20, -1: 240, 0: 280, 1: 240
+  second route: the vectors of Z^5 with squared norm 2 (all of {-2..2}^5 scanned): 40, the same set: True
+RESULT [KZ1873]: 40 points of R^5 pairwise at angle >= 60 degrees (D_5), so the kissing number in dimension 5 is at least 40: HOLDS
+anchor (the page's trivial row): cross polytope +-e_i, 10 vectors; squared norm 1, max inner product 0 <= 1/2
+red controls (each must be refused):
+  D_5 plus (1/2, 1/2, 1/2, 1/2, 1): pair (1, 0, 0, 0, 1), (1/2, 1/2, 1/2, 1/2, 1) with inner product 3/2 > 1
+  2 e_1 for e_1 + e_2: unequal squared norms [2, 4]
+  an added 41st vector: refused, as expected
+  2 e_1 for e_1 + e_2: refused, as expected
+  a claimed 41 from D_5: refused, as expected
+controls all as expected

@@ -1645,6 +1645,56 @@ paper's induction $\lVert T_m\rVert \le 2^{m-1}$ beyond $m = 4$), which we read.
 Reproduce: in each folder, `./fetch.sh` (or `fetch_page.sh`, `fetch_psmo.sh`) where there is a download, then
 `./run_all.sh`; everything runs in about two minutes with Python 3.9+ alone (`c44` takes about a minute).
 
+## Twenty rows with explicit finite certificates (12 November 2026)
+
+Rows whose bound comes from an explicit finite object printed on the constant page or in the cited paper. Each check is
+our own code, exact (integers, rationals, $\mathbb{Q}(\sqrt2)$, $\mathbb{Q}(\sqrt3, \sqrt{11})$, Gaussian elimination
+modulo $2^{61}-1$ as a second route) or in 60-digit interval arithmetic, and every folder has red controls (one changed
+value must fail). No program of any source was run; LaTeX sources were read as text, and data were read from data
+files or, for [HZ26], from the integer literals of the certificate file with Python's `ast` module. Thirteen rows came
+into the repository without a pull request; [R1959] and [G1980] came with
+[#23](https://github.com/teorth/optimizationproblems/pull/23), [S1956] with
+[#27](https://github.com/teorth/optimizationproblems/pull/27), [GP1968] with
+[#28](https://github.com/teorth/optimizationproblems/pull/28), and the three 89a rows with
+[#255](https://github.com/teorth/optimizationproblems/pull/255).
+
+| Row | Construction (source) | Check | Result |
+| --- | --- | --- | --- |
+| 2a [C2007] $2$ | $p(z) = z$, $A = (0\ 2;\ 0\ 0)$ as printed on the page | `c2a` | $\lVert A\rVert = 2$; the Hermitian parts $H_\phi$ have eigenvalues $\pm1$ for every $\phi$, so $W(A)$ is the closed unit disk; ratio 2 |
+| 3a [Ru96] $2 - \log 6/\log 7$ | $U = \{0, 1, 3\}$ as printed | `c3az` | $\lvert U+U\rvert = 6$, $\lvert U-U\rvert = 7$, $1.07921777883839820968\ldots$ |
+| 3a [Z2025] $1.173077$\* | Zheng's limit expression, arXiv 2506.01896v1, Theorem 1 | `c3az` | his table for $B = 3..7$ reproduced (to $6 \cdot 10^{-16}$); at $B = 5$, $r_0 = 0.805053$, $a_0 = 0.466823$ the bound is $\ge 1.17307727978513594789\ldots$ in interval arithmetic |
+| 4a [P1970] $2.1146$ | a 20-point cap in $\mathbb{F}_3^4$ (the paper is not accessible to us: our search) | `c4a` | no line by two routes; $A \times A$ a cap in $\mathbb{F}_3^8$; $20^{1/4} = 2.11474252688\ldots$ |
+| 5a [HZ26] $0.9435$ | the eight-pair kernel-boundary system of arXiv 2607.01169v3 and its certificate file (`957a5afa...92a8`, as the paper states) | `c5a/hz26_check.py` | all 129 covering inequalities; $a$, $b$ and the least slack equal the printed fractions; $\sqrt{ab} = 0.94349259071354502557\ldots$ |
+| 5b [MT26] $4/7$ | $A_{\mathrm{base}}$, 14 integers, arXiv 2602.23282v2, Lemma 6.1 | `c5b/mt26_check.py` | a $(4,5)$-set by both routes of `c5b_check.py`, $h(A_{\mathrm{base}}) = 8$ by both routes; $8/14$ |
+| 9a [L1979] $\vartheta(C_7) \approx 3.3177$ | Lovasz's eigenvalue certificate $J - tA$ | `c9th` | $\det(xI - A) = (x-2)(x^3+x^2-2x-1)^2$; $\vartheta(C_7) \le -7\lambda_7/(2 - \lambda_7) = 3.31766720739\ldots$ |
+| 9a [S1956] $7/2$ | the fractional clique cover of $C_7$ | `c9th` | weight $1/2$ on each edge covers; the packing $1/2$ per vertex shows $\alpha^*(C_7) = 7/2$ |
+| 10c [Band2024] $\sqrt2$ | the $2 \times 2$ sign matrix printed in the row | `c10c/band2024_check.py` | $\mathrm{disc} = 2$, so $2/\sqrt2$ |
+| 24a [Kun2023] $1+\sqrt2$ | Kunisky's matrices $A_{k+1} = \frac{1}{\sqrt2}(A_k\ I;\ A_k\ {-I})$, arXiv 2111.02974v1 | `c24k` | unit columns and $\mathrm{disc}(A_k) = 2^{-k/2} + \sum_{a \le k} 2^{-a/2}$ exhaustively for $k \le 4$ in $\mathbb{Z}[\sqrt2]$; the paper's induction beyond |
+| 27a [MM1961] $4$ | the Moser spindle | `c27a` | 7 points in $\mathbb{Q}(\sqrt3, \sqrt{11})$, exactly 11 unit distances, chromatic number 4 |
+| 27b [R1959] $8$ | $K_8$ | `c27b` | split 18 + 10 edges, both embeddings verified (darts, rotation system, $V - E + F = 2$); $\chi = 8$ |
+| 27b [G1980] $9$ | the join of $K_6$ and $C_5$, as the row describes it | `c27b` | split 27 + 23 edges, both verified planar; $\chi = 9$ |
+| 28a [Bon2014] $65$ | $\Gamma_f$ of $G_2(4)$, arXiv 1305.2584v3 | `c28a/bon_jb_check.py` | $G_2(4)$ built a second way (Jenrich's Hermitian form): SRG$(416,100,36,20)$, $\omega = 5$; Gram $90/18/{-6}$, rank 65 (idempotent trace and modulo $2^{61}-1$); $\lceil 416/5\rceil = 84 > 66$ |
+| 28a [JB2014] $64$ | the 352 points $C \cup B_1$, arXiv 1308.0206v6 | `c28a/bon_jb_check.py` | claim (1) for all 65 choices of $q_0$; $Ap = 20p$, $\langle p, y_i\rangle = 0$ on $C \cup B_1$; affine rank 64; $\lceil 352/5\rceil = 71 > 65$ |
+| 29a [KZ1873] $40$ | the roots of $D_5$ | `c29a` | 40 vectors of squared norm 2, every inner product $\le 1$ |
+| 43a [GP1968] $\sqrt3/2$ | the equilateral triangle | `c43a` | $L_M = 2$, $L_S = \sqrt3$ (Fermat point: the three unit vectors sum to 0 exactly in $\mathbb{Q}(\sqrt3)$) |
+| 89a [PPSS2024] $4551721 \cdot 2^{-24} \cdot 3^{-2}$ | the 768-vertex graph, Zenodo 6602512 (`c4.graph6.txt`) | `c89p/ppss_check.py` | $\hom(K_4, C) + \hom(K_4, \bar C^\circ) = 10487165184 = 4551721 \cdot 2304$ by two routes: exactly $4551721/150994944$ |
+| 89a [Tho1997] $0.030291$ | $M_4 \otimes K_4 \otimes G_{18}$ as Even-Zohar and Linial describe it | `c89p/ezl_check.py` | exactly $3769/124416 = 0.0302935314\ldots$ by two routes (profiles; `k4hom` on the 288-vertex graph); see the note |
+| 89a [EZL2015] $0.030285$ | the nested blow-up $M_4 \otimes K_4 \otimes (K_3 \otimes K_3)^{\odot n}$, arXiv 1312.1205v2 | `c89p/ezl_check.py` | limit $1411/46592 = 0.03028416895\ldots$ exactly (level by level); $n = 1..6$ listed |
+
+Notes. (1) [Tho1997]: the construction as EZL describe it gives $3769/124416 = 0.0302935314\ldots$, and EZL report
+Thomason's bound as strictly below this value by less than $10^{-7}$ (a referee's perturbation); the row's $0.030291$
+is $2.5 \cdot 10^{-6}$ lower, so this construction does not reach it as printed. We could not read Thomason's paper;
+perhaps $0.030294$ was meant. (2) [P1970]: the printed $2.1146$ is below $20^{1/4} = 2.1147425\ldots$ (valid); its
+four-decimal truncation would be $2.1147$. (3) [Bon2014] and [JB2014] were anchors of our [Gri2026] replay above (on
+the graph built from Brouwer's model); here they are replayed from their own papers, on $G_2(4)$ built from the
+construction in Jenrich's paper. (4) The values $0.866$, $1.414214$ and $3.3177$ stand next to exact expressions.
+Not checked (read): the lemmas that turn the objects into bounds (the Gyarmati-Hennecart-Ruzsa lemma and Zheng's
+Lemmas 1-2; Ma and Tang's $c_* = \inf f(n)/n$; Hou and Zhao's Theorem 2.1; Lovasz's and Shannon's bounds; the
+blow-up lemma; Kunisky's induction beyond $k = 4$; that a Steiner tree on three points has at most one Steiner point).
+
+Reproduce: in each folder, `./fetch.sh` (or `fetch_mt26.sh`, `fetch_hz26.sh`, `fetch_bonjb.sh`) where there is a
+download, then `./run_all.sh`; `c89p` needs a C compiler and takes about a minute, everything else seconds.
+
 ## Reproduce
 
 ```

@@ -1,0 +1,15 @@
+the paper's Theorem 1.1, its limit statement and the recursion of its second proof are in the source: True
+k = 0: 1 x 1; column squared norms of M_k all [(1, 0)] (= 2^k: True); min_x max_i |(M_k x)_i| = 1 + 0 sqrt 2 over 2 sign vectors (formula: 1 + 0 sqrt 2); disc(A_k) = 1.000000000000; step (1 + disc(A_(k-1)))/sqrt 2: True
+k = 1: 2 x 2; column squared norms of M_k all [(2, 0)] (= 2^k: True); min_x max_i |(M_k x)_i| = 2 + 0 sqrt 2 over 4 sign vectors (formula: 2 + 0 sqrt 2); disc(A_k) = 1.414213562373; step (1 + disc(A_(k-1)))/sqrt 2: True
+k = 2: 4 x 4; column squared norms of M_k all [(4, 0)] (= 2^k: True); min_x max_i |(M_k x)_i| = 2 + 1 sqrt 2 over 16 sign vectors (formula: 2 + 1 sqrt 2); disc(A_k) = 1.707106781187; step (1 + disc(A_(k-1)))/sqrt 2: True
+k = 3: 8 x 8; column squared norms of M_k all [(8, 0)] (= 2^k: True); min_x max_i |(M_k x)_i| = 4 + 1 sqrt 2 over 256 sign vectors (formula: 4 + 1 sqrt 2); disc(A_k) = 1.914213562373; step (1 + disc(A_(k-1)))/sqrt 2: True
+k = 4: 16 x 16; column squared norms of M_k all [(16, 0)] (= 2^k: True); min_x max_i |(M_k x)_i| = 4 + 3 sqrt 2 over 65536 sign vectors (formula: 4 + 3 sqrt 2); disc(A_k) = 2.060660171780; step (1 + disc(A_(k-1)))/sqrt 2: True
+  limit of 2^(-k/2) + sum_(a<=k) 2^(-a/2): 1/(sqrt 2 - 1) = 1 + sqrt 2 = 2.414213562373
+RESULT [Kun2023]: disc(A_k) = 2^(-k/2) + sum_(a=1)^k 2^(-a/2) exactly for k <= 4 (exhaustive), the paper's induction beyond, increasing to 1 + sqrt 2, so C_24 >= 1 + sqrt 2: HOLDS
+red controls (each must fail):
+  A_2 with one sign flipped: min max = 0 + 1 sqrt 2 (A_2: 2 + 1 sqrt 2)
+  recursion with +I in both blocks at k = 1: columns [((1, 0), (1, 0)), ((1, 0), (1, 0))], min max = (0, 0)
+  a claimed disc(A_4) + 1/4: fails, as expected
+  A_2 with a flipped sign: fails, as expected
+  +I in both blocks: fails, as expected
+controls all as expected

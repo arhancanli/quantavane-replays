@@ -1,0 +1,18 @@
+Moser spindle in Q(sqrt 3, sqrt 11), cos theta = 5/6, sin theta = sqrt(11)/6 (cos^2 + sin^2 = 1: True):
+  O   = (0, 0)
+  B   = (1/2 sqrt3, 1/2)
+  C   = (1/2 sqrt3, -1/2)
+  D   = (1 sqrt3, 0)
+  B'  = (5/12 sqrt3 - 1/12 sqrt11, 5/12 + 1/12 sqrt33)
+  C'  = (5/12 sqrt3 + 1/12 sqrt11, -5/12 + 1/12 sqrt33)
+  D'  = (5/6 sqrt3, 1/6 sqrt33)
+  7 distinct points: True; the 11 spindle edges have squared length 1: True; pairs at distance 1 among all 21: 11, exactly the spindle's edges: True
+  proper 3-colourings (the 729 assignments with O coloured 0, which loses nothing by symmetry): none; a proper 4-colouring: {'O': 0, 'B': 1, 'C': 2, 'D': 0, "B'": 1, "C'": 2, "D'": 3}
+RESULT [MM1961]: the Moser spindle is a 7-vertex unit-distance graph with chromatic number 4, so chi(R^2) >= 4: HOLDS
+red controls (each must fail):
+  cos theta = 4/5: |D D'|^2 = 6/5
+  without the edge D D': a 3-colouring {'O': 0, 'B': 1, 'C': 2, 'D': 0, "B'": 1, "C'": 2, "D'": 0}
+  cos theta = 4/5: fails, as expected
+  without D D', not 3-colourable: fails, as expected
+  that 3-colouring on the spindle: fails, as expected
+controls all as expected

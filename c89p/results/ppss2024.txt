@@ -1,0 +1,14 @@
+the graph (graph6, 768 vertices, 148608 edges, degree 387)
+  route A: hom(K_4, C) = 5185912320, hom(K_4, looped complement) = 5301252864
+  route B: cliques of C (c_1..c_4) = [768, 148608, 9581824, 216079680], 24 c_4 = 5185912320; of the complement = [768, 145920, 9149952, 207075456], c_1 + 14 c_2 + 36 c_3 + 24 c_4 = 5301252864; routes agree: True
+  per-root traces: C 6752490..6752490, complement 6902673..6902673 (one value each)
+  density = 10487165184/768^4 = 4551721/150994944 = 0.030144857035743; 4551721 * 2^-24 * 3^-2 = 4551721/150994944: equal True; < 0.030145: True
+RESULT [PPSS2024]: the blow-ups of the 768-vertex graph have monochromatic K_4 density tending to exactly 4551721 * 2^-24 * 3^-2 = 0.030144857036 < 0.030145, so C_89 <= that: HOLDS
+red controls (each must fail):
+  edge 0-1 toggled: total 10487199010 (was 10487165184), routes agree: True
+  G(768, 1/2), seed 89: density 0.031967
+  complement without loops: 10155723264 != 10487165184
+  one edge toggled: fails, as expected
+  a random graph: fails, as expected
+  no loops in the complement: fails, as expected
+controls all as expected

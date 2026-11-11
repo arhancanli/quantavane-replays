@@ -1,0 +1,12 @@
+a 20-point cap in F_3^4 found by our search: True
+  0000 1000 0100 0010 0001 0011 0101 0110 0111 1001 1012 1022 1102 1202 2012 2102 2110 2111 2122 2212
+  route a (1140 triples): no line; route b (190 pairs): no line
+  A x A, 400 points of F_3^8 (79,800 pairs): a cap; complete (each of the 61 other points on a line through two cap points): True
+  20^(1/4) = 2.114742526881; 2.1146^4 < 20: True; 2.1147^4 < 20 < 2.1148^4: True
+RESULT [P1970]: a 20-point cap in F_3^4 exists, so C_4 >= 20^(1/4) = 2.114742... > 2.1146: HOLDS
+red controls (each must fail):
+  one point replaced: fails, as expected
+  a 21st point: fails, as expected
+  product with a line: fails, as expected
+  2.1148 claimed: fails, as expected
+controls all as expected

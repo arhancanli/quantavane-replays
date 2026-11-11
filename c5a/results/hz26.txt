@@ -1,0 +1,14 @@
+[HZ26] R = 8, m = 32, L = 4; mixing weights 10^-8 [39490874, 8624912, 135342, 12911860, 20451562, 2832639, 9217142, 6335669] (sum 1); eta = 17/250000000000
+  weights nonnegative and summing to 1: True; the 8 kernels (the 2nd uniform) symmetric probability vectors: True; boundary vectors of length 128: True
+  covering inequalities q = 0..128: violated 0; q = 128 an equality: True; least positive slack at q = 127: 4735171805469436153/6250000000000000000000000000000 (printed: q = 127, 4735171805469436153/6250000000000000000000000000000): True
+  a = 497329054138522113993707809619/390625000000000000000000000000 (printed equal: True)
+  b = 69918675237166718360455326217/100000000000000000000000000000 (printed equal: True; b > 0)
+  ab < (9435/10000)^2: True; sqrt(ab) = 0.943492590713545025573958381132 (printed 0.9434925907135450...)
+RESULT [HZ26]: the kernel-boundary system is feasible with a, b as stated, so C_5a <= sqrt(ab) = 0.9434925907135450... < 0.9435: HOLDS
+red controls (each must fail):
+  eta - 1/250000000000: violated covering inequalities at q = [66, 86, 87, 88, 91]
+  eta one unit smaller: fails, as expected
+  first weight + 10^-8: fails, as expected
+  an asymmetric kernel: fails, as expected
+  a claimed 0.9434: fails, as expected
+controls all as expected

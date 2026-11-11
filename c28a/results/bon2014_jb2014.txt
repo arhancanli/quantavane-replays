@@ -1,0 +1,21 @@
+the quoted statements are in both LaTeX sources: True
+PG(2,16) with h(x,y) = x1 y3^4 + x2 y2^4 + x3 y1^4: 273 points, 65 isotropic, 208 non-isotropic; 416 orthogonal bases; triangle sizes [15]; strongly regular (416, 100, 36, 20)
+  Bondarenko's formulas: s = -4, f = 65, beta = 26, p = 1/5, q = -1/15
+  clique number 5 (a clique [415, 411, 409, 403, 93]; no larger by exhaustive search)
+[Bon2014] <z_i, z_j> = (A^2)_ij + 8 A_ij + 16 [i = j] - 26 is 90 / 18 / -6 on every pair: True; G^2 = 576 G in the algebra of I, A, J: True; rank = trace(G)/576 = 65; rank mod 2^61 - 1: 65
+  squared distances (times 1/90): adjacent 144, non-adjacent 192; diameter on non-adjacent pairs; parts of smaller diameter are cliques of size <= 5: at least ceil(416/5) = 84 > 66
+RESULT [Bon2014]: 416 points of S^64 in R^65 need at least 84 > 66 parts of smaller diameter, so C_28 <= 65: HOLDS
+[JB2014] for all 65 isotropic q0: |B| = 96 in three components of 32, |C| = 320, claim (1) (20 / 0 / 8) for every vertex and component: True
+  q0 = the first isotropic point: p = 1_B2 - 1_B3 has A p = 20 p: True; <p, y_i> = 0 on C u B_1 and +-24 on B_2, B_3: True; |C u B_1| = 352
+  so dim span <= 65 inside the hyperplane sum = 104: affine dimension <= 64; Gram of differences rank mod 2^61 - 1: 64 (so exactly 64); parts of smaller diameter are cliques (<= 5 points): at least ceil(352/5) = 71 > 65
+RESULT [JB2014]: 352 points in R^64 need at least 71 > 65 parts of smaller diameter, so C_28 <= 64: HOLDS
+red controls (each must fail):
+  adjacency at |T n T'| = 2: not strongly regular (degree [150])
+  non-isotropic q0 (the bases with a point orthogonal to it, the description of B for isotropic q0): 66 vertices, not 96
+  p' = 1_B2 + 1_B3: A p' = 20 p': False; <p', y_i> on C: [16, 16, 16]
+  an added edge completing a 6-clique: clique number 6, parts ceil(416/6) = 70
+  |T n T'| = 2: fails, as expected
+  non-isotropic q0: fails, as expected
+  1_B2 + 1_B3: fails, as expected
+  added edge: fails, as expected
+controls all as expected

@@ -1,0 +1,19 @@
+A_base from the paper (14 elements): [0, 136, 200, 243, 246, 249, 272, 286, 298, 323, 400, 528, 596, 1056]
+  14 distinct integers: True
+[MT26] A_base, n = 14: (4,5) route a holds, route b holds
+   h(A) route a (branch and bound, difference test) = 8, a largest Sidon subset [0, 136, 200, 243, 246, 298, 323, 528]
+   route b (all 8- and 9-subsets, sum test): Sidon 8-subset found [0, 136, 200, 243, 246, 298, 323, 528]; Sidon 9-subset none
+   n - floor((8n - 6)/17) = 8; page's f(14) = 8; 0.01 s
+  the printed Sidon subset [0, 136, 200, 243, 246, 298, 323, 528]: inside A_base, 8 distinct elements, Sidon (sum test): True
+  h(A_base)/14 = 8/14 = 4/7 (the row: 4/7)
+RESULT [MT26]: A_base is a (4,5)-set (both routes) with h(A_base) = 8 (both routes), so C_5b = inf f(n)/n <= 8/14 = 4/7: HOLDS
+red controls (each must be refused or fail):
+  1056 -> 392 (0 + 528 - 136): route a refuses at (0, 136, 392, 528), route b refuses at (0, 136, 392, 528)
+  h claimed 7: a Sidon 8-subset exists [0, 136, 200, 243, 246, 298, 323, 528]; h claimed 9: a Sidon 9-subset does not exist
+  A_base without 1056: h = 8, ratio 8/13 > 4/7: True
+  parallelogram {0,136,392,528}: refused, as expected
+  h claimed 7: refused, as expected
+  h claimed 9: refused, as expected
+  printed subset with 596 for 528: refused, as expected
+  4/7 from 13 points: refused, as expected
+controls all as expected

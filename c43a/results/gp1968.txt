@@ -1,0 +1,11 @@
+equilateral triangle, sides squared ['1', '1', '1'] -> L_M = 2
+  G = (1/2, sqrt3/6): |G - P|^2 = 1/3 for all three: True; unit vectors of length 1: True, sum = (0, 0): True; g(G) = 3/sqrt 3 = sqrt 3 = 1.732050807569; grid scan min g = 1.732052603290
+  L_S = sqrt 3 < L_M = 2; ratio L_S/L_M = sqrt(3)/2 = 0.866025403784 (printed: sqrt(3)/2, 0.866)
+RESULT [GP1968]: the equilateral triangle has L_S/L_M = sqrt(3)/2, so C_43 <= sqrt(3)/2 ~ 0.866: HOLDS
+red controls (each must fail):
+  right isosceles triangle: min g = 1.931852, ratio 0.965926 > 0.866025
+  its centroid: unit vectors sum to (0.2599, 0.2599)
+  right isosceles triangle: fails, as expected
+  centroid of a non-equilateral triangle: fails, as expected
+  a claimed 0.8660: fails, as expected
+controls all as expected

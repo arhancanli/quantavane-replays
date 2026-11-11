@@ -1,0 +1,13 @@
+K_3 (x) K_3: SRG(9,4,1,2), loopless (the Paley graph of order 9): True; G_18 = (K_3 (x) K_3) (.) K_2 has 18 vertices; composition rule = direct enumeration on G_18: True
+  R(K_4 + A_4, M_4 (x) K_4 (x) K_3 (x) K_3) = 11411/373248 (profiles), 11411/373248 (k4hom, 144 vertices); EZL: 11411/373248
+  R(K_4 + A_4, M_4 (x) K_4 (x) G_18) = 3769/124416 = 0.030293531379 (profiles), 3769/124416 (k4hom, 288 vertices); EZL: 3769/124416
+  nested blow-ups H^(.)n, H = K_3 (x) K_3: R(K_4 + A_4, M_4 (x) K_4 (x) H^(.)n) for n = 1..6: 0.0305721665, 0.0302877393, 0.0302842131, 0.0302841695, 0.0302841690, 0.0302841690
+  limit (solved level by level): 1411/46592 = 0.030284168956; EZL: 1411/46592
+RESULT [EZL2015]: the nested blow-ups give C_89 <= 1411/46592 = 0.0302841690...; the printed 0.030285 is it rounded up: HOLDS
+RESULT [Tho1997]: the product M_4 (x) K_4 (x) G_18 gives exactly 3769/124416 = 0.030293531379... (two routes, as EZL state); the printed 0.030291 is BELOW it by 2.53e-06, so the construction as described supports 0.030294 (rounded up), not 0.030291: CONSTRUCTION HOLDS, PRINTED VALUE NOT REACHED
+red controls (each must fail):
+  (K_3 (x) K_3) (.) (2 isolated vertices): 0.0305721665; K_2 (.) (K_3 (x) K_3): 0.0393063057
+  K_2 replaced by its complement: fails, as expected
+  composition order reversed: fails, as expected
+  a claimed 0.030284: fails, as expected
+controls all as expected

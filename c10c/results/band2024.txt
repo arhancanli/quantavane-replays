@@ -1,0 +1,9 @@
+[Band2024] A = [[1, 1], [1, -1]] (from the row); disc(A) over the 4 sign vectors = 2; bound D/sqrt(2) = sqrt 2 = 1.41421356237...; printed 1.414214: 1.414214^2 > 2: True, (1414213/1000000)^2 < 2: True (sqrt 2 rounded up, printed with \approx next to the exact sqrt 2)
+RESULT [Band2024]: the 2 x 2 sign matrix has discrepancy 2, so C_10c >= 2/sqrt 2 = sqrt 2: HOLDS
+anchor (the page's trivial row): A = [1], disc = 1, bound 1
+red controls (each must fail):
+  all-ones: disc 0; with 0 for -1: disc 1
+  all-ones 2 x 2: fails, as expected
+  a claimed discrepancy 3: fails, as expected
+  -1 replaced by 0: fails, as expected
+controls all as expected

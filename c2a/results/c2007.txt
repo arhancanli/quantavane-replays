@@ -1,0 +1,12 @@
+A from the page: [[0, 2], [0, 0]]; A^T A has trace 4 and determinant 0, largest eigenvalue 4, so ||A|| = 2
+  Hermitian part H_phi = (0, 1 e^(-i phi); 1 e^(i phi), 0): eigenvalues +-1 for every phi, so W(A) is the closed disk of radius 1
+  v = (1, 1)/sqrt 2 gives v*Av = 1; over 2025 exact unit vectors max |v*Av|^2 = 576/625 <= 1: True (the maximum 1 needs |v_1| = |v_2|, irrational here)
+  ratio ||p(A)|| / max_W |p| = 2/1 = 2
+RESULT [C2007]: p(z) = z and A = (0 2; 0 0) give the ratio 2, so C_2 >= 2: HOLDS
+red controls (each must fail):
+  A = (0 2; 0 1): ||A|| = 2.236068, max_W |z| = 1.618034, ratio 1.381966
+  A = (0 3; 0 0): W(A) has radius 3/2
+  (0 2; 0 1) reaching 2: fails, as expected
+  (0 3; 0 0) with W the unit disk: fails, as expected
+  a claimed ratio 2 + 10^-12: fails, as expected
+controls all as expected
