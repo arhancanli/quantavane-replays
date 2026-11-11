@@ -1,0 +1,47 @@
+[Jon2026b] (PR #187): C_4b >= alpha = 75806770413/10^11 = 0.75806770413 (JD-Jones-ASES/nk-lean @ 55acbf0, certificates/square/)
+  certificate.json sha256 0e1a242044e62c8e...: the file at the commit: True
+  odd215.txt sha256 1ae65e9349a66e18...: the file at the commit: True
+  odd437.txt sha256 fe026c70694a8589...: as the repository's README states: True
+  binary_policy.json sha256 0c7a47db2a19b619...: the file at the commit: True
+
+1. the six Paley chains (the same chains as Naslund's; Jones's contributions)
+  p =   3, t =  2: chain property on 2 ordered pairs: True; f_p = 36388946522659/200000000000000: (1 - f_p) log t - (2 alpha - 1) log p >= 1.390E-13 > 0: True
+  p =   7, t =  3: chain property on 6 ordered pairs: True; f_p = 21449596099599/250000000000000: (1 - f_p) log t - (2 alpha - 1) log p >= 2.200E-13 > 0: True
+  p =  11, t =  4: chain property on 12 ordered pairs: True; f_p = 53616212291671/500000000000000: (1 - f_p) log t - (2 alpha - 1) log p >= 2.786E-13 > 0: True
+  p =  31, t =  7: chain property on 42 ordered pairs: True; f_p = 5572834432791/62500000000000: (1 - f_p) log t - (2 alpha - 1) log p >= 3.896E-13 > 0: True
+  p =  59, t =  9: chain property on 72 ordered pairs: True; f_p = 2635800323561/62500000000000: (1 - f_p) log t - (2 alpha - 1) log p >= 4.402E-13 > 0: True
+  p = 103, t = 11: chain property on 110 ordered pairs: True; f_p = 2396907967053/1000000000000000: (1 - f_p) log t - (2 alpha - 1) log p >= 4.816E-13 > 0: True
+
+2. the (5,43) coupled-prime alphabet
+  4913 points, three digits per prime, digits in range: True; distinct: True; intervals in [0, 1] with positive widths: True (denominator 99999974386028; largest right endpoint 99999974386028)
+  related pairs a ~> b: 6,031,254; sup I_a > inf I_b for 0 of them
+  the relation by a direct per-pair function for 400 random targets, all sources: equal: True
+  log sum w^f - (2 alpha - 1) log 215^3 >= 1.3844E-12 with f = 26536176765267/1000000000000000: True
+
+3. the (19,23) coupled-prime alphabet
+  19683 points, three digits per prime, digits in range: True; distinct: True; intervals in [0, 1] with positive widths: True (denominator 100000118525840; largest right endpoint 100000118525840)
+  related pairs a ~> b: 77,614,176; sup I_a > inf I_b for 0 of them
+  the relation by a direct per-pair function for 400 random targets, all sources: equal: True
+  log sum w^f - (2 alpha - 1) log 437^3 >= 1.3920E-12 with f = 67878931321877/1000000000000000: True
+
+4. the binary policy (Naslund's geometry as Jones transcribed it; Jones's weights)
+  25 states, 94 branches, depth m = 1000000000000000; f and a as in certificate.json: True
+  windows, residues, containment and cyclic order: True (124 containments, 56 cyclic comparisons)
+  root state 1: both windows [0, 1] and v = 1: True
+  growth rows sum u^f v_j - a v_s: smallest >= 3.5018E-13 > 0: True
+  the initialization factor c = 1/4 is at most min d_s/v_s = 0.355200: True
+  log a - alpha log 4 >= 3.0975E-12: True
+  log(1/4) + (m - 1) log a - f log 2 - alpha m log 4 >= 3095.002185 at m = 10^15: True
+
+5. the budget
+  sum f_i = alpha + 9663/250000000000000 (the row: 38652/10^15): True
+  so every hypothesis of the criterion holds: alpha = 0.75806770413 is attainable, C_4b >= 0.75806770413
+
+controls (each must come out as stated):
+[ctl] (19,23): one target start moved into its source's interval: 1 violated pairs, refused: True
+[ctl] (19,23): contribution raised by 1e-12 fails the moment test (margin -5.562E-12): True
+[ctl] binary: f raised by 1e-12: smallest growth row -3.250E-12, refused: True
+[ctl] the budget at alpha + 2 x the surplus fails: True
+controls all as expected: True
+
+RESULT: PASS (every finite hypothesis of the criterion holds at alpha = 0.75806770413, so C_4b >= 0.75806770413)

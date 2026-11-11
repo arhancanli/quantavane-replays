@@ -1,0 +1,56 @@
+[Nas2026b] (PR #219): C_4b >= alpha = 473797394875551/625000000000000 = 0.7580758318008816 (the row prints 0.7580758)
+paper TeX (enaslund/sarkozy-lower-bound-0.758 @ 5a83f41) sha256 4472c9a90c6282fb39e6768929c5a0a6ff28c4ec1f8289c89b4f1e16306881c6: as pinned True
+  bound.json sha256 080735a362d5fb73...: as the paper's appendix states True
+  q215-depth3-product.json sha256 dae38a756de83c99...: as the paper's appendix states True
+  q437-unequal32s.json sha256 3ef1e78e59f6e903...: as the paper's appendix states True
+  binary-cert-0.7580758318008816.json sha256 1b388dd3cfda324a...: as the paper's appendix states True
+  the manifest's alpha and odd contributions equal the paper's: True
+
+1. the six Paley chains
+  p =   3, t =  2: chain property on 2 ordered pairs: True; f_p = 0.1819189685063644313459576: (1 - f_p) log t - (2 alpha - 1) log p >= 2.430E-26 > 0: True
+  p =   7, t =  3: chain property on 6 ordered pairs: True; f_p = 0.0857695922261077385453455: (1 - f_p) log t - (2 alpha - 1) log p >= 3.907E-26 > 0: True
+  p =  11, t =  4: chain property on 12 ordered pairs: True; f_p = 0.1072043074619092931875010: (1 - f_p) log t - (2 alpha - 1) log p >= 4.689E-26 > 0: True
+  p =  31, t =  7: chain property on 42 ordered pairs: True; f_p = 0.0891366647927413831505830: (1 - f_p) log t - (2 alpha - 1) log p >= 1.267E-25 > 0: True
+  p =  59, t =  9: chain property on 72 ordered pairs: True; f_p = 0.0421426390460550181119771: (1 - f_p) log t - (2 alpha - 1) log p >= 1.994E-25 > 0: True
+  p = 103, t = 11: chain property on 110 ordered pairs: True; f_p = 0.0023654891206769647316637: (1 - f_p) log t - (2 alpha - 1) log p >= 1.368E-25 > 0: True
+  ordered pairs checked: 244 (the paper: 244); smallest margin 2.430E-26 (the paper: 2.4e-26)
+
+2. the (5,43) low code
+  4913 points, depths (3, 3), digits in range: True; distinct: True; widths in (0,1): True
+  related pairs a ~> b: 6,031,254 (the paper: 6,031,254); every one goes forward in the list (so ~> is acyclic): True
+  heaviest directed path: 99999974386028/10^14 (stated 99999974386028): True; below 1: True
+  the relation by a direct per-pair function for 400 random targets, all sources: equal: True
+  log sum w^f - (2 alpha - 1) log 215^3 >= 6.9190E-18 (the paper: > 6.919e-18): True
+
+3. the (19,23) low code
+  3645 points, depths (3, 2), digits in range: True; distinct: True; intervals in [0, 1] with positive widths: True; largest right endpoint 9999999218567850/10^16 (stated 9999999218567850): True
+  related pairs a ~> b: 2,702,580 (the paper: 2,702,580); sup I_a > inf I_b for 0 of them; all go forward in the list: True
+  the relation by a direct per-pair function for 400 random targets, all sources: equal: True
+  log sum w^f - (2 alpha - 1) log F >= 5.9278E-18 with F = 3628411 (the paper: > 5.927e-18): True
+
+4. the binary policy
+  25 states, 94 branches, depth m = 100000000000000000000; f_B and alpha as in the table and the manifest: True
+  windows, residues, containment (5.2) and cyclic order (5.3): True (124 containments, each two endpoint comparisons, and 56 cyclic comparisons: 304, the paper's 304)
+  root state 1: both windows [0, 1] and v = 1: True
+  growth rows sum u^f v_j - a v_s: smallest >= 3.2740E-19 > 0 (the paper: > 3.27e-19): True
+  c = min d_s/v_s =  = 0.355195 (the paper: >0.3551): True
+  log a - alpha log 4 >= 4.9111E-19 (the paper: > 4.91e-19): True
+  log c + (m - 1) log a - f log 2 - alpha m log 4 >= 46.917147 (the paper: > 46.91): True
+
+5. the budget
+  sum f_i = 3790379159004415734016231/5000000000000000000000000 = alpha + 7734016231/5000000000000000000000000 (the paper: alpha + 7734016231/5000000000000000000000000): True; prime supports pairwise disjoint: True
+  so every hypothesis of the criterion holds: alpha = 0.7580758318008816 is attainable, C_4b >= 0.7580758
+
+controls (each must come out as stated):
+[ctl] the p = 31 chain with two entries swapped is refused: True
+[ctl] the p = 103 chain at contribution 1/2 fails the test (margin -1.193E+0): True
+[ctl] (5,43): every width raised by the slack 25613972 + 1: heaviest path 100034066503020 >= 10^14, refused: True
+[ctl] (5,43): the list reversed is not a topological order (refused): True
+[ctl] (5,43): contribution raised by 1e-15 fails the moment test (margin -6.912E-15): True
+[ctl] (19,23): one target start moved 1/10^16 into its source's interval: 1 violated pairs, refused: True
+[ctl] binary: one scale of state 1 raised by 0.01%: state 1 branch r=2 parity 1: containment fails; refused: True
+[ctl] binary: f_B raised by 1e-17: smallest growth row -3.678E-17, refused: True
+[ctl] the budget at alpha + 2 x the surplus fails: True
+controls all as expected: True
+
+RESULT: PASS (every finite hypothesis of the criterion holds at alpha = 0.7580758318008816, so C_4b >= 0.7580758)

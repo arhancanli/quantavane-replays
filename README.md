@@ -1525,6 +1525,39 @@ strict inequality fail ($Q(-1, 1) = 0$, a zero on the torus); $G$ with $A$ and $
 changed coefficient is caught by the comparison of the two routes. Reproduce: `cd c59 && python3 -I griego_check.py
 --controls` (no download; about 10 seconds), or `./run_all.sh` for every 59a row we replayed.
 
+## 4b: Naslund's interval-moment certificates, 0.75806746, 0.7580758 and 0.75806770413 (11 November 2026)
+
+`c4b/naslund_check.py`, our own code, checks every finite hypothesis of the interval-moment criterion (Naslund's
+Theorem 3.3; Jones's `NK.powerLowerBound_of_intervalMoments`) for three 4b rows: [Nas2026a] $C_{4b} \ge 0.75806746$
+and [Jon2026b] $C_{4b} \ge 0.75806770413$ (both recorded in
+[#187](https://github.com/teorth/optimizationproblems/pull/187)) and [Nas2026b] $C_{4b} \ge 0.7580758$, exactly
+$473797394875551/625000000000000$ ([#219](https://github.com/teorth/optimizationproblems/pull/219)). For Naslund's two
+rows the data are the four JSON witnesses of the archive embedded in each paper's LaTeX source
+(enaslund/sarkozy-lower-bound-0.758 @ `e5d6937` and @ `5a83f41`; `fetch_nas.sh` decodes the archive bytes and keeps
+only the JSON files, each with the SHA-256 the paper's appendix prints); for Jones's row, the four data files of
+JD-Jones-ASES/nk-lean @ `55acbf0`, `certificates/square/` (`fetch_jon.sh`). No program or Lean file of either
+repository was read or run.
+
+| Component | [Nas2026a] | [Nas2026b] | [Jon2026b] |
+| --- | --- | --- | --- |
+| six Paley chains: the chain property on all 244 ordered pairs, and $(1 - f_p)\log t > (2\alpha - 1)\log p$ | smallest margin $7.6 \cdot 10^{-14}$ | $2.43 \cdot 10^{-26}$ | $1.39 \cdot 10^{-13}$ |
+| (5,43) code, 4,913 points: the relation of Definition 4.7 for every ordered pair; intervals (longest paths, or the given starts) | 6,031,254 related pairs, all forward; heaviest path $99999974386028/10^{14}$ | the same file and counts | the same pairs; Jones's starts, none overlapping |
+| (5,43) moment, $\log\sum w^f - (2\alpha-1)\log 215^3$ | $\ge 6.9784 \cdot 10^{-10}$ | $\ge 6.9190 \cdot 10^{-18}$ | $\ge 1.3844 \cdot 10^{-12}$ |
+| (19,23) code: points, related pairs, overlaps | 19,683 (depths 3, 3), 77,614,486, none | 3,645 (depths 3, 2), 2,702,580, none | 19,683, 77,614,176, none |
+| (19,23) moment margin | $\ge 6.9560 \cdot 10^{-10}$ | $\ge 5.9278 \cdot 10^{-18}$ | $\ge 1.3920 \cdot 10^{-12}$ |
+| binary policy: windows, residues, 124 containments and 56 cyclic comparisons (the papers' 304 endpoint comparisons), root, growth rows | all hold; smallest row $\ge 6.9929 \cdot 10^{-9}$ | all hold; $\ge 3.274 \cdot 10^{-19}$ | all hold; $\ge 3.50 \cdot 10^{-13}$ |
+| depth condition $\log c + (m-1)\log a - f\log 2 - \alpha m\log 4 > 0$ | $\ge 28.32697$ ($m = 10^{10}$, $c$ as stated) | $\ge 46.9171$ ($m = 10^{20}$) | $\ge 3095.0$ ($m = 10^{15}$, $c = 1/4 \le \min d_s/v_s$) |
+| budget $\sum f_i - \alpha$, exact | $25671/10^{12}$ | $15468032462/10^{25}$ | $38652/10^{15}$ |
+
+Every count and margin the papers state is reproduced. Logarithms and powers use Python's correctly rounded decimal
+`ln` and `exp` at 70 digits, each result moved one unit outward; the relation is computed twice (prefix bit masks for all
+pairs; a direct per-pair function for 400 random targets against every source) and the two agree. Red controls, all
+refused or failing as they must: a chain with two entries swapped; a chain at contribution 1/2; every (5,43) width raised
+past the path slack; the (5,43) list reversed; a (19,23) start moved into a source's interval; one binary scale raised by
+0.01% (containment fails); a contribution raised past its margin (moment test, growth rows); the budget at twice the
+surplus. Not checked: the criterion itself and the lemmas behind it (Lean-formalized by the authors), which we read.
+Reproduce: `cd c4b && ./fetch_nas.sh && ./fetch_jon.sh && ./run_nas.sh` (about 7 minutes, under 300 MB).
+
 ## Reproduce
 
 ```
