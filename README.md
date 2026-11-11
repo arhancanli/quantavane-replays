@@ -8,6 +8,23 @@ have no connection with any of the authors.
 An index of every asterisked bound in that repository, with the replays posted for each (ours and others'), is in
 [ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026, with a section on what changed to 10 November).
 
+## How to cite
+
+Cite this repository, with the constant's page in the optimization constants repository. For one replay, give its
+folder (each section below names it) and the commit of this repository you used.
+
+```bibtex
+@misc{quantavane-replays,
+  author       = {Canli, Arhan},
+  title        = {Quantavane replays: independent exact replays of certificates in the optimization constants repository},
+  year         = {2026},
+  howpublished = {\url{https://github.com/arhancanli/quantavane-replays}},
+  note         = {Quantavane; MIT licence}
+}
+```
+
+[CITATION.cff](CITATION.cff) gives the same reference for GitHub's "Cite this repository" button.
+
 ## C1a, C1c and C1d (3 to 7 November 2026)
 
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |

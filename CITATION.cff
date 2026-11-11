@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these replays, please cite them as below, with the constant's page in the optimization constants repository."
+type: software
+title: "Quantavane replays: independent exact replays of certificates in the optimization constants repository"
+abstract: "Independent exact replays of certificates submitted to the optimization constants repository (teorth/optimizationproblems), each with our own code written from the definition on the constant's page, and red controls."
+authors:
+  - family-names: Canli
+    given-names: Arhan
+    affiliation: Quantavane
+    email: arhan@quantavane.com
+license: MIT
+url: "https://quantavane.com"
+repository-code: "https://github.com/arhancanli/quantavane-replays"
+keywords:
+  - exact verification
+  - replication
+  - optimization constants
