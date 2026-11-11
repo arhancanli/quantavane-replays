@@ -1,0 +1,15 @@
+m  coordinates per argument      nonzero coefficients  all +-1  ||T_m||                ratio = 2^((m-1)/m)
+2  [2, 2]                       4                     True     2 (exhaustive)         2^(1/2) = 1.414213562373
+3  [4, 4, 2]                    16                    True     4 (exhaustive)         2^(2/3) = 1.587401051968
+4  [8, 8, 4, 2]                 64                    True     8 (exhaustive)         2^(3/4) = 1.681792830507
+5  [16, 16, 8, 4, 2]            256                   True     >= 16 at (1,..,1)      2^(4/5) = 1.741101126592
+6  [32, 32, 16, 8, 4, 2]        1024                  True     >= 32 at (1,..,1)      2^(5/6) = 1.781797436281
+7  [64, 64, 32, 16, 8, 4, 2]    4096                  True     >= 64 at (1,..,1)      2^(6/7) = 1.811447328528
+RESULT [DMPSS2014]: B_R,m >= 2^(1-1/m) for m = 2..7 (exhaustive norms for m <= 4; above, the norm's upper bound is the paper's induction), increasing to 2, so C_26b >= 2: HOLDS
+red controls (each must fail):
+  T_3 with + for - in the second term: 16 nonzero coefficients, norm 8, ratio 0.793701 (not 2^(2/3) = 1.587401)
+  T_2 with + x^2 y^2: norm 4, ratio 0.707107 (< sqrt 2)
+  T_3 with + for -: fails, as expected
+  T_2 with +x^2y^2: fails, as expected
+  a claimed exponent m/(m+1) at m = 3: fails, as expected
+controls all as expected

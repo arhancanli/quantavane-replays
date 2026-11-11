@@ -1599,12 +1599,12 @@ stated value plus $10^{-12}$. Not checked: Gao's product theorem (its $k = 2$ ca
 and the note's $C_{13}$, $C_{21}$ and $C_{23}$ values, whose base data use fibre and coset encodings. Reproduce:
 `cd c9 && ./fetch_bpz.sh && python3 -I bpz_check.py certs --controls` (seconds).
 
-## Seventeen rows with explicit constructions in their sources (11 November 2026)
+## Eighteen rows with explicit constructions in their sources (11 November 2026)
 
 Rows whose bound comes from an explicit finite object printed on the constant page or in the cited paper. Each check is
 our own code, exact (integers, rationals, $\mathbb{Q}(\sqrt2)$) or with correctly rounded 60-digit logarithms, and each
 folder has red controls (one changed value must fail). No program of any source was run; notebooks and LaTeX sources
-were read as text. Fifteen of the rows came into the repository without a pull request; [GGSWT2025] on 1d came with
+were read as text. Sixteen of the rows came into the repository without a pull request; [GGSWT2025] on 1d came with
 [#224](https://github.com/teorth/optimizationproblems/pull/224) and [BG2008] on 4b with
 [#175](https://github.com/teorth/optimizationproblems/pull/175).
 
@@ -1621,6 +1621,7 @@ were read as text. Fifteen of the rows came into the repository without a pull r
 | 37a [BdW2002], [T2013] $\log_2 3$ | not-all-equal $g$ as printed on the page | `c37/kushilevitz_check.py` | Boolean, $\deg = 2$, $s = 3$ |
 | 40a [Leh1933] $1.176280\ldots$ | Lehmer's polynomial as printed on the page | `c40` | $M(\ell) = 1.17628081825991750654\ldots$ by two Sturm routes over the rationals |
 | 26a [ADGP2025] $2$ | the degree-$d$ address function | `c26a/address_check.py` | $d \le 5$: $4^{d-1}$ coefficients of size $2^{1-d}$, ratio $2^{(d-1)/d}$ exactly |
+| 26b [DMPSS2014] $2$ | the $m$-linear forms $T_m$ of arXiv 1111.3253v2, section 4 | `c26b` | $4^{m-1}$ coefficients $\pm1$, $\lVert T_m\rVert = 2^{m-1}$ (exhaustive for $m \le 4$), ratio $2^{(m-1)/m}$, $m \le 7$ |
 | 44a [CHS2020] $1$ | complete read-once decision trees | `c44/chs2020_check.py` | degree $d$, $2^d - 1$ relevant variables, $d \le 8$ |
 | 44a [CHS2020] $3/2$ | the functions $\Xi_d$ of arXiv 1801.08564, section 5 | `c44/chs2020_check.py` | degree $d$, $3 \cdot 2^{d-1} - 2$ relevant variables, $d \le 8$ |
 | 58a [Kan2021] $5$ | $d = 54$ and $d = 150$ | `c58` | no reduced $b/d$ with every partial quotient $\le 4$, in either expansion |
@@ -1636,8 +1637,8 @@ that version's signed 150-step example has $\max f*f/(\int f)^2 = 1.4581057\ldot
 = 2.426896\ldots$, so it bounds the $\lvert\max f*f\rvert$ variant that the 1d page distinguishes, not $C_{1d}$
 (`c1mv/signed_note.py`). The decimals $1.63093$ (37a) and $0.733412$ (4b) are the exact values rounded up, printed
 with an approximately-equal sign next to the exact expression. Not checked: the lemmas that turn the finite objects
-into the bounds (supermultiplicativity for 9a, the base-expansion lemma for 4b, the composition and limit statements),
-which we read.
+into the bounds (supermultiplicativity for 9a, the base-expansion lemma for 4b, the limit statements, and for 26b the
+paper's induction $\lVert T_m\rVert \le 2^{m-1}$ beyond $m = 4$), which we read.
 
 Reproduce: in each folder, `./fetch.sh` (or `fetch_page.sh`, `fetch_psmo.sh`) where there is a download, then
 `./run_all.sh`; everything runs in about two minutes with Python 3.9+ alone (`c44` takes about a minute).
