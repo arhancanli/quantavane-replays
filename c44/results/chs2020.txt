@@ -1,0 +1,26 @@
+complete read-once decision trees (the [CHS2020] row 1):
+  d = 1: 1 variables, degree 1, 1 relevant, 1 monomials, truth table of 2^1 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 1/2
+  d = 2: 3 variables, degree 2, 3 relevant, 4 monomials, truth table of 2^3 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 3/4
+  d = 3: 7 variables, degree 3, 7 relevant, 16 monomials, truth table of 2^7 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 7/8
+  d = 4: 15 variables, degree 4, 15 relevant, 64 monomials, truth table of 2^15 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 15/16
+  d = 5: 31 variables, degree 5, 31 relevant, 256 monomials; R_d/2^d >= 31/32
+  d = 6: 63 variables, degree 6, 63 relevant, 1024 monomials; R_d/2^d >= 63/64
+  d = 7: 127 variables, degree 7, 127 relevant, 4096 monomials; R_d/2^d >= 127/128
+  d = 8: 255 variables, degree 8, 255 relevant, 16384 monomials; R_d/2^d >= 255/256
+RESULT [CHS2020] row 1: R_d >= 2^d - 1 for d = 1..8, so C_44 >= sup_d (2^d - 1)/2^d = 1: HOLDS
+Xi_d (the [CHS2020] row 3/2):
+  d = 1: 1 variables, degree 1, 1 relevant, 1 monomials, truth table of 2^1 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 1/2 = 0.500000
+  d = 2: 4 variables, degree 2, 4 relevant, 4 monomials, truth table of 2^4 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 1 = 1.000000
+  d = 3: 10 variables, degree 3, 10 relevant, 16 monomials, truth table of 2^10 points: +-1-valued, its transform equals the polynomial; R_d/2^d >= 5/4 = 1.250000
+  d = 4: 22 variables, degree 4, 22 relevant, 64 monomials; R_d/2^d >= 11/8 = 1.375000
+  d = 5: 46 variables, degree 5, 46 relevant, 256 monomials; R_d/2^d >= 23/16 = 1.437500
+  d = 6: 94 variables, degree 6, 94 relevant, 1024 monomials; R_d/2^d >= 47/32 = 1.468750
+  d = 7: 190 variables, degree 7, 190 relevant, 4096 monomials; R_d/2^d >= 95/64 = 1.484375
+  d = 8: 382 variables, degree 8, 382 relevant, 16384 monomials; R_d/2^d >= 191/128 = 1.492188
+RESULT [CHS2020] row 3/2: R_d >= 3 * 2^(d-1) - 2 for d = 1..8, so C_44 >= sup_d (3/2 - 2^(1-d)) = 3/2: HOLDS
+red controls (each must fail):
+  Xi_3 with (s+t)/2 in both halves: values [Fraction(-4, 1), Fraction(-2, 1), Fraction(0, 1), Fraction(2, 1), Fraction(4, 1)] (not +-1-valued)
+  Xi_3 with (s+t)/2 in both halves: fails, as expected
+  a claim of 3 * 2^(d-1) - 1 variables at d = 4: fails, as expected
+  a claim of degree d - 1 for the tree at d = 3: fails, as expected
+controls all as expected

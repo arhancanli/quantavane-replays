@@ -1,0 +1,14 @@
+1d certs/ae_c3prime.json
+  n: 150
+  S: 10043450170978683912
+  argmax_m: 108
+  max_abs_c: 493851130455511966019060748562329888
+  scaled_by: 576460752303423488
+  sign_at_max: +
+  ties: 1
+  bound = 257214130445579148968260806542880150/175123075237728741502887417152096569
+  decimal: floor 1.4687620697410217960228  ceil 1.4687620697410217960229
+  printed 1.4688: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 99 rejected: True
+  control: old coefficients rejected for weight 75 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

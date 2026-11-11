@@ -1,0 +1,11 @@
+1d certs/ae_c3prime.json
+  n: 150
+  S: 174226087914
+  argmax_m: 108
+  max_abs_c: 148612918783399643488
+  scaled_by: 10000000000
+  sign_at_max: +
+  ties: 1
+  bound = 3715322969584991087200/2529560809151404739283
+  decimal: floor 1.4687620697410218095144  ceil 1.4687620697410218095145
+  printed 1.4688: above the exact value, a valid upper bound as printed

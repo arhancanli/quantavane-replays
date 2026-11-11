@@ -1,0 +1,11 @@
+1a certs/mv2009_n208.json
+  n: 208
+  S: 2039607811
+  argmax_m: 321
+  max_abs_c: 15097201589811886
+  scaled_by: 100000000
+  sign_at_max: +
+  ties: 1
+  bound = 6280435861361744576/4160000022692211721
+  decimal: floor 1.5097201507458786720707  ceil 1.5097201507458786720708
+  printed 1.50992: above the exact value, a valid upper bound as printed

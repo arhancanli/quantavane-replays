@@ -1,0 +1,13 @@
+Delta (the paper's vertices): 108 points of L1 in the box |coordinates| <= 5; in the open tetrahedron: 0; on its boundary: 4; T inside: True
+  918 pairs +-u in L* with |u|^2 <= 9; least width 2 + 1*sqrt2 = 3.414213562373, attained by 7 of them: [('0', '0', '1/2'), ('0', '1/2', '0'), ('1/4', '-1/4', '-1/4'), ('1/4', '-1/4', '1/4'), ('1/4', '1/4', '-1/4'), ('1/4', '1/4', '1/4'), ('1/2', '0', '0')]
+  the tail bound: (3/4)(2 + sqrt 2)^2 = 9/2 + 3 sqrt 2 <= 9: True, so no u outside the search has width <= 2 + sqrt 2
+RESULT [CS2019]: Delta is hollow with respect to L1 and has lattice width exactly 2 + sqrt 2 = 3.414213562373 (seven functionals up to sign, as the paper says), so Flt(3) >= 2 + sqrt 2: HOLDS
+red controls (each must fail):
+  A moved to (5/2 + sqrt 2, sqrt 2, 2 + sqrt 2): 108 points of L1 in the box |coordinates| <= 5; in the open tetrahedron: 2; on its boundary: 1; T inside: False
+  918 pairs +-u in L* with |u|^2 <= 9; least width 2 + 1*sqrt2 = 3.414213562373, attained by 4 of them: [('0', '0', '1/2'), ('0', '1/2', '0'), ('1/4', '-1/4', '-1/4'), ('1/4', '1/4', '-1/4')]
+  z = 3 instead of 2 + sqrt 2: 108 points of L1 in the box |coordinates| <= 5; in the open tetrahedron: 0; on its boundary: 0; T inside: False
+  918 pairs +-u in L* with |u|^2 <= 9; least width 3 + 0*sqrt2 = 3.000000000000, attained by 1 of them: [('0', '0', '1/2')]
+  A moved outward by 1/2: fails, as expected
+  z = 3: fails, as expected
+  a claimed width 2 + sqrt 2 + 1/1000: fails, as expected
+controls all as expected

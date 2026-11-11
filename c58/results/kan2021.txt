@@ -1,0 +1,8 @@
+d = 54: 18 reduced fractions b/d; with every partial quotient <= 4: 0 (either expansion), 0 (canonical); with <= 5: 4 (e.g. b = 17: [3, 5, 1, 2]); the least possible largest partial quotient is 5
+d = 150: 40 reduced fractions b/d; with every partial quotient <= 4: 0 (either expansion), 0 (canonical); with <= 5: 12 (e.g. b = 29: [5, 5, 1, 4]); the least possible largest partial quotient is 5
+anchor: 2 <= d <= 3000 with no reduced b/d, all partial quotients <= 4: [54, 150] (either expansion), [6, 54, 150] (canonical)
+RESULT [Kan2021]: d = 54 and d = 150 have no reduced fraction with all partial quotients <= 4, so A_Zar >= 5: HOLDS
+red controls (a changed value must not fail):
+  d = 55 (has a witness with A = 4): as expected
+  A = 5 at d = 54 (has witnesses): as expected
+controls all as expected

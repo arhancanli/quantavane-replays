@@ -1,0 +1,12 @@
+[PS2018]: 367 words read from the appendix, 367 distinct, every symbol in 0..6; independent in C_7^5 by both routes: True; 367^(1/5) = 3.2578659668...
+  anchor: the same 367 words as gao2026/R367.txt (used in our [Gao2026] replay): True
+RESULT [PS2018]: alpha(C_7^5) >= 367, so Theta(C_7) >= 367^(1/5); the printed ~3.2578 is its truncation to four decimals: HOLDS
+[MO2017]: generator b = (0, 1, 1, 5, 1), group order 7; 50 orbit representatives, orbits of size 7 give 350 distinct words; independent in C_7^5 by both routes: True; 350^(1/5) = 3.2271088093...
+RESULT [MO2017]: alpha(C_7^5) >= 350, so Theta(C_7) >= 350^(1/5); the printed ~3.2271 is its truncation to four decimals: HOLDS
+red controls (each must be refused or fail):
+  [PS2018] plus a neighbour of its first word: refused, as expected
+  [PS2018] a repeated word: refused, as expected
+  [PS2018] printed 3.2579: refused, as expected
+  [MO2017] generator (0,1,1,5,2): refused, as expected
+  [MO2017] printed 3.2272: refused, as expected
+controls all as expected

@@ -1,0 +1,19 @@
+[FrPi73]: A from the page, 17 elements; |A+A| = 59, |A-A| = 55 (the page: 59, 55; two routes agree); C(A) = log(59/17)/log(55/17) = 1.05979309454724537760...
+RESULT [FrPi73]: C_3d >= 1.059793094547...; the printed 1.059793... is its leading digits: HOLDS
+[PeWe13]: Q_j built from the paper's definition for 1 <= j <= 120: |Q_j| = 5j+17, |Q_j+Q_j| = 32j+63, |Q_j-Q_j| = 26j+61 for every j (all hold); anchor |Q_j ^+ Q_j| = 32j+56 for j >= 2 and fhat(Q_19) = log 664/log 555 = 1.028377107227... (the paper: 1.028377107...)
+  C(Q_j) from the formulas: j = 1: 1.063983540477, j = 10: 1.112713601212, j = 100: 1.124477071280, j = 1000: 1.125796183776, j = 1000000: 1.125944277898, j = 1000000000000: 1.125944426308; increasing in j for j < 2000: True; each below the limit: True
+  reader's note: f(Q_10) = log|Q_10+Q_10|/log|Q_10-Q_10| = log 383/log 321 = 1.030597880543..., while the page (quoting the paper's Theorem 20) prints 1.030597781
+RESULT [PeWe13]: C_3d >= lim_j C(Q_j) = log(32/5)/log(26/5) = 1.125944426308549...; the printed 1.125944426 is its leading digits: HOLDS
+[GGSWT2025]: the notebook's list has 309 entries, 309 distinct; it contains A_1 = {-159, ..., 111} (271 elements): True; the other 38 elements: [-434, -161, 113, 185, 192, 199, 202, 206, 224, 237, 248, 258, 276, 305, 309, 311, 313, 317, 328, 329, 333, 334, 336, 337, 348, 350, 353, 359, 362, 371, 373, 376, 377, 378, 379, 383, 384, 386]
+  |A+A| = 1367, |A-A| = 1163 (two routes agree); C(A) = log(1367/309)/log(1163/309) = 1.12193573748604409765...
+RESULT [GGSWT2025]: C_3d >= 1.121935737486...; the printed ~1.1219 is its value to four decimals: HOLDS
+red controls (each must be refused or fail):
+  [FrPi73] set with 30 for 29: |A+A| = 59, |A-A| = 61, not (59, 55)
+  Q_j with 10 for 12: first formula failure at j = 1
+  AlphaEvolve set without 386: C = 1.1181151048..., not ~1.1219
+  [FrPi73] with 30 for 29: as expected
+  [FrPi73] printed 1.059794: as expected
+  Q_j with 10 for 12: as expected
+  [PeWe13] printed 1.125944427: as expected
+  AlphaEvolve set without 386: as expected
+controls all as expected

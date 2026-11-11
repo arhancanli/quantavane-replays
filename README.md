@@ -1599,6 +1599,49 @@ stated value plus $10^{-12}$. Not checked: Gao's product theorem (its $k = 2$ ca
 and the note's $C_{13}$, $C_{21}$ and $C_{23}$ values, whose base data use fibre and coset encodings. Reproduce:
 `cd c9 && ./fetch_bpz.sh && python3 -I bpz_check.py certs --controls` (seconds).
 
+## Seventeen rows with explicit constructions in their sources (11 November 2026)
+
+Rows whose bound comes from an explicit finite object printed on the constant page or in the cited paper. Each check is
+our own code, exact (integers, rationals, $\mathbb{Q}(\sqrt2)$) or with correctly rounded 60-digit logarithms, and each
+folder has red controls (one changed value must fail). No program of any source was run; notebooks and LaTeX sources
+were read as text. Fifteen of the rows came into the repository without a pull request; [GGSWT2025] on 1d came with
+[#224](https://github.com/teorth/optimizationproblems/pull/224) and [BG2008] on 4b with
+[#175](https://github.com/teorth/optimizationproblems/pull/175).
+
+| Row | Construction (source) | Check | Result |
+| --- | --- | --- | --- |
+| 1a [MV2009] $\le 1.50992$ | 208-step function, appendix of arXiv 0907.1379v2 | `c1mv`, `../autocorr_check.py 1a`, both readings | $1.50972015074587866869\ldots$ (binary64), $\ldots867207\ldots$ (decimals) |
+| 1d [GGSWT2025] $\le 1.4688$ | signed 150-step function, alphaevolve_results @ `4226acb`, cell 65 | `c1mv`, `1d` mode | $1.46876206974102179602\ldots$ (binary64), $\ldots218095\ldots$ (decimals) |
+| 3d [FrPi73] $1.059793\ldots$ | the 17-element set printed in the row | `c3d` | $\lvert A+A\rvert = 59$, $\lvert A-A\rvert = 55$, $1.05979309454724537760\ldots$ |
+| 3d [PeWe13] $1.125944426$ | the family $Q_j$ of Integers 13 (2013) #A57 | `c3d` | $\lvert Q_j\rvert = 5j+17$, $\lvert Q_j+Q_j\rvert = 32j+63$, $\lvert Q_j-Q_j\rvert = 26j+61$ for $1 \le j \le 120$; limit $\log(32/5)/\log(26/5) = 1.125944426308549\ldots$ |
+| 3d [GGSWT2025] $\approx 1.1219$ | 309 integers, alphaevolve_repository_of_problems @ `8f44745`, first cell of `sums_differences_problems.ipynb` | `c3d` | $\{-159,\ldots,111\}$ plus 38; $1367$ and $1163$; $1.12193573748604409765\ldots$ |
+| 9a [PS2018] $367^{1/5}$ | the 367 words of the appendix of arXiv 1808.07438v2 | `c9/ps_mo_check.py` | independent in $C_7^{\boxtimes 5}$ by two routes; the same words as Gao's `R367.txt` |
+| 9a [MO2017] $350^{1/5}$ | generator $(0,1,1,5,1)$ and 50 orbit representatives, arXiv 1504.01472v1 | `c9/ps_mo_check.py` | 350 distinct words, independent by two routes |
+| 37a [HKP2011] $\log_3 6$ | Kushilevitz's $h$ as printed on the page | `c37/kushilevitz_check.py` | Boolean on all 64 points, Moebius coefficients as printed, $\deg = 3$, $s = 6$ |
+| 37a [BdW2002], [T2013] $\log_2 3$ | not-all-equal $g$ as printed on the page | `c37/kushilevitz_check.py` | Boolean, $\deg = 2$, $s = 3$ |
+| 40a [Leh1933] $1.176280\ldots$ | Lehmer's polynomial as printed on the page | `c40` | $M(\ell) = 1.17628081825991750654\ldots$ by two Sturm routes over the rationals |
+| 26a [ADGP2025] $2$ | the degree-$d$ address function | `c26a/address_check.py` | $d \le 5$: $4^{d-1}$ coefficients of size $2^{1-d}$, ratio $2^{(d-1)/d}$ exactly |
+| 44a [CHS2020] $1$ | complete read-once decision trees | `c44/chs2020_check.py` | degree $d$, $2^d - 1$ relevant variables, $d \le 8$ |
+| 44a [CHS2020] $3/2$ | the functions $\Xi_d$ of arXiv 1801.08564, section 5 | `c44/chs2020_check.py` | degree $d$, $3 \cdot 2^{d-1} - 2$ relevant variables, $d \le 8$ |
+| 58a [Kan2021] $5$ | $d = 54$ and $d = 150$ | `c58` | no reduced $b/d$ with every partial quotient $\le 4$, in either expansion |
+| 4b [Ruz1984] $\approx 0.733077$ | a 7-element residue set modulo 65 (our search; the page prints none) | `c4b/ruzsa_bg_check.py` | the largest such sets have 7 elements; witness $\{0,2,5,22,24,43,46\}$ |
+| 4b [BG2008] $\approx 0.733412$ | $S$ modulo 205 as printed in the row | `c4b/ruzsa_bg_check.py` | 205 square-free, no difference of $S$ a nonzero square |
+| 73a [CS2019] $2+\sqrt2$ | the tetrahedron of arXiv 1812.00916, section 3 | `c73` | hollow for the shifted fcc lattice; width exactly $2+\sqrt2$, attained by 7 functionals up to sign |
+
+Notes. The 1a page prints 1.50992 for [MV2009]; the function supports it, but the paper states $S \le 1.5098$ and gives
+1.50972 for this function (we did not see the journal version). The 3d page quotes $f(Q_{10}) \simeq 1.030597781$
+from the paper's Theorem 20; the page's own formulas give $\log 383/\log 321 = 1.0305978805\ldots$ (the paper's
+$\hat f(Q_{19}) = 1.028377107\ldots$ is reproduced exactly). The 1d [MV2010] value 1.4993 is not in arXiv 0907.1379v2;
+that version's signed 150-step example has $\max f*f/(\int f)^2 = 1.4581057\ldots$ but $\max\lvert f*f\rvert/(\int f)^2
+= 2.426896\ldots$, so it bounds the $\lvert\max f*f\rvert$ variant that the 1d page distinguishes, not $C_{1d}$
+(`c1mv/signed_note.py`). The decimals $1.63093$ (37a) and $0.733412$ (4b) are the exact values rounded up, printed
+with an approximately-equal sign next to the exact expression. Not checked: the lemmas that turn the finite objects
+into the bounds (supermultiplicativity for 9a, the base-expansion lemma for 4b, the composition and limit statements),
+which we read.
+
+Reproduce: in each folder, `./fetch.sh` (or `fetch_page.sh`, `fetch_psmo.sh`) where there is a download, then
+`./run_all.sh`; everything runs in about two minutes with Python 3.9+ alone (`c44` takes about a minute).
+
 ## Reproduce
 
 ```

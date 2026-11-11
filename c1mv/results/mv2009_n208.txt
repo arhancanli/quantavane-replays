@@ -1,0 +1,14 @@
+1a certs/mv2009_n208.json
+  n: 208
+  S: 47030154125319951543
+  argmax_m: 321
+  max_abs_c: 8027049204474599515322530069294233600
+  scaled_by: 2305843009213693952
+  sign_at_max: +
+  ties: 1
+  bound = 371028052117937044263796945425155686400/245759488561261028487193944304429786761
+  decimal: floor 1.5097201507458786686938  ceil 1.5097201507458786686939
+  printed 1.50992: above the exact value, a valid upper bound as printed
+  control: corrupted coefficient 138 rejected: True
+  control: old coefficients rejected for weight 104 + 1: True
+  control: bound unchanged when every value is scaled by 3: True

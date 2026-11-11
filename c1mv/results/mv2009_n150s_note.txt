@@ -1,0 +1,5 @@
+certs/mv2009_n150s.json: n = 150, 24 negative values, sum = 17.320508050000
+  max_t f*f / (int f)^2   = 1.458105685768062... (knot 226)
+  min_t f*f / (int f)^2   = -2.426895802097483... (knot 56)
+  max_t |f*f| / (int f)^2 = 2.426895802097483...
+RESULT note: the signed example gives 1.4581056... for max f*f (the |max f*f| constant) but 2.426895... for max |f*f| (C_1d), so it is not a 1d certificate: CONFIRMED

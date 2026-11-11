@@ -1,0 +1,11 @@
+[Ruz1984]: m = 65 = 5 * 13 is square-free; the largest residue sets with no nonzero square difference (containing 0) have 7 elements (126 of them), e.g. [0, 2, 5, 22, 24, 43, 46]
+RESULT [Ruz1984]: C_4b >= (1 + log 7/log 65)/2 = 0.733077338450196...; the printed ~0.733077 is its value to six decimals: HOLDS
+[BG2008]: m = 205 = 5 * 41 is square-free: True; S = [0, 2, 8, 14, 77, 79, 85, 96, 103, 109, 111, 181] (12 distinct residues); pairs whose difference is a nonzero square mod 205: 0
+RESULT [BG2008]: C_4b >= (1 + log 12/log 205)/2 = 0.733411797040272...; the printed ~0.733412 is its value to six decimals (rounded up; the row gives the exact expression): HOLDS
+red controls (each must fail):
+  S with 180 for 181: 6 ordered pairs with a square difference
+  [BG2008] with 180 for 181: fails, as expected
+  an 8-element set modulo 65: fails, as expected
+  [BG2008] printed 0.733413: fails, as expected
+  modulus 65 * 5 = 325 is not square-free: fails, as expected
+controls all as expected

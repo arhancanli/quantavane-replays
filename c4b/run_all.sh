@@ -10,4 +10,8 @@ status=0
 python3 -I "$here/chain_check.py" "$root" --controls > "$here/results/kra2026.txt" 2>&1 || status=1
 python3 -I "$here/chain_check.py" "$root" --controls --row=jon2026a > "$here/results/jon2026a.txt" 2>&1 || status=1
 grep -H "RESULT\|controls all" "$here/results/kra2026.txt" "$here/results/jon2026a.txt"
+# the base-expansion rows [Ruz1984] (modulus 65; our exhaustive search) and [BG2008] (modulus 205, the set printed on
+# the page): square-free moduli, no nonzero square difference; controls. results/ruz1984_bg2008.txt
+python3 -I "$here/ruzsa_bg_check.py" "$root" --controls > "$here/results/ruz1984_bg2008.txt" 2>&1 || status=1
+grep -H "RESULT\|controls all" "$here/results/ruz1984_bg2008.txt"
 exit $status

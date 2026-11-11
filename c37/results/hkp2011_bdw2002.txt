@@ -1,0 +1,21 @@
+page: page/37a.md (main 87b4ebb); Kushilevitz h with 31 monomials (10 cubic), g with 6
+self-test: the Moebius transform recovers 40 random integer multilinear polynomials (n <= 8)
+h [HKP2011]: Boolean on all 64 points (32 ones); the Moebius coefficients equal the printed polynomial (31 monomials); deg = 3; s = 6, attained at 2 point(s), including 000000: True
+  log s / log deg = 1.630929753571457; printed 1.63093: the exact value rounded to nearest, as the page writes it (with an approximately-equal sign) (exact integer powers)
+  anchor h(h, ..., h) on 36 bits: 312511 monomials, deg = 9 = 3^2 (10000 top monomials), s at 0 = 36 = 6^2; the same exponent
+RESULT [HKP2011]: s(h) = 6, deg(h) = 3, so C_37 >= log_3 6 = 1.630929753571... (printed ~1.63093): HOLDS
+g [BdW2002]: Boolean on all 8 points (6 ones); the Moebius coefficients equal the printed polynomial (6 monomials); deg = 2; s = 3, attained at 2 point(s), including 000: True
+  log s / log deg = 1.584962500721156; printed 1.58496: the exact value rounded to nearest, as the page writes it (with an approximately-equal sign) (exact integer powers)
+  anchor g(g, ..., g) on 9 bits: 126 monomials, deg = 4 = 2^2 (27 top monomials), s at 0 = 9 = 3^2; the same exponent
+RESULT [BdW2002]/[T2013]: s(g) = 3, deg(g) = 2, so C_37 >= log_2 3 = 1.584962500721... (printed ~1.58496): HOLDS
+red controls (each must be refused or fail):
+  h - z1z3z4: NOT Boolean: value -1 at x = 111100 (x_1 first)
+  h, z1z2z3 for z1z3z4: NOT Boolean: value -1 at x = 101110 (x_1 first)
+  g, -2 x1x2: NOT Boolean: value -1 at x = 111 (x_1 first)
+  h without z1z3z4: refused, as expected
+  h with z1z2z3 for z1z3z4: refused, as expected
+  h with claimed sensitivity 7: refused, as expected
+  h with claimed exponent 1.63094: refused, as expected
+  g with -2 x1x2: refused, as expected
+  g with claimed degree 1: refused, as expected
+controls all as expected

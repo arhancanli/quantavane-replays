@@ -1,0 +1,18 @@
+page: certs/page/40a.md; l(x) = x^{10}+x^9-x^7-x^6-x^5-x^4-x^3+x+1; coefficients (constant term first) [1, 1, 0, -1, -1, -1, -1, -1, 0, 1, 1]
+  route 1: T = [3, 4, -5, -5, 1, 1] (constant term first); real roots of T: 0 in (-inf, -2), 4 in (-2, 2), 1 in (2, inf); degree 5
+  route 2: real roots of l: 0 in (-inf, 0], 1 in (0, 1), 1 in (1, inf)
+  route 1: M(l) in [1.1762808182599176, ...], width 1.7e-60; route 2: width 6.2e-61; they overlap
+  M(l) = 1.176280818259917506544070338474... (the first 30 decimals certain)
+RESULT [Leh1933]/[BDM2007]: M(l) = 1.17628081825991750654..., so L <= M(l); the printed 1.176280... is its leading digits: HOLDS
+anchor: Phi_7 = 1 + x + ... + x^6 (palindromic, degree 6):
+  Phi_7: T = [-1, -2, 1, 1] (constant term first); real roots of T: 0 in (-inf, -2), 3 in (-2, 2), 0 in (2, inf); degree 3
+  M(Phi_7) = 1 (every root on the unit circle), as Kronecker's theorem says
+red controls (each must be refused or give a different value):
+  l with -2x^5: T = [2, 4, -5, -5, 1, 1] (constant term first); real roots of T: 0 in (-inf, -2), 2 in (-2, 2), 1 in (2, inf); degree 5
+  l with -2x^5: T has non-real roots, so this route does not apply; refused
+  l without -x^4: refused (not a palindromic polynomial of even degree)
+  a printed 1.176281...: refused
+  -2 x^5 for -x^5: as expected
+  l without -x^4: as expected
+  printed 1.176281: as expected
+controls all as expected

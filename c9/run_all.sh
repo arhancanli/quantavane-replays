@@ -44,4 +44,9 @@ out=results/bpz2026.txt
 # the authors' Lean repository, read as data (./fetch_bpz.sh); red controls
 python3 -I bpz_check.py "$root" --controls > $out 2>&1 || status=1
 grep -H "RESULT" $out
+out=results/ps2018_mo2017.txt
+# the classical 9a rows [PS2018] 367^(1/5) and [MO2017] 350^(1/5), from the two papers' LaTeX sources
+# (./fetch_psmo.sh): independence in C_7^5 by two routes; red controls
+python3 -I ps_mo_check.py "$root" --controls > $out 2>&1 || status=1
+grep -H "RESULT" $out
 exit $status
