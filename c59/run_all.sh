@@ -9,3 +9,5 @@ python3 -I c59_check.py certs/gomyway/c59_cert.json --controls | tee results/c59
 python3 -I patel_check.py --controls | tee results/patel2026.txt
 # the 59a row [BPWW2026] (K_2 < 0.3177, arXiv:2504.03236 Theorem 6.4), from the paper's matrix D alone; red controls
 python3 -I bpww_check.py --controls | tee results/bpww2026.txt
+# the 59a row [G2026] (Griego, PR #75: K_2 < 0.3174541), from the construction the pull request states alone; controls
+python3 -I griego_check.py --controls | tee results/griego2026.txt

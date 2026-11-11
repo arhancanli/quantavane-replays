@@ -1,0 +1,15 @@
+[G2026] (PR #75): L = 1000000, A = 641550, C = 660190, D = 981359, N = 250, M = 251, r = 3174541/10000000
+step 1: LC - AD = 30599133550 > 0, (L - C)^2 - (D - A)^2 = 679619 > 0, L > C: True; so Q has no zero on the closed bidisc
+        G = z w conj(Q) on the torus (coefficients): True; so |F| = 1 there, |F| <= 1 on the bidisc, and the Fejer mean p has |p| <= 1 (p is not constant)
+step 2: 251 x 251 coefficients nu_jk = a_jk L^(j+k+1) by two routes (Q F = G; 1/Q then G): identical at every (j, k): True; a_00 = D/L = 981359/1000000, a_10 = -611982671/20000000000, a_01 = 633339821/100000000000; largest |nu| has 3002 digits
+step 3: ||p_r||_1 at r = 0.3174541 = 1.0000000001368431130617046...; > 1: True; > 1 + 1/7307638490 (the stated margin): True; ||p_r||_1 - 1 = 1.368431e-10
+so K_2 <= 0.3174541, and K_2 < 0.3174541 by continuity in r (6 s)
+
+controls (each must come out as stated):
+[ctl] r = 0.31745 (below the row): ||p_r||_1 = 0.999999623035162... < 1: True
+[ctl] D + 1: (L - C)^2 - (D + 1 - A)^2 = 0, not > 0, so step 1 is refused; indeed Q(-1, 1) = 0, a zero on the torus: True
+[ctl] G with A and C swapped is not z w conj(Q): True
+[ctl] one coefficient of route (ii) changed by 1 (j = 137, k = 41) is caught by the comparison: True
+controls all as expected: True
+
+RESULT: PASS (|p| <= 1 on the bidisc and ||p_r||_1 > 1 + 1/7307638490 at r = 0.3174541, so K_2 < 0.3174541)

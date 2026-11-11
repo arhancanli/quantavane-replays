@@ -1507,6 +1507,24 @@ non-isotropic $q_0$ fails the degree data; $t + 10^{-6}$ puts 240 points beyond 
 an added edge completing a 6-clique is found (then only 54 parts). Reproduce: `cd c28a && ./run_all.sh` (no download;
 about 10 seconds).
 
+## 59a: the [G2026] polynomial, $K_2 < 0.3174541$ (11 November 2026)
+
+`c59/griego_check.py`, our own code, from the construction stated in
+[#75](https://github.com/teorth/optimizationproblems/pull/75) alone (its integers $L = 10^6$, $A = 641550$, $C = 660190$,
+$D = 981359$, $N = 250$ and $r = 3174541/10^7$; the script in the pull request was neither read nor run):
+$Q = L - Az - Cw + Dzw$, $G = D - Cz - Aw + Lzw$, $F = G/Q$ and $p$ the double Fejer mean of order $M = 251$.
+
+| Step | Result |
+| --- | --- |
+| $Q$ has no zero on the closed bidisc | $LC - AD = 30599133550 > 0$ and $(L - C)^2 - (D - A)^2 = 679619 > 0$, so $\lvert A - Dw\rvert < \lvert L - Cw\rvert$ on $\lvert w\rvert \le 1$; $G = zw\,\overline{Q}$ on the torus, so $\lvert F\rvert \le 1$ and the Fejer mean $p$ is in the Schur class |
+| the $251 \times 251$ coefficients | $\nu_{jk} = a_{jk} L^{j+k+1}$ by two routes that share no code (the recurrence from $QF = G$; the series of $1/Q$, then the product with $G$): identical at every $(j, k)$ |
+| $\lVert p_r\rVert_1$ at $r = 0.3174541$ | $1.0000000001368431130617\ldots$, an exact integer comparison over the common denominator; above $1 + 1/7307638490$, the stated margin. So $K_2 < 0.3174541$ |
+
+Red controls, all as expected: $r = 0.31745$ gives $\lVert p_r\rVert_1 = 0.9999996230\ldots < 1$; $D + 1$ makes the
+strict inequality fail ($Q(-1, 1) = 0$, a zero on the torus); $G$ with $A$ and $C$ swapped is not $zw\,\overline{Q}$; one
+changed coefficient is caught by the comparison of the two routes. Reproduce: `cd c59 && python3 -I griego_check.py
+--controls` (no download; about 10 seconds), or `./run_all.sh` for every 59a row we replayed.
+
 ## Reproduce
 
 ```
