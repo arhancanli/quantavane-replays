@@ -1,0 +1,47 @@
+file sk2026/R3_33_n240_Z240.json sha256 6d38907338f0186cc33aab200a252de1e759b30e3c6a0bf26ade83a5f98d6da4
+file sk2026/R3_34_n240_Z240.json sha256 cb16daafe3e6d29ee6e29c303ff4ec08da5c027d806c2fec7c00787c222681f7
+1. structure: n = 240, |S| = 32, S = -S, edge list = Cay(Z_240, S) (3,840 edges), group table = addition mod 240: True
+   S = [14, 34, 38, 40, 43, 50, 58, 60, 63, 67, 69, 70, 79, 87, 89, 99, 141, 151, 153, 161, 170, 171, 173, 177, 180, 182, 190, 197, 200, 202, 206, 226]
+2. triangle-free, route a (S + S misses S): True; route b (every edge's endpoints share no neighbour): True; degrees [32]; N(0) independent: True (so alpha >= 32)
+3. multipliers [13, 37, 71, 169, 203, 227, 239]: units with aS = S: True; with 1 a group of order 8: True; the file's 7 stabilizer maps are exactly x -> ax: True; |R(0)| = 207, 31 orbits, sizes [1, 2, 2, 2, 4, 4, 4, 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]
+5. the k = 34 file holds the same graph (n = 240, same S): True
+4. alpha(G) <= 32: independent 33-sets through 0, by orbit (c17b_indep, K = 33, one orbit per process)
+   orbit  0 rep   1 |P| = 176 nodes 12952730123 4753.2 s: NONE
+   orbit  1 rep   2 |P| = 175 nodes 4656661216 1839.3 s: NONE
+   orbit  2 rep   3 |P| = 166 nodes 1264749178 505.6 s: NONE
+   orbit  3 rep   4 |P| = 157 nodes 225970448 99.3 s: NONE
+   orbit  4 rep   5 |P| = 150 nodes 96249523 43.2 s: NONE
+   orbit  5 rep   6 |P| = 142 nodes 26188757 11.9 s: NONE
+   orbit  6 rep   7 |P| = 136 nodes 13671847 6.4 s: NONE
+   orbit  7 rep   8 |P| = 130 nodes 3810796 1.9 s: NONE
+   orbit  8 rep   9 |P| = 125 nodes 1729444 0.9 s: NONE
+   orbit  9 rep  10 |P| = 116 nodes 185741 0.1 s: NONE
+   orbit 10 rep  11 |P| = 114 nodes 160404 0.1 s: NONE
+   orbit 11 rep  12 |P| = 107 nodes 36955 0.0 s: NONE
+   orbit 12 rep  15 |P| =  97 nodes 8923 0.0 s: NONE
+   orbit 13 rep  16 |P| =  90 nodes 1271 0.0 s: NONE
+   orbit 14 rep  20 |P| =  86 nodes 1299 0.0 s: NONE
+   orbit 15 rep  21 |P| =  83 nodes 822 0.0 s: NONE
+   orbit 16 rep  22 |P| =  75 nodes 79 0.0 s: NONE
+   orbit 17 rep  23 |P| =  71 nodes 66 0.0 s: NONE
+   orbit 18 rep  24 |P| =  68 nodes 24 0.0 s: NONE
+   orbit 19 rep  25 |P| =  58 nodes 4 0.0 s: NONE
+   orbit 20 rep  28 |P| =  50 nodes 1 0.0 s: NONE
+   orbit 21 rep  29 |P| =  48 nodes 1 0.0 s: NONE
+   orbit 22 rep  30 |P| =  38 nodes 1 0.0 s: NONE
+   orbit 23 rep  31 |P| =  37 nodes 1 0.0 s: NONE
+   orbit 24 rep  42 |P| =  27 nodes 0 0.0 s: NONE
+   orbit 25 rep  48 |P| =  20 nodes 0 0.0 s: NONE
+   orbit 26 rep  49 |P| =  17 nodes 0 0.0 s: NONE
+   orbit 27 rep  62 |P| =  10 nodes 0 0.0 s: NONE
+   orbit 28 rep  80 |P| =   2 nodes 0 0.0 s: NONE
+   orbit 29 rep 100 |P| =   1 nodes 0 0.0 s: NONE
+   orbit 30 rep 120 |P| =   0 nodes 0 0.0 s: NONE
+   RESULT NONE: an independent set of size 33 does not exist (nodes 19242156924, 7261.9 s)
+   alpha(G) = 32: True  (7262 s of search CPU)
+RED CONTROLS
+  C1 K = 32 (must find): found [0, 1, 19, 104, 105, 107, 110, 112, 115, 116, 117, 120, 122, 125, 127, 128, 133, 208, 210, 213, 218, 228, 229, 230, 231, 233, 234, 235, 236, 237, 238, 239], independent in G: True (0.0 s)
+  C2 S without +-14, K = 33 (must find): found [0, 1, 208, 209, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239], independent: True (0.0 s)
+  C3 c17b_indep against brute force on 60 random circulants (120 decisions at K = alpha, alpha + 1): True
+  controls all as expected
+RESULT R(3,33) >= 241 CONFIRMED; run time 18122 s

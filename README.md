@@ -1416,6 +1416,29 @@ $10^{-12}$; a term of degree $d + 1$; and $c = 0$ for even $d$ (then $d + \lvert
 so two live sets meet). Read, not machine-checked: Lemmas 1 and 2 and the proofs of Claims 1 and 2 for every $d$, which
 we re-derived. Reproduce: `cd c26a && ./fetch.sh && ./run_all.sh` (seconds).
 
+## 17b: R(3,33) >= 241 from a circulant graph on Z_240 (10 November 2026)
+
+`c17b/c17b_check.py` and `c17b/c17b_indep.c`, our own code: the certificate [SK2026] that the 17b page cites
+([#252](https://github.com/teorth/optimizationproblems/pull/252); Zenodo 10.5281/zenodo.23552014,
+`r3_33_ramsey_certificate.zip`, `a17548de...14d4`), from its two JSON files only (`R3_33_n240_Z240.json`,
+`6d389073...6da4`; `R3_34_n240_Z240.json`, `cb16daaf...81f7`); the bundle's checkers and search code were neither read
+nor run. The claim: $G = \mathrm{Cay}(\mathbb{Z}_{240}, S)$, $S = \pm\{14, 34, 38, 40, 43, 50, 58, 60, 63, 67, 69, 70, 79, 87,
+89, 99\}$, is triangle-free with no independent set of 33 vertices, so $R(3,33) > 240$.
+
+| Check | Result |
+| --- | --- |
+| the file's graph | $S = -S$, $0 \notin S$, $\lvert S\rvert = 32$; the edge list is exactly $\{x, x+s\}$ (3,840 edges, no repeats); the group table is addition mod 240 |
+| triangle-free | yes by two routes ($(S+S) \cap S = \varnothing$; no edge's endpoints share a neighbour), so $N(0)$ is an independent 32-set |
+| automorphisms fixing 0 | $x \mapsto ax$, $a \in \{\pm1, \pm13, \pm37, \pm71\}$: units with $aS = S$, a group of order 8; the file's seven stabilizer maps are exactly these. Orbits on the 207 non-neighbours of 0: 31 (sizes 1, 2, 2, 2, 4, 4, 4, 4 and 8 twenty-three times) |
+| no independent 33-set | orbital branching (the first orbit an independent 33-set through 0 meets may be assumed to contribute its representative, and earlier orbits nothing), then 31 exact searches for a 31-clique in the complement, by branch and bound with greedy-colouring bounds (Tomita's MCQ) run as a decision: none in any of the 31 (19242156924 search nodes, 7261.9 s of CPU) |
+
+Red controls, all as expected: $K = 32$ finds an independent 32-set at once (checked); $S$ without $\pm 14$ (no longer
+multiplier-invariant, so every non-neighbour is its own orbit) gives an independent 33-set at once (checked); on 60 random
+small circulants the search agrees with brute force at $K = \alpha$ and $\alpha + 1$. The $k = 34$ file holds the same
+graph. What rests on mathematics: vertex-transitivity and the orbital-branching argument (both elementary); the step to
+$R(3,34) \ge 244$ (Burr, Erdős, Faudree and Schelp) is cited by the claimant and not checked here. Reproduce:
+`cd c17b && ./fetch.sh && ./run_all.sh` (a C compiler and Python 3.9+; about 303 minutes on one core, a few MB).
+
 ## Reproduce
 
 ```
