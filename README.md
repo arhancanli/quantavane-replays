@@ -1558,6 +1558,30 @@ past the path slack; the (5,43) list reversed; a (19,23) start moved into a sour
 surplus. Not checked: the criterion itself and the lemmas behind it (Lean-formalized by the authors), which we read.
 Reproduce: `cd c4b && ./fetch_nas.sh && ./fetch_jon.sh && ./run_nas.sh` (about 7 minutes, under 300 MB).
 
+## 9a: [BPZ2026], valid-tuple products for $C_7$, $C_{11}$, $C_{15}$ and $C_{19}$ (11 November 2026)
+
+`c9/bpz_check.py`, our own code, from the LaTeX source of Buys, Polak and Zuiddam (arXiv 2607.29681v1, `main3.tex`,
+`60bf79af...ff21`) and the base data of their Lean repository (spectra-research/shannon-capacity-lean @ `aa21eeb`,
+`ShannonBounds/BaseC{7,11,15,19}Data.lean`, read as data: the word lists `I`, `X` and the (parent, alternative, side)
+triples; no Lean proof was built or run). For each cycle it checks every condition of the paper's definition of a
+valid tuple $(I, S, f_0, f_1, X)$ in $C_n^{\boxtimes k}$ ($I$, $f_0(S)$, $f_1(S)$ and $X$ independent, one of
+$f_0(s), f_1(s)$ equal to $s$, $N[f_i(s)] \cap I = \{s\}$, $X$ missing $N[f_0(S)] \cap N[f_1(S)]$), the profile, the
+paper's star schedule in integers, and $\lfloor M^{1/p} 10^{12}\rfloor$ exactly by integer powers.
+
+| Cycle | Base | Profile (the paper's) | Schedule | Power | $\Theta(C_n) \ge$ |
+| --- | --- | --- | --- | --- | --- |
+| $C_7$ (the 9a row) | $C_7^{\boxtimes 5}$, Polak and Schrijver's 367-set | (367, 8, 367, 322) | 1, 2, 3, 5, 10, 20, 40 | 200 | 3.258805369885 |
+| $C_{11}$ (the page's note) | $C_{11}^{\boxtimes 3}$, 148 | (148, 3, 148, 142) | 1, 2, 3, 4, 7, 8, 14, 15, 29, 58 | 174 | 5.294502522149 |
+| $C_{15}$ (note) | $C_{15}^{\boxtimes 4}$, 2842 | (2842, 3, 2842, 2833) | doubling to 1024 | 4096 | 7.301600534487 |
+| $C_{19}$ (note) | $C_{19}^{\boxtimes 4}$, 7666 | (7666, 2, 7666, 7661) | doubling to 4096 | 16384 | 9.357192705918 |
+
+Anchors: the paper's $C_5$ example (profile (2, 1, 2, 0), star square (5, 0, 4, 4)); Gao's profile (367, 8, 367, 321) on
+the $C_7$ schedule gives Gao's 3.258789153908. Red controls, all refused: a parent put into $X$ (it lies in both
+neighbourhoods); both maps the identity at one parent; a word of $I$ moved next to another; a repeated word in $X$; each
+stated value plus $10^{-12}$. Not checked: Gao's product theorem (its $k = 2$ case is replayed in our [Gao2026] check),
+and the note's $C_{13}$, $C_{21}$ and $C_{23}$ values, whose base data use fibre and coset encodings. Reproduce:
+`cd c9 && ./fetch_bpz.sh && python3 -I bpz_check.py certs --controls` (seconds).
+
 ## Reproduce
 
 ```

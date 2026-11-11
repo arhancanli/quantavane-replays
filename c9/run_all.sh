@@ -39,4 +39,9 @@ out=results/tan2026.txt
 # and BPZ's base profile are inputs), and the comparisons of PR #296 from its certificate data; red controls
 python3 -I tan_check.py "$root/lt2026/certificate.json" --tex="$root/tan2026" --controls > $out 2>&1 || status=1
 grep -H "RESULT" $out
+out=results/bpz2026.txt
+# the 9a row [BPZ2026] (C_7) and the page's note on C_11, C_15, C_19 (PR #174), from the paper's TeX and the base data of
+# the authors' Lean repository, read as data (./fetch_bpz.sh); red controls
+python3 -I bpz_check.py "$root" --controls > $out 2>&1 || status=1
+grep -H "RESULT" $out
 exit $status

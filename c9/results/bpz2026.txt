@@ -1,0 +1,64 @@
+9a [BPZ2026] (Buys, Polak and Zuiddam, arXiv 2607.29681v1): the C_7 row Theta(C_7) >= 3.258805369885..., and the page's note on C_11, C_15 and C_19
+bpz2026/main3.tex sha256 60bf79af0ab1148b16a81514504d1903f4e5b9add02bf9af53bd186028bbff21: as pinned True
+  our transcription appears verbatim: True   (a_1-b_1)(a_2-b_2)+c_1b_2+b_1c_2,\ 
+  our transcription appears verbatim: True   d_1b_2+b_1d_2,\ 
+  our transcription appears verbatim: True   c_1c_2,\ 
+  our transcription appears verbatim: True   d_1d_2+(c_1-d_1)(c_2-d_2)
+anchor: the paper's C_5 example is a valid tuple with profile (2, 1, 2, 0): True; its star square is (5, 0, 4, 4): True
+
+C_7: BaseC7Data.lean (spectra-research/shannon-capacity-lean @ aa21eeb)
+  our transcription appears verbatim: True   \(\pi_1=(367,8,367,322)\). Form
+  our transcription appears verbatim: True   \(\pi_2=\pi_1\star\pi_1\), \(\pi_3=\pi_1\star\pi_2\),
+  our transcription appears verbatim: True   \(\pi_5=\pi_2\star\pi_3\), and then
+  our transcription appears verbatim: True   \(\pi_{2r}=\pi_r\star\pi_r\) for \(r=5,10,20\). The resulting \(\pi_{40}\)
+  our transcription appears verbatim: True   \(\Theta(C_7)\geq 3.258805369885\ldots\).
+  sha256 bb50af06aeefdd1a2aafce35802e6f129fa16132b1a070a9d3806a0227f718ba: as pinned True; |I| = 367, |X| = 367, 8 (parent, alternative, side) triples; codes in range: True
+  valid tuple in C_7^5 (every condition of Section 2): True
+  profile (367, 8, 367, 322) (the paper: (367, 8, 367, 322)): True; footprints in X: (19, 26)
+  pi_40: an independent set in C_7^200 of size M (103 digits); floor(M^(1/200) 10^12)/10^12 = 3.258805369885: the stated 3.258805369885: True
+
+C_11: BaseC11Data.lean (spectra-research/shannon-capacity-lean @ aa21eeb)
+  our transcription appears verbatim: True   \(\pi_1=(148,3,148,142)\). Form
+  our transcription appears verbatim: True   \(\pi_4=\pi_2\star\pi_2\), \(\pi_7=\pi_3\star\pi_4\),
+  our transcription appears verbatim: True   \(\pi_8=\pi_4\star\pi_4\), \(\pi_{14}=\pi_7\star\pi_7\),
+  our transcription appears verbatim: True   \(\pi_{15}=\pi_7\star\pi_8\),
+  our transcription appears verbatim: True   \(\pi_{29}=\pi_{14}\star\pi_{15}\), and
+  our transcription appears verbatim: True   \(\pi_{58}=\pi_{29}\star\pi_{29}\). The last profile lies in
+  our transcription appears verbatim: True   \(\Theta(C_{11})\geq 5.294502522149\ldots\).
+  sha256 b6233477afdc35e6cd63a39232dabf1c5f238dfc139767e0bd08f2ca8305e517: as pinned True; |I| = 148, |X| = 148, 3 (parent, alternative, side) triples; codes in range: True
+  valid tuple in C_11^3 (every condition of Section 2): True
+  profile (148, 3, 148, 142) (the paper: (148, 3, 148, 142)): True; footprints in X: (3, 3)
+  pi_58: an independent set in C_11^174 of size M (126 digits); floor(M^(1/174) 10^12)/10^12 = 5.294502522149: the stated 5.294502522149: True
+
+C_15: BaseC15Data.lean (spectra-research/shannon-capacity-lean @ aa21eeb)
+  our transcription appears verbatim: True   \(\pi_1=(2842,3,2842,2833)\). Form
+  our transcription appears verbatim: True   \(r=1,2,4,\ldots,512\). The resulting \(\pi_{1024}\) lies in
+  our transcription appears verbatim: True   \(\Theta(C_{15})\geq 7.301600534487\ldots\).
+  sha256 a09fc625d159ad083e5c9da35f0707050659133ffa78b23edb1383fe2e07efa5: as pinned True; |I| = 2842, |X| = 2842, 3 (parent, alternative, side) triples; codes in range: True
+  valid tuple in C_15^4 (every condition of Section 2): True
+  profile (2842, 3, 2842, 2833) (the paper: (2842, 3, 2842, 2833)): True; footprints in X: (6, 3)
+  pi_1024: an independent set in C_15^4096 of size M (3537 digits); floor(M^(1/4096) 10^12)/10^12 = 7.301600534487: the stated 7.301600534487: True
+
+C_19: BaseC19Data.lean (spectra-research/shannon-capacity-lean @ aa21eeb)
+  our transcription appears verbatim: True   \(\pi_1=(7666,2,7666,7661)\). Form
+  our transcription appears verbatim: True   \(r=1,2,4,\ldots,2048\). The resulting \(\pi_{4096}\) lies in
+  our transcription appears verbatim: True   \(\Theta(C_{19})\geq 9.357192705918\ldots\).
+  sha256 298ea875746240f154e4ee5461468ea60a7ba468d30cd8d1892c9ee24e8d730b: as pinned True; |I| = 7666, |X| = 7666, 2 (parent, alternative, side) triples; codes in range: True
+  valid tuple in C_19^4 (every condition of Section 2): True
+  profile (7666, 2, 7666, 7661) (the paper: (7666, 2, 7666, 7661)): True; footprints in X: (3, 2)
+  pi_4096: an independent set in C_19^16384 of size M (15912 digits); floor(M^(1/16384) 10^12)/10^12 = 9.357192705918: the stated 9.357192705918: True
+
+anchor: Gao's profile (367, 8, 367, 321) on the C_7 schedule gives 3.258789153908 (the [Gao2026] row: 3.258789153908): True
+
+controls (each must come out as stated):
+[ctl] C_7: one word of X replaced by a parent (in both neighbourhoods): refused (1 words of X lie in N[f_0(S)] and N[f_1(S)]): True
+[ctl] C_7: both maps the identity at one parent: refused (not exactly one of f_0(s), f_1(s) equals s at (1, 3, 4, 4, 6)): True
+[ctl] C_7: one word of I moved next to another: refused (I is not independent): True
+[ctl] C_19: a repeated word in X: refused (X is not independent): True
+[ctl] C_7: the stated value plus 10^-12 is not implied: True
+[ctl] C_11: the stated value plus 10^-12 is not implied: True
+[ctl] C_15: the stated value plus 10^-12 is not implied: True
+[ctl] C_19: the stated value plus 10^-12 is not implied: True
+controls all as expected: True
+
+RESULT: PASS (four valid base tuples with the paper's profiles; the schedules give Theta(C_7) >= 3.258805369885, Theta(C_11) >= 5.294502522149, Theta(C_15) >= 7.301600534487, Theta(C_19) >= 9.357192705918)
