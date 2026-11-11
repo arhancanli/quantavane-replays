@@ -1,0 +1,24 @@
+PG(2,16): 273 points, 65 isotropic, 208 non-isotropic; vertices (orthogonal non-isotropic triples): 416; |T(A)| = [15]
+strongly regular (416, 100, 36, 20), every pair checked: True (degrees {100}, lambda {36}, mu {20})
+G = 96I + 24A - 6J (entries 90, 18, -6): rank 65 modulo 2^61 - 1 (so >= 65 over Q; the SRG eigenvalues 100, 20, -4 with multiplicities 1, 65, 350 give exactly 65 and G >= 0)
+clique number: 5 (a maximum clique [0, 389, 409, 413, 415], a clique: True); no 6-clique
+Lemma 1(3)-(4) degree data hold for 65 of the 65 isotropic points q0
+  for q0 = (0, 1, 1): |B| = 96 = 3 x 32 (three components), |C| = 320; degrees 20 inside B_i, 0 between, 80 to C; 8 to each B_i and 76 inside C
+t = (sqrt 222 - 1)/13 > 0: True; 78 t^2 + 12 t = 102 + 0 sqrt(222) (must be 102)
+Lemma 3: x_c . S_i = 0 for all c in C and i = 1, 2, 3: True; Gram(S) = [[12288, -6144, -6144], [-6144, 12288, -6144], [-6144, -6144, 12288]]: det 0, a 2 x 2 minor 113246208, so rank 2 and dim W = 63
+Lemma 4 (b = vertex 0 of B_1): z_b . S_i = ['0', '0', '0'], |z_b|^2 = 78, z_b . x_c = 18 or -6 as b ~ c or not: True
+Gram matrix of {x_c} u {z_b} (321 x 321, integers): rank 63 modulo 2^61 - 1, so dim span X = 63 (with Lemma 3)
+Lemma 5: |p - x_c|^2 = 192 for the 240 c not adjacent to b, = 2544/13 - 48/13 sqrt(222) (= 192 - 48t, below 192: True) for the 80 neighbours; pairs inside C: 144 or 192; |p|^2 = 78 t^2 != 90: True; so diam(X)^2 = 192, attained
+Lemma 6: a smaller-diameter subset is a clique of the graph (b standing for p), so at most 5 points; ceil(321/5) = 65 > 64 = 63 + 1: True
+anchors (same graph, not the replayed row):
+  all 416 points (rank 65): ceil(416/5) = 84 > 66, Bondarenko's dimension 65
+  C u B_3 (352 points) orthogonal to S_1 - S_2: True; Gram rank 64 mod 2^61 - 1; ceil(352/5) = 71 > 65, the bound 64 of the [JB2014] row
+
+controls (each must come out as stated):
+[ctl] the sizes |T(A) & T(A')| that occur are [2, 3, 5]; the rule |T & T'| = 2 instead of 3 gives degrees [150], lambda [47], mu [54, 60]: not SRG(416,100,36,20): True
+[ctl] a non-isotropic q0 = (0, 0, 1): |B| = 66, |C| = 350, components [1, 1, 1, 1, 1, 1, 60]; the degree data fail: True
+[ctl] t + 1/10^6: |p - x_c|^2 > 192 for 240 points, so the diameter comes only from p and X minus p (320 points) has smaller diameter: the construction fails: True
+[ctl] one added edge (41, 0) completing a 6-clique: the search finds clique number 6, so only ceil(321/6) = 54 parts: True
+controls all as expected: True
+
+RESULT: PASS (321 points in R^63, diameter^2 192, every smaller-diameter subset at most 5 points: at least 65 > 64 parts, so Borsuk fails in dimension 63)

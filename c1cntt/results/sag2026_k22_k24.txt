@@ -1,0 +1,46 @@
+[k22] k22/K4194304_0.4103781.txt (certificate commit 867e0e6f2858; stated in #354 at 2643147e48) sha256 d0278d18a330108b926281368b66aa41a069d7429451548b340bdb6366ca3494: as stated True
+  weights 4194305
+  nonzero 3522422
+  wmax 4503599627370496
+  S 11219502722536334
+  A0 20282425100656989050078320468740
+  K 4194304
+  L 8388608
+  identity_failures 0
+  Amin 12316052677654275337897144
+  argmin_count 1
+  argmin 3513048
+  direct_sums_checked 67
+  direct_sums_agree 1
+  exact value K Amin / S^2 = 679700908027579442984780824576/1656279491328950142501183554731 = 0.41037814667511661723...
+  equal to the stated fraction: True; minimum only at k = [3513048] (stated 3513048): True; S as stated: True
+  printed 0.4103781 <= exact value: True; the next printed value 0.4103782 is above it: True (margin 4.668e-08)
+  outcome as recorded in ROWS (printed bound implied: True): True
+  [ctl] w_3513048 + 1: the exact value becomes 0.41037814667512886904..., not the stated fraction, so the changed weights are refused: True
+  [ctl] every weight times 3 (values 9 times larger, same ratio): the same fraction and lag: True
+  [ctl] one residue mod p1 corrupted (lag 4183122): the mod-p3 identity fails there (1 failure), exit 1: True
+[k24] k24/K16777216_0.4103782.txt (certificate commit f2b97a3caa1f; stated in #354 at e06c3123e2) sha256 f2b2e7771aa7f803c32efa91aacfd59abcc352719abfeb4281749df75d7c893a: as stated True
+  weights 16777217
+  nonzero 14089329
+  wmax 4503599627370496
+  S 11219722476171521
+  A0 20282413478220819312172465283869
+  K 16777216
+  L 33554432
+  identity_failures 0
+  Amin 3079134059530732585829120
+  argmin_count 1
+  argmin 2691006
+  direct_sums_checked 67
+  direct_sums_agree 1
+  exact value K Amin / S^2 = 51659297209703959230693685329920/125882172442308406613641411453441 = 0.41037818308529216481...
+  equal to the stated fraction: True; minimum only at k = [2691006] (stated 2691006): True; S as stated: True
+  printed 0.4103782 <= exact value: False: the printed bound is 1.691e-08 ABOVE the exact value, so it is NOT a valid lower bound as printed; the 7-decimal truncation 0.4103781 is
+  outcome as recorded in ROWS (printed bound implied: False): True
+  [ctl] w_2691006 + 1: the exact value becomes 0.41037818308531844200..., not the stated fraction, so the changed weights are refused: True
+  [ctl] every weight times 3 (values 9 times larger, same ratio): the same fraction and lag: True
+  [ctl] one residue mod p1 corrupted (lag 13965598): the mod-p3 identity fails there (1 failure), exit 1: True
+selftest 200 cases (K up to 3000 and powers of two up to 2048, so L = 2K and L > 2K): all equal to the direct double sum
+controls all as expected: True
+FINDING: K = 16777216: printed 0.4103782 is not implied (exact 0.41037818308...; 0.4103781 is)
+RESULT: PASS (K = 2^22 and K = 2^24: each the stated fraction, lag and S exactly; 0.4103781 holds for both; 0.4103782 as printed for K = 2^24 does not)

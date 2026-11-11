@@ -1430,14 +1430,82 @@ nor run. The claim: $G = \mathrm{Cay}(\mathbb{Z}_{240}, S)$, $S = \pm\{14, 34, 3
 | the file's graph | $S = -S$, $0 \notin S$, $\lvert S\rvert = 32$; the edge list is exactly $\{x, x+s\}$ (3,840 edges, no repeats); the group table is addition mod 240 |
 | triangle-free | yes by two routes ($(S+S) \cap S = \varnothing$; no edge's endpoints share a neighbour), so $N(0)$ is an independent 32-set |
 | automorphisms fixing 0 | $x \mapsto ax$, $a \in \{\pm1, \pm13, \pm37, \pm71\}$: units with $aS = S$, a group of order 8; the file's seven stabilizer maps are exactly these. Orbits on the 207 non-neighbours of 0: 31 (sizes 1, 2, 2, 2, 4, 4, 4, 4 and 8 twenty-three times) |
-| no independent 33-set | orbital branching (the first orbit an independent 33-set through 0 meets may be assumed to contribute its representative, and earlier orbits nothing), then 31 exact searches for a 31-clique in the complement, by branch and bound with greedy-colouring bounds (Tomita's MCQ) run as a decision: none in any of the 31 (19242156924 search nodes, 7261.9 s of CPU) |
+| no independent 33-set | orbital branching (the first orbit an independent 33-set through 0 meets may be assumed to contribute its representative, and earlier orbits nothing), then 31 exact searches for a 31-clique in the complement, by branch and bound with greedy-colouring bounds (Tomita's MCQ) run as a decision: none in any of the 31 (19,242,156,924 search nodes, 7,262 s of CPU) |
 
 Red controls, all as expected: $K = 32$ finds an independent 32-set at once (checked); $S$ without $\pm 14$ (no longer
 multiplier-invariant, so every non-neighbour is its own orbit) gives an independent 33-set at once (checked); on 60 random
 small circulants the search agrees with brute force at $K = \alpha$ and $\alpha + 1$. The $k = 34$ file holds the same
 graph. What rests on mathematics: vertex-transitivity and the orbital-branching argument (both elementary); the step to
 $R(3,34) \ge 244$ (Burr, Erdős, Faudree and Schelp) is cited by the claimant and not checked here. Reproduce:
-`cd c17b && ./fetch.sh && ./run_all.sh` (a C compiler and Python 3.9+; about 303 minutes on one core, a few MB).
+`cd c17b && ./fetch.sh && ./run_all.sh` (a C compiler and Python 3.9+; about two hours of CPU on one core, a few MB).
+
+## 10c: four discrepancy certificates (11 November 2026)
+
+`c10c/c10c_check.py`, our own code, reads the four matrices printed on the 10c page (main at `87b4ebb`,
+`constants/10c.md`, `b8aa25a1...365b`) as data and computes $\mathrm{disc}(A) = \min_{x \in \{\pm1\}^n} \lVert Ax\rVert_\infty$
+exactly by two exhaustive routes that share no code: a Gray-code walk that updates $Ax$ in integers, and bit masks
+with $(Ax)_i = (\lvert P_i\rvert - \lvert N_i\rvert) - 2(\lvert S \cap P_i\rvert - \lvert S \cap N_i\rvert)$ for the
+$+1$ and $-1$ positions $P_i$, $N_i$ of row $i$. Both give the full distribution of $\lVert Ax\rVert_\infty$.
+
+| Row | Pull request | Matrix | $\mathrm{disc}(A)$ and distribution of $\lVert Ax\rVert_\infty$ | Bound |
+| --- | --- | --- | --- | --- |
+| [G2026] | [#74](https://github.com/teorth/optimizationproblems/pull/74) | $6 \times 6$, $\pm1$ | 4 (4: 52, 6: 12) | $4/\sqrt6 = 1.632993161855...$ |
+| [X2026] | [#86](https://github.com/teorth/optimizationproblems/pull/86) | $9 \times 9$, $\pm1$, row 9 = row 1 | 5 (5: 352, 7: 144, 9: 16) | $5/3$ |
+| [L2026] | [#129](https://github.com/teorth/optimizationproblems/pull/129) | $17 \times 17$, $\pm1$, row 17 = row 1 | 7 (7: 43,904, 9: 60,480, 11: 21,760, 13: 4,352, 15: 544, 17: 32) | $7/\sqrt{17} = 1.697749375254...$ |
+| [H2026] | [#170](https://github.com/teorth/optimizationproblems/pull/170) | $8 \times 8$, $\{-1,0,1\}$, column 8 zero | 5 (5: 224, 7: 32, as the page states) | $5/\sqrt8 = 1.767766952966...$ |
+
+The page's sets $T_i$ equal the matrices' $-1$ positions, and its equality examples give the printed $Ax$. The README
+cell prints 1.767767 for this lower bound, which is $5/\sqrt8$ rounded up by $4.7 \cdot 10^{-8}$. Red controls, all as
+expected: one flipped entry in each matrix lowers the discrepancy (4 to 2, 5 to 3, 7 to 5, 5 to 3); a claimed
+discrepancy one higher is refused; with column 8 of [H2026] set to $+1$ the discrepancy is 4 (even, as the page's parity
+remark says); both routes equal a naive triple loop on 60 random matrices over $\{-1,0,1\}$. Not checked: the page's
+remarks (optimality at $n = 8$, the covering-code framing). Reproduce: `cd c10c && ./fetch.sh && ./run_all.sh` (about
+20 seconds).
+
+## C1c: #354's certificates with $K = 2^{22}$ and $K = 2^{24}$ cells (11 November 2026)
+
+`c1cntt/c1c_ntt.c` (our own, standard C) computes every $A_k = \sum_i w_i w_{i+k}$, $0 \le k \le K$, of a text
+certificate ("K", then the $K + 1$ weights) exactly: the cyclic autocorrelation of length $L = 2K$ by a
+number-theoretic transform modulo three primes below $2^{62}$, with the one wrapped term (lag $K$) removed. $A_0 =
+\sum_i w_i^2$ is summed exactly and lies below the product of the first two primes, so each $A_k \le A_0$ is their CRT
+value, and the third prime checks it at every lag; the minimizing lag, lags 0 and $K$ and 64 random lags are summed
+again directly in 128-bit integers. `c1cntt_check.py` reduces $K \min_k A_k / S^2$ and compares. SeanSagait's
+`verify_*.py` and `construction/` were neither read nor run.
+
+| Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |
+| --- | --- | --- | --- |
+| [#354](https://github.com/teorth/optimizationproblems/pull/354) (10 Nov, 19:06 UTC) | SeanSagait/c1c-autocorrelation-certificate @ `867e0e6f`, `K4194304_0.4103781.txt` ($K = 2^{22}$), `d0278d18...3494` | 679700908027579442984780824576/1656279491328950142501183554731 = 0.41037814667511661723..., minimum only at k = 3513048 (S = 11219502722536334) | 0.4103781, below |
+| #354 (11 Nov, 00:59 UTC) | same repository @ `f2b97a3c`, `K16777216_0.4103782.txt` ($K = 2^{24}$, from the `.xz`, `eaaaf182...b5ca`), `f2b2e777...893a` | 51659297209703959230693685329920/125882172442308406613641411453441 = 0.41037818308529216481..., minimum only at k = 2691006 (S = 11219722476171521) | 0.4103782, **above** the exact value by $1.69 \cdot 10^{-8}$: not a valid lower bound as printed; 0.4103781 (or 0.41037818) is |
+
+Every fraction, lag and sum is the one stated in #354; both values are above our own #344 (0.4103780000). Red
+controls: the weight at the deciding lag plus 1 changes the value; every weight times 3 gives the same fraction and
+lag; one residue modulo the first prime corrupted at a random lag is caught by the third prime at that lag; a
+self-test against the direct double sum on 200 random cases (including $L = 2K$). `run_all.sh` exits 0 exactly when
+every outcome is as recorded, including the printed-bound finding. Reproduce: `cd c1cntt && ./fetch.sh && ./run_all.sh`
+(about 3 minutes, under 1 GB).
+
+## 28a: Borsuk's conjecture fails in dimension 63 [Gri2026] (11 November 2026)
+
+`c28a/borsuk_check.py`, our own code, written from the proof PDF of maaxgrin/borsuk-63-counterexample @ `cdcdbeac`
+(`d6c39e45...7734`, read as text; its scripts were neither read nor run and its DIMACS files are not used). We build
+the $G_2(4)$ graph from Brouwer's projective model as the PDF describes it ($\mathbb{F}_{16} = \mathbb{F}_2[\alpha]/(\alpha^4
++ \alpha + 1)$, $h(u, w) = \sum_i u_i w_i^4$ on PG(2,16), vertices the 416 triples of pairwise orthogonal non-isotropic
+points, adjacency $\lvert T(A) \cap T(A')\rvert = 3$) and check, exactly:
+
+| Step | Result |
+| --- | --- |
+| the graph | 273 points, 65 isotropic; 416 vertices; strongly regular $(416, 100, 36, 20)$, every pair checked; $G = 96I + 24A - 6J$ has rank 65 modulo $2^{61} - 1$ |
+| Lemma 1 | clique number 5 (a 5-clique; no 6-clique by exhaustive search); for every one of the 65 isotropic $q_0$: $\lvert B\rvert = 96$ in three components of 32, $\lvert C\rvert = 320$, degrees 20, 0, 80 and 8, 76 |
+| Lemmas 3, 4 | $x_c \cdot S_i = 0$; Gram$(S_1, S_2, S_3)$ of rank 2; $z_b \cdot S_i = 0$, $\lvert z_b\rvert^2 = 78$, $z_b \cdot x_c \in \{18, -6\}$; the integer Gram matrix of $\{x_c\} \cup \{z_b\}$ has rank 63 modulo $2^{61} - 1$, so $X$ spans exactly 63 dimensions |
+| Lemma 5 | in $\mathbb{Q}(\sqrt{222})$: $78t^2 + 12t = 102$; $\lvert p - x_c\rvert^2 = 192$ (240 points) or $192 - 48t$ (80 points); diameter$^2$ 192, attained |
+| Lemma 6 | smaller-diameter subsets are cliques (with $b$ for $p$): at most 5 points, so at least $\lceil 321/5\rceil = 65 > 64$ parts |
+
+Anchors on the same graph (not counted as replays): the 416 points need 84 parts in $\mathbb{R}^{65}$ (Bondarenko); the
+352 points $C \cup B_3$ are orthogonal to $S_1 - S_2$ (Gram rank 64) and need 71 parts in $\mathbb{R}^{64}$, the bound of
+the [JB2014] row. Red controls: adjacency at $\lvert T \cap T'\rvert = 2$ is not SRG$(416,100,36,20)$ (degree 150); a
+non-isotropic $q_0$ fails the degree data; $t + 10^{-6}$ puts 240 points beyond 192 from $p$, so the construction fails;
+an added edge completing a 6-clique is found (then only 54 parts). Reproduce: `cd c28a && ./run_all.sh` (no download;
+about 10 seconds).
 
 ## Reproduce
 

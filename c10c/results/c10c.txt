@@ -1,0 +1,58 @@
+10c page (teorth/optimizationproblems @ 87b4ebb, constants/10c.md) sha256 b8aa25a127d45239e25e78be9487f1b3bde4d62b87b05e24772f9b7c9e51365b
+
+[G2026] (PR #74): C_10c >= 4/sqrt(6), claimed disc(A) = 4 for an 6 x 6 matrix
+  matrix read from the page: 6 x 6, entries [-1, 1]; square 6 x 6: True; all entries in [-1, 1]: True
+  identically zero columns: none; repeated rows: none
+  the page's T_i lists equal the -1 positions of the rows: True
+  route A (Gray code, 2^6 = 64 vectors): disc = 4; route B (bit masks): disc = 4; histograms identical: True
+  distribution of ||Ax||_inf over all sign vectors: 4: 52, 6: 12
+  a minimizer: x = (-1, 1, 1, 1, 1, 1), Ax = (4, 2, 4, 2, 0, -2)
+  disc(A) = 4 as claimed: True; bound 4/sqrt(6) = 1.632993161855...; the table's decimal 1.632993 is below the exact value
+
+[X2026] (PR #86): C_10c >= 5/3, claimed disc(A) = 5 for an 9 x 9 matrix
+  matrix read from the page: 9 x 9, entries [-1, 1]; square 9 x 9: True; all entries in [-1, 1]: True
+  identically zero columns: none; repeated rows: [(1, 9)]
+  the page's T_i lists equal the -1 positions of the rows: True
+  route A (Gray code, 2^9 = 512 vectors): disc = 5; route B (bit masks): disc = 5; histograms identical: True
+  distribution of ||Ax||_inf over all sign vectors: 5: 352, 7: 144, 9: 16
+  a minimizer: x = (-1, -1, 1, -1, 1, 1, 1, 1, 1), Ax = (3, 5, 5, 3, 5, 3, 3, -3, 3)
+  disc(A) = 5 as claimed: True; bound 5/3 = 1.666666666666...; the table's decimal 1.666667 is above the exact value
+
+[L2026] (PR #129): C_10c >= 7/sqrt(17), claimed disc(A) = 7 for an 17 x 17 matrix
+  matrix read from the page: 17 x 17, entries [-1, 1]; square 17 x 17: True; all entries in [-1, 1]: True
+  identically zero columns: none; repeated rows: [(1, 17)]
+  the page's T_i lists equal the -1 positions of the rows: True
+  route A (Gray code, 2^17 = 131072 vectors): disc = 7; route B (bit masks): disc = 7; histograms identical: True
+  distribution of ||Ax||_inf over all sign vectors: 7: 43904, 9: 60480, 11: 21760, 13: 4352, 15: 544, 17: 32
+  a minimizer: x = (1, -1, -1, -1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1), Ax = (5, 7, 7, 7, 1, 5, 3, -3, 1, 5, 5, -5, 5, -1, 7, -1, 5)
+  disc(A) = 7 as claimed: True; bound 7/sqrt(17) = 1.697749375254...; the table's decimal 1.697749 is below the exact value
+
+[H2026] (PR #170): C_10c >= 5/sqrt(8), claimed disc(A) = 5 for an 8 x 8 matrix
+  matrix read from the page: 8 x 8, entries [-1, 0, 1]; square 8 x 8: True; all entries in [-1, 1]: True
+  identically zero columns: [8]; repeated rows: none
+  the page's T_i lists equal the -1 positions of the rows: True
+  route A (Gray code, 2^8 = 256 vectors): disc = 5; route B (bit masks): disc = 5; histograms identical: True
+  distribution of ||Ax||_inf over all sign vectors: 5: 224, 7: 32
+  a minimizer: x = (-1, 1, 1, 1, 1, 1, 1, 1), Ax = (5, -3, -1, -1, -1, -1, -3, -3)
+  disc(A) = 5 as claimed: True; bound 5/sqrt(8) = 1.767766952966...; the table's decimal 1.767767 is above the exact value
+
+the page's equality examples:
+  [G2026] x = (1, -1, 1, 1, 1, 1): Ax = (4, 2, 0, -2, 0, 2), ||Ax||_inf = 4; as printed: True
+  [X2026] x = (-1, -1, 1, -1, 1, 1, 1, 1, 1): Ax = (3, 5, 5, 3, 5, 3, 3, -3, 3), ||Ax||_inf = 5; as printed: True
+  [H2026] x = (-1, -1, -1, -1, -1, -1, 1, -1): Ax = (-5, -1, 1, -3, -3, 1, -1, 3), ||Ax||_inf = 5
+  [H2026] the stated distribution 5 (224 times) and 7 (32 times): True
+
+controls (each must come out as stated):
+[ctl] [G2026] the entry at row 1, column 1 flipped: disc 2 < 4, so the corrupted certificate is refused (both routes; flip 1 tried): True
+[ctl] [G2026] a claimed discrepancy 5 is refused: True
+[ctl] [X2026] the entry at row 2, column 1 flipped: disc 3 < 5, so the corrupted certificate is refused (both routes; flip 10 tried): True
+[ctl] [X2026] a claimed discrepancy 6 is refused: True
+[ctl] [L2026] the entry at row 2, column 1 flipped: disc 5 < 7, so the corrupted certificate is refused (both routes; flip 18 tried): True
+[ctl] [L2026] a claimed discrepancy 8 is refused: True
+[ctl] [H2026] the entry at row 1, column 1 flipped: disc 3 < 5, so the corrupted certificate is refused (both routes; flip 1 tried): True
+[ctl] [H2026] a claimed discrepancy 6 is refused: True
+[ctl] routes A and B equal a naive triple loop on 60 random matrices over {-1, 0, 1}, n <= 7: True
+[ctl] [H2026] with column 8 set to +1 (a sign matrix at even n): disc 4, even and at most 4: True
+controls all as expected: True
+
+RESULT: PASS (disc = 4, 5, 7, 5 for the four matrices, as the page states; C_10c >= 4/sqrt(6), 5/3, 7/sqrt(17), 5/sqrt(8))
