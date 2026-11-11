@@ -22,5 +22,8 @@ python3 -I "$here/g2026_check.py" --controls > "$here/results/g2026.txt" 2>&1 ||
 # bin/diff2d for |U-U| (about 3 hours, under 0.2 GB; the counts file is compared only after our computation)
 cc -O2 -o "$here/bin/diff2d" "$here/diff2d.c" || status=1
 python3 -I "$here/mi2026_check.py" "$root" "$here/bin" --controls > "$here/results/mi2026.txt" 2>&1 || status=1
-for f in syl2 m2026 m2026b k2026b o2026 ggswt2025 g2026 mi2026; do grep -H "RESULT\|run time" "$here/results/$f.txt" | tr '\n' ' '; echo; done
+# the [K2026] limit row, 1.19102809* (PR #134): the masked-digit bound F(x) certified at x0 = 9996789/10^7 in interval
+# arithmetic, with Zheng's bounded digits as an anchor (seconds; no download)
+python3 -I "$here/k2026_check.py" --controls > "$here/results/k2026.txt" 2>&1 || status=1
+for f in syl2 m2026 m2026b k2026b o2026 ggswt2025 g2026 mi2026 k2026; do grep -H "RESULT\|run time" "$here/results/$f.txt" | tr '\n' ' '; echo; done
 exit $status

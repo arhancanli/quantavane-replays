@@ -1,0 +1,13 @@
+M = <1518, 1524, 1587, 2024, 2032, 2116> n [0, 17032]: |M| = 3121, |M+M| = 18730, |M-M| = 32369 (the pull request: 3121, 18730, 32369); kappa by bit sets equals the pairwise minimum on M n [0, 4000]
+  the bound as a function of x peaks near x = 0.9996789017 at 1.191028097510 (floating point)
+  certified at x0 = 9996789/10^7: F(x0) >= 1.19102809750763750015... (60-digit interval arithmetic)
+RESULT [K2026]: C_3a >= F(x0) > 1.19102809 (margin 7.51e-09): HOLDS
+anchor [Z2025]: bounded digits 0..5, base 11: sup_x F = 1.173077280 (Zheng's 1.173077)
+red controls (each must fail):
+  cap 17031: |M| = 3120, |M+M| = 18727, |M-M| = 32365
+  generator 2117 for 2116: the best value near x = 0.999 is 1.183715830
+  cap 17031: fails, as expected
+  generator 2117 for 2116: fails, as expected
+  a claimed 1.19102810: fails, as expected
+  x0 = 0.99 (far from the peak): fails, as expected
+controls all as expected

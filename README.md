@@ -1599,19 +1599,21 @@ stated value plus $10^{-12}$. Not checked: Gao's product theorem (its $k = 2$ ca
 and the note's $C_{13}$, $C_{21}$ and $C_{23}$ values, whose base data use fibre and coset encodings. Reproduce:
 `cd c9 && ./fetch_bpz.sh && python3 -I bpz_check.py certs --controls` (seconds).
 
-## Eighteen rows with explicit constructions in their sources (11 November 2026)
+## Nineteen rows with explicit constructions in their sources (11 November 2026)
 
 Rows whose bound comes from an explicit finite object printed on the constant page or in the cited paper. Each check is
 our own code, exact (integers, rationals, $\mathbb{Q}(\sqrt2)$) or with correctly rounded 60-digit logarithms, and each
 folder has red controls (one changed value must fail). No program of any source was run; notebooks and LaTeX sources
 were read as text. Sixteen of the rows came into the repository without a pull request; [GGSWT2025] on 1d came with
-[#224](https://github.com/teorth/optimizationproblems/pull/224) and [BG2008] on 4b with
-[#175](https://github.com/teorth/optimizationproblems/pull/175).
+[#224](https://github.com/teorth/optimizationproblems/pull/224), [BG2008] on 4b with
+[#175](https://github.com/teorth/optimizationproblems/pull/175) and [K2026] on 3a with
+[#134](https://github.com/teorth/optimizationproblems/pull/134).
 
 | Row | Construction (source) | Check | Result |
 | --- | --- | --- | --- |
 | 1a [MV2009] $\le 1.50992$ | 208-step function, appendix of arXiv 0907.1379v2 | `c1mv`, `../autocorr_check.py 1a`, both readings | $1.50972015074587866869\ldots$ (binary64), $\ldots867207\ldots$ (decimals) |
 | 1d [GGSWT2025] $\le 1.4688$ | signed 150-step function, alphaevolve_results @ `4226acb`, cell 65 | `c1mv`, `1d` mode | $1.46876206974102179602\ldots$ (binary64), $\ldots218095\ldots$ (decimals) |
+| 3a [K2026] $> 1.19102809$\* | $M = \langle 1518, 1524, 1587, 2024, 2032, 2116\rangle \cap [0, 17032]$ and the bound $1 + \log(P_-(x)/P_+(x))/\log 34065$ of #134 | `c3a/k2026_check.py` | $\lvert M\rvert = 3121$, $\lvert M+M\rvert = 18730$, $\lvert M-M\rvert = 32369$; at $x = 0.9996789$ the bound is $\ge 1.1910280975076\ldots$ in interval arithmetic; Zheng's digits give 1.173077 |
 | 3d [FrPi73] $1.059793\ldots$ | the 17-element set printed in the row | `c3d` | $\lvert A+A\rvert = 59$, $\lvert A-A\rvert = 55$, $1.05979309454724537760\ldots$ |
 | 3d [PeWe13] $1.125944426$ | the family $Q_j$ of Integers 13 (2013) #A57 | `c3d` | $\lvert Q_j\rvert = 5j+17$, $\lvert Q_j+Q_j\rvert = 32j+63$, $\lvert Q_j-Q_j\rvert = 26j+61$ for $1 \le j \le 120$; limit $\log(32/5)/\log(26/5) = 1.125944426308549\ldots$ |
 | 3d [GGSWT2025] $\approx 1.1219$ | 309 integers, alphaevolve_repository_of_problems @ `8f44745`, first cell of `sums_differences_problems.ipynb` | `c3d` | $\{-159,\ldots,111\}$ plus 38; $1367$ and $1163$; $1.12193573748604409765\ldots$ |
