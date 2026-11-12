@@ -1,0 +1,24 @@
+29a, kissing number in dimension 5: the LP rows [OS1979] 46.345 and [Cox1963] 48
+Gegenbauer polynomials of S^4, k <= 40: recurrence = explicit C_k^(3/2) sum, all G_k(1) = 1: True
+[OS1979] tau_5 <= 46.345: our degree-10 polynomial F = (1 - 10^-6) + sum f_k G_k, f_k = 3414134/751195, 6599613/699224, 11310459/864874, 8681257/812868, 1684978/285159, 0, 0, 0, 1313483/855749, 19699/128763
+  coefficients recovered by orthogonal projection (weight 1 - t^2, exact integrals): True
+  F: F(-1) = -3.79506, F(s) = -1e-06, Sturm: 0 distinct roots in (-1, s]; Bernstein: all negative on 51 pieces
+  bound F(1)/F_0 = 26669151064052382694495098210166206122621137 / 575539972281414314515047277598599080646137
+        = 46.337617452246 <= 46.345: True (margin 0.007383)
+  dual, degree <= 9: sum_i y_i G_k(t_i) >= -1 for k = 1..9: True (least -0.999999999001); every admissible polynomial of degree <= 9 gives at least 46.3459146392 > 46.345: True
+  dual, degree <= 40: feasible for k = 1..40: True (least -0.999999999000); every admissible polynomial of degree <= 40 gives at least 46.3375720693
+  so the LP bound with polynomials of degree <= 40 lies in [46.337572069, 46.337617452]; the printed 46.345 holds, and degree <= 9 cannot give it
+[Cox1963] tau_5 <= 48 (L_5(5, 1/2) = 48 as [BDM2012] states): L = (t - 1/2)(t + 5/7)^2 (t + 1/7)^2
+  Gegenbauer coefficients (projection = triangular solve: True): 96/2401, 1412/7203, 424/1029, 2136/3773, 68/147, 8/33
+  all coefficients >= 0: True; L <= 0 on [-1, 1/2] (t - 1/2 <= 0 times squares); L(1)/L_0 = 48
+
+red controls (each must be refused):
+  F on [-1, 0.51] (s = 0.51): refused, as expected
+  F with f_10 = 0: refused, as expected
+  the same coefficients on the Gegenbauer polynomials of S^3: refused, as expected
+  a claim of 46.3375 from F: refused, as expected
+  46.345 from any polynomial of degree <= 9 (the degree-9 dual): refused, as expected
+  L with 5/7 replaced by 2/3 as a certificate of 48 (ratio 48.192771, least coefficient 0.1856): refused, as expected
+  L as a certificate of 47.9: refused, as expected
+controls all as expected: True
+RESULT: PASS (tau_5 <= 46.3376174522 < 46.345, and tau_5 <= 48 from L)

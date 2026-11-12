@@ -1751,6 +1751,32 @@ containment of the sofa's points between the numeric samples (it follows from th
 Reproduce: in each folder, `./run_all.sh` (`c3az` and `c51` need their `./fetch.sh` first for their earlier rows);
 everything runs in under a minute with Python 3.9+ alone, except `c51` (about a minute).
 
+## 29a: Delsarte's linear-programming bound in dimension 5 (12 November 2026, night)
+
+`c29a/os1979_check.py`, standard library only, exact rationals: the two linear-programming rows of the 29a page
+(kissing number in dimension 5). Both came into the repository without a pull request, and neither source was
+accessible to us, so both certificates are ours. If $f = \sum_k f_k G_k$, with $G_k$ the Gegenbauer polynomials of
+$S^4$ ($G_k(1) = 1$), has $f_0 > 0$, $f_k \ge 0$ for $k \ge 1$ and $f \le 0$ on $[-1, 1/2]$, then $\tau_5 \le
+f(1)/f_0$ (positive definiteness of the $G_k$; distinct points of a kissing configuration have inner product at most
+$1/2$).
+
+| Row | Certificate (ours) | Check | Result |
+| --- | --- | --- | --- |
+| 29a [OS1979] $46.345$ | $F = (1 - 10^{-6}) + \sum_k f_k G_k$ of degree 10, $f_6 = f_7 = f_8 = 0$, the other $f_k$ rationals with 6- and 7-digit terms from our own LP search (`lp_search.py`, floating point, information only) | $f_k \ge 0$; the coefficients again by orthogonal projection (weight $1 - t^2$, exact integrals); $F < 0$ on $[-1, 1/2]$ by a Sturm sequence over $\mathbb{Q}$ and by Bernstein coefficients on 51 pieces | $\tau_5 \le F(1)/F_0 = 46.33761745224\ldots < 46.345$ |
+| 29a [Cox1963] $48$ | Levenshtein's $L = (t - \frac12)(t + \frac57)^2(t + \frac17)^2$, the bound $L_5(5, 1/2) = 48$ that the cited survey [BDM2012] states | Gegenbauer coefficients $\frac{96}{2401}, \frac{1412}{7203}, \frac{424}{1029}, \frac{2136}{3773}, \frac{68}{147}, \frac{8}{33}$ by projection and by a triangular solve; $L \le 0$ on $[-1, 1/2]$ from the factorisation | $L(1)/L_0 = 48$ exactly |
+
+Note. Dual certificates (points of $[-1, 1/2]$ with non-negative weights $y_i$ and $\sum_i y_i G_k(t_i) \ge -1$ for
+$k = 1, \ldots, K$, which give $f(1)/f_0 \ge 1 + \sum_i y_i$ for every admissible $f$ of degree at most $K$) show that
+degree at most 9 gives at least $46.3459146\ldots$ and degree at most 40 at least $46.3375720\ldots$. So the
+linear-programming bound in dimension 5 is $46.3376\ldots$ (to within $5 \cdot 10^{-5}$, for degree at most 40), and
+the printed $46.345$ lies between it and the degree-9 value. The Gegenbauer polynomials are computed by the recurrence
+and by the explicit sum for $C_k^{(3/2)}$, identical for $k \le 40$. Not checked: Coxeter's own argument (spherical
+simplices) for 48, and the positive definiteness of the $G_k$ (Schoenberg), which we take from the literature. Red
+controls, all refused: $F$ with $s = 0.51$, $F$ without $f_{10}$, the same coefficients on the Gegenbauer polynomials
+of $S^3$, a claim of $46.3375$ from $F$, $46.345$ from any polynomial of degree at most 9, $L$ with $\frac57$ replaced
+by $\frac23$ (the ratio becomes $48.19\ldots$), and $L$ as a certificate of $47.9$. Reproduce: `cd c29a &&
+./run_all.sh` (seconds).
+
 ## Reproduce
 
 ```
