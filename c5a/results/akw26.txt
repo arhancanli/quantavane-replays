@@ -1,0 +1,85 @@
+[Akw26] John Akwei's symmetric certificates, Zenodo 10.5281/zenodo.24138215 v1.0; definitions from the V6 report (Appendix D, Theorem 5.4, Table 10) and the README (sha256 as pinned: True); no deposit program read or run
+Certificate sym_polya_m1024_L6 (the [Akw26] row of 5a): m = 1024, L = 6, n = 512 kernels, Lm = 6144, D = 10^12; sha256 of the three files as pinned: True
+  files: _P 1024 x 512, _lam 512, _W_end1 6144 x 512 decimal integers, as the README states: True
+  kernels: nonnegative True; every column sums to D (mass 1) True; row i = row m - 1 - i (symmetric) True
+  mixing weights: nonnegative True; sum = D (the lambdas sum to 1) True
+  boundary weights: min 11, max 256250246415226 (= 256.250246 D)
+  Appendix D family, rounded: column k supported on the 2l central cells of l = k + 1: True; value within 1/2 of D/(2l) except the central pair (cells n - 1, n), which takes the remainder: True (largest |p - D/(2l)| = 251.5 units)
+  weights within 1/2 of 4l^3/n^4 D and (2n - 1)/n^2 D except lambda_(n-1): True; lambda_(n-1) = D minus the others: True (+1.4280 units from its exact value)
+  the 130816 boundary cells no inequality reads (j < n - l) all hold [11]; Table 10's repair increment 11 x 10^-12: True
+  covering q = 0..6144: 6145 of 6145 hold (Table 10: 6145); both routes identical at every q: True; direct sums at 16 shifts equal: True
+    least slack T(q) - D^3: 0 (the covering sum exactly 1) at q = [6144]; least positive slack 13784029044225571705/D^3 = 1.378403e-17 at q = 6142; least slack with the window inside the box (q <= 5120): 10997531633522950352517877/D^3 = 1.099753e-11 at q = 3801
+  a = 1.3333320617495973355337338... = 162760261444042643497770244718593/122070312500000000000000000000000
+  b = 0.6666679385061570545884061... (exact fraction, 127/127 bits); b > 0: True
+  ab = 0.8888897369507681571740315...; sqrt(ab) = 0.942809491334685364374432932990... (floor, 30 digits)
+  printed (Table 10): a 1.333332061750 True; b 0.666667938506 True; gamma 0.942809491335 True (each the value rounded to 12 places); kernels 512 = n: True; inequalities 6145 = Lm + 1: True
+  the README prints the same values (both tables, repair 11, ten-place bound 0.9428094915): True
+  ab < 0.942809493^2 (the certified bound): True; ab < 0.9428094915^2 (the ten-place bound): True; also ab < 0.9428094914^2: True
+  the row: ab * 10^14 <= 9428095^2 (sqrt(ab) <= 0.9428095), integers cross-multiplied: True; 0.9428095 - sqrt(ab) = 8.665315e-09
+  multiplier (floating point, informational, not part of the check): the widest column implies one mu with w_k = (1/2) mu * p_k; |mu| on odd shifts <= 4.0e-05; on even shifts 2k, mu = 4n^2/(2n-1) U_k (twice V6's discrete renewal multiplier) to a relative 1.6e-05; every column rebuilt from this mu agrees with the file to 1.6e-09 D
+RESULT sym_polya_m1024_L6: PASS; agreement with Table 10, the README and Appendix D: True (19 s)
+Red controls on sym_polya_m1024_L6 (altered copies, the same checks; each must be refused):
+  fact: no boundary integer lowered by one unit breaks an inequality: the least ratio of slack to the largest single-entry effect is 1.8138 >= 1 at q = 6142: True
+  C1 p_512[0] one unit lower (976562500 -> 976562499): mass; symmetry; covering fails at 5 q ([6136, 6138, 6140, 6142, 6144]): refused, as expected
+  C1b every boundary integer one unit lower (the uniform repair 11 -> 10): covering fails at 1 q ([6142]): refused, as expected
+  C2 one unit of weight moved from lambda_1 to lambda_512 (58 -> 57, 3902435303 -> 3902435304; sum still D): covering fails at 2 q ([0, 1]): refused, as expected
+  C2b lambda_512 one unit lower: sum of weights; covering fails at 94 q ([5972, 5974, 5976, 5978, 5980, 5982] ...): refused, as expected
+  C3 a claimed sqrt(ab) <= 0.94280949133468536437 (just below the computed value): not implied (ab > claim^2), refused, as expected
+  C4 one unit moved from p_512[0] to p_512[1] (mass kept): symmetry: refused, as expected
+controls all as expected
+Certificate sym_polya_m128_L8: m = 128, L = 8, n = 64 kernels, Lm = 1024, D = 10^12; sha256 of the three files as pinned: True
+  files: _P 128 x 64, _lam 64, _W_end1 1024 x 64 decimal integers, as the README states: True
+  kernels: nonnegative True; every column sums to D (mass 1) True; row i = row m - 1 - i (symmetric) True
+  mixing weights: nonnegative True; sum = D (the lambdas sum to 1) True
+  boundary weights: min 1, max 32251968487510 (= 32.251968 D)
+  Appendix D family, rounded: column k supported on the 2l central cells of l = k + 1: True; value within 1/2 of D/(2l) except the central pair (cells n - 1, n), which takes the remainder: True (largest |p - D/(2l)| = 30.5 units)
+  weights within 1/2 of 4l^3/n^4 D and (2n - 1)/n^2 D except lambda_(n-1): True; lambda_(n-1) = D minus the others: True (+1.3916 units from its exact value)
+  the 2016 boundary cells no inequality reads (j < n - l) all hold [1]; Table 10's repair increment 1 x 10^-12: True
+  covering q = 0..1024: 1025 of 1025 hold (Table 10: 1025); both routes identical at every q: True; direct sums at 15 shifts equal: True
+    least slack T(q) - D^3: 0 (the covering sum exactly 1) at q = [1024]; least positive slack 242233276367187500000/D^3 = 2.422333e-16 at q = 1023; least slack with the window inside the box (q <= 896): 986293889803654466166533/D^3 = 9.862939e-13 at q = 521
+  a = 1.3332519531586567009604530... = 2604007721013001369063384933178177/1953125000000000000000000000000000
+  b = 0.6667480468895112703980024... (exact fraction, 126/126 bits); b > 0: True
+  ab = 0.8889431357801605219649631...; sqrt(ab) = 0.942837809901660934639061928646... (floor, 30 digits)
+  printed (Table 10): a 1.333251953159 True; b 0.666748046890 True; gamma 0.942837809902 True (each the value rounded to 12 places); kernels 64 = n: True; inequalities 1025 = Lm + 1: True
+  the README prints the same values (both tables, repair 1, ten-place bound 0.9428378101): True
+  ab < 0.942837811^2 (the certified bound): True; ab < 0.9428378101^2 (the ten-place bound): True; also ab < 0.9428378100^2: True
+  multiplier (floating point, informational, not part of the check): the widest column implies one mu with w_k = (1/2) mu * p_k; |mu| on odd shifts <= 5.8e-07; on even shifts 2k, mu = 4n^2/(2n-1) U_k (twice V6's discrete renewal multiplier) to a relative 1.7e-07; every column rebuilt from this mu agrees with the file to 1.7e-10 D
+RESULT sym_polya_m128_L8: PASS; agreement with Table 10, the README and Appendix D: True (0 s)
+Certificate sym_polya_m256_L8: m = 256, L = 8, n = 128 kernels, Lm = 2048, D = 10^12; sha256 of the three files as pinned: True
+  files: _P 256 x 128, _lam 128, _W_end1 2048 x 128 decimal integers, as the README states: True
+  kernels: nonnegative True; every column sums to D (mass 1) True; row i = row m - 1 - i (symmetric) True
+  mixing weights: nonnegative True; sum = D (the lambdas sum to 1) True
+  boundary weights: min 1, max 64250980467267 (= 64.250980 D)
+  Appendix D family, rounded: column k supported on the 2l central cells of l = k + 1: True; value within 1/2 of D/(2l) except the central pair (cells n - 1, n), which takes the remainder: True (largest |p - D/(2l)| = 59.5 units)
+  weights within 1/2 of 4l^3/n^4 D and (2n - 1)/n^2 D except lambda_(n-1): True; lambda_(n-1) = D minus the others: True (-2.7372 units from its exact value)
+  the 8128 boundary cells no inequality reads (j < n - l) all hold [1]; Table 10's repair increment 1 x 10^-12: True
+  covering q = 0..2048: 2049 of 2049 hold (Table 10: 2049); both routes identical at every q: True; direct sums at 15 shifts equal: True
+    least slack T(q) - D^3: 0 (the covering sum exactly 1) at q = [2048]; least positive slack 182390213015625000000/D^3 = 1.823902e-16 at q = 2047; least slack with the window inside the box (q <= 1792): 995154416950496317958781/D^3 = 9.951544e-13 at q = 599
+  a = 1.3333129882344055482719270... = 1302063465072661668234303783007713/976562500000000000000000000000000
+  b = 0.6666870117735240465132795... (exact fraction, 124/125 bits); b > 0: True
+  ab = 0.8889024518848236602670173...; sqrt(ab) = 0.942816234419424738125107571115... (floor, 30 digits)
+  printed (Table 10): a 1.333312988234 True; b 0.666687011774 True; gamma 0.942816234419 True (each the value rounded to 12 places); kernels 128 = n: True; inequalities 2049 = Lm + 1: True
+  the README prints the same values (both tables, repair 1, ten-place bound 0.9428162346): True
+  ab < 0.942816236^2 (the certified bound): True; ab < 0.9428162346^2 (the ten-place bound): True; also ab < 0.9428162345^2: True
+  multiplier (floating point, informational, not part of the check): the widest column implies one mu with w_k = (1/2) mu * p_k; |mu| on odd shifts <= 5.7e-07; on even shifts 2k, mu = 4n^2/(2n-1) U_k (twice V6's discrete renewal multiplier) to a relative 1.7e-07; every column rebuilt from this mu agrees with the file to 4.1e-10 D
+RESULT sym_polya_m256_L8: PASS; agreement with Table 10, the README and Appendix D: True (1 s)
+Certificate sym_polya_m512_L8: m = 512, L = 8, n = 256 kernels, Lm = 4096, D = 10^12; sha256 of the three files as pinned: True
+  files: _P 512 x 256, _lam 256, _W_end1 4096 x 256 decimal integers, as the README states: True
+  kernels: nonnegative True; every column sums to D (mass 1) True; row i = row m - 1 - i (symmetric) True
+  mixing weights: nonnegative True; sum = D (the lambdas sum to 1) True
+  boundary weights: min 23, max 128250489582116 (= 128.250489 D)
+  Appendix D family, rounded: column k supported on the 2l central cells of l = k + 1: True; value within 1/2 of D/(2l) except the central pair (cells n - 1, n), which takes the remainder: True (largest |p - D/(2l)| = 122.5 units)
+  weights within 1/2 of 4l^3/n^4 D and (2n - 1)/n^2 D except lambda_(n-1): True; lambda_(n-1) = D minus the others: True (-0.6647 units from its exact value)
+  the 32640 boundary cells no inequality reads (j < n - l) all hold [23]; Table 10's repair increment 23 x 10^-12: True
+  covering q = 0..4096: 4097 of 4097 hold (Table 10: 4097); both routes identical at every q: True; direct sums at 15 shifts equal: True
+    least slack T(q) - D^3: 0 (the covering sum exactly 1) at q = [4095, 4096]; least positive slack 1093593892222408087890/D^3 = 1.093594e-15 at q = 4094; least slack with the window inside the box (q <= 3584): 22999374721448752702805375/D^3 = 2.299937e-11 at q = 909
+  a = 1.3333282470916667711443620... = 651039183150227915597833053198347/488281250000000000000000000000000
+  b = 0.6666717536397312956136904... (exact fraction, 128/128 bits); b > 0: True
+  ab = 0.8888922806659904450009444...; sqrt(ab) = 0.942810840341789051176015697593... (floor, 30 digits)
+  printed (Table 10): a 1.333328247092 True; b 0.666671753640 True; gamma 0.942810840342 True (each the value rounded to 12 places); kernels 256 = n: True; inequalities 4097 = Lm + 1: True
+  the README prints the same values (both tables, repair 23, ten-place bound 0.9428108405): True
+  ab < 0.942810842^2 (the certified bound): True; ab < 0.9428108405^2 (the ten-place bound): True; also ab < 0.9428108404^2: True
+  multiplier (floating point, informational, not part of the check): the widest column implies one mu with w_k = (1/2) mu * p_k; |mu| on odd shifts <= 5.7e-07; on even shifts 2k, mu = 4n^2/(2n-1) U_k (twice V6's discrete renewal multiplier) to a relative 1.4e-06; every column rebuilt from this mu agrees with the file to 8.1e-10 D
+RESULT sym_polya_m512_L8: PASS; agreement with Table 10, the README and Appendix D: True (5 s)
+RESULT [Akw26]: all four Table 10 certificates PASS, as printed; by Hou-Zhao Theorem 2.1 the m = 1024, L = 6 certificate gives C_5a <= sqrt(ab) < 0.9428095 (shown)
+run time 35 s
