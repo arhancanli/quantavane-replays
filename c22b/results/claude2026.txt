@@ -1,0 +1,48 @@
+Sources (read as data):
+  design.json read as data: every parameter string equals ours: True
+  the seven q strings taken from capaxis.py with take_q.py equal ours: True
+[Claude2026] C_22b <= 7.2012719* (PR #267): T(2, n), n >= 59 odd, thickness >= 1, length <= 7.2012719 n + 19.649
+Exact identities (rationals):
+  exact: X(+-1) = +-1: True
+  exact: X'(+-1) = X''(+-1) = 0: True
+  exact: Y(+-1) = 0, Y'(+-1) = -+1: True
+  exact: q even of degree 12, q(+-1) = H/R = 3.786: True
+  exact: beta, beta' and the derivatives of 3t^2-2t^3 and t^2(1-t)^2 vanish at t = 0, 1; S5(0) = 0, S5(1) = 1, S5'(0) = S5'(1) = 0; 3t^2-2t^3 = 0, 1 at t = 0, 1: True
+  exact: d theta/ds at both ends of each cap = 1/b (so the strands are C^1 at all four junctions): True
+  exact: Lambda(1) = 4.221523489843..., T0 = R Lambda(1)/b = 79.2705581829..., Theta_f = 2 T0 + E1 + E2 + Ew = 107.1011163657... (rationals)
+  exact: the axis curvature of a cap has the sign of X'Y'' - Y'X'' = (1 - v^2)^1 Q(v) with Q of degree 12 having no root in [-1, 1] (Sturm) and X'Y'' - Y'X'' < 0 at v = 0: the caps turn one way only, so the axis is a convex curve: True
+Helix lemma (Section 3):
+  (H4) curvatures a_i/(a_i^2 + b^2) = 0.503040, 0.687184 (exact rationals): both < 1: True
+  (H1) f_AB(u) > 4 for all u: certified min >= 4.0000056122 on |u| <= 2/b (least point value 4.0000087401 at u = 1.373808); |u| >= 2/b is trivial: True
+  (H2) f_A(u) > 4 for |u| sqrt(a1^2 + b^2) >= pi: certified min >= 4.0000340330 (least point value 4.0000376108 at u = 6.112005): True
+  (H3) pi/sqrt(a2^2 + b^2) = 9.478798... > 2/b = 6.197265..., so (H3) is trivial: True
+  c = pi (sqrt(a1^2 + b^2) + sqrt(a2^2 + b^2)) in [7.201271888199, 7.201271888199] (exact bounds), inside [7.2012718, 7.2012719]: True
+Zones (V2): curvature of the free pieces and every pair with a point on a free piece:
+  (V2) top zone, n = 1 (mod 4), cap1: curvature of strand A <= 0.79888, strand B <= 0.79905 (certified, 2068 interval evaluations): < 0.8: True
+  (V2) top zone, n = 1 (mod 4): 6144 elements, 1,438,664 element pairs tested (plus 620,694 discarded by arc separation < pi and 730,784 helix-helix pairs left to (H1)-(H3)), 23,247 bisections, depth <= 7, 8,594 element evaluations; smallest certified lower bound of |P(s) - P(t)|^2 (mean-value form): 4.0000000010; all pairs certified (47 s)
+  (V2) top zone, n = 3 (mod 4), cap1: curvature of strand A <= 0.79888, strand B <= 0.79908 (certified, 2068 interval evaluations): < 0.8: True
+  (V2) top zone, n = 3 (mod 4): 6144 elements, 1,410,894 element pairs tested (plus 622,206 discarded by arc separation < pi and 730,789 helix-helix pairs left to (H1)-(H3)), 23,242 bisections, depth <= 7, 8,608 element evaluations; smallest certified lower bound of |P(s) - P(t)|^2 (mean-value form): 4.0000000015; all pairs certified (54 s)
+  (V2) bottom zone, swap: curvature of strand A <= 0.78159, strand B <= 0.72815 (certified, 2048 interval evaluations): < 0.8: True
+  (V2) bottom zone, cap2: curvature of strand A <= 0.79648, strand B <= 0.79832 (certified, 2074 interval evaluations): < 0.8: True
+  (V2) bottom zone: 7168 elements, 1,721,267 element pairs tested (plus 758,049 discarded by arc separation < pi and 736,243 helix-helix pairs left to (H1)-(H3)), 18,762 bisections, depth <= 7, 7,650 element evaluations; smallest certified lower bound of |P(s) - P(t)|^2 (mean-value form): 4.0000000015; all pairs certified (66 s)
+Separation (V3) and the knot type (V4):
+  (S1) cap 1 (both strands, both phases) lies above y = L_s - 7.21e-05; (S2) cap 2 lies below y = 9.98e-05 (certified); within the paper's delta_t = 0.00012 and y_cap2 = 0.00011: True
+  (S2) swap strand radii <= 1.947922 (certified): <= 1.9511: True; so 2R - a1 - 1.9511 = 8.2348 > 2 separates the swap from column 1
+  (S1)-(S3) 2R - 2a1 = 8.251876 > 2, W - delta_t > 2, W - y_cap2 > 2: True
+  (S4) L_s(59) = (b/2)(59 pi - Theta_f) in [12.626997, 12.626997] > max(S_w + W, delta_t + max(S_w, y_cap2) + 2, 2R) = 12.260000 (and L_s grows with n): True; L_s(57) = 11.6131
+  (V4) the axis radius of curvature is >= 6.00420 (certified): >= 6.0042: True; half-width R = 6.06; strand radii <= max(a1, 1.9511) < 6.0042 (caps: a1 (1 + m_o beta) <= a1, a2 (1 + m_i beta) <= 1.54 a2)
+Length (V5):
+  n = 1 (mod 4): strand lengths cap 1 A 115.812635..115.812912, B 26.214264..26.214273; swap A 14.572868..14.572890, B 14.572868..14.572891; cap 2 A 26.212855..26.212863, B 115.760916..115.761193; L_free in [313.146405, 313.147023]; C = L_free - (b Theta_f + S_w) ell in [19.630457, 19.631075]
+  n = 3 (mod 4): strand lengths cap 1 A 115.830861..115.831139, B 26.210976..26.210985; swap A 14.572868..14.572890, B 14.572868..14.572891; cap 2 A 26.212855..26.212863, B 115.760916..115.761193; L_free in [313.161343, 313.161962]; C = L_free - (b Theta_f + S_w) ell in [19.645396, 19.646014]
+  (V5) C <= 19.646014 for both entry phases: <= 19.649: True
+  (total 490 s)
+Red controls (each must be refused):
+  (information) a1 = 1.9340602790, the optimum's outer radius, with a2 and b unchanged: (H1) still holds, least value of f_AB 4.0000019369 at u = 1.375321 (with the design's a1: 4.0000087...), because b is still above the optimum's: the margin falls to about 2e-6
+  a1 = 1.934055 (7e-6 lower): f_AB(1.379860) <= 3.9999831659 < 4, a certified violation of (H1): refused: True
+  the Kim-Oh-Huh helix (a1, a2, b) = (1.9498, 0.1420, 0.3226): inner curvature 1.14300 > 1 (radius 0.8749), (H4) fails: refused: True
+  W = 2: W - delta_t = 1.99988 is not > 2, so (S1) cannot separate cap 1 from the column points outside the window: refused: True
+  q with 9.5170 for 9.5169: q(1) = 3.7861 != 3.786, the phase rate jumps at the junctions (not C^1): refused: True
+  E1 = -19.5: a certified violation in the top zone: strand A at tau = 0.1712646 (cap 1) and strand A at tau = 0.3011475 (cap 1), |P(s) - P(t)|^2 <= 3.994922 < 4, arc separation >= pi: refused: True
+  m_o = 0: a certified violation in the top zone: strand A at tau = 0.3016357 (cap 1) and strand A at tau = 0.4071045 (cap 1), |P(s) - P(t)|^2 <= 3.999991 < 4, arc separation >= pi: refused: True
+Red controls all refused: True
+RESULT: PASS  (545 s)

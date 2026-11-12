@@ -1777,6 +1777,40 @@ of $S^3$, a claim of $46.3375$ from $F$, $46.345$ from any polynomial of degree 
 by $\frac23$ (the ratio becomes $48.19\ldots$), and $L$ as a certificate of $47.9$. Reproduce: `cd c29a &&
 ./run_all.sh` (seconds).
 
+## 22b: the double-helix construction of [Claude2026], $C_{22b} \le 7.2012719$\* (12 November 2026, night)
+
+`c22b/c22b_check.py` with `c22b/ia22.py`, standard library only: exact rationals and our own rigorous interval
+arithmetic (binary64 rounded outward by one ulp after every operation; sin and cos computed at 60 digits with the
+`decimal` module from Taylor series, so no libm function is trusted). Written from the paper alone
+(YouhuaLi/tight-alternating-knot-constant @ `debf7c92`, the commit of [#267](https://github.com/teorth/optimizationproblems/pull/267):
+`paper/main.tex` and `paper/numbers.tex` read as text, `design.json` read as data). The seven decimal coefficients of
+the even polynomial $q$ in the cap phase are given only in `code/capaxis.py`: they were taken from that file at that
+commit with Python's `ast` parser (the string argument of each of the seven `Fr(...)` calls in its one dict literal
+`QC`; nothing executed and no other part of the file read), by `c22b/take_q.py`, as our coordinator allowed on
+12 November. No program of the repository was read or run. The theorem: for every odd $n \ge 59$ a $C^{1,1}$ curve of
+type $T(2,n)$ with thickness at least $1$ and length at most $7.2012719\,n + 19.649$, hence $C_{22b} \le 7.2012719$.
+
+| Statement (paper) | Check | Result |
+| --- | --- | --- |
+| helix lemma (H1)-(H4) for $(a_1, a_2, b) = (1.934062, 0.075486, 0.322723)$ | bisection with the mean-value form | $\min f_{AB} \ge 4.0000056$ (least value found $4.0000087$); $\min f_A \ge 4.000034$ where $\lvert u\rvert \sqrt{a_1^2+b^2} \ge \pi$; (H3) is trivial ($\pi/\sqrt{a_2^2+b^2} > 2/b$); curvatures $0.503040$ and $0.687184$ |
+| $c = \pi(\sqrt{a_1^2+b^2} + \sqrt{a_2^2+b^2}) \in [7.2012718, 7.2012719]$ | exact rational bounds | $c = 7.2012718881\ldots$ |
+| the construction (Section 4) | exact identities: $X$, $Y$, $q$, $\beta$, $S_5$ and both phase profiles at $\tau = 0, 1$; $q(\pm 1) = H/R$, so $d\theta/ds = 1/b$ at every junction; the closing phase $n\pi$ | $C^1$ at all four junctions; the axis is convex ($X'Y'' - Y'X'' = (1 - v^2)Q$ with $Q < 0$ on $[-1, 1]$ by a Sturm sequence) |
+| (V2): top zone for both entry phases ($n \equiv 1, 3 \bmod 4$), bottom zone | curvature $\lvert P' \times P''\rvert / \lvert P'\rvert^3$ of both strands on the caps and the swap; every pair of points with one on a free piece has an upper bound $< \pi$ on its arc separation or $\lvert P(s) - P(t)\rvert^2 > 4$ (element pairs, mean-value form, bisection) | curvature $< 0.79908$; 4.57 million element pairs, depth at most 7, smallest certified lower bound $4.0000000010$ |
+| (V3), (V4): separation and the knot type | interval bounds | cap 1 above $L_s - 7.3 \cdot 10^{-5}$, cap 2 below $1.0 \cdot 10^{-4}$, swap radii $\le 1.94793$, axis radius of curvature $\ge 6.0042$, $L_s(59) = 12.627 > \max(S_w + W, 2R) = 12.26$ |
+| (V5): the length | upper bounds for the strand lengths of both caps and the swap (midpoint rule with a rigorous second-derivative remainder) | $C \le 19.646014$ ($n \equiv 3$; $19.631075$ for $n \equiv 1$), so $L \le 7.2012719\,n + 19.649$ |
+
+Our reading of two points the text leaves implicit: cap 1 uses $(E_1, F_1)$ and cap 2 $(E_2, F_2)$; every phase offset
+follows from continuity along the lap, and cap 2 is cap 1 turned by $\pi$. With this reading every constant the paper
+prints comes out on the right side (19.649, 0.00012, 0.00011, 1.9511, 6.0042, curvature below 0.8, 4.0000055 and
+4.0000257). Red controls, all refused: $a_1 = 1.934055$ ((H1) fails at a certified point), the Kim-Oh-Huh helix
+$(1.9498, 0.1420, 0.3226)$ (inner curvature $1.143 > 1$), $W = 2$ ((S1) needs $W - \delta_t > 2$), $q$ with $9.5170$
+for $9.5169$ ($q(\pm 1) \ne H/R$, so the phase rate jumps at the junctions), and $E_1 = -19.5$ and $m_o = 0$ (each gives
+a certified pair in cap 1 closer than 2 at arc separation at least $\pi$). For information: $a_1 = 1.9340602790$ (the
+optimum's outer radius) with $b$ unchanged keeps (H1), its margin cut from about $9 \cdot 10^{-6}$ to $2 \cdot 10^{-6}$.
+Not checked by us: Lemma 2.1 (Cantarella-Kusner-Sullivan; Litherland et al.) and the topological step of Lemma 4.1 (a
+band with $n$ half-twists bounds $T(2, n)$), taken from the paper and its references; Proposition 3.1 (the optimum) is
+not used by the bound. Reproduce: `cd c22b && ./fetch.sh && ./run_all.sh` (about ten minutes on one core).
+
 ## Reproduce
 
 ```
