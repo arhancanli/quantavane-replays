@@ -1,0 +1,13 @@
+49a row [NS2017]: the base of sum_{k <= n/3} C(n, k)
+  1. (sum_{k<=n/3} C(n,k))^3 <= (27/4)^n for n = 1..900: True
+  2. 3/2^(2/3) = (27/4)^(1/3) = 1.889881574842309747...; printed 1.8898815748 is its truncation: True
+     at x = 1/2: ((1 + x) x^(-1/3))^3 = 27/4 = 27/4: True
+     n = 30: (3(n+1) sum)^(1/n) = 2.10423600
+     n = 300: (3(n+1) sum)^(1/n) = 1.91819097
+     n = 900: (3(n+1) sum)^(1/n) = 1.90045309
+RESULT [NS2017]: with |F| <= 3(n+1) sum_{k<=n/3} C(n,k) <= 3(n+1)(27/4)^(n/3), C_49 <= 3/2^(2/3) = 1.8898815748...: HOLDS
+red controls (each must fail):
+  cut at n/2, n = 900: exceeds, refused as expected
+  x = 2/3: cube of the base 125/18 > 27/4: refused as the optimum, as expected
+  a claimed C_49 <= 1.8898 from this count: refused, as expected
+controls all as expected

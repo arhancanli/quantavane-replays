@@ -1,0 +1,17 @@
+3a row [GHR2007] lower: U = [0, 1, 3, 6, 13, 17, 21]
+  |U+U| = 26, |U-U| = 39, q = 2 max U + 1 = 43 (the row: 26, 39, 43): True; 0 in U and |U-U| < q: True
+  1 + log(39/26)/log(43) in [1.1078020566936510705392, 1.1078020566936510705392]
+RESULT [GHR2007] 1.1078...: C_3a >= 1.10780... (the printed 1.1078... is its truncation): HOLDS
+3a row [K2026c] upper: lambda = (9451e - 3286)/(5378e + 787), bound 2 - 1/lambda
+  2 - 1/lambda = (13524e - 7359)/(9451e - 3286) and the row's (13524e - 7359)/(9451e - 3286): identical: True
+  lambda in [1.454277448906442787392708, 1.454277448906442787392708] (the page: 1.454277448906...); lambda < 3/2: True
+  bound in [1.312373302115109372662446, 1.312373302115109372662446] (the row: 1.312373302115...); below 4/3: True
+  printed digits 1.312373302115 and 1.454277448906 are truncations: True
+  README cell 1.31237330 >= the bound (valid as an upper bound): False; PR #364's 1.31237331: True
+RESULT [K2026c] 1.312373302115...: the transfer identity and the decimals hold; the README's 1.31237330 is below the bound by 2.1151e-09 (rounded the wrong way), 1.31237331 is valid: HOLDS
+red controls (each must fail):
+  U with 22 for 21: |U+U| = 26, |U-U| = 37, q = 45, value 1.09268522 < 1.1078: True
+  a claimed 1.1079 from U: refused, as expected
+  the transfer identity with 13523e - 7359: refused, as expected
+  1.31237330 as an upper bound: refused, as expected
+controls all as expected

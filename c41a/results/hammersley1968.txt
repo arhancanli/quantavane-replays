@@ -1,0 +1,12 @@
+41a row [Hammersley1968]: A >= pi/2 + 2/pi from Hammersley's sofa (r = 2/pi)
+  1. exact for all t (s = tan(t/2)): <c,e1> = r cos t: True; <c,e2> = r sin t: True; ray to (r,0) along -e2: True; ray to (-r,0) along -e1: True
+  2. numeric anchor: 2001 angles x 9006 boundary points of S_r, all inside the hallway: True (violations 0)
+  3. area(S_r) = pi/2 + 2r - pi r^2/2; at r = 2/pi: 0 + 1/2 pi + 2/pi = pi/2 + 2/pi: True; d/dr = 2 - pi r = 0 there (the maximum over r); 0 < 2/pi <= 1: True
+     pi/2 + 2/pi = 2.207416099162
+RESULT [Hammersley1968]: the sofa moves around the corner (exact path identities, numeric anchor) and has area pi/2 + 2/pi, so A >= pi/2 + 2/pi = 2.20741609916...: HOLDS
+red controls (each must fail):
+  r = 6/5: hole fits under the top (r <= 1): no, refused as expected
+  path c(t) = r (cos t, sin t): identity <c,e1> = r cos t fails; numeric violations 1197711: refused, as expected
+  half-stadium widened to |x| <= r + 1/10: numeric violations 499450: refused, as expected
+  a claimed area 2.2075: refused, as expected
+controls all as expected

@@ -1,0 +1,22 @@
+15a row [S1969]: omega <= log_2 7 ~ 2.8074 (Strassen's 2 x 2 algorithm with 7 multiplications, recursively)
+  1. the four entries of AB as combinations of M1..M7 (coefficient tensors, factor order kept): True
+     c11 = a11*b11 + a12*b21
+     c12 = a11*b12 + a12*b22
+     c21 = a21*b11 + a22*b21
+     c22 = a21*b12 + a22*b22
+  2. 20 random 2 x 2 block matrices with 3 x 3 integer blocks (a non-commutative ring): equal to the block product in all 20: True (each uses 7 block products = 189 scalar multiplications)
+  3. k = 1 (n = 2): recursive Strassen equals the ordinary product: True; scalar multiplications 7 = 7^1: True
+  3. k = 2 (n = 4): recursive Strassen equals the ordinary product: True; scalar multiplications 49 = 7^2: True
+  3. k = 3 (n = 8): recursive Strassen equals the ordinary product: True; scalar multiplications 343 = 7^3: True
+  3. k = 4 (n = 16): recursive Strassen equals the ordinary product: True; scalar multiplications 2401 = 7^4: True
+  3. k = 5 (n = 32): recursive Strassen equals the ordinary product: True; scalar multiplications 16807 = 7^5: True
+  3. k = 6 (n = 64): recursive Strassen equals the ordinary product: True; scalar multiplications 117649 = 7^6: True
+  4. 2^2.8073 < 7 < 2^2.8074 (exactly: 2^28073 < 7^10000 < 2^28074): True, True; so log_2 7 = 2.8073549..., printed 2.8074 (next to the exact log_2 7)
+     log_2 7 in [2.807354922057604107441969317231, 2.807354922057604107441969317231]
+RESULT [S1969]: Strassen's seven products give a bilinear algorithm for 2 x 2 matrices over any ring; recursively 7^k multiplications for 2^k x 2^k, so omega <= log_2 7 = 2.80735...: HOLDS
+red controls (each must fail):
+  M7 = (a12 + a22)(b21 + b22) (one sign changed): identity fails, as expected
+  C11 without M7: identity fails, as expected
+  C12 = M3 - M5: identity fails, as expected
+  a claimed omega <= 2.8073 from 7 products (needs 7 <= 2^2.8073): fails, as expected
+controls all as expected

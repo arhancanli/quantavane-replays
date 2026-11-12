@@ -1,0 +1,18 @@
+36a row [dLOV2014] (lower): Delta_4 >= pi^2/16 ~ 0.616850 from the D_4 lattice
+  1. basis vectors in D_4: True; |det| = 2 = index [Z^4 : D_4] = 2: True; Gram determinant 4
+  2. every integer vector of norm 1 has odd sum (not in D_4): True; least norm found 2, with 24 minimal vectors (+-e_i +- e_j: 24): True
+  3. r^2 = 1/2, r^4 = 1/4, center density r^4/covolume = 1/8 (the table's 0.12500): True
+  4. pi in [3.1415926535897932384626, 3.1415926535897932384626]; density (pi^2/2) r^4 / covolume = pi^2/16 in [0.61685027506808491367, 0.61685027506808491367]
+     printed 0.616850 is pi^2/16 truncated to 6 decimals: True
+RESULT [dLOV2014] lower: the D_4 packing has density exactly pi^2/16 = 0.616850275068084..., so Delta_4 >= pi^2/16: HOLDS
+Upper-bound rows, conversion Delta_4 <= (pi^2/2) delta_4 only (the delta_4 values are read from the tables):
+  [CE2003] Rogers  (pi^2/2) 0.13127 in [0.647791484865500, 0.647791484865500]; printed 0.647791... is its truncation: True
+  [CE2003] new     (pi^2/2) 0.13126 in [0.647742136843494, 0.647742136843494]; printed 0.647742... is its truncation: True
+  [dLOV2014]       (pi^2/2) 0.130587 in [0.644421014962528, 0.644421014962528]; printed 0.644421... is its truncation: True
+  README cell 0.644421 >= the value (valid as an upper bound): False; PR #364's 0.644422 >= the value: True
+red controls (each must fail):
+  Z^4: least norm 1, covolume 1, density <= 0.308425 < pi^2/16: True
+  a claimed Delta_4 >= 0.6169 from D_4: refused, as expected
+  (1,0,0,0) in D_4: no, refused as expected
+  0.644421 as an upper bound for (pi^2/2) 0.130587: refused, as expected
+controls all as expected

@@ -1,0 +1,16 @@
+78a row [FP2011]: C_78 >= 1 from thrackled cycles (straight-line star polygons of the odd cycles)
+  n =   5: star {5/2} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 5/5
+  n =   7: star {7/3} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 7/7
+  n =   9: star {9/4} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 9/9
+  n =  29: star {29/14} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 29/29
+  n =  53: star {53/26} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 53/53
+  n =  77: star {77/38} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 77/77
+  n = 101: star {101/50} on (i, i^2): True (every pair of edges meets exactly once); |E|/|V| = 101/101
+  (all odd n from 5 to 101 checked; lines shown for a sample)
+RESULT [FP2011]: each odd cycle C_n, 5 <= n <= 101, has a straight-line thrackle drawing with |E|/|V| = 1, so C_78 >= 1: HOLDS
+red controls (each must fail):
+  the convex 7-gon (k = 1): refused, as expected (edges 0 and 2 do not cross)
+  n = 6, order [0, 1, 2, 3, 4, 5]: refused, as expected (edges 0 and 2 do not cross)
+  n = 6, order [0, 2, 4, 1, 3, 5]: refused, as expected (edges 0 and 4 do not cross)
+  pentagram with two vertices swapped [0, 4, 2, 1, 3]: refused, as expected (edges 0 and 2 do not cross)
+controls all as expected

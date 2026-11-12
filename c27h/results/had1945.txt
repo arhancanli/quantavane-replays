@@ -1,0 +1,12 @@
+27a row [Had1945], [CR2017]: chi(R^2) <= 7 from the hexagon tiling, 7 colours
+  s = 2/5: colour (u + 3v) mod 7: 7 classes; least N on L7 minus 0 is 7 at (-3, 1) (outside the box N >= 507/4)
+  s = 2/5: cell diameter 2s = 4/5 < 1: True
+  s = 2/5: same-colour cells: centre distance >= sqrt(21) s, gap >= (sqrt(21) - 2) s > 1 iff 21 s^2 > (1 + 2s)^2: 84/25 > 81/25: True
+  admissible range of this argument: 0.3872103350 < s < 0.5 (2/5 inside: True)
+  anchor (floating point): true least distance between two cells of one colour at s = 2/5: 1.058301
+RESULT [Had1945/CR2017]: at s = 2/5 no two points at distance 1 get the same colour, so chi(R^2) <= 7: HOLDS
+red controls (each must fail):
+  s = 1/2 (cells of diameter 1): refused, as expected
+  s = 0.35: refused, as expected; the true least same-colour distance there is 0.926013 < 1
+  colouring (u + 2v) mod 7 at s = 2/5: refused, as expected (colour (u + 2v) mod 7: 7 classes; least N on L7 minus 0 is 3 at (-2, 1) (outside the box N >= 507/4))
+controls all as expected

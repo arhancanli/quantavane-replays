@@ -1,0 +1,12 @@
+69a row [Tao2022]: C_69 >= 1 from f(z) = z^n - 1, lambda_0 = 1
+  n =  2: True (f' = 2 z^1, |0 - 1|^2 = 1)
+  n =  3: True (f' = 3 z^2, |0 - 1|^2 = 1)
+  n =  4: True (f' = 4 z^3, |0 - 1|^2 = 1)
+  n = 60: True (f' = 60 z^59, |0 - 1|^2 = 1)
+  (n = 2..60 all checked)
+RESULT [Tao2022]: the only critical point 0 is at distance exactly 1 from lambda_0 = 1, so no R < 1 is admissible and C_69 >= 1: HOLDS
+red controls (each must fail):
+  R = 0.999 for z^5 - 1: not admissible, as expected (distance^2 1 vs R^2 998001/1000000)
+  f = z^5 - 2: refused, as expected (lambda_0 is not a zero)
+  lambda_0 = 0: refused, as expected (lambda_0 is not a zero)
+controls all as expected

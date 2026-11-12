@@ -1,0 +1,10 @@
+20a row [Pat2026]: X = E - 1, E ~ Exp(1): E X = 0, E X^2 = 1, E X^4 = 9, Var(X^2) = 8
+RESULT [Pat2026] 20a: n = 1, isotropic log-concave X with Var(|X|^2)/n = 8, so C_20a >= 8: HOLDS
+20c row [Pat2026]: uniform on [-sqrt3, sqrt3]: variance 1 + 0 sqrt3, density 0 + 1/6 sqrt3; A = (-oo, 0]: mu(A) = 1/2, mu^+(A) = density; psi_mu >= 0 + 1 sqrt3
+RESULT [Pat2026] 20c: psi_mu >= sqrt 3 = 1.7320508..., so C_20c >= sqrt 3: HOLDS
+red controls (each must fail):
+  X = E (no shift): E X = 1: refused, as expected
+  uniform on [-1, 1]: variance 1/3: not isotropic, refused as expected
+  a claimed C_20a >= 9 from E - 1: refused, as expected
+  a claimed C_20c >= 1.7321 from the uniform law: refused, as expected (sqrt 3 < 1.7321)
+controls all as expected

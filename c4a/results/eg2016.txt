@@ -1,0 +1,14 @@
+4a row [EG2016]: the base of M_n (monomials of degree <= 2n/3 with exponents <= 2)
+  1. x = 5931/10000: (1 + x + x^2)^3/x^2 = 20.912901058 < 2.756^3 = 20.933297216: True
+  2. n =   3: M_n = 10; M_n^3 x^2n <= (1+x+x^2)^3n: True; M_n <= 2.756^n: True; (3 M_n)^(1/n) = 3.10723250
+  2. n =  30: M_n = 336613980400...; M_n^3 x^2n <= (1+x+x^2)^3n: True; M_n <= 2.756^n: True; (3 M_n)^(1/n) = 2.71315817
+  2. n = 300: M_n = 803310100998...; M_n^3 x^2n <= (1+x+x^2)^3n: True; M_n <= 2.756^n: True; (3 M_n)^(1/n) = 2.74119552
+  2. n = 600: M_n = 629246344926...; M_n^3 x^2n <= (1+x+x^2)^3n: True; M_n <= 2.756^n: True; (3 M_n)^(1/n) = 2.74658621
+     all n = 3, 6, ..., 600: True
+  3. x0 = 0.593070330817253582 (4 x0^2 + x0 - 2 = 0.0e+00); Gamma = 2.755104613023633000...; Gamma < 2.756: True
+RESULT [EG2016]: M_n <= 2.756^n for every n (the exact inequality at x = 5931/10000), so with |A| <= 3 M_n, C_4a <= 2.756 (Gamma = 2.7551046130...): HOLDS
+red controls (each must fail):
+  x = 1/2: (1 + x + x^2)^3/x^2 = 343/16: refused, as expected
+  a claimed C_4a <= 2.755 from this bound: refused, as expected
+  degree cap n instead of 2n/3, n = 600: M = 95564773... <= 2.756^600: no, refused as expected
+controls all as expected

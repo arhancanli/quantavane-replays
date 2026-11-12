@@ -1,0 +1,18 @@
+76a row [BS2007]: l_0(d) >= 3d^2 from the Fermat surfaces x^d + y^d + z^d + t^d = 0 (smooth), so C_76 >= 3
+  d =  3: Q(w), w^3 = -1, [Q(w):Q] = 2; lines listed 27 = 3d^2; all on F_d: True; distinct: 27; ok
+  d =  4: Q(w), w^4 = -1, [Q(w):Q] = 4; lines listed 48 = 3d^2; all on F_d: True; distinct: 48; ok
+  d =  5: Q(w), w^5 = -1, [Q(w):Q] = 4; lines listed 75 = 3d^2; all on F_d: True; distinct: 75; ok
+  d =  6: Q(w), w^6 = -1, [Q(w):Q] = 4; lines listed 108 = 3d^2; all on F_d: True; distinct: 108; ok
+  d =  7: Q(w), w^7 = -1, [Q(w):Q] = 6; lines listed 147 = 3d^2; all on F_d: True; distinct: 147; ok
+  d =  8: Q(w), w^8 = -1, [Q(w):Q] = 8; lines listed 192 = 3d^2; all on F_d: True; distinct: 192; ok
+  d =  9: Q(w), w^9 = -1, [Q(w):Q] = 6; lines listed 243 = 3d^2; all on F_d: True; distinct: 243; ok
+  d = 10: Q(w), w^10 = -1, [Q(w):Q] = 8; lines listed 300 = 3d^2; all on F_d: True; distinct: 300; ok
+  d = 11: Q(w), w^11 = -1, [Q(w):Q] = 10; lines listed 363 = 3d^2; all on F_d: True; distinct: 363; ok
+  d = 12: Q(w), w^12 = -1, [Q(w):Q] = 8; lines listed 432 = 3d^2; all on F_d: True; distinct: 432; ok
+  smoothness: the partials d x^(d-1), d y^(d-1), d z^(d-1), d t^(d-1) vanish together only at 0
+RESULT [BS2007]: for d = 3..12 the Fermat surface carries 3d^2 distinct lines, so l_0(d) >= 3d^2 and C_76 >= 3: HOLDS
+red controls (each must fail):
+  d = 5, the line x = y, z = w t (1^5 = +1): not on F_5, as expected
+  d = 4 with one line listed twice: 47 distinct among 48: caught, as expected
+  a claim of 3d^2 + 1 = 109 lines in this family at d = 6: refused, as expected (108)
+controls all as expected

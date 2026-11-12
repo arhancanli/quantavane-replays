@@ -1,0 +1,15 @@
+87a row [Odl1990] (GRH): the printed 215.333... against 8 pi e^(gamma + pi/2)
+  gamma in [0.5772156649015328606065120900824024310421, 0.5772156649015328606065120900824024310421]
+  pi    in [3.1415926535897932384626433832795028841971, 3.1415926535897932384626433832795028841971]
+  8 pi e^(gamma + pi/2)  in [215.332515953490686445091197513882, 215.332515953490686445091197513882]
+  4 pi e^(1 + gamma)     in [60.8395403238834156681734135068689, 60.8395403238834156681734135068689]
+  8 pi e^gamma           in [44.7632321909553238862186675921949, 44.7632321909553238862186675921949]
+  4 pi e^gamma           in [22.3816160954776619431093337960974, 22.3816160954776619431093337960974]
+  the row's 215.333...: a valid lower bound as printed: False; above the bound by 4.8405e-04; the truncation is 215.3325...: True
+  [for reference] 60.8395... is the truncation of 4 pi e^(1 + gamma): True; the notes' 44.763 truncates 8 pi e^gamma: True; the notes' 22.382 is above 4 pi e^gamma (rounded up): True
+RESULT [Odl1990] GRH: 8 pi e^(gamma + pi/2) = 215.332515953...; the printed 215.333... is rounded up past the bound (it should read 215.3325...): FINDING CONFIRMED
+red controls (each must fail):
+  gamma from n = 10 with no correction terms: 0.576383160974208284 (off by 8.33e-04): refused as an enclosure, as expected
+  215.333 as a lower bound for 8 pi e^(gamma + pi/2): refused, as expected
+  215.332 as a lower bound: accepted, as expected
+controls all as expected

@@ -1,0 +1,12 @@
+13b row [Pal1920] hexagon: all six side lines at squared distance 1/4 from 0: True; area = 0 + 1/2 sqrt3
+  sqrt(3)/2 = 0.866025403784...; the printed 0.8660254038 is its rounding to 10 decimals (up, next to the exact value): True
+RESULT [Pal1920] sqrt(3)/2: the regular hexagon of width 1 has area exactly sqrt(3)/2: HOLDS
+13b row [Pal1920] truncated: 8 vertices; area = 2 + -2/3 sqrt3 = 2 - 2/sqrt3: True; removed 2 x (7 sqrt3 - 12)/12: True
+  cutting corner 0 and any other corner j = 1..5 gives the same area: True
+  2 - 2/sqrt3 = 0.845299461620...; the printed 0.8452994616 is its rounding (and truncation) to 10 decimals: True
+RESULT [Pal1920] 2 - 2/sqrt3: the hexagon minus two dodecagon corners has area exactly 2 - 2/sqrt3: HOLDS
+red controls (each must fail):
+  hexagon with R = 1/2: side lines at squared distance 3/16 < 1/4: refused, as expected
+  cut at distance 0.45: the disk point (1/2, 0) is outside the polygon: refused, as expected
+  a claimed area 0.8452 for the truncated hexagon: refused, as expected (the area is larger)
+controls all as expected

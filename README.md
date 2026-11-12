@@ -1695,6 +1695,62 @@ blow-up lemma; Kunisky's induction beyond $k = 4$; that a Steiner tree on three 
 Reproduce: in each folder, `./fetch.sh` (or `fetch_mt26.sh`, `fetch_hz26.sh`, `fetch_bonjb.sh`) where there is a
 download, then `./run_all.sh`; `c89p` needs a C compiler and takes about a minute, everything else seconds.
 
+## Twenty more rows with explicit constructions (12 November 2026, afternoon)
+
+Rows whose bound comes from an explicit construction or a stated finite computation. Each check is our own code, exact
+(integers, rationals, $\mathbb{Q}(\sqrt3)$, cyclotomic fields, Sturm sequences over $\mathbb{Q}$, rational-function
+identities) or in 60- to 70-digit decimal interval arithmetic, and every folder has red controls (one changed value must
+fail). No program of any source was run; LaTeX sources were read as text. Fourteen rows came into the repository
+without a pull request; [Hammersley1968] came with [#25](https://github.com/teorth/optimizationproblems/pull/25),
+[NS2017] with [#36](https://github.com/teorth/optimizationproblems/pull/36), [K2026c] with
+[#198](https://github.com/teorth/optimizationproblems/pull/198), the two [Pat2026] rows with
+[#226](https://github.com/teorth/optimizationproblems/pull/226) and [Erd1962] with
+[#264](https://github.com/teorth/optimizationproblems/pull/264).
+
+| Row | Construction (source) | Check | Result |
+| --- | --- | --- | --- |
+| 15a [S1969] $\log_2 7$ | Strassen's seven products (in their commonly stated form; the paper was not accessible to us) | `c15a` | the bilinear identity for all four entries, with factor order kept (valid over any ring); 20 block products with $3 \times 3$ integer blocks; recursion on $2^k \times 2^k$, $k \le 6$: the true product with exactly $7^k$ multiplications |
+| 27a [Had1945], [CR2017] $7$ | the hexagon tiling, colour $(u + 3v) \bmod 7$ | `c27h` | at side $2/5$: cells of diameter $4/5$, same-colour cells at distance $\ge (\sqrt{21} - 2) \cdot 2/5 > 1$ ($84/25 > 81/25$); the colour sublattice has least norm 7 |
+| 36a [dLOV2014] $\pi^2/16$ (lower) | the $D_4$ lattice | `c36a` | covolume 2, 24 minimal vectors of norm 2, center density $1/8$, density $\pi^2/16 = 0.61685027506808491367\ldots$ |
+| 3a [GHR2007] $1.1078\ldots$ | $U = \{0,1,3,6,13,17,21\}$ as printed | `c3az/ghr_k2026c_check.py` | 26, 39, $q = 43$ by two routes; $1 + \log(3/2)/\log 43 = 1.10780205669365107053\ldots$ |
+| 3a [K2026c] $1.312373302115\ldots$ (upper) | $\lambda = (9451e - 3286)/(5378e + 787)$, transfer $2 - 1/\lambda$ | `c3az/ghr_k2026c_check.py` | $2 - 1/\lambda = (13524e - 7359)/(9451e - 3286)$ identically; $1.31237330211510937266\ldots$; see the note |
+| 76a [BS2007] $3d^2$ | the Fermat surface $x^d + y^d + z^d + t^d = 0$ | `c76a` | $d = 3..12$: $3d^2$ lines on the surface ($d + 2$ points each), pairwise distinct (normalised Plücker coordinates), in $\mathbb{Q}(\zeta_{2d})$ |
+| 9a [BMRRST1971] $343^{1/5}$ | a 343-word linear code in $\mathbb{Z}_7^5$ (ours: $G = [I_3 \mid P]$, $P = ((1,2),(1,4),(3,1))$; the paper is not accessible to us) | `c9l` | no nonzero codeword in $\{0, \pm1\}^5$; all 58,653 pairs non-adjacent in $C_7^{\boxtimes 5}$ |
+| 78a [FP2011] $1$ | straight-line star polygons $\{n/\frac{n-1}{2}\}$ on $(i, i^2)$ | `c78a` | odd $n = 5..101$: every pair of edges meets exactly once (integer orientation tests) |
+| 69a [Tao2022] $1$ | $z^n - 1$, $\lambda_0 = 1$ | `c69a` | $n = 2..60$: $f' = nz^{n-1}$, the only critical point is at distance exactly 1 |
+| 89a [Erd1962] $1/32$ | the uniformly random colouring | `c89e` | 2 of 64 colourings of $K_4$ are monochromatic; all colourings of $K_n$, $n \le 6$, average exactly $\binom n4/32$ |
+| 20a [Pat2026] $8$ | $X = E - 1$, $E$ exponential | `c20` | moments $k!$: $\mathbb{E}X = 0$, $\mathbb{E}X^2 = 1$, $\mathbb{E}X^4 = 9$, $\mathrm{Var}(X^2) = 8$ |
+| 20c [Pat2026] $\sqrt3$ | the uniform law on $[-\sqrt3, \sqrt3]$, $A = (-\infty, 0]$ | `c20` | variance 1, $\mu^+(A) = 1/(2\sqrt3)$, $\psi_\mu \ge \sqrt3$, in $\mathbb{Q}(\sqrt3)$ |
+| 51a [CH1964] $4/7$ | the Clunie-Hayman series at $K = 6$ (as He and Tang recall it, arXiv 2602.12217v1) | `c51/ch1964_check.py` | $\max_{\lvert z\rvert = 1}\lvert k\rvert = \max_{[-1,1]}\lvert Q\rvert$, $Q = 2\sum (-1)^{T_n} 6^{-T_n} T_{2n+1}$: below $7/4$ by Sturm sequences (degree 15, tail $< 2 \cdot 10^{-28}$); $1/\max = 0.574656\ldots$ |
+| 87a [Odl1990] $215.333\ldots$ (GRH) | $8\pi e^{\gamma + \pi/2}$, the closed form stated in [HMR2019] | `c87/odl1990_check.py` | $\gamma$ (Euler-Maclaurin) and $\pi$ (Machin) enclosed exactly: $215.33251595349068644\ldots$; **the printed value is rounded up past the bound**, see the note |
+| 4a [EG2016] $2.756$ | the monomial count $M_n$ of the Ellenberg-Gijswijt bound $\lvert A\rvert \le 3M_n$ | `c4a/eg2016_check.py` | $M_n \le ((1+x+x^2)x^{-2/3})^n$ at $x = 5931/10000$, whose cube is below $2.756^3$; $M_n$ exactly for $n \le 600$; $\Gamma = 2.7551046130\ldots$ |
+| 13b [Pal1920] $\sqrt3/2$ | the regular hexagon of width 1 | `c13b` | side lines at distance $1/2$, area $\sqrt3/2$, in $\mathbb{Q}(\sqrt3)$ |
+| 13b [Pal1920] $2 - 2/\sqrt3$ | the hexagon with two corners cut by sides of the circumscribed regular dodecagon | `c13b` | area $2 - 2/\sqrt3$ (each corner $(7\sqrt3 - 12)/12$), the same for any two corners |
+| 41a [Hammersley1968] $\pi/2 + 2/\pi$ | Hammersley's sofa, the corner on the hole's circle at $r(\cos 2t, \sin 2t)$ | `c41a` | the path identities and the Thales condition as rational-function identities in $\tan(t/2)$; numeric anchor (2001 angles, about 9000 boundary points); area $\pi/2 + 2r - \pi r^2/2$, maximal at $r = 2/\pi$ |
+| 53a [GG2006] $3$ | $e_1^{n-1}e_2^{n-1}e_3^{n-1}$ in $C_n^3$ | `c53a` | zero-sum free for $n = 2..9$ (two routes for $n \le 5$) |
+| 49a [NS2017] $3/2^{2/3}$ (upper) | the count $\sum_{k \le n/3}\binom nk$ in their bound | `c49u` | $(\sum)^3 \le (27/4)^n$ for $n \le 900$ (exact; $x = 1/2$ in the generating-function bound); $1.88988157484230974\ldots$ |
+
+Notes. (1) 87a [Odl1990] (GRH): the closed form $8\pi e^{\gamma + \pi/2}$ (as [HMR2019] states it, arXiv 1901.04354v1,
+which gives $\approx 215.33$) is $215.3325159534\ldots$, so the row's $215.333\ldots$ is $4.8 \cdot 10^{-4}$ above the
+bound; for a lower bound it should read $215.3325\ldots$ (or $215.332$). Likewise the page's notes quote $22.382$ for
+$4\pi e^{\gamma} = 22.3816\ldots$ (rounded up); $44.763$ ($8\pi e^\gamma = 44.7632\ldots$) and the unconditional
+$60.8395\ldots$ ($4\pi e^{1+\gamma} = 60.83954\ldots$, the standard form; Odlyzko's survey was not machine-readable to
+us) are truncations. (2) The README cells of PR [#364](https://github.com/teorth/optimizationproblems/pull/364): 3a's
+$1.31237330$ is below $(13524e - 7359)/(9451e - 3286) = 1.3123733021151\ldots$ by $2.1 \cdot 10^{-9}$, and 36a's
+$0.644421$ is below $(\pi^2/2) \cdot 0.130587 = 0.6444210149\ldots$; the proposed $1.31237331$ and $0.644422$ are both
+valid upper bounds (`c3az`, `c36a`; the three 36a upper-bound conversions $0.647791\ldots$, $0.647742\ldots$,
+$0.644421\ldots$ are truncations of the exact products). (3) 9a: $343^{1/5} = 3.2140958\ldots$, so the printed
+$3.2141$ (next to the exact expression) is rounded up. Not checked (read): Strassen's recursion count beyond
+$k = 6$; Hadwiger's partition argument for boundary points; that the 13b sets are universal covers (Pál's theorem);
+the reductions behind 51a (Clunie-Hayman, p. 156; He and Tang), 4a ($\lvert A\rvert \le 3M_n$) and 49a ($\lvert
+\mathcal F\rvert \le 3(n+1)\sum_{k \le n/3}\binom nk$); Shannon's $\Theta(G) \ge \alpha(G^n)^{1/n}$; the
+Odlyzko-Serre bound behind the 87a value and [K2026c]'s exponent theorem (formalized in Lean, as the row records); the
+containment of the sofa's points between the numeric samples (it follows from the support-function argument stated in
+`c41a`, not from exact arithmetic).
+
+Reproduce: in each folder, `./run_all.sh` (`c3az` and `c51` need their `./fetch.sh` first for their earlier rows);
+everything runs in under a minute with Python 3.9+ alone, except `c51` (about a minute).
+
 ## Reproduce
 
 ```

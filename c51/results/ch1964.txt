@@ -1,0 +1,10 @@
+51a row [CH1964]: B >= 4/7 from the Clunie-Hayman series with K = 6 (phase epsilon = -1)
+  1. Q_8 of degree 15; tail bound 1.9390322170469166e-28 (< 1e-16: True)
+  2. Sturm: roots of Q_8 - c in [-1, 1]: 0, of Q_8 + c: 0; signs at 0 as needed: True; so max |Q| < 7/4: True
+  3. floating-point grid: max |Q| = 1.740170599 at theta = 0.535327; with the Lipschitz margin <= 1.740290240 < 1.75: True; 1/max = 0.574656301
+RESULT [CH1964]: beta(f) = 1/max |k| > 4/7 at K = 6 (1/max |k| = 0.574656), so B > 4/7 = 0.5714285714...: HOLDS
+red controls (each must fail):
+  K = 3 (max |Q| = 1.944378): refused, as expected (roots of Q - c: 2)
+  phase +1 at K = 6 (max = Q(1) = 2.342635): refused, as expected
+  a claimed 0.5750 at K = 6 (needs max |Q| < 1/0.575 = 1.739130): refused, as expected
+controls all as expected

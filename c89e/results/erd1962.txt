@@ -1,0 +1,11 @@
+89a row [Erd1962]: C_89 <= 1/32 from the uniformly random 2-colouring
+  1. K_4: 2 of the 64 colourings are monochromatic (2/64 = 1/32)
+  2. n = 4: 64 colourings, average monochromatic K_4 = 1/32 = C(4,4)/32: True; least 0
+  2. n = 5: 1024 colourings, average monochromatic K_4 = 5/32 = C(5,4)/32: True; least 0
+  2. n = 6: 32768 colourings, average monochromatic K_4 = 15/32 = C(6,4)/32: True; least 0
+  3. one class, red density 1/2: 1/32
+RESULT [Erd1962]: some colouring of K_n has at most C(n,4)/32 monochromatic K_4 for every n, so C_89 <= 1/32 = 0.03125: HOLDS
+red controls (each must fail):
+  five of six edges agreeing counted as monochromatic (n = 5): average 35/32, not C(5,4)/32 = 5/32: refused, as expected
+  a claimed 1/33 from the random colouring: refused, as expected
+controls all as expected

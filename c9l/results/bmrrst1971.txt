@@ -1,0 +1,11 @@
+9a row [BMRRST1971]: Theta(C_7) >= 343^(1/5) from a 343-word independent set of C_7^(x5)
+  generator [I_3 | P], P = ((1, 2), (1, 4), (3, 1)): 343 words, 343 distinct
+  route 1: every nonzero codeword has a coordinate outside {0, +-1}: True
+  route 2: all 58653 pairs of words non-adjacent in the strong product: True
+  343^(1/5) = 7^(3/5) = 3.21409584971603864658...; the printed 3.2141 is this value rounded to four decimals (up), printed with an approximately-equal sign next to the exact 343^(1/5)
+RESULT [BMRRST1971]: alpha(C_7^(x5)) >= 343, so Theta(C_7) >= 343^(1/5) = 3.2140958...: HOLDS
+red controls (each must fail):
+  P with (1,1) for (3,1): refused, as expected; codeword [(0, 0, 1, 1, 1)]
+  S plus (1,1,0,0,0): refused, as expected; pair ((0, 0, 0, 0, 0), (1, 1, 0, 0, 0))
+  a claim of 344 words from this code: refused, as expected
+controls all as expected
