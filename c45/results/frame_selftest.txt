@@ -1,0 +1,14 @@
+Self-test (frame T0 = 12252240): c45_frame against brute force over every a mod M0, from the definition
+  base [3, 5, 7, 13, 23] (G1 [3, 5, 7, 13], G11 [23]; M0 = 31395): 11 bins <= C (22 values in all) and the weight above C as brute force; moments exact: identical (2 s)
+  base [3, 5, 7, 13, 53] (G1 [3, 5, 7, 13], G13 [53]; M0 = 72345): 16 bins <= C (30 values in all) and the weight above C as brute force; moments exact: identical (3 s)
+  base [3, 5, 7, 13, 29] (G1 [3, 5, 7, 13], G7 [29]; M0 = 39585): 16 bins <= C (30 values in all) and the weight above C as brute force; moments exact: identical (2 s)
+  base [3, 5, 7, 13, 19] (G1 [3, 5, 7, 13], G9 [19]; M0 = 25935): 14 bins <= C (29 values in all) and the weight above C as brute force; moments exact: identical (1 s)
+  base [3, 5, 7, 13, 31] (G1 [3, 5, 7, 13], G5 [31]; M0 = 42315): 11 bins <= C (21 values in all) and the weight above C as brute force; moments exact: identical (1 s)
+  base [3, 5, 7, 13, 17] (G1 [3, 5, 7, 13], G16 [17]; M0 = 23205): 10 bins <= C (21 values in all) and the weight above C as brute force; moments exact: identical (1 s)
+  base [3, 5, 7, 13, 97] (G1 [3, 5, 7, 13], G16 [97]; M0 = 132405): 11 bins <= C (22 values in all) and the weight above C as brute force; moments exact: identical (2 s)
+  base [3, 5, 13, 683] (G1 [3, 5, 13], G11 [683]; M0 = 133185): 7 bins <= C (21 values in all) and the weight above C as brute force; moments exact: identical (4 s)
+  base [3, 13, 23, 29] (G1 [3, 13], G7 [29], G11 [23]; M0 = 26013): 9 bins <= C (20 values in all) and the weight above C as brute force; moments exact: identical (5 s)
+  base [3, 13, 53, 17] (G1 [3, 13], G16 [17], G13 [53]; M0 = 35139): 13 bins <= C (29 values in all) and the weight above C as brute force; moments exact: identical (3 s)
+  base [3, 7, 13, 137] (G1 [3, 7, 13], G17 [137]; M0 = 37401): 9 bins <= C (20 values in all) and the weight above C as brute force; moments exact: identical (2 s)
+  base [3, 5, 7, 13, 53]: every V through the flushed table (SIG = 2), a run resumed from the saved state of a finished run, the low vectors split into 4 passes, and an 8-pass run stopped after pass 2 and resumed give the same histogram and totals: True
+RESULT: PASS

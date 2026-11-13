@@ -1503,6 +1503,25 @@ self-test against the direct double sum on 200 random cases (including $L = 2K$)
 every outcome is as recorded, including the printed-bound finding. Reproduce: `cd c1cntt && ./fetch.sh && ./run_all.sh`
 (about 3 minutes, under 1 GB).
 
+## 45a: the 54-prime row [S2026] of #290, $C_{45} < 0.489481743486002$ (14 November 2026)
+
+PR #290 (fortunto2) proposes $C_{45} < 0.489481743486002$ from the page's obstruction inequality with 29 base primes,
+whose orders divide $T_0 = 12252240$, and 25 cluster primes. `c45/c45_frame.c` and `c45/c45_frame_check.py` are our
+own code, written from the 45a page and the prime sets in the PR; no program of the certificate was read or run.
+The base primes are grouped by the part of their order outside 12 (moduli 12, 36, 60, 48, 28, 52, 44, 68); the exact
+histogram of $\nu_0$ over the classes modulo $T_0$ is computed for $\nu_0 \le 1{,}538{,}836$ (743,649,329,876 pairs,
+1,434,945 bins), with the total weight and the first and second moments of $\nu_0$ over all classes checked against
+closed forms, and every partition of a vector's pairs checked. The claimant's `certs/c45-54/seed_histogram.txt.gz`
+(fortunto2/romanoff-c45 @ `92749480`, `f0e0d886...c305`), read as data, has the same bins and the same aggregate line
+above the cut. With the cut justified ($(C+1)\kappa H_{\min} \ge 1/2$) and 1,658,880 distinct cluster multipliers,
+the sum is the exact rational $S = 0.48948174348600104752999373053\ldots \le 0.489481743486002$, and with the
+claimant's series for $\log 2$ it agrees with the printed $S$ in every printed digit. Self-test: the same pipeline
+against brute force from the definition on small bases using every group. Red controls: without the cluster prime
+176383 the sum is above the bound; 53 placed in a cluster is refused; 337, whose order 21 divides none of the group
+moduli, is refused in the base; a cut 2,000 lower is refused; one class moved by one changes $S$. Not replayed here:
+the rows [P2026b] and [P2026c] of #281 (about 50 CPU-hours and more). Reproduce: `cd c45 && ./fetch.sh &&
+./run_frame.sh` (about three hours on two threads).
+
 ## C1c: #366's certificate with $K = 98{,}304$ cells (14 November 2026)
 
 PR #366 (intervalplace) proposes $C_{1c} \ge 1376728953781146098572851250003968/3354819039892156766926073767410361 =

@@ -1,0 +1,20 @@
+PR #290, row [S2026] (29 base primes and 25 cluster primes): C45 < 0.489481743486002
+  base groups: G1 [3, 5, 7, 13]; G9 [19, 37, 73, 109]; G5 [11, 31, 41, 61, 151]; G16 [17, 257, 241, 97]; G7 [29, 43, 127, 113]; G13 [8191, 53, 157]; G11 [23, 89, 397, 683]; G17 [137]
+  c45_frame: B law: 516730 vectors, 65535 tree nodes, least entry 3360; invariant under the 8 affine maps of Z/4: yes
+  c45_frame: resumed at pass 4, phase pass, chunk 0
+  c45_frame: done: 743649329876 pairs with nu <= C, 0 partition failures (2 s)
+  histogram: 1,434,945 bins with nu0 <= 1,538,836 (743,649,329,876 (V, B) pairs, 3 s); total weight = M0, sum nu0 = T0 prod (q - 1), sum nu0^2 = T0 sum_d prod_q (q - 1 or q - 2), every V's pairs partitioned: all exact
+  the claimant's c45-54/seed_histogram.txt.gz (sha256 of the text e011429b..., as stated: True; 1,434,945 bins), read as data: bins identical to ours: True
+    its aggregate line above C (count, sum nu0, sum nu0^2) equals ours (closed-form totals minus our bins): True
+  cut: (C + 1) kappa H_min >= 1/2, so every class above C gives 1/(2M) for every cluster multiplier: True
+  lambda = sum_(k <= 120) 1/(k 2^k) < log 2; 1,658,880 distinct cluster multipliers H
+  S = 0.4894817434860010475299937305345901094254... (exact rational)
+  S <= 0.489481743486002, and the printed value is S rounded up at its last digit: True
+  with lambda = 2 sum_(j < 40) 1/((2j+1) 3^(2j+1)): S = 0.489481743486001047529993730534590109425254326...; the printed 0.48948174348600104752999373053459010942... agrees in every printed digit: True
+Red controls:
+  without the cluster prime 176383 (order 239): S = 0.489481744739673..., above 0.489481743486002: True
+  53 (order 52) placed in the cluster of order 23: refused, as expected
+  337 (order 21) added to the base: refused (21 divides none of the group moduli), as expected
+  a cut 2000 lower: the classes above it are not all capped, refused: True
+  one class moved from nu0 = 821364 to 821365: S changes (0.489481743486001047529993730534...): True
+RESULT: PASS  (57 s)
