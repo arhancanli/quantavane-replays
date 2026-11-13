@@ -281,12 +281,14 @@ rigorous remainders; the comparison with the printed bound is exact.
 | #330, update of 5 Nov evening | rpinho/math-certificates @a12c362 `c82/degree104-joint/certificate.json` (`ee9622b5...fdd5`, as in its SHA256SUMS) | [0.2519923409720083, 0.2519923409720084], inside the stated [0.25199234097200838698, 0.25199234097200839540] | 0.2519923410 |
 | #280 v4, 5 Nov | vidigoat/optimization-records @79ce0df `tao/certificates/c82/v4/certificate.json` (`c1981f1c...c72f`) | [0.2520079723284296, 0.2520079723284297] | 0.2520079724 |
 | #280 v5, 9 Nov | vidigoat/optimization-records @191064e `tao/certificates/c82/v5/certificate.json` (`8a5f363c...a909`, as the PR comment states); 8 denominators of degree 104, $D$ = 999,999,999,960 as stated | [0.2519889613870203, 0.2519889613870204], below the README's 0.25198896138704 | 0.2519889614 |
+| #330, update of 12 Nov | rpinho/math-certificates @dadec73 `c82/degree104-joint/certificate.json` (`1e5af101...c67e`, as in its SHA256SUMS and RESULT.json) | upper end 0.2519744487408959, inside the stated [0.25197444874089584762, 0.25197444874089585022] | 0.2519744488 |
+| #330, update of 13 Nov | rpinho/math-certificates @977121e `c82/degree104-joint/certificate.json` (`0c4df95e...3077`, as in its SHA256SUMS and RESULT.json); six denominators of degree 104 | upper end 0.2519696459872491, inside the stated [0.25196964598724909777, 0.25196964598724910008]; margin to the printed bound 1.275e-11 | 0.2519696460 |
 | control: Doche 2001 | [Pin26] `controls/doche2001.json` (`835a10b9...7fc2`) | [0.2544361553, 0.2544361561] | 0.25444 |
 
 What rests on mathematics: that C82 <= B for any certificate meeting the hypotheses (the direct argument in the
 certificates' notes, read step by step), Gershgorin's theorem and the series bounds.
 
-Reproduce: `cd c82 && ./fetch.sh ROOT && ./run_all.sh ROOT --workers=14` (about 5.5 minutes).
+Reproduce: `cd c82 && ./fetch.sh ROOT && ./run_all.sh ROOT --workers=14` (about 14 minutes with the two rows of 12 and 13 November, about 4 minutes each).
 
 ## C16: the Brezis-Gallouet-Wainger remainder constant on the torus (5 November 2026)
 
@@ -1500,6 +1502,21 @@ lag; one residue modulo the first prime corrupted at a random lag is caught by t
 self-test against the direct double sum on 200 random cases (including $L = 2K$). `run_all.sh` exits 0 exactly when
 every outcome is as recorded, including the printed-bound finding. Reproduce: `cd c1cntt && ./fetch.sh && ./run_all.sh`
 (about 3 minutes, under 1 GB).
+
+## C1c: #366's certificate with $K = 98{,}304$ cells (14 November 2026)
+
+PR #366 (intervalplace) proposes $C_{1c} \ge 1376728953781146098572851250003968/3354819039892156766926073767410361 =
+0.41037353651\ldots$ from a step function with $K = 98{,}304$ and 98,368 non-negative integer weights
+(intervalplace/frontier @ `c0bcdfb7`, `c1c-barnard-steinerberger/K98304_0.4103735.json`, `ff375289...9ead` as the PR
+states). The repository's `verify.py` was neither read nor run; only the JSON was fetched. Two separately written
+exact programs compute every $A_k = \sum_i w_i w_{i+k}$, $0 \le k \le K$: `c1c366/c1c366_kron.py` (standard
+library: one big-integer product by Kronecker substitution, then the deciding lag and three others summed again
+term by term) and `c1c366/c1c366_limbs.py` (numpy: 17-bit limbs and exact 64-bit integer correlations, every
+partial sum below $2^{51}$). Both give $S = 57920799717304981$, $\min_k A_k = 14004811134655213405078646342$ at the
+single lag $k = 15880$ (as stated), and $K \min_k A_k / S^2$ equal to the stated fraction, which is
+$4.018 \cdot 10^{-5}$ above the page's [Kos2026] value. Red control: the weight at index 15880 plus 1 changes the
+fraction in both programs. Reproduce: `cd c1c366 && ./fetch.sh && ./run_all.sh` (about 3 minutes; numpy for the
+second program).
 
 ## 28a: Borsuk's conjecture fails in dimension 63 [Gri2026] (11 November 2026)
 

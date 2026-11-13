@@ -1,0 +1,10 @@
+A: n 98368 K 98304 S 57920799717304981 min A_k 14004811134655213405078646342 at k [15880]
+A: bound 1376728953781146098572851250003968 / 3354819039892156766926073767410361 = 0.410373536518799
+A: equals stated fraction: True | stated argmin 15880 in ours: True
+B: n 98368 K 98304 S 57920799717304981 min A_k 14004811134655213405078646342 at k [15880]
+B: bound 1376728953781146098572851250003968 / 3354819039892156766926073767410361 = 0.410373536518799
+B: equals stated fraction: True
+red control (weight 15880 plus 1):
+A: equals stated fraction: False | stated argmin 15880 in ours: True
+B: equals stated fraction: False
+RESULT: ALL CHECKS PASS (both programs give the stated fraction; both red controls differ)

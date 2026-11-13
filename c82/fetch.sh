@@ -38,6 +38,10 @@ get pr330b certificate.json rpinho/math-certificates 98208a40e043e578d35183b4184
 get pr330c certificate.json rpinho/math-certificates 3be6b2f133db43374ea30767b58c62ce2d39686a c82/degree104-joint/certificate.json
 # PR #330 update of 5 Nov evening, 0.2519923410* (rpinho/math-certificates @ a12c362, c82/degree104-joint)
 get pr330d certificate.json rpinho/math-certificates a12c3622120c39af776902dbe49b6eff97a4d189 c82/degree104-joint/certificate.json
+# PR #330 update of 12 Nov, 0.2519744488* (rpinho/math-certificates @ dadec73, c82/degree104-joint)
+get pr330e certificate.json rpinho/math-certificates dadec7353c435a081befca73888e3ab6cef3134a c82/degree104-joint/certificate.json
+# PR #330 update of 13 Nov, 0.2519696460* (rpinho/math-certificates @ 977121e, c82/degree104-joint)
+get pr330f certificate.json rpinho/math-certificates 977121e04d22dd9cde69e3765b3eed2a78376e3d c82/degree104-joint/certificate.json
 # PR #280 updated 5 Nov, 0.2520079724* (vidigoat tao/certificates/c82/v4 @ 79ce0df)
 get pr280d certificate.json vidigoat/optimization-records 79ce0dfb211a67ff7e387b58b0d19ff1d6accfba tao/certificates/c82/v4/certificate.json
 # PR #280 updated 9 Nov, 0.2519889614* (vidigoat tao/certificates/c82/v5 @ 191064e; sha256 stated in the PR comment)
