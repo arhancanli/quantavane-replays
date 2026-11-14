@@ -1,0 +1,77 @@
+== the certificate
+A: s = 2^-120, t1 = 22545746012851/140737488355328, 11 pieces, degrees [20, 20, 20, 20, 20, 20, 20, 20, 20, 0, 0]
+A: s is a positive power of 1/2 and the spike [-s/2, s/2) lies left of t1     PASS
+A: pieces contiguous from t1 to 1 + s/2, each of positive length              PASS
+A: the last two pieces are the constant T on [1 - t1, 1) and [1, 1 + s/2)     PASS
+A: f >= 0 on every piece (Bernstein)                                          PASS
+A:   smallest Bernstein coefficient over the pieces: 0.0
+A: int f = 1 + M exactly                                                      PASS
+A:   int f = 2.491247835698739976351134828292
+A: lag mesh: 42 points from 0 to 1 + s; 41 cells, largest degree 41
+A: the mesh starts at 0, contains 1 and ends at 1 + s                         PASS
+A: g is continuous at every interior mesh point                               PASS
+A: g(0) = int f^2                                                             PASS
+A: g = 0 at the end of the support                                            PASS
+A: 2 int_0^inf g = (int f)^2                                                  PASS
+A: g >= the stated bound on every cell of [0, 1] (Bernstein, 48 leaves, depth <= 4) PASS
+A:   certified: min over [0, 1] of g, minus the stated bound, >= 1/1000000000000000000000000000000000000000000000000000000000000
+A:   smallest g at a mesh point, minus T: 0
+A:   cells on which g = T identically: 2, covering [0.8398028394827648, 1.0]
+A: bound = (T - margin) / (1 + M)^2 exactly                                   PASS
+A:   bound = 0.410378195722515456620959705443384843306244844... (denominator of 728 bits)
+A: bound >= 0.410378195 (the printed row)                                     PASS
+A: digest of g (cells, coefficients in powers of t - u): 4ef298f0bc3bd6c7495ff9a916b57ca646a0bb4032e4e13e904c39a97c9e911d
+A: VERDICT PASS
+B: s = 2^-k, and the spike ends at or before t1                                 PASS
+B: the pieces of h tile [t1, 1 + s/2)                                           PASS
+B: h = T on [1 - t1, 1) and on [1, 1 + s/2)                                     PASS
+B: f >= 0 on every piece (centred forms, after removing zeros at the left end)  PASS
+B: int f = 1 + M                                                                PASS
+B: the closed form vanishes identically beyond the last lag                     PASS
+B: lags run from -(1 + s) to 1 + s and include 0 and 1                          PASS
+B: 83 lags, 41 cells on [0, 1 + s], largest degree 41
+B: closed form = direct integral of f(x) f(x + t) at 11 rational lags           PASS
+B: g >= the stated bound on every cell of [0, 1] (128 intervals, depth <= 35)   PASS
+B:   cells with g = T identically: 2; g(1) - T = 0
+B: bound = (T - margin) / (1 + M)^2                                             PASS
+B: bound >= 0.410378195                                                         PASS
+B:   bound = 0.410378195722515456620959705443384843306244844...
+B: digest of g (cells, coefficients in powers of t - u): 4ef298f0bc3bd6c7495ff9a916b57ca646a0bb4032e4e13e904c39a97c9e911d
+B: VERDICT PASS
+== information (program A only; centred forms cannot certify a bound that is attained): T in place of T - margin
+A: CONTROL: the lower bound on g replaced by 2.546936671418349
+A: g >= the stated bound on every cell of [0, 1] (Bernstein, 48 leaves, depth <= 4) PASS
+A:   certified: min over [0, 1] of g, minus the stated bound, >= 0
+A: VERDICT PASS
+== red control 1: the bound on g raised to T + 2^-132 (one unit in the numerator of T)
+A: CONTROL: the lower bound on g replaced by 2.546936671418349
+A: g >= the stated bound on every cell of [0, 1] (Bernstein, 38 leaves, depth <= 3) FAIL
+A: VERDICT REFUSED
+B: CONTROL: the lower bound on g replaced by 2.546936671418349
+B: g >= the stated bound on every cell of [0, 1] (112 intervals, depth <= 35)   FAIL
+B: VERDICT REFUSED
+== red control 2: the constant coefficient of piece 4 lowered by 10^-20
+A: CONTROL: piece 4, coefficient 0 changed by -1/100000000000000000000
+A: int f = 1 + M exactly                                                      FAIL
+A: g >= the stated bound on every cell of [0, 1] (Bernstein, 28 leaves, depth <= 4) FAIL
+A: digest of g (cells, coefficients in powers of t - u): 54bbb731401b9ec88d2595837944da803ed273798cb4a72cdd5fbd5381ea980f
+A: VERDICT REFUSED
+B: CONTROL: piece 4, coefficient 0 changed by -1/100000000000000000000
+B: int f = 1 + M                                                                FAIL
+B: g >= the stated bound on every cell of [0, 1] (53 intervals, depth <= 67)    FAIL
+B: digest of g (cells, coefficients in powers of t - u): 54bbb731401b9ec88d2595837944da803ed273798cb4a72cdd5fbd5381ea980f
+B: VERDICT REFUSED
+== red control 3: h on [1 - t1, 1) lowered from T by 10^-30
+A: CONTROL: piece 9, coefficient 0 changed by -1/1000000000000000000000000000000
+A: the last two pieces are the constant T on [1 - t1, 1) and [1, 1 + s/2)     FAIL
+A: int f = 1 + M exactly                                                      FAIL
+A: g >= the stated bound on every cell of [0, 1] (Bernstein, 4 leaves, depth <= 0) FAIL
+A: digest of g (cells, coefficients in powers of t - u): c9bc010507578a38242e700edcf5512e4ef5edb612d2254621fcd5f44f53bb7a
+A: VERDICT REFUSED
+B: CONTROL: piece 9, coefficient 0 changed by -1/1000000000000000000000000000000
+B: h = T on [1 - t1, 1) and on [1, 1 + s/2)                                     FAIL
+B: int f = 1 + M                                                                FAIL
+B: g >= the stated bound on every cell of [0, 1] (4 intervals, depth <= 98)     FAIL
+B: digest of g (cells, coefficients in powers of t - u): c9bc010507578a38242e700edcf5512e4ef5edb612d2254621fcd5f44f53bb7a
+B: VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs accept the certificate and give the same exact g, digest 4ef298f0bc3bd6c7495ff9a916b57ca646a0bb4032e4e13e904c39a97c9e911d; three red controls refused by both)

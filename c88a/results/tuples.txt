@@ -1,0 +1,204 @@
+== [Zha14] 70,000,000: the k0 = 3,500,000 primes after k0
+A: pi(3500000) = 250150, pi(70000000) = 4118064, difference 3867914
+A: entries 3500000 (k0 = 3500000): the primes from 3500017 to 63374611
+A: diameter 59874594; below 70000000: True
+A: Zhang's inequality pi(70000000) - pi(3500000) > 3500000: True
+A: every entry is a prime greater than k0: True
+A: primes p <= 47, every class occupied modulo: none
+A: admissible: True
+A: VERDICT PASS
+B: pi(3500000) = 250150, pi(70000000) = 4118064
+B: 3500000 entries, from 3500017 to 63374611, diameter 59874594
+B: pi(70000000) - pi(3500000) = 3867914 > 3500000: True
+B: entries divisible by some prime p <= k0: 0
+B: class 0 is free modulo every prime p <= k0; k0 entries cannot fill p > k0 classes
+B: admissible: True
+B: VERDICT PASS
+== [Pol14a] 4680: k0 = 632 (Sutherland's tables)
+A: entries 632 (claimed k = 632), distinct: True
+A: min 0, max 4680, diameter 4680 (claimed 4680)
+A: primes p <= k examined: 115 (largest 631)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 632 (k = 632), strictly increasing after sorting: True
+B: diameter 4680 (claimed 4680)
+B: witness n = 1487388270256588629876426186919631891268551091771287185833457923938721369622726116494699559341996702576794745873516157672581250200442359361150164761894155495870852018511373781148323049904990508871667321142540978862197843581068786129436036457797805717202343734631 (mod the product 1702638442551072365617326631534342245041465988544372563961893321511809758012320472936554398121035062403896046404654753749168137340872368042807946221263167725872661266685741122100016726950864909508767802965271369340352229248204502328104750019252611639587225304330 of the primes <= 632)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== [May15] 600: k = 105 (Sutherland's tables)
+A: entries 105 (claimed k = 105), distinct: True
+A: min 0, max 600, diameter 600 (claimed 600)
+A: primes p <= k examined: 27 (largest 103)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 105 (k = 105), strictly increasing after sorting: True
+B: diameter 600 (claimed 600)
+B: witness n = 16714569222630172382414471028020989961569 (mod the product 23984823528925228172706521638692258396210 of the primes <= 105)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== [Pol14b] 246: k = 50 (Sutherland's tables)
+A: entries 50 (claimed k = 50), distinct: True
+A: min 0, max 246, diameter 246 (claimed 246)
+A: primes p <= k examined: 15 (largest 47)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 50 (k = 50), strictly increasing after sorting: True
+B: diameter 246 (claimed 246)
+B: witness n = 16166148933218923 (mod the product 614889782588491410 of the primes <= 50)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== [Zha26] 240: k = 49 (the tuple in the author's certificate.json)
+A: entries 49 (claimed k = 49), distinct: True
+A: min 0, max 240, diameter 240 (claimed 240)
+A: primes p <= k examined: 15 (largest 47)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 49 (k = 49), strictly increasing after sorting: True
+B: diameter 240 (claimed 240)
+B: witness n = 138177229425169631 (mod the product 614889782588491410 of the primes <= 49)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== [Sta26] 240: k = 49 (Sutherland's tables)
+A: entries 49 (claimed k = 49), distinct: True
+A: min 0, max 240, diameter 240 (claimed 240)
+A: primes p <= k examined: 15 (largest 47)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 49 (k = 49), strictly increasing after sorting: True
+B: diameter 240 (claimed 240)
+B: witness n = 169409784855105859 (mod the product 614889782588491410 of the primes <= 49)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== [OAI26] 186: k = 40 (the tuple of the Lean statement)
+A: entries 40 (claimed k = 40), distinct: True
+A: min 0, max 186, diameter 186 (claimed 186)
+A: primes p <= k examined: 12 (largest 37)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 40 (k = 40), strictly increasing after sorting: True
+B: diameter 186 (claimed 186)
+B: witness n = 598186533641 (mod the product 7420738134810 of the primes <= 40)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== a second 40-tuple of diameter 186 (Sutherland's tables; information)
+A: entries 40 (claimed k = 40), distinct: True
+A: min 0, max 186, diameter 186 (claimed 186)
+A: primes p <= k examined: 12 (largest 37)
+A: fewest free classes: 1, at p = 2
+A: admissible: True
+A: VERDICT PASS
+B: size 40 (k = 40), strictly increasing after sorting: True
+B: diameter 186 (claimed 186)
+B: witness n = 1199868004033 (mod the product 7420738134810 of the primes <= 40)
+B: largest gcd(n + h, product) over the entries: 1
+B: admissible: True
+B: VERDICT PASS
+== red control, [Zha14]: the FIRST 3,500,000 primes instead
+A: primes p <= 47, every class occupied modulo: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+A: admissible: False
+A: VERDICT REFUSED
+B: every class occupied modulo (primes <= 47): [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Pol14a] (odd entry): entry 12 replaced by 13
+A: every class occupied modulo: [2, 3, 11, 23]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [2, 3, 11, 23]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Pol14a] (even entry, fills p = 11): entry 12 replaced by 2
+A: every class occupied modulo: [11, 17]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [11, 17]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [May15] (odd entry): entry 10 replaced by 11
+A: every class occupied modulo: [2, 3, 5, 7]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [2, 3, 5, 7]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [May15] (even entry, fills p = 3): entry 10 replaced by 2
+A: every class occupied modulo: [3]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [3]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Pol14b] (odd entry): entry 4 replaced by 5
+A: every class occupied modulo: [2, 3, 7, 23]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [2, 3, 7, 23]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Pol14b] (even entry, fills p = 3): entry 4 replaced by 2
+A: every class occupied modulo: [3, 5]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [3, 5]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Zha26] (odd entry): entry 2 replaced by 3
+A: every class occupied modulo: [2, 7]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [2, 7]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Zha26] (even entry, fills p = 3): entry 2 replaced by 4
+A: every class occupied modulo: [3, 5]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [3, 5]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Sta26] (odd entry): entry 4 replaced by 5
+A: every class occupied modulo: [2, 3]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [2, 3]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Sta26] (even entry, fills p = 3): entry 4 replaced by 2
+A: every class occupied modulo: [3, 11]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [3, 11]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [OAI26] (odd entry): entry 2 replaced by 3
+A: every class occupied modulo: [2, 7]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [2, 7]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [OAI26] (even entry, fills p = 3): entry 2 replaced by 4
+A: every class occupied modulo: [3, 5]
+A: admissible: False
+A: VERDICT REFUSED
+B: no free class modulo [3, 5]
+B: admissible: False
+B: VERDICT REFUSED
+== red control, [Pol14b]: the same tuple offered as a 51-tuple, and with diameter 244
+A: VERDICT REFUSED
+B: VERDICT REFUSED
+A: VERDICT REFUSED
+B: VERDICT REFUSED
+RESULT: ALL CHECKS PASS (8 tuples accepted by both programs; 15 red controls refused by both)

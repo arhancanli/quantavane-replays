@@ -1,0 +1,46 @@
+== the page's system
+A: 5 classes, moduli [2, 3, 4, 6, 12], all > 1: True, pairwise distinct: True
+A: period 12, residues not covered: none
+A: least modulus 2
+A: VERDICT PASS
+B: sorted moduli [2, 3, 4, 6, 12], distinct and greater than 1: True
+B: density of the union = 1
+B: least modulus 2
+B: VERDICT PASS
+== red control: 11 mod 12 replaced by 10 mod 12
+A: 5 classes, moduli [2, 3, 4, 6, 12], all > 1: True, pairwise distinct: True
+A: period 12, residues not covered: [11]
+A: least modulus 2
+A: VERDICT REFUSED
+B: sorted moduli [2, 3, 4, 6, 12], distinct and greater than 1: True
+B: density of the union = 11/12
+B: least modulus 2
+B: VERDICT REFUSED
+== red control: 1 mod 6 replaced by 5 mod 6
+A: 5 classes, moduli [2, 3, 4, 6, 12], all > 1: True, pairwise distinct: True
+A: period 12, residues not covered: [7]
+A: least modulus 2
+A: VERDICT REFUSED
+B: sorted moduli [2, 3, 4, 6, 12], distinct and greater than 1: True
+B: density of the union = 11/12
+B: least modulus 2
+B: VERDICT REFUSED
+== red control: the class 1 mod 6 removed
+A: 4 classes, moduli [2, 3, 4, 12], all > 1: True, pairwise distinct: True
+A: period 12, residues not covered: [7]
+A: least modulus 2
+A: VERDICT REFUSED
+B: sorted moduli [2, 3, 4, 12], distinct and greater than 1: True
+B: density of the union = 11/12
+B: least modulus 2
+B: VERDICT REFUSED
+== red control: a covering with a repeated modulus (0 mod 2, 1 mod 2)
+A: 2 classes, moduli [2, 2], all > 1: True, pairwise distinct: False
+A: period 2, residues not covered: none
+A: least modulus 2
+A: VERDICT REFUSED
+B: sorted moduli [2, 2], distinct and greater than 1: False
+B: density of the union = 1
+B: least modulus 2
+B: VERDICT REFUSED
+RESULT: ALL CHECKS PASS (the system accepted by both programs; four red controls refused by both)
