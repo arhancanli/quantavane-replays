@@ -1,0 +1,76 @@
+== program A (c13acov_a.py)
+A: check side data as in the paper: sigma = (-631/58, -1, 7/16, 37/56), h = (0, 0, 130783/250000, 446199/1000000), kR = kL = 30: PASS
+A: check K: the four vertices satisfy all four side inequalities; shoelace area = 7170601298323360123534337/29109471743520000000000000; |V2 - V4|^2 > 1: PASS (area 7170601298323360123534337/29109471743520000000000000 = 0.2463322372010956..., |V2 - V4|^2 = 1.031628)
+A: check the printed upper bounds 0.24634 (the README cell of PR #314) and 0.2463322373 hold, and 0.2463322372 is the truncation: PASS
+A: check a_j0 n_0 + a_j1 n_1 + n_j = 0 has positive solutions equal to the four fractions stated on PR #314: PASS (a20 = 5541045/8027539, a21 = 24427652/40137695, a30 = 47299645/118570699, a31 = 502233812/592853495)
+A: check 1463 specs: 16 flush, 9 rot, 1438 vrot: PASS
+A: check every spec matrix is orthogonal (exactly): PASS
+A: check the 25 flush/rot specs give the vertical directions (0, -1), (0, 1) and 30 + 30 others: PASS (62 distinct)
+A: check u^R strictly upward in the open right half-plane, u^L strictly downward in the open left half-plane, all unit vectors: PASS
+A: check every M_s n_i of a flush/rot spec is a label direction: PASS
+A: check every other M_s n_i of a vrot spec is kappa_1 w_1 + kappa_2 w_2 with adjacent label directions and kappa >= 0, exactly: PASS (5744 two-term expansions)
+A: check tree: every split's cells lie in the parent, are pairwise disjoint and cover it: PASS
+A: check tree: no spec branched twice on a path: PASS
+A: check tree: leaves 0..12662, each exactly once; 24,898 nodes, depth 26 (the paper's table): PASS (24898 nodes, depth 26)
+A: check multiplier files: every leaf 0..12662 has exactly one line: PASS (6778020 rows in all (the manifest states 6,778,020))
+A: check every leaf: D > 0, every multiplier > 0, rows valid, escape rows only from its path, B >= 1, sum f = 0, and |sum_I f|^2 <= 1 for every I in F(R): PASS (3410037 prefix checks; largest |sum_I f|^2 = 0.999999850314; least B = 1.000000000000)
+A: largest |sum_I f|^2 over all leaves and families: 889440504613318720321333688461974543195435763947872656250000/889440637750093268890573640750986917099230326952020867573449
+A: least B over all leaves: 1
+A: VERDICT PASS
+== program B (c13acov_b.py)
+B: check the SHA-256 of all 52 data files equals the certificate's manifest.json: PASS
+B: check normals n(sigma_i) are unit vectors and the side data are the paper's (4.1): PASS
+B: check area of K by (1/2) sum h_i l_i (every side length positive) = the paper's fraction; 0.24634 and 0.2463322373 are upper bounds: PASS (0.2463322372010956...)
+B: check a_j0, a_j1 positive, solve the normal relations, and equal the author's four fractions: PASS
+B: check each matrix has orthonormal columns: PASS
+B: check contact directions: (0, +-1) plus 30 right and 30 left, as kR = kL = 30: PASS
+B: check flush and rot directions M n_i are all label directions: PASS
+B: check vrot directions: exact nonnegative two-term expansions in angularly adjacent label directions: PASS
+B: check tree: splits partition their rectangles (grid marking), specs not repeated on a path, leaves distinct: PASS
+B: check tree: 24898 nodes, 12663 leaves, depth 26; the paper's table says 24,898, 12,663 and 26: PASS
+B: check one multiplier line per leaf (12663 lines, 6778020 rows; the manifest says 6,778,020 rows): PASS
+B: check all 12,663 leaves pass (4.7): B >= 1, sum f = 0, every family sum of squared norm <= 1, multipliers > 0, escape rows from the path only: PASS (largest squared norm 0.999999850314, least B 1.000000000000)
+B: largest |sum_I f|^2 over all leaves and families: 889440504613318720321333688461974543195435763947872656250000/889440637750093268890573640750986917099230326952020867573449
+B: least B over all leaves: 1
+B: VERDICT PASS
+== red control A1: h_2 = 130782/250000 in the escape rows (one unit lower in the last place)
+A: CONTROL h2
+A: check leaf 0: (4.7) and the row rules: FAIL
+A: VERDICT REFUSED
+== red control A2: the first two right contact directions swapped
+A: CONTROL swapRL
+A: check u^R strictly upward in the open right half-plane, u^L strictly downward in the open left half-plane, all unit vectors: FAIL
+A: VERDICT REFUSED
+== red control A3: the root split's first cell widened to p <= 23, overlapping the second
+A: CONTROL overlap
+A: check tree: every split's cells lie in the parent, are pairwise disjoint and cover it: FAIL
+A: VERDICT REFUSED
+== red control A4: leaf 0 (B = 1 exactly), its escape multiplier one unit lower
+A: CONTROL mult
+A: check leaf 0: (4.7) and the row rules: FAIL
+A: VERDICT REFUSED
+== red control A5: leaf 0 given an escape row of spec 1462, which is not on its path
+A: CONTROL esc
+A: check leaf 0: (4.7) and the row rules: FAIL
+A: VERDICT REFUSED
+== red control B1: h_3 = 446198/1000000 in the escape rows (one unit lower in the last place)
+B: CONTROL h3
+B: check leaf 5: (4.7) and the row rules: FAIL
+B: VERDICT REFUSED
+== red control B2: the contact direction u^R_6 reflected in the x-axis
+B: CONTROL dir
+B: check flush and rot directions M n_i are all label directions: FAIL
+B: VERDICT REFUSED
+== red control B3: the root split's first cell narrowed by one row of p (a gap)
+B: CONTROL gap
+B: check tree: splits partition their rectangles (grid marking), specs not repeated on a path, leaves distinct: FAIL
+B: VERDICT REFUSED
+== red control B4: leaf 0, every multiplier doubled (B = 2, sum still 0)
+B: CONTROL mult
+B: check leaf 0: (4.7) and the row rules: FAIL
+B: VERDICT REFUSED
+== red control B5: a direction (0, -1) from a spec given to P- instead of P+ (against the stated rule)
+B: CONTROL pminus
+B: check leaf 9: (4.7) and the row rules: FAIL
+B: VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs accept every leaf, with the same largest squared norm 889440504613318720321333688461974543195435763947872656250000/889440637750093268890573640750986917099230326952020867573449 and least B = 1; the area is the paper's fraction; ten red controls refused)

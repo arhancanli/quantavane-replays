@@ -1,0 +1,80 @@
+== program A (../c49/sunflower_check.py, unchanged, via c49p370_a.py), with its red controls
+ROW pin370: [Pin2026] (PR #370) @a50021b, mu_3 >= 1.5678643*
+  sha256 pr370/best_1.5678643845728069793620.json: 53381b5f52264c43d56343ab27d698c598462d5abfd83c043365afbae9efb1e8
+  check sha256 equals the one in the packet's SHA256SUMS: PASS
+  the row's fragment 53381b5f...e1e8: first 8 agree: True; last 4 agree: False (the file ends in ...b1e8)
+  check one block: 28 points, in-port 0, out-port 1, 252303 members: PASS
+  set sizes: {7: 32, 9: 34, 11: 438, 12: 146, 13: 1140, 14: 5313, 16: 57900, 18: 187300}
+  check block: members distinct: PASS (252303 members)
+  check block: Sperner and 3-sunflower-free, box method: PASS (blocks 8+10+10, 10 boxes, 220 box triples; 0.7 s)
+  check block: Sperner and 3-sunflower-free, box2 method: PASS (blocks 4+4+10+10, 62 boxes, 41664 box triples; 1.1 s)
+  port counts N00, N01, N10, N11 (ports 0 -> 1): 33980, 64728, 64728, 88867
+  check transfer matrix rows (64728, 88867), (33980, 64728) as on the 49a page (ports 0 -> 1): PASS (computed (64728, 88867), (33980, 64728))
+  check port counts N00 = 33980, N01 = N10 = 64728, N11 = 88867 as the row states: PASS
+  check Koshta's block: 252292 members (the file replayed in ../c49): PASS
+  check the certificate is Koshta's block minus the 21 listed sets plus the 32 listed sets: PASS
+  check the 21 removed sets are Koshta's 20 sets inside the first copy of H and his extra set: PASS
+  check the 32 added sets: seven points each, 16 inside each pendant copy of H, avoiding both ports: PASS (per pendant [16, 16])
+  check second path: no containment and no 3-sunflower through any of the 32 added sets (each scanned against all 252303 members): PASS (57.6 s)
+  check Perron root equals 64728 + sqrt(3019700660), 3019700660 = 88867 * 33980: PASS
+  points per copy: 28 - 2 = 26 (chain families on 26k + 2 points)
+  rho: (129456 + sqrt(12078802640))/2, in [119679.8030641397, 119679.8030641398)
+  check rho is irrational (D not a perfect square): PASS
+  bound rho^(1/26): in [1.5678643845728069793620334, 1.5678643845728069793620335)
+  check printed lower bound 1.5678643 <= rho^(1/26) (exact: 1.5678643^26 <= rho): PASS (it is the truncation at 7 decimals)
+  check control: 1.5678644 (printed bound + 1e-7) is refuted: PASS
+  check 49a page's value 1.5678643... agrees (truncation): PASS (rho^(1/26) in [1.5678643, 1.5678644))
+  check value 1.56786438... stated in the row text of PR #370 agrees (truncated): PASS (rho^(1/26) in [1.56786438, 1.56786439))
+  check value 1.567864384572806979... stated in PR #370 description agrees (truncated): PASS (rho^(1/26) in [1.567864384572806979, 1.567864384572806980))
+  check value 1.5678643845728069793620... stated in the certificate's file name agrees (truncated): PASS (rho^(1/26) in [1.5678643845728069793620, 1.5678643845728069793621))
+  check control: 1.5678643846 (10-decimal truncation + 1e-10) is refuted: PASS
+  check control block: planted 3-sunflower caught by the box method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control block: planted containment caught by the box method: PASS (witness verified)
+  check control block: planted 3-sunflower caught by the box2 method: PASS (witness verified; the added set is comparable with no member, Sperner still reported)
+  check control block: planted containment caught by the box2 method: PASS (witness verified)
+  check control: N11 + 1 no longer gives the page's matrix and moves the exact rate: PASS (rate 1.5678643845728069793620334 -> 1.5678645403572018864266695)
+  check control: with N11 lowered by 0.1% (to 88779) the printed bound 1.5678643 is refuted: PASS (rate would be 1.5678506705)
+  check control: without the added set 64768 (still a valid family) N00 = 33979 and the printed 1.5678643 is refuted: PASS (rate would be 1.5678639771)
+  RESULT: ALL CHECKS PASS
+== program B (c49p370_b.py): self-test, then the certificate
+B: check self-test: both joins agree with the definitions on 3000 random small families (sunflower-free 1119, with a sunflower 1881; Sperner 432, with a containment 2568): PASS
+B: VERDICT PASS
+B: check n = 28 points, ports (0, 1), 252303 members, all distinct: PASS (252303 distinct)
+B: check the diagram holds exactly the members: PASS (1059 nodes, widest level 185)
+B: check Sperner (no member a proper subset of another), pair join over the diagram: PASS (17001 states)
+B: check 3-sunflower-free, triple join over the diagram: PASS (965747 states)
+B: port counts N00 N01 N10 N11 = 33980 64728 64728 88867
+B: check members and port counts as PR #370 states (252303; 33980, 64728, 64728, 88867): PASS
+B: check rho = 64728 + sqrt(3019700660): trace 2 * 64728 and discriminant 4 * 3019700660, not a square: PASS
+B: rho^(1/26) in [1.5678643845728069793620, 1.5678643845728069793620 + 1e-22)
+B: check the stated 1.567864384572806979 are the first 18 decimals: PASS
+B: check printed lower bound 1.5678643 <= rho^(1/26) (exact: 1.5678643^26 <= rho): PASS
+B: VERDICT PASS
+== B red control 1: one set planted that makes a 3-sunflower with two members and is comparable with none
+B: CONTROL sunflower2
+B: planted 190160927 with 58494615 and 131502391
+B: check 3-sunflower-free, triple join over the diagram: FAIL (witness (125567, 238751, 190160927))
+B: check members and port counts as PR #370 states (252303; 33980, 64728, 64728, 88867): FAIL
+B: check rho = 64728 + sqrt(3019700660): trace 2 * 64728 and discriminant 4 * 3019700660, not a square: FAIL
+B: check the stated 1.567864384572806979 are the first 18 decimals: FAIL
+B: VERDICT REFUSED
+== B red control 2: a member with one point removed (a proper subset of a member)
+B: CONTROL subset
+B: check Sperner (no member a proper subset of another), pair join over the diagram: FAIL (witness 16579260 < 33356476)
+B: check 3-sunflower-free, triple join over the diagram: FAIL (witness (16579262, 33356476, 16579260))
+B: check members and port counts as PR #370 states (252303; 33980, 64728, 64728, 88867): FAIL
+B: check rho = 64728 + sqrt(3019700660): trace 2 * 64728 and discriminant 4 * 3019700660, not a square: FAIL
+B: check the stated 1.567864384572806979 are the first 18 decimals: FAIL
+B: VERDICT REFUSED
+== B red control 3: the added set 64768 removed (N00 = 33979)
+B: CONTROL drop
+B: check members and port counts as PR #370 states (252303; 33980, 64728, 64728, 88867): FAIL
+B: check rho = 64728 + sqrt(3019700660): trace 2 * 64728 and discriminant 4 * 3019700660, not a square: FAIL
+B: check the stated 1.567864384572806979 are the first 18 decimals: FAIL
+B: check printed lower bound 1.5678643 <= rho^(1/26) (exact: 1.5678643^26 <= rho): FAIL
+B: VERDICT REFUSED
+== B red control 4: the printed bound one unit higher, 1.5678644
+B: CONTROL printed
+B: check printed lower bound 1.5678644 <= rho^(1/26) (exact: 1.5678644^26 <= rho): FAIL
+B: VERDICT REFUSED
+RESULT: ALL CHECKS PASS (A and B: Sperner and 3-sunflower-free, port counts 33980, 64728, 64728, 88867, rho^(1/26) = 1.5678643845728069793620...; every red control refused)
