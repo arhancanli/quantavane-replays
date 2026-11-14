@@ -1,0 +1,169 @@
+== PR #367 (1a), the row in its files: C1_262144_1.5026648332.txt (intervalplace/frontier @ 9edc297)
+A: 1a, n = 262144 heights, scaled by 1 to primitive integers of at most 51 bits
+A: check every height >= 0: PASS
+A: check S = sum a_i > 0: PASS
+A: check c_k summed again term by term at every maximum and at 40 random k: PASS (41 values)
+A: S = 699385371110246821
+A: max_k c_k = 1401926655216272999477461653816 at k = 344084
+A: fingerprint of the whole sequence (mod 2^61-1): 7960829705246376
+A: exact value 735013322210029338350039415555883008/489139897323017668625465543540606041
+A: = 1.5026648331747963041592630510168976994204...
+A: check the exact value equals the stated fraction 735013322210029338350039415555883008/489139897323017668625465543540606041: PASS
+A: check the maximum is attained at the stated index 344084: PASS
+A: check the printed upper bound 1.5026648332 is at least the exact value: PASS (printed - exact = 2.520e-11)
+A: VERDICT PASS
+B: 1a, n = 262144, largest height 51 bits, one 128-bit accumulator
+B: n 262144
+B: fingerprint 7960829705246376
+B: S = 699385371110246821
+B: max_k c_k = 1401926655216272999477461653816 at k = 344084
+B: exact value 735013322210029338350039415555883008/489139897323017668625465543540606041
+B: = 1.5026648331747963041592630510168976994204...
+B: check the exact value equals the stated fraction 735013322210029338350039415555883008/489139897323017668625465543540606041: PASS
+B: check the maximum is attained at the stated index 344084: PASS
+B: check the printed upper bound 1.5026648332 is at least the exact value: PASS (printed - exact = 2.520e-11)
+B: VERDICT PASS
+== PR #367 (1a), the certificate its description and title name: C1_262144_1.5026648336.txt (@ 8c9fa72)
+A: 1a, n = 262144 heights, scaled by 1 to primitive integers of at most 51 bits
+A: check every height >= 0: PASS
+A: check S = sum a_i > 0: PASS
+A: check c_k summed again term by term at every maximum and at 40 random k: PASS (41 values)
+A: S = 699385403727613880
+A: max_k c_k = 1401926786390249811617250433459 at k = 316694
+A: fingerprint of the whole sequence (mod 2^61-1): 534500821892074518
+A: exact value 11484584234108926456768515550896128/7642811608550585358028269349510225
+A: = 1.5026648336144073644888980862581797897701...
+A: check the exact value equals the stated fraction 11484584234108926456768515550896128/7642811608550585358028269349510225: PASS
+A: check the maximum is attained at the stated index 316694: PASS
+A: VERDICT PASS
+B: 1a, n = 262144, largest height 51 bits, one 128-bit accumulator
+B: n 262144
+B: fingerprint 534500821892074518
+B: S = 699385403727613880
+B: max_k c_k = 1401926786390249811617250433459 at k = 316694
+B: exact value 11484584234108926456768515550896128/7642811608550585358028269349510225
+B: = 1.5026648336144073644888980862581797897701...
+B: check the exact value equals the stated fraction 11484584234108926456768515550896128/7642811608550585358028269349510225: PASS
+B: check the maximum is attained at the stated index 316694: PASS
+B: VERDICT PASS
+== [Cum2026] (1a), recorded by PR #367: the ancillary file 49c83eb6...2f2d
+A: 1a, n = 262144 heights, scaled by 10000000000000000000000000000 to primitive integers of at most 102 bits
+A: check every height >= 0: PASS
+A: check S = sum a_i > 0: PASS
+A: check c_k summed again term by term at every maximum and at 40 random k: PASS (41 values)
+A: S = 2621439999999999531874986203906077
+A: max_k c_k = 19695728601020479470081028896616565736884238823715245714000000 at k = 275085
+A: fingerprint of the whole sequence (mod 2^61-1): 673224019464698045
+A: exact value 10326234156771825140409842478149306017059563804408018744901632000000/6871947673599997545676727668735312122788541593125740957532237529929
+A: = 1.5026648407760991290612046881700719407904...
+A: check the exact value truncated to 23 decimals is the stated 1.50266484077609912906120: PASS
+A: check the printed upper bound 1.50266484078 is at least the exact value: PASS (printed - exact = 3.901e-12)
+A: VERDICT PASS
+B: 1a, n = 262144, largest height 102 bits, limbs (count, bits): 2, 51
+B: n 262144
+B: fingerprint 673224019464698045
+B: S = 2621439999999999531874986203906077
+B: max_k c_k = 19695728601020479470081028896616565736884238823715245714000000 at k = 275085
+B: exact value 10326234156771825140409842478149306017059563804408018744901632000000/6871947673599997545676727668735312122788541593125740957532237529929
+B: = 1.5026648407760991290612046881700719407904...
+B: check the exact value truncated to 23 decimals is the stated 1.50266484077609912906120: PASS
+B: check the printed upper bound 1.50266484078 is at least the exact value: PASS (printed - exact = 3.901e-12)
+B: VERDICT PASS
+== PR #368 (1b): C1b_15360_0.3808564712.json (intervalplace/frontier @ 6d6c4ba)
+A: 1b, n = 15360 heights k_i / Q, Q = 1125899906842624
+A: check len(heights_int) = n: PASS
+A: check 0 <= k_i <= Q for every i: PASS
+A: check mass exactly 1: sum k_i = n Q / 2: PASS (sum = 8646911284551352320, nQ/2 = 8646911284551352320)
+A: check Q P_m - R_m summed again term by term at every maximum and at 40 random m: PASS (41 values)
+A: max_m [Q P_m - R_m] = 3707849734734953936493216938911489 at m = 6384
+A: fingerprint of the whole sequence (mod 2^61-1): 124142330083333984
+A: exact value 3707849734734953936493216938911489/9735556609752801803494680617287680
+A: = 0.3808564711154302423886097211528450858928...
+A: check the exact value equals the stated fraction 3707849734734953936493216938911489/9735556609752801803494680617287680: PASS
+A: check the maximum is attained at the stated index 6384: PASS
+A: check the printed upper bound 0.3808564712 is at least the exact value: PASS (printed - exact = 8.457e-11)
+A: VERDICT PASS
+B: check n = number of heights: PASS (15360 heights)
+B: check every k_i in [0, Q]: PASS
+B: check total mass exactly 1 (2 sum k_i = n Q): PASS
+B: 1b, n = 15360, Q = 1125899906842624
+B: n 15360
+B: fingerprint 124142330083333984
+B: max_m v_m = 3707849734734953936493216938911489 at m = 6384
+B: exact value 3707849734734953936493216938911489/9735556609752801803494680617287680
+B: = 0.3808564711154302423886097211528450858928...
+B: check the exact value equals the stated fraction 3707849734734953936493216938911489/9735556609752801803494680617287680: PASS
+B: check the maximum is attained at the stated index 6384: PASS
+B: check the printed upper bound 0.3808564712 is at least the exact value: PASS (printed - exact = 8.457e-11)
+B: VERDICT PASS
+== information: the description's value 1.5026648336 compared with the exact value of its file (not a red control)
+A: check the printed upper bound 1.5026648336 is at least the exact value: FAIL (printed - exact = -1.441e-11)
+A: VERDICT REFUSED
+B: check the printed upper bound 1.5026648336 is at least the exact value: FAIL (printed - exact = -1.441e-11)
+B: VERDICT REFUSED
+== red control 1: PR #367 row, height 1000 plus one unit
+A: CONTROL height 1000 changed by 1 (units of the primitive integer heights)
+A: exact value 183753330552507334587509853888970752/122284974330754417506059071440274921
+A: check the exact value equals the stated fraction 735013322210029338350039415555883008/489139897323017668625465543540606041: FAIL
+A: VERDICT REFUSED
+B: CONTROL height 1000 changed by 1 (units of the primitive integer heights)
+B: exact value 183753330552507334587509853888970752/122284974330754417506059071440274921
+B: check the exact value equals the stated fraction 735013322210029338350039415555883008/489139897323017668625465543540606041: FAIL
+B: VERDICT REFUSED
+== red control 2: PR #367 row, claimed as an upper bound 1.5026648331 (below the exact value)
+A: exact value 735013322210029338350039415555883008/489139897323017668625465543540606041
+A: check the printed upper bound 1.5026648331 is at least the exact value: FAIL (printed - exact = -7.480e-11)
+A: VERDICT REFUSED
+B: exact value 735013322210029338350039415555883008/489139897323017668625465543540606041
+B: check the printed upper bound 1.5026648331 is at least the exact value: FAIL (printed - exact = -7.480e-11)
+B: VERDICT REFUSED
+== red control 3: PR #367 row, height 5 made negative
+A: CONTROL height 5 changed by -2000000000000000 (units of the primitive integer heights)
+A: check every height >= 0: FAIL
+A: VERDICT REFUSED
+B: CONTROL height 5 changed by -2000000000000000 (units of the primitive integer heights)
+B: check every height >= 0: FAIL
+B: VERDICT REFUSED
+== red control 4: [Cum2026], height 1000 plus 10^15 units, against the stated 23 digits
+A: CONTROL height 1000 changed by 1000000000000000 (units of the primitive integer heights)
+A: exact value 10326234156771825140409842478149306017059563804408018744901632000000/6871947673599997550919607668735311187538514000937894957532237529929
+A: check the exact value truncated to 23 decimals is the stated 1.50266484077609912906120: FAIL
+A: VERDICT REFUSED
+B: CONTROL height 1000 changed by 1000000000000000 (units of the primitive integer heights)
+B: exact value 10326234156771825140409842478149306017059563804408018744901632000000/6871947673599997550919607668735311187538514000937894957532237529929
+B: check the exact value truncated to 23 decimals is the stated 1.50266484077609912906120: FAIL
+B: VERDICT REFUSED
+== red control 5: [Cum2026], claimed as an upper bound 1.50266484077 (below the exact value)
+A: exact value 10326234156771825140409842478149306017059563804408018744901632000000/6871947673599997545676727668735312122788541593125740957532237529929
+A: check the printed upper bound 1.50266484077 is at least the exact value: FAIL (printed - exact = -6.099e-12)
+A: VERDICT REFUSED
+B: exact value 10326234156771825140409842478149306017059563804408018744901632000000/6871947673599997545676727668735312122788541593125740957532237529929
+B: check the printed upper bound 1.50266484077 is at least the exact value: FAIL (printed - exact = -6.099e-12)
+B: VERDICT REFUSED
+== red control 6: PR #368, height 2490 (equal to Q) plus one unit
+A: CONTROL height 2490 changed by 1 (units of 1/Q)
+A: check 0 <= k_i <= Q for every i: FAIL
+A: check mass exactly 1: sum k_i = n Q / 2: FAIL (sum = 8646911284551352321, nQ/2 = 8646911284551352320)
+A: exact value 3707849734734953936493216938911489/9735556609752801803494680617287680
+A: VERDICT REFUSED
+B: CONTROL height 2490 changed by 1 (units of 1/Q)
+B: check every k_i in [0, Q]: FAIL
+B: check total mass exactly 1 (2 sum k_i = n Q): FAIL
+B: VERDICT REFUSED
+== red control 7: PR #368, 1000/Q moved from height 11656 to height 5753 (mass unchanged)
+A: CONTROL 1000/Q moved from height 11656 to height 5753 (mass unchanged)
+A: exact value 1235949911578318729431010208053163/3245185536584267267831560205762560
+A: check the exact value equals the stated fraction 3707849734734953936493216938911489/9735556609752801803494680617287680: FAIL
+A: VERDICT REFUSED
+B: CONTROL 1000/Q moved from height 11656 to height 5753 (mass unchanged)
+B: exact value 1235949911578318729431010208053163/3245185536584267267831560205762560
+B: check the exact value equals the stated fraction 3707849734734953936493216938911489/9735556609752801803494680617287680: FAIL
+B: VERDICT REFUSED
+== red control 8: PR #368, claimed as an upper bound 0.3808564711 (below the exact value)
+A: exact value 3707849734734953936493216938911489/9735556609752801803494680617287680
+A: check the printed upper bound 0.3808564711 is at least the exact value: FAIL (printed - exact = -1.543e-11)
+A: VERDICT REFUSED
+B: exact value 3707849734734953936493216938911489/9735556609752801803494680617287680
+B: check the printed upper bound 0.3808564711 is at least the exact value: FAIL (printed - exact = -1.543e-11)
+B: VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs give the same exact value and the same fingerprint of every sequence for all four certificates; eight red controls refused by both; the description's 1.5026648336 is below the exact value of its file, as recorded above)
