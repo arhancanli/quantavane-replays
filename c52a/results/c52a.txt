@@ -1,0 +1,39 @@
+== 52a [FP1983]: program A (c52a_a.py)
+52a program A: [FP1983] r_3 <= 5191/1000 by the first moment
+n = 3, m = 1: 8 formulas, 56 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 56: True
+n = 3, m = 2: 64 formulas, 392 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 392: True
+n = 3, m = 3: 512 formulas, 2744 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 2744: True
+n = 4, m = 1: 32 formulas, 448 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 448: True
+n = 4, m = 2: 1024 formulas, 12544 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 12544: True
+n = 4, m = 3: 32768 formulas, 351232 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 351232: True
+n = 5, m = 1: 80 formulas, 2240 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 2240: True
+n = 5, m = 2: 6400 formulas, 156800 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 156800: True
+2 (7/8)^5191/1000 < 1 (exact integers: 8^5191 > 2^1000 7^5191): True
+information: r1 = log 2/log(8/7) > 5.19 (8^519 < 2^100 7^519): True; r1 < 5.191 iff 7^5191 < 2^14573: True
+row [FP1983] r_3 <= 5191/1000: True
+VERDICT PASS
+== program B (c52a_b.py)
+52a program B: [FP1983] r_3 <= 5.191
+n = 3: every assignment satisfies a fraction 7/8 of the clauses: True
+n = 4: every assignment satisfies a fraction 7/8 of the clauses: True
+n = 5: every assignment satisfies a fraction 7/8 of the clauses: True
+n = 6: every assignment satisfies a fraction 7/8 of the clauses: True
+n = 7: every assignment satisfies a fraction 7/8 of the clauses: True
+n = 8: every assignment satisfies a fraction 7/8 of the clauses: True
+n = 9: every assignment satisfies a fraction 7/8 of the clauses: True
+r1 = log 2 / log(8/7) in [5.190893069684431605908332214398937207099, 5.190893069684431605908332214398937207109]
+row [FP1983] r_3 <= r1 <= 5.191: True
+VERDICT PASS
+== red control 1: the bound claimed as 5.190
+2 (7/8)^519/100 < 1 (exact integers: 8^519 > 2^100 7^519): False
+VERDICT REFUSED: 2 (7/8)^519/100 >= 1
+row [FP1983] r_3 <= r1 <= 5.190: False
+VERDICT REFUSED: r1 is not below 5.190
+== red control 2: clauses on two variables (each satisfied with probability 3/4)
+CONTROL: clause model two-literal
+n = 3, m = 1: 12 formulas, 72 (formula, satisfying assignment) pairs; (8 C(n,3))^m 2^n (7/8)^m = 84: False
+VERDICT REFUSED: E[#satisfying assignments] is not 2^n (7/8)^m in this model
+CONTROL: clause model two-literal
+n = 3: every assignment satisfies a fraction 3/4 of the clauses: False
+VERDICT REFUSED: the probability that a random clause is satisfied is not 7/8
+RESULT: ALL CHECKS PASS (both programs: E[#satisfying assignments] = 2^n (7/8)^m in the page's model, r1 = log 2/log(8/7) = 5.1908930696... < 5.191; two red controls refused by both)

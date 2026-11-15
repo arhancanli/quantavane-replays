@@ -1,0 +1,101 @@
+== 83a: the search step (c83a_search.py, floating search, not part of the proof) run again
+collocation eigenvalue estimate: 0.303663002898732659110307270341590023957497985484968929021051
+grid ratio min 0.303663002898732638421525408731781611455373936198310656796128 max 0.303663002898732676744787751587663728165852230471964200606664
+psi(0), psi(1/2), psi(1): 3.01942975116407681890557182513568079684773692861199378967285 1.62214088906623007384652702494768705345938239470449104828731 0.99999999999999999989157978275144955659925471991300582885742
+max |coefficient|: 4.434117081163577
+written psi_again.json claims 0.303663002898732 0.303663002898733
+psi.json reproduced byte for byte: True
+== program A (c83a_a.py)
+83a program A: psi of degree 18, claimed 0.303663002898732 <= |lambda_2| <= 0.303663002898733
+self-test partial fractions: True
+self-test zeta(2) = pi^2/6: True ; zeta(3) = Apery: True ; zeta(5, a) - zeta(5, a+1) = a^-5: True
+self-test closed form = direct sum at x = 0.37: True (0.569811323481236 vs 0.569811323481237)
+closed form: zeta(i, X) terms for i = 2..21, Laurent terms X^-p for p = 0..21; max |R_i| coefficient 1.848e+01
+cells: 32 of width 1/32, Taylor order 25
+psi > 0 on [0,1]: True (least cell bound 9.997236e-01 at x = 63/64)
+V psi - 0.303663002898732 psi >= 0 on [0,1]: True (least cell bound 5.268819e-16 at x = 63/64)
+0.303663002898733 psi - V psi >= 0 on [0,1]: True (least cell bound 1.926797e-16 at x = 63/64)
+PROVED: 0.303663002898732 <= |lambda_2| <= 0.303663002898733
+row [Schweiger1980] C_83 <= 2/(3 + sqrt 5) = 0.381966...: True
+row [MR1987] C_83 <= 0.30366327: True
+row [MR1987] C_83 >= 0.30366299: True
+information: the 175-digit centre of [GKW2026] (first 50 digits) lies in [lo, hi]: True
+VERDICT PASS
+== program B (c83a_b.py)
+83a program B: psi of degree 18, claimed 0.303663002898732 <= |lambda_2| <= 0.303663002898733
+self-test zeta(2) = pi^2/6, zeta(4) = pi^4/90 (pi by Machin): True; eta(1) = ln 2: True
+self-test (T phi)'(0.3) = -V psi(0.3), T summed directly: True (0.6188707900 vs 0.6188707878)
+series in w to w^150, Cauchy bound M = 8.139e+07 on |w| = 6/5; global Taylor polynomial in t of degree 201; uniform remainder 1.041e-30
+cells: 32 of width 1/32
+psi > 0 on [0,1]: True (least cell bound 9.997236e-01 on the cell at x = 63/64)
+V psi - 0.303663002898732 psi >= 0 on [0,1]: True (least cell bound 5.268819e-16 on the cell at x = 63/64)
+0.303663002898733 psi - V psi >= 0 on [0,1]: True (least cell bound 1.926797e-16 on the cell at x = 63/64)
+PROVED: 0.303663002898732 <= |lambda_2| <= 0.303663002898733
+row [Schweiger1980] C_83 <= 2/(3 + sqrt 5) = 0.381966...: True
+row [MR1987] C_83 <= 0.30366327: True
+row [MR1987] C_83 >= 0.30366299: True
+information: the 175-digit centre of [GKW2026] (first 50 digits) lies in [lo, hi]: True
+VERDICT PASS
+== red control 1: the lower bound claimed as 0.303663002898733
+V psi - 0.303663002898733 psi >= 0 on [0,1]: False (least cell bound -1.403426e-15 at x = 1/64)
+0.303663002898733 psi - V psi >= 0 on [0,1]: True (least cell bound 1.926797e-16 at x = 63/64)
+  the inequality FAILS at x = 1/64: value in [-1.004204e-15, -1.004204e-15]
+  the inequality FAILS at x = 3/64: value in [-9.823709e-16, -9.823709e-16]
+  the inequality FAILS at x = 5/64: value in [-9.321912e-16, -9.321912e-16]
+VERDICT REFUSED: the claimed bounds are not proved
+V psi - 0.303663002898733 psi >= 0 on [0,1]: False (least cell bound -1.403426e-15 on the cell at x = 1/64)
+  the inequality FAILS at x = 1/64: value in [-1.004204e-15, -1.004204e-15]
+  the inequality FAILS at x = 3/64: value in [-9.823709e-16, -9.823709e-16]
+  the inequality FAILS at x = 5/64: value in [-9.321912e-16, -9.321912e-16]
+0.303663002898733 psi - V psi >= 0 on [0,1]: True (least cell bound 1.926797e-16 on the cell at x = 63/64)
+VERDICT REFUSED: the claimed bounds are not proved
+== red control 2: the upper bound claimed as 0.303663002898732
+V psi - 0.303663002898732 psi >= 0 on [0,1]: True (least cell bound 5.268819e-16 at x = 63/64)
+0.303663002898732 psi - V psi >= 0 on [0,1]: False (least cell bound -2.281633e-15 at x = 1/64)
+  the inequality FAILS at x = 1/64: value in [-1.948804e-15, -1.948804e-15]
+  the inequality FAILS at x = 3/64: value in [-1.843946e-15, -1.843946e-15]
+  the inequality FAILS at x = 5/64: value in [-1.775105e-15, -1.775105e-15]
+VERDICT REFUSED: the claimed bounds are not proved
+V psi - 0.303663002898732 psi >= 0 on [0,1]: True (least cell bound 5.268819e-16 on the cell at x = 63/64)
+0.303663002898732 psi - V psi >= 0 on [0,1]: False (least cell bound -2.281633e-15 on the cell at x = 1/64)
+  the inequality FAILS at x = 1/64: value in [-1.948804e-15, -1.948804e-15]
+  the inequality FAILS at x = 3/64: value in [-1.843946e-15, -1.843946e-15]
+  the inequality FAILS at x = 5/64: value in [-1.775105e-15, -1.775105e-15]
+VERDICT REFUSED: the claimed bounds are not proved
+== red control 3: coefficient 9 of psi changed by 2^-30
+CONTROL: coefficient 9 of psi changed by 1/1073741824
+V psi - 0.303663002898732 psi >= 0 on [0,1]: False (least cell bound -2.826450e-10 at x = 63/64)
+0.303663002898733 psi - V psi >= 0 on [0,1]: False (least cell bound -4.890170e-10 at x = 1/64)
+  not proved on the cell at x = 37/64 (value at the centre in [5.009741e-13, 5.009741e-13])
+  the inequality FAILS at x = 39/64: value in [-1.251738e-12, -1.251738e-12]
+  the inequality FAILS at x = 41/64: value in [-3.518812e-12, -3.518812e-12]
+  the inequality FAILS at x = 1/64: value in [-4.093019e-10, -4.093019e-10]
+  the inequality FAILS at x = 3/64: value in [-2.890106e-10, -2.890106e-10]
+  the inequality FAILS at x = 5/64: value in [-2.061276e-10, -2.061276e-10]
+VERDICT REFUSED: the claimed bounds are not proved
+CONTROL: coefficient 9 of psi changed by 1/1073741824
+V psi - 0.303663002898732 psi >= 0 on [0,1]: False (least cell bound -2.826450e-10 on the cell at x = 63/64)
+  not proved on the cell at x = 37/64
+  the inequality FAILS at x = 39/64: value in [-1.251738e-12, -1.251738e-12]
+  the inequality FAILS at x = 41/64: value in [-3.518812e-12, -3.518812e-12]
+0.303663002898733 psi - V psi >= 0 on [0,1]: False (least cell bound -4.890170e-10 on the cell at x = 1/64)
+  the inequality FAILS at x = 1/64: value in [-4.093019e-10, -4.093019e-10]
+  the inequality FAILS at x = 3/64: value in [-2.890106e-10, -2.890106e-10]
+  the inequality FAILS at x = 5/64: value in [-2.061276e-10, -2.061276e-10]
+VERDICT REFUSED: the claimed bounds are not proved
+== red control 4: the point term of V with (x+k)^2 in place of (x+k)^3
+CONTROL: operator variant wrong-weight (the point term with (x+k)^2 in place of (x+k)^3)
+V psi - 0.303663002898732 psi >= 0 on [0,1]: True (least cell bound 1.697525e-01 at x = 1/64)
+0.303663002898733 psi - V psi >= 0 on [0,1]: False (least cell bound -3.396020e-01 at x = 61/64)
+  the inequality FAILS at x = 1/64: value in [-1.786464e-01, -1.786464e-01]
+  the inequality FAILS at x = 3/64: value in [-1.952108e-01, -1.952108e-01]
+  the inequality FAILS at x = 5/64: value in [-2.102680e-01, -2.102680e-01]
+VERDICT REFUSED: the claimed bounds are not proved
+CONTROL: operator variant wrong-weight (the point term with (x+k)^2 in place of (x+k)^3)
+V psi - 0.303663002898732 psi >= 0 on [0,1]: True (least cell bound 1.697525e-01 on the cell at x = 1/64)
+0.303663002898733 psi - V psi >= 0 on [0,1]: False (least cell bound -3.396020e-01 on the cell at x = 61/64)
+  the inequality FAILS at x = 1/64: value in [-1.786464e-01, -1.786464e-01]
+  the inequality FAILS at x = 3/64: value in [-1.952108e-01, -1.952108e-01]
+  the inequality FAILS at x = 5/64: value in [-2.102680e-01, -2.102680e-01]
+VERDICT REFUSED: the claimed bounds are not proved
+RESULT: ALL CHECKS PASS (both programs: psi > 0 and 0.303663002898732 psi <= V psi <= 0.303663002898733 psi on [0, 1], so 0.303663002898732 <= C_83 <= 0.303663002898733: [Schweiger1980] 0.38197 and [MR1987] 0.30366299, 0.30366327 hold; four red controls refused by both)
