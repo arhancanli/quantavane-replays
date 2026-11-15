@@ -1,0 +1,52 @@
+== program A (c57ab_a.py)
+57a/57b program A (Stirling)
+self-test Gamma(1/2)^2 = pi, Gamma(1) = 1: True; Gamma(1/6) = 2^(-1/3) (3/pi)^(1/2) Gamma(1/3)^2: True
+Gamma(1/6) = 5.566316001780235204250096895207...
+Gamma(1/4) = 3.625609908221908311930685155867...
+Gamma(1/3) = 2.678938534707747633655692940974...
+Gamma(5/6) = 1.128787029908125961260901090258...
+Gamma(11/12) = 1.055546564813466302313701484734...
+row 57a [AG1937] Gamma(1/3) Gamma(11/12)/(sqrt(1 + sqrt 3) Gamma(1/4)) = 0.471861653452681784874468793611...: ~ 0.4719: True
+row 57b [Rad1943] Gamma(1/3) Gamma(5/6)/Gamma(1/6) = 0.543258965342976706952728295300...: ~ 0.5433: True
+VERDICT PASS
+== program B (c57ab_b.py)
+57a/57b program B (incomplete gamma series)
+self-test Gamma(1/2)^2 = pi: True; Gamma(1/12) Gamma(11/12) = pi/sin(pi/12): True
+Gamma(1/12) = 11.49942818607399066388560985243...
+Gamma(1/6) = 5.566316001780235204250096895207...
+Gamma(1/4) = 3.625609908221908311930685155867...
+Gamma(1/3) = 2.678938534707747633655692940974...
+Gamma(5/6) = 1.128787029908125961260901090258...
+Gamma(11/12) = 1.055546564813466302313701484734...
+row 57a [AG1937] = 0.471861653452681784874468793611...: ~ 0.4719: True
+row 57b [Rad1943] = 0.543258965342976706952728295300...: ~ 0.5433: True
+VERDICT PASS
+== red control 1: the Ahlfors-Grunsky form without 1/sqrt(1 + sqrt 3)
+CONTROL: variant ag-no-factor
+row 57a [AG1937] Gamma(1/3) Gamma(11/12)/(sqrt(1 + sqrt 3) Gamma(1/4)) = 0.779936187079757301940347234959...: ~ 0.4719: False
+row 57b [Rad1943] Gamma(1/3) Gamma(5/6)/Gamma(1/6) = 0.543258965342976706952728295300...: ~ 0.5433: True
+VERDICT REFUSED: a printed value does not match
+CONTROL: variant ag-no-factor
+row 57a [AG1937] = 0.779936187079757301940347234959...: ~ 0.4719: False
+row 57b [Rad1943] = 0.543258965342976706952728295300...: ~ 0.5433: True
+VERDICT REFUSED: a printed value does not match
+== red control 2: Rademacher's form with Gamma(1/6) and Gamma(5/6) swapped
+CONTROL: variant rad-swapped
+row 57a [AG1937] Gamma(1/3) Gamma(11/12)/(sqrt(1 + sqrt 3) Gamma(1/4)) = 0.471861653452681784874468793611...: ~ 0.4719: True
+row 57b [Rad1943] Gamma(1/3) Gamma(5/6)/Gamma(1/6) = 13.210479956297098677644846631038...: ~ 0.5433: False
+VERDICT REFUSED: a printed value does not match
+CONTROL: variant rad-swapped
+row 57a [AG1937] = 0.471861653452681784874468793611...: ~ 0.4719: True
+row 57b [Rad1943] = 13.21047995629709867764484663103...: ~ 0.5433: False
+VERDICT REFUSED: a printed value does not match
+== red control 3: the Ahlfors-Grunsky value printed as 0.4718
+row 57a [AG1937] Gamma(1/3) Gamma(11/12)/(sqrt(1 + sqrt 3) Gamma(1/4)) = 0.471861653452681784874468793611...: ~ 0.4718: False
+row 57b [Rad1943] Gamma(1/3) Gamma(5/6)/Gamma(1/6) = 0.543258965342976706952728295300...: ~ 0.5433: True
+VERDICT REFUSED: a printed value does not match
+row 57a [AG1937] = 0.471861653452681784874468793611...: ~ 0.4718: False
+row 57b [Rad1943] = 0.543258965342976706952728295300...: ~ 0.5433: True
+VERDICT REFUSED: a printed value does not match
+== agreement: the first 20 digits of every value, A against B
+0.47186165345268178487 0.54325896534297670695 1.05554656481346630231 1.12878702990812596126 2.67893853470774763365 3.62560990822190831193 5.56631600178023520425 
+agreement: True
+RESULT: ALL CHECKS PASS (both programs: Gamma(1/3), Gamma(1/4), Gamma(11/12), Gamma(5/6), Gamma(1/6) and both rows agree to 20 digits; [AG1937] = 0.47186165345268178487... ~ 0.4719, [Rad1943] = 0.54325896534297670695... ~ 0.5433; three red controls refused by both)

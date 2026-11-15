@@ -1,0 +1,28 @@
+== program A (c32a_a.py)
+32a program A
+self-test log 2, log 10: True
+sum 2^(-k-1) k log2 k in [1.2885312757793885296564440, 1.2885312757793885296564440]
+log2 log2 e in [0.5287663729448975891145324, 0.5287663729448975891145324]
+row [Li25] = 0.759764902834490907297189353463...: ~ 0.76: True
+VERDICT PASS
+== program B (c32a_b.py)
+32a program B
+value in [0.7597649028344909072971893534, 0.7597649028344909072971893534]
+row [Li25] ~ 0.76: True
+VERDICT PASS
+== red control 1: 2^(-k) in place of 2^(-k-1)
+CONTROL: 2^(-k) in place of 2^(-k-1)
+row [Li25] = 2.048296178613879428841876486706...: ~ 0.76: False
+VERDICT REFUSED: the printed value does not match
+CONTROL: 2^(-k) in place of 2^(-k-1)
+row [Li25] ~ 0.76: False
+VERDICT REFUSED: the printed value does not match
+== red control 2: the value printed as 0.75
+row [Li25] = 0.759764902834490907297189353463...: ~ 0.75: False
+VERDICT REFUSED: the printed value does not match
+row [Li25] ~ 0.75: False
+VERDICT REFUSED: the printed value does not match
+== agreement: the first 20 digits of every value, A against B
+0.75976490283449090729 
+agreement: True
+RESULT: ALL CHECKS PASS (both programs: 0.75976490283449090729718935... ~ 0.76; two red controls refused by both)

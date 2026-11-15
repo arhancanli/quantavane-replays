@@ -1,0 +1,62 @@
+== program A (c10a_a.py)
+10a program A
+self-test pi, Psi(1), e, log 2: True
+H(0) in [-0.363380227632, -0.363380227632]; H(1) in [0.599578310371, 0.599578310371]
+C* in [0.255730213166210014361869933728, 0.255730213166210014361869933728]
+information: lambda* = 2 C* phi(C*) = 0.197479090994
+K_DR = (pi/2) exp(C*^2) in [1.676956674215576237077855078853, 1.676956674215576237077855078853]
+row [Dav1984], [Ree1991]: K_DR ~ 1.67696: True
+row [G1953] upper, sinh(pi/2) = 2.3012989023072948734630400...: ~ 2.30130: True
+row [G1953] lower, pi/2 = 1.5707963267948966192313216...: ~ 1.57080: True
+row [K1979] pi/(2 log(1 + sqrt 2)) = 1.7822139781913691117744134...: ~ 1.782214: True
+row [SLXCKKM26] 6 pi/11 = 1.7135959928671599482523509...: ~ 1.71360: True
+VERDICT PASS
+== program B (c10a_b.py)
+10a program B
+self-test Phi(1), pi: True
+H(0) in [-0.363380227632, -0.363380227632]; H(1) in [0.599578310371, 0.599578310371]
+C* in [0.25573021316621001436186993372833, 0.25573021316621001436186993372833]
+K_DR = 1/R(C*) in [1.67695667421557623707785507885304, 1.67695667421557623707785507885304]
+row [Dav1984], [Ree1991]: K_DR ~ 1.67696: True
+row [G1953] upper, sinh(pi/2) = 2.3012989023072948734630400...: ~ 2.30130: True
+row [G1953] lower, pi/2 = 1.5707963267948966192313216...: ~ 1.57080: True
+row [K1979] pi/(2 log(1 + sqrt 2)) = 1.7822139781913691117744134...: ~ 1.782214: True
+row [SLXCKKM26] 6 pi/11 = 1.7135959928671599482523509...: ~ 1.71360: True
+VERDICT PASS
+== red control 1: K_DR printed as 1.67695
+row [Dav1984], [Ree1991]: K_DR ~ 1.67695: False
+row [G1953] upper, sinh(pi/2) = 2.3012989023072948734630400...: ~ 2.30130: True
+row [G1953] lower, pi/2 = 1.5707963267948966192313216...: ~ 1.57080: True
+row [K1979] pi/(2 log(1 + sqrt 2)) = 1.7822139781913691117744134...: ~ 1.782214: True
+row [SLXCKKM26] 6 pi/11 = 1.7135959928671599482523509...: ~ 1.71360: True
+VERDICT REFUSED: a printed value does not match
+row [Dav1984], [Ree1991]: K_DR ~ 1.67695: False
+row [G1953] upper, sinh(pi/2) = 2.3012989023072948734630400...: ~ 2.30130: True
+row [G1953] lower, pi/2 = 1.5707963267948966192313216...: ~ 1.57080: True
+row [K1979] pi/(2 log(1 + sqrt 2)) = 1.7822139781913691117744134...: ~ 1.782214: True
+row [SLXCKKM26] 6 pi/11 = 1.7135959928671599482523509...: ~ 1.71360: True
+VERDICT REFUSED: a printed value does not match
+== red control 2: Phi(C) in place of Phi(-C) in the equation for C*
+CONTROL: H with Phi(C) in place of Phi(-C)
+no sign change of H on [0, 1]
+VERDICT REFUSED: C* not found
+CONTROL: H with Phi(C) in place of Phi(-C)
+no sign change of H on [0, 1]
+VERDICT REFUSED: C* not found
+== red control 3: sinh(pi/2) printed as 2.30131
+row [Dav1984], [Ree1991]: K_DR ~ 1.67696: True
+row [G1953] upper, sinh(pi/2) = 2.3012989023072948734630400...: ~ 2.30131: False
+row [G1953] lower, pi/2 = 1.5707963267948966192313216...: ~ 1.57080: True
+row [K1979] pi/(2 log(1 + sqrt 2)) = 1.7822139781913691117744134...: ~ 1.782214: True
+row [SLXCKKM26] 6 pi/11 = 1.7135959928671599482523509...: ~ 1.71360: True
+VERDICT REFUSED: a printed value does not match
+row [Dav1984], [Ree1991]: K_DR ~ 1.67696: True
+row [G1953] upper, sinh(pi/2) = 2.3012989023072948734630400...: ~ 2.30131: False
+row [G1953] lower, pi/2 = 1.5707963267948966192313216...: ~ 1.57080: True
+row [K1979] pi/(2 log(1 + sqrt 2)) = 1.7822139781913691117744134...: ~ 1.782214: True
+row [SLXCKKM26] 6 pi/11 = 1.7135959928671599482523509...: ~ 1.71360: True
+VERDICT REFUSED: a printed value does not match
+== agreement: the first 20 digits of every value, A against B
+1.57079632679489661923 1.67695667421557623707 1.67695667421557623707 1.71359599286715994825 1.78221397819136911177 2.30129890230729487346 
+agreement: True
+RESULT: ALL CHECKS PASS (both programs: C* = 0.2557302131662100143618..., K_DR = 1.6769566742155762370778... ~ 1.67696; sinh(pi/2), pi/2, Krivine and 6 pi/11 round to the page's decimals; three red controls refused by both)
