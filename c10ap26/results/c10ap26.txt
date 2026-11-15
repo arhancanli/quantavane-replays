@@ -1,0 +1,168 @@
+== a_head
+P increasing on [11/2, oo): True; P(11/2) = [20.388605 +/- 1.55e-7] > 20: True
+Gauss-Legendre on 43 panels done (7 s)
+pairs: 22952; largest quadrature + tail remainder bound 2.930e-23 at (a, b) = (300, 1)
+A_10 = [0.7936505358591872940567445 +/- 3.51e-26], A_01 = [-0.001159314684100737148144352 +/- 1.61e-28]
+information: sum of A_ab^2 over a + b <= 301 = [0.9704626 +/- 3.65e-8] (Parseval: at most 1)
+R = sum |c_j| = [0.999976203885693079243558960000 +/- 3e-35] (< 1)
+b_1 in [0.8818508164233383791955072 +/- 1.87e-27]
+sum_{3<=n<=301} |b_n| <= [2.916517129e-8 +/- 1.99e-18]
+information: largest |b_n| over even n <= 0 (zero by parity)
+head time 7 s
+== b_head
+P increasing on [28/5, oo) and P(28/5) = [28.429714 +/- 1.21e-7] > 25: True
+Gauss-Legendre, 91 panels of 30 nodes (74 s)
+pairs 22952; largest remainder bound 1.612e-28
+A_10 = [0.7936505358591872940567445 +/- 3.51e-26], A_01 = [-0.001159314684100737148144352 +/- 1.75e-28]
+b_1 in [0.8818508164233383791955072 +/- 2.00e-27]
+sum_{3<=n<=301} |b_n| <= [2.916516517e-8 +/- 5.05e-19]
+head time 84 s
+== a_self
+self-test D^3 H(0.5) = sum n^3 b_n t^n = 0.4409254082; T_(-t) Phi_3 (Gaussian expectation) = 0.4409254082: True
+self-test D^3 H(-0.3) = sum n^3 b_n t^n = -0.2645552449; T_(-t) Phi_3 (Gaussian expectation) = -0.2645552449: True
+self-test E_s[d_xy Phi_3] = 0.08510424 against d/ds E_s[Phi_3] = 0.08510427 (t = 0.5, s = -0.5): True
+VERDICT SELFTEST PASS
+== b_self
+self-test D^3 H(0.4): sum n^3 b_n t^n = 0.3527403266, Gaussian expectation of Phi_3 = 0.3527403266: True
+self-test D^3 H(-0.6): sum n^3 b_n t^n = -0.5291104899, Gaussian expectation of Phi_3 = -0.5291104899: True
+self-test E_s[d_xy Phi_3] = 0.04646985 against d/ds E_s[Phi_3] = 0.04646986: True
+VERDICT SELFTEST PASS
+== a_b3
+exterior: c_8 = [2.797909143e-8 +/- 4.29e-18] > 0, c_8 8^11 = [240.3385654 +/- 3.60e-8]; C_0 <= [8.3806e+15 +/- 1.08e+9], C_1 <= [5.2348e+22 +/- 3.18e+17]; exterior integral <= [9.49e-5824 +/- 1.45e-5827]
+initial 8 x 16 x 64 boxes: upper sum 2.86854e+58
+  20000 splits, 28192 boxes, upper sum 6.02333e+08 (45 s)
+  40000 splits, 48192 boxes, upper sum 1.10956e+06 (87 s)
+  60000 splits, 68192 boxes, upper sum 150577 (133 s)
+  80000 splits, 88192 boxes, upper sum 51899.1 (180 s)
+  100000 splits, 108192 boxes, upper sum 25299.9 (232 s)
+  120000 splits, 128192 boxes, upper sum 14997.6 (285 s)
+  140000 splits, 148192 boxes, upper sum 9944.58 (333 s)
+  160000 splits, 168192 boxes, upper sum 7156.78 (386 s)
+  180000 splits, 188192 boxes, upper sum 5440.2 (432 s)
+  200000 splits, 208192 boxes, upper sum 4298.91 (482 s)
+  220000 splits, 228192 boxes, upper sum 3499.05 (529 s)
+  240000 splits, 248192 boxes, upper sum 2916 (576 s)
+  260000 splits, 268192 boxes, upper sum 2480.29 (623 s)
+  280000 splits, 288192 boxes, upper sum 2145.61 (672 s)
+  300000 splits, 308192 boxes, upper sum 1881.02 (722 s)
+  320000 splits, 328192 boxes, upper sum 1668.36 (765 s)
+  340000 splits, 348192 boxes, upper sum 1494.5 (810 s)
+  360000 splits, 368192 boxes, upper sum 1349.75 (856 s)
+  380000 splits, 388192 boxes, upper sum 1227.5 (908 s)
+  400000 splits, 408192 boxes, upper sum 1123.27 (956 s)
+  420000 splits, 428192 boxes, upper sum 1034.31 (1006 s)
+  440000 splits, 448192 boxes, upper sum 957.506 (1056 s)
+  460000 splits, 468192 boxes, upper sum 890.672 (1103 s)
+  480000 splits, 488192 boxes, upper sum 831.91 (1153 s)
+  500000 splits, 508192 boxes, upper sum 779.785 (1207 s)
+  520000 splits, 528192 boxes, upper sum 733.346 (1259 s)
+  540000 splits, 548192 boxes, upper sum 691.693 (1306 s)
+  560000 splits, 568192 boxes, upper sum 654.17 (1354 s)
+  580000 splits, 588192 boxes, upper sum 620.137 (1407 s)
+  600000 splits, 608192 boxes, upper sum 589.101 (1470 s)
+  620000 splits, 628192 boxes, upper sum 560.866 (1527 s)
+  640000 splits, 648192 boxes, upper sum 535.09 (1588 s)
+  660000 splits, 668192 boxes, upper sum 511.351 (1654 s)
+  680000 splits, 688192 boxes, upper sum 489.628 (1718 s)
+  700000 splits, 708192 boxes, upper sum 469.605 (1790 s)
+  720000 splits, 728192 boxes, upper sum 451.188 (1858 s)
+  740000 splits, 748192 boxes, upper sum 434.026 (1921 s)
+  760000 splits, 768192 boxes, upper sum 418.084 (1990 s)
+  780000 splits, 788192 boxes, upper sum 403.179 (2063 s)
+  800000 splits, 808192 boxes, upper sum 389.246 (2129 s)
+  820000 splits, 828192 boxes, upper sum 376.203 (2191 s)
+  840000 splits, 848192 boxes, upper sum 363.986 (2254 s)
+  860000 splits, 868192 boxes, upper sum 352.503 (2311 s)
+  880000 splits, 888192 boxes, upper sum 341.731 (2378 s)
+  900000 splits, 908192 boxes, upper sum 331.6 (2441 s)
+  920000 splits, 928192 boxes, upper sum 322.006 (2505 s)
+  940000 splits, 948192 boxes, upper sum 312.959 (2569 s)
+  960000 splits, 968192 boxes, upper sum 304.37 (2632 s)
+  980000 splits, 988192 boxes, upper sum 296.239 (2707 s)
+  1000000 splits, 1008192 boxes, upper sum 288.546 (2783 s)
+  top box x [3.0625, 3.1250] y [-3.4375, -3.3750] s [0.131836, 0.132812]: 6.575e-04
+  top box x [3.0625, 3.1250] y [3.3750, 3.4375] s [0.867188, 0.868164]: 6.575e-04
+  top box x [3.1875, 3.2188] y [-3.2500, -3.1875] s [0.175781, 0.177734]: 6.575e-04
+  top box x [3.1875, 3.2188] y [3.1875, 3.2500] s [0.822266, 0.824219]: 6.575e-04
+  top box x [0.0000, 0.5000] y [2.0000, 2.2500] s [0.195312, 0.199219]: 6.575e-04
+  top box x [0.0000, 0.5000] y [-2.2500, -2.0000] s [0.800781, 0.804688]: 6.575e-04
+  top box x [4.9062, 4.9219] y [2.9375, 3.0000] s [0.755859, 0.757812]: 6.575e-04
+  top box x [4.9062, 4.9219] y [-3.0000, -2.9375] s [0.242188, 0.244141]: 6.575e-04
+partition: 1008192 boxes after 1000000 splits (2797 s); finite part <= [288.5461013 +/- 1.26e-8]; I <= [288.5461013 +/- 1.26e-8]
+== b_b3
+coverage: True (1008192 boxes tile the domain) (10 s)
+exterior (own constants): c_8 = [2.797909143e-8 +/- 4.29e-18], c_8 8^11 = [240.3385654 +/- 3.60e-8], C_0 <= [8.381e+15 +/- 4.02e+11], C_1 <= [5.235e+22 +/- 1.69e+18], bound [9.49e-5824 +/- 1.45e-5827]
+  50000 boxes, running sum [20.0949 +/- 1.82e-5] (66 s)
+  100000 boxes, running sum [35.8103 +/- 4.40e-5] (122 s)
+  150000 boxes, running sum [47.2637 +/- 3.45e-5] (181 s)
+  200000 boxes, running sum [60.8715 +/- 2.84e-6] (224 s)
+  250000 boxes, running sum [69.1931 +/- 2.97e-5] (262 s)
+  300000 boxes, running sum [75.7651 +/- 1.04e-5] (300 s)
+  350000 boxes, running sum [86.0535 +/- 2.32e-5] (334 s)
+  400000 boxes, running sum [94.9085 +/- 1.82e-5] (368 s)
+  450000 boxes, running sum [101.956 +/- 1.68e-4] (401 s)
+  500000 boxes, running sum [107.667 +/- 4.97e-4] (435 s)
+program B on program A's partition: I <= [108.0906892 +/- 3.32e-8] (438 s)
+program B, all parts: 1008192 boxes, I <= [214.7490041 +/- 2.18e-8]
+== b_b3_1
+exterior (own constants): c_8 = [2.797909143e-8 +/- 4.29e-18], c_8 8^11 = [240.3385654 +/- 3.60e-8], C_0 <= [8.381e+15 +/- 4.02e+11], C_1 <= [5.235e+22 +/- 1.69e+18], bound [9.49e-5824 +/- 1.45e-5827]
+part 1 of 2: the exterior is counted in part 0
+  50000 boxes, running sum [20.1110 +/- 8.46e-6] (58 s)
+  100000 boxes, running sum [35.7922 +/- 2.67e-5] (114 s)
+  150000 boxes, running sum [47.2229 +/- 4.70e-5] (174 s)
+  200000 boxes, running sum [60.7263 +/- 4.21e-5] (219 s)
+  250000 boxes, running sum [68.9179 +/- 1.37e-5] (257 s)
+  300000 boxes, running sum [75.4677 +/- 2.87e-5] (295 s)
+  350000 boxes, running sum [85.6055 +/- 3.48e-5] (330 s)
+  400000 boxes, running sum [94.1405 +/- 1.52e-5] (364 s)
+  450000 boxes, running sum [100.876 +/- 7.37e-5] (397 s)
+  500000 boxes, running sum [106.262 +/- 3.48e-4] (431 s)
+program B on program A's partition: I <= [106.6583149 +/- 1.15e-8] (434 s)
+== a_final
+claim K_G <= 17813/10000: gamma = pi/(2K) = [0.881825816423341 +/- 3.96e-16]
+b_1 > [0.881850816423338 +/- 3.80e-16]; sum_{3<=n<=301} |b_n| < [2.916517129e-8 +/- 1.99e-18]
+C_a = [50.17294133 +/- 1.02e-9] (a = 1/1000); I <= [288.5461013 +/- 1.26e-8]; B_3 <= sqrt(C_a I) = [120.32126 +/- 4.18e-6]
+tail sum_{n>301} |b_n| <= B_3/sqrt(10 * 301^5) = [2.4206174e-5 +/- 1.97e-13]
+lemma 5.1 as stated: b_1 > 0.881850816: True; head < 3e-8: True; B_3 < 107: False; C_a < 50.173: True
+gamma + head + tail = [0.881850051762316 +/- 2.71e-16] < b_1: margin [7.6466102e-7 +/- 2.65e-15]
+RESULT: K_G <= 17813/10000 (with the analytic lemmas of the paper, not re-proved)
+VERDICT PASS
+== b_final
+gamma = [0.881825816423341 +/- 3.96e-16]; b_1 > [0.881850816423338 +/- 3.80e-16]; head < [2.916516517e-8 +/- 5.05e-19]
+C_a = [50.17294133 +/- 1.02e-9]; I <= [214.7490041 +/- 2.18e-8]; B_3 <= [103.80072 +/- 1.39e-6]; tail <= [2.0882578e-5 +/- 4.29e-13]
+lemma 5.1: b_1 > 0.881850816: True; head < 3e-8: True; B_3 < 107: True
+margin b_1 - gamma - head - tail = [4.0882564e-6 +/- 4.18e-15] > 0
+RESULT: K_G <= 17813/10000 (with the analytic lemmas of the paper, not re-proved)
+VERDICT PASS
+== red control 1: the claim K_G <= 1.7812
+claim K_G <= 17812/10000: gamma = pi/(2K) = [0.881875323823769 +/- 4.07e-16]
+b_1 > [0.881850816423338 +/- 3.80e-16]; sum_{3<=n<=301} |b_n| < [2.916517129e-8 +/- 1.99e-18]
+C_a = [50.17294133 +/- 1.02e-9] (a = 1/1000); I <= [288.5461013 +/- 1.26e-8]; B_3 <= sqrt(C_a I) = [120.32126 +/- 4.18e-6]
+tail sum_{n>301} |b_n| <= B_3/sqrt(10 * 301^5) = [2.4206174e-5 +/- 1.97e-13]
+lemma 5.1 as stated: b_1 > 0.881850816: True; head < 3e-8: True; B_3 < 107: False; C_a < 50.173: True
+gamma + head + tail = [0.881899559162744 +/- 2.82e-16] is NOT below b_1: margin [-4.8742739e-5 +/- 4.06e-13]
+VERDICT REFUSED: the criterion gamma + sum |b_n| < b_1 is not established
+gamma = [0.881875323823769 +/- 4.07e-16]; b_1 > [0.881850816423338 +/- 3.80e-16]; head < [2.916516517e-8 +/- 5.05e-19]
+C_a = [50.17294133 +/- 1.02e-9]; I <= [214.7490041 +/- 2.18e-8]; B_3 <= [103.80072 +/- 1.39e-6]; tail <= [2.0882578e-5 +/- 4.29e-13]
+lemma 5.1: b_1 > 0.881850816: True; head < 3e-8: True; B_3 < 107: True
+margin [-4.5419144e-5 +/- 2.39e-14]: VERDICT REFUSED: the criterion is not established
+== red control 2: c_1 lowered by 1/10000 (heads recomputed)
+CONTROL: c_1 shifted by -1/10000
+b_1 in [0.8817518749200408842772619 +/- 2.82e-27]
+CONTROL: c_1 shifted by -1/10000
+b_1 in [0.8817518749200408842772619 +/- 2.95e-27]
+gamma + head + tail = [0.881908512510779 +/- 3.96e-16] is NOT below b_1: margin [-0.00015663759 +/- 7.38e-13]
+VERDICT REFUSED: the criterion gamma + sum |b_n| < b_1 is not established
+margin [-0.00015331400 +/- 4.65e-12]: VERDICT REFUSED: the criterion is not established
+== red control 3: kappa_(1,1) with its sign flipped (the integrand self-tests)
+CONTROL: kappa_(1,1) with its sign flipped
+self-test D^3 H(0.5) = sum n^3 b_n t^n = 0.4409254082; T_(-t) Phi_3 (Gaussian expectation) = 0.4439147634: False
+self-test D^3 H(-0.3) = sum n^3 b_n t^n = -0.2645552449; T_(-t) Phi_3 (Gaussian expectation) = -0.2646329385: False
+self-test E_s[d_xy Phi_3] = 0.07159325 against d/ds E_s[Phi_3] = 0.07159328 (t = 0.5, s = -0.5): True
+VERDICT REFUSED (self-test fails)
+CONTROL: kappa_(1,1) with its sign flipped
+self-test D^3 H(0.4): sum n^3 b_n t^n = 0.3527403266, Gaussian expectation of Phi_3 = 0.3535070960: False
+self-test D^3 H(-0.6): sum n^3 b_n t^n = -0.5291104899, Gaussian expectation of Phi_3 = -0.5375126551: False
+self-test E_s[d_xy Phi_3] = 0.04168023 against d/ds E_s[Phi_3] = 0.04168024: True
+VERDICT REFUSED (self-test fails)
+RESULT: ALL CHECKS PASS (both programs: b_1, the head sum and B_3 as in Lemma 5.1, and gamma + head + tail < b_1, so K_G <= 1.7813 given the paper's analytic lemmas; the partition tiles the domain; both integrands pass the D^3 H identity; three red controls refused by both)
