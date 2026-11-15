@@ -1,0 +1,75 @@
+== 48a [DP2026]: program A (c48a_a.py), then program B (c48a_b.py)
+pi in [3.141592653589793238462643383279, 3.141592653589793238462643383280]
+t_0 in [1.177410022515474691011569326459, 1.177410022515474691011569326460]
+A in [1.776574120161349358934736714095, 1.776574120161349358934736714096]
+a in [1.803338389684026369643742273621, 1.803338389684026369643742273622]
+p_0 in [0.393423950816028211896671736470, 0.393423950816028211896671736471]
+z in [0.270406029923698269232988940363, 0.270406029923698269232988940364]
+c_0 in [2.309515867366166682601860767377, 2.309515867366166682601860767378]
+C_48 = c_0^2 in [5.333863541616097216005578611413, 5.333863541616097216005578611414]
+c_0^2 rounds to 5.33386 at 5 decimals: yes
+information: a rounds to the paper's 1.80334: yes
+information: p_0 rounds to the paper's 0.39342: yes
+information: z rounds to the paper's 0.27041: yes
+information: c_0 rounds to the paper's 2.30952: yes
+VERDICT PASS
+pi in [3.141592653589793238462643383279, 3.141592653589793238462643383280]
+t_0 in [1.177410022515474691011569326459, 1.177410022515474691011569326460]
+A in [1.776574120161349358934736714095, 1.776574120161349358934736714096]
+a in [1.803338389684026369643742273621, 1.803338389684026369643742273622]
+p_0 in [0.393423950816028211896671736470, 0.393423950816028211896671736471]
+z in [0.270406029923698269232988940363, 0.270406029923698269232988940364]
+c_0 in [2.309515867366166682601860767377, 2.309515867366166682601860767378]
+C_48 = c_0^2 in [5.333863541616097216005578611413, 5.333863541616097216005578611414]
+c_0^2 rounds to 5.33386 at 5 decimals: yes
+information: a rounds to the paper's 1.80334: yes
+information: p_0 rounds to the paper's 0.39342: yes
+information: z rounds to the paper's 0.27041: yes
+information: c_0 rounds to the paper's 2.30952: yes
+VERDICT PASS
+== red control 1: c_0^2 claimed to round to 5.33387
+C_48 = c_0^2 in [5.333863541616097216005578611413, 5.333863541616097216005578611414]
+c_0^2 rounds to 5.33387 at 5 decimals: NO
+VERDICT REFUSED
+C_48 = c_0^2 in [5.333863541616097216005578611413, 5.333863541616097216005578611414]
+c_0^2 rounds to 5.33387 at 5 decimals: NO
+VERDICT REFUSED
+== red control 2: t_0 = sqrt(ln 2) in place of sqrt(2 ln 2)
+CONTROL variant t0=sqrt(ln2)
+C_48 = c_0^2 in [5.627540060562602903393469713010, 5.627540060562602903393469713011]
+c_0^2 rounds to 5.33386 at 5 decimals: NO
+VERDICT REFUSED
+CONTROL variant t0=sqrt(ln2)
+C_48 = c_0^2 in [5.627540060562602903393469713010, 5.627540060562602903393469713011]
+c_0^2 rounds to 5.33386 at 5 decimals: NO
+VERDICT REFUSED
+== red control 3: p_0 = e^(-a^2/2), the factor 2 dropped
+CONTROL variant p0-without-2
+C_48 = c_0^2 in [10.270644369505305052512593400770, 10.270644369505305052512593400771]
+c_0^2 rounds to 5.33386 at 5 decimals: NO
+VERDICT REFUSED
+CONTROL variant p0-without-2
+C_48 = c_0^2 in [10.270644369505305052512593400770, 10.270644369505305052512593400771]
+c_0^2 rounds to 5.33386 at 5 decimals: NO
+VERDICT REFUSED
+== red control 4: H(x) = 2x e^(-x^2/2) + Q(x), the factor 2 on Q dropped
+CONTROL variant H-with-Q-once
+C_48 = c_0^2 in [5.024713906430718414888535436727, 5.024713906430718414888535436728]
+c_0^2 rounds to 5.33386 at 5 decimals: NO
+VERDICT REFUSED
+CONTROL variant H-with-Q-once
+C_48 = c_0^2 in [5.024713906430718414888535436727, 5.024713906430718414888535436728]
+c_0^2 rounds to 5.33386 at 5 decimals: NO
+VERDICT REFUSED
+== agreement: every quantity printed by both programs (enclosures must overlap)
+pi: the two enclosures overlap
+t_0: the two enclosures overlap
+A: the two enclosures overlap
+a: the two enclosures overlap
+p_0: the two enclosures overlap
+z: the two enclosures overlap
+c_0: the two enclosures overlap
+C_48 = c_0^2: the two enclosures overlap
+compared 8 quantities, 0 disjoint
+pair exit 0
+RESULT: ALL CHECKS PASS (both programs give C_48 = c_0^2 = 5.33386354161609721600557861141..., overlapping enclosures for every quantity; four red controls refused by both)
