@@ -1,0 +1,164 @@
+== (1) [H1987]: program 1 (c10b_series.py), then program 2 (c10b_agm.py)
+coefficients a_j: recurrence, closed form and Wallis integrals agree for j < 60
+K_0 in [0.812557858821472442318593494612, 0.812557858821472442318593494613]
+pi in [3.14159265358979323846264338327950288, 3.14159265358979323846264338327950289] (Machin)
+Haagerup's bound 8/(pi(K_0+1)) in [1.404909132735795535525448150614, 1.404909132735795535525448150615]
+check: phi(K_0) / (pi/4) = 2 g(K_0)... equals K_0 + 1 within the enclosure: True
+printed upper bound 1.40491 [H1987]: holds (printed minus value >= 8.673e-07)
+information: Haagerup's conjectured value (int cos^2 t (1 + sin^2 t)^(-1/2) dt)^(-1) in [1.404575934663742032773958471548, 1.404575934663742032773958471549]
+information: Euler's gamma in [0.577215664901532860606512090082, 0.577215664901532860606512090099]
+information: e^(1 - gamma) [P1978] in [1.526205111595863880474888715011, 1.526205111595863880474888715037]
+printed upper bound 1.52621 [P1978]: holds
+VERDICT PASS
+pi in [3.1415926535897932384626433832795028841971, 3.1415926535897932384626433832795028841972] (Salamin-Brent)
+Legendre's relation at m = 1/2: 2KE - K^2 - pi/2 in [-4.710E-42, 4.710E-42]
+K_0 in [0.812557858821472442318593494612, 0.812557858821472442318593494613]
+Haagerup's bound 8/(pi(K_0+1)) in [1.404909132735795535525448150614, 1.404909132735795535525448150615]
+printed upper bound 1.40491 [H1987]: holds (printed minus value >= 8.673e-07)
+information: Haagerup's conjectured value (int cos^2 t (1 + sin^2 t)^(-1/2) dt)^(-1) in [1.404575934663742032773958471548, 1.404575934663742032773958471549]
+information: Euler's gamma in [0.577215664901532860606512090082, 0.577215664901532860606512090083]
+information: e^(1 - gamma) [P1978] in [1.526205111595863880474888715036, 1.526205111595863880474888715037]
+printed upper bound 1.52621 [P1978]: holds
+VERDICT PASS
+== (2) [GFL26], PR #196: program A (c10b_gfl_a.py), then program B (c10b_gfl_b.py)
+Euler's gamma in [0.5772156649015328606065120900824024310421, 0.5772156649015328606065120900824024310422]
+self-test: the radial factors e_{a,b} (a, b <= 6) are orthonormal in L2(nu), exactly
+1/(W): poles -lambda with lambda in [11.464962864239, 11.464962864240], [1.034936591516, 1.034936591517], [0.177072838159, 0.177072838160]
+1/(2 rho + W): poles -lambda with lambda in [11.503086144878, 11.503086144879], [1.055532023895, 1.055532023896], [0.198743266566, 0.198743266567]
+int e^-s / W(s) ds in [2.0756809770175265778879004, 2.0756809770175265778879005]
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+B^-1 + G positive definite (LDL): True
+R in [1.0773034536130749180387442, 1.0773034536130749180387443]
+S in [0.9999999981625050848743609, 0.9999999981625050848743610]
+1 - S in [0.00000000183749491512, 0.00000000183749491513]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): hold
+claimed mu_W < 44789233448019/62500000000000: holds
+claimed ratio > 4237019744599/3125000000000: holds
+VERDICT PASS
+self-test: the Laguerre forms of e_{a,b} (a, b <= 5) are orthonormal in L2(nu)
+e^1 E1(1) in [0.596347362323194074341078499369, 0.596347362323194074341078499370]
+poles of 1/W at -lambda, lambda in [11.464962864239, 11.464962864240], [1.034936591516, 1.034936591517], [0.177072838159, 0.177072838160]
+poles of 1/(2 rho + W) at -lambda, lambda in [11.503086144878, 11.503086144879], [1.055532023895, 1.055532023896], [0.198743266566, 0.198743266567]
+int e^-s / W(s) ds in [2.0756809770175265778879004, 2.0756809770175265778879005]
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+B^-1 + G positive definite (LDL): True
+R in [1.0773034536130749180387442, 1.0773034536130749180387443]
+S in [0.9999999981625050848743609, 0.9999999981625050848743610]
+1 - S in [1.83749491512E-9, 1.83749491513E-9]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): hold
+claimed mu_W < 0.716627735168304: holds
+claimed ratio > 1.35584631827168: holds
+VERDICT PASS
+== red control H1: [H1987] claimed as 1.4049091327357955 (the value cut after 16 decimals, below it)
+printed upper bound 1.4049091327357955 [H1987]: FAILS (printed minus value >= -3.553e-17)
+VERDICT REFUSED
+printed upper bound 1.4049091327357955 [H1987]: FAILS (printed minus value >= -3.553e-17)
+VERDICT REFUSED
+== red control H2: [H1987] claimed as 1.40490
+printed upper bound 1.40490 [H1987]: FAILS (printed minus value >= -9.133e-06)
+VERDICT REFUSED
+printed upper bound 1.40490 [H1987]: FAILS (printed minus value >= -9.133e-06)
+VERDICT REFUSED
+== red control H3: [P1978] claimed as 1.52620
+printed upper bound 1.52620 [P1978]: FAILS
+VERDICT REFUSED
+printed upper bound 1.52620 [P1978]: FAILS
+VERDICT REFUSED
+== red control G1: rho = 0.012 (lowered by 3.9e-5): the Gram blocks still hold, S > 1
+CONTROL rho set to 0.012
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+1 - S in [-0.00009277613787404595, -0.00009277613787404594]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3559736368967403373865432, 1.3559736368967403373865433]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): FAIL
+VERDICT REFUSED
+CONTROL rho set to 0.012
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+1 - S in [-0.00009277613787404595, -0.00009277613787404594]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3559736368967403373865432, 1.3559736368967403373865433]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): FAIL
+VERDICT REFUSED
+== red control G2: beta_10 = 0.0148 (raised by 0.7%): a Gram block fails, S < 1 still
+CONTROL beta10 set to 0.0148
+Gram blocks: 132 nonempty, 570 pivots, all positive: False; least pivot in [-0.007024591197744, -0.007024591197743], block (p,q) = (2, 1)
+1 - S in [0.00000006250425299694, 0.00000006250425299695]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): FAIL
+VERDICT REFUSED
+CONTROL beta10 set to 0.0148
+Gram blocks: 132 nonempty, 570 pivots, all positive: False; least pivot in [-0.007024591197744, -0.007024591197743], block (p,q) = (2, 1)
+1 - S in [6.250425299694E-8, 6.250425299695E-8]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): FAIL
+VERDICT REFUSED
+== red control G3: zeta_2 = 1.3819 (the weight lowered): both conditions fail
+CONTROL zeta2 set to 1.3819
+Gram blocks: 132 nonempty, 570 pivots, all positive: False; least pivot in [-0.053245716643212, -0.053245716643211], block (p,q) = (2, 1)
+1 - S in [-0.00001326508980994802, -0.00001326508980994801]
+mu_W in [0.7166176290162088205386589, 0.7166176290162088205386590]
+ratio (1 - rho)/(rho + mu_W) in [1.3558651232635899494374243, 1.3558651232635899494374244]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): FAIL
+VERDICT REFUSED
+CONTROL zeta2 set to 1.3819
+Gram blocks: 132 nonempty, 570 pivots, all positive: False; least pivot in [-0.053245716643212, -0.053245716643211], block (p,q) = (2, 1)
+1 - S in [-0.00001326508980994802, -0.00001326508980994801]
+mu_W in [0.7166176290162088205386589, 0.7166176290162088205386590]
+ratio (1 - rho)/(rho + mu_W) in [1.3558651232635899494374243, 1.3558651232635899494374244]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): FAIL
+VERDICT REFUSED
+== red control G4: the ratio claimed above 1.35584631827169
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+1 - S in [0.00000000183749491512, 0.00000000183749491513]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): hold
+claimed ratio > 135584631827169/100000000000000: FAILS
+VERDICT REFUSED
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+1 - S in [1.83749491512E-9, 1.83749491513E-9]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): hold
+claimed ratio > 1.35584631827169: FAILS
+VERDICT REFUSED
+== red control G5: mu_W claimed below 0.716627735168303
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+1 - S in [0.00000000183749491512, 0.00000000183749491513]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): hold
+claimed mu_W < 716627735168303/1000000000000000: FAILS
+VERDICT REFUSED
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot in [0.000012259567912, 0.000012259567913], block (p,q) = (2, 1)
+1 - S in [1.83749491512E-9, 1.83749491513E-9]
+mu_W in [0.7166277351683039056785778, 0.7166277351683039056785779]
+ratio (1 - rho)/(rho + mu_W) in [1.3558463182716895859699624, 1.3558463182716895859699625]
+conditions of Theorem 3.1 (all Gram blocks, S < 1): hold
+claimed mu_W < 0.716627735168303: FAILS
+VERDICT REFUSED
+== agreement: every quantity printed by both programs of a pair (enclosures must overlap)
+K_0: the two enclosures overlap
+pi: the two enclosures overlap
+Haagerup's bound 8/(pi(K_0+1)): the two enclosures overlap
+information: Haagerup's conjectured value (int cos^2 t (1 + sin^2 t)^(-1/2) dt)^(-1): the two enclosures overlap
+information: Euler's gamma: the two enclosures overlap
+information: e^(1 - gamma) [P1978]: the two enclosures overlap
+compared 6 quantities, 0 disjoint
+pair H exit 0
+int e^-s / W(s) ds: the two enclosures overlap
+Gram blocks: 132 nonempty, 570 pivots, all positive: True; least pivot: the two enclosures overlap
+R: the two enclosures overlap
+S: the two enclosures overlap
+1 - S: the two enclosures overlap
+mu_W: the two enclosures overlap
+ratio (1 - rho)/(rho + mu_W): the two enclosures overlap
+compared 7 quantities, 0 disjoint
+pair G exit 0
+RESULT: ALL CHECKS PASS ([H1987] and [GFL26] by two programs each; eight red controls refused by both programs of their pair)
