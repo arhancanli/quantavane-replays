@@ -1,0 +1,38 @@
+== 50a [GP19], r = 3: program A (c50a_a.py)
+program A (c50a_a.py): hypergeometric series in exact rationals, pi by Machin
+pi in [3.141592653589793238462643383279, 3.141592653589793238462643383279]
+t in [0, 1/3): R >= 1 - F(1/3) >= 0.713790
+t in [-1, 0]: 2103 cells, every lower bound >= 4987/10000 (least 0.498700479, on [-0.979000, -0.978500])
+RESULT r = 3: min over [-1, 1/3) of (1 - F_r(t))/(1 - 3 t) >= 4987/10000: True
+VERDICT PASS
+== program B (c50a_b.py)
+program B (c50a_b.py): closed forms through arcsin, decimal intervals
+pi in [3.141592653589793238462643383280, 3.141592653589793238462643383280]
+F_3(-1/2) in [-0.43599112417691743236, -0.43599112417691743236]
+t in [0, 1/3): ratio >= 1 - F(1/3) >= 0.713796
+t in [-1, 0], 20000 equal cells: least cell lower bound 0.498748234 on [-0.96600, -0.96595]
+RESULT r = 3: min over [-1, 1/3) of (1 - F_r(t))/(1 - 3 t) >= 0.4987: True
+VERDICT PASS
+== red control 1: the minimum claimed to be at least 0.4988
+cell [-0.959035187, -0.959035156] does not clear the target (lower bound 0.498800000)
+RESULT r = 3: min over [-1, 1/3) of (1 - F_r(t))/(1 - 3 t) >= 1247/2500: False
+VERDICT REFUSED
+RESULT r = 3: min over [-1, 1/3) of (1 - F_r(t))/(1 - 3 t) >= 0.4988: False
+VERDICT REFUSED
+== red control 2: (Gamma(2)/Gamma(3/2)) not squared in F_3
+CONTROL variant: (Gamma(2)/Gamma(3/2)) not squared
+cell [-0.720167206, -0.720167175] does not clear the target (lower bound 0.498699997)
+RESULT r = 3: min over [-1, 1/3) of (1 - F_r(t))/(1 - 3 t) >= 4987/10000: False
+VERDICT REFUSED
+CONTROL variant: (Gamma(2)/Gamma(3/2)) not squared
+t in [-1, 0], 20000 equal cells: least cell lower bound 0.471017969 on [-0.98055, -0.98050]
+RESULT r = 3: min over [-1, 1/3) of (1 - F_r(t))/(1 - 3 t) >= 0.4987: False
+VERDICT REFUSED
+== anchor (program B): r = 1, Goemans-Williamson, F_1 = (2/pi) arcsin t: at least 0.8785, and a claim of 0.8786 refused
+t in [-1, 0], 20000 equal cells: least cell lower bound 0.878541200 on [-0.68920, -0.68915]
+RESULT r = 1: min over [-1, 1/1) of (1 - F_r(t))/(1 - 1 t) >= 0.8785: True
+VERDICT PASS
+t in [-1, 0], 20000 equal cells: least cell lower bound 0.878541200 on [-0.68920, -0.68915]
+RESULT r = 1: min over [-1, 1/1) of (1 - F_r(t))/(1 - 1 t) >= 0.8786: False
+VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs: min over [-1, 1/3) of (1 - F_3(t))/(1 - 3t) >= 0.4987, so the row's 0.498 holds; two red controls refused by both; Goemans-Williamson anchor >= 0.8785 and not >= 0.8786)

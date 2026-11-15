@@ -1,0 +1,78 @@
+== 33a [DM2013]: program A (c33a_a.py)
+program A (c33a_a.py): F_(2^d) by carry-less products modulo the smallest irreducible; trace by squarings
+d =  1: #H =     6  #k =     192  ramified points over A = 0: 0
+d =  2: #H =     6  #k =     192  ramified points over A = 0: 0
+d =  3: #H =     9  #k =     192  ramified points over A = 0: 0
+d =  4: #H =    10  #k =     192  ramified points over A = 0: 0
+d =  5: #H =    36  #k =     202  ramified points over A = 0: 10
+d =  6: #H =    87  #k =     288  ramified points over A = 0: 0
+d =  7: #H =    90  #k =     192  ramified points over A = 0: 0
+d =  8: #H =   274  #k =     320  ramified points over A = 0: 0
+d =  9: #H =   513  #k =     192  ramified points over A = 0: 0
+d = 10: #H =  1086  #k =     842  ramified points over A = 0: 10
+a_d(H), d = 1..10: [6, 0, 1, 1, 6, 13, 12, 33, 56, 105]
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+g(H) = 2 (deg a - 1 for a smooth model y^2 + a(x) y = b(x) with deg a = 3 > deg b / 2)
+all 6 rational places of H split completely in k: True
+zeros of A on H (points over F_32): 10; (point, character) pairs ramified with conductor exponent 2: 310 of 310
+every nontrivial character has conductor 2P_5 + 2P_5' (degree 20): True ; g(k) = 343
+S: 2 of degree 5, 16 of degree 6, 15 of degree 8, 4 of degree 10 ; t = 192 <= sum e f (nu-1-[(nu-1)/p]) = 266 : True
+inequality (1.1): (1 + 266 - 192)^2 - ... = 57 >= 0: True
+Corollary 1.2 (all characters at full conductor): A(2) >= 6/19 = 0.31578947368421052631
+Theorem 1.1 with f' = 2 sum f (1 - 2^-f):         A(2) >= 24576/77527 = 0.31699923897480877629
+VERDICT PASS
+== program B (c33a_b.py)
+program B (c33a_b.py): F_(2^d) by log tables over the largest primitive polynomial; closed points
+places of H at infinity: 2 rational, v(f_h) >= [2, 6] there (> 0, so the Frobenius is trivial)
+closed points of H by degree, e = 1..10: [6, 0, 1, 1, 6, 13, 12, 33, 56, 105]
+closed points of H on A = 0: [5, 5]
+characters ramified (pole order 1 after reduction, exponent 2) at the two places on A = 0: 62 of 62
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+g(H) from its zeta function (L-polynomial of degree 2g predicts #H(F_(2^d)) for d <= 14): 2
+characters whose L-polynomial has degree 22 (not 20 or 24; counts to d = 14): 31 of 31
+g(k) = 343
+all 6 rational places of H split completely: True
+t = 192 <= 266; inequality value 57
+A(2) >= 24576/77527 = 0.31699923897480877629
+VERDICT PASS
+== red control 1: the bound claimed as A(2) >= 0.317
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+CONTROL claim A(2) >= 317/1000 : False
+VERDICT REFUSED
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+CONTROL claim A(2) >= 317/1000: False
+VERDICT REFUSED
+== red control 2: y^2 replaced by x^3 in the span of h
+CONTROL variant: h-x3
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 48, 128, 256]
+MISMATCH with the paper's a_d(k) = (192,0,0,0,2,16,0,16,0,64), g(k) = 343
+VERDICT REFUSED
+CONTROL variant: h-x3
+a_d(k), d = 1..10: [192, 0, 0, 0, 0, 16, 0, 48, 128, 256]
+MISMATCH with the paper's data
+S needs 2 places of degree 5, k has 0
+VERDICT REFUSED
+== red control 3: A = x^5 + x^3 + 1 (also irreducible) in place of x^5 + x^2 + 1
+CONTROL variant: A-x5x3
+a_d(k), d = 1..10: [192, 0, 0, 0, 0, 16, 0, 16, 0, 97]
+MISMATCH with the paper's a_d(k) = (192,0,0,0,2,16,0,16,0,64), g(k) = 343
+S asks for 2 places of degree 5; k has 0
+VERDICT REFUSED
+CONTROL variant: A-x5x3
+a_d(k), d = 1..10: [192, 0, 0, 0, 0, 16, 0, 16, 0, 97]
+MISMATCH with the paper's data
+S needs 2 places of degree 5, k has 0
+VERDICT REFUSED
+== red control 4: S with 17 places of degree 6
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+S asks for 17 places of degree 6; k has 16
+VERDICT REFUSED
+a_d(k), d = 1..10: [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+S needs 17 places of degree 6, k has 16
+VERDICT REFUSED
+== agreement
+a_d(k): A [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]  B [192, 0, 0, 0, 2, 16, 0, 16, 0, 64]
+a_d(H): A 6,0,1,1,6,13,12,33,56,105  B 6,0,1,1,6,13,12,33,56,105
+bound:  A 24576/77527 = 0.31699923897480877629  B 24576/77527 = 0.31699923897480877629
+pair exit 0
+RESULT: ALL CHECKS PASS (both programs: a_d(H) = (6,0,1,1,6), a_d(k) = (192,0,0,0,2,16,0,16,0,64), g(k) = 343, inequality (1.1) value 57, A(2) >= 24576/77527 = 0.316999238974...; four red controls refused by both)

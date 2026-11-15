@@ -1,0 +1,66 @@
+== 55a: program A (c55a_a.py)
+program A (c55a_a.py): multiset table, supersolutions in exact interval arithmetic
+t_n, n = 1..41: [1, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0, 6, 0, 10, 0, 20, 0, 36, 0, 72, 0, 137, 0, 274, 0, 540, 0, 1093, 0, 2199, 0, 4494, 0, 9182, 0, 18937, 0, 39122, 0, 81323]
+t_99 = 317145363238384
+level v = 3/10: Phi(v; Y, W) <= Y at Y = 38/125 (upper end 0.302746495813), so T(v) <= 38/125
+level v = 1/2: Phi(v; Y, W) <= Y at Y = 547/1000 (upper end 0.545873107856), so T(v) <= 547/1000
+level v = 3/5: Phi(v; Y, W) <= Y at Y = 761/1000 (upper end 0.760591870909), so T(v) <= 761/1000
+level 0: x = 6677/10000, Y0 = 1343718520791/1000000000000, Phi(x; Y0, W_2, ...) <= 1.343688798463468, margin 2.972e-05
+supersolution at x = 6677/10000: True, so rho >= 6677/10000
+information: truncated system at x1 = 66771/100000: f(y) > 0 for all y >= 0 (tangent bound 2.826e-05): True, so rho <= 66771/100000
+gamma = 571/500: (1 - e^(-1/gamma))^3 in [0.198575341081807, 0.198575341081807] < 0.6677^4 = 0.198758405906424: True
+information: the least such gamma lies in [1.141439074, 1.141439074]
+colours: (2 + gamma)(Delta - 1) + 1 = 1571/500 (Delta - 1) + 1
+[FLM2020] gamma = 1569/1000, p = 4: phi(x)/x <= 0.997914573204 at x = 49328517/200000000: rho_gamma < 1: True; colours (2 + gamma)(Delta - 1) = 3569/1000 (Delta - 1)
+[GKPT2017] gamma = 87/50, p = 6: phi(x)/x <= 0.980610267082 at x = 174929139/1000000000: rho_gamma < 1: True; colours (2 + gamma)(Delta - 1) = 187/50 (Delta - 1)
+VERDICT PASS
+== program B (c55a_b.py)
+program B (c55a_b.py): coefficients from the functional equation; decimal intervals
+t_n, n = 1..41: [1, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0, 6, 0, 10, 0, 20, 0, 36, 0, 72, 0, 137, 0, 274, 0, 540, 0, 1093, 0, 2199, 0, 4494, 0, 9182, 0, 18937, 0, 39122, 0, 81323]
+t_99 = 317145363238384
+level v = 0.25: Phi(v; Y, W) <= Y at Y = 0.252 (upper end 0.251059328896), so T(v) <= 0.252
+level v = 0.45: Phi(v; Y, W) <= Y at Y = 0.476 (upper end 0.474536702258), so T(v) <= 0.476
+level v = 0.62: Phi(v; Y, W) <= Y at Y = 0.834 (upper end 0.833189274386), so T(v) <= 0.834
+level 0: x = 0.6677, Y0 = 1.343718346535, Phi <= 1.343688963382278, margin 2.938e-05
+supersolution at x = 0.6677: True, so rho >= 0.6677
+gamma = 1.142: (3/4) ln(1 - e^(-1/gamma)) <= -0.404146674704286 < ln 0.6677 >= -0.403916308118314: True
+colours: (2 + gamma)(Delta - 1) + 1 = 3.142 (Delta - 1) + 1
+[FLM2020] gamma = 1.569, p = 4: phi(x)/x <= 0.997914573204 at x = 0.246642585: rho_gamma < 1: True
+[GKPT2017] gamma = 1.74, p = 6: phi(x)/x <= 0.980610267082 at x = 0.174929137: rho_gamma < 1: True
+VERDICT PASS
+== red control 1: the supersolution at x = 0.66771, above rho
+supersolution at x = 66771/100000: False, so rho >= ?
+gamma = 571/500: (1 - e^(-1/gamma))^3 in [0.198575341081807, 0.198575341081807] < 0.6677^4 = 0.198758405906424: True
+[FLM2020] gamma = 1569/1000, p = 4: phi(x)/x <= 0.997914573204 at x = 49328517/200000000: rho_gamma < 1: True; colours (2 + gamma)(Delta - 1) = 3569/1000 (Delta - 1)
+[GKPT2017] gamma = 87/50, p = 6: phi(x)/x <= 0.980610267082 at x = 174929139/1000000000: rho_gamma < 1: True; colours (2 + gamma)(Delta - 1) = 187/50 (Delta - 1)
+VERDICT REFUSED
+supersolution at x = 0.66771: False, so rho >= ?
+gamma = 1.142: (3/4) ln(1 - e^(-1/gamma)) <= -0.404146674704286 < ln 0.6677 >= -0.403916308118314: True
+[FLM2020] gamma = 1.569, p = 4: phi(x)/x <= 0.997914573204 at x = 0.246642585: rho_gamma < 1: True
+[GKPT2017] gamma = 1.74, p = 6: phi(x)/x <= 0.980610267082 at x = 0.174929137: rho_gamma < 1: True
+VERDICT REFUSED
+== red control 2: gamma = 1.141 in place of 1.142
+supersolution at x = 6677/10000: True, so rho >= 6677/10000
+gamma = 1141/1000: (1 - e^(-1/gamma))^3 in [0.198901852270804, 0.198901852270804] < 0.6677^4 = 0.198758405906424: False
+VERDICT REFUSED
+supersolution at x = 0.6677: True, so rho >= 0.6677
+gamma = 1.141: (3/4) ln(1 - e^(-1/gamma)) <= -0.403735945148100 < ln 0.6677 >= -0.403916308118314: False
+VERDICT REFUSED
+== red control 3: the tree class with outdegree 2 allowed (the MSET_2 term not removed)
+CONTROL variant: with-degree-2
+no supersolution at v = 3/5 (least float gap at Y = 0.975341)
+supersolution at x = 6677/10000: False, so rho >= ?
+gamma = 571/500: (1 - e^(-1/gamma))^3 in [0.198575341081807, 0.198575341081807] < 0.6677^4 = 0.198758405906424: True
+[FLM2020] gamma = 1569/1000, p = 4: phi(x)/x <= 0.997914573204 at x = 49328517/200000000: rho_gamma < 1: True; colours (2 + gamma)(Delta - 1) = 3569/1000 (Delta - 1)
+[GKPT2017] gamma = 87/50, p = 6: phi(x)/x <= 0.980610267082 at x = 174929139/1000000000: rho_gamma < 1: True; colours (2 + gamma)(Delta - 1) = 187/50 (Delta - 1)
+VERDICT REFUSED
+CONTROL variant: with-degree-2
+no supersolution at v = 0.62
+supersolution at x = 0.6677: False, so rho >= ?
+gamma = 1.142: (3/4) ln(1 - e^(-1/gamma)) <= -0.404146674704286 < ln 0.6677 >= -0.403916308118314: True
+VERDICT REFUSED
+== agreement
+A: t_99 = 317145363238384
+B: t_99 = 317145363238384
+pair exit 0
+RESULT: ALL CHECKS PASS (both programs: the same t_n; rho >= 0.6677 by a supersolution; (1 - e^(-1/1.142))^(3/4) < 0.6677, so 3.142; FLM2020 at gamma = 1.569 and GKPT2017 at gamma = 1.74 give min phi(x)/x < 1; three red controls refused by both)

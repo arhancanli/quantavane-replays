@@ -1,0 +1,49 @@
+== n2: program A (c14a_a.c)
+n = 2, step limit 2000, radius <= 12: halting machines 19, proved non-halting 42 (by radius: 34 8 0 0 0 0 0 0 0 0 0 0; with the last h writers, h = 1..9: 0 0 0 0 0 0 0 0 0), holdouts 0
+RESULT n = 2: S = 6, Sigma = 4 (every machine decided)
+== n2: program B (c14a_b.c)
+n = 2, limit 2000: halting 19; never halting: cyclers 6, translated cyclers 36, closed view sets 0 (by writer-history depth 0..9: 0 0 0 0 0 0 0 0 0 0); undecided 0
+RESULT n = 2: S = 6, Sigma = 4 (every machine decided)
+== n3: program A (c14a_a.c)
+n = 3, step limit 2000, radius <= 12: halting machines 1772, proved non-halting 3645 (by radius: 1889 1554 167 19 3 0 0 0 0 0 0 0; with the last h writers, h = 1..9: 6 7 0 0 0 0 0 0 0), holdouts 0
+RESULT n = 3: S = 21, Sigma = 6 (every machine decided)
+== n3: program B (c14a_b.c)
+n = 3, limit 2000: halting 1772; never halting: cyclers 526, translated cyclers 3027, closed view sets 92 (by writer-history depth 0..9: 79 6 7 0 0 0 0 0 0 0); undecided 0
+RESULT n = 3: S = 21, Sigma = 6 (every machine decided)
+== n4: program A (c14a_a.c)
+n = 4, step limit 2000, radius <= 12: halting machines 249693, proved non-halting 609204 (by radius: 267948 241365 82910 11961 2056 540 249 89 25 5 1 1; with the last h writers, h = 1..9: 922 935 88 88 14 2 5 0 0), holdouts 12
+RESULT n = 4: undecided (12 holdouts); the halting machines give S >= 107, Sigma >= 13
+== n4: program B (c14a_b.c)
+n = 4, limit 2000: halting 249693; never halting: cyclers 87754, translated cyclers 500902, closed view sets 20548 (by writer-history depth 0..9: 18494 922 935 88 88 14 2 5 0 0); undecided 12
+RESULT n = 4: undecided (12 machines); halting machines give S >= 107, Sigma >= 13
+== n4: the machines neither program decides (A, then B; sorted)
+0RB1LA_1LC1RB_1LA1LD_---0LA
+0RB1LA_1LC1RB_1RA1LD_---0LA
+0RB1LA_1LC1RB_1RB1LD_---0LA
+1RB0LC_1LB1LA_1RC0LD_---0RA
+1RB0LD_1LC1RB_---1LA_0RB1LD
+1RB0RB_0LC1RB_1RD1LC_---1RA
+1RB0RB_1LC1RB_---0LD_1RA1LD
+1RB1LA_1LA0RC_1LD1RC_---0LA
+1RB1LA_1LA1RC_---0RD_0LA1RD
+1RB1LA_1LC1RD_0LA1RC_---0RC
+1RB1LA_1RC1RD_0LA1RC_---0RC
+1RB1LB_1RC0RD_1LD1RB_---0LA
+the same 12 machines in both programs
+== red control 1: n = 3 with a step limit of 20, so the 21-step machines must be left undecided
+HOLDOUT 1RB---_1LB0RC_1LC1LA
+RESULT n = 3: undecided (1 holdouts); the halting machines give S >= 20, Sigma >= 6
+UNDECIDED 1RB---_1LB0RC_1LC1LA
+RESULT n = 3: undecided (1 machines); halting machines give S >= 20, Sigma >= 6
+== red control 2: n = 4 with a step limit of 100; the 107-step champion 1RB1LB_1LA0LC_---1LD_1RD0RA must be left undecided
+HOLDOUT 1RB1LB_1LA0LC_---1LD_1RD0RA
+RESULT n = 4: undecided (13 holdouts); the halting machines give S >= 97, Sigma >= 13
+UNDECIDED 1RB1LB_1LA0LC_---1LD_1RD0RA
+RESULT n = 4: undecided (13 machines); halting machines give S >= 97, Sigma >= 13
+== red control 3: n = 3 with the tests cut down (radius 1, no history; B also without translated cyclers)
+RESULT n = 3: undecided (1756 holdouts); the halting machines give S >= 21, Sigma >= 6
+RESULT n = 3: undecided (1586 machines); halting machines give S >= 21, Sigma >= 6
+== red control 4: every closed-set test (and in B the cycler tests) applied to every halting 3-state machine
+SELFTEST: every test applied to each of the 1772 halting machines: 0 false proofs
+SELFTEST: every test applied to each of the 1772 halting machines: 0 false proofs
+RESULT: ALL CHECKS PASS (both programs: BB(2) S = 6, Sigma = 4; BB(3) S = 21, Sigma = 6 with every 3-state machine decided; BB(4): S >= 107, Sigma >= 13 attained, all but the same 12 of 858,909 machines decided; four red controls as required)
