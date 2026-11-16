@@ -1,0 +1,103 @@
+== row 5a [St26] 0.98173*, program A
+program A, parameters st26 (main)
+tau = 1.128028, alphas = 0.708402, 0.785148, 0.869892, 1.124418, 1.182121, 1.243221, cs = 0.664209, 0.664134, 0.855601
+self-test: cell formulas equal the definition at 200 random points per window: ok
+the four bounds at w = (0.0943872, 0.335791, 0.3880977, 0.8328982, 1, 1): 1.963450594, 1.963450592, 1.963450592, 1.963450597
+full-dimensional cells: 19658 (1.1 s)
+cells skipped by the upper bounds: 14261
+dual weights of the four bounds at the maximum: 0.787515684475, 0.205448220206, 0.007029023650, 0.000007071667
+linear programs solved exactly: 5397
+max over w of min of the four bounds (exact):
+b* = 59921981981288812116070443299330936788757170983355187/30518711381462059789440425174328432010556128400000000
+b* = 1.96345059371304719729
+attained at w = (0.094387196075, 0.335791000000, 0.388097712140, 0.832898193714, 1.000000000000, 1.000000000000)
+the four bounds there: 1.963450593713047, 1.963450593713047, 1.963450593713047, 1.963450593713047
+C_5a <= b*/2 = 0.98172529685652359864
+row st26: C_5a <= 0.981730  holds
+VERDICT PASS
+run time 196.4 s
+== row 5a [St26] 0.98173*, program B
+program B, parameters st26 (main)
+bounds at the given point: 1.963450594, 1.963450592, 1.963450592, 1.963450597
+full-dimensional cells (joint interlacings): 19658
+cells skipped by the relaxation bounds: 6808
+self-tests of cell functions at interior points: 300 cells, all equal
+dual linear programs solved exactly: 12850
+b* = 59921981981288812116070443299330936788757170983355187/30518711381462059789440425174328432010556128400000000
+b* = 1.96345059371304719729
+dual weights on (Lemma 3.1, windows): 0.787515684475, 0.205448220206, 0.007029023650, 0.000007071667
+C_5a <= b*/2 = 0.98172529685652359864
+row st26: C_5a <= 0.981730  holds
+VERDICT PASS
+run time 443.7 s
+== row 5a [CHO25] 0.98183, program A
+program A, parameters cho25 (main)
+tau = 1.12733, alphas = 0.70749, 0.78822, 0.87175, 1.12464, 1.18020, 1.24610, cs = 0.66461, 0.6778, 0.71884
+self-test: cell formulas equal the definition at 200 random points per window: ok
+the four bounds at w = (0.13398, 0.30015, 0.46220, 0.96476, 0.97795, 1): 1.963645571, 1.963645185, 1.963645159, 1.963645766
+full-dimensional cells: 24736 (1.8 s)
+cells skipped by the upper bounds: 17121
+dual weights of the four bounds at the maximum: 0.782171756679, 0.112465165247, 0.105362921695, 0.000000156377
+linear programs solved exactly: 7615
+max over w of min of the four bounds (exact):
+b* = 362872028287545008936797287797794631031506611/184795082019251925473577387269844142000000000
+b* = 1.96364548408134071674
+attained at w = (0.133982734907, 0.300154702759, 0.462196734462, 0.964764702759, 0.977954702759, 1.000000000000)
+the four bounds there: 1.963645484081340, 1.963645484081340, 1.963645484081340, 1.963645484081340
+C_5a <= b*/2 = 0.98182274204067035837
+row cho25: C_5a <= 0.981830  holds
+VERDICT PASS
+run time 245.7 s
+== row 5a [CHO25] 0.98183, program B
+program B, parameters cho25 (main)
+bounds at the given point: 1.963645571, 1.963645185, 1.963645159, 1.963645766
+full-dimensional cells (joint interlacings): 24736
+cells skipped by the relaxation bounds: 9144
+self-tests of cell functions at interior points: 300 cells, all equal
+dual linear programs solved exactly: 15592
+b* = 362872028287545008936797287797794631031506611/184795082019251925473577387269844142000000000
+b* = 1.96364548408134071674
+dual weights on (Lemma 3.1, windows): 0.782171756679, 0.112465165247, 0.105362921695, 0.000000156377
+C_5a <= b*/2 = 0.98182274204067035837
+row cho25: C_5a <= 0.981830  holds
+VERDICT PASS
+run time 446.1 s
+== red control 1: the St26 claim lowered to 0.98172
+program A, parameters st26 (CONTROL claim 24543/25000)
+linear programs solved exactly: 5397
+b* = 1.96345059371304719729
+row st26: C_5a <= 0.981720  NOT implied
+VERDICT REFUSED
+program B, parameters st26 (CONTROL claim 24543/25000)
+dual linear programs solved exactly: 12850
+b* = 1.96345059371304719729
+row st26: C_5a <= 0.981720  NOT implied
+VERDICT REFUSED
+== red control 2: Lemma 3.2 with tau/c^2 in place of 2 tau/c^2
+program A, parameters st26 (CONTROL Lemma 3.2 with tau/c^2 in place of 2 tau/c^2)
+linear programs solved exactly: 2290
+b* = 1.98406921899365155170
+row st26: C_5a <= 0.981730  NOT implied
+VERDICT REFUSED
+program B, parameters st26 (CONTROL Lemma 3.2 with tau/c^2 in place of 2 tau/c^2)
+dual linear programs solved exactly: 8228
+b* = 1.98406921899365155170
+row st26: C_5a <= 0.981730  NOT implied
+VERDICT REFUSED
+== red control 3: the two near-equal windows c_1 = 0.664209 and c_2 = 0.664134 removed (only c_3 kept)
+program A, parameters st26 (CONTROL windows c_1, c_2 removed)
+linear programs solved exactly: 48
+b* = 1.99584381796447582299
+row st26: C_5a <= 0.981730  NOT implied
+VERDICT REFUSED
+program B, parameters st26 (CONTROL windows c_1, c_2 removed)
+dual linear programs solved exactly: 67
+b* = 1.99584381796447582299
+row st26: C_5a <= 0.981730  NOT implied
+VERDICT REFUSED
+== agreement: the exact maxima b*, A against B
+st26: equal
+cho25: equal
+x2: equal
+x3: equal
+RESULT: ALL CHECKS PASS (both programs, the same exact maxima: St26 b*/2 <= 0.98173 and CHO25 b*/2 <= 0.98183; three red controls refused by both)
