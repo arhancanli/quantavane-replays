@@ -1,0 +1,46 @@
+== program A (c8a_a.py)
+program A (Euler-Maclaurin N = 40, p = 30; Stirling shift 20, 20 terms; fixed point 2^-320)
+self-test at t = 10: Z = -1.549194546181022, Im part contains 0: True, EM remainder 2.5e-58
+Z(706736257086734689/50000000000000000) in [-8.294279e-18, -8.294279e-18] (width 1.9e-55), Im part contains 0: True
+Z(70673625708673469/5000000000000000) in [7.568930e-18, 7.568930e-18] (width 1.8e-55), Im part contains 0: True
+sign change of Z on [706736257086734689/50000000000000000, 70673625708673469/5000000000000000]: True
+so zeta has a zero 1/2 + i gamma with gamma in (706736257086734689/50000000000000000, 70673625708673469/5000000000000000), and R >= 2/log gamma in [0.7551060614321844382602636, 0.7551060614321844386636567]
+row 8a (lower bound, no reference): 2/log gamma_1 = 0.75510606143218443826...; page 0.755106: truncation, correct rounding; printed <= 2/log gamma: True
+VERDICT PASS
+== program B (c8a_b.py)
+program B (Cohen-Rodriguez Villegas-Zagier for eta, n = 90; Stirling shift 30, 15 terms; decimal 110 digits)
+self-tests: CRVZ gives log 2 (n = 40, gap 2.2e-34), B_2, B_4, B_12, pi: ok; at t = 10: Z = -1.549194546181022, Im part contains 0: True
+Z(14.13472514173469378) in [-8.294279e-18, -8.294279e-18] (width 1.5e-55), Im part contains 0: True, CRVZ bound 1.1e-59
+Z(14.1347251417346938) in [7.568930e-18, 7.568930e-18] (width 1.4e-55), Im part contains 0: True, CRVZ bound 1.1e-59
+sign change of Z: True
+zero 1/2 + i gamma with 14.13472514173469378 < gamma < 14.1347251417346938; 2/log gamma in [0.7551060614321844382602636, 0.7551060614321844386636567]
+row 8a (lower bound, no reference): 2/log gamma_1 = 0.75510606143218443826...; page 0.755106: truncation, correct rounding; printed <= 2/log gamma: True
+VERDICT PASS
+== red control 1: theta with the wrong sign
+program A (Euler-Maclaurin N = 40, p = 30; Stirling shift 20, 20 terms; fixed point 2^-320) CONTROL theta-sign
+Z(706736257086734689/50000000000000000) in [7.884246e-18, 7.884246e-18] (width 1.9e-55), Im part contains 0: False
+Z(70673625708673469/5000000000000000) in [-7.194756e-18, -7.194756e-18] (width 1.8e-55), Im part contains 0: False
+sign change of Z on [706736257086734689/50000000000000000, 70673625708673469/5000000000000000]: True
+VERDICT REFUSED
+program B (Cohen-Rodriguez Villegas-Zagier for eta, n = 90; Stirling shift 30, 15 terms; decimal 110 digits) CONTROL theta-sign
+Z(14.13472514173469378) in [7.884246e-18, 7.884246e-18] (width 1.5e-55), Im part contains 0: False, CRVZ bound 1.1e-59
+Z(14.1347251417346938) in [-7.194756e-18, -7.194756e-18] (width 1.4e-55), Im part contains 0: False, CRVZ bound 1.1e-59
+sign change of Z: True
+VERDICT REFUSED
+== red control 2: a bracket above gamma_1, (14.13472514173469381, 14.13472514173469383)
+program A (Euler-Maclaurin N = 40, p = 30; Stirling shift 20, 20 terms; fixed point 2^-320) CONTROL bracket
+Z(1413472514173469381/100000000000000000) in [1.550053e-17, 1.550053e-17] (width 2.0e-55), Im part contains 0: True
+Z(1413472514173469383/100000000000000000) in [3.136374e-17, 3.136374e-17] (width 2.3e-55), Im part contains 0: True
+sign change of Z on [1413472514173469381/100000000000000000, 1413472514173469383/100000000000000000]: False
+VERDICT REFUSED
+program B (Cohen-Rodriguez Villegas-Zagier for eta, n = 90; Stirling shift 30, 15 terms; decimal 110 digits) CONTROL bracket
+Z(14.13472514173469381) in [1.550053e-17, 1.550053e-17] (width 2.9e-55), Im part contains 0: True, CRVZ bound 1.1e-59
+Z(14.13472514173469383) in [3.136374e-17, 3.136374e-17] (width 5.8e-55), Im part contains 0: True, CRVZ bound 1.1e-59
+sign change of Z: False
+VERDICT REFUSED
+== agreement: Z at both ends (7 digits) and 2/log gamma_1 (20 digits), A against B
+agreement: True
+in [-8.294279e-18, -8.294279e-18]
+in [7.568930e-18, 7.568930e-18]
+= 0.75510606143218443826
+RESULT: ALL CHECKS PASS (both programs: a zero of zeta at 1/2 + i gamma, 14.13472514173469378 < gamma < 14.13472514173469380; 2/log gamma = 0.75510606143218443826... >= 0.755106; two red controls refused by both)

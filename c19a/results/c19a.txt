@@ -1,0 +1,41 @@
+== program A (c19a_a.py)
+program A (exact algebra in Q(sqrt 10), fixed point at 10^-60)
+u* = sqrt 10 - 3, p* = (1 - u*)/2 = (4 - sqrt 10)/2; f(u*) = 3/2 + 1/2 sqrt 10
+f(u*) = (sqrt 10 + 3)/2 exactly; f(0) = 3 and f(1) = 2 are smaller
+c_E in [0.4097321837023963429905688234976645964540, 0.4097321837023963429905688234976645964540]
+row 19a [E1956]: c_E = 0.409732183702396342990568823497...; page 0.4097321837: truncation, correct rounding
+VERDICT PASS
+== program B (c19a_b.py)
+program B (branch-and-bound over p with mean-value bounds, exact Fractions)
+self-test: derivative enclosures contain the difference quotients: ok
+max over p of sqrt(2 pi) * ratio in [1.02704627669472988866648225740541, 1.02704627669472988866648225740598] (51 levels, 6 boxes left), at p ~ 0.41886116991581023860
+c_E in [0.409732183702396342990568823497, 0.409732183702396342990568823497]
+closed form (sqrt 10 + 3)/6 = 1.027046276694729888666482257405... inside the maximum's enclosure
+row 19a [E1956]: c_E = 0.409732183702396342990568823497...; page 0.4097321837: truncation, correct rounding
+VERDICT PASS
+== red control 1: the value printed as 0.4097321838
+program A (exact algebra in Q(sqrt 10), fixed point at 10^-60) CONTROL print
+row 19a [E1956]: c_E = 0.409732183702396342990568823497...; page 0.4097321838: NONE
+VERDICT REFUSED
+program B (branch-and-bound over p with mean-value bounds, exact Fractions) CONTROL print
+row 19a [E1956]: c_E = 0.409732183702396342990568823497...; page 0.4097321838: NONE
+VERDICT REFUSED
+== red control 2: the lattice term h/2 doubled
+program A (exact algebra in Q(sqrt 10), fixed point at 10^-60) CONTROL lattice
+row 19a [E1956]: c_E = 0.803387472897692760353412987271...; page 0.4097321837: NONE
+VERDICT REFUSED
+program B (branch-and-bound over p with mean-value bounds, exact Fractions) CONTROL lattice
+row 19a [E1956]: c_E = 0.803387472897692760353412987271...; page 0.4097321837: NONE
+VERDICT REFUSED
+== red control 3: the factor p^2 + q^2 of beta_3 dropped
+program A (exact algebra in Q(sqrt 10), fixed point at 10^-60) CONTROL beta
+row 19a [E1956]: c_E = 0.265961520267621785293297373289...; page 0.4097321837: NONE
+VERDICT REFUSED
+program B (branch-and-bound over p with mean-value bounds, exact Fractions) CONTROL beta
+row 19a [E1956]: c_E = 0.265961520267621785293297373289...; page 0.4097321837: NONE
+VERDICT REFUSED
+== agreement: the first 30 digits, A against B (main run and the two changed definitions)
+main: equal (c_E = 0.409732183702396342990568823497)
+lattice: equal (c_E = 0.803387472897692760353412987271)
+beta: equal (c_E = 0.265961520267621785293297373289)
+RESULT: ALL CHECKS PASS (both programs: c_E = 0.409732183702396342990568823497... ~ 0.4097321837; three red controls refused by both)
