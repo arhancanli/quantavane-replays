@@ -1,0 +1,43 @@
+== program A (c7azz_a.py)
+cubic 108 N^3 - 2359989 N^2 + 138304 N - 2048: discriminant < 0, so one real root and a complex pair
+N_3 in [21851.6913962195616968020152813, 21851.6913962195616968020152813]
+|N_1|^2 = 2048/(108 N_3) in [0.00086780298234687858, 0.00086780298234687858], |N_1| ~ 0.029458495928
+c = pi/(2 sqrt 3) - log(3 sqrt 3/4) in [0.6452756102348350070386355, 0.6452756102348350070386355] (paper: 0.64527561...)
+psi(2/3) - psi(1/2) from Gauss's values equals c: True
+lim sup log|I'_n|/n = log|N_1| - (5/2) log 2 + 4 - c in [-1.90291648559998216823, -1.90291648559998216823]
+lim log b'_n/n = log N_3 - (5/2) log 2 + 4 - c in [11.61389004533104820528, 11.61389004533104820528]
+1 + sigma/tau in [7.103205334137001727505773422810, 7.103205334137001727505773422810]
+row 7103205334137/1000000000000: the leading digits of the value: True (the value is 0.000000000000001727 above it, so as an upper bound the safe rounding is 7.103205334138)
+key 7.1032053341370017275057734
+VERDICT PASS
+== program B (c7azz_b.py)
+stationary polynomial of g (highest degree first): [2, -125, -500, -625]
+y_3 = 66.33950152462140818379; y_1,2 = -1.91975076231070409189 -+ 1.01250889231433415697 i (paper: 66.33950152, -1.91975076 -+ 1.01250889 i)
+N_3 = g(y_3) = 21851.69139621956169680202; N_1 = g(y_1) = 0.02930189021915159899 + 0.00303351478184406466 i, |N_1| = 0.02945849592811687637
+N_1 and N_3 satisfy the paper's cubic (18): True
+lim sup log|I'_n|/n = -1.90291648559998216823; lim log b'_n/n = 11.61389004533104820529
+1 + sigma/tau in [7.103205334137001727505773422810, 7.103205334137001727505773422810]
+row 7.103205334137: the leading digits of the value: True
+key 7.1032053341370017275057734
+VERDICT PASS
+== red controls, A: the claim 7.103205334136; 2047 for 2048 in the cubic; 2 log 2 for (5/2) log 2
+row 887900666767/125000000000: the leading digits of the value: False (the value is 0.000000000001001727 above it, so as an upper bound the safe rounding is 7.103205334137)
+VERDICT REFUSED
+row 7103205334137/1000000000000: the leading digits of the value: False (the value is -0.000783120560288696 above it, so as an upper bound the safe rounding is 7.103205334138)
+VERDICT REFUSED
+row 7103205334137/1000000000000: the leading digits of the value: False (the value is 1.581774416518625429 above it, so as an upper bound the safe rounding is 7.103205334138)
+VERDICT REFUSED
+== red controls, B: the claim 7.103205334136; (y - 25)^2 for (y - 25)^3 in g; 2 log 2 for (5/2) log 2
+N_1 and N_3 satisfy the paper's cubic (18): True
+row 7.103205334136: the leading digits of the value: False
+VERDICT REFUSED
+N_1 and N_3 satisfy the paper's cubic (18): False
+row 7.103205334137: the leading digits of the value: False
+VERDICT REFUSED
+N_1 and N_3 satisfy the paper's cubic (18): True
+row 7.103205334137: the leading digits of the value: False
+VERDICT REFUSED
+== agreement: 1 + sigma/tau (25 digits), A against B
+agreement: True
+key 7.1032053341370017275057734
+RESULT: ALL CHECKS PASS (both programs: mu(pi) <= 1 + sigma/tau = 7.1032053341370017275057734...; the row's 7.103205334137 is its truncation, 1.7e-15 below it; three red controls refused by each)

@@ -1,0 +1,34 @@
+== program A (c1cbs20_a.py)
+x_0 (root of sin x = x cos x in (pi, 3 pi/2)) in [4.493409457909064175307880927280, 4.493409457909064175307880927280], width 1.2e-36
+min sin(x)/x = -theta_0 <= -.217233628212 < -1/(2 pi): True (so it is the global minimum)
+theta_0 in [0.2172336282112216574082793255624707342042, 0.2172336282112216574082793255624707342586]
+1/(2(1 + theta_0)) in [0.4107674881894053376704755331419722030591, 0.4107674881894053376704755331419722030774]
+page theta_0 = 0.2172336...: truncation True; page bound 0.4107675...: truncation False, correct rounding True, at least the value (so valid as an upper bound) True
+key 0.217233628211221657408279325562 0.410767488189405337670475533141
+VERDICT PASS
+== program B (c1cbs20_b.py)
+min of sin(x)/x on [pi/2, 4 pi]: in [-0.217233628211221657408279325562473675, -0.217233628211221657408279325562470632] (x near 4.49340945790906420597; 2 final cells, 45 rounds)
+below -1/(4 pi) = -0.079577471: True, so this is the minimum over all x
+theta_0 in [0.2172336282112216574082793255624706, 0.2172336282112216574082793255624737]
+1/(2(1 + theta_0)) in [0.4107674881894053376704755331419712, 0.4107674881894053376704755331419722]
+page theta_0 = 0.2172336...: truncation True; page bound 0.4107675: correct rounding True, at least the value True
+key 0.217233628211221657408279325562 0.410767488189405337670475533141
+VERDICT PASS
+== red controls, program A: theta_0 claimed as 0.2172337...; bound claimed as 0.4107674; theta_0 from the maximum
+page theta_0 = 0.2172337...: truncation False; page bound 0.4107675...: truncation False, correct rounding True, at least the value (so valid as an upper bound) True
+VERDICT REFUSED
+page theta_0 = 0.2172336...: truncation True; page bound 0.4107674...: truncation True, correct rounding False, at least the value (so valid as an upper bound) False
+VERDICT REFUSED
+bound undefined
+VERDICT REFUSED
+== red controls, program B: theta_0 claimed as 0.2172337...; bound claimed as 0.4107674; search only on [pi/2, pi]
+page theta_0 = 0.2172337...: truncation False; page bound 0.4107675: correct rounding True, at least the value True
+VERDICT REFUSED
+page theta_0 = 0.2172336...: truncation True; page bound 0.4107674: correct rounding False, at least the value False
+VERDICT REFUSED
+page theta_0 = 0.2172336...: truncation False; page bound 0.4107675: correct rounding False, at least the value False
+VERDICT REFUSED
+== agreement: theta_0 and the bound (30 digits), A against B
+agreement: True
+key 0.217233628211221657408279325562 0.410767488189405337670475533141
+RESULT: ALL CHECKS PASS (both programs: theta_0 = 0.21723362821122165740827932556..., the page's 0.2172336... a truncation; 1/(2(1 + theta_0)) = 0.41076748818940533767047553314..., so the page's 0.4107675... is a correct rounding upward, valid as an upper bound; three red controls refused by each)

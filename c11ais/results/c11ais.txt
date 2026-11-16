@@ -1,0 +1,38 @@
+== program A (c11ais_a.py)
+delta (series to K = 14) = r1 + r2 sqrt2 + r3 t* + r4 pi with r = (0.000000e+00, -3.506453e-04, -8.709263e-05, 2.171772e-04) (denominators of 1, 99, 66, 66 digits)
+delta in [0.000132791302991664429113865787, 0.000132791302991664429113865787] (series tail <= 2.4e-46)
+pi/2 - delta in [1.57066353549190495480220782, 1.57066353549190495480220782]
+the row's delta ~ 0.00013: correct rounding True
+key 0.0001327913029916644291
+VERDICT PASS
+== program B (c11ais_b.py)
+delta = a s* + b pi + c sqrt2 with a = -8.709263e-05, b = 2.171772e-04, c = -3.506453e-04 (series to K = 12, tail <= 2.2e-40)
+delta in [0.000132791302991664429113865788, 0.000132791302991664429113865788]
+pi/2 - delta in [1.57066353549190495480220783, 1.57066353549190495480220783]
+for information: a midpoint sum in p gives 0.000132791303
+the row's delta ~ 0.00013: correct rounding True
+key 0.0001327913029916644291
+VERDICT PASS
+== red controls (A then B): 44 for 45 in the denominator; the crossover at sin^2 = 1/4; the claim delta ~ 0.000133
+delta in [0.000135810269019021162291916043, 0.000135810269019021162291916043] (series tail <= 3.3e-46)
+the row's delta ~ 0.00013: correct rounding False
+VERDICT REFUSED
+delta in [0.000135810269019021162291916044, 0.000135810269019021162291916044]
+the row's delta ~ 0.00013: correct rounding False
+VERDICT REFUSED
+delta in [0.000147723261935216162921526552, 0.000147723261935216162921526552] (series tail <= 2.6e-46)
+the row's delta ~ 0.00013: correct rounding False
+VERDICT REFUSED
+delta in [0.000147723261935216162921526552, 0.000147723261935216162921526552]
+the row's delta ~ 0.00013: correct rounding False
+VERDICT REFUSED
+delta in [0.000132791302991664429113865787, 0.000132791302991664429113865787] (series tail <= 2.4e-46)
+the row's delta ~ 0.000133: correct rounding True ; delta >= 133/1000000: False
+VERDICT REFUSED
+delta in [0.000132791302991664429113865788, 0.000132791302991664429113865788]
+the row's delta ~ 0.000133: correct rounding True ; delta >= 0.000133: False
+VERDICT REFUSED
+== agreement: delta (20 digits), A against B
+agreement: True
+key 0.0001327913029916644291
+RESULT: ALL CHECKS PASS (both programs: delta = 0.00013279130299166442911386578...; pi/2 - delta = 1.5706635354919049548...; the row's delta ~ 0.00013 is a correct rounding; three red controls refused by each)

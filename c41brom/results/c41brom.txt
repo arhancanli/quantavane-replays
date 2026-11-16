@@ -1,0 +1,31 @@
+== program A (c41brom_a.py)
+X (x^2 (x + 3) = 8) in [1.355301397608119909925287735864, 1.355301397608119909925287735864]; Y (4x^3 + 3x - 1 = 0) in [0.298035818991660761556402707199, 0.298035818991660761556402707199]
+area X + arctan Y in [1.64495521842544085166880934760063, 1.64495521842544085166880934760063]
+printed 164495521/100000000: a truncation of the value (so a valid lower bound): True; [Gibbs2014] 1.64495 likewise: True
+key 1.6449552184254408516688093
+VERDICT PASS
+== program B (c41brom_b.py)
+u = X + 1 = cbrt(3 + 2 sqrt 2) + cbrt(3 - 2 sqrt 2) in [2.3553013976081199099252877358642509519183, 2.3553013976081199099252877358642509519183]; u^3 - 3u - 6 = 0: True
+w = 2Y = cbrt(sqrt 2 + 1) - cbrt(sqrt 2 - 1) in [0.5960716379833215231128054143996818281133, 0.5960716379833215231128054143996818281133]; w^3 + 3w - 2 = 0: True
+area in [1.6449552184254408516688093476006337, 1.6449552184254408516688093476006337]
+printed 1.64495521: a truncation of the value: True; [Gibbs2014] 1.64495 likewise: True
+key 1.6449552184254408516688093
+VERDICT PASS
+== red controls, A: the claim 1.64495522; 4x^3 + 3x + 1; x^2 (x + 3) = 9
+printed 82247761/50000000: a truncation of the value (so a valid lower bound): False; [Gibbs2014] 1.64495 likewise: True
+VERDICT REFUSED
+printed 164495521/100000000: a truncation of the value (so a valid lower bound): False; [Gibbs2014] 1.64495 likewise: False
+VERDICT REFUSED
+printed 164495521/100000000: a truncation of the value (so a valid lower bound): False; [Gibbs2014] 1.64495 likewise: False
+VERDICT REFUSED
+== red controls, B: the claim 1.64495522; 3 + 2 sqrt 3 for 3 + 2 sqrt 2; the arctan term dropped
+printed 1.64495522: a truncation of the value: False; [Gibbs2014] 1.64495 likewise: True
+VERDICT REFUSED
+printed 1.64495521: a truncation of the value: False; [Gibbs2014] 1.64495 likewise: False
+VERDICT REFUSED
+printed 1.64495521: a truncation of the value: False; [Gibbs2014] 1.64495 likewise: False
+VERDICT REFUSED
+== agreement: the area (25 digits), A against B
+agreement: True
+key 1.6449552184254408516688093
+RESULT: ALL CHECKS PASS (both programs: area = 1.64495521842544085166880934...; the cubic form and the radical form agree; the printed 1.64495521 is a truncation; three red controls refused by each)

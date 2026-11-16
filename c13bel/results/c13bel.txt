@@ -1,0 +1,32 @@
+== program A (c13bel_a.py)
+triangle side 1: L(0) = pi/4 + 3 g(side/sqrt 3) in [0.825711783590943478189692008286, 0.825711783590943478189692008286]
+pi/8 + sqrt(3)/4 in [0.825711783590943478189692008286, 0.825711783590943478189692008286]; the same number: True
+at v = 0: vertices outside D (d^2 = 1/3 > 1/4): True; edge midpoints inside D (side^2/12 < 1/4): True
+case (a): d1 = 7/10, d1^2 <= 1/2 (so the caps' sectors are disjoint): True
+case (b): pi/4 + g(d1) >= 0.836548794348 > L(0): True
+so m(v) >= 0.825711783590... for every v; printed lower bound 8257/10000: holds (truncation: True)
+key 0.8257117835909434781896920
+VERDICT PASS
+== program B (c13bel_b.py)
+radius 0.5; far field |v| >= 1/2: m >= 0.8598053107 (>= target 0.8257: True)
+every cell of [-1/2, 1/2]^2 certified: 99322 cells, depth up to 16, smallest certified lower bound 0.825700000785
+so area conv(D u (T + v)) >= 0.8257 for every v: True
+VERDICT PASS
+== red controls, program A: the claim 0.8258; d1 = 3/4; a triangle of side 0.9
+case (a): d1 = 7/10, d1^2 <= 1/2 (so the caps' sectors are disjoint): True
+so m(v) >= 0.825711783590... for every v; printed lower bound 4129/5000: FAILS (truncation: False)
+VERDICT REFUSED
+case (a): d1 = 3/4, d1^2 <= 1/2 (so the caps' sectors are disjoint): False
+so m(v) >= 0.825711783590... for every v; printed lower bound 8257/10000: holds (truncation: True)
+VERDICT REFUSED
+case (a): d1 = 7/10, d1^2 <= 1/2 (so the caps' sectors are disjoint): True
+so m(v) >= 0.790798098341... for every v; printed lower bound 8257/10000: FAILS (truncation: False)
+VERDICT REFUSED
+== red controls, program B: the claim 0.8258; a disk of radius 0.49; bound (ii) removed
+NOT CERTIFIED: a cell at depth 22 near (0.00272870, 0.0078125) has lower bound 0.8257999995 < 0.8258
+VERDICT REFUSED
+NOT CERTIFIED: a cell at depth 22 near (0.23149299, 0.13427734) has lower bound 0.8256999932 < 0.8257
+VERDICT REFUSED
+NOT CERTIFIED: a cell at depth 22 near (0.12975525, 0.078125) has lower bound 0.8256999932 < 0.8257
+VERDICT REFUSED
+RESULT: ALL CHECKS PASS (A: min over placements = pi/8 + sqrt(3)/4 = 0.82571178359..., attained with the centres together; B: every placement certified >= 0.8257 by branch and bound; the printed 0.8257 is a truncation; three red controls refused by each)
