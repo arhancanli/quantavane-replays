@@ -1,0 +1,32 @@
+== program A (c50alp_a.py)
+program A (c50a_a.py): hypergeometric series in exact rationals, pi by Machin
+pi in [3.141592653589793238462643383279, 3.141592653589793238462643383279]
+p = 337/500; t in [0, 1/3): rho >= p (1 - F(1/3)) + (1 - p) >= 0.807094
+t in [-1, 0]: 2000 cells, every lower bound >= 119/200 (least 0.595345043, on [-0.456500, -0.456000])
+RESULT p = 337/500: min over [-1, 1/3) of rho_p >= 119/200: True
+VERDICT PASS
+== program B (c50alp_b.py)
+program B (c50a_b.py): closed forms through arcsin, decimal intervals
+pi in [3.141592653589793238462643383280, 3.141592653589793238462643383280]
+F_3(-1/2) in [-0.43599112417691743236, -0.43599112417691743236]
+p = 0.674; t in [0, 1/3): ratio >= p (1 - F(1/3)) + (1 - p) >= 0.807098
+t in [-1, 0], 4000 equal cells refined adaptively to 4000: least cell lower bound 0.595533170 on [-0.459250000, -0.459000000]
+RESULT p = 0.674: min over [-1, 1/3) of rho_p >= 0.595: True
+VERDICT PASS
+== red control 1: the claim 0.5958 (the minimum is 0.59572...), A then B
+cell [-0.418856707, -0.418856706] does not clear the target (lower bound 0.595800000)
+t in [-1, 0]: stopped at a cell of width 2^-24 that does not clear the target (4649 cells cleared before it)
+RESULT p = 337/500: min over [-1, 1/3) of rho_p >= 2979/5000: False
+VERDICT REFUSED
+t in [-1, 0]: a cell of width < 2^-30 at -0.418856707 does not clear the target (lower bound 0.595800000)
+RESULT p = 0.674: min over [-1, 1/3) of rho_p >= 0.5958: False
+VERDICT REFUSED
+== red control 2: p = 0.9 (A) and p = 0.5 (B) in place of 0.674
+cell [-0.441781004, -0.441781003] does not clear the target (lower bound 0.595000000)
+t in [-1, 0]: stopped at a cell of width 2^-24 that does not clear the target (927 cells cleared before it)
+RESULT p = 9/10: min over [-1, 1/3) of rho_p >= 119/200: False
+VERDICT REFUSED
+t in [-1, 0]: a cell of width < 2^-30 at -0.298520302 does not clear the target (lower bound 0.595000000)
+RESULT p = 0.5: min over [-1, 1/3) of rho_p >= 0.595: False
+VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs: min over x of rho_0.674 >= 0.595, so the max over p is at least 0.595; red controls refused)
