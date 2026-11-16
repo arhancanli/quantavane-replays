@@ -1,0 +1,36 @@
+== program A (c71hod_a.py)
+q_k <= 2/3 for 1 <= k <= 222: True; tail after k = 220 at most 2.1e-46
+beta(1/2) in [6.454783716562758553816836228598, 6.454783716562758553816836228598]
+beta > 64547837/10000000 (the row): True (margin 1.656e-08)
+key 6.4547837165627585538168362
+VERDICT PASS
+== program B (c71hod_b.py)
+closed forms q_m = F_(m+2)/F_(m+3), pi_m = 2/F_(m+3) agree with the recursion for m <= 60: True
+beta(1/2) in [6.454783716562758553816836228598, 6.454783716562758553816836228598] (tail <= 5.0e-50)
+beta > 6.4547837 (the row): True (margin 1.656e-08)
+key 6.4547837165627585538168362
+VERDICT PASS
+== red controls, A: the claim 6.4547838; z = 0.499; q_(m+1) = 1/(2 + q_m)
+beta(1/2) in [6.454783716562758553816836228598, 6.454783716562758553816836228598]
+beta > 32273919/5000000 (the row): False (margin -8.344e-08)
+VERDICT REFUSED
+beta(499/1000) in [6.454495719145847699667914488180, 6.454495719145847699667914488180]
+beta > 64547837/10000000 (the row): False (margin -2.880e-04)
+VERDICT REFUSED
+beta(1/2) in [5.591492186262486068468951948651, 5.591492186262486068468951948651]
+beta > 64547837/10000000 (the row): False (margin -8.633e-01)
+VERDICT REFUSED
+== red controls, B: the claim 6.4547838; F_(n+2)/F_(n+3) for F_(n+1)/F_(n+2); the factor 4z(1-z) taken as 1/2
+beta(1/2) in [6.454783716562758553816836228598, 6.454783716562758553816836228598] (tail <= 5.0e-50)
+beta > 6.4547838 (the row): False (margin -8.344e-08)
+VERDICT REFUSED
+beta(1/2) in [6.383891125707247769857339930357, 6.383891125707247769857339930357] (tail <= 5.0e-50)
+beta > 6.4547837 (the row): False (margin -7.089e-02)
+VERDICT REFUSED
+beta(1/2) in [3.227391858281379276908418114299, 3.227391858281379276908418114299] (tail <= 5.0e-50)
+beta > 6.4547837 (the row): False (margin -3.227e+00)
+VERDICT REFUSED
+== agreement: beta(1/2) (25 digits), A against B
+agreement: True
+key 6.4547837165627585538168362
+RESULT: ALL CHECKS PASS (both programs: beta(1/2) = 6.45478371656275855381683622859...; the row's > 6.4547837 holds with margin 1.66e-8; three red controls refused by each)

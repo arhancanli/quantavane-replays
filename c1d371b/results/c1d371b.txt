@@ -1,0 +1,54 @@
+== PR #371 (1d), eighth certificate: C1d_327680_1.4546676818.txt (intervalplace/frontier @ 1ab20c7), program A then program B
+cells n = 327680, negative heights 89427, largest |v_i| = 1000000000000, S = 1150626355561932
+max |c_m| = 2938681335289198603141896 at m = 116123 (sign +); 41 values summed again term by term, all equal
+fingerprint sum c_m 3^m mod 2^61-1 = 394736550967477101
+exact value 40122795831148524928230686720/27582104377369449232322657763
+decimal (truncated) 1.454667681704099986987752334415
+stated fraction: equal
+stated maximizing knot m = 116123 only: yes
+printed upper bound 1.4546676818: holds (printed minus exact = 9.590e-11)
+VERDICT PASS
+cells n = 327680, negative heights 89427, largest |v_i| = 1000000000000, S = 1150626355561932
+max |c_m| = 2938681335289198603141896 at m = 116123 (c_m = 2938681335289198603141896 at the first)
+fingerprint sum c_m 3^m mod 2^61-1 = 394736550967477101
+exact value 40122795831148524928230686720/27582104377369449232322657763
+decimal (truncated) 1.454667681704099986987752334415
+stated fraction: equal
+stated maximizing knot m = 116123 only: yes
+printed upper bound 1.4546676818: holds (printed minus exact = 9.590e-11)
+VERDICT PASS
+== red control 1: height 50000 plus one unit, against the stated fraction
+CONTROL height 50000 changed by 1
+exact value 1925894199895133261563898101760/1323941010113735864404198696489
+stated fraction: DIFFERENT
+VERDICT REFUSED
+CONTROL height 50000 changed by 1
+exact value 1925894199895133261563898101760/1323941010113735864404198696489
+stated fraction: DIFFERENT
+VERDICT REFUSED
+== red control 2: claimed as an upper bound 1.4546676817 (below the exact value)
+exact value 40122795831148524928230686720/27582104377369449232322657763
+printed upper bound 1.4546676817: FAILS (printed minus exact = -4.100e-12)
+VERDICT REFUSED
+exact value 40122795831148524928230686720/27582104377369449232322657763
+printed upper bound 1.4546676817: FAILS (printed minus exact = -4.100e-12)
+VERDICT REFUSED
+== red control 3: height 0 (971162111320) negated, against the stated fraction
+CONTROL height 0 changed by -1942324222640
+exact value 168673517668293499430908477440/82467187740867972850451441329
+stated fraction: DIFFERENT
+VERDICT REFUSED
+CONTROL height 0 changed by -1942324222640
+exact value 168673517668293499430908477440/82467187740867972850451441329
+stated fraction: DIFFERENT
+VERDICT REFUSED
+== red control 4: the last height plus 10^6 units (S changes), against the stated fraction
+CONTROL height 327679 changed by 1000000
+exact value 120368467049324516702410260480/82746313275936642204709473289
+stated fraction: DIFFERENT
+VERDICT REFUSED
+CONTROL height 327679 changed by 1000000
+exact value 120368467049324516702410260480/82746313275936642204709473289
+stated fraction: DIFFERENT
+VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs give the stated fraction, the single maximizing knot 116123 and the same fingerprint of all 655,359 knot values; four red controls refused by both)
