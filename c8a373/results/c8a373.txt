@@ -1,0 +1,48 @@
+== program A (c8a373_a.py)
+program A (Euler-Maclaurin N = 40, p = 30 with sigma as an interval; Stirling shift 20; fixed point 2^-320)
+self-tests: pi, e, zeta(2 + 10^-30 i) = pi^2/6 within 2^-120: ok
+(1) Z changes sign on (706736257086734689/50000000000000000, 70673625708673469/5000000000000000): True, so zeta(1/2 + i gamma_1) = 0 there
+(2) Re zeta(sigma + 89/5 i) > 0 for 1/2 <= sigma <= 2: yes (24 subintervals, smallest lower end 1.348478), so |S(T0)| < 1/2
+    theta(89/5)/pi + 1 in [0.992434386719, 0.992434386719]; integers within 1/2: [1]
+    N(89/5) = 1; the claim N = 1: holds
+(3) 2/log gamma_1 in [0.7551060614321844382602, 0.7551060614321844386636]; printed upper bound 0.755107: holds
+    gamma_1^4 < 70673625708673469/5000000000000000^4 = 39916.2258 < 40000: True
+    8/log(3*10^12) <= 0.278458130228 < 0.279 < 2/log gamma_1: True
+VERDICT PASS
+== program B (c8a373_b.py)
+program B (CRVZ for eta with sigma as an interval, n = 90; Stirling shift 30, 15 terms; decimal 110 digits)
+self-tests: CRVZ on log 2, pi, zeta(2 + 10^-30 i) = pi^2/6 within 10^-60: ok
+(1) Z changes sign on (14.13472514173469378, 14.1347251417346938): True
+(2) Re zeta(sigma + 17.8 i) > 0 on [1/2, 2]: yes (40 pieces, least lower end 0.94700919), so |S(T0)| < 1/2
+    theta(T0)/pi + 1 in [0.99243438671870, 0.99243438671870]; integers within 1/2: [1]; N(T0) = 1; the claim N = 1: holds
+(3) 2/log gamma_1 in [0.7551060614321844382602, 0.7551060614321844386636]; printed upper bound 0.755107: holds
+    gamma_1^4 <= 39916.225842 < 40000: True; 8/log(3*10^12) <= 0.278458130228 < 0.279 < 2/log gamma_1: True
+VERDICT PASS
+== red control 1: the same count at height 22 (above the second zero, 21.022...), claimed N = 1
+program A (Euler-Maclaurin N = 40, p = 30 with sigma as an interval; Stirling shift 20; fixed point 2^-320) CONTROL height22
+(2) Re zeta(sigma + 22 i) > 0 for 1/2 <= sigma <= 2: yes (24 subintervals, smallest lower end 0.276788), so |S(T0)| < 1/2
+    N(22) = 2; the claim N = 1: FAILS
+VERDICT REFUSED
+program B (CRVZ for eta with sigma as an interval, n = 90; Stirling shift 30, 15 terms; decimal 110 digits) CONTROL height22
+(2) Re zeta(sigma + 22 i) > 0 on [1/2, 2]: yes (40 pieces, least lower end 0.48759943), so |S(T0)| < 1/2
+    theta(T0)/pi + 1 in [1.76173696672901, 1.76173696672901]; integers within 1/2: [2]; N(T0) = 2; the claim N = 1: FAILS
+VERDICT REFUSED
+== red control 2: 0.755106 (below 2/log gamma_1) claimed as the upper bound
+program A (Euler-Maclaurin N = 40, p = 30 with sigma as an interval; Stirling shift 20; fixed point 2^-320) CONTROL printed
+(3) 2/log gamma_1 in [0.7551060614321844382602, 0.7551060614321844386636]; printed upper bound 0.755106: FAILS
+VERDICT REFUSED
+program B (CRVZ for eta with sigma as an interval, n = 90; Stirling shift 30, 15 terms; decimal 110 digits) CONTROL printed
+(3) 2/log gamma_1 in [0.7551060614321844382602, 0.7551060614321844386636]; printed upper bound 0.755106: FAILS
+VERDICT REFUSED
+== red control 3: a bracket above gamma_1, (14.13472514173469381, 14.13472514173469383)
+program A (Euler-Maclaurin N = 40, p = 30 with sigma as an interval; Stirling shift 20; fixed point 2^-320) CONTROL bracket
+(1) Z changes sign on (1413472514173469381/100000000000000000, 1413472514173469383/100000000000000000): False, so zeta(1/2 + i gamma_1) = 0 there
+VERDICT REFUSED
+program B (CRVZ for eta with sigma as an interval, n = 90; Stirling shift 30, 15 terms; decimal 110 digits) CONTROL bracket
+(1) Z changes sign on (14.13472514173469381, 14.13472514173469383): False
+VERDICT REFUSED
+== agreement: 2/log gamma_1 (22 digits) and the integer within 1/2 of theta(17.8)/pi + 1, A against B
+agreement: True
+[0.7551060614321844382602, 0.7551060614321844386636]
+1/2: [1]
+RESULT: ALL CHECKS PASS (both programs: the zero 1/2 + i gamma_1 with 14.13472514173469378 < gamma_1 < 14.13472514173469380 is the only zero with 0 < gamma <= 17.8; 2/log gamma_1 = 0.75510606143218443826... <= 0.755107; gamma_1^4 < 40000; 8/log(3*10^12) < 0.279; three red controls refused by both)

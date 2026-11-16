@@ -1,0 +1,62 @@
+== PR #372 (1d): c006_31bbf628_int56.json (ArthurAnache/Hackathon-AI-Reasearch @ c0f8d18), program A then program B
+   (checked against the stated fraction, the stated knot k = 12511, and 1.4540711000681049, the printed figure rounded up)
+cells n = 51200, negative heights 14167, largest |v_i| = 72057594037927936, S = 19122158522613018945
+max |c_m| = 5192296860720458560490724514234172 at m = 12511 (sign +); 41 values summed again term by term, all equal
+fingerprint sum c_m 3^m mod 2^61-1 = 2037259568886248206
+exact value 21267647941510998263770007610303168512/14626277862557668614837367632277156521
+decimal (truncated) 1.454071100068104835482988050925
+stated fraction: equal
+stated maximizing knot m = 12511 only: yes
+printed upper bound 1.4540711000681049: holds (printed minus exact = 6.452e-17)
+VERDICT PASS
+cells n = 51200, negative heights 14167, largest |v_i| = 72057594037927936, S = 19122158522613018945
+max |c_m| = 5192296860720458560490724514234172 at m = 12511 (c_m = 5192296860720458560490724514234172 at the first)
+fingerprint sum c_m 3^m mod 2^61-1 = 2037259568886248206
+exact value 21267647941510998263770007610303168512/14626277862557668614837367632277156521
+decimal (truncated) 1.454071100068104835482988050925
+stated fraction: equal
+stated maximizing knot m = 12511 only: yes
+printed upper bound 1.4540711000681049: holds (printed minus exact = 6.452e-17)
+VERDICT PASS
+== the printed figure 1.4540711000681048 itself, as an upper bound (reader's note: it is below the exact value)
+exact value 21267647941510998263770007610303168512/14626277862557668614837367632277156521
+printed upper bound 1.4540711000681048: FAILS (printed minus exact = -3.548e-17)
+VERDICT REFUSED
+exact value 21267647941510998263770007610303168512/14626277862557668614837367632277156521
+printed upper bound 1.4540711000681048: FAILS (printed minus exact = -3.548e-17)
+VERDICT REFUSED
+== red control 1: height 25000 plus one unit, against the stated fraction
+CONTROL height 25000 changed by 1
+exact value 132922799634443739148562547564394803200/91414236640985428852294626963038737729
+stated fraction: DIFFERENT
+VERDICT REFUSED
+CONTROL height 25000 changed by 1
+exact value 132922799634443739148562547564394803200/91414236640985428852294626963038737729
+stated fraction: DIFFERENT
+VERDICT REFUSED
+== red control 2: claimed as an upper bound 1.4540711000681047
+exact value 21267647941510998263770007610303168512/14626277862557668614837367632277156521
+printed upper bound 1.4540711000681047: FAILS (printed minus exact = -1.355e-16)
+VERDICT REFUSED
+exact value 21267647941510998263770007610303168512/14626277862557668614837367632277156521
+printed upper bound 1.4540711000681047: FAILS (printed minus exact = -1.355e-16)
+VERDICT REFUSED
+== red control 3: height 0 (17612588903005780) negated, against the stated fraction
+CONTROL height 0 changed by -35225177806011560
+exact value 23283180215534098353111157430495846400/14572440980364224586714910071977781529
+stated fraction: DIFFERENT
+VERDICT REFUSED
+CONTROL height 0 changed by -35225177806011560
+exact value 23283180215534098353111157430495846400/14572440980364224586714910071977781529
+stated fraction: DIFFERENT
+VERDICT REFUSED
+== red control 4: the last height plus 10^6 units (S changes), against the stated fraction
+CONTROL height 51199 changed by 1000000
+exact value 21267647941510998263770007610303168512/14626277862559198387519176713792756521
+stated fraction: DIFFERENT
+VERDICT REFUSED
+CONTROL height 51199 changed by 1000000
+exact value 21267647941510998263770007610303168512/14626277862559198387519176713792756521
+stated fraction: DIFFERENT
+VERDICT REFUSED
+RESULT: ALL CHECKS PASS (both programs give the stated fraction, the single maximizing knot 12511 and the same fingerprint of all 102,399 knot values; the printed 1.4540711000681048 is 3.5e-17 below the exact value, 1.4540711000681049 holds; four red controls refused by both)
