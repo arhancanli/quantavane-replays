@@ -1,0 +1,2 @@
+program 1: B in [0.2536269201610361 0.2536269202551648]; program 2: B in [0.2536269162787913 0.2536269293400451]
+RESULT: ALL CHECKS PASS (both programs accept the certificate, B < 0.2536331090204145 in both, and their enclosures of B overlap)

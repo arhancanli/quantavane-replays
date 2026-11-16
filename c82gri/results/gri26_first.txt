@@ -1,0 +1,35 @@
+82a [Gri26] C_82 <= 0.2536331090204145 (merged row; maaxgrin/zhang-zagier-c82-bound @ cb88f92, the record qstar_lp_grid32768_maxden1e7 of runs/qstar_targeted_refined.jsonl, the one its certified run names)
+  check SHA-256 of gri26/certificate.json matches our extraction (fetch.sh) of line 1 of runs/qstar_targeted_refined.jsonl, sha256 698a2ed5...b1a6: PASS (ccbda5c371802b765e7a01f5a9a5a7b7b84c907719a28ff79a7ef44ded0f3aee)
+  factors: 6 denominators (P7^1, P9^1, Q1^1, Q2^1, R0^1, R2^1), 7 numerators; 354 roots after composing with T
+  check H1 P7: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 12, lc 1, m 1)
+  check H1 P9: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 16, lc 1, m 1)
+  check H1 Q1: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 Q2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 R0: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 R2: degree >= 1, leading coefficient +-1, multiplicity >= 1: PASS (deg 28, lc 1, m 1)
+  check H1 P1: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc 1, q = 56823994/2143341)
+  check H1 P2: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 1, lc -1, q = 71890668/3022795)
+  check H1 P3: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 3, lc 1, q = 7593829/7822968)
+  check H1 P4: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 4, lc 1, q = 45179616/9982079)
+  check H1 P5: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 287519/7501824)
+  check H1 P6: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 8, lc 1, q = 24396374/5845145)
+  check H1 P8: degree >= 1, nonzero leading coefficient, q >= 0: PASS (deg 12, lc 1, q = 12389192/7349107)
+  check H2 deg A < D: PASS (D = 140, deg A = 472651158004937546429382156014863230202224713/3774031381935655613867715451591849269426432 = 0.894555280116 D)
+  check H3 gcd(S_i, R_j) = 1 for all 42 pairs with q_i > 0: PASS (modulo prime(s) [2305843009213693951])
+  check E1 every root of every F o T enclosed (13 factors, 354 discs, pairwise disjoint per factor): PASS (largest disc radius 2^-303; 2.6 s)
+  check E1 self-test: root sums match Vieta and sum ln|r| encloses ln|a_0/a_n|: PASS
+  E2 log M(Q o T): [35.4992299049, 35.4992299050]  (/D: [0.2535659278923, 0.2535659278924])
+  check E3 self-test: g from the certified roots overlaps g from Horner on the exact coefficients (12 of 12 random points compared): PASS
+  E3 int_0^1 max(0, g) dt: [0.00853891, 0.00853894]  (823 panels: 520 negative, 268 positive, 35 crude, 567 split; depth 9..26; crude width 2.652e-11; 2.7 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 6 denominators: PASS ([-35.499231, -35.499229] vs [-35.499230, -35.499229]; 578 panels, 1.4 s)
+  check E3 self-test (Jensen): int g over all panels equals sum w ln M(F o T), 4 numerators away from the circle: PASS ([14.686325, 14.686327] vs [14.686326, 14.686327]; 321 panels, 0.2 s)
+  B: [0.2536269201610361, 0.2536269202551648]  (width 9.41e-11)
+  check E4 B < 0.2536331090204145, the printed upper bound (B_hi = 0.2536269202551648; margin 6.189e-06): PASS
+  stated value: README: the numerical value for this Q 0.253626920959: above our enclosure by 7.04e-10 (not a condition of the bound; reported in the replay)
+  stated value: runs/qstar_cert_roots_262144_target253635.jsonl: bound_upper 0.2536331090204145: above our enclosure by 6.19e-06 (not a condition of the bound; reported in the replay)
+  check R1 red: the bound 0.2536269201609, just below our enclosure, is not implied (B_lo > it): PASS
+  check R2 red: P7 added as a numerator (q = 1/1000) is caught by H3 (exact gcd of degree 12): PASS
+  check R3 red: P7 doubled (not monic) is refused by H1: PASS
+  check R4 red: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+  run time: 7.4 s
+  RESULT: ALL CHECKS PASS

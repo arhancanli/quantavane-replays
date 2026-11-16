@@ -1,0 +1,43 @@
+self-tests of the arithmetic, the root certification and the integrator
+  check pi enclosed (width 1152 units of 2^-256): PASS
+  check exp(2 pi i/6) = (1 + i sqrt(3))/2 inside the ball: PASS (radius 3 units)
+  check exp(2 pi i/4) = i inside the ball: PASS
+  check ln 2 enclosed: PASS
+  check log M((x - 2) o T) = ln 2: PASS (['0.693147180559', '0.693147180559'])
+  check the roots of (2x - 1) o T lie inside the circle: PASS (['0.000000000000', '0.000000000000'])
+  check int_0^1 log|F(T(u))| dt = ln 2 for F = [1, -2] (integrator, Jensen): PASS ([0.69314718055994, 0.69314718055994], {'neg': 0, 'pos': 1024, 'crude': 0, 'split': 0})
+  check int_0^1 log|F(T(u))| dt = ln 2 for F = [2, -1] (integrator, Jensen): PASS ([0.69314718055994, 0.69314718055994], {'neg': 0, 'pos': 1024, 'crude': 0, 'split': 0})
+  check certification accepts a cubic's roots, and a root moved by 2^-100 gives a disc of radius >= 2^-101: PASS
+  check two equal approximations are refused (discs not disjoint): PASS
+  RESULT: ALL CHECKS PASS
+PR #280 [Pat26] updated 14 Nov: C_82 < 0.2536331090204145* (tao/certificates/c82/v6 at e3bae2e), program 2
+  check SHA-256 of the certificate is the stated ccbda5c37180...: PASS (ccbda5c371802b765e7a01f5a9a5a7b7b84c907719a28ff79a7ef44ded0f3aee)
+  factors: 6 denominators (deg 12 ^ 1, deg 16 ^ 1, deg 28 ^ 1, deg 28 ^ 1, deg 28 ^ 1, deg 28 ^ 1), 7 numerators
+  check H1 every denominator monic up to sign with a positive integer multiplicity, every numerator with q >= 0 (6 + 7 factors): PASS
+  check H2 deg A < D: PASS (D = 140, deg A = 472651158004937546429382156014863230202224713/3774031381935655613867715451591849269426432 = 0.894555280116 D)
+  check H3 S_i, R_j coprime for all 42 pairs with q_i > 0 (Euclid modulo 10^9+7): PASS
+  check E1 every root of every F o T in its own certified disc (Newton inclusion, 13 factors, 354 discs, pairwise disjoint per factor): PASS (largest radius 2^-249)
+  sum m_j log M(R_j o T): [35.4992299049, 35.4992299049]
+  check part 0/2 (pos) used the same certificate and the same certified roots: PASS
+  check part 0/2 (pos): every panel resolved by depth 60: PASS ({'neg': 536, 'pos': 106, 'crude': 16, 'split': 146}, depth 11..18, 9 s)
+  check part 1/2 (pos) used the same certificate and the same certified roots: PASS
+  check part 1/2 (pos): every panel resolved by depth 60: PASS ({'neg': 559, 'pos': 81, 'crude': 16, 'split': 144}, depth 11..18, 9 s)
+  check part 0/1 (jensen) used the same certificate and the same certified roots: PASS
+  check part 0/1 (jensen): every panel resolved by depth 60: PASS ({'neg': 0, 'pos': 1485, 'crude': 0, 'split': 461}, depth 11..16, 16 s)
+  check the pos parts cover every panel: PASS ([(0, 2), (1, 2)])
+  check the jensen parts cover every panel: PASS ([(0, 1)])
+  int_0^1 max(0, g) dt: [0.00853837, 0.00854020]  ({'neg': 1095, 'pos': 187, 'crude': 32, 'split': 290})
+  check self-test (Jensen): int_0^1 sum_j (-m_j) log|R_j(T(u))| dt overlaps -sum_j m_j log M(R_j o T): PASS ([-35.499229, -35.499229] vs [-35.499229, -35.499229])
+  B: [0.2536269162787913, 0.2536269293400451]  (width 1.31e-08)
+  check B < 0.2536331090204145, the printed upper bound: PASS (margin 6.180e-06)
+  check red control 1: the bound 0.2536269162786, just below our enclosure, is not implied: PASS
+  check red control 2: P7 added as a numerator (q = 1/1000) is refused by H3: PASS
+  check red control 3: P7 doubled (not monic) is refused by H1: PASS
+  check red control 4: every q_i scaled so that deg A = D + 1 is refused by H2: PASS
+  run time (combine): 0.4 s
+  RESULT: ALL CHECKS PASS
+  parts (each certifies the cached approximations again):
+    approximations for 13 factors, 13 certified, 1.6 s
+    part 0/2 (pos): [0.00228671, 0.00228707], {'neg': 536, 'pos': 106, 'crude': 16, 'split': 146}, fails 0, depth 11..18, roots 0.4 s, integral 9.1 s
+    part 1/2 (pos): [0.00198247, 0.00198302], {'neg': 559, 'pos': 81, 'crude': 16, 'split': 144}, fails 0, depth 11..18, roots 0.3 s, integral 9.3 s
+    part 0/1 (jensen): [-17.74961495, -17.74961495], {'neg': 0, 'pos': 1485, 'crude': 0, 'split': 461}, fails 0, depth 11..16, roots 0.4 s, integral 15.6 s

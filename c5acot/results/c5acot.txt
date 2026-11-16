@@ -1,0 +1,60 @@
+== program A (c5acot_a.py)
+== asymptotic: upsilon = 10, K = 6 atoms, N = 200, delta = 1/20, sigma = 20
+   p_i >= 0, sum p_i = 1, shapes: True; (i) t = 1 on (0, sigma - upsilon): True; (ii) int w_i = 1: True; strong (w, t >= 0): True
+   (vi) min over knots of E(w * t) = 1.000000000000000 at x = 200 delta (>= 1: True)
+   alpha = E||t||^2 - sigma = 0.944813043789150...; beta = E||w||^2 = 0.941258026241787...
+   beta = 17721303845724881168.../18827253900273972602... (61 and 61 digits)
+   beta equals the fraction printed in Appendix A.3: True
+   2 sqrt(alpha beta) >= 1.886067719637... <= 1.88607: True; 4 (1 + upsilon sqrt(beta/alpha))^2 <= 483: True
+   the row: sqrt(alpha beta) = 0.943033859818... <= 0.94304: True
+   key asymptotic 0.94481304378915084085 0.94125802624178782959
+== explicit: upsilon = 3, K = 5 atoms, N = 32, delta = 3/32, sigma = 6
+   p_i >= 0, sum p_i = 1, shapes: True; (i) t = 1 on (0, sigma - upsilon): True; (ii) int w_i = 1: True; strong (w, t >= 0): True
+   (vi) min over knots of E(w * t) = 1.000000000000000 at x = 32 delta (>= 1: True)
+   alpha = E||t||^2 - sigma = 1.630562624521578...; beta = E||w||^2 = 0.547609565133438...
+   beta = 12202340518338097915.../22282920707136844948... (29 and 29 digits)
+   2 sqrt(alpha beta) >= 1.889880091156... <= 1.8898801: True; 4 (1 + upsilon sqrt(beta/alpha))^2 <= 30: True
+   key explicit 1.63056262452157843046 0.54760956513343842563
+VERDICT PASS
+== program B (c5acot_b.py)
+== asymptotic: upsilon 10, K 6, N 200; shapes and p: True; (i): True; (ii): True; strong: True
+   (vi): E(w * t) linear between knots (all 400 midpoints): True; min at knots 1.000000000000000 (>= 1: True)
+   alpha 0.94481304378915084085, beta 0.94125802624178782959; 2 sqrt(alpha beta) <= 1.886067719637 (<= 1.88607: True); 4(1 + upsilon sqrt(beta/alpha))^2 <= 482.344284 (<= 483: True)
+   the row: sqrt(alpha beta) <= 0.943033859819 (<= 0.94304: True)
+   key asymptotic 0.94481304378915084085 0.94125802624178782959
+== explicit: upsilon 3, K 5, N 32; shapes and p: True; (i): True; (ii): True; strong: True
+   (vi): E(w * t) linear between knots (all 64 midpoints): True; min at knots 1.000000000000000 (>= 1: True)
+   alpha 1.63056262452157843046, beta 0.54760956513343842564; 2 sqrt(alpha beta) <= 1.889880091156 (<= 1.8898801: True); 4(1 + upsilon sqrt(beta/alpha))^2 <= 29.998698 (<= 30: True)
+   key explicit 1.63056262452157843046 0.54760956513343842563
+VERDICT PASS
+== red controls, A: the claim 0.94303; a middle-third table height set to 0.999; the mirroring ignored
+   p_i >= 0, sum p_i = 1, shapes: True; (i) t = 1 on (0, sigma - upsilon): True; (ii) int w_i = 1: True; strong (w, t >= 0): True
+   (vi) min over knots of E(w * t) = 1.000000000000000 at x = 200 delta (>= 1: True)
+   the row: sqrt(alpha beta) = 0.943033859818... <= 0.94303: False
+VERDICT REFUSED
+   p_i >= 0, sum p_i = 1, shapes: True; (i) t = 1 on (0, sigma - upsilon): False; (ii) int w_i = 1: True; strong (w, t >= 0): True
+   (vi) min over knots of E(w * t) = 0.999964319581229 at x = 291 delta (>= 1: False)
+   the row: sqrt(alpha beta) = 0.943003506578... <= 0.94304: True
+VERDICT REFUSED
+   p_i >= 0, sum p_i = 1, shapes: True; (i) t = 1 on (0, sigma - upsilon): True; (ii) int w_i = 1: True; strong (w, t >= 0): True
+   (vi) min over knots of E(w * t) = 0.821279088077138 at x = 400 delta (>= 1: False)
+   the row: sqrt(alpha beta) = 0.943033859818... <= 0.94304: True
+VERDICT REFUSED
+== red controls, B: the claim 0.94303; 1/1000 of probability moved from atom 1 to atom 0; a window height raised
+== asymptotic: upsilon 10, K 6, N 200; shapes and p: True; (i): True; (ii): True; strong: True
+   (vi): E(w * t) linear between knots (all 400 midpoints): True; min at knots 1.000000000000000 (>= 1: True)
+   the row: sqrt(alpha beta) <= 0.943033859819 (<= 0.94303: False)
+VERDICT REFUSED
+== asymptotic: upsilon 10, K 6, N 200; shapes and p: True; (i): True; (ii): True; strong: True
+   (vi): E(w * t) linear between knots (all 400 midpoints): True; min at knots 0.999866258380094 (>= 1: False)
+   the row: sqrt(alpha beta) <= 0.943218973888 (<= 0.94304: False)
+VERDICT REFUSED
+== asymptotic: upsilon 10, K 6, N 200; shapes and p: True; (i): True; (ii): False; strong: True
+   (vi): E(w * t) linear between knots (all 400 midpoints): True; min at knots 1.000022820244795 (>= 1: True)
+   the row: sqrt(alpha beta) <= 0.943067098919 (<= 0.94304: False)
+VERDICT REFUSED
+== agreement: alpha and beta of both witnesses (20 digits), A against B
+agreement: True
+key asymptotic 0.94481304378915084085 0.94125802624178782959
+key explicit 1.63056262452157843046 0.54760956513343842563
+RESULT: ALL CHECKS PASS (both witnesses satisfy every condition of Definition 2.2 exactly; (10, alpha, beta) with alpha = 0.94481304378915..., beta = 0.94125802624178... (the fraction printed in Appendix A.3), 2 sqrt(alpha beta) = 1.88606771963... <= 1.88607, threshold 482.34 <= 483, sqrt(alpha beta) = 0.94303385981... <= 0.94304; (3, 1.63056262452..., 0.54760956513...) gives 1.88988009115... <= 1.8898801 and 29.9987 < 30; three red controls refused by each)
