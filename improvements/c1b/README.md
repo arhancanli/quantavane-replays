@@ -1,5 +1,12 @@
 # C1b <= 0.3808585498 (Erdős minimum overlap constant, upper bound)
 
+> **Correction, 17 Nov 2026.** This is not the lowest public value. Four step functions posted on
+> [EinsteinArena](https://einsteinarena.com/) between 16 and 29 October 2026 give lower exact upper bounds, the lowest
+> being solution 2643 (Blob, 65,536 steps): $C_{1b} \le 0.3808562597779765\ldots \le 0.3808562598$; also solutions
+> 2644 (AncientScience-Evolve-2, 0.3808564037), 2628 (NIGHTFALL, Devin Wright, 0.3808564044) and 2623 (CristianBudala,
+> 0.3808565883). We evaluated all four exactly with two programs (read from the EinsteinArena API on 17 Nov 2026). Our
+> 114,688-step function below remains a valid upper bound, found independently; credit for the lower values is theirs.
+
 A new upper bound for $C_{1b}$ of the
 [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/1b.html) (10 Nov 2026):
 
