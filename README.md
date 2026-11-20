@@ -8,6 +8,24 @@ have no connection with any of the authors.
 An index of every asterisked bound in that repository, with the replays posted for each (ours and others'), is in
 [ASTERISK_INDEX.md](ASTERISK_INDEX.md) (snapshot of 5 November 2026, with a section on what changed to 10 November).
 
+To re-run a replay with one command: `./check.sh --list` lists the folders, and `./check.sh FOLDER` downloads that
+folder's certificate (when it has one) from its pinned commit, checks the SHA-256 and runs the folder's own
+`run_all.sh`, printing PASS or FAIL.
+
+## Checked or cited by others
+
+- Advatiya Thalluri, *Independent verification of recently claimed records in extremal mathematics (November 2026)*
+  (Zenodo, 4 November 2026, [doi:10.5281/zenodo.23938910](https://doi.org/10.5281/zenodo.23938910)), recomputed 46
+  bounds from open pull requests of the optimization constants repository with his own checkers; for 12 of them
+  there are two independent readers, and for most of these the second is this repository. We thank him for the
+  comparison.
+- The descriptions of [#330](https://github.com/teorth/optimizationproblems/pull/330) (rpinho),
+  [#339](https://github.com/teorth/optimizationproblems/pull/339) and
+  [#340](https://github.com/teorth/optimizationproblems/pull/340) (mizopl) cite replays from this repository; #340 asks
+  for the asterisk on the 3a row [M2026] to come off on that evidence.
+
+If you use one of these replays in your own work, we would be glad to hear of it, and to list it here.
+
 ## How to cite
 
 Cite this repository, with the constant's page in the optimization constants repository. For one replay, give its
