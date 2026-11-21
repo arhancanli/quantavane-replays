@@ -1,92 +1,137 @@
-# Euclidean TSP (Beardwood-Halton-Hammersley) constant: beta >= 0.64254, a sharper first term in Dong and Cao's series
+# Euclidean TSP (Beardwood-Halton-Hammersley) constant: beta >= 0.64295, sharper terms in Dong and Cao's series
 
-Constant 12 of the [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/12a.html):
-the length of the shortest tour through n uniform random points of the unit square is asymptotic to beta sqrt(n).
+Constant 12 of the [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/12a.html).
+The length of the shortest tour through n uniform random points of the unit square is asymptotic to beta sqrt(n).
 
 ## The result
 
 Dong and Cao ([arXiv:2610.02809](https://arxiv.org/abs/2610.02809), Theorem 3.11) prove, for every K >= 3,
 
-$$\beta \geq \frac58 + \sum_{k=3}^{K} C_k,\qquad C_k = \frac{\Gamma(k-\frac12)}{2\,k!}\int_{(\mathbb R^2)^{k-1}} \frac{g(G_1(y))}{A(y)^{k-1/2}}\,dy_2\cdots dy_k ,$$
+$$\beta \geq \frac58 + \sum_{k=3}^{K} C_k,\qquad C_k = \frac{\Gamma(k-\frac12)}{2\,k!}\int_{(\mathbb R^2)^{k-1}} \frac{g(G_1(y))}{A(y)^{k-1/2}}\,dy_2\cdots dy_k .$$
 
-where $y_1 = 0$, $G_1(y)$ joins two points at distance at most 1, $g = q - D$ is their lower bound for the excess of
-the path-cover number of a connected component over its degree count, and $A(y)$ is the area of the union of the unit
-discs centred at the $y_i$. Each $C_k$ is bounded from below on its own; they certify $C_3 \geq 0.01113528859$,
-$C_4 \geq 0.005040573276$ and $C_5 \geq 0.001015487669$, giving $\beta \geq 0.6421913$.
+The symbols are:
+- $y_1 = 0$;
+- $G_1(y)$ is the graph joining two points at distance at most 1;
+- $g = q - D$ is their lower bound for the excess of a connected component's path-cover number over its degree count;
+- $A(y)$ is the area of the union of the unit discs at the $y_i$.
 
-We certify a sharper value of the first term:
+Each $C_k$ is bounded from below separately. Dong and Cao certify $C_3 \geq 0.01113528859$, $C_4 \geq 0.005040573276$ and
+$C_5 \geq 0.001015487669$, giving $\beta \geq 0.6421913$. We certify sharper values of the first two:
 
-$$C_3 \geq 0.0114906 \quad\text{(program B: } 0.011490649265622\text{; program A: } 0.011490649266\text{)},$$
+| term | Dong-Cao | ours (program A / program B) | method |
+| --- | --- | --- | --- |
+| $C_3$ | 0.01113528859 | 0.0114906492656 / 0.011490649265622 | exact union areas on (a, b, angle) cells |
+| $C_4$ | 0.005040573276 | 0.005450602910 / 0.005450602904 | DC's cubes, adaptive to side 1/512, exact three-disc areas |
+| $C_5$ | 0.001015487669 | (theirs is used; see below) | |
 
-so that, with Dong and Cao's own $C_4$ and $C_5$ unchanged,
+Using the smaller value of each pair:
 
-$$\beta \geq \frac58 + 0.0114906 + 0.005040573276 + 0.001015487669 \geq 0.64254.$$
+$$\beta \geq \frac58 + 0.0114906492 + 0.0054506029 + 0.0010154876 = 0.64295673\ldots \geq 0.64295,$$
 
-The best lower bound listed on the repository's page today is 0.6277 (Gaudio and Jaillet 2020); Dong and Cao's
-0.6421913 is not listed there. The improvement over Dong and Cao is about $3.5 \cdot 10^{-4}$. The lower-bound formula
-(their Theorem 3.11) and the values of $C_4$ and $C_5$ (their Section 3.3.1, Table 1) are Dong and Cao's; only the
-evaluation of $C_3$ is new. The combined bound relies on their $C_4$ and $C_5$ computations, whose code is not public
-("available upon request"); our $C_3$ alone gives $5/8 + C_3 \geq 0.6364906$.
+with Dong and Cao's $C_5$ unchanged.
 
-## Why C_3 is a three-dimensional integral
+This is $7.65 \cdot 10^{-4}$ above Dong and Cao's 0.6421913; the repository's page lists 0.6277. The lower-bound
+formula, the cube method and the value of $C_5$ are Dong and Cao's. What is new is the evaluation of $C_3$ and $C_4$:
+exact areas of unions of three discs, planar Kneser-Poulsen monotonicity, and adaptive refinement. Each of the two
+improves theirs on its own. Our own $C_5$ computation (7 dimensions, cubes down to side 1/16) reached only 0.000945
+at the resolution we could afford today, below their 0.0010155, so theirs is used.
 
-For three points, a connected $G_1$ is a path ($q = D = 1$, so $g = 0$) or a triangle ($q = 1$, $D = 0$, so $g = 1$).
-Hence $C_3 = \frac{\sqrt\pi}{16}\int A^{-5/2}$ over pairs $(y_2, y_3)$ with $|y_2|, |y_3|, |y_2 - y_3| \leq 1$. With
-$a = |y_2|$, $b = |y_3|$ and $\theta \in [0, \pi]$ the angle between them ($dy_2\,dy_3 = 4\pi\, a\, b\, da\, db\, d\theta$) and
-$G(A) = \int_0^\infty r^4 e^{-A r^2} dr = 3\sqrt\pi / (8 A^{5/2})$:
+## C_3: a three-dimensional integral
 
-$$C_3 = 4\pi \int_0^1\!\!\int_0^1\!\!\int_0^\pi \tfrac16\,\mathbf 1[c \leq 1]\; G(A(a,b,c))\; a\, b\; d\theta\, db\, da, \qquad c^2 = a^2 + b^2 - 2ab\cos\theta .$$
+For three points, a connected $G_1$ is either a path ($q = D = 1$, so $g = 0$) or a triangle ($g = 1$). Hence
+$C_3 = \frac{\sqrt\pi}{16}\int A^{-5/2}$ over pairs $(y_2, y_3)$ with all three distances at most 1. In the coordinates
+$a = |y_2|$, $b = |y_3|$ and $\theta$ the angle between them, $dy_2\,dy_3 = 4\pi\,a\,b\,da\,db\,d\theta$.
 
-## How each cell is bounded
+Each cell of $[0,1]^2 \times [0,\pi]$ is handled as follows:
+- if its largest $c = |y_2 - y_3|$ exceeds 1, it counts as zero;
+- otherwise it is bounded below by its weight times $\frac16 G(\bar A)$, where $G(A) = 3\sqrt\pi/(8A^{5/2})$ and
+  $\bar A$ is the exact union area at the cell's largest triangle.
 
-The cube $[0,1]^2 \times [0,\pi]$ is cut into cells. On a cell, the largest $c$ is computed from rational bounds of
-$\cos\theta$ at the cell's corners. If it exceeds 1 the cell may contain paths, and it counts as **zero**. Otherwise every
-configuration in it is a triangle, and the cell is bounded below by its weight $\frac{a_1^2 - a_0^2}{2}\cdot\frac{b_1^2 - b_0^2}{2}\cdot(\theta_1 - \theta_0)$
-times $\frac16 G(\bar A)$. Here $\bar A$ is the exact union area at $(a_1, b_1, \bar c)$, with $\bar c$ the cell's largest $c$
-rounded up to the grid $1/n_c$. If that triple is not a triangle, it is expanded until it is one.
+The union area never decreases when no pairwise distance decreases. This is the planar Kneser-Poulsen theorem
+(K. Bezdek and R. Connelly, J. reine angew. Math. 553 (2002)).
 
-By the planar Kneser-Poulsen theorem (K. Bezdek and R. Connelly, J. reine angew. Math. 553 (2002)), the area of a union
-of unit discs does not decrease when no pairwise distance decreases. So $A \leq \bar A$ on the whole cell, and $G$
-decreases in $A$.
+Programs: `tsp_c3_a.py` (integer intervals, Green's theorem) and `tsp_c3_b.py` (40-digit decimals,
+inclusion-exclusion). On the grid 120/300/160 they agree to 12 digits.
 
-## Two programs that share no code
+## C_4: Dong and Cao's cubes with sharper areas
 
-    python3 -I tsp_c3_a.py --na 120 --nt 300 --nc 160 --claim 0.6425 --controls
-    python3 -I tsp_c3_b.py --na 120 --nt 300 --nc 160 --claim 0.6425 --controls
+The integrals use Dong and Cao's coordinates (their (20)) on $|y_j| \leq k-2$ (their (25)). Each cube is handled as
+follows:
+- exact integer bounds of every squared distance give the edges that are present on the whole cube, absent on the
+  whole cube, or undetermined;
+- the cube's $g$ is the minimum of $g$ over every graph compatible with them;
+- the area is bounded above by the smaller of two forms, using the tables:
+  - $A_3(T) + c(d_{lm})$;
+  - $A_3(T) + A_3(l, m_1, m_2) - A_2(m_1, m_2)$.
 
-| program | arithmetic | union of three unit discs | C_3 at 120/300/160 | run time |
-| --- | --- | --- | --- | --- |
-| `tsp_c3_a.py` (with `lower_pairs_a.py`, `lower_triples_a.py`) | integer intervals | Green's theorem over the uncovered arcs | 0.011490649266 | about 31 min (load 60-120) |
-| `tsp_c3_b.py` (with `lower_pairs_b.py`, `lower_triples_b.py`) | 40-digit decimals, outward 1e-30 margins | inclusion-exclusion, triple intersection from arcs | 0.011490649265622 | about 13 min |
+Here $T$ is any triple of the four points and $l$ the remaining point. $A_3$ is the union area of three unit discs at the rounded-up largest distances, by Kneser-Poulsen.
+$c(d) = \pi - \text{lens}(d)$ is the part of one disc outside another. $A_2$ is the union area of two discs, at the
+rounded-down smallest distance. The second form uses
+$|B_l \setminus (B_{m_1}\cup B_{m_2})| = |B_l\cup B_{m_1}\cup B_{m_2}| - |B_{m_1}\cup B_{m_2}|$.
 
-Both programs use only the Python standard library. Their arithmetic and their union-area routines share no code; the
-discretisation (cells, corner rule, rounding of $c$ to the grid) is the same design in both. On the coarse grids
-12/24/12 and 24/48/24 they agree to the 12th digit (0.00953280475, 0.01057339274), and on the final grid program A's
-exact rational lower bound 0.01149064926562172913... agrees with program B's 0.011490649265622 in every printed digit.
-A third program written separately inside the lab (interval arithmetic with mpmath, its own union routine by polar
-integration over Voronoi sectors) reproduces the cell sums exactly on the grids 24/48/24 and 60/120/80 and on the first
-16 rows of the final grid.
+$A_3$, $c$ and $A_2$ come from a table at spacing 1/64 (`c4_tables.py`):
+- $A_3$ and $c$ are rounded up at 20 digits;
+- $A_2$ is rounded down.
 
-Red controls (both programs):
-- the claim moved up past the certified value is refused;
-- a coarse grid gives a smaller value;
-- counting the cells that mix triangles and paths as triangles raises the value, so the zero weight is in effect.
+The table is computed twice, once with integer intervals and Green's theorem and once with 40-digit decimals and
+inclusion-exclusion. The two files are byte-identical. It is stored as `tables/tables_64.txt.gz` (SHA-256 of the
+uncompressed file `2261b3183f538e18f15eafb5017f50ea81a69f218c21401bf51b6f5296b3e320`) and `tables/tables_64_L.txt`.
 
-Outputs: `results/`.
+Cubes are split adaptively. A heuristic estimate of the possible gain decides where to split, and validity does not
+depend on those decisions.
 
-The four `lower_*` files are the programs of our certified lower bound for the minimum spanning tree constant (the
-isolated-triples term), reused unchanged. The C_3 programs take the triple term with cut 0 and with the path weight 0.
-Program A computes $G$ in closed form ($3\sqrt\pi / (8A^{5/2})$ in interval arithmetic), because the MST routine's
-series at cut 0 is very slow.
+The two implementations, `c4_a.c` and `c4_b.c`, are written separately from each other:
+- program A uses recursion, interval-of-differences distances and subset enumeration;
+- program B uses an explicit stack, clamped box distances, union-find for $g$, a scan of all edge masks and
+  bisection for the table indices.
 
-## Not claimed
+The arithmetic is IEEE double with outward margins:
+- table values are moved one ulp outward;
+- every area sum is moved up;
+- `pow` is lowered by $10^{-13}$ relative;
+- the totals are lowered by $10^{-12}$ (A) or $10^{-9}$ (B) relative.
 
-- No peer review yet.
-- Dong and Cao's preprint has not been refereed either. This bound inherits their Theorem 3.11 and their certified
-  $C_4$ and $C_5$.
-- Non-rigorous estimates of the exact $C_3$: about 0.011715 (adaptive quadrature in the angle with Gauss-Legendre in
-  $a$, $b$; Monte Carlo 0.011725 $\pm$ 0.000015). The certified value is 98.1% of it; the ceiling of this route with
-  Dong and Cao's $C_4$, $C_5$ is about 0.64277. Their importance-sampling estimator, reimplemented, gives
-  $C_4 \approx 0.00639$ and $C_5 \approx 0.00392$ (their certified 0.00504 and 0.00102): the larger room is there.
+Commands:
+
+    gunzip -k tables/tables_64.txt.gz
+    cc -O2 -o c4_a c4_a.c -lm && cc -O2 -o c4_b c4_b.c -lm
+    C4_LTAB=tables/tables_64_L.txt C4_DEPTH=6 C4_TAU=1e-11 ./c4_a tables/tables_64.txt 8 0.0052
+    C4_LTAB=tables/tables_64_L.txt C4_DEPTH=6 C4_TAU=1e-11 ./c4_b tables/tables_64.txt 8 0.0052
+
+Run times on one core at load about 60: about 45 min (A) and 52 min (B). Both programs report 2,827,471,112 positive
+cubes and 144,271,175 splits, and $C_4 \geq 0.005450602910$ (A), $0.005450602904$ (B); the difference is B's larger
+final safety margin.
+
+Outputs are in `results/`.
+
+## Checks inside the lab
+
+Two fresh referees worked separately from the author.
+
+**$C_3$:**
+- They re-derived the reduction, the constant and the change of variables.
+- An independent mpmath interval program with its own union routine reproduces the cell sums exactly on two full
+  grids and on a slice of the final grid.
+
+**$C_4$:**
+- All 357,760 table entries were checked at 40 digits.
+- 20,000 random cubes at depths 0 to 6 were run through both programs; in each one, 262 sampled configurations plus a
+  local ascent were checked against the bound. There were no area, $g$ or weight violations, and A and B were equal on
+  every cube.
+- A float reimplementation of the cube rule matches A to 12 digits.
+
+The referee's notes on $C_4$: the two programs share the (byte-identical) table and the same cube rule, so their
+agreement checks the implementations and the referee's review checks the rule; the arithmetic is IEEE double with
+outward margins and relies on `pow` being accurate to a few ulps (it is not interval arithmetic throughout).
+
+## Not claimed, and what is left
+
+- Nothing here is peer reviewed. Dong and Cao's preprint is not refereed either. This bound inherits their Theorem 3.11.
+- Non-rigorous estimates of the exact terms are:
+  - $C_3 \approx 0.011715$ (quadrature);
+  - $C_4 \approx 0.00641$ (Monte Carlo);
+  - $C_5 \approx 0.0039$ (Dong and Cao's importance sampling, reimplemented).
+
+  There is room left, mostly in $C_5$ (Dong and Cao certify about a quarter of it) and in further terms.
 
 Prepared with AI assistance (Claude, Anthropic).
