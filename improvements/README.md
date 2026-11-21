@@ -10,7 +10,7 @@ re-derive command and the credit for the warm start.
 | $C_{1a}$ (upper) | 1.5027427280 (exactly 1.50274272798999968357...; 10 Nov evening, superseding 1.5027427375 of 8 Nov) | 1.5027427341 (#270, vidigoat, 10 Nov) | [`c1a`](c1a) |
 | $C_{1b}$ (upper) | 0.3808585498 (exactly 0.38085854975166311714...; 10 Nov, 114,688-step function refined from [A2026]) | 0.3808585504 ([A2026] on the page; no open pull request) | [`c1b`](c1b) |
 | $C_{1c}$ (lower) | 0.4103780000 (exactly 0.41037800003882762970...; 10 Nov evening, K = 2^20, superseding 0.4103774129 of 10 Nov morning and 0.4103598711 of 8 Nov) | 0.4103772 (#354, K = 524288) | [`c1c`](c1c) |
-| $C_{1d}$ (upper) | 1.4546733414 (exactly 1.45467334138563686456...; 10 Nov evening, superseding 1.454673347420953 of 9 Nov) | 1.4546733458 (#270, vidigoat, 10 Nov) | [`c1d`](c1d) |
+| $C_{1d}$ (upper) | 1.4513061918499 (exactly 1.45130619184989692...; 21 Nov, 102,400-cell function refined from C. Weill's #374, superseding our 1.4546733414 of 10 Nov) | 1.4513064006879361 (#374, C. Weill, 17 Nov) | [`c1d`](c1d) |
 
 Pull requests [#344](https://github.com/teorth/optimizationproblems/pull/344) (C1c) and
 [#345](https://github.com/teorth/optimizationproblems/pull/345) (C1d) were opened on 8 Nov with the first certificates

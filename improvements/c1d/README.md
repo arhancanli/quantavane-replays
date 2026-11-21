@@ -1,4 +1,35 @@
-# C1d <= 1.4546733414 (signed third autocorrelation constant, upper bound)
+# C1d <= 1.4513061918499 (signed third autocorrelation constant, upper bound)
+
+A new upper bound for $C_{1d}$ of the [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/1d.html) (21 Nov 2026):
+
+$$C_{1d} \leq \frac{5136552493465657446805004533831259136}{3539261750767002528079406787843004249} = 1.45130619184989692\ldots \leq 1.4513061918499.$$
+
+| | value | our margin |
+| --- | --- | --- |
+| this certificate (`c1d_upper_n102400_20261121.json`) | 1.45130619184989692... | |
+| C. Weill, open pull request [#374](https://github.com/teorth/optimizationproblems/pull/374), 17 Nov (the warm start) | 1.45130640068793609... (1.4513064006879361) | -2.088e-7 |
+| our 10 Nov certificate (below) | 1.45467334138563686... (1.4546733414) | -3.367e-3 |
+| best on the live page (main, 87b4ebb), [SCIEL2026] | 1.457854884921989 | -6.549e-3 |
+
+## The certificate
+
+`c1d_upper_n102400_20261121.json`: $n = 102400$ equal cells on $[-1/4,1/4]$ with integer values $v_i$ (largest $|v_i| = 2^{56}$). For a step function on $n$ equal cells, $f*f$ is linear between the knots $t_k = -1/2 + k/(2n)$, with $(f*f)(t_k) = c_{k-1}/(2n)$ for $c = v * v$, so the bound is $2n \max_m |c_m| / S^2$ with $S = \sum_i v_i$ (the page's rule). The maximum is attained only at $m = 28802$ (the page's knot $k = 28803$). The file states the reduced fraction (`score_num`, `score_den`) and the printed claim (`claim`), rounded up.
+
+## Two exact checks that share no code
+
+    python3 -I check.py c1d_upper_n102400_20261121.json --record 1.4513064006879361 --record 513655524515252183593642627316297728000/353926313748615382700541734286037793169 --record 1.4546733414 --controls
+    python3 ntt_check_conv.py c1d_upper_n102400_20261121.json --fraction=5136552493465657446805004533831259136/3539261750767002528079406787843004249 --claim=1.4513061918499 --controls
+
+Outputs: `results/check_20261121.txt`, `results/ntt_20261121.txt`. Both give the same fraction and the same single knot; the red controls (one value moved where $|c_m|$ grows at the deciding knot; the claim moved one unit down; a value changed by one unit and by 1%) are refused. A third program written separately inside the lab (Python big-integer squaring with identity checks modulo $2^{521}-1$, and direct $O(n^2)$ summation in C with 192-bit accumulators) agrees on all 204,799 values of $c$ and reproduces Weill's fraction from his file as a positive control.
+
+## How it was found, and credit
+
+Warm start: C. Weill's certificate in [#374](https://github.com/teorth/optimizationproblems/pull/374) ([cweill/c1d-upper-bound @ 7889e93](https://github.com/cweill/c1d-upper-bound/tree/7889e938c7ceff997bddf643f018c06719b867b2), `c1d_n102400_1.4513064007.json`, SHA-256 `391cc726acbab3a7f4216dedab2ec5dd74cb797dc12189966dac11a0dee31e2d`), its values read as exact binary64 integers; only the published values were used, his programs were neither read nor run. His function sits in a new basin about $3.4 \cdot 10^{-3}$ below every earlier certificate; it was not yet at a local minimum of the smooth surrogate, and one chain of the $p$-norm continuation we used on 10 Nov ($\log \lVert v*v \rVert_p - 2 \log S$, $p$ doubled from $3 \cdot 10^7$ to $2 \cdot 10^{12}$, L-BFGS, 3000 iterations a stage, one CPU core, about 35 minutes) lowers it by $2.088 \cdot 10^{-7}$. Search code: `../search/c1d_refine.py`. The construction is Weill's; the gain is local polishing.
+
+Prepared with AI assistance (Claude, Anthropic).
+
+## Our certificate of 10 Nov (superseded; it remains a valid bound)
+
 
 A new upper bound for $C_{1d}$ of the [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/1d.html) (10 Nov 2026, evening):
 

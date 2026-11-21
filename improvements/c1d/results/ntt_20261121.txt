@@ -1,0 +1,11 @@
+self-test against brute force (16 random inputs): True
+c1d_upper_n102400_20261121.json: C_1d, n = 102400, S = 37625851489458693860, max |v| = 72057594037927936
+  max |c_m| at m = [28802] (knots with that value: 1), c_m = 10032329088800112200791024480139178
+  bound = 5136552493465657446805004533831259136/3539261750767002528079406787843004249
+  decimal (floor to 22 places): 1.4513061918498969251536
+  stated fraction: EQUAL
+  claim C_1d <= 1.4513061918499: implied
+  control: value 28802 moved by 1 (|c_m| at m = 28802 grows) raises the bound: True
+  control: the claim moved one unit down (1.4513061918498) is refused: True
+  run time 1 s
+RESULT: PASS
