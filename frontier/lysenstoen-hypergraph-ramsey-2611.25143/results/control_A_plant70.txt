@@ -1,0 +1,6 @@
+tri n=70 triples=54740 colour0=19795 colour1=34945
+RESULT tri n=70 colour=0 size=4 found=0 (search nodes 2415)
+  FOUND colour 1: 0 2 7 20 33 64
+  FOUND colour 1: 1 2 20 52 62 64
+  FOUND colour 1: 1 4 7 13 20 24
+RESULT tri n=70 colour=1 size=6 found=61 (search nodes 98678)

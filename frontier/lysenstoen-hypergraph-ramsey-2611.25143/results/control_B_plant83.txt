@@ -1,0 +1,5 @@
+R665_83_points_short.json: full colouring of 29034396 5-subsets built from the short form; SHA-256 equals the stated digest: true
+  affine consistency on all 85320 sets through 0,1 (20 normalisations each): 0 disagreements; sampled invariance violations: 0
+RESULT R665_83_points_short.json: 6-sets through {0,1} examined 1663740; monochromatic: colour 0 9, colour 1 0
+  (f83: 12.5 s)
+FAIL (1)

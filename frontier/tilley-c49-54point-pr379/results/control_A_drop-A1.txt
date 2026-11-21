@@ -1,0 +1,24 @@
+PROGRAM A (two-level box method), block = tilley, control = drop-A1
+block B: 252225 members on 28 points; port counts (p,q) 00 33948, 01 64728, 10 64728, 11 88821
+|P| = 150, |L(Ap)| = 40296, |L(Aq)| = 40296; L(Ap) avoids p: True; L(Aq) avoids q: True
+top box G: L0 x R1  : 98676 x 153549 = 15151601124 members; sub-boxes 6 (left) and 8 (right)
+top box G: L1 x R0  : 153549 x 98676 = 15151601124 members; sub-boxes 8 (left) and 6 (right)
+top box P x L(Ap)   : 150 x 40296 = 6044400 members; sub-boxes 2 (left) and 3 (right)
+top box L(Aq) x P   : 40296 x 150 = 6044400 members; sub-boxes 3 (left) and 2 (right)
+  G: L0 x R1   columns (p_left, q_right) 00 2197386144  01 3015295308  10 4189713984  11 5749205688
+  G: L1 x R0   columns (p_left, q_right) 00 2197386144  01 4189713984  10 3015295308  11 5749205688
+  P x L(Ap)    columns (p_left, q_right) 00 1269600  01 4774800  10 0  11 0
+  L(Aq) x P    columns (p_left, q_right) 00 1269600  01 0  10 4774800  11 0
+54-point block: 30315291048 members; totals 00 4397311488  01 7209784092  10 7209784092  11 11498411376
+containments between top boxes (first inside second): none
+3-sunflowers among top-box triples: none
+exhaustive check time 1.5 s; half pattern triples computed 39
+VALID (Sperner and 3-sunflower-free): True
+a = N01 = N10: True (7209784092); b = N00 = 4397311488; c = N11 = 11498411376
+Perron root rho = 7209784092 + sqrt(50562096437434687488) (b*c = 50562096437434687488)
+rho^(1/52) in [1.56785855676574746010, 1.56785855676574746010 + 1e-20)
+RATE20 1.56785855676574746010 VALID True
+printed 1.567866388204975: valid lower bound False; truncation at 15 decimals False
+printed 1.56786638820497592522: valid lower bound False; truncation at 20 decimals False
+all counts as printed on page 2 and rho as in the Theorem: False
+RESULT FAIL

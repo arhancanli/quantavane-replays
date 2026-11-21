@@ -1,0 +1,26 @@
+PROGRAM A (two-level box method), block = tilley, control = plant-contain
+block B: 252271 members on 28 points; port counts (p,q) 00 33948, 01 64728, 10 64728, 11 88867
+|P| = 150, |L(Ap)| = 42412, |L(Aq)| = 42412; L(Ap) avoids p: True; L(Aq) avoids q: True
+top box G: L0 x R1  : 98676 x 153595 = 15156140220 members; sub-boxes 6 (left) and 8 (right)
+top box G: L1 x R0  : 153595 x 98676 = 15156140220 members; sub-boxes 8 (left) and 6 (right)
+top box P x L(Ap)   : 150 x 42412 = 6361800 members; sub-boxes 2 (left) and 3 (right)
+top box L(Aq) x P   : 42412 x 150 = 6361800 members; sub-boxes 3 (left) and 2 (right)
+top box planted     : 1 x 1 = 1 members; sub-boxes 1 (left) and 1 (right)
+  G: L0 x R1   columns (p_left, q_right) 00 2197386144  01 3016856916  10 4189713984  11 5752183176
+  G: L1 x R0   columns (p_left, q_right) 00 2197386144  01 4189713984  10 3016856916  11 5752183176
+  P x L(Ap)    columns (p_left, q_right) 00 1269600  01 5092200  10 0  11 0
+  L(Aq) x P    columns (p_left, q_right) 00 1269600  01 0  10 5092200  11 0
+  planted      columns (p_left, q_right) 00 0  01 1  10 0  11 0
+54-point block: 30325004041 members; totals 00 4397311488  01 7211663101  10 7211663100  11 11504366352
+containments between top boxes (first inside second): [('planted', 'P x L(Ap)')]
+3-sunflowers among top-box triples: [('G: L1 x R0', 'G: L1 x R0', 'planted'), ('P x L(Ap)', 'P x L(Ap)', 'planted')]
+exhaustive check time 1.6 s; half pattern triples computed 69
+VALID (Sperner and 3-sunflower-free): False
+a = N01 = N10: False (7211663101); b = N00 = 4397311488; c = N11 = 11504366352
+Perron root rho = 7211663101 + sqrt(50588282321810251776) (b*c = 50588282321810251776)
+rho^(1/52) in [1.56786638820708084289, 1.56786638820708084289 + 1e-20)
+RATE20 1.56786638820708084289 VALID False
+printed 1.567866388204975: valid lower bound True; truncation at 15 decimals False
+printed 1.56786638820497592522: valid lower bound True; truncation at 20 decimals False
+all counts as printed on page 2 and rho as in the Theorem: False
+RESULT FAIL

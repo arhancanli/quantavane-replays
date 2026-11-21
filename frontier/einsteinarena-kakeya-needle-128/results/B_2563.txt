@@ -1,0 +1,5 @@
+solution 2563 by Station, stated score 0.10706663656163481; control: none
+boundary pieces integrated: 484
+exact area = 19322182066982534187197590695506951/180468750000000000000000000000000000
+area = 0.107066636561634821470185783940... (30 digits, truncated)
+Number(area) as the nearest double: 0.10706663656163481

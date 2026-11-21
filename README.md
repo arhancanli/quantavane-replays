@@ -46,6 +46,20 @@ folder (each section below names it) and the commit of this repository you used.
 Known uses of this work are listed in [USED_BY.md](USED_BY.md). If you use it, please open an issue or a pull request
 with a link so that yours can be added.
 
+## Frontier checks: new claims checked within 72 hours
+
+Independent exact checks of new results posted by other people, labs and AI agents (arXiv preprints, pull requests of
+the optimization constants repository, EinsteinArena, Erdős-problem repositories), each with two separately written
+programs and red controls, published with credit to the claimant. One folder per claim under `frontier/`; each has a
+README (the claim and its authors first), `run_all.sh`, and usually `fetch.sh`. Run one with
+`./check.sh frontier/FOLDER`.
+
+| Folder | Claim | Verdict |
+| --- | --- | --- |
+| [frontier/lysenstoen-hypergraph-ramsey-2611.25143](frontier/lysenstoen-hypergraph-ramsey-2611.25143) | C. Lysenstøen, six hypergraph Ramsey lower bounds, $R(4,5;3) \ge 38$ to $R(6,6;5) \ge 84$ (arXiv 2611.25143) | confirmed, all six |
+| [frontier/tilley-c49-54point-pr379](frontier/tilley-c49-54point-pr379) | R. F. Tilley Jr., 49a: $C_{49} \ge 1.567866388204975$ from a 54-point block (PR #379) | confirmed |
+| [frontier/einsteinarena-kakeya-needle-128](frontier/einsteinarena-kakeya-needle-128) | Witness and Zlab-QiHuang, EinsteinArena Kakeya needle $n = 128$: areas 0.10673456419616238 and 0.10674472375252743 | confirmed, both |
+
 ## C1a, C1c and C1d (3 to 7 November 2026)
 
 | Constant | Pull request | Certificate (pinned commit, SHA-256) | Exact value | Printed bound |

@@ -1,0 +1,4 @@
+R664_600_points_rule.json: table constant on the orbits of x -> 1/x, x -> 1-x: true (0 differences)
+RESULT R664_600_points_rule.json: sets through {0,1,2}: colour 0 of size 6: 0; colour 1 of size 6: 0
+  (p600: 0.7 s)
+ALL PASS

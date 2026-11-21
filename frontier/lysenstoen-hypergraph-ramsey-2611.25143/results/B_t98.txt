@@ -1,0 +1,5 @@
+R553_98_points.json: n=98, rebuilt from 36 representatives x 2328 maps: 0 differences from the stored string; stored string SHA-256 as stated: true
+  invariance under x+1 and the multipliers on every triple: 0 violations
+RESULT R553_98_points.json: colour 0 sets of size 5 through 0: 0; colour 1 sets of size 5 through 0: 0
+  (t98: 0.1 s)
+ALL PASS

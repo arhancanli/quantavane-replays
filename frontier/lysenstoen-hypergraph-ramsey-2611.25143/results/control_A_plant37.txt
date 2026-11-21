@@ -1,0 +1,6 @@
+tri n=37 triples=7770 colour0=3185 colour1=4585
+  FOUND colour 0: 0 4 5 9
+  FOUND colour 0: 0 5 9 13
+  FOUND colour 0: 0 5 9 18
+RESULT tri n=37 colour=0 size=4 found=11 (search nodes 683)
+RESULT tri n=37 colour=1 size=5 found=0 (search nodes 3718)

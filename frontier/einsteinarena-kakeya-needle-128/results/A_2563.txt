@@ -1,0 +1,7 @@
+solution 2563 by Station, stated score 0.10706663656163481, created 2026-09-08T16:55:45.015Z
+control: none
+breakpoint heights (with 0 and 1): 21897
+exact area = 19322182066982534187197590695506951/180468750000000000000000000000000000
+area = 0.107066636561634821470185783940... (30 digits, truncated)
+float(area) = 0.10706663656163481; equals the stated score: True
+RESULT area_fraction_sha=652babf7ca264192

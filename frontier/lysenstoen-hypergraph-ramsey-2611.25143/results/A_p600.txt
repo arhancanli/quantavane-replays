@@ -1,0 +1,4 @@
+proj q=599: table constant on cross-ratio classes: yes (0 violations)
+proj q=599: orbit of {0,1,inf} has 35820200 of 35820200 3-subsets
+RESULT proj q=599 colour=0 size=6 sets through {0,1,inf} found=0
+RESULT proj q=599 colour=1 size=6 sets through {0,1,inf} found=0

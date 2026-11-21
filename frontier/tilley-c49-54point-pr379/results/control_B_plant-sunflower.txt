@@ -1,0 +1,17 @@
+B: 252271 members, cells 105; (p,q) counts 00 33948 01 64728 10 64728 11 88867
+F 75 (the example chair's complement in F: true), H 121 (HA 46, HC 75), |P| 150, |L(Ap)| 42412, |L(Aq)| 42412
+L(Ap) avoids p: true; L(Aq) avoids q: true
+  3-sunflower with members from PxL(Ap), PxL(Ap), planted
+  containment: a member of planted inside one of PxL(Ap)
+exhaustive over all multisets of three top boxes and all cell triples: 3-sunflowers 1, containments 1
+  G L0xR1: 00 2197386144 01 3016856916 10 4189713984 11 5752183176
+  G L1xR0: 00 2197386144 01 4189713984 10 3016856916 11 5752183176
+  PxL(Ap): 00 1269600 01 5092200 10 0 11 0
+  L(Aq)xP: 00 1269600 01 0 10 5092200 11 0
+  planted: 00 0 01 2116 10 0 11 0
+54-point block: 30325006156 members; 00 4397311488 01 7211665216 10 7211663100 11 11504366352
+a = N01 = N10: false; rho = 7211665216 + sqrt(50588282321810251776)
+rho^(1/52) in [1.567866392658981397842, +1e-21)
+printed 1.567866388204975 valid: true; 1.56786638820497592522 valid: true; 1.56786638820497592523 valid: true (the note says beta < ...523)
+counts as printed on page 2 and the radicand as in the Theorem: false
+RESULT FAIL

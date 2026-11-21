@@ -1,0 +1,5 @@
+R564_200_points_rule.json: 64684950 4-subsets from the rule; SHA-256 of the colouring as stated: true; invariance under x+1, -1/x: 0 violations
+  3-subsets not in the class of {0,1,2}: 0
+RESULT R564_200_points_rule.json: sets through {0,1,2}: colour 0 of size 5: 0; colour 1 of size 6: 0
+  (p200: 31.1 s)
+ALL PASS

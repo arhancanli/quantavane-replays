@@ -1,0 +1,6 @@
+five n=83 5-subsets=29034396 colour0=14499901 inconsistent normalisations=11882
+five: full colouring restricted to sets through 0,1 differs from the short form in 0 places
+  FOUND colour 1: 0 1 10 19 30 40
+  FOUND colour 1: 0 1 10 20 30 40
+  FOUND colour 1: 0 1 10 30 35 40
+RESULT five n=83 size=6 6-sets examined=377447148 found colour0=0 colour1=1128

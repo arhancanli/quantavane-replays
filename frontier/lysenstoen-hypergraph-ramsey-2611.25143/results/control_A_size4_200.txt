@@ -1,0 +1,7 @@
+proj q=199: invariance of all 64684950 4-subsets under x+1, -1/x: 0 violations
+proj q=199: orbit of {0,1,inf} has 1313400 of 1313400 3-subsets
+  FOUND colour 0: 0 1 199 2
+  FOUND colour 0: 0 1 199 3
+  FOUND colour 0: 0 1 199 7
+RESULT proj q=199 colour=0 size=4 sets through {0,1,inf} found=85
+RESULT proj q=199 colour=1 size=6 sets through {0,1,inf} found=0

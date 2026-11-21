@@ -1,0 +1,6 @@
+tri n=98 triples=152096 colour0=76050 colour1=76046
+  FOUND colour 0: 1 2 11 41 63
+  FOUND colour 0: 1 2 11 48 63
+  FOUND colour 0: 2 7 31 40 97
+RESULT tri n=98 colour=0 size=5 found=17 (search nodes 64551)
+RESULT tri n=98 colour=1 size=5 found=0 (search nodes 64314)

@@ -8,7 +8,7 @@
 here=$(cd "$(dirname "$0")" && pwd)
 cd "$here" || exit 1
 if [ "$1" = "--list" ] || [ -z "$1" ]; then
-  for d in c*/; do
+  for d in c*/ frontier/*/; do
     d=${d%/}; [ -f "$d/run_all.sh" ] || continue
     if [ -f "$d/RESULT.md" ]; then t=$(head -1 "$d/RESULT.md" | sed 's/^# *//'); else t=$(sed -n '2p' "$d/run_all.sh" | sed 's/^# *//'); fi
     printf '%-10s %s\n' "$d" "$t"

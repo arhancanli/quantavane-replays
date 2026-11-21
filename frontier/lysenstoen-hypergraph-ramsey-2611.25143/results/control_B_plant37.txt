@@ -1,0 +1,5 @@
+R453_37_points.json: n=37, rebuilt from 32 representatives x 111 maps: 0 differences from the stored string; stored string SHA-256 as stated: true
+  invariance under x+1 and the multipliers on every triple: 12 violations
+RESULT R453_37_points.json: colour 0 sets of size 4 through 0: 11; colour 1 sets of size 5 through 0: 0
+  (t37: 0.0 s)
+FAIL (1)
