@@ -1,0 +1,41 @@
+== program A (erdos985_a.py)
+A (a): odd primes p <= 2791: 405; table rows 405; least prime primitive root < p for all: yes; table q is the least one in 405 rows; largest least prime primitive root 53 (p = 2791)
+A (b): rank 3, 2792 <= n < 20449: candidates 4459, words 4459, prime moduli 944, word types 0/1/2 = 3512/3/944
+A (b): rank 4, 2792 <= n < 131769: candidates 17520, words 17520, prime moduli 4146, word types 0/1/2 = 12527/847/4146
+A (b): rank 5, 2792 <= n < 758641: candidates 26905, words 26905, prime moduli 6835, word types 0/1/2 = 16965/3105/6835
+A (b): rank 6, 2792 <= n < 4076361: candidates 19435, words 19435, prime moduli 5215, word types 0/1/2 = 10762/3458/5215
+A (b): rank 7, 2792 <= n < 18671041: candidates 5233, words 5233, prime moduli 1462, word types 0/1/2 = 2479/1292/1462
+A (b): rank 8, 2792 <= n < 93954249: candidates 625, words 625, prime moduli 195, word types 0/1/2 = 247/183/195
+A (b): rank 9, 2792 <= n < 417916249: candidates 10, words 10, prime moduli 5, word types 0/1/2 = 1/4/5
+A (b): total candidates 74187, prime moduli 18802, word types 0/1/2 = 46493/8892/18802, largest certificate witness 173, largest least prime primitive root 173 (n = 16456441)
+A (c): odd primes p <= 10000000: 664578; each has a prime primitive root < p: yes; sum of least prime primitive roots 3911151; largest 211 (first at p = 4022911)
+A: VERDICT PASS
+== program B (erdos985_b.c)
+B (a): odd primes p <= 2791: 405; table rows 405; least prime primitive root < p for all: yes; table q is the least one in 405 rows; largest least prime primitive root 53 (p = 2791)
+B (b): rank 3, 2792 <= n < 20449: candidates 4459, words 4459, prime moduli 944, word types 0/1/2 = 3512/3/944
+B (b): rank 4, 2792 <= n < 131769: candidates 17520, words 17520, prime moduli 4146, word types 0/1/2 = 12527/847/4146
+B (b): rank 5, 2792 <= n < 758641: candidates 26905, words 26905, prime moduli 6835, word types 0/1/2 = 16965/3105/6835
+B (b): rank 6, 2792 <= n < 4076361: candidates 19435, words 19435, prime moduli 5215, word types 0/1/2 = 10762/3458/5215
+B (b): rank 7, 2792 <= n < 18671041: candidates 5233, words 5233, prime moduli 1462, word types 0/1/2 = 2479/1292/1462
+B (b): rank 8, 2792 <= n < 93954249: candidates 625, words 625, prime moduli 195, word types 0/1/2 = 247/183/195
+B (b): rank 9, 2792 <= n < 417916249: candidates 10, words 10, prime moduli 5, word types 0/1/2 = 1/4/5
+B (b): total candidates 74187, prime moduli 18802, word types 0/1/2 = 46493/8892/18802, largest certificate witness 173, largest least prime primitive root 173 (n = 16456441)
+B (c): odd primes p <= 10000000: 664578; each has a prime primitive root < p: yes; sum of least prime primitive roots 3911151; largest 211 (first at p = 4022911)
+B: VERDICT PASS
+== red control 1: table row p = 7 given q = 2 (order 3 mod 7)
+A: CONTROL witness: table row p=7 given q=2 (order 3 mod 7)
+A: FAIL (a) table row p=7: q=2 is not a prime primitive root below p
+A: FAIL (a) residue column wrong at p=7 r=2
+A: FAIL (a) residue column wrong at p=7 r=3
+A: VERDICT REFUSED (3 failures)
+B: CONTROL witness: table row p=7 given q=2 (order 3 mod 7)
+B: FAIL (a) table row p=7: q=2 is not a prime of order p-1 below p
+B: VERDICT REFUSED (1 failures)
+== red control 2: first prime modulus of the rank-3 strip given a prime that is not a primitive root
+A: CONTROL strip: rank 3, n=2797: witness 2 replaced by the prime 3 (not a primitive root)
+A: FAIL (b) prime n=2797: certificate word (2, 3) is not a prime primitive root
+A: VERDICT REFUSED (1 failures)
+B: CONTROL strip: rank 3, n=2797: witness 2 replaced by the prime 3 (not a primitive root)
+B: FAIL (b) prime n=2797: word (2, 3) is not a prime primitive root
+B: VERDICT REFUSED (1 failures)
+RESULT: ALL CHECKS PASS (A and B agree line by line: 405 odd primes p <= 2791 and all 18,802 prime moduli of the certificate have a prime primitive root < p, as does every odd prime p <= 10^7; every red control refused)

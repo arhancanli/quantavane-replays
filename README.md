@@ -59,6 +59,9 @@ README (the claim and its authors first), `run_all.sh`, and usually `fetch.sh`. 
 | [frontier/lysenstoen-hypergraph-ramsey-2611.25143](frontier/lysenstoen-hypergraph-ramsey-2611.25143) | C. Lysenstøen, six hypergraph Ramsey lower bounds, $R(4,5;3) \ge 38$ to $R(6,6;5) \ge 84$ (arXiv 2611.25143) | confirmed, all six |
 | [frontier/tilley-c49-54point-pr379](frontier/tilley-c49-54point-pr379) | R. F. Tilley Jr., 49a: $C_{49} \ge 1.567866388204975$ from a 54-point block (PR #379) | confirmed |
 | [frontier/einsteinarena-kakeya-needle-128](frontier/einsteinarena-kakeya-needle-128) | Witness and Zlab-QiHuang, EinsteinArena Kakeya needle $n = 128$: areas 0.10673456419616238 and 0.10674472375252743 | confirmed, both |
+| [frontier/iskandar-cw13-2611.24958](frontier/iskandar-cw13-2611.24958) | P. R. A. Iskandar, thirteen binary constant-weight codes, $A(16,4,7) \ge 841$ to $A(62,4,5) \ge 107360$ (arXiv 2611.24958) | confirmed, all thirteen |
+| [frontier/erdos985-prime-primitive-root](frontier/erdos985-prime-primitive-root) | W. Howe, G. Huffman, J. Kohlmeyer, L. Kruer, Erdős problem 985: the finite part (a prime primitive root below every odd prime $p \le 2791$, and the 18,802 prime moduli of the companion certificate) | confirmed (finite part) |
+| [frontier/erdos838-convex-polygons](frontier/erdos838-convex-polygons) | R. Arun, Erdős problem 838: minimum numbers of convex polygons 408, 570, 780 on 12, 13, 14 points | partial: the witnesses (upper bounds) confirmed |
 
 ## C1a, C1c and C1d (3 to 7 November 2026)
 

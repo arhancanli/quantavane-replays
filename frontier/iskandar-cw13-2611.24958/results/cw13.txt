@@ -1,0 +1,63 @@
+== program A (cw_a.py)
+A: A(16,4,7) >= 841: words 841, distinct 841, length/weight ok yes, t=6 subsets clashing 0, orbit rebuild (121 reps, |<g>| from blocks 7 7 1 1, sizes 1:1,7:120) equals list: yes
+A: A(20,4,5) >= 876: words 876, distinct 876, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (294 reps, |<g>| from blocks 3 3 3 3 3 3 1 1, sizes 1:3,3:291) equals list: yes
+A: A(25,4,6) >= 7800: words 7800, distinct 7800, length/weight ok yes, t=5 subsets clashing 0, orbit rebuild (1560 reps, |<g>| from blocks 5 5 5 5 5, sizes 5:1560) equals list: yes
+A: A(29,4,5) >= 4491: words 4491, distinct 4491, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (1503 reps, |<g>| from blocks 3 3 3 3 3 3 3 3 3 1 1, sizes 1:9,3:1494) equals list: yes
+A: A(29,6,5) >= 333: words 333, distinct 333, length/weight ok yes, t=3 subsets clashing 0, orbit rebuild (111 reps, |<g>| from blocks 3 3 3 3 3 3 3 3 3 1 1, sizes 3:111) equals list: yes
+A: A(36,4,5) >= 11207: words 11207, distinct 11207, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (321 reps, |<g>| from blocks 35 1, sizes 7:1,35:320) equals list: yes
+A: A(38,4,5) >= 13737: words 13737, distinct 13737, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (723 reps, |<g>| from blocks 19 19, sizes 19:723) equals list: yes
+A: A(39,4,5) >= 15618: words 15618, distinct 15618, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (411 reps, |<g>| from blocks 38 1, sizes 38:411) equals list: yes
+A: A(44,4,5) >= 25585: words 25585, distinct 25585, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (595 reps, |<g>| from blocks 43 1, sizes 43:595) equals list: yes
+A: A(54,4,5) >= 60632: words 60632, distinct 60632, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (1144 reps, |<g>| from blocks 53 1, sizes 53:1144) equals list: yes
+A: A(55,4,5) >= 66144: words 66144, distinct 66144, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (1248 reps, |<g>| from blocks 53 1 1, sizes 53:1248) equals list: yes
+A: A(60,4,5) >= 94105: words 94105, distinct 94105, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (1595 reps, |<g>| from blocks 59 1, sizes 59:1595) equals list: yes
+A: A(62,4,5) >= 107360: words 107360, distinct 107360, length/weight ok yes, t=4 subsets clashing 0, orbit rebuild (1760 reps, |<g>| from blocks 61 1, sizes 61:1760) equals list: yes
+A: total words 408729, total representatives 11386
+A: VERDICT PASS
+== program B (cw_b.c)
+B: A(16,4,7) >= 841: words 841, repeats 0, weight ok yes, largest intersection of two words 5 (bound 5; minimum distance 4; 1291227 bucket pairs, all pairs agree), orbit rebuild from 121 reps under blocks [7 7 1 1]: 841 words, equals list: yes
+B: A(20,4,5) >= 876: words 876, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 197796 bucket pairs, all pairs agree), orbit rebuild from 294 reps under blocks [3 3 3 3 3 3 1 1]: 876 words, equals list: yes
+B: A(25,4,6) >= 7800: words 7800, repeats 0, weight ok yes, largest intersection of two words 4 (bound 4; minimum distance 4; 22778550 bucket pairs, all pairs agree), orbit rebuild from 1560 reps under blocks [5 5 5 5 5]: 7800 words, equals list: yes
+B: A(29,4,5) >= 4491: words 4491, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 2463435 bucket pairs, all pairs agree), orbit rebuild from 1503 reps under blocks [3 3 3 3 3 3 3 3 3 1 1]: 4491 words, equals list: yes
+B: A(29,6,5) >= 333: words 333, repeats 0, weight ok yes, largest intersection of two words 2 (bound 2; minimum distance 6; 12132 bucket pairs, all pairs agree), orbit rebuild from 111 reps under blocks [3 3 3 3 3 3 3 3 3 1 1]: 333 words, equals list: yes
+B: A(36,4,5) >= 11207: words 11207, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 9915535 bucket pairs, all pairs agree), orbit rebuild from 321 reps under blocks [35 1]: 11207 words, equals list: yes
+B: A(38,4,5) >= 13737: words 13737, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 13357380 bucket pairs, all pairs agree), orbit rebuild from 723 reps under blocks [19 19]: 13737 words, equals list: yes
+B: A(39,4,5) >= 15618: words 15618, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 16381515 bucket pairs, all pairs agree), orbit rebuild from 411 reps under blocks [38 1]: 15618 words, equals list: yes
+B: A(44,4,5) >= 25585: words 25585, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 34472025 bucket pairs, all pairs agree), orbit rebuild from 595 reps under blocks [43 1]: 25585 words, equals list: yes
+B: A(54,4,5) >= 60632: words 60632, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 128148488 bucket pairs), orbit rebuild from 1144 reps under blocks [53 1]: 60632 words, equals list: yes
+B: A(55,4,5) >= 66144: words 66144, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 147126304 bucket pairs), orbit rebuild from 1248 reps under blocks [53 1 1]: 66144 words, equals list: yes
+B: A(60,4,5) >= 94105: words 94105, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 249831665 bucket pairs), orbit rebuild from 1595 reps under blocks [59 1]: 94105 words, equals list: yes
+B: A(62,4,5) >= 107360: words 107360, repeats 0, weight ok yes, largest intersection of two words 3 (bound 3; minimum distance 4; 304228960 bucket pairs), orbit rebuild from 1760 reps under blocks [61 1]: 107360 words, equals list: yes
+B: codes 13, total words 408729, total representatives 11386
+B: VERDICT PASS
+== red control 1: in A(16,4,7) word 2 replaced by word 1 with one 1 moved (distance 2)
+A: CONTROL distance: A(16,4,7) word 2 replaced by 0111111100000000
+A: FAIL A(16,4,7): 7 t-subsets (t=6) lie in two words: distance < 4
+A: FAIL A(16,4,7): orbit union differs from the word list
+A: VERDICT REFUSED (2 failures)
+B: CONTROL distance: A(16,4,7) word 2 replaced (bitmask fe)
+B: FAIL A(16,4,7): 106 word pairs found (counted once per shared bucket) meeting in more than 5 points (distance < 4)
+B: FAIL A(16,4,7): orbit rebuild (841 words, 841 distinct) differs from the list
+B: VERDICT REFUSED (2 failures)
+== red control 2: in A(16,4,7) word 2 replaced by a copy of word 1
+A: CONTROL repeat: A(16,4,7) word 2 replaced by 1111111000000000
+A: FAIL A(16,4,7): 1 repeated words
+A: FAIL A(16,4,7): orbit union differs from the word list
+A: VERDICT REFUSED (2 failures)
+B: CONTROL repeat: A(16,4,7) word 2 replaced (bitmask 7f)
+B: FAIL A(16,4,7): 1 repeated words
+B: FAIL A(16,4,7): 22 word pairs found (counted once per shared bucket) meeting in more than 5 points (distance < 4)
+B: FAIL A(16,4,7): orbit rebuild (841 words, 841 distinct) differs from the list
+B: VERDICT REFUSED (3 failures)
+== red control 3: in A(16,4,7) word 2 replaced by word 1 with one extra 1 (weight 8)
+A: CONTROL weight: A(16,4,7) word 2 replaced by 1111111100000000
+A: FAIL A(16,4,7): 1 words of weight != 7
+A: FAIL A(16,4,7): 21 t-subsets (t=6) lie in two words: distance < 4
+A: FAIL A(16,4,7): orbit union differs from the word list
+A: VERDICT REFUSED (3 failures)
+B: CONTROL weight: A(16,4,7) word 2 replaced (bitmask ff)
+B: FAIL A(16,4,7): 1 words of weight != 7
+B: FAIL A(16,4,7): 232 word pairs found (counted once per shared bucket) meeting in more than 5 points (distance < 4)
+B: FAIL A(16,4,7): orbit rebuild (841 words, 841 distinct) differs from the list
+B: VERDICT REFUSED (3 failures)
+RESULT: ALL CHECKS PASS (A and B: all 13 codes valid with the claimed sizes, 408,729 words, minimum distance >= d, each equal to the union of the orbits of its 11,386 representatives in total; every red control refused)

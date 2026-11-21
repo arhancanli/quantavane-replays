@@ -1,0 +1,77 @@
+== program A (erdos838_a.py)
+A: witness10.txt: n=10, collinear triples 0, convex subsets by size 3..10 = 120,66,3,0,0,0,0,0, total 189 (claimed 189)
+A: witness11.txt: n=11, collinear triples 0, convex subsets by size 3..11 = 165,108,10,0,0,0,0,0,0, total 283 (claimed 283)
+A: witness12.txt: n=12, collinear triples 0, convex subsets by size 3..12 = 220,165,22,1,0,0,0,0,0,0, total 408 (claimed 408)
+A: real13.jsonl[0]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,241,41,2,0,0,0,0,0,0,0, total 570 (claimed 570), sign string matches
+A: real13.jsonl[1]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570), sign string matches
+A: real13.jsonl[2]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570), sign string matches
+A: real13.jsonl[3]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570), sign string matches
+A: real13.jsonl[4]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570), sign string matches
+A: Witness13.lean: n=13, collinear triples 0, convex subsets by size 3..13 = 286,241,41,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+A: witness780-small.txt: n=14, collinear triples 0, convex subsets by size 3..14 = 364,350,64,2,0,0,0,0,0,0,0,0, total 780 (claimed 780), deletion totals 574/574/574/575/575/575/576/578/578/580/581/582/586/588
+A: witness780.txt: n=14, collinear triples 0, convex subsets by size 3..14 = 364,350,64,2,0,0,0,0,0,0,0,0, total 780 (claimed 780), deletion totals 574/574/574/575/575/575/576/578/578/580/581/582/586/588
+A: VERDICT PASS
+== program B (erdos838_b.c)
+B: witness10.txt: n=10, collinear triples 0, convex subsets by size 3..10 = 120,66,3,0,0,0,0,0, total 189 (claimed 189)
+B: witness11.txt: n=11, collinear triples 0, convex subsets by size 3..11 = 165,108,10,0,0,0,0,0,0, total 283 (claimed 283)
+B: witness12.txt: n=12, collinear triples 0, convex subsets by size 3..12 = 220,165,22,1,0,0,0,0,0,0, total 408 (claimed 408)
+B: real13.jsonl[0]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,241,41,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+B: real13.jsonl[1]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+B: real13.jsonl[2]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+B: real13.jsonl[3]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+B: real13.jsonl[4]: n=13, collinear triples 0, convex subsets by size 3..13 = 286,247,35,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+B: Witness13.lean: n=13, collinear triples 0, convex subsets by size 3..13 = 286,241,41,2,0,0,0,0,0,0,0, total 570 (claimed 570)
+B: witness780-small.txt: n=14, collinear triples 0, convex subsets by size 3..14 = 364,350,64,2,0,0,0,0,0,0,0,0, total 780 (claimed 780), deletion totals 574/574/574/575/575/575/576/578/578/580/581/582/586/588
+B: witness780.txt: n=14, collinear triples 0, convex subsets by size 3..14 = 364,350,64,2,0,0,0,0,0,0,0,0, total 780 (claimed 780), deletion totals 574/574/574/575/575/575/576/578/578/580/581/582/586/588
+B: VERDICT PASS
+== red control 1: collinear on witness12.txt
+A: CONTROL collinear: witness12.txt point 2 replaced by 2*P1 - P0 = (144, 24)
+A: FAIL witness12.txt: 1 collinear triples, e.g. (0, 1, 2)
+A: FAIL witness12.txt: total 474 != claimed 408
+A: VERDICT REFUSED (2 failures)
+B: CONTROL collinear: witness12.txt point 2 replaced by 2*P1 - P0 = (144, 24)
+B: FAIL witness12.txt: 1 collinear triples
+B: FAIL witness12.txt: total 456 != claimed 408
+B: VERDICT REFUSED (2 failures)
+== red control 2: collinear on witness780-small.txt
+A: CONTROL collinear: witness780-small.txt point 2 replaced by 2*P1 - P0 = (-2000, 6000)
+A: FAIL witness780-small.txt: 1 collinear triples, e.g. (0, 1, 2)
+A: FAIL witness780-small.txt: total 877 != claimed 780
+A: FAIL witness780-small.txt: breakdown [364, 389, 114, 10, 0, 0, 0, 0, 0, 0, 0, 0] != claimed [364, 350, 64, 2]
+A: FAIL witness780-small.txt: deletion totals [575, 606, 634, 638, 643, 646, 646, 646, 648, 652, 653, 666, 669, 678] != claimed [574, 574, 574, 575, 575, 575, 576, 578, 578, 580, 581, 582, 586, 588]
+A: VERDICT REFUSED (4 failures)
+B: CONTROL collinear: witness780-small.txt point 2 replaced by 2*P1 - P0 = (-2000, 6000)
+B: FAIL witness780-small.txt: 1 collinear triples
+B: FAIL witness780-small.txt: total 855 != claimed 780
+B: FAIL witness780-small.txt: size 3 count 363 != claimed 364
+B: FAIL witness780-small.txt: size 4 count 378 != claimed 350
+B: FAIL witness780-small.txt: size 5 count 106 != claimed 64
+B: FAIL witness780-small.txt: size 6 count 8 != claimed 2
+B: FAIL witness780-small.txt: deletion totals differ at rank 0
+B: VERDICT REFUSED (20 failures)
+== red control 3: move on witness12.txt
+A: CONTROL move: witness12.txt point 0 moved to (-1000, 37)
+A: FAIL witness12.txt: total 477 != claimed 408
+A: VERDICT REFUSED (1 failures)
+B: CONTROL move: witness12.txt point 0 moved to (-1000, 37)
+B: FAIL witness12.txt: total 477 != claimed 408
+B: VERDICT REFUSED (1 failures)
+== red control 4: move on witness780-small.txt
+A: CONTROL move: witness780-small.txt point 0 moved to (-3000, -1963)
+A: FAIL witness780-small.txt: total 827 != claimed 780
+A: FAIL witness780-small.txt: breakdown [364, 359, 98, 6, 0, 0, 0, 0, 0, 0, 0, 0] != claimed [364, 350, 64, 2]
+A: FAIL witness780-small.txt: deletion totals [588, 593, 593, 597, 598, 599, 602, 602, 605, 607, 630, 632, 636, 642] != claimed [574, 574, 574, 575, 575, 575, 576, 578, 578, 580, 581, 582, 586, 588]
+A: VERDICT REFUSED (3 failures)
+B: CONTROL move: witness780-small.txt point 0 moved to (-3000, -1963)
+B: FAIL witness780-small.txt: total 827 != claimed 780
+B: FAIL witness780-small.txt: size 4 count 359 != claimed 350
+B: FAIL witness780-small.txt: size 5 count 98 != claimed 64
+B: FAIL witness780-small.txt: size 6 count 6 != claimed 2
+B: FAIL witness780-small.txt: deletion totals differ at rank 0
+B: VERDICT REFUSED (18 failures)
+== red control 5: claimed total 407 for witness12
+A: FAIL witness12.txt: total 408 != claimed 407
+A: VERDICT REFUSED (1 failures)
+B: FAIL witness12.txt: total 408 != claimed 407
+B: VERDICT REFUSED (1 failures)
+RESULT: ALL CHECKS PASS (A and B agree witness by witness: no three collinear; 189, 283, 408, 570 (six 13-point witnesses) and 780 = 364 + 350 + 64 + 2 convex polygons; deleting any point of the 14-point witness leaves at least 574; every red control refused)
