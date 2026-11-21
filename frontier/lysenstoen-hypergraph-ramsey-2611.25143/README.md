@@ -18,7 +18,8 @@ The colourings are the paper's ancillary files, read here as data. The paper's o
 
 ## Verdict: CONFIRMED, all six (checked by two independent programs; not peer reviewed)
 
-Verdict time 21 November 2026, 15:28 UTC, about 43 hours after submission.
+Verdict time 21 November 2026, 15:28 UTC: about 38 hours after the paper was announced (arXiv listing of 20 November,
+01:00 UTC) and 67 hours after submission.
 
 | Colouring | Program A (C) | Program B (JavaScript) |
 | --- | --- | --- |
