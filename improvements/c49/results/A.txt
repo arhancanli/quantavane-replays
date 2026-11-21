@@ -1,0 +1,26 @@
+PROGRAM A (two-level box method), block = tilley, control = none
+block B: 252271 members on 28 points; port counts (p,q) 00 33948, 01 64728, 10 64728, 11 88867
+|P| = 150, |L(Ap)| = 42412, |L(Aq)| = 42412; L(Ap) avoids p: True; L(Aq) avoids q: True
+variation: 2 extra left, 2 extra right, 0 P dropped left, 0 P dropped right
+top box G: L0 x R1  : 98678 x 153595 = 15156447410 members; sub-boxes 8 (left) and 8 (right)
+top box G: L1 x R0  : 153595 x 98678 = 15156447410 members; sub-boxes 8 (left) and 8 (right)
+top box P x L(Ap)   : 150 x 42412 = 6361800 members; sub-boxes 2 (left) and 3 (right)
+top box L(Aq) x P   : 42412 x 150 = 6361800 members; sub-boxes 3 (left) and 2 (right)
+  G: L0 x R1   columns (p_left, q_right) 00 2197515600  01 3017034650  10 4189713984  11 5752183176
+  G: L1 x R0   columns (p_left, q_right) 00 2197515600  01 4189713984  10 3017034650  11 5752183176
+  P x L(Ap)    columns (p_left, q_right) 00 1269600  01 5092200  10 0  11 0
+  L(Aq) x P    columns (p_left, q_right) 00 1269600  01 0  10 5092200  11 0
+54-point block: 30325618420 members; totals 00 4397570400  01 7211840834  10 7211840834  11 11504366352
+containments between top boxes (first inside second): none
+3-sunflowers among top-box triples: none
+exhaustive check time 2.4 s; half pattern triples computed 40
+VALID (Sperner and 3-sunflower-free): True
+a = N01 = N10: True (7211840834); b = N00 = 4397570400; c = N11 = 11504366352
+Perron root rho = 7211840834 + sqrt(50591260940311180800) (b*c = 50591260940311180800)
+rho^(1/52) in [1.56786720305588072742, 1.56786720305588072742 + 1e-20)
+RATE20 1.56786720305588072742 VALID True
+printed 1.567866388204975: valid lower bound True; truncation at 15 decimals False
+printed 1.56786638820497592522: valid lower bound True; truncation at 20 decimals False
+claimed bound 1.5678672030558807: valid lower bound True; truncation at 16 decimals True
+variation of Tilley's block: the page-2 counts are not expected
+RESULT PASS

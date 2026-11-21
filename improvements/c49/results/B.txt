@@ -1,0 +1,15 @@
+B: 252273 members, cells 107; (p,q) counts 00 33950 01 64728 10 64728 11 88867
+F 75 (the example chair's complement in F: true), H 121 (HA 46, HC 75), |P| 150, |L(Ap)| 42412, |L(Aq)| 42412
+L(Ap) avoids p: true; L(Aq) avoids q: true
+exhaustive over all multisets of three top boxes and all cell triples: 3-sunflowers 0, containments 0
+  G L0xR1: 00 2197515600 01 3017034650 10 4189713984 11 5752183176
+  G L1xR0: 00 2197515600 01 4189713984 10 3017034650 11 5752183176
+  PxL(Ap): 00 1269600 01 5092200 10 0 11 0
+  L(Aq)xP: 00 1269600 01 0 10 5092200 11 0
+54-point block: 30325618420 members; 00 4397570400 01 7211840834 10 7211840834 11 11504366352
+a = N01 = N10: true; rho = 7211840834 + sqrt(50591260940311180800)
+rho^(1/52) in [1.567867203055880727424, +1e-21)
+printed 1.567866388204975 valid: true; 1.56786638820497592522 valid: true; 1.56786638820497592523 valid: true (the note says beta < ...523)
+counts as printed on page 2 and the radicand as in the Theorem: false
+VARIATION extras (2 cells): valid true
+RESULT PASS

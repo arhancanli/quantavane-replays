@@ -1,0 +1,350 @@
+[   0.0s] H: 121 members, Sperner+SF-free on Z11 (brute): True
+[   0.0s] F: 75 members, Sperner+SF-free on K5 edges (brute): True
+[   0.0s] === 28-point blocks ===
+[   0.3s] Tilley B: boxes=105 |B|=252271 (explicit 252271) (p,q) 00 33948 01 64728 10 64728 11 88867 | explicit [33948, 64728, 64728, 88867]
+[   0.3s]    sunflower=False sperner_violation=False box_overlaps=[]
+[   0.5s] B' = B + X* (pendant 2): boxes=106 |B|=252272 (explicit 252272) (p,q) 00 33949 01 64728 10 64728 11 88867 | explicit [33949, 64728, 64728, 88867]
+[   0.5s]    sunflower=False sperner_violation=False box_overlaps=[]
+[   0.5s] === Tilley 54-point family ===
+[   0.7s] Tilley54: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   0.7s]    counts N00 4397311488 N01 7211663100 N10 7211663100 N11 11504366352 total 30325004040
+[   0.7s]    verdict: VALID | expected: VALID | OK
+[   1.1s]    oracle recount [[4397311488, 7211663100], [7211663100, 11504366352]] | L(Ap) q-split (0,1) = [8464, 33948] L(Aq) p-split = [8464, 33948] |P| = 150
+[   1.1s]    matches note's printed totals: True
+[   1.1s] === Modified: X* added to both copies ===
+[   1.3s] X*-both: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   1.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   1.3s]    verdict: VALID | expected: VALID | OK
+[   1.6s]    oracle recount [[4397440944, 7211751967], [7211751967, 11504366352]]
+[   1.6s]    matches claimed counts: True | total 30325311230
+[   1.7s]    explicit check: the four products pairwise disjoint: True []
+[   1.7s] === Second variant: X* AND X' added to both copies ===
+[   1.9s] B'' = B + X* + X': boxes=107 |B|=252273 (explicit 252273) (p,q) 00 33950 01 64728 10 64728 11 88867 | explicit [33950, 64728, 64728, 88867]
+[   1.9s]    sunflower=False sperner_violation=False box_overlaps=[]
+[   2.1s] X*+X'-both: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   2.1s]    counts N00 4397570400 N01 7211840834 N10 7211840834 N11 11504366352 total 30325618420
+[   2.1s]    verdict: VALID | expected: VALID | OK
+[   2.4s]    oracle recount [[4397570400, 7211840834], [7211840834, 11504366352]]
+[   2.4s]    total 30325618420
+[   2.4s] === Variants (informational) ===
+[   2.6s] X*-left-only: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   2.6s]    counts N00 4397376216 N01 7211751967 N10 7211663100 N11 11504366352 total 30325157635
+[   2.6s]    verdict: VALID | expected: VALID | OK
+[   2.8s] X*-right-only: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   2.8s]    counts N00 4397376216 N01 7211663100 N10 7211751967 N11 11504366352 total 30325157635
+[   2.8s]    verdict: VALID | expected: VALID | OK
+[   2.8s] === Red controls ===
+[   3.0s] X'-only (pendant 1) both copies: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   3.0s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   3.0s]    verdict: VALID | (informational)
+[   3.3s] C2 B' + (X* minus a point): struct_ok=True sunflower=True sperner_violation=True product_overlaps=[] box_overlaps=[] (0.2s)
+[   3.3s]    counts N00 4397570400 N01 7211840834 N10 7211840834 N11 11504366352 total 30325618420
+[   3.4s]    sunflower product triple (0, 0, 1) (of 24 hits) explicit witness verified by oracle: True
+[   3.4s]       member 5ec7f7807f1fc01
+[   3.4s]       member ff8003407f1fc01
+[   3.4s]       member 5e800b087f1fd91
+[   3.4s]    containment product pair (0, 0) explicit witness verified by oracle: True
+[   3.4s]    verdict: REFUSED | expected: REFUSED | OK
+[   3.9s] C3 planted sunflower: sunflower=True witness verified=True | verdict: REFUSED | expected REFUSED
+[   4.1s] C4 Ap=A1 o [0, 2, 3, 1, 4]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   4.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   4.1s]    verdict: VALID | (informational)
+[   4.3s] C4 Ap=A1 o [0, 2, 4, 1, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   4.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   4.3s]    verdict: VALID | (informational)
+[   4.5s] C4 Ap=A1 o [0, 3, 2, 1, 4] (note's): struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   4.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   4.5s]    verdict: VALID | expected: VALID | OK
+[   4.7s] C4 Ap=A1 o [0, 3, 4, 1, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   4.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   4.7s]    verdict: VALID | (informational)
+[   4.9s] C4 Ap=A1 o [0, 4, 2, 1, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   4.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   4.9s]    verdict: VALID | (informational)
+[   5.1s] C4 Ap=A1 o [0, 4, 3, 1, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   5.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   5.1s]    verdict: VALID | (informational)
+[   5.3s] C4 Ap=A1 o [1, 2, 3, 0, 4]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   5.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   5.3s]    verdict: VALID | (informational)
+[   5.5s] C4 Ap=A1 o [1, 2, 4, 0, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.3s)
+[   5.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   5.5s]    verdict: VALID | (informational)
+[   5.7s] C4 Ap=A1 o [1, 3, 2, 0, 4]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   5.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   5.7s]    verdict: VALID | (informational)
+[   5.9s] C4 Ap=A1 o [1, 3, 4, 0, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   5.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   5.9s]    verdict: VALID | (informational)
+[   6.1s] C4 Ap=A1 o [1, 4, 2, 0, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   6.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   6.1s]    verdict: VALID | (informational)
+[   6.3s] C4 Ap=A1 o [1, 4, 3, 0, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   6.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   6.3s]    verdict: VALID | (informational)
+[   6.3s]    C4 summary: Ap from A1: 12 of 12 well-formed permutations VALID
+[   6.5s] C4 Aq=A1 o [0, 1, 3, 2, 4] (note's): struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   6.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   6.5s]    verdict: VALID | expected: VALID | OK
+[   6.7s] C4 Aq=A1 o [0, 1, 4, 2, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   6.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   6.7s]    verdict: VALID | (informational)
+[   6.9s] C4 Aq=A1 o [0, 3, 1, 2, 4]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   6.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   6.9s]    verdict: VALID | (informational)
+[   7.1s] C4 Aq=A1 o [0, 3, 4, 2, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   7.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   7.1s]    verdict: VALID | (informational)
+[   7.3s] C4 Aq=A1 o [0, 4, 1, 2, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   7.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   7.3s]    verdict: VALID | (informational)
+[   7.5s] C4 Aq=A1 o [0, 4, 3, 2, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   7.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   7.5s]    verdict: VALID | (informational)
+[   7.7s] C4 Aq=A1 o [2, 1, 3, 0, 4]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   7.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   7.7s]    verdict: VALID | (informational)
+[   7.8s] C4 Aq=A1 o [2, 1, 4, 0, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   7.8s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   7.8s]    verdict: VALID | (informational)
+[   8.0s] C4 Aq=A1 o [2, 3, 1, 0, 4]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   8.0s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   8.0s]    verdict: VALID | (informational)
+[   8.3s] C4 Aq=A1 o [2, 3, 4, 0, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   8.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   8.3s]    verdict: VALID | (informational)
+[   8.4s] C4 Aq=A1 o [2, 4, 1, 0, 3]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   8.4s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   8.4s]    verdict: VALID | (informational)
+[   8.6s] C4 Aq=A1 o [2, 4, 3, 0, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   8.6s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   8.6s]    verdict: VALID | (informational)
+[   8.6s]    C4 summary: Aq from A1: 12 of 12 well-formed permutations VALID
+[   8.8s] C4 Ap=A2 o [0, 2, 3, 4, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   8.8s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   8.8s]    verdict: VALID | (informational)
+[   9.0s] C4 Ap=A2 o [0, 2, 4, 3, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   9.0s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   9.0s]    verdict: VALID | (informational)
+[   9.3s] C4 Ap=A2 o [0, 3, 2, 4, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.3s)
+[   9.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   9.3s]    verdict: VALID | (informational)
+[   9.5s] C4 Ap=A2 o [0, 3, 4, 2, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   9.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   9.5s]    verdict: VALID | (informational)
+[   9.7s] C4 Ap=A2 o [0, 4, 2, 3, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   9.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   9.7s]    verdict: VALID | (informational)
+[   9.9s] C4 Ap=A2 o [0, 4, 3, 2, 1]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[   9.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[   9.9s]    verdict: VALID | (informational)
+[  10.1s] C4 Ap=A2 o [1, 2, 3, 4, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  10.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  10.1s]    verdict: VALID | (informational)
+[  10.3s] C4 Ap=A2 o [1, 2, 4, 3, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  10.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  10.3s]    verdict: VALID | (informational)
+[  10.5s] C4 Ap=A2 o [1, 3, 2, 4, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  10.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  10.5s]    verdict: VALID | (informational)
+[  10.7s] C4 Ap=A2 o [1, 3, 4, 2, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  10.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  10.7s]    verdict: VALID | (informational)
+[  10.9s] C4 Ap=A2 o [1, 4, 2, 3, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  10.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  10.9s]    verdict: VALID | (informational)
+[  11.1s] C4 Ap=A2 o [1, 4, 3, 2, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  11.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  11.1s]    verdict: VALID | (informational)
+[  11.1s]    C4 summary: Ap from A2: 12 of 12 well-formed permutations VALID
+[  11.3s] C4 Aq=A2 o [0, 1, 3, 4, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  11.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  11.3s]    verdict: VALID | (informational)
+[  11.5s] C4 Aq=A2 o [0, 1, 4, 3, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  11.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  11.5s]    verdict: VALID | (informational)
+[  11.7s] C4 Aq=A2 o [0, 3, 1, 4, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  11.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  11.7s]    verdict: VALID | (informational)
+[  11.9s] C4 Aq=A2 o [0, 3, 4, 1, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  11.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  11.9s]    verdict: VALID | (informational)
+[  12.1s] C4 Aq=A2 o [0, 4, 1, 3, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  12.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  12.1s]    verdict: VALID | (informational)
+[  12.3s] C4 Aq=A2 o [0, 4, 3, 1, 2]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  12.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  12.3s]    verdict: VALID | (informational)
+[  12.5s] C4 Aq=A2 o [2, 1, 3, 4, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  12.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  12.5s]    verdict: VALID | (informational)
+[  12.7s] C4 Aq=A2 o [2, 1, 4, 3, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  12.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  12.7s]    verdict: VALID | (informational)
+[  12.9s] C4 Aq=A2 o [2, 3, 1, 4, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  12.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  12.9s]    verdict: VALID | (informational)
+[  13.1s] C4 Aq=A2 o [2, 3, 4, 1, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  13.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  13.1s]    verdict: VALID | (informational)
+[  13.3s] C4 Aq=A2 o [2, 4, 1, 3, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  13.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  13.3s]    verdict: VALID | (informational)
+[  13.6s] C4 Aq=A2 o [2, 4, 3, 1, 0]: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.3s)
+[  13.6s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  13.6s]    verdict: VALID | (informational)
+[  13.6s]    C4 summary: Aq from A2: 12 of 12 well-formed permutations VALID
+[  13.8s] C5 Ap + star(2) planted: struct_ok=True sunflower=True sperner_violation=True product_overlaps=[] box_overlaps=[] (0.2s)
+[  13.8s]    counts N00 4397440944 N01 7212595717 N10 7211751967 N11 11504366352 total 30326154980
+[  13.9s]    sunflower product triple (0, 2, 2) (of 4 hits) explicit witness verified by oracle: True
+[  13.9s]       member 0fc3f6487f1fc01
+[  13.9s]       member 0fc7fec8000fc00
+[  13.9s]       member 0fc3f648000fc00
+[  13.9s]    containment product pair (2, 0) explicit witness verified by oracle: True
+[  13.9s]    verdict: REFUSED | expected: REFUSED | OK
+[  14.3s] C6 Aq + star(1) planted: struct_ok=True sunflower=True sperner_violation=True product_overlaps=[] box_overlaps=[] (0.3s)
+[  14.3s]    counts N00 4397440944 N01 7211751967 N10 7212595717 N11 11504366352 total 30326154980
+[  14.4s]    sunflower product triple (1, 3, 3) (of 4 hits) explicit witness verified by oracle: True
+[  14.4s]       member 1fc7f0083f0fc71
+[  14.4s]       member 000d70003f0fc71
+[  14.4s]       member 001570003f0fc71
+[  14.4s]    containment product pair (3, 1) explicit witness verified by oracle: True
+[  14.4s]    verdict: REFUSED | expected: REFUSED | OK
+[  14.6s] C7 core ['12', '13', '14'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  14.6s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  14.8s]    sunflower product triple (0, 0, 0) (of 19 hits) explicit witness verified by oracle: True
+[  14.8s]       member 1fc7f9c07f1fc01
+[  14.8s]       member 1fc007c87f1fc01
+[  14.8s]       member ffc001c07f1fc01
+[  14.8s]    verdict: REFUSED | (informational)
+[  15.0s] C7 core ['12', '13', '23'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  15.0s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  15.2s]    sunflower product triple (0, 0, 1) (of 18 hits) explicit witness verified by oracle: True
+[  15.2s]       member 1fc3fec07f1fc01
+[  15.2s]       member ffc002c07f1fc01
+[  15.2s]       member 1fc003c87f1fd91
+[  15.2s]    verdict: REFUSED | (informational)
+[  15.4s] C7 core ['12', '13', '24'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  15.4s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  15.6s]    sunflower product triple (0, 0, 1) (of 18 hits) explicit witness verified by oracle: True
+[  15.6s]       member 1fc7fc887f1fc01
+[  15.6s]       member ffc004c07f1fc01
+[  15.6s]       member 1fc006807f1fd91
+[  15.6s]    verdict: REFUSED | (informational)
+[  15.8s] C7 core ['12', '13', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  15.8s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  15.9s]    sunflower product triple (0, 0, 0) (of 13 hits) explicit witness verified by oracle: True
+[  15.9s]       member 1fc3fec07f1fc01
+[  15.9s]       member 1fc008c87f1fc01
+[  15.9s]       member ffc008c07f1fc01
+[  15.9s]    verdict: REFUSED | (informational)
+[  16.2s] C7 core ['12', '14', '23'] + full pendant 2: struct_ok=True sunflower=False sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  16.2s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  16.2s]    verdict: VALID | (informational)
+[  16.4s] C7 core ['12', '14', '24'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  16.4s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  16.5s]    sunflower product triple (0, 0, 1) (of 12 hits) explicit witness verified by oracle: True
+[  16.5s]       member 1fc3f5c87f1fc01
+[  16.5s]       member ffc005407f1fc01
+[  16.5s]       member 1fc00f407f1fd91
+[  16.5s]    verdict: REFUSED | (informational)
+[  16.8s] C7 core ['12', '14', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  16.8s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  16.9s]    sunflower product triple (0, 0, 0) (of 20 hits) explicit witness verified by oracle: True
+[  16.9s]       member 1fc7fe407f1fc01
+[  16.9s]       member 1fc008c87f1fc01
+[  16.9s]       member ffc009407f1fc01
+[  16.9s]    verdict: REFUSED | (informational)
+[  17.1s] C7 core ['12', '23', '24'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  17.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  17.3s]    sunflower product triple (0, 0, 0) (of 19 hits) explicit witness verified by oracle: True
+[  17.3s]       member 1fc7fe407f1fc01
+[  17.3s]       member 1fc007c87f1fc01
+[  17.3s]       member ffc006407f1fc01
+[  17.3s]    verdict: REFUSED | (informational)
+[  17.5s] C7 core ['12', '23', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  17.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  17.7s]    sunflower product triple (0, 0, 1) (of 7 hits) explicit witness verified by oracle: True
+[  17.7s]       member 0fc7fa807f1fc01
+[  17.7s]       member ffc00a407f1fc01
+[  17.7s]       member 0fc00b087f1fd91
+[  17.7s]    verdict: REFUSED | (informational)
+[  17.9s] C7 core ['12', '24', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  17.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  18.0s]    sunflower product triple (0, 0, 1) (of 19 hits) explicit witness verified by oracle: True
+[  18.0s]       member 1fc7fe407f1fc01
+[  18.0s]       member ffc00c407f1fc01
+[  18.0s]       member 1fc00dc07f1fd91
+[  18.0s]    verdict: REFUSED | (informational)
+[  18.3s] C7 core ['13', '14', '23'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  18.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  18.4s]    sunflower product triple (0, 0, 1) (of 7 hits) explicit witness verified by oracle: True
+[  18.4s]       member 1fc7f7807f1fc01
+[  18.4s]       member ffc003807f1fc01
+[  18.4s]       member 1fc003c87f1fd91
+[  18.4s]    verdict: REFUSED | (informational)
+[  18.7s] C7 core ['13', '14', '24'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  18.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  18.8s]    sunflower product triple (0, 0, 1) (of 19 hits) explicit witness verified by oracle: True
+[  18.8s]       member 1fc7f7807f1fc01
+[  18.8s]       member ffc005807f1fc01
+[  18.8s]       member 1fc00d887f1fd91
+[  18.8s]    verdict: REFUSED | (informational)
+[  19.1s] C7 core ['13', '14', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  19.1s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  19.3s]    sunflower product triple (0, 0, 0) (of 16 hits) explicit witness verified by oracle: True
+[  19.3s]       member 1fc7f9c07f1fc01
+[  19.3s]       member 1fc00f887f1fc01
+[  19.3s]       member ffc009807f1fc01
+[  19.3s]    verdict: REFUSED | (informational)
+[  19.5s] C7 core ['13', '23', '24'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  19.5s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  19.7s]    sunflower product triple (0, 0, 1) (of 13 hits) explicit witness verified by oracle: True
+[  19.7s]       member 1fc7f7807f1fc01
+[  19.7s]       member ffc006807f1fc01
+[  19.7s]       member 1fc006807f1fd91
+[  19.7s]    verdict: REFUSED | (informational)
+[  19.9s] C7 core ['13', '23', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  19.9s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  20.0s]    sunflower product triple (0, 0, 1) (of 18 hits) explicit witness verified by oracle: True
+[  20.0s]       member 0fc7fa807f1fc01
+[  20.0s]       member ffc00a807f1fc01
+[  20.0s]       member 0fc00ec87f1fd91
+[  20.0s]    verdict: REFUSED | (informational)
+[  20.2s] C7 core ['13', '24', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  20.2s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  20.4s]    sunflower product triple (0, 0, 1) (of 18 hits) explicit witness verified by oracle: True
+[  20.4s]       member 1fc3fd007f1fc01
+[  20.4s]       member ffc00c807f1fc01
+[  20.4s]       member 1fc00e487f1fd91
+[  20.4s]    verdict: REFUSED | (informational)
+[  20.6s] C7 core ['14', '23', '24'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  20.6s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  20.8s]    sunflower product triple (0, 0, 0) (of 20 hits) explicit witness verified by oracle: True
+[  20.8s]       member 1fc7f7807f1fc01
+[  20.8s]       member 1fc00f487f1fc01
+[  20.8s]       member ffc007007f1fc01
+[  20.8s]    verdict: REFUSED | (informational)
+[  21.0s] C7 core ['14', '23', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  21.0s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  21.1s]    sunflower product triple (0, 0, 1) (of 18 hits) explicit witness verified by oracle: True
+[  21.1s]       member 0fc7ff407f1fc01
+[  21.1s]       member ffc00b007f1fc01
+[  21.1s]       member 0fc00b087f1fd91
+[  21.1s]    verdict: REFUSED | (informational)
+[  21.3s] C7 core ['14', '24', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  21.3s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  21.5s]    sunflower product triple (0, 0, 0) (of 8 hits) explicit witness verified by oracle: True
+[  21.5s]       member 1fc3fd007f1fc01
+[  21.5s]       member 1fc00f487f1fc01
+[  21.5s]       member ffc00d007f1fc01
+[  21.5s]    verdict: REFUSED | (informational)
+[  21.7s] C7 core ['23', '24', '34'] + full pendant 2: struct_ok=True sunflower=True sperner_violation=False product_overlaps=[] box_overlaps=[] (0.2s)
+[  21.7s]    counts N00 4397440944 N01 7211751967 N10 7211751967 N11 11504366352 total 30325311230
+[  21.8s]    sunflower product triple (0, 0, 0) (of 16 hits) explicit witness verified by oracle: True
+[  21.8s]       member 1fc7fe407f1fc01
+[  21.8s]       member 1fc00f887f1fc01
+[  21.8s]       member ffc00e007f1fc01
+[  21.8s]    verdict: REFUSED | (informational)
+[  21.8s]    C7 summary: valid 3-edge cores with full pendant 2: [['12', '14', '23']]
+[  21.8s] done
