@@ -1,4 +1,4 @@
-# Euclidean TSP (Beardwood-Halton-Hammersley) constant: beta >= 0.64295, sharper terms in Dong and Cao's series
+# Euclidean TSP (Beardwood-Halton-Hammersley) constant: beta >= 0.64309, sharper terms in Dong and Cao's series
 
 Constant 12 of the [optimization constants repository](https://teorth.github.io/optimizationproblems/constants/12a.html).
 The length of the shortest tour through n uniform random points of the unit square is asymptotic to beta sqrt(n).
@@ -21,16 +21,16 @@ $C_5 \geq 0.001015487669$, giving $\beta \geq 0.6421913$. We certify sharper val
 | term | Dong-Cao | ours (program A / program B) | method |
 | --- | --- | --- | --- |
 | $C_3$ | 0.01113528859 | 0.0114906492656 / 0.011490649265622 | exact union areas on (a, b, angle) cells |
-| $C_4$ | 0.005040573276 | 0.005450602910 / 0.005450602904 | DC's cubes, adaptive to side 1/512, exact three-disc areas |
+| $C_4$ | 0.005040573276 | 0.005584568980 / 0.005584568975 | DC's cubes, adaptive to side 1/1024, exact three-disc areas |
 | $C_5$ | 0.001015487669 | (theirs is used; see below) | |
 
 Using the smaller value of each pair:
 
-$$\beta \geq \frac58 + 0.0114906492 + 0.0054506029 + 0.0010154876 = 0.64295673\ldots \geq 0.64295,$$
+$$\beta \geq \frac58 + 0.0114906492 + 0.0055845689 + 0.0010154876 = 0.64309070\ldots \geq 0.64309,$$
 
 with Dong and Cao's $C_5$ unchanged.
 
-This is $7.65 \cdot 10^{-4}$ above Dong and Cao's 0.6421913; the repository's page lists 0.6277. The lower-bound
+This is $8.99 \cdot 10^{-4}$ above Dong and Cao's 0.6421913; the repository's page lists 0.6277. The lower-bound
 formula, the cube method and the value of $C_5$ are Dong and Cao's. What is new is the evaluation of $C_3$ and $C_4$:
 exact areas of unions of three discs, planar Kneser-Poulsen monotonicity, and adaptive refinement. Each of the two
 improves theirs on its own. Our own $C_5$ computation (7 dimensions, cubes down to side 1/16) reached only 0.000945
@@ -95,12 +95,14 @@ Commands:
 
     gunzip -k tables/tables_64.txt.gz
     cc -O2 -o c4_a c4_a.c -lm && cc -O2 -o c4_b c4_b.c -lm
-    C4_LTAB=tables/tables_64_L.txt C4_DEPTH=6 C4_TAU=1e-11 ./c4_a tables/tables_64.txt 8 0.0052
-    C4_LTAB=tables/tables_64_L.txt C4_DEPTH=6 C4_TAU=1e-11 ./c4_b tables/tables_64.txt 8 0.0052
+    C4_LTAB=tables/tables_64_L.txt C4_DEPTH=7 C4_TAU=3e-12 ./c4_a tables/tables_64.txt 8 0.0055
+    C4_LTAB=tables/tables_64_L.txt C4_DEPTH=7 C4_TAU=3e-12 ./c4_b tables/tables_64.txt 8 0.0055
 
-Run times on one core at load about 60: about 45 min (A) and 52 min (B). Both programs report 2,827,471,112 positive
-cubes and 144,271,175 splits, and $C_4 \geq 0.005450602910$ (A), $0.005450602904$ (B); the difference is B's larger
-final safety margin.
+Run times on one core at load about 60: about 1 h 50 min each. Both programs report 7,001,145,723 positive cubes and
+299,028,686 splits, and $C_4 \geq 0.005584568980$ (A), $0.005584568975$ (B); the difference is B's larger final
+safety margin. An earlier, coarser run (depth 6, threshold $10^{-11}$: $C_4 \geq 0.005450602910$ / $0.005450602904$,
+2,827,471,112 positive cubes) is kept in `results/` as well; the referee's sampling checks were made on that version
+of the code, which is unchanged (only the depth and threshold differ).
 
 Outputs are in `results/`.
 

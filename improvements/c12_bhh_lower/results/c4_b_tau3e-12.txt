@@ -1,0 +1,6 @@
+rows 8/16: 5.226443095319e-03
+rows 16/16: 6.418666697353e-03
+g: path 0.0 star 0.5 cycle 1.0 K4 1.0
+H 8 depth 7 adepth 0 table N 64: 9577306560 cubes visited, 7001145723 positive, 299028686 split
+C_4 >= 0.005584568975   [Dong-Cao: 0.005040573276]
+claim C_4 >= 0.0055: HOLDS

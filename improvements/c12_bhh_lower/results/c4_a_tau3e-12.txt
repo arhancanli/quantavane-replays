@@ -1,0 +1,8 @@
+using the two-disc refinement of the area bound (L table)
+adaptive mode: tau 3e-12, max depth from C4_DEPTH
+r2 rows 8/16: partial integral 5.226443095319e-03 (5769332785 positive cubes, 234044260 splits)
+r2 rows 16/16: partial integral 6.418666697353e-03 (7001145723 positive cubes, 299028686 splits)
+g: path 0.0  star 0.5  4-cycle 1.0  K4 1.0  paw 0.5
+area bound with the two-disc refinement; H 8 (base cube side 1/8), refinement depth 7 (every cube to depth 0), table N 64: 9575930304 cubes visited, 7001145723 positive, 299028686 split
+C_4 >= 0.005584568980   [Dong-Cao: 0.005040573276]
+claim C_4 >= 0.0055: HOLDS
