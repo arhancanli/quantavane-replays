@@ -1,0 +1,18 @@
+self-test: G(4) = 3 sqrt(pi)/256: ok
+  rows a < 0.1333: C_3 >= 0.000436701258 (38142 union areas, 131 s)
+  rows a < 0.2667: C_3 >= 0.001569618806 (130431 union areas, 387 s)
+  rows a < 0.4000: C_3 >= 0.003162426408 (249600 union areas, 764 s)
+  rows a < 0.5333: C_3 >= 0.005016522675 (368423 union areas, 1112 s)
+  rows a < 0.6667: C_3 >= 0.006968467577 (466020 union areas, 1414 s)
+  rows a < 0.8000: C_3 >= 0.008887436236 (528979 union areas, 1663 s)
+  rows a < 0.9333: C_3 >= 0.010672173596 (558066 union areas, 1785 s)
+  rows a < 1.0000: C_3 >= 0.011490649266 (561758 union areas, 1814 s)
+C_3 >= 0.011490649266  (na 120, nt 300, nc 160; 561758 union areas)  [Dong-Cao: 0.01113528859]
+exact rational lower bound for C_3: 12271938932841069705930762166223161160380574983958174953549512795078708286466992340222266708189/1067993517960455041197510853084776057301352261178326384973520803911109862890320275011481043468288
+with Dong-Cao's C_4 >= 0.005040573276 and C_5 >= 0.001015487669: beta_TSP >= 5/8 + C_3 + C_4 + C_5 >= 0.642546710211
+Dong-Cao's own total: 0.642191349535
+claim beta_TSP >= 257/400: HOLDS
+red control 1 (claim 0.6425468 one unit above the 7th decimal): refused
+red control 2 (coarse grid 8/16/8 gives C_3 >= 0.008682461 < fine): refused
+red control 3 (mixed triangle/path cells wrongly counted as triangles raises the value: 0.016290163 > 0.010849575): detected
+red controls: all behaved as required

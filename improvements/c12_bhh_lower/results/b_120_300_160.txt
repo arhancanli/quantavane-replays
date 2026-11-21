@@ -1,0 +1,14 @@
+self-tests: G(4) = 3 sqrt(pi)/256, union of three unit discs (equilateral side 1): ok
+  a < 0.1667: C_3 >= 0.000664552716 (57201 union areas, 78 s)
+  a < 0.3333: C_3 >= 0.002321816259 (188362 union areas, 220 s)
+  a < 0.5000: C_3 >= 0.004538035260 (340190 union areas, 383 s)
+  a < 0.6667: C_3 >= 0.006968467577 (466020 union areas, 504 s)
+  a < 0.8333: C_3 >= 0.009349523258 (539173 union areas, 591 s)
+  a < 1.0000: C_3 >= 0.011490649266 (561758 union areas, 643 s)
+C_3 >= 0.011490649265622  (na 120, nt 300, nc 160; 561758 union areas)  [Dong-Cao: 0.01113528859]
+with Dong-Cao's C_4 >= 0.005040573276 and C_5 >= 0.001015487669: beta_TSP >= 0.642546710211
+claim beta_TSP >= 0.6425: HOLDS
+red control 1 (claim 0.6425468): refused
+red control 2 (coarse grid gives 0.008682461 < fine): refused
+red control 3 (mixed cells counted as triangles: 0.016290163 > 0.010849575): detected
+red controls: all behaved as required
