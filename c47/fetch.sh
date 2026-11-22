@@ -49,6 +49,12 @@ if [ ! -f pr350r8/final.json ]; then
   curl -s -f -L -o pr350r8/final.json \
     "https://raw.githubusercontent.com/rpinho/math-certificates/85c4680cc57130d4e9f3f0f48643e51775cdb286/c47/round8/certificates/final.json"
 fi
+# PR #350 (rpinho), update of 18 Nov (round 9, 452 atoms and 8443 witnesses) at commit 6b0a3d0
+if [ ! -f pr350r9/final.json ]; then
+  mkdir -p pr350r9
+  curl -s -f -L -o pr350r9/final.json \
+    "https://raw.githubusercontent.com/rpinho/math-certificates/6b0a3d0fe76ff8c305145d97c93c029c6772a7a3/c47/round9/certificates/final.json"
+fi
 if [ -f pr341/construction.json ]; then
   shasum -a 256 -c "$here/SHA256SUMS"
 else
