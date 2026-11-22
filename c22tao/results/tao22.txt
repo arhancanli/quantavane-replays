@@ -1,0 +1,23 @@
+PASS 15a [P1978] log_70 143640 printed 2.7952 | A=2.79512268974833765665 B=2.79512268974833765665 agree40=True within1ulp=True rounds_to_printed=False red_control_fails=True kind=u printed_on_safe_side=True
+PASS 15a [BCRL1979,B1980] 3 log_12 10 printed 2.7799 | A=2.77988522408738044833 B=2.77988522408738044833 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=True
+PASS 15a [P1979] 3 log_436 196 printed 2.6054 | A=2.60534321430643601836 B=2.60534321430643601836 agree40=True within1ulp=True rounds_to_printed=False red_control_fails=True kind=u printed_on_safe_side=True
+PASS 15a [P1980] log_48 47216 printed 2.7802 | A=2.78014189055469766081 B=2.78014189055469766081 agree40=True within1ulp=True rounds_to_printed=False red_control_fails=True kind=u printed_on_safe_side=True
+PASS 15a [S1981] log_110 140600 printed 2.5218006 | A=2.52180061098082809536 B=2.52180061098082809536 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=False
+PASS 11a [BELP2008] pi/2 printed 1.57080 | A=1.57079632679489661923 B=1.57079632679489661923 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=True
+PASS 11a [Pisier1986] sqrt(pi/2) printed 1.25331 | A=1.25331413731550025120 B=1.25331413731550025120 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=True
+PASS 11b [KP2020] log_2(3/2) printed 0.58496 | A=0.58496250072115618145 B=0.58496250072115618145 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=False
+PASS 13a [Wet1973] pi/8 printed 0.3926990816 | A=0.39269908169872415480 B=0.39269908169872415480 agree40=True within1ulp=True rounds_to_printed=False red_control_fails=True kind=u printed_on_safe_side=False
+PASS 13a [PW2021] pi/12 printed 0.2617993878 | A=0.26179938779914943653 B=0.26179938779914943653 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=True
+PASS 13b [trivial] pi/4 printed 0.7853981634 | A=0.78539816339744830961 B=0.78539816339744830961 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=False
+PASS 1b [S1958] (4-sqrt6)/5 printed 0.310102 | A=0.31010205144336438036 B=0.31010205144336438036 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=True
+PASS 1b [M1959] sqrt(4-sqrt15) printed 0.356393 | A=0.35639395869260061690 B=0.35639395869260061690 agree40=True within1ulp=True rounds_to_printed=False red_control_fails=True kind=l printed_on_safe_side=True
+PASS 1b [Scherk1955] 1-1/sqrt2 printed 0.292893 | A=0.29289321881345247559 B=0.29289321881345247559 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=True
+PASS 22a [BS1999] (4pi/11)^(3/4) printed 1.105 | A=1.10500154220369001743 B=1.10500154220369001743 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=True
+PASS 22b [Klotz2021] 1+pi sqrt(4+1/pi^2) printed 7.36 | A=7.36226513156732839369 B=7.36226513156732839369 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=False
+PASS 22b [trivial] 2pi+2 printed 8.28 | A=8.28318530717958647692 B=8.28318530717958647692 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=False
+PASS 47a [Ald2000] 3/4-sqrt2/4+sqrt6/2 printed 1.6211915 | A=1.62119148079831528689 B=1.62119148079831528689 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=False
+PASS 47a [Mel2003] (11+sqrt61)/12 printed 1.5675208 | A=1.56752080632555453284 B=1.56752080632555453284 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=l printed_on_safe_side=True
+PASS 82a [Zag93] (1/2)log((1+sqrt5)/2) printed 0.2406059 | A=0.24060591252980172374 B=0.24060591252980172374 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=? printed_on_safe_side=n/a
+PASS 35a [AP24] log_2(1+sqrt2) printed 1.271 | A=1.27155330316361197264 B=1.27155330316361197264 agree40=True within1ulp=True rounds_to_printed=False red_control_fails=True kind=l printed_on_safe_side=True
+PASS 24a [GFL2026a] 3 sqrt(2 pi) printed 7.5199 | A=7.51988482389300150724 B=7.51988482389300150724 agree40=True within1ulp=True rounds_to_printed=True red_control_fails=True kind=u printed_on_safe_side=True
+ALL PASS
